@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { market } from "@/lib/market";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -15,6 +16,6 @@ export default function robots(): MetadataRoute.Robots {
         "/sign-up",
       ],
     },
-    sitemap: "https://buudy.com/sitemap.xml",
+    sitemap: `${market.siteUrl}/sitemap.xml`,
   };
 }

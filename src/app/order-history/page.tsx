@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ArrowRight, PackageCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { requireAccount } from "@/lib/account";
+import { market } from "@/lib/market";
 import { formatMoney } from "@/lib/money";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Order, OrderItem } from "@/types/database";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const dateFormatter = new Intl.DateTimeFormat("en-US", {
+const dateFormatter = new Intl.DateTimeFormat(market.locale, {
   month: "short",
   day: "numeric",
   year: "numeric",

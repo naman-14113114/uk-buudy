@@ -1,9 +1,11 @@
+import { market } from "@/lib/market";
+
 export const contactPage = {
   eyebrow: "Contact Buudy",
   title: "We are here to help.",
   copy: "Welcome to Buudy, where professional-grade light therapy meets thoughtful support. We are delighted to assist you with product questions, order help, and anything you need for a smoother daily routine.",
   supportLabel: "support@buudy.com",
-  supportHours: "Monday to Friday, 9:00 AM to 5:00 PM EST",
+  supportHours: market.supportHours,
   supportIntro:
     "Choose the contact path that suits you best. For product questions, order support, or store help, our team will get back to you promptly.",
   formTitle: "Send us a message.",

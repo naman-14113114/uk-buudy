@@ -1,12 +1,13 @@
 import type { Product } from "@/data/products";
 import type { FAQItem } from "@/data/productSections";
+import { absoluteUrl } from "@/lib/site";
 
 export function productJsonLd(product: Product) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    image: product.gallery.map((image) => `https://buudy.com${image.src}`),
+    image: product.gallery.map((image) => absoluteUrl(image.src)),
     description: product.description,
     brand: {
       "@type": "Brand",
@@ -20,7 +21,7 @@ export function productJsonLd(product: Product) {
     },
     offers: {
       "@type": "Offer",
-      url: `https://buudy.com/products/${product.slug}`,
+      url: absoluteUrl(`/products/${product.slug}`),
       priceCurrency: product.currency,
       price: (product.priceCents / 100).toFixed(2),
       availability: "https://schema.org/InStock",

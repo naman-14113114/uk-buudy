@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { market } from "@/lib/market";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { AuthActionState } from "@/types/actions";
 
@@ -215,7 +216,7 @@ export async function updateProfileAction(
     shipping_city: parsed.data.shippingCity || null,
     shipping_state: parsed.data.shippingState || null,
     shipping_postal_code: parsed.data.shippingPostalCode || null,
-    shipping_country: parsed.data.shippingCountry || "United States",
+    shipping_country: parsed.data.shippingCountry || market.country,
     marketing_opt_in: parsed.data.marketingOptIn === "on",
   });
 

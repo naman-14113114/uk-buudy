@@ -63,7 +63,7 @@ export const features: Feature[] = [
   {
     title: "Ultimate Value",
     kicker: "A one-time investment",
-    body: "Compare the cost: while other high-end masks retail for $300-$400, Buudy offers superior technology and more LEDs for a fraction of the price. It is a one-time investment that replaces expensive salon visits and recurring spa subscriptions forever.",
+    body: "Compare the cost: while other high-end masks retail for £300-£400, Buudy offers superior technology and more LEDs for a fraction of the price. It is a one-time investment that replaces expensive salon visits and recurring spa subscriptions forever.",
   },
 ];
 
@@ -544,10 +544,10 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "$199", featured: true },
-    { label: "Brand A", price: "$299" },
-    { label: "Brand B", price: "$399" },
-    { label: "Brand C", price: "$372" },
+    { label: "Buudy", price: "£179", featured: true },
+    { label: "Brand A", price: "£299" },
+    { label: "Brand B", price: "£399" },
+    { label: "Brand C", price: "£372" },
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],

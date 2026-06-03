@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button, cn } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { market } from "@/lib/market";
 import type { ProductReview, ProductReviewsResponse } from "@/types/reviews";
 
 type AnimatableProductReview = ProductReview & {
@@ -118,7 +119,7 @@ function RatingBreakdown({
       >
         <span className="buudy-mono text-[var(--plum-soft)]">All reviews</span>
         <span className="buudy-mono text-[var(--plum-soft)]">
-          {total.toLocaleString("en-US")}
+          {total.toLocaleString(market.locale)}
         </span>
       </button>
 
@@ -150,7 +151,7 @@ function RatingBreakdown({
               />
             </span>
             <span className="buudy-mono text-right text-[var(--plum-soft)]">
-              {count.toLocaleString("en-US")}
+              {count.toLocaleString(market.locale)}
             </span>
           </button>
         );
@@ -478,7 +479,8 @@ export function ProductReviewsGrid({
   const visibleCount = reviews.length;
   const hasMore = visibleCount < currentTotal;
   const progressLabel = useMemo(
-    () => `${visibleCount.toLocaleString("en-US")} of ${currentTotal.toLocaleString("en-US")}`,
+    () =>
+      `${visibleCount.toLocaleString(market.locale)} of ${currentTotal.toLocaleString(market.locale)}`,
     [currentTotal, visibleCount],
   );
   const reviewColumns = useMemo(() => {
@@ -619,7 +621,7 @@ export function ProductReviewsGrid({
             <div className="text-right">
               <p className="buudy-mono text-[var(--plum-soft)]">Verified archive</p>
               <p className="mt-2 text-2xl font-semibold text-[var(--plum)]">
-                {total.toLocaleString("en-US")} reviews
+                {total.toLocaleString(market.locale)} reviews
               </p>
             </div>
           </div>

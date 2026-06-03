@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { products, productsById, type Product } from "@/data/products";
 import type { CartLine } from "@/lib/cart";
+import { market } from "@/lib/market";
 
 type KlaviyoCommand = [string, ...unknown[]];
 
@@ -23,8 +24,11 @@ type CheckoutEventDetail = {
 
 const KLAVIYO_COMPANY_ID =
   process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID || "Tp323F";
-const KLAVIYO_US_POPUP_FORM_ID = "UBEgb8";
+const KLAVIYO_UK_POPUP_FORM_ID = "UBEgb8";
 const productBySlug = new Map(products.map((product) => [product.slug, product]));
+const marketHost = new URL(market.siteUrl).hostname;
+const welcomeOfferLabel = "£10";
+const staleDollarOfferLabel = `${String.fromCharCode(36)}10`;
 
 function isEnabledHost() {
   if (typeof window === "undefined") {
@@ -33,7 +37,7 @@ function isEnabledHost() {
 
   const host = window.location.hostname;
   return (
-    host === "us.buudy.com" ||
+    host === marketHost ||
     host.endsWith(".vercel.app") ||
     host === "localhost" ||
     host === "127.0.0.1"
@@ -59,8 +63,8 @@ function productPayload(product: Product) {
     Brand: "Buudy",
     Price: product.priceCents / 100,
     CompareAtPrice: product.compareAtCents / 100,
-    Market: "US",
-    SourceSite: "us.buudy.com",
+    Market: market.marketLabel,
+    SourceSite: marketHost,
   };
 }
 
@@ -91,7 +95,7 @@ function pushKlaviyo(command: KlaviyoCommand) {
 function guardKlaviyoScrollLock() {
   let raf = 0;
 
-  const removeUkPopupNodes = () => {
+  const removeStaleDollarPopupNodes = () => {
     document
       .querySelectorAll<HTMLElement>(
         '[aria-modal="true"], [data-testid="POPUP"], div[class*="kl-private-reset-css"], .needsclick[class*="kl-private-reset-css"]',
@@ -99,18 +103,14 @@ function guardKlaviyoScrollLock() {
       .forEach((node) => {
         const text = node.textContent || "";
 
-        if (!text.includes("£10") || text.includes("$10")) {
+        if (!text.includes(staleDollarOfferLabel)) {
           return;
         }
 
         const popup =
           node.closest<HTMLElement>('[aria-modal="true"], [data-testid="POPUP"]') ??
           node;
-        const popupText = popup.textContent || "";
-
-        if (!popupText.includes("$10")) {
-          popup.remove();
-        }
+        popup.remove();
       });
   };
 
@@ -122,7 +122,10 @@ function guardKlaviyoScrollLock() {
       .forEach((node) => {
         const text = node.textContent || "";
 
-        if (!text.includes("$10 WELCOME") && !text.includes("£10 WELCOME")) {
+        if (
+          !text.includes(`${staleDollarOfferLabel} WELCOME`) &&
+          !text.includes(`${welcomeOfferLabel} WELCOME`)
+        ) {
           return;
         }
 
@@ -154,7 +157,7 @@ function guardKlaviyoScrollLock() {
   const unlockScroll = () => {
     window.cancelAnimationFrame(raf);
     raf = window.requestAnimationFrame(() => {
-      removeUkPopupNodes();
+      removeStaleDollarPopupNodes();
 
       if (hasVisibleKlaviyoForm()) {
         return;
@@ -261,7 +264,7 @@ export function KlaviyoAnalytics() {
 
     let hasTriggered = false;
 
-    const openUsPopup = (event: MouseEvent) => {
+    const openUkPopup = (event: MouseEvent) => {
       if (hasTriggered || event.clientY > 12) {
         return;
       }
@@ -270,13 +273,13 @@ export function KlaviyoAnalytics() {
       event.stopImmediatePropagation();
       hasTriggered = true;
       window._klOnsite = window._klOnsite || [];
-      window._klOnsite.push(["openForm", KLAVIYO_US_POPUP_FORM_ID]);
+      window._klOnsite.push(["openForm", KLAVIYO_UK_POPUP_FORM_ID]);
     };
 
-    document.addEventListener("mouseleave", openUsPopup, { capture: true });
+    document.addEventListener("mouseleave", openUkPopup, { capture: true });
 
     return () => {
-      document.removeEventListener("mouseleave", openUsPopup, { capture: true });
+      document.removeEventListener("mouseleave", openUkPopup, { capture: true });
     };
   }, []);
 
@@ -292,8 +295,8 @@ export function KlaviyoAnalytics() {
         PageName: document.title,
         URL: window.location.href,
         Path: pathname,
-        Market: "US",
-        SourceSite: "us.buudy.com",
+        Market: market.marketLabel,
+        SourceSite: marketHost,
       },
     ]);
 
@@ -372,8 +375,8 @@ export function KlaviyoAnalytics() {
               ProductCategories: payload.Categories,
             },
           ],
-          Market: "US",
-          SourceSite: "us.buudy.com",
+          Market: market.marketLabel,
+          SourceSite: marketHost,
         },
       ]);
     }
@@ -392,7 +395,7 @@ export function KlaviyoAnalytics() {
         "track",
         "Started Checkout",
         {
-          $event_id: `us-buudy-${Date.now()}`,
+          $event_id: `uk-buudy-${Date.now()}`,
           $value:
             typeof detail?.totals?.totalCents === "number"
               ? detail.totals.totalCents / 100
@@ -403,8 +406,8 @@ export function KlaviyoAnalytics() {
             new Set(items.flatMap((item) => item.ProductCategories)),
           ),
           Items: items,
-          Market: "US",
-          SourceSite: "us.buudy.com",
+          Market: market.marketLabel,
+          SourceSite: marketHost,
         },
       ]);
     }

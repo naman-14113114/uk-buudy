@@ -1,5 +1,7 @@
-export function formatMoney(cents: number, currency = "USD") {
-  return new Intl.NumberFormat("en-US", {
+import { market, type StoreCurrency } from "@/lib/market";
+
+export function formatMoney(cents: number, currency: StoreCurrency = market.currency) {
+  return new Intl.NumberFormat(market.locale, {
     style: "currency",
     currency,
     maximumFractionDigits: cents % 100 === 0 ? 0 : 2,

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SkincareQuizPage } from "@/components/quiz/SkincareQuizPage";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Personalized Skincare Quiz",
@@ -12,11 +13,10 @@ export const metadata: Metadata = {
     title: "Personalized Skincare Quiz | Buudy",
     description:
       "Build a personalized LED light therapy and daily skincare routine in 60 seconds.",
-    url: "https://buudy.com/pages/skincare-quiz",
+    url: absoluteUrl("/pages/skincare-quiz"),
   },
 };
 
 export default function Page() {
   return <SkincareQuizPage />;
 }
-

@@ -8,6 +8,7 @@ import { CartProvider } from "@/components/cart/CartProvider";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
+import { market } from "@/lib/market";
 import "./globals.css";
 
 const inter = Inter({
@@ -37,7 +38,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://buudy.com"),
+  metadataBase: new URL(market.siteUrl),
   title: {
     default: "Buudy Light Therapy",
     template: "%s | Buudy",
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Buudy",
     type: "website",
-    url: "https://buudy.com/",
+    url: market.siteUrl,
   },
 };
 
@@ -62,7 +63,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       className={`${inter.variable} ${fraunces.variable} ${jetBrains.variable} ${playfair.variable}`}
       data-scroll-behavior="smooth"
     >

@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { Save } from "lucide-react";
 import { updateProfileAction } from "@/app/actions/auth";
 import { Button } from "@/components/ui/Button";
+import { market } from "@/lib/market";
 import { initialAuthState, type AuthActionState } from "@/types/actions";
 import type { Profile } from "@/types/database";
 
@@ -75,9 +76,9 @@ export function ProfileForm({ email, profile }: ProfileFormProps) {
           <input
             autoComplete="country-name"
             className={textInput(Boolean(getFieldError(state, "shippingCountry")))}
-            defaultValue={profile?.shipping_country ?? "United States"}
+            defaultValue={profile?.shipping_country ?? market.country}
             name="shippingCountry"
-            placeholder="United States"
+            placeholder={market.country}
             type="text"
           />
         </label>

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Search, X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
+import { market } from "@/lib/market";
 
 export function ProductGallery({ images }: { images: ProductImage[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -233,81 +234,16 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
             <svg
               aria-hidden="true"
               className="h-3 w-[21px] flex-shrink-0 object-contain rounded-[1px]"
-              viewBox="0 0 19 10"
+              viewBox="0 0 60 30"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect fill="#B22234" height="10" width="19" />
-              <line stroke="#FFFFFF" strokeWidth="1" x1="0" x2="19" y1="1" y2="1" />
-              <line stroke="#FFFFFF" strokeWidth="1" x1="0" x2="19" y1="3" y2="3" />
-              <line stroke="#FFFFFF" strokeWidth="1" x1="0" x2="19" y1="5" y2="5" />
-              <line stroke="#FFFFFF" strokeWidth="1" x1="0" x2="19" y1="7" y2="7" />
-              <line stroke="#FFFFFF" strokeWidth="1" x1="0" x2="19" y1="9" y2="9" />
-              <rect fill="#3C3B6E" height="5.38" width="7.6" />
-              <g fill="#FFFFFF">
-                <circle cx="0.63" cy="0.45" r="0.15" />
-                <circle cx="1.89" cy="0.45" r="0.15" />
-                <circle cx="3.15" cy="0.45" r="0.15" />
-                <circle cx="4.41" cy="0.45" r="0.15" />
-                <circle cx="5.67" cy="0.45" r="0.15" />
-                <circle cx="6.93" cy="0.45" r="0.15" />
-                <circle cx="1.26" cy="0.90" r="0.15" />
-                <circle cx="2.52" cy="0.90" r="0.15" />
-                <circle cx="3.78" cy="0.90" r="0.15" />
-                <circle cx="5.04" cy="0.90" r="0.15" />
-                <circle cx="6.30" cy="0.90" r="0.15" />
-                <circle cx="0.63" cy="1.35" r="0.15" />
-                <circle cx="1.89" cy="1.35" r="0.15" />
-                <circle cx="3.15" cy="1.35" r="0.15" />
-                <circle cx="4.41" cy="1.35" r="0.15" />
-                <circle cx="5.67" cy="1.35" r="0.15" />
-                <circle cx="6.93" cy="1.35" r="0.15" />
-                <circle cx="1.26" cy="1.80" r="0.15" />
-                <circle cx="2.52" cy="1.80" r="0.15" />
-                <circle cx="3.78" cy="1.80" r="0.15" />
-                <circle cx="5.04" cy="1.80" r="0.15" />
-                <circle cx="6.30" cy="1.80" r="0.15" />
-                <circle cx="0.63" cy="2.25" r="0.15" />
-                <circle cx="1.89" cy="2.25" r="0.15" />
-                <circle cx="3.15" cy="2.25" r="0.15" />
-                <circle cx="4.41" cy="2.25" r="0.15" />
-                <circle cx="5.67" cy="2.25" r="0.15" />
-                <circle cx="6.93" cy="2.25" r="0.15" />
-                <circle cx="1.26" cy="2.70" r="0.15" />
-                <circle cx="2.52" cy="2.70" r="0.15" />
-                <circle cx="3.78" cy="2.70" r="0.15" />
-                <circle cx="5.04" cy="2.70" r="0.15" />
-                <circle cx="6.30" cy="2.70" r="0.15" />
-                <circle cx="0.63" cy="3.15" r="0.15" />
-                <circle cx="1.89" cy="3.15" r="0.15" />
-                <circle cx="3.15" cy="3.15" r="0.15" />
-                <circle cx="4.41" cy="3.15" r="0.15" />
-                <circle cx="5.67" cy="3.15" r="0.15" />
-                <circle cx="6.93" cy="3.15" r="0.15" />
-                <circle cx="1.26" cy="3.60" r="0.15" />
-                <circle cx="2.52" cy="3.60" r="0.15" />
-                <circle cx="3.78" cy="3.60" r="0.15" />
-                <circle cx="5.04" cy="3.60" r="0.15" />
-                <circle cx="6.30" cy="3.60" r="0.15" />
-                <circle cx="0.63" cy="4.05" r="0.15" />
-                <circle cx="1.89" cy="4.05" r="0.15" />
-                <circle cx="3.15" cy="4.05" r="0.15" />
-                <circle cx="4.41" cy="4.05" r="0.15" />
-                <circle cx="5.67" cy="4.05" r="0.15" />
-                <circle cx="6.93" cy="4.05" r="0.15" />
-                <circle cx="1.26" cy="4.50" r="0.15" />
-                <circle cx="2.52" cy="4.50" r="0.15" />
-                <circle cx="3.78" cy="4.50" r="0.15" />
-                <circle cx="5.04" cy="4.50" r="0.15" />
-                <circle cx="6.30" cy="4.50" r="0.15" />
-                <circle cx="0.63" cy="4.95" r="0.15" />
-                <circle cx="1.89" cy="4.95" r="0.15" />
-                <circle cx="3.15" cy="4.95" r="0.15" />
-                <circle cx="4.41" cy="4.95" r="0.15" />
-                <circle cx="5.67" cy="4.95" r="0.15" />
-                <circle cx="6.93" cy="4.95" r="0.15" />
-              </g>
+              <rect fill="#012169" height="30" width="60" />
+              <path d="M0 0 60 30M60 0 0 30" stroke="#fff" strokeWidth="6" />
+              <path d="M0 0 60 30M60 0 0 30" stroke="#c8102e" strokeWidth="3" />
+              <path d="M30 0v30M0 15h60" stroke="#fff" strokeWidth="10" />
+              <path d="M30 0v30M0 15h60" stroke="#c8102e" strokeWidth="6" />
             </svg>
-            <span className="buudy-mono leading-none">Made in USA</span>
+            <span className="buudy-mono leading-none">{market.madeInLabel}</span>
           </span>
 
           <button

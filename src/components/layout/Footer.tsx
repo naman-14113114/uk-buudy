@@ -20,7 +20,7 @@ export function Footer() {
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
               Salon-grade LED light therapy, beautifully wearable. Designed in
-              the United States.
+              the United Kingdom.
             </p>
           </div>
 
@@ -47,7 +47,7 @@ export function Footer() {
             <p className="mt-4 text-sm leading-7 text-[rgba(247,241,232,.72)]">
               Operating Hours
               <br />
-              Monday - Friday - 9am - 5pm EST
+              Monday - Friday - 9am - 5pm GMT
             </p>
             <a
               className="mt-3 block text-sm underline underline-offset-4"

@@ -1,6 +1,6 @@
 export const shippingPolicyHtml = `
   <h2>Overview</h2>
-  <p>We currently offer free shipping to the United States, Australia, and Canada.</p>
+  <p>We currently offer free worldwide tracked shipping.</p>
   <p>All orders are processed within 1 to 3 business days and shipped using a fully tracked courier service.</p>
   <p>Rest assured, we are doing everything in our power to get your order to you as soon as possible. Once your order is dispatched, transit time is normally between 3 and 10 business days depending on your country or region. Please consider any holidays that might impact delivery times.</p>
   <p>Due to the nature of the shipping business, delays are sometimes inevitable. Our shipping times are guidelines only, and specific delivery dates are not guaranteed.</p>
@@ -19,6 +19,6 @@ export const shippingPolicyHtml = `
   <ul>
     <li>By email: <a href="mailto:support@buudy.com">support@buudy.com</a></li>
     <li>By visiting our <a href="/pages/contact-us#contact-form">Contact Form</a></li>
-    <li>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</li>
+    <li>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM GMT</li>
   </ul>
 `;

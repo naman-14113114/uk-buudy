@@ -1,4 +1,5 @@
 import { productAsset, productMediaAsset, type ProductImage } from "@/lib/media";
+import { market, type StoreCurrency } from "@/lib/market";
 import { faqs, torchFaqs, torchWavelengths, type FAQItem, type Wavelength } from "./productSections";
 
 export type ProductGift = {
@@ -33,7 +34,7 @@ export type Product = {
   description: string;
   seoTitle: string;
   seoDescription: string;
-  currency: "USD";
+  currency: StoreCurrency;
   priceCents: number;
   compareAtCents: number;
   rating: number;
@@ -69,9 +70,9 @@ export const buudyMask: Product = {
   seoTitle: "Buudy LED Mask | 8-Mode LED Face and Neck Mask",
   seoDescription:
     "Salon-grade LED light therapy for home with 192 LEDs, 7 visible light colors plus a dedicated 830nm near-infrared mode, face and neck coverage, cordless design, and free gifts.",
-  currency: "USD",
-  priceCents: 19900,
-  compareAtCents: 39900,
+  currency: market.currency,
+  priceCents: 17900,
+  compareAtCents: 44900,
   rating: 4.9,
   reviewCount: 16000,
   customerCount: "16,000+",
@@ -226,9 +227,9 @@ export const buudyRedTorch: Product = {
   seoTitle: "Buudy Red Torch | 5 Wavelength Red Light Therapy Device",
   seoDescription:
     "Portable red and blue light therapy torch with 5 wavelengths, near infrared support, rechargeable battery, and targeted body and skin relief.",
-  currency: "USD",
-  priceCents: 9139,
-  compareAtCents: 22847,
+  currency: market.currency,
+  priceCents: 7000,
+  compareAtCents: 17500,
   rating: 4.9,
   reviewCount: 58,
   customerCount: "58+",

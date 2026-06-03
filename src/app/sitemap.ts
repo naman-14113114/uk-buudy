@@ -1,114 +1,32 @@
 import type { MetadataRoute } from "next";
+import { market } from "@/lib/market";
+
+const routes = [
+  { path: "/", lastModified: "2026-05-28", changeFrequency: "weekly", priority: 1 },
+  { path: "/products/buudy-led-mask", lastModified: "2026-05-28", changeFrequency: "weekly", priority: 1 },
+  { path: "/products/red-light-torch", lastModified: "2026-05-28", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/cart", lastModified: "2026-05-28", changeFrequency: "monthly", priority: 0.4 },
+  { path: "/pages/contact-us", lastModified: "2026-05-29", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/pages/about-us", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/pages/faqs", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/order-tracking", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.5 },
+  { path: "/shipping-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.4 },
+  { path: "/return-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.4 },
+  { path: "/refund-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.4 },
+  { path: "/privacy-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.3 },
+  { path: "/terms-of-service", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.3 },
+  { path: "/cookies-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.3 },
+  { path: "/pages/skincare-quiz", lastModified: "2026-05-31", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/pages/premium-travel-box", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/pages/buudy-led-torch", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/pages/skincare-guide", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.6 },
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://buudy.com/",
-      lastModified: new Date("2026-05-28"),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: "https://buudy.com/products/buudy-led-mask",
-      lastModified: new Date("2026-05-28"),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: "https://buudy.com/products/red-light-torch",
-      lastModified: new Date("2026-05-28"),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: "https://buudy.com/cart",
-      lastModified: new Date("2026-05-28"),
-      changeFrequency: "monthly",
-      priority: 0.4,
-    },
-    {
-      url: "https://buudy.com/pages/contact-us",
-      lastModified: new Date("2026-05-29"),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: "https://buudy.com/pages/about-us",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: "https://buudy.com/pages/faqs",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: "https://buudy.com/order-tracking",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: "https://buudy.com/shipping-policy",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.4,
-    },
-    {
-      url: "https://buudy.com/return-policy",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.4,
-    },
-    {
-      url: "https://buudy.com/refund-policy",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.4,
-    },
-    {
-      url: "https://buudy.com/privacy-policy",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.3,
-    },
-    {
-      url: "https://buudy.com/terms-of-service",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.3,
-    },
-    {
-      url: "https://buudy.com/cookies-policy",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.3,
-    },
-    {
-      url: "https://buudy.com/pages/skincare-quiz",
-      lastModified: new Date("2026-05-31"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: "https://buudy.com/pages/premium-travel-box",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: "https://buudy.com/pages/buudy-led-torch",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: "https://buudy.com/pages/skincare-guide",
-      lastModified: new Date("2026-06-01"),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-  ];
+  return routes.map((route) => ({
+    url: `${market.siteUrl}${route.path === "/" ? "" : route.path}`,
+    lastModified: new Date(route.lastModified),
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+  }));
 }

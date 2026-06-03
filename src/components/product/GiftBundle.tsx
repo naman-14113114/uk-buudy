@@ -20,6 +20,7 @@ import {
   Droplets,
 } from "lucide-react";
 import type { Product } from "@/data/products";
+import { market } from "@/lib/market";
 import { formatMoney } from "@/lib/money";
 import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
@@ -51,9 +52,9 @@ function useDeliveryDate(daysFromToday: number) {
       const date = new Date();
       date.setDate(date.getDate() + daysFromToday);
 
-      const weekday = date.toLocaleString("en-US", { weekday: "long" });
+      const weekday = date.toLocaleString(market.locale, { weekday: "long" });
       const day = date.getDate();
-      const month = date.toLocaleString("en-US", { month: "long" });
+      const month = date.toLocaleString(market.locale, { month: "long" });
 
       setDateLabel(`${weekday} ${day} ${month}`);
     }, 0);

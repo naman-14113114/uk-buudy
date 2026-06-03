@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FaqPage } from "@/components/faq/FaqPage";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions | Help & Support - Buudy",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     title: "Buudy Help Center | Frequently Asked Questions",
     description:
       "Find answers to shipping policies, return policies, order tracking, payment methods, and technical questions about the Buudy LED Skincare Mask.",
-    url: "https://buudy.com/pages/faqs",
+    url: absoluteUrl("/pages/faqs"),
   },
 };
 

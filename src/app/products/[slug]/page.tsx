@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ProductPage } from "@/components/product/ProductPage";
 import { getProductBySlug, products } from "@/data/products";
 import { faqJsonLd, productJsonLd } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/site";
 
 type PageProps = {
   params: Promise<{
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: product.name,
       description: product.description,
-      url: `https://buudy.com/products/${product.slug}`,
+      url: absoluteUrl(`/products/${product.slug}`),
       images: [
         {
           url: product.gallery[0].src,

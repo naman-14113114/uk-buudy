@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronDown, Mail, MessageSquare } from "lucide-react";
 import { faqsData } from "@/data/faqs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { market } from "@/lib/market";
 
 type FaqItemProps = {
   question: string;
@@ -106,7 +107,7 @@ export function FaqPage() {
         <div className="mt-16 rounded-[24px] border border-[var(--border)] bg-[rgba(255,255,255,0.4)] backdrop-blur-md p-8 text-center max-w-2xl mx-auto shadow-[0_20px_50px_-28px_rgba(58,31,61,0.08)]">
           <h3 className="buudy-display text-2xl text-[var(--plum)]">Still have questions?</h3>
           <p className="mt-2 text-sm sm:text-base text-[var(--muted)] font-light">
-            Our support desk is here for you Monday through Friday, 9am - 5pm EST.
+            Our support desk is here for you {market.supportHours}.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 

@@ -351,11 +351,11 @@ export function ComparisonTable() {
             title="Price"
             values={[
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
-                <span className="line-through mr-1.5 opacity-60">$399</span>$199
+                <span className="line-through mr-1.5 opacity-60">£449</span>£179
               </span>,
-              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">$395</span>,
-              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">$380</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">$455</span>,
+              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£395</span>,
+              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£380</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£455</span>,
             ]}
             isLast={true}
           />

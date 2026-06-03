@@ -18,6 +18,7 @@ import { CartSummary } from "./CartSummary";
 import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
 import { FreeGiftsPanel } from "./FreeGiftsPanel";
 import { getDisplayLines, type CartLine } from "@/lib/cart";
+import { market } from "@/lib/market";
 
 const digitalGiftId = "skincare-ebook";
 
@@ -46,9 +47,9 @@ function useDeliveryDate(daysFromToday: number) {
       const date = new Date();
       date.setDate(date.getDate() + daysFromToday);
 
-      const weekday = date.toLocaleString("en-US", { weekday: "long" });
+      const weekday = date.toLocaleString(market.locale, { weekday: "long" });
       const day = date.getDate();
-      const month = date.toLocaleString("en-US", { month: "long" });
+      const month = date.toLocaleString(market.locale, { month: "long" });
 
       setDateLabel(`${weekday} ${day} ${month}`);
     }, 0);

@@ -1,9 +1,10 @@
 import { formatMoney, percentOff } from "@/lib/money";
+import { market, type StoreCurrency } from "@/lib/market";
 
 type PriceProps = {
   priceCents: number;
   compareAtCents?: number;
-  currency?: string;
+  currency?: StoreCurrency;
   size?: "sm" | "lg";
   invert?: boolean;
 };
@@ -11,7 +12,7 @@ type PriceProps = {
 export function Price({
   priceCents,
   compareAtCents,
-  currency = "USD",
+  currency = market.currency,
   size = "lg",
   invert,
 }: PriceProps) {

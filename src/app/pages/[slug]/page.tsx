@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FreeGiftDetailPage } from "@/components/gifts/FreeGiftDetailPage";
 import { freeGiftDetails, getFreeGiftDetail } from "@/data/freeGifts";
+import { absoluteUrl } from "@/lib/site";
 
 type GiftPageProps = {
   params: Promise<{ slug: string }>;
@@ -21,7 +22,7 @@ export async function generateMetadata({
     return {};
   }
 
-  const url = `https://buudy.com/pages/${gift.slug}`;
+  const url = absoluteUrl(`/pages/${gift.slug}`);
 
   return {
     title: gift.seoTitle,

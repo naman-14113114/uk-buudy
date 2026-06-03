@@ -81,7 +81,7 @@ WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
 ```
 
 The browser loads that key at runtime through `src/app/api/contact/config/route.ts`,
-so the same deployment works on `buudy-zeta.vercel.app`, `us.buudy.com`, or a
+so the same deployment works on `buudy-zeta.vercel.app`, `uk.buudy.com`, or a
 future domain without changing code. The submitted payload also records the
 actual `window.location.href` as `source_url`.
 

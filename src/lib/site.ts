@@ -1,4 +1,6 @@
-export const defaultSiteUrl = "https://us.buudy.com";
+import { market } from "@/lib/market";
+
+export const defaultSiteUrl = market.siteUrl;
 export const plusbaseStoreUrl = "https://buudy.com";
 
 const plusbaseBridgePath = "/pages/add-to-cart";
@@ -51,10 +53,10 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
     gift: "buudy-red-torch",
     redirect: "checkout",
     product_handle: "buudy-led-mask",
-    source: options.source ?? "us_buudy",
-    utm_source: options.utmSource ?? "us.buudy.com",
+    source: options.source ?? market.checkoutSource,
+    utm_source: options.utmSource ?? market.checkoutUtmSource,
     utm_medium: options.utmMedium ?? "store_cart_checkout",
-    utm_campaign: options.utmCampaign ?? "us_led_mask",
+    utm_campaign: options.utmCampaign ?? market.checkoutUtmCampaign,
   };
 
   if (options.checkoutRef) {

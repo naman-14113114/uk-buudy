@@ -17,7 +17,7 @@ export const faqsData: FaqItem[] = [
     question: "What is the Shipping Policy?",
     answerHtml: `
       <div class="space-y-4 text-sm leading-6 text-[var(--muted)]">
-        <p>We offer free shipping to the United States, Australia, and Canada. Orders are processed within 1 to 3 business days and shipped with a fully tracked courier service.</p>
+        <p>We offer free worldwide tracked shipping. Orders are processed within 1 to 3 business days and shipped with a fully tracked courier service.</p>
         <p>After dispatch, transit normally takes 3 to 10 business days depending on the destination. Tracking information may take 1 to 2 business days to appear.</p>
         <p>Read the complete <a href="/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a> for pre-order guidance, tracking details, and address-change instructions.</p>
       </div>
@@ -39,7 +39,7 @@ export const faqsData: FaqItem[] = [
   {
     question: "What are shipping costs?",
     answerHtml: `
-      <p class="text-sm leading-6">Shipping is free for orders to the United States, Australia, and Canada. Orders are processed within 1 to 3 business days and sent with a tracked courier service. Once dispatched, transit usually takes 3 to 10 business days. Read the full <a href="/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a> or <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">contact us</a> with questions.</p>
+      <p class="text-sm leading-6">Shipping is free worldwide. Orders are processed within 1 to 3 business days and sent with a tracked courier service. Once dispatched, transit usually takes 3 to 10 business days. Read the full <a href="/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a> or <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">contact us</a> with questions.</p>
     `
   },
   {

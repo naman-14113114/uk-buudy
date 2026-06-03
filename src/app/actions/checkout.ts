@@ -15,6 +15,7 @@ import {
 } from "@/lib/supabase/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { CheckoutActionState } from "@/types/actions";
+import { market } from "@/lib/market";
 
 const checkoutSchema = z.object({
   cartJson: z.string().min(2),
@@ -136,7 +137,7 @@ export async function recordCheckoutAction(
       shipping_city: parsed.data.shippingCity || null,
       shipping_state: parsed.data.shippingState || null,
       shipping_postal_code: parsed.data.shippingPostalCode || null,
-      shipping_country: parsed.data.shippingCountry || "United States",
+      shipping_country: parsed.data.shippingCountry || market.country,
       status: "sale_recorded",
       source: "site_static_checkout",
       subtotal_cents: totals.subtotalCents,
@@ -144,7 +145,7 @@ export async function recordCheckoutAction(
       total_cents: totals.totalCents,
       savings_cents: totals.savingsCents,
       gift_value_cents: totals.giftValueCents,
-      currency: "USD",
+      currency: market.currency,
       promo_codes: promoCodes,
       gift_message: cart.giftMessage || null,
     })
@@ -193,7 +194,7 @@ export async function recordCheckoutAction(
       shipping_city: parsed.data.shippingCity || null,
       shipping_state: parsed.data.shippingState || null,
       shipping_postal_code: parsed.data.shippingPostalCode || null,
-      shipping_country: parsed.data.shippingCountry || "United States",
+      shipping_country: parsed.data.shippingCountry || market.country,
       marketing_opt_in: parsed.data.marketingOptIn === "on",
     });
   }
