@@ -34,10 +34,10 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
   const [session, setSession] = useState<HeaderSession | null>(null);
   const accountMenuRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
-  const mobileTouchStartY = useRef(0);
 
   useEffect(() => {
     async function loadSession() {
@@ -113,12 +113,29 @@ export function Header() {
   }, [accountMenuOpen]);
 
   useEffect(() => {
-    if (!mobileMenuOpen) {
+    if (mobileMenuOpen || !mobileMenuMounted) {
       return;
     }
 
-    const previousOverflow = document.body.style.overflow;
+    const timeout = window.setTimeout(() => setMobileMenuMounted(false), 280);
+
+    return () => window.clearTimeout(timeout);
+  }, [mobileMenuMounted, mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!mobileMenuMounted) {
+      return;
+    }
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverscroll = document.body.style.overscrollBehavior;
+    const previousHtmlOverscroll = document.documentElement.style.overscrollBehavior;
+
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "contain";
+    document.documentElement.style.overscrollBehavior = "contain";
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -126,37 +143,16 @@ export function Header() {
       }
     }
 
-    function onWheel(event: WheelEvent) {
-      if (event.deltaY > 12) {
-        setMobileMenuOpen(false);
-      }
-    }
-
-    function onTouchStart(event: TouchEvent) {
-      mobileTouchStartY.current = event.touches[0]?.clientY ?? 0;
-    }
-
-    function onTouchMove(event: TouchEvent) {
-      const currentY = event.touches[0]?.clientY ?? 0;
-
-      if (mobileTouchStartY.current - currentY > 24) {
-        setMobileMenuOpen(false);
-      }
-    }
-
     window.addEventListener("keydown", onKeyDown);
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("wheel", onWheel, { passive: true });
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overscrollBehavior = previousBodyOverscroll;
+      document.documentElement.style.overscrollBehavior = previousHtmlOverscroll;
       window.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("wheel", onWheel);
     };
-  }, [mobileMenuOpen]);
+  }, [mobileMenuMounted]);
 
   const signedIn = Boolean(session?.user);
   const accountLabel =
@@ -178,6 +174,7 @@ export function Header() {
           onClick={() => {
             setHidden(false);
             setAccountMenuOpen(false);
+            setMobileMenuMounted(true);
             setMobileMenuOpen(true);
           }}
           type="button"
@@ -310,19 +307,27 @@ export function Header() {
         </div>
       </div>
 
-      {mobileMenuOpen && typeof document !== "undefined"
+      {mobileMenuMounted && typeof document !== "undefined"
         ? createPortal(
-            <div className="fixed inset-0 z-[70] lg:hidden">
+            <div
+              className={`fixed inset-0 z-[70] lg:hidden transition ${
+                mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
+              }`}
+            >
               <button
                 aria-label="Close navigation menu"
-                className="absolute inset-0 bg-[rgba(18,9,20,.52)] backdrop-blur-sm"
+                className={`absolute inset-0 bg-[rgba(18,9,20,.52)] backdrop-blur-sm transition-opacity duration-300 ease-out ${
+                  mobileMenuOpen ? "opacity-100" : "opacity-0"
+                }`}
                 onClick={() => setMobileMenuOpen(false)}
                 type="button"
               />
               <aside
                 aria-label="Mobile navigation"
                 aria-modal="true"
-                className="absolute inset-y-0 left-0 flex w-[min(88vw,22rem)] flex-col overflow-y-auto border-r border-[var(--border)] bg-[var(--card)] shadow-[18px_0_60px_-32px_rgba(18,9,20,.7)]"
+                className={`absolute inset-y-0 left-0 flex w-[min(88vw,22rem)] flex-col overflow-y-auto border-r border-[var(--border)] bg-[var(--card)] shadow-[18px_0_60px_-32px_rgba(18,9,20,.7)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+                }`}
                 id="mobile-site-navigation"
                 role="dialog"
               >
