@@ -109,7 +109,13 @@ export function Footer() {
                 key={icon.label}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt={icon.label} className="h-4 w-auto" src={icon.src} />
+                <img
+                  alt={icon.label}
+                  className="h-4 w-auto"
+                  decoding="async"
+                  loading="lazy"
+                  src={icon.src}
+                />
               </span>
             ))}
           </div>
