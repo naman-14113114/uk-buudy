@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductPage } from "@/components/product/ProductPage";
 import { getProductBySlug, products } from "@/data/products";
+import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
   faqJsonLd,
@@ -103,6 +104,10 @@ export default async function ProductRoute({ params }: PageProps) {
     notFound();
   }
 
+  const productFaqs = product.template === "mask"
+    ? [...ledMaskSeoFaqs, ...product.faqs]
+    : product.faqs;
+
   return (
     <>
       {[
@@ -113,7 +118,7 @@ export default async function ProductRoute({ params }: PageProps) {
           { name: "Home", url: "/" },
           { name: product.name, url: `/products/${product.slug}` },
         ]),
-        faqJsonLd(product.faqs),
+        faqJsonLd(productFaqs),
       ].map((schema, index) => (
         <script
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
