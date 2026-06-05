@@ -3,7 +3,8 @@ import { market } from "@/lib/market";
 
 const routes = [
   { path: "/", lastModified: "2026-05-28", changeFrequency: "weekly", priority: 1 },
-  { path: "/products/buudy-led-mask", lastModified: "2026-05-28", changeFrequency: "weekly", priority: 1 },
+  { path: "/products/buudy-led-mask", lastModified: "2026-06-05", changeFrequency: "weekly", priority: 1 },
+  { path: "/pages/best-led-face-mask-uk", lastModified: "2026-06-05", changeFrequency: "weekly", priority: 0.95 },
   { path: "/products/red-light-torch", lastModified: "2026-05-28", changeFrequency: "weekly", priority: 0.9 },
   { path: "/cart", lastModified: "2026-05-28", changeFrequency: "monthly", priority: 0.4 },
   { path: "/pages/contact-us", lastModified: "2026-05-29", changeFrequency: "monthly", priority: 0.6 },
