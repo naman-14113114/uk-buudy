@@ -187,6 +187,45 @@ video {
   animation: buudy-fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.home-soft-lift {
+  animation: home-soft-lift 9s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+
+.home-light-scan::before {
+  animation: home-light-scan 5.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(66% 0.088 86 / 0.26),
+    transparent
+  );
+  content: "";
+  inset-block: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 36%;
+}
+
+@keyframes home-soft-lift {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: 0 -10px;
+  }
+}
+
+@keyframes home-light-scan {
+  from {
+    left: -42%;
+  }
+
+  to {
+    left: 108%;
+  }
+}
+
 .buudy-cart-wipe {
   isolation: isolate;
   overflow: hidden;
