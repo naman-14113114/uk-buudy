@@ -57,6 +57,9 @@ export function WavelengthSelector() {
                     className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 ease-in-out ${
                       isActive ? "opacity-100 scale-100 z-10" : "opacity-0 scale-95 z-0"
                     }`}
+                    decoding="async"
+                    fetchPriority="low"
+                    loading="lazy"
                     style={{
                       filter: isActive ? `drop-shadow(0 0 35px ${wavelength.color}35)` : "none",
                     }}
