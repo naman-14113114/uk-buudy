@@ -165,6 +165,8 @@ export function GiftBundle({ product }: { product: Product }) {
                 src="/media/products/buudy-led-mask/images/klarna_badge.png"
                 alt="Klarna"
                 className="w-[85%] h-auto object-contain"
+                decoding="async"
+                loading="lazy"
               />
             </div>
             {/* Afterpay Badge Container */}
@@ -173,6 +175,8 @@ export function GiftBundle({ product }: { product: Product }) {
                 src="/media/products/buudy-led-mask/images/afterpay_badge.png"
                 alt="Afterpay"
                 className="w-[88%] h-auto object-contain"
+                decoding="async"
+                loading="lazy"
               />
             </div>
           </div>
