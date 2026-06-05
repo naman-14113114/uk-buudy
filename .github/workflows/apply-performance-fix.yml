@@ -1,0 +1,545 @@
+name: Apply product page performance fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/apply-performance-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-performance-fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply performance patch
+        shell: bash
+        run: |
+          cat > /tmp/buudy-performance.patch <<'PATCH'
+diff --git a/src/components/integrations/ClarityAnalytics.tsx b/src/components/integrations/ClarityAnalytics.tsx
+index 5e5b34c..c96ee8a 100644
+--- a/src/components/integrations/ClarityAnalytics.tsx
++++ b/src/components/integrations/ClarityAnalytics.tsx
+@@ -1,4 +1,7 @@
+-import Script from "next/script";
++"use client";
++
++import { useEffect } from "react";
++import { runAfterEngagement } from "@/lib/loadOnEngagement";
+ 
+ const clarityScript = `
+ (function(c,l,a,r,i,t,y){
+@@ -9,11 +12,20 @@ const clarityScript = `
+ `;
+ 
+ export function ClarityAnalytics() {
+-  return (
+-    <Script
+-      dangerouslySetInnerHTML={{ __html: clarityScript }}
+-      id="microsoft-clarity"
+-      strategy="afterInteractive"
+-    />
++  useEffect(
++    () =>
++      runAfterEngagement(() => {
++        if (document.querySelector("script[data-buudy-clarity='true']")) {
++          return;
++        }
++
++        const script = document.createElement("script");
++        script.dataset.buudyClarity = "true";
++        script.textContent = clarityScript;
++        document.head.appendChild(script);
++      }),
++    [],
+   );
++
++  return null;
+ }
+diff --git a/src/components/integrations/KlaviyoAnalytics.tsx b/src/components/integrations/KlaviyoAnalytics.tsx
+index c60022c..4e177a0 100644
+--- a/src/components/integrations/KlaviyoAnalytics.tsx
++++ b/src/components/integrations/KlaviyoAnalytics.tsx
+@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
+ import { usePathname } from "next/navigation";
+ import { products, productsById, type Product } from "@/data/products";
+ import type { CartLine } from "@/lib/cart";
++import { runAfterEngagement } from "@/lib/loadOnEngagement";
+ import { market } from "@/lib/market";
+ 
+ type KlaviyoCommand = [string, ...unknown[]];
+@@ -313,8 +314,11 @@ export function KlaviyoAnalytics() {
+ 
+     window.klaviyo = window.klaviyo || [];
+     const cleanupScrollGuard = guardKlaviyoScrollLock();
++    const loadKlaviyo = () => {
++      if (document.querySelector("script[data-buudy-klaviyo='true']")) {
++        return;
++      }
+ 
+-    if (!document.querySelector("script[data-buudy-klaviyo='true']")) {
+       const script = document.createElement("script");
+       script.async = true;
+       script.dataset.buudyKlaviyo = "true";
+@@ -322,9 +326,14 @@ export function KlaviyoAnalytics() {
+         KLAVIYO_COMPANY_ID,
+       )}`;
+       document.head.appendChild(script);
+-    }
++    };
+ 
+-    return cleanupScrollGuard;
++    const cleanupKlaviyoLoad = runAfterEngagement(loadKlaviyo);
++
++    return () => {
++      cleanupKlaviyoLoad();
++      cleanupScrollGuard();
++    };
+   }, []);
+ 
+   useEffect(() => {
+diff --git a/src/components/integrations/TawkToWidget.tsx b/src/components/integrations/TawkToWidget.tsx
+index bad9579..d8637d0 100644
+--- a/src/components/integrations/TawkToWidget.tsx
++++ b/src/components/integrations/TawkToWidget.tsx
+@@ -1,4 +1,7 @@
+-import Script from "next/script";
++"use client";
++
++import { useEffect } from "react";
++import { runAfterEngagement } from "@/lib/loadOnEngagement";
+ 
+ const tawkToScript = `
+ var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+@@ -69,18 +72,25 @@ const tawkToPositionScript = `
+ `;
+ 
+ export function TawkToWidget() {
+-  return (
+-    <>
+-      <Script
+-        dangerouslySetInnerHTML={{ __html: tawkToScript }}
+-        id="tawk-to-widget"
+-        strategy="afterInteractive"
+-      />
+-      <Script
+-        dangerouslySetInnerHTML={{ __html: tawkToPositionScript }}
+-        id="tawk-to-position"
+-        strategy="afterInteractive"
+-      />
+-    </>
++  useEffect(
++    () =>
++      runAfterEngagement(() => {
++        if (!document.querySelector("script[data-buudy-tawk-position='true']")) {
++          const positionScript = document.createElement("script");
++          positionScript.dataset.buudyTawkPosition = "true";
++          positionScript.textContent = tawkToPositionScript;
++          document.head.appendChild(positionScript);
++        }
++
++        if (!document.querySelector("script[data-buudy-tawk='true']")) {
++          const widgetScript = document.createElement("script");
++          widgetScript.dataset.buudyTawk = "true";
++          widgetScript.textContent = tawkToScript;
++          document.head.appendChild(widgetScript);
++        }
++      }),
++    [],
+   );
++
++  return null;
+ }
+diff --git a/src/components/layout/Header.tsx b/src/components/layout/Header.tsx
+index 5ac3232..6e1c45e 100644
+--- a/src/components/layout/Header.tsx
++++ b/src/components/layout/Header.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ 
+ import Link from "next/link";
++import Image from "next/image";
+ import { useEffect, useRef, useState, type ReactNode } from "react";
+ import { createPortal } from "react-dom";
+ import {
+@@ -199,11 +200,14 @@ export function Header() {
+           href="/"
+           aria-label="Buudy home"
+         >
+-          <img
+-            src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
++          <Image
+             alt="Buudy Logo"
+-            className="w-auto object-contain"
+-            style={{ height: "clamp(40px, 4vw, 50px)" }}
++            className="h-[clamp(40px,4vw,50px)] w-auto object-contain"
++            height={74}
++            priority
++            sizes="(min-width: 1024px) 180px, 150px"
++            src="/media/products/buudy-led-mask/images/buudy_footer_logo.png"
++            width={220}
+           />
+         </Link>
+ 
+@@ -332,11 +336,14 @@ export function Header() {
+                 role="dialog"
+               >
+                 <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
+-                  <img
++                  <Image
+                     alt="Buudy Logo"
+-                    className="w-auto object-contain"
+-                    src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
+-                    style={{ height: "40px" }}
++                    className="h-10 w-auto object-contain"
++                    height={74}
++                    priority
++                    sizes="150px"
++                    src="/media/products/buudy-led-mask/images/buudy_footer_logo.png"
++                    width={220}
+                   />
+                   <button
+                     aria-label="Close navigation menu"
+diff --git a/src/components/product/AppPromo.tsx b/src/components/product/AppPromo.tsx
+index eaf05a0..f853ea5 100644
+--- a/src/components/product/AppPromo.tsx
++++ b/src/components/product/AppPromo.tsx
+@@ -3,6 +3,7 @@ import { Play, Smartphone } from "lucide-react";
+ import { touchTech } from "@/data/productSections";
+ import { productAsset, productMediaAsset } from "@/lib/media";
+ import { Button } from "@/components/ui/Button";
++import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
+ 
+ export function RitualSection() {
+   return (
+@@ -27,7 +28,7 @@ export function RitualSection() {
+             </button>
+           </div>
+           <p className="buudy-mono absolute bottom-5 left-5 text-[var(--cream)]">
+-            How Buudy works · 0:48
++            How Buudy works - 0:48
+           </p>
+         </div>
+         <div>
+@@ -77,18 +78,15 @@ export function TouchTechSection() {
+           </ul>
+         </div>
+         <div className="relative aspect-square overflow-hidden rounded-[18px] bg-[var(--ink)]">
+-          <video
+-            autoPlay
+-            muted
+-            loop
+-            playsInline
++          <LazyAutoplayVideo
++            ariaLabel="Buudy LED Mask light modes demonstration"
+             className="w-full h-full object-cover"
+-          >
+-            <source src={productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos")} type="video/mp4" />
+-          </video>
++            rootMargin="220px 0px"
++            src={productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos")}
++          />
+           <div className="absolute bottom-6 right-6 rounded-2xl bg-[rgba(247,241,232,.94)] p-4 text-[var(--plum)] backdrop-blur">
+             <p className="buudy-mono">Tap to cycle</p>
+-            <p className="buudy-display mt-1 text-xl">8 modes · 1 gesture</p>
++            <p className="buudy-display mt-1 text-xl">8 modes - 1 gesture</p>
+           </div>
+         </div>
+       </div>
+diff --git a/src/components/product/GuaranteeSection.tsx b/src/components/product/GuaranteeSection.tsx
+index ffe82e1..f47010d 100644
+--- a/src/components/product/GuaranteeSection.tsx
++++ b/src/components/product/GuaranteeSection.tsx
+@@ -1,20 +1,18 @@
++import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
++
+ export function GuaranteeSection() {
+   return (
+     <section className="buudy-section relative overflow-hidden py-14 pb-24 text-center md:py-24 md:pb-36">
+-      {/* Background Autoplay Video (Highly visible) */}
+-      <video
+-        autoPlay
+-        loop
+-        muted
+-        playsInline
++      <LazyAutoplayVideo
++        ariaLabel="Buudy guarantee lifestyle background"
+         className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none"
++        rootMargin="180px 0px"
+         src="/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4"
+       />
+ 
+-      {/* Premium dark ink overlay: highly transparent to make video completely visible */}
+       <div 
+         className="absolute inset-0 z-10" 
+-        style={{ backgroundColor: "oklch(17% 0.03 318 / 42%)" }} // 42% opacity of var(--ink) deep plum
++        style={{ backgroundColor: "oklch(17% 0.03 318 / 42%)" }}
+       />
+ 
+       <div className="buudy-wrap relative z-20 max-w-5xl">
+diff --git a/src/components/product/LazyProductReviewsGrid.tsx b/src/components/product/LazyProductReviewsGrid.tsx
+new file mode 100644
+index 0000000..f89bd4b
+--- /dev/null
++++ b/src/components/product/LazyProductReviewsGrid.tsx
+@@ -0,0 +1,52 @@
++"use client";
++
++import { useEffect, useRef, useState } from "react";
++import { ProductReviewsGrid } from "./ProductReviewsGrid";
++import type { ProductReview } from "@/types/reviews";
++
++type LazyProductReviewsGridProps = {
++  averageRating: number;
++  productHandle: string;
++  initialReviews: ProductReview[];
++  pageSize: number;
++  ratingDistribution: Record<string, number>;
++  total: number;
++};
++
++export function LazyProductReviewsGrid(props: LazyProductReviewsGridProps) {
++  const rootRef = useRef<HTMLDivElement>(null);
++  const [shouldRender, setShouldRender] = useState(false);
++
++  useEffect(() => {
++    const root = rootRef.current;
++    if (!root) {
++      return;
++    }
++
++    const observer = new IntersectionObserver(
++      ([entry]) => {
++        if (!entry.isIntersecting) {
++          return;
++        }
++
++        setShouldRender(true);
++        observer.disconnect();
++      },
++      { rootMargin: "520px 0px", threshold: 0.01 },
++    );
++
++    observer.observe(root);
++
++    return () => observer.disconnect();
++  }, []);
++
++  return (
++    <div ref={rootRef}>
++      {shouldRender ? (
++        <ProductReviewsGrid {...props} />
++      ) : (
++        <div className="min-h-[36rem] rounded-[24px] border border-[rgba(58,31,61,.12)] bg-[rgba(255,252,245,.64)] shadow-[0_22px_56px_-44px_rgba(58,31,61,.45)]" />
++      )}
++    </div>
++  );
++}
+diff --git a/src/components/product/ProductReviewsGrid.tsx b/src/components/product/ProductReviewsGrid.tsx
+index 5737da9..144a74e 100644
+--- a/src/components/product/ProductReviewsGrid.tsx
++++ b/src/components/product/ProductReviewsGrid.tsx
+@@ -457,25 +457,6 @@ export function ProductReviewsGrid({
+     void preloadReviewImages(review.images);
+   }, []);
+ 
+-  useEffect(() => {
+-    const firstVisibleImages = reviews
+-      .flatMap((review) => review.images.slice(0, 1))
+-      .slice(0, 8);
+-    const prefetch = () => {
+-      void preloadReviewImages(firstVisibleImages);
+-    };
+-
+-    if ("requestIdleCallback" in window) {
+-      const idleId = window.requestIdleCallback(prefetch, { timeout: 1200 });
+-
+-      return () => window.cancelIdleCallback(idleId);
+-    }
+-
+-    const timeoutId = setTimeout(prefetch, 250);
+-
+-    return () => clearTimeout(timeoutId);
+-  }, [reviews]);
+-
+   const visibleCount = reviews.length;
+   const hasMore = visibleCount < currentTotal;
+   const progressLabel = useMemo(
+diff --git a/src/components/product/ProductReviewsSection.tsx b/src/components/product/ProductReviewsSection.tsx
+index 85bb8d9..c280dc6 100644
+--- a/src/components/product/ProductReviewsSection.tsx
++++ b/src/components/product/ProductReviewsSection.tsx
+@@ -1,4 +1,4 @@
+-import { ProductReviewsGrid } from "./ProductReviewsGrid";
++import { LazyProductReviewsGrid } from "./LazyProductReviewsGrid";
+ import {
+   getProductReviewSummary,
+   getProductReviews,
+@@ -19,7 +19,7 @@ export function ProductReviewsSection() {
+   return (
+     <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="reviews">
+       <div className="buudy-wrap">
+-        <ProductReviewsGrid
++        <LazyProductReviewsGrid
+           averageRating={summary.averageRating}
+           initialReviews={initialReviews}
+           pageSize={reviewPageSize}
+diff --git a/src/components/product/VideoReviews.tsx b/src/components/product/VideoReviews.tsx
+index db30b5d..332bce0 100644
+--- a/src/components/product/VideoReviews.tsx
++++ b/src/components/product/VideoReviews.tsx
+@@ -46,7 +46,7 @@ function ReviewVideoCard({
+           videoEl.pause();
+         }
+       },
+-      { rootMargin: "900px 700px", threshold: 0.01 },
++      { rootMargin: "160px 0px", threshold: 0.01 },
+     );
+ 
+     observer.observe(card);
+@@ -255,7 +255,7 @@ export function VideoReviews() {
+       <div className="buudy-wrap">
+         <SectionHeading
+           align="center"
+-          eyebrow="§ Real Customers"
++          eyebrow="Real Customers"
+           title={
+             <>
+               Buudy Mask <span className="buudy-italic text-[var(--gold)]">reviews</span> <span className="font-playfair italic text-[var(--plum)]">&</span> real results
+diff --git a/src/components/ui/LazyAutoplayVideo.tsx b/src/components/ui/LazyAutoplayVideo.tsx
+new file mode 100644
+index 0000000..3f55d72
+--- /dev/null
++++ b/src/components/ui/LazyAutoplayVideo.tsx
+@@ -0,0 +1,75 @@
++"use client";
++
++import { useEffect, useRef, useState } from "react";
++
++type LazyAutoplayVideoProps = {
++  ariaLabel?: string;
++  className?: string;
++  poster?: string;
++  rootMargin?: string;
++  src: string;
++  type?: string;
++};
++
++export function LazyAutoplayVideo({
++  ariaLabel,
++  className,
++  poster,
++  rootMargin = "180px 0px",
++  src,
++  type = "video/mp4",
++}: LazyAutoplayVideoProps) {
++  const videoRef = useRef<HTMLVideoElement>(null);
++  const [shouldLoad, setShouldLoad] = useState(false);
++
++  useEffect(() => {
++    const video = videoRef.current;
++    if (!video) {
++      return;
++    }
++
++    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
++      return;
++    }
++
++    const observer = new IntersectionObserver(
++      ([entry]) => {
++        if (!entry.isIntersecting) {
++          return;
++        }
++
++        setShouldLoad(true);
++        observer.disconnect();
++      },
++      { rootMargin, threshold: 0.01 },
++    );
++
++    observer.observe(video);
++
++    return () => observer.disconnect();
++  }, [rootMargin]);
++
++  useEffect(() => {
++    if (!shouldLoad) {
++      return;
++    }
++
++    videoRef.current?.play().catch(() => undefined);
++  }, [shouldLoad]);
++
++  return (
++    <video
++      aria-label={ariaLabel}
++      autoPlay={shouldLoad}
++      className={className}
++      loop
++      muted
++      playsInline
++      poster={poster}
++      preload="none"
++      ref={videoRef}
++    >
++      {shouldLoad ? <source src={src} type={type} /> : null}
++    </video>
++  );
++}
+diff --git a/src/lib/loadOnEngagement.ts b/src/lib/loadOnEngagement.ts
+new file mode 100644
+index 0000000..0d0d822
+--- /dev/null
++++ b/src/lib/loadOnEngagement.ts
+@@ -0,0 +1,37 @@
++export function runAfterEngagement(callback: () => void, delay = 12000) {
++  if (typeof window === "undefined") {
++    return () => undefined;
++  }
++
++  let hasRun = false;
++  const events = ["pointerdown", "keydown", "scroll", "touchstart"] as const;
++  const listenerOptions = { once: true, passive: true } as AddEventListenerOptions;
++
++  function cleanupListeners() {
++    events.forEach((eventName) => {
++      window.removeEventListener(eventName, run, listenerOptions);
++    });
++  }
++
++  function run() {
++    if (hasRun) {
++      return;
++    }
++
++    hasRun = true;
++    window.clearTimeout(timer);
++    cleanupListeners();
++    callback();
++  }
++
++  const timer = window.setTimeout(run, delay);
++
++  events.forEach((eventName) => {
++    window.addEventListener(eventName, run, listenerOptions);
++  });
++
++  return () => {
++    window.clearTimeout(timer);
++    cleanupListeners();
++  };
++}
+PATCH
+          git apply --whitespace=nowarn /tmp/buudy-performance.patch
+          git rm .github/workflows/apply-performance-fix.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/components src/lib
+          git commit -m "Improve product page performance"
+          git push
