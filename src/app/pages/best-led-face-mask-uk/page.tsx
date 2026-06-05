@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ShieldCheck, Star, Zap } from "lucide-react";
-import { faqs } from "@/data/productSections";
 import { buudyMask } from "@/data/products";
+import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
   guidePageJsonLd,
@@ -56,8 +56,6 @@ const comparisonRows = [
   ["Guarantee", "90-day money back guarantee"],
 ];
 
-const guideFaqs = faqs.slice(0, 7);
-
 export const metadata: Metadata = {
   title: "Best LED Face Mask UK 2026 | Red Light Therapy Guide",
   description: pageDescription,
@@ -107,7 +105,7 @@ export default function BestLedFaceMaskUkPage() {
       title: pageTitle,
       description: pageDescription,
       url: "/pages/best-led-face-mask-uk",
-      faqs: guideFaqs,
+      faqs: ledMaskSeoFaqs,
     }),
   ];
 
