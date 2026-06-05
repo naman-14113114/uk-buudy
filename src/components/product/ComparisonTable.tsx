@@ -176,6 +176,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("ChatGPT Image May 31, 2026, 12_10_21 AM.png")}
                       alt="Buudy Logo"
                       className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
@@ -183,6 +185,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("OmniLux_Logo.png")}
                       alt="Omnilux"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
@@ -190,6 +194,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("current_body_logo.png")}
                       alt="CurrentBody"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
@@ -197,6 +203,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("59 (2).png")}
                       alt="Dr Dennis Gross"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -215,6 +223,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("ChatGPT Image May 31, 2026, 11_38_29 PM.png")}
                       alt="Buudy Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
@@ -222,6 +232,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("omnilux.png")}
                       alt="Omnilux Contour Face Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
@@ -229,6 +241,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("current Body.png")}
                       alt="CurrentBody Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
@@ -236,6 +250,8 @@ export function ComparisonTable() {
                       src={productMediaAsset("Dr Dennis Gross.png")}
                       alt="Dr Dennis Gross Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
+                      decoding="async"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -321,7 +337,7 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Eye Protection"
             subtitle="Integrated eye support"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ComparisonRow
