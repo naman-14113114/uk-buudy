@@ -64,12 +64,12 @@ export const buudyMask: Product = {
   heroTitle: "Buudy LED",
   heroEmphasis: "Mask",
   shortDescription:
-    "Salon-grade light therapy with 192 high-density LEDs and full face plus neck coverage.",
+    "UK salon-grade LED face mask with 192 high-density LEDs, 8 light modes, and full face plus neck coverage.",
   description:
-    "Salon-grade light therapy reimagined for home. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colors plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
-  seoTitle: "Buudy LED Mask | 8-Mode LED Face and Neck Mask",
+    "Salon-grade light therapy reimagined for UK homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colors plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
+  seoTitle: "Best LED Face Mask UK | Buudy Red Light Therapy Mask",
   seoDescription:
-    "Salon-grade LED light therapy for home with 192 LEDs, 7 visible light colors plus a dedicated 830nm near-infrared mode, face and neck coverage, cordless design, and free gifts.",
+    "Shop the Buudy LED Face Mask in the UK: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, 90-day returns, and free glow kit.",
   currency: market.currency,
   priceCents: 17900,
   compareAtCents: 44900,
