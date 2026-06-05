@@ -214,7 +214,7 @@ const torchAsset = (fileName: string) => productAsset(fileName, "buudy-red-torch
 
 export const buudyRedTorch: Product = {
   id: "buudy-red-torch",
-  sku: "1000020018633106",
+  sku: "1000020384558655",
   slug: "red-light-torch",
   template: "torch",
   name: "Buudy Red Torch",
