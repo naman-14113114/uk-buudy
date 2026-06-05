@@ -40,19 +40,61 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(market.siteUrl),
   title: {
-    default: "Buudy Light Therapy",
+    default: "Best LED Face Mask UK | Buudy Light Therapy",
     template: "%s | Buudy",
   },
   description:
-    "Professional-grade LED light therapy for home skincare and targeted wellness routines.",
+    "UK LED face mask for red light therapy, blue light acne routines, anti-ageing skincare, full face and neck coverage, and salon-grade home treatments.",
   applicationName: "Buudy",
+  keywords: [
+    "best LED face mask UK",
+    "LED face mask UK",
+    "red light therapy mask UK",
+    "LED face mask for acne UK",
+    "anti ageing LED mask",
+    "near infrared face mask",
+    "home light therapy mask",
+  ],
   alternates: {
     canonical: "/",
+    languages: {
+      "en-GB": "/",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
     siteName: "Buudy",
     type: "website",
     url: market.siteUrl,
+    locale: "en_GB",
+    title: "Best LED Face Mask UK | Buudy Light Therapy",
+    description:
+      "Salon-grade LED face and neck mask for UK skincare routines with 192 LEDs, 8 light modes, and a launch glow kit.",
+    images: [
+      {
+        url: "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
+        width: 1200,
+        height: 1500,
+        alt: "Buudy LED Face Mask with neck coverage",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best LED Face Mask UK | Buudy",
+    description:
+      "192 LEDs, red and blue light therapy, near-infrared support, cordless wearability, and face plus neck coverage.",
+    images: ["/images/products/buudy-led-mask/01-buudy-led-mask-front.webp"],
   },
 };
 
