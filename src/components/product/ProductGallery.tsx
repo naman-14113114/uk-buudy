@@ -222,6 +222,9 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
             id="buudyLED-23435t23-MainImg"
             className="buudyLED-23435t23-main_img"
             alt={currentImage.alt}
+            decoding="async"
+            fetchPriority="high"
+            loading="eager"
             onClick={() => openLightbox()}
             style={{ opacity: transitionOpacity }}
           />
@@ -307,6 +310,9 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
                 src={image.src}
                 className="buudyLED-23435t23-thumb_img"
                 alt={image.alt}
+                decoding="async"
+                fetchPriority="low"
+                loading="lazy"
               />
               <span aria-hidden="true" className="buudyLED-23435t23-thumb_zoom">
                 <Search size={14} strokeWidth={2.2} />
@@ -365,6 +371,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
                   id="buudyLED-23435t23-ModalImg"
                   src={images[currentIndex]?.src}
                   alt="Expanded Product View"
+                  decoding="async"
                 />
                 <button
                   className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-next"
