@@ -48,7 +48,7 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
     qty: String(quantity),
     product_quantity: String(quantity),
     gift_variant_id: "1000020384558655",
-    gift_product_id: "1000000647209032",
+    gift_product_id: "1000000665008955",
     gift_quantity: String(giftQuantity),
     gift: "buudy-red-torch",
     redirect: "checkout",
