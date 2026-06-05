@@ -1,5 +1,6 @@
 export const primaryNavigation = [
   { label: "LED Face Mask", href: "/products/buudy-led-mask" },
+  { label: "Best LED Mask Guide", href: "/pages/best-led-face-mask-uk" },
   { label: "Red Light Torch", href: "/products/red-light-torch" },
   { label: "Skincare Quiz", href: "/pages/skincare-quiz" },
 ];
@@ -13,6 +14,6 @@ export const secondaryNavigation = [
 export const announcementItems = [
   "Free shipping on all orders",
   "Made in United Kingdom",
-  "Sign up and enjoy £10 off",
+  "Sign up and enjoy GBP 10 off",
   "4.9 stars from 16,000+ customers",
 ];
