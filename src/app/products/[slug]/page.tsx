@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductPage } from "@/components/product/ProductPage";
 import { getProductBySlug, products } from "@/data/products";
-import { faqJsonLd, productJsonLd } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  faqJsonLd,
+  organizationJsonLd,
+  productJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
 type PageProps = {
@@ -11,7 +17,7 @@ type PageProps = {
   }>;
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export function generateStaticParams() {
   return products.map((product) => ({
@@ -32,13 +38,45 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: product.seoTitle,
     description: product.seoDescription,
+    keywords:
+      product.template === "mask"
+        ? [
+            "best LED face mask UK",
+            "LED face mask UK",
+            "red light therapy mask UK",
+            "LED face mask for acne UK",
+            "anti ageing LED mask",
+            "LED mask with neck coverage",
+            "near infrared LED face mask",
+          ]
+        : [
+            "red light torch UK",
+            "handheld red light therapy",
+            "near infrared torch",
+            "blue red light therapy device",
+          ],
     alternates: {
       canonical: `/products/${product.slug}`,
+      languages: {
+        "en-GB": `/products/${product.slug}`,
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
     openGraph: {
-      title: product.name,
+      title: product.seoTitle,
       description: product.description,
       url: absoluteUrl(`/products/${product.slug}`),
+      type: "website",
       images: [
         {
           url: product.gallery[0].src,
@@ -50,8 +88,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: product.name,
-      description: product.description,
+      title: product.seoTitle,
+      description: product.seoDescription,
       images: [product.gallery[0].src],
     },
   };
@@ -67,18 +105,22 @@ export default async function ProductRoute({ params }: PageProps) {
 
   return (
     <>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd(product)),
-        }}
-        type="application/ld+json"
-      />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd(product.faqs)),
-        }}
-        type="application/ld+json"
-      />
+      {[
+        organizationJsonLd(),
+        websiteJsonLd(),
+        productJsonLd(product),
+        breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: product.name, url: `/products/${product.slug}` },
+        ]),
+        faqJsonLd(product.faqs),
+      ].map((schema, index) => (
+        <script
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          key={index}
+          type="application/ld+json"
+        />
+      ))}
       <ProductPage product={product} />
     </>
   );
