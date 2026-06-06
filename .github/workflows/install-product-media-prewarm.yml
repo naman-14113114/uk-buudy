@@ -1,0 +1,127 @@
+name: Install product media prewarm files
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/install-product-media-prewarm.yml
+
+permissions:
+  contents: write
+
+jobs:
+  install-product-media-prewarm:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tested product media files
+        shell: bash
+        run: |
+          cat > /tmp/media-prewarm-files.tar.gz.b64 <<'B64'
+          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
+          XF+uL9fDrv8FfPXzEgB4AAA=
+          B64
+          sed -i 's/^[[:space:]]*//' /tmp/media-prewarm-files.tar.gz.b64
+          base64 -d /tmp/media-prewarm-files.tar.gz.b64 > /tmp/media-prewarm-files.tar.gz
+          tar -xzf /tmp/media-prewarm-files.tar.gz
+          git rm -f .github/workflows/install-product-media-prewarm.yml
+          git rm -f .github/workflows/fix-product-media-prewarm.yml || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --name-status
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Prewarm product page media"
+          git push
