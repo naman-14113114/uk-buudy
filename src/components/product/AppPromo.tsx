@@ -3,6 +3,7 @@ import { Play, Smartphone } from "lucide-react";
 import { touchTech } from "@/data/productSections";
 import { productAsset, productMediaAsset } from "@/lib/media";
 import { Button } from "@/components/ui/Button";
+import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 
 export function RitualSection() {
   return (
@@ -27,7 +28,7 @@ export function RitualSection() {
             </button>
           </div>
           <p className="buudy-mono absolute bottom-5 left-5 text-[var(--cream)]">
-            How Buudy works · 0:48
+            How Buudy works - 0:48
           </p>
         </div>
         <div>
@@ -77,18 +78,15 @@ export function TouchTechSection() {
           </ul>
         </div>
         <div className="relative aspect-square overflow-hidden rounded-[18px] bg-[var(--ink)]">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <LazyAutoplayVideo
+            ariaLabel="Buudy LED Mask light modes demonstration"
             className="w-full h-full object-cover"
-          >
-            <source src={productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos")} type="video/mp4" />
-          </video>
+            rootMargin="220px 0px"
+            src={productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos")}
+          />
           <div className="absolute bottom-6 right-6 rounded-2xl bg-[rgba(247,241,232,.94)] p-4 text-[var(--plum)] backdrop-blur">
             <p className="buudy-mono">Tap to cycle</p>
-            <p className="buudy-display mt-1 text-xl">8 modes · 1 gesture</p>
+            <p className="buudy-display mt-1 text-xl">8 modes - 1 gesture</p>
           </div>
         </div>
       </div>

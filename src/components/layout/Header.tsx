@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -199,11 +200,14 @@ export function Header() {
           href="/"
           aria-label="Buudy home"
         >
-          <img
-            src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
+          <Image
             alt="Buudy Logo"
-            className="w-auto object-contain"
-            style={{ height: "clamp(40px, 4vw, 50px)" }}
+            className="h-[clamp(40px,4vw,50px)] w-auto object-contain"
+            height={74}
+            priority
+            sizes="(min-width: 1024px) 180px, 150px"
+            src="/media/products/buudy-led-mask/images/buudy_footer_logo.png"
+            width={220}
           />
         </Link>
 
@@ -332,11 +336,14 @@ export function Header() {
                 role="dialog"
               >
                 <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
-                  <img
+                  <Image
                     alt="Buudy Logo"
-                    className="w-auto object-contain"
-                    src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
-                    style={{ height: "40px" }}
+                    className="h-10 w-auto object-contain"
+                    height={74}
+                    priority
+                    sizes="150px"
+                    src="/media/products/buudy-led-mask/images/buudy_footer_logo.png"
+                    width={220}
                   />
                   <button
                     aria-label="Close navigation menu"

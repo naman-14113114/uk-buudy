@@ -1,4 +1,7 @@
-import Script from "next/script";
+"use client";
+
+import { useEffect } from "react";
+import { runAfterEngagement } from "@/lib/loadOnEngagement";
 
 const clarityScript = `
 (function(c,l,a,r,i,t,y){
@@ -9,11 +12,20 @@ const clarityScript = `
 `;
 
 export function ClarityAnalytics() {
-  return (
-    <Script
-      dangerouslySetInnerHTML={{ __html: clarityScript }}
-      id="microsoft-clarity"
-      strategy="afterInteractive"
-    />
+  useEffect(
+    () =>
+      runAfterEngagement(() => {
+        if (document.querySelector("script[data-buudy-clarity='true']")) {
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.dataset.buudyClarity = "true";
+        script.textContent = clarityScript;
+        document.head.appendChild(script);
+      }),
+    [],
   );
+
+  return null;
 }

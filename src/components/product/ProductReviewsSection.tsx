@@ -1,4 +1,4 @@
-import { ProductReviewsGrid } from "./ProductReviewsGrid";
+import { LazyProductReviewsGrid } from "./LazyProductReviewsGrid";
 import {
   getProductReviewSummary,
   getProductReviews,
@@ -19,7 +19,7 @@ export function ProductReviewsSection() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="reviews">
       <div className="buudy-wrap">
-        <ProductReviewsGrid
+        <LazyProductReviewsGrid
           averageRating={summary.averageRating}
           initialReviews={initialReviews}
           pageSize={reviewPageSize}

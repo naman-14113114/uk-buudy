@@ -46,7 +46,7 @@ function ReviewVideoCard({
           videoEl.pause();
         }
       },
-      { rootMargin: "900px 700px", threshold: 0.01 },
+      { rootMargin: "160px 0px", threshold: 0.01 },
     );
 
     observer.observe(card);
@@ -255,7 +255,7 @@ export function VideoReviews() {
       <div className="buudy-wrap">
         <SectionHeading
           align="center"
-          eyebrow="§ Real Customers"
+          eyebrow="Real Customers"
           title={
             <>
               Buudy Mask <span className="buudy-italic text-[var(--gold)]">reviews</span> <span className="font-playfair italic text-[var(--plum)]">&</span> real results

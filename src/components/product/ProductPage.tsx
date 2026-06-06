@@ -8,7 +8,6 @@ import { FeatureGrid } from "./FeatureGrid";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { ProductHero } from "./ProductHero";
 import { ProductReviewsSection } from "./ProductReviewsSection";
-import { SEOGuideSection } from "./SEOGuideSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
 import { VideoReviews } from "./VideoReviews";
@@ -27,7 +26,6 @@ export function ProductPage({ product }: { product: Product }) {
       <BeforeAfterGrid />
       <WavelengthSelector />
       <ExpertSection />
-      <SEOGuideSection product={product} />
       <ComparisonTable />
       <TouchTechSection />
       <AppPromo />

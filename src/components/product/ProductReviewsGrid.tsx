@@ -457,25 +457,6 @@ export function ProductReviewsGrid({
     void preloadReviewImages(review.images);
   }, []);
 
-  useEffect(() => {
-    const firstVisibleImages = reviews
-      .flatMap((review) => review.images.slice(0, 1))
-      .slice(0, 8);
-    const prefetch = () => {
-      void preloadReviewImages(firstVisibleImages);
-    };
-
-    if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(prefetch, { timeout: 1200 });
-
-      return () => window.cancelIdleCallback(idleId);
-    }
-
-    const timeoutId = setTimeout(prefetch, 250);
-
-    return () => clearTimeout(timeoutId);
-  }, [reviews]);
-
   const visibleCount = reviews.length;
   const hasMore = visibleCount < currentTotal;
   const progressLabel = useMemo(

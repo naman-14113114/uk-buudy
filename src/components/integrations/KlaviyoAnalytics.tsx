@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { products, productsById, type Product } from "@/data/products";
 import type { CartLine } from "@/lib/cart";
+import { runAfterEngagement } from "@/lib/loadOnEngagement";
 import { market } from "@/lib/market";
 
 type KlaviyoCommand = [string, ...unknown[]];
@@ -313,8 +314,11 @@ export function KlaviyoAnalytics() {
 
     window.klaviyo = window.klaviyo || [];
     const cleanupScrollGuard = guardKlaviyoScrollLock();
+    const loadKlaviyo = () => {
+      if (document.querySelector("script[data-buudy-klaviyo='true']")) {
+        return;
+      }
 
-    if (!document.querySelector("script[data-buudy-klaviyo='true']")) {
       const script = document.createElement("script");
       script.async = true;
       script.dataset.buudyKlaviyo = "true";
@@ -322,9 +326,14 @@ export function KlaviyoAnalytics() {
         KLAVIYO_COMPANY_ID,
       )}`;
       document.head.appendChild(script);
-    }
+    };
 
-    return cleanupScrollGuard;
+    const cleanupKlaviyoLoad = runAfterEngagement(loadKlaviyo);
+
+    return () => {
+      cleanupKlaviyoLoad();
+      cleanupScrollGuard();
+    };
   }, []);
 
   useEffect(() => {

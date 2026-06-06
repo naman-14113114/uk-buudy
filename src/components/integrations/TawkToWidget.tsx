@@ -1,4 +1,7 @@
-import Script from "next/script";
+"use client";
+
+import { useEffect } from "react";
+import { runAfterEngagement } from "@/lib/loadOnEngagement";
 
 const tawkToScript = `
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -69,18 +72,25 @@ const tawkToPositionScript = `
 `;
 
 export function TawkToWidget() {
-  return (
-    <>
-      <Script
-        dangerouslySetInnerHTML={{ __html: tawkToScript }}
-        id="tawk-to-widget"
-        strategy="afterInteractive"
-      />
-      <Script
-        dangerouslySetInnerHTML={{ __html: tawkToPositionScript }}
-        id="tawk-to-position"
-        strategy="afterInteractive"
-      />
-    </>
+  useEffect(
+    () =>
+      runAfterEngagement(() => {
+        if (!document.querySelector("script[data-buudy-tawk-position='true']")) {
+          const positionScript = document.createElement("script");
+          positionScript.dataset.buudyTawkPosition = "true";
+          positionScript.textContent = tawkToPositionScript;
+          document.head.appendChild(positionScript);
+        }
+
+        if (!document.querySelector("script[data-buudy-tawk='true']")) {
+          const widgetScript = document.createElement("script");
+          widgetScript.dataset.buudyTawk = "true";
+          widgetScript.textContent = tawkToScript;
+          document.head.appendChild(widgetScript);
+        }
+      }),
+    [],
   );
+
+  return null;
 }

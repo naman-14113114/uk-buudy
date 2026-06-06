@@ -1,20 +1,18 @@
+import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
+
 export function GuaranteeSection() {
   return (
     <section className="buudy-section relative overflow-hidden py-14 pb-24 text-center md:py-24 md:pb-36">
-      {/* Background Autoplay Video (Highly visible) */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
+      <LazyAutoplayVideo
+        ariaLabel="Buudy guarantee lifestyle background"
         className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none"
+        rootMargin="180px 0px"
         src="/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4"
       />
 
-      {/* Premium dark ink overlay: highly transparent to make video completely visible */}
       <div 
         className="absolute inset-0 z-10" 
-        style={{ backgroundColor: "oklch(17% 0.03 318 / 42%)" }} // 42% opacity of var(--ink) deep plum
+        style={{ backgroundColor: "oklch(17% 0.03 318 / 42%)" }}
       />
 
       <div className="buudy-wrap relative z-20 max-w-5xl">
