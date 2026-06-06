@@ -28,6 +28,8 @@ export function LazyProductReviewsGrid(props: LazyProductReviewsGridProps) {
       return;
     }
 
+    const timer = window.setTimeout(() => setShouldRender(true), 1200);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) {
@@ -37,12 +39,15 @@ export function LazyProductReviewsGrid(props: LazyProductReviewsGridProps) {
         setShouldRender(true);
         observer.disconnect();
       },
-      { rootMargin: "520px 0px", threshold: 0.01 },
+      { rootMargin: "1800px 0px", threshold: 0.01 },
     );
 
     observer.observe(root);
 
-    return () => observer.disconnect();
+    return () => {
+      window.clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return (

@@ -20,7 +20,7 @@ function ReviewVideoCard({
   const shouldPlayRef = useRef(false);
   const primarySrc = video.fallbackSrc ?? video.src;
   const [src, setSrc] = useState(primarySrc);
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(index < reviewVideos.length);
 
   const playWhenReady = useCallback(() => {
     if (!shouldPlayRef.current) return;
@@ -46,7 +46,7 @@ function ReviewVideoCard({
           videoEl.pause();
         }
       },
-      { rootMargin: "160px 0px", threshold: 0.01 },
+      { rootMargin: "1200px 0px", threshold: 0.01 },
     );
 
     observer.observe(card);
@@ -81,7 +81,7 @@ function ReviewVideoCard({
         onLoadedData={playWhenReady}
         playsInline
         poster={video.poster}
-        preload={shouldLoad ? "auto" : "none"}
+        preload={shouldLoad ? "metadata" : "none"}
         ref={videoRef}
         src={shouldLoad ? src : undefined}
       >

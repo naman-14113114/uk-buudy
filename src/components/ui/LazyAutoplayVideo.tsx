@@ -15,12 +15,12 @@ export function LazyAutoplayVideo({
   ariaLabel,
   className,
   poster,
-  rootMargin = "180px 0px",
+  rootMargin = "1400px 0px",
   src,
   type = "video/mp4",
 }: LazyAutoplayVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const [shouldPlay, setShouldPlay] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -38,8 +38,7 @@ export function LazyAutoplayVideo({
           return;
         }
 
-        setShouldLoad(true);
-        observer.disconnect();
+        setShouldPlay(true);
       },
       { rootMargin, threshold: 0.01 },
     );
@@ -50,26 +49,26 @@ export function LazyAutoplayVideo({
   }, [rootMargin]);
 
   useEffect(() => {
-    if (!shouldLoad) {
+    if (!shouldPlay) {
       return;
     }
 
     videoRef.current?.play().catch(() => undefined);
-  }, [shouldLoad]);
+  }, [shouldPlay]);
 
   return (
     <video
       aria-label={ariaLabel}
-      autoPlay={shouldLoad}
+      autoPlay={shouldPlay}
       className={className}
       loop
       muted
       playsInline
       poster={poster}
-      preload="none"
+      preload="metadata"
       ref={videoRef}
     >
-      {shouldLoad ? <source src={src} type={type} /> : null}
+      <source src={src} type={type} />
     </video>
   );
 }

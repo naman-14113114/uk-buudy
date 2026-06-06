@@ -6,7 +6,7 @@ export function GuaranteeSection() {
       <LazyAutoplayVideo
         ariaLabel="Buudy guarantee lifestyle background"
         className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none"
-        rootMargin="180px 0px"
+        rootMargin="1400px 0px"
         src="/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4"
       />
 

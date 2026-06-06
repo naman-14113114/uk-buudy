@@ -81,7 +81,7 @@ export function TouchTechSection() {
           <LazyAutoplayVideo
             ariaLabel="Buudy LED Mask light modes demonstration"
             className="w-full h-full object-cover"
-            rootMargin="220px 0px"
+            rootMargin="1400px 0px"
             src={productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos")}
           />
           <div className="absolute bottom-6 right-6 rounded-2xl bg-[rgba(247,241,232,.94)] p-4 text-[var(--plum)] backdrop-blur">
