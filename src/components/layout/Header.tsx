@@ -206,7 +206,7 @@ export function Header() {
             height={74}
             priority
             sizes="(min-width: 1024px) 180px, 150px"
-            src="/media/products/buudy-led-mask/images/buudy_footer_logo.png"
+            src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
             width={220}
           />
         </Link>
@@ -342,7 +342,7 @@ export function Header() {
                     height={74}
                     priority
                     sizes="150px"
-                    src="/media/products/buudy-led-mask/images/buudy_footer_logo.png"
+                    src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
                     width={220}
                   />
                   <button
