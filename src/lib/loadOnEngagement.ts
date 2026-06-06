@@ -1,4 +1,4 @@
-export function runAfterEngagement(callback: () => void, delay = 12000) {
+export function runAfterEngagement(callback: () => void, delay = 45000) {
   if (typeof window === "undefined") {
     return () => undefined;
   }

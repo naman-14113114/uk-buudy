@@ -1,8 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { ProductReviewsGrid } from "./ProductReviewsGrid";
 import type { ProductReview } from "@/types/reviews";
+
+const ProductReviewsGrid = dynamic(
+  () => import("./ProductReviewsGrid").then((mod) => mod.ProductReviewsGrid),
+  { ssr: false },
+);
 
 type LazyProductReviewsGridProps = {
   averageRating: number;
