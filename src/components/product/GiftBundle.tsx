@@ -178,26 +178,26 @@ export function GiftBundle({ product }: { product: Product }) {
         })}
       </ul>
 
-      <div className="mt-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-5">
-        <div className="flex items-center justify-between gap-5">
+      <div className="mt-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-5">
+        <div className="flex items-center justify-between gap-2 sm:gap-5">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {deliveryIconData && (
-                <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
+                <div className="w-5 h-5 sm:w-7 sm:h-7 flex-shrink-0 flex items-center justify-center">
                   <Lottie animationData={deliveryIconData} loop={true} />
                 </div>
               )}
-              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-7 font-bold">DELIVERY</p>
+              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs">DELIVERY</p>
             </div>
-            <p className="buudy-display mt-1.5 text-lg sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
+            <p className="buudy-display mt-1.5 text-base sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
               {deliveryDate || "soon"}
             </p>
           </div>
           <div className="text-right">
-            <p className="buudy-eyebrow text-[var(--gold)] whitespace-nowrap">
+            <p className="buudy-eyebrow text-[var(--gold)] whitespace-nowrap text-[9px] sm:text-[11px] tracking-tight sm:tracking-normal">
               {hasGifts ? "FREE GIFTS UNLOCK IN" : "ORDER TODAY"}
             </p>
-            <p className="buudy-display mt-1.5 text-2xl sm:text-[2.2rem] font-normal text-[var(--plum)] leading-none">
+            <p className="buudy-display mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--plum)] leading-none">
               {timer}
             </p>
           </div>
@@ -216,19 +216,20 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="buudy-cart-pulse-ring absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />
           <span className="buudy-cart-pulse relative h-2 w-2 rounded-full bg-[var(--cream)]" />
         </span>
-        <span>{hasGifts ? "ADD TO CART + FREE GIFTS" : "ADD TO CART"}</span>
+        <span>{hasGifts ? "ADD TO CART + FREE GIFTS" : "ADD TO CART + FREE SHIPPING"}</span>
       </Button>
 
-      {/* 4-Item Benefits Grid Row */}
-      <div className="mt-8 grid grid-cols-4 gap-2 border-b border-[rgba(58,31,61,.12)] pb-8 text-center">
-        <div className="flex flex-col items-center gap-2">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-            <FaceNeckIcon size={22} />
-          </span>
-          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-            Full-Face &<br />Neck Coverage
-          </p>
-        </div>
+      {/* Benefits Grid Row (Mask Only) */}
+      {product.id === "buudy-led-mask" && (
+        <div className="mt-8 grid grid-cols-4 gap-2 border-b border-[rgba(58,31,61,.12)] pb-8 text-center">
+          <div className="flex flex-col items-center gap-2">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
+              <FaceNeckIcon size={22} />
+            </span>
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
+              Full-Face &<br />Neck Coverage
+            </p>
+          </div>
         <div className="flex flex-col items-center gap-2">
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
             <BatteryCharging size={22} strokeWidth={1.5} />
@@ -245,15 +246,16 @@ export function GiftBundle({ product }: { product: Product }) {
             90 Days Money<br />Back Guarantee
           </p>
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-            <Waves size={22} strokeWidth={1.5} />
-          </span>
-          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-            Science-Backed<br />Light
-          </p>
+          <div className="flex flex-col items-center gap-2">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
+              <Waves size={22} strokeWidth={1.5} />
+            </span>
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
+              Science-Backed<br />Light
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       {hasGifts ? (
         <section className="mt-8" id="free-gifts">
@@ -320,21 +322,7 @@ export function GiftBundle({ product }: { product: Product }) {
         </section>
       )}
 
-      {product.template === "mask" ? (
-        <ProductDetailsAccordion product={product} />
-      ) : (
-        <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--border)] pt-6">
-          {product.badges.map((badge, index) => (
-            <span
-              className="buudy-mono inline-flex items-center gap-2 text-[var(--plum)] opacity-80"
-              key={badge}
-            >
-              {index % 2 === 0 ? <ShieldCheck size={15} /> : <Truck size={15} />}
-              {badge}
-            </span>
-          ))}
-        </div>
-      )}
+      <ProductDetailsAccordion product={product} />
     </div>
   );
 }

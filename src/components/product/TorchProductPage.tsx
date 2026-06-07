@@ -89,7 +89,7 @@ function TorchStorySection() {
           {torchDetailImages.map((image, index) => (
             <div
               className={`relative overflow-hidden rounded-2xl bg-[var(--cream)] ${
-                index === 0 ? "aspect-[4/5] sm:col-span-2" : "aspect-square"
+                index === 0 ? "aspect-[4/5] sm:col-span-2 sm:row-span-2" : "aspect-square"
               }`}
               key={image.src}
             >
@@ -186,17 +186,18 @@ function TorchUseGuide() {
   );
 }
 
+import { TorchFeatureTabs } from "./TorchFeatureTabs";
+
 export function TorchProductPage({ product }: { product: Product }) {
   return (
     <>
       <ProductHero product={product} />
-      <TorchFeatureGrid product={product} />
+      <TorchFeatureTabs />
       <TorchStorySection />
-      <SpecsPanel product={product} />
-      <TorchDetailSection />
+      {/* <TorchDetailSection /> */}
       <TorchUseGuide />
       <FAQSection faqs={product.faqs} />
-      <GuaranteeSection />
+      {/* <GuaranteeSection showVideo={false} /> */}
       <StickyAddToCart product={product} />
     </>
   );

@@ -201,7 +201,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
       aria-label="Product details"
       className="mt-8 rounded-[18px] border border-[var(--border)] bg-[rgba(247,241,232,.64)] px-5"
     >
-      {items.map((item) => (
+      {items.filter(item => !(product.template === "torch" && item.id === "certifications")).map((item) => (
         <AccordionPanel
           isOpen={openItem === item.id}
           item={item}

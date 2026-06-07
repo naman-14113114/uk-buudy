@@ -1,14 +1,16 @@
 import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 
-export function GuaranteeSection() {
+export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) {
   return (
-    <section className="buudy-section relative overflow-hidden py-14 pb-24 text-center md:py-24 md:pb-36">
-      <LazyAutoplayVideo
-        ariaLabel="Buudy guarantee lifestyle background"
-        className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none"
-        rootMargin="1400px 0px"
-        src="/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4"
-      />
+    <section className={`buudy-section relative overflow-hidden py-14 pb-24 text-center md:py-24 md:pb-36 ${!showVideo ? 'bg-[var(--plum)]' : ''}`}>
+      {showVideo && (
+        <LazyAutoplayVideo
+          ariaLabel="Buudy guarantee lifestyle background"
+          className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none"
+          rootMargin="1400px 0px"
+          src="/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4"
+        />
+      )}
 
       <div 
         className="absolute inset-0 z-10" 
