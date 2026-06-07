@@ -27,7 +27,7 @@ const queryAnswers = [
   {
     question: "Best LED face mask UK",
     answer:
-      "For UK shoppers comparing LED masks, Buudy is strongest if you want one device with 192 LEDs, 8 light modes, full face and neck coverage, cordless use, free tracked shipping, and a 90-day return window.",
+      "For UK shoppers comparing LED masks, Buudy is strongest if you want one device with 192 LEDs, 7 wavelengths plus 830nm near-infrared, full face and neck coverage, cordless use, free tracked shipping, and a 90-day return window.",
   },
   {
     question: "LED face mask for acne and anti-ageing",

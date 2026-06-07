@@ -132,7 +132,7 @@ export const freeGiftDetails: FreeGiftDetail[] = [
     cardTitle: "What customers unlock inside",
     cardBullets: [
       "LED science explained simply",
-      "Your 8 light modes, broken down clearly",
+      "Your 7 wavelengths plus NIR, broken down clearly",
       "Skin-type guidance and weekly treatment plans",
       "AM and PM rituals, ingredient pairings, and a results timeline",
     ],
@@ -146,7 +146,7 @@ export const freeGiftDetails: FreeGiftDetail[] = [
         bullets: [
           "Welcome to the Buudy Method",
           "The Science of LED Light Therapy",
-          "Your 8 Light Modes, Explained",
+          "Your 7 Wavelengths + NIR, Explained",
           "Find Your Skin Type",
           "Your Personalised Treatment Plan",
           "The Daily Routine: AM and PM",

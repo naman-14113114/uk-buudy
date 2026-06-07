@@ -38,9 +38,9 @@ export function RitualSection() {
             ritual.
           </h2>
           <p className="buudy-copy mt-5">
-            Discover how Buudy&apos;s 8 light modes, flexible silicone fit, and simple
-            10-minute routine make at-home light therapy feel easy, consistent,
-            and beautifully wearable.
+            Discover how Buudy&apos;s 7 wavelengths plus 830nm near-infrared,
+            flexible silicone fit, and simple 10-minute routine make at-home
+            light therapy feel easy, consistent, and beautifully wearable.
           </p>
           <Button className="mt-7" variant="ghost">
             Learn more
@@ -86,7 +86,7 @@ export function TouchTechSection() {
           />
           <div className="absolute bottom-6 right-6 rounded-2xl bg-[rgba(247,241,232,.94)] p-4 text-[var(--plum)] backdrop-blur">
             <p className="buudy-mono">Tap to cycle</p>
-            <p className="buudy-display mt-1 text-xl">8 modes - 1 gesture</p>
+            <p className="buudy-display mt-1 text-xl">7 + NIR - 1 gesture</p>
           </div>
         </div>
       </div>
@@ -118,8 +118,8 @@ export function AppPromo() {
           <p className="buudy-copy mt-3 text-sm leading-6">
             Buudy Glow Coach is the AI Skincare app for Buudy LED Mask
             customers. It helps customers plan, time, and track their
-            personalized LED mask sessions using the eight light modes available
-            on the mask.
+            personalised LED mask sessions using the 7 wavelengths plus
+            near-infrared available on the mask.
           </p>
           <div className="mt-4 grid grid-cols-3 gap-2">
             {["Plan", "Time", "Track"].map((step) => (
@@ -165,7 +165,7 @@ export function BlueLightSection() {
             Blue light therapy.
           </h2>
           <blockquote className="buudy-display mt-8 text-2xl italic leading-snug text-[var(--cream)] md:text-3xl">
-            &quot;One of my other favorite LED colours as you can see here is going
+            &quot;One of my other favourite LED colours as you can see here is going
             to be the blue light therapy. Blue light specifically is going to be
             for combatting acne, killing any bacteria that&apos;s going to be sitting
             on the surface of the skin contributing to that acne breakout.&quot;

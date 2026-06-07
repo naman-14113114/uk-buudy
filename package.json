@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "normalize:reviews": "node scripts/normalize-reviews.mjs",
     "build": "next build",
     "sync:assets": "node scripts/sync-product-assets.mjs",

@@ -77,7 +77,7 @@ function TorchStorySection() {
                 On-the-go <em className="buudy-italic">relief</em>.
               </>
             }
-            copy='Simply set aside some "Me Time" for 15 minutes a day while you watch your favorite show.'
+            copy='Simply set aside some "Me Time" for 15 minutes a day while you watch your favourite show.'
           />
           <p className="mt-6 leading-8 text-[var(--muted)]">
             Experience the synergy of portability and power with a handheld

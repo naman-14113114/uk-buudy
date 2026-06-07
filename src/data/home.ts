@@ -4,7 +4,7 @@ import { buudyMask, buudyRedTorch } from "./products";
 export const homeHero = {
   eyebrow: "Next-generation light therapy",
   title: "Perfected for you.",
-  copy: "Professional-grade skincare from the comfort of your home. Experience radiant, youthful skin with 8 targeted light modes, complete neck coverage, and 100% wireless freedom.",
+  copy: "Professional-grade skincare from the comfort of your home. Experience radiant, youthful skin with 7 wavelengths plus 830nm near-infrared, complete neck coverage, and 100% wireless freedom.",
   ctaLabel: "Shop the Buudy Mask",
   ctaHref: `/products/${buudyMask.slug}`,
   images: [
@@ -25,7 +25,7 @@ export const homeHero = {
 
 export const homeMaskSpotlight = {
   eyebrow: "Professional grade",
-  title: "The Buudy LED light therapy mask with 8 light modes",
+  title: "The Buudy LED light therapy mask with 7 + NIR",
   copy: "Modern problems require modern solutions. The Buudy LED light therapy mask does it all wirelessly. No more fumbling around with outdated remotes and power cords. With simple built-in tap technology, you can glow while lounging around the house.",
   image: {
     src: homeAsset("04-home-mask-spotlight.png"),
@@ -47,7 +47,7 @@ export const homeFeatureCards = [
   },
   {
     title: "Full neck coverage",
-    copy: "The neck is always first to show signs of aging. Get your neck glowing with a simple tap.",
+    copy: "The neck is always first to show signs of ageing. Get your neck glowing with a simple tap.",
     image: productAsset("01-buudy-led-mask-front.webp"),
   },
 ];
@@ -74,7 +74,7 @@ export const homeYoungerYou = {
 export const homeTorchSpotlight = {
   eyebrow: "Portable and powerful",
   title: "Targeted light therapy in your hand.",
-  copy: 'Simply set aside some "Me Time" for 15 minutes a day while you watch your favorite show. The Red Torch harnesses high-power LED technology for blood circulation support, stiffness relief, and targeted body care.',
+  copy: 'Simply set aside some "Me Time" for 15 minutes a day while you watch your favourite show. The Red Torch harnesses high-power LED technology for blood circulation support, stiffness relief, and targeted body care.',
   ctaLabel: "Buy Now",
   ctaHref: `/products/${buudyRedTorch.slug}`,
   image: {
@@ -85,7 +85,7 @@ export const homeTorchSpotlight = {
 };
 
 export const homeWavelengthMap = {
-  eyebrow: "Personalized treatment guide",
+  eyebrow: "Personalised treatment guide",
   title: "Your wavelength map",
   copy: "Tap any of the 16 facial zones, select your skin concern, and discover exactly which LED wavelength to use and why.",
   zones: [

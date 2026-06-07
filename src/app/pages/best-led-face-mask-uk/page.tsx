@@ -178,9 +178,10 @@ export default function BestLedFaceMaskUkPage() {
               red, blue, near-infrared, neck coverage, and easy repeat use.
             </h2>
             <p className="mt-5 text-base leading-8 text-[var(--muted)] md:text-lg">
-              Buudy is designed for that exact brief: 192 LEDs, 8 light modes,
-              full face and neck coverage, cordless wearability, and a launch
-              bundle at {formatMoney(buudyMask.priceCents, buudyMask.currency)}.
+              Buudy is designed for that exact brief: 192 LEDs, 7 wavelengths
+              plus 830nm near-infrared, full face and neck coverage, cordless
+              wearability, and a launch bundle at{" "}
+              {formatMoney(buudyMask.priceCents, buudyMask.currency)}.
             </p>
           </div>
 
@@ -260,7 +261,7 @@ export default function BestLedFaceMaskUkPage() {
             <ul className="mt-7 grid gap-3">
               {[
                 "192 high-density LEDs",
-                "8 modes including red, blue, and 830nm near-infrared",
+                "7 wavelengths plus 830nm near-infrared",
                 "Face plus neck coverage",
                 "Free glow kit while the launch offer is live",
               ].map((item) => (

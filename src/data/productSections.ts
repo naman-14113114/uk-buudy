@@ -43,12 +43,12 @@ export const features: Feature[] = [
   {
     title: "Full Neck Coverage",
     kicker: 'Say No to "Turkey Neck"',
-    body: "The face is only half the story. Unlike many popular brands that neglect the neck or charge extra for a separate attachment, Buudy includes integrated neck coverage. It is specifically designed to firm and rejuvenate the neck area, preventing aging where it often shows most.",
+    body: "The face is only half the story. Unlike many popular brands that neglect the neck or charge extra for a separate attachment, Buudy includes integrated neck coverage. It is specifically designed to firm and rejuvenate the neck area, preventing ageing where it often shows most.",
   },
   {
-    title: "8-in-1 Multi-Spectrum",
+    title: "7 + NIR Multi-Spectrum",
     kicker: "Therapy in a single device",
-    body: "Why settle for one or three colors? Buudy offers 7 visible light colors plus a dedicated 830nm near-infrared mode: Infra-red, Red, Blue, Green, Cyan, Yellow, Purple, and White. Whether you are fighting stubborn acne, reducing deep wrinkles, or supporting skin repair, you have a professional-grade solution for every skin concern.",
+    body: "Why settle for one or three colours? Buudy offers 7 visible wavelengths plus a dedicated 830nm near-infrared mode: Red, Blue, Green, Cyan, Yellow, Purple, White, and NIR. Whether you are fighting stubborn acne, reducing deep wrinkles, or supporting skin repair, you have a professional-grade solution for every skin concern.",
   },
   {
     title: "Cordless Freedom",
@@ -94,7 +94,7 @@ export const realLifeImages = [
   },
   {
     src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
-    alt: "Buudy LED Mask anti-aging mode",
+    alt: "Buudy LED Mask anti-ageing mode",
   },
   {
     src: productAsset("13-buudy-led-mask-starter-kit.webp"),
@@ -388,7 +388,7 @@ export const wavelengths: Wavelength[] = [
     nm: "633nm",
     name: "RED",
     color: "#d4523a",
-    description: "Anti-aging and Revitilization",
+    description: "Anti-ageing and Revitalisation",
   },
   {
     nm: "415nm",
@@ -551,7 +551,7 @@ export const comparison = {
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],
-    ["Light Colors", "7 total", "3 total", "1 total", "3 total"],
+    ["Light Colours", "7 + NIR", "3 total", "1 total", "3 total"],
     ["Neck Coverage", "Yes", "-", "-", "-"],
     ["Customizable treatments", "Yes", "-", "-", "Yes"],
     ["Hands-free, cordless, rechargeable", "Yes", "Yes", "-", "-"],
@@ -563,7 +563,7 @@ export const comparison = {
 export const touchTech = [
   {
     title: "Built-in Tap Tech",
-    body: "Cycle through your personalized color treatments with just a gentle tap.",
+    body: "Cycle through your personalised colour treatments with just a gentle tap.",
   },
   {
     title: "Lightweight & Portable",
@@ -571,7 +571,7 @@ export const touchTech = [
   },
   {
     title: "Effortless Consistency",
-    body: "Just put it on for 3 minutes a day and let the mask do the work while you watch your favorite show.",
+    body: "Just put it on for 3 minutes a day and let the mask do the work while you watch your favourite show.",
   },
 ];
 

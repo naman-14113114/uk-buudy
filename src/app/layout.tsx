@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     title: "Best LED Face Mask UK | Buudy Light Therapy",
     description:
-      "Salon-grade LED face and neck mask for UK skincare routines with 192 LEDs, 8 light modes, and a launch glow kit.",
+      "Salon-grade LED face and neck mask for UK skincare routines with 192 LEDs, 7 wavelengths plus 830nm near-infrared, and a launch glow kit.",
     images: [
       {
         url: "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",

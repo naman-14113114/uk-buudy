@@ -268,10 +268,10 @@ export function ComparisonTable() {
           />
 
           <ComparisonRow
-            title="Light Colors"
+            title="Light Colours"
             subtitle="Each with specific skin benefits"
             values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">8 TOTAL</strong>,
+              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">7 + NIR</strong>,
               <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">2 TOTAL</strong>,
               <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">1 TOTAL</strong>,
               <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
@@ -282,7 +282,7 @@ export function ComparisonTable() {
           <ColorRow
             colorName="Red"
             colorCode="#F00202"
-            description="Anti-aging and Revitalization"
+            description="Anti-ageing and Revitalisation"
             values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
           />
 

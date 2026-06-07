@@ -10,7 +10,7 @@ export function SkincareQuizPage() {
 
       <div className="buudy-wrap relative z-10">
         <div className="mb-10 max-w-3xl md:mb-14">
-          <p className="buudy-eyebrow">Personalized light therapy</p>
+          <p className="buudy-eyebrow">Personalised light therapy</p>
           <h1 className="buudy-display mt-4 text-[3rem] leading-[.98] text-[var(--plum)] md:text-[5.4rem]">
             Your skin, mapped to a{" "}
             <em className="buudy-italic text-[var(--gold)]">better ritual</em>.
@@ -33,7 +33,7 @@ export function SkincareQuizPage() {
                 src="/images/home/04-home-mask-spotlight.png"
               />
               <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(23,10,24,.88))] p-6 pt-24 text-[var(--cream)]">
-                <p className="buudy-mono text-[var(--gold)]">Eight light modes</p>
+                <p className="buudy-mono text-[var(--gold)]">7 + NIR modes</p>
                 <p className="buudy-display mt-2 text-3xl leading-tight">
                   A routine that meets your skin where it is.
                 </p>

@@ -13,7 +13,7 @@ export const contactPage = {
     "Have a question or need assistance? Fill out the form below with your name, email, and message. We will get back to you promptly.",
   helpTitle: "FAQ, help, and social updates.",
   helpCopy:
-    "Explore our frequently asked questions for quick answers. For personalized assistance, use the contact form below or stay connected with us on social media for updates and promotions.",
+    "Explore our frequently asked questions for quick answers. For personalised assistance, use the contact form below or stay connected with us on social media for updates and promotions.",
 };
 
 export const contactHelpLinks = [

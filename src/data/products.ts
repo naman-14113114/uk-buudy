@@ -64,9 +64,9 @@ export const buudyMask: Product = {
   heroTitle: "Buudy LED",
   heroEmphasis: "Mask",
   shortDescription:
-    "UK salon-grade LED face mask with 192 high-density LEDs, 8 light modes, and full face plus neck coverage.",
+    "UK salon-grade LED face mask with 192 high-density LEDs, 7 wavelengths plus 830nm near-infrared, and full face plus neck coverage.",
   description:
-    "Salon-grade light therapy reimagined for UK homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colors plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
+    "Salon-grade light therapy reimagined for UK homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colours plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
   seoTitle: "Best LED Face Mask UK | Buudy Red Light Therapy Mask",
   seoDescription:
     "Shop the Buudy LED Face Mask in the UK: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, 90-day returns, and free glow kit.",
@@ -90,7 +90,7 @@ export const buudyMask: Product = {
     },
     {
       src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
-      alt: "Buudy LED Mask anti-aging mode",
+      alt: "Buudy LED Mask anti-ageing mode",
     },
     {
       src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
@@ -159,7 +159,7 @@ export const buudyMask: Product = {
     { label: "Dimensions", value: "20cm x 29cm (7.87in x 11.42in)" },
     { label: "Number of LEDs", value: "192" },
     { label: "Intensity Level", value: "4 levels" },
-    { label: "Light Modes", value: "7 visible colors + 830nm near-infrared" },
+    { label: "Light Modes", value: "7 visible colours + 830nm near-infrared" },
     { label: "Near-Infrared (NIR)", value: "830nm" },
     { label: "Battery Life", value: "Up to 12 sessions per charge (1500mAh)" },
     { label: "Use Type", value: "Portable cordless LED mask for household" },
@@ -170,7 +170,7 @@ export const buudyMask: Product = {
   ],
   included: [
     { quantity: "1x", label: "Premium Travel Box", tag: "Free gift" },
-    { quantity: "1x", label: "8-mode LED Light Face Mask" },
+    { quantity: "1x", label: "7-colour + NIR LED Light Face Mask" },
     { quantity: "1x", label: "Charger with USB-C cable" },
     { quantity: "2x", label: "Eye Support" },
     { quantity: "1x", label: "User Manual" },
@@ -185,7 +185,7 @@ export const buudyMask: Product = {
   ],
   keyBenefits: [
     "Stimulate collagen production",
-    "Assist with anti-aging",
+    "Assist with anti-ageing",
     "Reduce acne",
     "Aid in healing",
     "Address sun damage",
@@ -194,7 +194,7 @@ export const buudyMask: Product = {
   ],
   differentiators: [
     "Buudy AI app for guided sessions",
-    "8 targeted light modes, including near-infrared",
+    "7 wavelengths plus 830nm near-infrared",
     "Full-face and neck coverage",
     "Cordless, rechargeable design",
     "3-minute treatment routine",
@@ -299,7 +299,7 @@ export const buudyRedTorch: Product = {
   highlights: [
     "Stimulate collagen production",
     "Smooths skin & fine lines",
-    "Assist with anti-aging and healing",
+    "Assist with anti-ageing and healing",
     "Enhances overall skin health",
     "Portable, safe, and easy to use",
     "Minimize wrinkles and lines",
