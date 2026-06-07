@@ -6,7 +6,7 @@ import { Search, X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
 import { market } from "@/lib/market";
 
-export function ProductGallery({ images }: { images: ProductImage[] }) {
+export function ProductGallery({ images, hasGifts = true }: { images: ProductImage[], hasGifts?: boolean }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
   const [transitionOpacity, setTransitionOpacity] = useState(1);
@@ -230,9 +230,11 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
           />
 
           {/* Overlaid Badges */}
-          <span className="buudy-mono absolute left-5 top-5 z-10 rounded-full bg-[var(--plum)] px-4 py-2 text-[var(--cream)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.8)]">
-            3 Free Gifts
-          </span>
+          {hasGifts && (
+            <span className="buudy-mono absolute left-5 top-5 z-10 rounded-full bg-[var(--plum)] px-4 py-2 text-[var(--cream)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.8)]">
+              3 Free Gifts
+            </span>
+          )}
           <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
             <svg
               aria-hidden="true"

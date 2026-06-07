@@ -105,13 +105,13 @@ export function Footer() {
           <div className="flex gap-3">
             {paymentIcons.map((icon) => (
               <span
-                className="inline-flex h-7 w-11 items-center justify-center rounded bg-[rgba(247,241,232,.96)] p-1.5"
+                className="inline-flex h-7 w-11 items-center justify-center overflow-hidden rounded bg-[rgba(247,241,232,.96)]"
                 key={icon.label}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt={icon.label}
-                  className="h-4 w-auto"
+                  className="h-full w-full object-cover"
                   decoding="async"
                   loading="lazy"
                   src={icon.src}

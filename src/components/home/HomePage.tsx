@@ -71,7 +71,7 @@ function ProductSpotlight({
             asChild
             className={`mt-8 ${
               isTorch
-                ? "bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]"
+                ? "!border-[var(--cream)] !text-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]"
                 : ""
             }`}
           >

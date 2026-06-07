@@ -280,6 +280,13 @@ export function ComparisonTable() {
 
           {/* Color Sub-rows */}
           <ColorRow
+            colorName="Infrared"
+            colorCode="#8B0000"
+            description="Deep tissue repair and healing"
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
+          />
+
+          <ColorRow
             colorName="Red"
             colorCode="#F00202"
             description="Anti-ageing and Revitalisation"

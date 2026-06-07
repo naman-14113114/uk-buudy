@@ -155,31 +155,8 @@ export function GiftBundle({ product }: { product: Product }) {
             or <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">4</strong> interest-free payments of{" "}
             <strong className="buudy-display text-[10px] sm:text-[14px] font-semibold text-[var(--plum)]">
               {formatMoney(product.priceCents / 4, product.currency)}
-            </strong>{" "}
-            with
+            </strong>
           </span>
-          <div className="inline-flex items-center gap-1 sm:gap-1.5 shrink-0">
-            {/* Klarna Badge Container */}
-            <div className="relative w-[50px] sm:w-[58px] h-[15px] sm:h-[18px] overflow-hidden rounded-[3px] bg-[#FFB3C7] flex items-center justify-center shrink-0">
-              <img
-                src="/media/products/buudy-led-mask/images/klarna_badge.png"
-                alt="Klarna"
-                className="w-[85%] h-auto object-contain"
-                decoding="async"
-                loading="lazy"
-              />
-            </div>
-            {/* Afterpay Badge Container */}
-            <div className="relative w-[56px] sm:w-[68px] h-[15px] sm:h-[18px] overflow-hidden rounded-[3px] bg-[#B2FCE4] flex items-center justify-center shrink-0">
-              <img
-                src="/media/products/buudy-led-mask/images/afterpay_badge.png"
-                alt="Afterpay"
-                className="w-[88%] h-auto object-contain"
-                decoding="async"
-                loading="lazy"
-              />
-            </div>
-          </div>
         </div>
       </div>
 
@@ -239,7 +216,7 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="buudy-cart-pulse-ring absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />
           <span className="buudy-cart-pulse relative h-2 w-2 rounded-full bg-[var(--cream)]" />
         </span>
-        <span>ADD TO CART + FREE GIFTS</span>
+        <span>{hasGifts ? "ADD TO CART + FREE GIFTS" : "ADD TO CART"}</span>
       </Button>
 
       {/* 4-Item Benefits Grid Row */}
