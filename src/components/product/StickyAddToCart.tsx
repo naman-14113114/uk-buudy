@@ -30,10 +30,6 @@ export function StickyAddToCart({ product }: { product: Product }) {
   const isMask = product.template === "mask";
 
   useEffect(() => {
-    if (product.template !== "mask") {
-      return;
-    }
-
     document.documentElement.classList.add("buudy-mask-sticky-cta");
 
     return () => {
