@@ -24,15 +24,15 @@ export function ProductPage({ product }: { product: Product }) {
     <>
       <ProductHero product={product} />
       <DeferredVideoReviews />
-      <FeatureGrid />
+      {/* <FeatureGrid /> */}
       <DeferredBeforeAfterGrid />
       <DeferredWavelengthSelector />
       <DeferredExpertSection />
       <ComparisonTable />
       {/* <TouchTechSection /> */}
       <AppPromo />
-      <BlueLightSection />
       <ProductReviewsSection />
+      <BlueLightSection />
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />

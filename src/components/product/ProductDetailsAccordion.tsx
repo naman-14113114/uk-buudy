@@ -20,9 +20,28 @@ import {
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import type { ReactNode } from "react";
+import { features, torchFeatures } from "@/data/productSections";
+import {
+  IconGrid4x4,
+  IconShieldHeart,
+  IconColorFilter,
+  IconBatteryCharging,
+  IconShieldCheck,
+  IconDiamond,
+  IconBulb,
+} from "@tabler/icons-react";
+
+const featureIcons = [
+  IconGrid4x4,
+  IconShieldHeart,
+  IconColorFilter,
+  IconBatteryCharging,
+  IconShieldCheck,
+  IconDiamond,
+];
 
 type AccordionItem = {
-  id: "specs" | "benefits" | "included" | "certifications";
+  id: "unique" | "specs" | "benefits" | "included" | "certifications";
   eyebrow: string;
   title: string;
   content: ReactNode;
@@ -104,6 +123,46 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
 
   const items: AccordionItem[] = [
     {
+      id: "unique",
+      eyebrow: "Features",
+      title: product.template === "torch" ? "What makes our torch unique?" : "What makes our mask unique?",
+      content: (
+        <ul className="grid gap-3">
+          {(product.template === "torch" ? torchFeatures : features).map((feature, index) => {
+            const Icon = product.template === "torch" ? IconBulb : featureIcons[index];
+            return (
+            <li
+              key={index}
+              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-4"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                    {Icon ? <Icon size={20} stroke={1.5} /> : null}
+                  </span>
+                  <div>
+                    <p className="font-sans text-sm font-bold text-[var(--plum)]">
+                      {feature.title}
+                    </p>
+                    <p className="font-sans mt-0.5 text-xs italic font-semibold text-[var(--gold)]">
+                      {feature.kicker}
+                    </p>
+                  </div>
+                </div>
+                <span className="buudy-display text-sm text-[var(--gold)] font-medium self-start mt-1">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <p className="font-sans mt-1 text-xs leading-5 text-[var(--muted)]">
+                {feature.body}
+              </p>
+            </li>
+          );
+        })}
+        </ul>
+      ),
+    },
+    {
       id: "specs",
       eyebrow: "Specifications",
       title: "The numbers, in detail",
@@ -128,7 +187,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         </dl>
       ),
     },
-    {
+    /* {
       id: "benefits",
       eyebrow: "Key benefits",
       title: "What your ritual supports",
@@ -149,7 +208,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
           })}
         </ul>
       ),
-    },
+    }, */
     {
       id: "included",
       eyebrow: "In the box",
