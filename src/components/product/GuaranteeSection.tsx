@@ -20,7 +20,7 @@ export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) 
       <div className="buudy-wrap relative z-20 max-w-5xl">
         <p className="buudy-eyebrow">Promise</p>
         <h2 className="buudy-display mx-auto mt-3 max-w-4xl text-[2rem] leading-[1.05] text-[var(--cream)] sm:text-[2.35rem] md:mt-4 md:text-6xl">
-          Our <em className="buudy-italic text-[var(--gold)]">90-Day Goddess</em>
+          Our <em className="buudy-italic text-[var(--gold)]">Buudy Goddess</em>
           <br />
           money back guarantee.
         </h2>

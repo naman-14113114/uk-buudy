@@ -30,7 +30,7 @@ export function WavelengthSelector() {
         <div className="max-w-full lg:max-w-5xl">
           <p className="buudy-mono text-[var(--gold)]">Spectrum</p>
           <h2 className="buudy-display mt-3 text-[2.5rem] leading-[1.06] text-[var(--cream)] md:text-6xl">
-            Choose <em className="buudy-italic">7 LED Colours + NIR</em> with a tap.
+            Change <em className="buudy-italic">7 light modes</em> with a tap.
           </h2>
         </div>
 
