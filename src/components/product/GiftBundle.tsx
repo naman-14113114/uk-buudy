@@ -118,7 +118,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden>
           ★★★★★
         </div>
-        <span className="font-sans text-sm sm:text-base font-medium text-[var(--gold)]">
+        <span className="font-sans text-sm sm:text-base font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
           {product.rating} · TRUSTED BY {product.customerCount} CUSTOMERS
         </span>
       </a>
