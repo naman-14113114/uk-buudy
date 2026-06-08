@@ -259,12 +259,12 @@ export function GiftBundle({ product }: { product: Product }) {
 
       {hasGifts ? (
         <section className="mt-8" id="free-gifts">
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
               Special Spring Sale
             </h3>
-            <p className="buudy-mono mt-1.5 text-xs text-[var(--gold)] font-bold tracking-widest flex items-center justify-center gap-1 flex-wrap">
-              <span className="buudy-display text-sm font-semibold text-[var(--gold)] normal-case">{formatMoney(giftValue, product.currency)}</span>
+            <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
+              <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">{formatMoney(giftValue, product.currency)}</span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
           </div>
@@ -278,10 +278,10 @@ export function GiftBundle({ product }: { product: Product }) {
               >
                 {/* Single absolute overlapping badge: FREE (bold & clear) + price strikethrough (no nested container) */}
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-2 sm:px-3 py-1 bg-[var(--card)] border border-[rgba(58,31,61,.22)] rounded-full flex items-center gap-1 sm:gap-1.5 shadow-[0_2px_8px_rgba(58,31,61,0.06)] whitespace-nowrap">
-                  <span className="text-black text-[9px] sm:text-[10px] font-extrabold tracking-widest uppercase font-sans">
+                  <span className="text-black text-[11px] sm:text-[13px] font-bold tracking-wider uppercase font-sans">
                     FREE
                   </span>
-                  <span className="line-through text-[9px] sm:text-[10.5px] text-[var(--muted)] buudy-display font-semibold leading-none">
+                  <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
                     {formatMoney(gift.valueCents, product.currency)}
                   </span>
                 </div>
