@@ -25,7 +25,7 @@ export const homeHero = {
 
 export const homeMaskSpotlight = {
   eyebrow: "Professional grade",
-  title: "The Buudy LED light therapy mask with 7 + NIR",
+  title: "The Buudy LED light therapy mask with 7 LED colours + NIR",
   copy: "Modern problems require modern solutions. The Buudy LED light therapy mask does it all wirelessly. No more fumbling around with outdated remotes and power cords. With simple built-in tap technology, you can glow while lounging around the house.",
   image: {
     src: homeAsset("04-home-mask-spotlight.png"),

@@ -46,7 +46,7 @@ export const features: Feature[] = [
     body: "The face is only half the story. Unlike many popular brands that neglect the neck or charge extra for a separate attachment, Buudy includes integrated neck coverage. It is specifically designed to firm and rejuvenate the neck area, preventing ageing where it often shows most.",
   },
   {
-    title: "7 + NIR Multi-Spectrum",
+    title: "7 LED Colours + NIR Multi-Spectrum",
     kicker: "Therapy in a single device",
     body: "Why settle for one or three colours? Buudy offers 7 visible wavelengths plus a dedicated 830nm near-infrared mode: Red, Blue, Green, Cyan, Yellow, Purple, White, and NIR. Whether you are fighting stubborn acne, reducing deep wrinkles, or supporting skin repair, you have a professional-grade solution for every skin concern.",
   },
@@ -551,7 +551,7 @@ export const comparison = {
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],
-    ["Light Colours", "7 + NIR", "3 total", "1 total", "3 total"],
+    ["Light Colours", "7 LED Colours + NIR", "3 total", "1 total", "3 total"],
     ["Neck Coverage", "Yes", "-", "-", "-"],
     ["Customizable treatments", "Yes", "-", "-", "Yes"],
     ["Hands-free, cordless, rechargeable", "Yes", "Yes", "-", "-"],

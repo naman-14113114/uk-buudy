@@ -29,7 +29,7 @@ export function ProductPage({ product }: { product: Product }) {
       <DeferredWavelengthSelector />
       <DeferredExpertSection />
       <ComparisonTable />
-      <TouchTechSection />
+      {/* <TouchTechSection /> */}
       <AppPromo />
       <BlueLightSection />
       <ProductReviewsSection />

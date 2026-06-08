@@ -27,10 +27,10 @@ export function WavelengthSelector() {
         style={{ background: `${active.color}15` }}
       />
       <div className="buudy-wrap relative z-10">
-        <div className="max-w-3xl">
+        <div className="max-w-full lg:max-w-5xl">
           <p className="buudy-mono text-[var(--gold)]">Spectrum</p>
           <h2 className="buudy-display mt-3 text-[2.5rem] leading-[1.06] text-[var(--cream)] md:text-6xl">
-            Change <em className="buudy-italic">7 + NIR</em> with a tap.
+            Choose <em className="buudy-italic">7 LED Colours + NIR</em> with a tap.
           </h2>
         </div>
 

@@ -217,17 +217,31 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          <img
-            src={currentImage.src}
-            id="buudyLED-23435t23-MainImg"
-            className="buudyLED-23435t23-main_img"
-            alt={currentImage.alt}
-            decoding="async"
-            fetchPriority="high"
-            loading="eager"
-            onClick={() => openLightbox()}
-            style={{ opacity: transitionOpacity }}
-          />
+          {currentImage.src.endsWith('.mp4') || currentImage.src.endsWith('.webm') ? (
+            <video
+              src={currentImage.src}
+              id="buudyLED-23435t23-MainImg"
+              className="buudyLED-23435t23-main_img"
+              autoPlay
+              muted
+              loop
+              playsInline
+              onClick={() => openLightbox()}
+              style={{ opacity: transitionOpacity }}
+            />
+          ) : (
+            <img
+              src={currentImage.src}
+              id="buudyLED-23435t23-MainImg"
+              className="buudyLED-23435t23-main_img"
+              alt={currentImage.alt}
+              decoding="async"
+              fetchPriority="high"
+              loading="eager"
+              onClick={() => openLightbox()}
+              style={{ opacity: transitionOpacity }}
+            />
+          )}
 
           {/* Overlaid Badges */}
           {hasGifts && (
@@ -308,14 +322,25 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
               }}
               type="button"
             >
-              <img
-                src={image.src}
-                className="buudyLED-23435t23-thumb_img"
-                alt={image.alt}
-                decoding="async"
-                fetchPriority="low"
-                loading="lazy"
-              />
+              {image.src.endsWith('.mp4') || image.src.endsWith('.webm') ? (
+                <video
+                  src={image.src}
+                  className="buudyLED-23435t23-thumb_img"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : (
+                <img
+                  src={image.src}
+                  className="buudyLED-23435t23-thumb_img"
+                  alt={image.alt}
+                  decoding="async"
+                  fetchPriority="low"
+                  loading="lazy"
+                />
+              )}
               <span aria-hidden="true" className="buudyLED-23435t23-thumb_zoom">
                 <Search size={14} strokeWidth={2.2} />
               </span>
@@ -368,13 +393,25 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
                 >
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
                 </button>
-                <img
-                  className="buudyLED-23435t23-lightbox_img"
-                  id="buudyLED-23435t23-ModalImg"
-                  src={images[currentIndex]?.src}
-                  alt="Expanded Product View"
-                  decoding="async"
-                />
+                {images[currentIndex]?.src?.endsWith('.mp4') || images[currentIndex]?.src?.endsWith('.webm') ? (
+                  <video
+                    className="buudyLED-23435t23-lightbox_img"
+                    id="buudyLED-23435t23-ModalImg"
+                    src={images[currentIndex]?.src}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    className="buudyLED-23435t23-lightbox_img"
+                    id="buudyLED-23435t23-ModalImg"
+                    src={images[currentIndex]?.src}
+                    alt="Expanded Product View"
+                    decoding="async"
+                  />
+                )}
                 <button
                   className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-next"
                   id="buudyLED-23435t23-ModalNext"

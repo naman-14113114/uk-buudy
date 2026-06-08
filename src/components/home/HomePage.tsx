@@ -43,7 +43,7 @@ function ProductSpotlight({
               ) : (
                 <>
                   The Buudy LED light therapy mask with{" "}
-                  <em className="buudy-italic">7 + NIR</em>.
+                  <em className="buudy-italic">7 LED Colours + NIR</em>.
                 </>
               )
             }

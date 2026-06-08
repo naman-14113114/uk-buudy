@@ -57,7 +57,7 @@ export const faqsData: FaqItem[] = [
   {
     question: "What type of payments do you accept?",
     answerHtml: `
-      <p class="text-sm leading-6">We accept Visa, Mastercard as well as Paypal.</p>
+      <p class="text-sm leading-6">We accept Visa, Mastercard, American Express, JCB as well as Paypal.</p>
     `
   },
   {

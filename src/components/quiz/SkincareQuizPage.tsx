@@ -33,7 +33,7 @@ export function SkincareQuizPage() {
                 src="/images/home/04-home-mask-spotlight.png"
               />
               <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(23,10,24,.88))] p-6 pt-24 text-[var(--cream)]">
-                <p className="buudy-mono text-[var(--gold)]">7 + NIR modes</p>
+                <p className="buudy-mono text-[var(--gold)]">7 LED Colours + NIR modes</p>
                 <p className="buudy-display mt-2 text-3xl leading-tight">
                   A routine that meets your skin where it is.
                 </p>

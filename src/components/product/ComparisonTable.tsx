@@ -271,7 +271,7 @@ export function ComparisonTable() {
             title="Light Colours"
             subtitle="Each with specific skin benefits"
             values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">7 + NIR</strong>,
+              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">7 LED Colours + NIR</strong>,
               <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">2 TOTAL</strong>,
               <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">1 TOTAL</strong>,
               <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,

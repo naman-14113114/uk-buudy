@@ -86,7 +86,7 @@ export function TouchTechSection() {
           />
           <div className="absolute bottom-6 right-6 rounded-2xl bg-[rgba(247,241,232,.94)] p-4 text-[var(--plum)] backdrop-blur">
             <p className="buudy-mono">Tap to cycle</p>
-            <p className="buudy-display mt-1 text-xl">7 + NIR - 1 gesture</p>
+            <p className="buudy-display mt-1 text-xl">7 LED Colours + NIR - 1 gesture</p>
           </div>
         </div>
       </div>
@@ -97,8 +97,8 @@ export function TouchTechSection() {
 export function AppPromo() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="buudy-ai">
-      <div className="buudy-wrap grid items-center gap-8 md:gap-12 lg:grid-cols-[1.2fr_1fr]">
-        <div className="relative aspect-[1200/799] w-full overflow-hidden rounded-[18px] bg-[var(--blush)]">
+      <div className="buudy-wrap grid items-center gap-8 md:gap-12 lg:grid-cols-[1fr_1.2fr]">
+        <div className="relative aspect-[1200/799] w-full overflow-hidden rounded-[18px] bg-[var(--blush)] lg:order-last">
           <Image
             alt="Buudy AI companion app"
             className="object-cover"
