@@ -27,7 +27,6 @@ export function StickyAddToCart({ product }: { product: Product }) {
     product.gifts.length > 0
       ? ` + ${product.gifts.length} free gifts`
       : " + free shipping";
-  const isMask = product.template === "mask";
 
   useEffect(() => {
     document.documentElement.classList.add("buudy-mask-sticky-cta");
@@ -74,18 +73,14 @@ export function StickyAddToCart({ product }: { product: Product }) {
 
   return (
     <div
-      className={`pointer-events-none fixed bottom-3 z-40 transition duration-300 ease-out sm:inset-x-0 sm:bottom-5 sm:px-3 ${
-        isMask ? "inset-x-3" : "left-3 right-[5.25rem]"
-      } ${
+      className={`pointer-events-none fixed bottom-3 inset-x-3 z-40 transition duration-300 ease-out sm:inset-x-0 sm:bottom-5 sm:px-3 ${
         visible
           ? "translate-y-0 opacity-100"
           : "translate-y-[calc(100%+2rem)] opacity-0"
       }`}
     >
       <div
-        className={`pointer-events-auto flex min-h-12 max-w-full items-center rounded-full border border-[var(--border)] bg-[var(--card)] p-1 shadow-[0_18px_42px_-20px_rgba(58,31,61,.68)] sm:mx-auto sm:min-h-[78px] sm:w-full sm:max-w-[850px] sm:justify-between sm:gap-5 sm:px-3 sm:py-2.5 ${
-          isMask ? "w-full" : "w-fit"
-        }`}
+        className="pointer-events-auto flex min-h-12 w-full max-w-full items-center rounded-full border border-[var(--border)] bg-[var(--card)] p-1 shadow-[0_18px_42px_-20px_rgba(58,31,61,.68)] sm:mx-auto sm:min-h-[78px] sm:w-full sm:max-w-[850px] sm:justify-between sm:gap-5 sm:px-3 sm:py-2.5"
       >
         <div className="hidden min-w-0 items-center gap-4 sm:flex">
           <div className="relative h-14 w-14 flex-none overflow-hidden rounded-full border border-[var(--border)] bg-[var(--blush)]">
@@ -110,9 +105,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
         </div>
         <Button
           aria-label={`Add ${product.name} to cart${giftLabel}`}
-          className={`buudy-cart-wipe min-h-11 flex-none px-4 text-xs sm:min-h-12 sm:w-auto sm:px-6 sm:text-sm ${
-            isMask ? "w-full" : ""
-          }`}
+          className="buudy-cart-wipe min-h-11 w-full flex-none px-3 text-[11px] sm:min-h-12 sm:w-auto sm:px-6 sm:text-sm whitespace-nowrap"
           onClick={() => {
             addProduct(product);
             router.push("/cart");
@@ -125,8 +118,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
           ) : (
             <ShoppingBag size={17} />
           )}
-          <span className="sm:hidden">Add to cart</span>
-          <span className="hidden sm:inline">Add to cart{giftLabel}</span>
+          <span>Add to cart{giftLabel}</span>
         </Button>
       </div>
     </div>

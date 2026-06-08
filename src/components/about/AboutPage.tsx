@@ -50,7 +50,7 @@ export function AboutPage() {
 
       {/* Main Alternating Sections */}
       <div className="relative z-10 space-y-12 py-16 md:py-24">
-        {aboutSections.map((section) => {
+        {aboutSections.filter(s => s.id !== "customer-support").map((section) => {
           const isRight = section.align === "right";
           
           return (
@@ -107,7 +107,7 @@ export function AboutPage() {
                                         <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
                                         {boldPart === "Email" ? (
                                           <a
-                                            className="ml-1 underline underline-offset-2"
+                                            className="ml-1 underline underline-offset-2 hover:text-[var(--gold)] transition-colors"
                                             href="mailto:support@buudy.com"
                                           >
                                             {rest.trim()}
@@ -139,6 +139,78 @@ export function AboutPage() {
             </section>
           );
         })}
+      </div>
+
+      {/* Centered Customer Support Section */}
+      <div className="relative z-10">
+        {aboutSections.filter(s => s.id === "customer-support").map((section) => (
+          <section
+            key={section.id}
+            className="buudy-section pt-0 pb-16 md:pb-24 transition-all duration-300"
+          >
+            <div className="buudy-wrap max-w-3xl mx-auto text-center">
+              <SectionHeading
+                eyebrow={section.eyebrow}
+                title={
+                  <>
+                    {section.title.split(" ").slice(0, -1).join(" ")}{" "}
+                    <em className="buudy-italic">
+                      {section.title.split(" ").slice(-1).join(" ")}
+                    </em>
+                  </>
+                }
+                align="center"
+              />
+              <div className="mt-8 rounded-3xl border border-[var(--border)] bg-[rgba(255,252,245,.6)] p-8 sm:p-12 shadow-[0_20px_50px_-20px_rgba(58,31,61,0.06)]">
+                <div className="space-y-6 text-sm sm:text-base leading-7 text-[var(--muted)] font-light mx-auto max-w-2xl text-left">
+                  {section.copy.split("\n\n").map((paragraph, pIdx) => {
+                    if (paragraph.startsWith("- ")) {
+                      return (
+                        <ul key={pIdx} className="space-y-4 mt-8 pt-6 border-t border-[rgba(58,31,61,0.06)]">
+                          {paragraph.split("\n").map((bullet, bIdx) => {
+                            const cleanBullet = bullet.replace(/^- /, "").trim();
+                            const [boldPart, rest] = cleanBullet.split(":");
+                            
+                            return (
+                              <li key={bIdx} className="flex items-center gap-3">
+                                <span className="text-[var(--gold)] h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                                <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
+                                  {rest ? (
+                                    <>
+                                      <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
+                                      {boldPart === "Email" ? (
+                                        <a
+                                          className="ml-1 underline underline-offset-2 hover:text-[var(--gold)] transition-colors"
+                                          href="mailto:support@buudy.com"
+                                        >
+                                          {rest.trim()}
+                                        </a>
+                                      ) : (
+                                        rest
+                                      )}
+                                    </>
+                                  ) : (
+                                    cleanBullet
+                                  )}
+                                </span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      );
+                    }
+                    
+                    return (
+                      <p key={pIdx} className="leading-relaxed text-center">
+                        {paragraph}
+                      </p>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </section>
+        ))}
       </div>
     </div>
   );
