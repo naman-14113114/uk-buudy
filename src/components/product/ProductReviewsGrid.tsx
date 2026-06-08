@@ -584,11 +584,21 @@ export function ProductReviewsGrid({
         <SectionHeading
           eyebrow="Product reviews"
           title={
-            <>
-              Buudy Mask <em className="buudy-italic">customer reviews</em>.
-            </>
+            productHandle === "buudy-red-torch" ? (
+              <>
+                Buudy Light Therapy Torch <em className="buudy-italic">reviews</em>.
+              </>
+            ) : (
+              <>
+                Buudy Mask <em className="buudy-italic">customer reviews</em>.
+              </>
+            )
           }
-          copy="Real feedback from customers who made Buudy part of their at-home skincare ritual."
+          copy={
+            productHandle === "buudy-red-torch"
+              ? "Real feedback from customers who made the Buudy Light Therapy Torch part of their daily wellness ritual."
+              : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
+          }
         />
 
         <div className="rounded-[22px] border border-[rgba(58,31,61,.14)] bg-[rgba(255,252,245,.72)] p-6 shadow-[0_20px_52px_-42px_rgba(58,31,61,.55)]">

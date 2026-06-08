@@ -5,9 +5,7 @@ import {
   reviewPageSize,
 } from "@/data/reviews";
 
-const productHandle = "buudy-led-mask";
-
-export function ProductReviewsSection() {
+export function ProductReviewsSection({ productHandle = "buudy-led-mask" }: { productHandle?: string } = {}) {
   const summary = getProductReviewSummary(productHandle);
 
   if (!summary) {

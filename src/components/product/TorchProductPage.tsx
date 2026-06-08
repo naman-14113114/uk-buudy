@@ -187,6 +187,7 @@ function TorchUseGuide() {
 }
 
 import { TorchFeatureTabs } from "./TorchFeatureTabs";
+import { ProductReviewsSection } from "./ProductReviewsSection";
 
 export function TorchProductPage({ product }: { product: Product }) {
   return (
@@ -196,6 +197,7 @@ export function TorchProductPage({ product }: { product: Product }) {
       <TorchStorySection />
       {/* <TorchDetailSection /> */}
       <TorchUseGuide />
+      <ProductReviewsSection productHandle={product.id} />
       <FAQSection faqs={product.faqs} />
       {/* <GuaranteeSection showVideo={false} /> */}
       <StickyAddToCart product={product} />

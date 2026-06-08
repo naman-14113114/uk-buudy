@@ -1,4 +1,5 @@
 import maskReviews from "./reviews/buudy-led-mask-reviews.json";
+import torchReviews from "./reviews/buudy-red-torch-reviews.json";
 import type { ProductReview, ProductReviewSummary } from "@/types/reviews";
 
 export const reviewPageSize = 20;
@@ -6,6 +7,7 @@ export const maxReviewPageSize = 50;
 
 const reviewCollections = {
   "buudy-led-mask": maskReviews as ProductReview[],
+  "buudy-red-torch": torchReviews as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;
