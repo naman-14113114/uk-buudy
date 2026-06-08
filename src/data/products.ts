@@ -132,6 +132,14 @@ export const buudyMask: Product = {
       src: productAsset("13-buudy-led-mask-starter-kit.webp"),
       alt: "Buudy LED Mask starter kit",
     },
+    {
+      src: productAsset("O3.png"),
+      alt: "Buudy LED Mask O3",
+    },
+    {
+      src: productAsset("buudy_purple.jpeg"),
+      alt: "Buudy LED Mask Purple",
+    },
   ],
   gifts: [
     {
