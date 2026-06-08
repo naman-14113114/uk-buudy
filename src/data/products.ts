@@ -85,10 +85,6 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask front view",
     },
     {
-      src: productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos"),
-      alt: "Buudy LED Mask light modes demonstration",
-    },
-    {
       src: productAsset("02-buudy-led-mask-side-profile.webp"),
       alt: "Buudy LED Mask side profile",
     },
@@ -139,6 +135,10 @@ export const buudyMask: Product = {
     {
       src: productAsset("buudy_purple.jpeg"),
       alt: "Buudy LED Mask Purple",
+    },
+    {
+      src: productMediaAsset("7 colors muted.webm", "buudy-led-mask", "videos"),
+      alt: "Buudy LED Mask light modes demonstration",
     },
   ],
   gifts: [
