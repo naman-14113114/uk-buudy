@@ -32,13 +32,11 @@ type HeaderSession = {
 
 export function Header() {
   const { totals, openCart } = useCart();
-  const [hidden, setHidden] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
   const [session, setSession] = useState<HeaderSession | null>(null);
   const accountMenuRef = useRef<HTMLDivElement>(null);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     async function loadSession() {
@@ -59,42 +57,6 @@ export function Header() {
     window.addEventListener("focus", loadSession);
 
     return () => window.removeEventListener("focus", loadSession);
-  }, []);
-
-  useEffect(() => {
-    lastScrollY.current = window.scrollY;
-    let frame = 0;
-
-    function updateHeader() {
-      const currentY = window.scrollY;
-      const delta = currentY - lastScrollY.current;
-
-      if (currentY < 24 || delta < -8) {
-        setHidden(false);
-      } else if (currentY > 120 && delta > 8) {
-        setHidden(true);
-        setAccountMenuOpen(false);
-        setMobileMenuOpen(false);
-      }
-
-      lastScrollY.current = currentY;
-      frame = 0;
-    }
-
-    function onScroll() {
-      if (!frame) {
-        frame = window.requestAnimationFrame(updateHeader);
-      }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-    };
   }, []);
 
   useEffect(() => {
@@ -161,10 +123,7 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b border-[rgba(58,31,61,.14)] bg-[rgba(247,241,232,.88)] backdrop-blur-xl transition-transform duration-300 ease-out ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      }`}
-      onFocusCapture={() => setHidden(false)}
+      className="relative z-40 border-b border-[rgba(58,31,61,.14)] bg-[rgba(247,241,232,.88)] backdrop-blur-xl"
     >
       <div className="buudy-wrap relative flex min-h-[64px] items-center justify-between gap-4 lg:min-h-[72px] lg:gap-6">
         <button
@@ -173,7 +132,6 @@ export function Header() {
           aria-label="Open navigation menu"
           className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)] lg:hidden"
           onClick={() => {
-            setHidden(false);
             setAccountMenuOpen(false);
             setMobileMenuMounted(true);
             setMobileMenuOpen(true);
@@ -245,7 +203,6 @@ export function Header() {
               aria-label={signedIn ? `Open account menu for ${accountLabel}` : "Open account menu"}
               className="inline-flex h-12 items-center gap-1 rounded-full border border-[rgba(58,31,61,.18)] px-3 text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
               onClick={() => {
-                setHidden(false);
                 setAccountMenuOpen((open) => !open);
               }}
               type="button"

@@ -1,11 +1,36 @@
+import { Buffer } from "node:buffer";
+import { randomUUID } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { isSupabaseAdminConfigured } from "@/lib/supabase/config";
 import {
-  getProductReviewSummary,
-  getProductReviewCount,
-  getProductReviews,
+  getMergedProductReviewDataset,
+  isReviewProductHandle,
   maxReviewPageSize,
   reviewPageSize,
+  toPublicProductReview,
 } from "@/data/reviews";
+
+const REVIEW_IMAGE_BUCKET = "product-review-images";
+const MAX_REVIEW_IMAGES = 5;
+const MAX_REVIEW_IMAGE_BYTES = 5 * 1024 * 1024;
+
+const allowedImageTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+const imageExtensionByType: Record<string, string> = {
+  "image/gif": "gif",
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+};
+
+const reviewSubmissionSchema = z.object({
+  body: z.string().trim().min(10).max(1000),
+  customerEmail: z.string().trim().email().max(254),
+  customerName: z.string().trim().min(2).max(50),
+  rating: z.coerce.number().int().min(1).max(5),
+  title: z.string().trim().min(2).max(70),
+});
 
 function parsePositiveInteger(value: string | null, fallback: number) {
   const parsed = Number.parseInt(value ?? "", 10);
@@ -26,9 +51,9 @@ export async function GET(
   context: { params: Promise<{ productHandle: string }> },
 ) {
   const { productHandle } = await context.params;
-  const summary = getProductReviewSummary(productHandle);
+  const dataset = await getMergedProductReviewDataset(productHandle);
 
-  if (!summary) {
+  if (!dataset) {
     return NextResponse.json({ message: "Reviews not found." }, { status: 404 });
   }
 
@@ -42,21 +67,157 @@ export async function GET(
     return NextResponse.json({ message: "Rating must be between 1 and 5." }, { status: 400 });
   }
 
-  const reviews = getProductReviews(productHandle, offset, limit, rating);
-  const total = getProductReviewCount(productHandle, rating);
+  const filteredReviews = rating
+    ? dataset.reviews.filter((review) => review.rating === rating)
+    : dataset.reviews;
+  const reviews = filteredReviews.slice(offset, offset + limit);
+  const total = filteredReviews.length;
   const nextOffset = offset + reviews.length;
 
   return NextResponse.json(
     {
+      averageRating: dataset.summary.averageRating,
       hasMore: nextOffset < total,
       nextOffset,
+      ratingDistribution: dataset.summary.ratingDistribution,
       reviews,
+      summaryTotal: dataset.summary.total,
       total,
     },
     {
       headers: {
-        "Cache-Control": "public, max-age=300, s-maxage=3600",
+        "Cache-Control": "no-store",
       },
     },
   );
+}
+
+function getCleanFormValue(formData: FormData, key: string) {
+  const value = formData.get(key);
+  return typeof value === "string" ? value : "";
+}
+
+function getReviewFiles(formData: FormData) {
+  return formData
+    .getAll("images")
+    .filter((value): value is File => value instanceof File && value.size > 0);
+}
+
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{ productHandle: string }> },
+) {
+  const { productHandle } = await context.params;
+
+  if (!isReviewProductHandle(productHandle)) {
+    return NextResponse.json({ message: "Reviews not found." }, { status: 404 });
+  }
+
+  if (!isSupabaseAdminConfigured()) {
+    return NextResponse.json(
+      { message: "Review submissions are not configured on this environment yet." },
+      { status: 503 },
+    );
+  }
+
+  let formData: FormData;
+
+  try {
+    formData = await request.formData();
+  } catch {
+    return NextResponse.json({ message: "Review form data was not readable." }, { status: 400 });
+  }
+
+  if (getCleanFormValue(formData, "botcheck")) {
+    return NextResponse.json({ message: "Review submission rejected." }, { status: 400 });
+  }
+
+  const parsed = reviewSubmissionSchema.safeParse({
+    body: getCleanFormValue(formData, "body"),
+    customerEmail: getCleanFormValue(formData, "customerEmail"),
+    customerName: getCleanFormValue(formData, "customerName"),
+    rating: getCleanFormValue(formData, "rating"),
+    title: getCleanFormValue(formData, "title"),
+  });
+
+  if (!parsed.success) {
+    return NextResponse.json(
+      { message: "Please complete every review field before submitting." },
+      { status: 400 },
+    );
+  }
+
+  const imageFiles = getReviewFiles(formData);
+
+  if (imageFiles.length > MAX_REVIEW_IMAGES) {
+    return NextResponse.json(
+      { message: `Please upload no more than ${MAX_REVIEW_IMAGES} images.` },
+      { status: 400 },
+    );
+  }
+
+  const invalidImage = imageFiles.find(
+    (image) => !allowedImageTypes.has(image.type) || image.size > MAX_REVIEW_IMAGE_BYTES,
+  );
+
+  if (invalidImage) {
+    return NextResponse.json(
+      { message: "Review images must be JPG, PNG, WebP, or GIF files under 5MB." },
+      { status: 400 },
+    );
+  }
+
+  const supabase = createSupabaseAdminClient();
+  const reviewId = randomUUID();
+  const imageUrls: string[] = [];
+
+  for (const [index, image] of imageFiles.entries()) {
+    const extension = imageExtensionByType[image.type] ?? "jpg";
+    const path = `${productHandle}/${reviewId}/review-image-${index + 1}.${extension}`;
+    const bytes = Buffer.from(await image.arrayBuffer());
+    const { error: uploadError } = await supabase.storage
+      .from(REVIEW_IMAGE_BUCKET)
+      .upload(path, bytes, {
+        contentType: image.type,
+        upsert: false,
+      });
+
+    if (uploadError) {
+      return NextResponse.json(
+        { message: "Review image upload is not configured yet. Please try again later." },
+        { status: 500 },
+      );
+    }
+
+    const { data } = supabase.storage.from(REVIEW_IMAGE_BUCKET).getPublicUrl(path);
+    imageUrls.push(data.publicUrl);
+  }
+
+  const { data, error } = await supabase
+    .from("product_reviews")
+    .insert({
+      body: parsed.data.body,
+      customer_email: parsed.data.customerEmail.toLowerCase(),
+      customer_name: parsed.data.customerName,
+      id: reviewId,
+      images: imageUrls,
+      product_handle: productHandle,
+      rating: parsed.data.rating,
+      source: "uk_buudy_review_form",
+      status: "published",
+      title: parsed.data.title,
+    })
+    .select(
+      "id, product_handle, customer_name, customer_email, rating, title, body, images, status, source, created_at, updated_at",
+    )
+    .single();
+
+  if (error || !data) {
+    return NextResponse.json(
+      { message: "We could not publish your review right now. Please try again." },
+      { status: 500 },
+    );
+  }
+
+  return NextResponse.json({ review: toPublicProductReview(data) }, { status: 201 });
 }

@@ -21,6 +21,13 @@ export type ProductReviewSummary = {
 export type ProductReviewsResponse = {
   reviews: ProductReview[];
   total: number;
+  summaryTotal?: number;
+  averageRating?: number;
+  ratingDistribution?: Record<string, number>;
   nextOffset: number;
   hasMore: boolean;
+};
+
+export type ProductReviewSubmissionResponse = {
+  review: ProductReview;
 };

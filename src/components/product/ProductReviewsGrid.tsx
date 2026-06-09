@@ -1,5 +1,6 @@
 "use client";
 
+import type { ChangeEvent, FormEvent } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
@@ -8,12 +9,20 @@ import {
   ChevronLeft,
   ChevronRight,
   LoaderCircle,
+  PencilLine,
+  Send,
+  Star,
+  UploadCloud,
   X,
 } from "lucide-react";
 import { Button, cn } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { market } from "@/lib/market";
-import type { ProductReview, ProductReviewsResponse } from "@/types/reviews";
+import type {
+  ProductReview,
+  ProductReviewSubmissionResponse,
+  ProductReviewsResponse,
+} from "@/types/reviews";
 
 type AnimatableProductReview = ProductReview & {
   isNew?: boolean;
@@ -428,6 +437,355 @@ function ReviewModal({
   );
 }
 
+type ReviewFormState = {
+  botcheck: string;
+  body: string;
+  customerEmail: string;
+  customerName: string;
+  rating: number;
+  title: string;
+};
+
+const emptyReviewForm: ReviewFormState = {
+  body: "",
+  botcheck: "",
+  customerEmail: "",
+  customerName: "",
+  rating: 5,
+  title: "",
+};
+
+function WriteReviewModal({
+  onClose,
+  onSubmitted,
+  productHandle,
+}: {
+  onClose: () => void;
+  onSubmitted: (review: ProductReview) => Promise<void> | void;
+  productHandle: string;
+}) {
+  const [form, setForm] = useState<ReviewFormState>(emptyReviewForm);
+  const [files, setFiles] = useState<File[]>([]);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPublished, setIsPublished] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    previousActiveElementRef.current = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+
+      if (event.key === "Tab" && dialogRef.current) {
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            "button:not([disabled]), input:not([disabled]), textarea:not([disabled])",
+          ),
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      previousActiveElementRef.current?.focus();
+    };
+  }, [onClose]);
+
+  function updateField<Key extends keyof ReviewFormState>(
+    key: Key,
+    value: ReviewFormState[Key],
+  ) {
+    setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    const selectedFiles = Array.from(event.target.files ?? []).slice(0, 5);
+    setFiles(selectedFiles);
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    formData.set("body", form.body);
+    formData.set("botcheck", form.botcheck);
+    formData.set("customerEmail", form.customerEmail);
+    formData.set("customerName", form.customerName);
+    formData.set("rating", String(form.rating));
+    formData.set("title", form.title);
+    files.forEach((file) => formData.append("images", file));
+
+    try {
+      const response = await fetch(`/api/reviews/${encodeURIComponent(productHandle)}`, {
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+        method: "POST",
+      });
+      const data = (await response.json().catch(() => null)) as
+        | ProductReviewSubmissionResponse
+        | { message?: string }
+        | null;
+
+      if (!response.ok || !data || !("review" in data)) {
+        throw new Error(
+          data && "message" in data && data.message
+            ? data.message
+            : "We could not publish your review right now.",
+        );
+      }
+
+      await onSubmitted(data.review);
+      setIsPublished(true);
+    } catch (submissionError) {
+      setError(
+        submissionError instanceof Error
+          ? submissionError.message
+          : "We could not publish your review right now.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  if (typeof document === "undefined") {
+    return null;
+  }
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[100000100] grid place-items-center bg-[rgba(30,12,31,.62)] p-4 backdrop-blur-md"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div
+        aria-label="Write a product review"
+        aria-modal="true"
+        className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[24px] border border-[rgba(180,145,76,.34)] bg-[var(--card)] p-5 shadow-[0_28px_90px_-34px_rgba(15,4,16,.82)] sm:p-8"
+        ref={dialogRef}
+        role="dialog"
+      >
+        <button
+          aria-label="Close review form"
+          className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
+          onClick={onClose}
+          ref={closeButtonRef}
+          type="button"
+        >
+          <X aria-hidden="true" size={22} />
+        </button>
+
+        {isPublished ? (
+          <div className="grid min-h-[24rem] place-items-center text-center">
+            <div>
+              <p className="buudy-mono text-[var(--gold)]">Review published</p>
+              <h3 className="buudy-display mt-4 text-4xl text-[var(--plum)]">
+                Thank you for sharing your glow.
+              </h3>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-[var(--muted)]">
+                Your review is live in the Buudy archive now.
+              </p>
+              <Button className="mt-7" onClick={onClose}>
+                Close
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div className="max-w-2xl">
+              <p className="buudy-mono text-[var(--gold)]">Customer review</p>
+              <h3 className="buudy-display mt-3 text-4xl leading-tight text-[var(--plum)]">
+                Write a review and rate product
+              </h3>
+            </div>
+
+            <input
+              aria-hidden="true"
+              autoComplete="off"
+              className="hidden"
+              name="botcheck"
+              onChange={(event) => updateField("botcheck", event.target.value)}
+              tabIndex={-1}
+              value={form.botcheck}
+            />
+
+            <div>
+              <label className="buudy-mono mb-3 block text-[var(--plum-soft)]">
+                Your rating
+              </label>
+              <div className="flex gap-2">
+                {[1, 2, 3, 4, 5].map((rating) => (
+                  <button
+                    aria-label={`${rating} out of 5 stars`}
+                    aria-pressed={form.rating === rating}
+                    className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(180,145,76,.32)] bg-[rgba(255,252,245,.84)] text-[var(--gold)] transition hover:-translate-y-0.5 hover:border-[var(--gold)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
+                    key={rating}
+                    onClick={() => updateField("rating", rating)}
+                    type="button"
+                  >
+                    <Star
+                      aria-hidden="true"
+                      fill={rating <= form.rating ? "currentColor" : "none"}
+                      size={22}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block">
+                <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]">
+                  Title of review
+                  <span>{form.title.length}/70</span>
+                </span>
+                <input
+                  className="w-full rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
+                  maxLength={70}
+                  onChange={(event) => updateField("title", event.target.value)}
+                  placeholder="Title Review"
+                  required
+                  value={form.title}
+                />
+              </label>
+              <label className="block">
+                <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]">
+                  Your name
+                  <span>{form.customerName.length}/50</span>
+                </span>
+                <input
+                  className="w-full rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
+                  maxLength={50}
+                  onChange={(event) => updateField("customerName", event.target.value)}
+                  placeholder="Your name"
+                  required
+                  value={form.customerName}
+                />
+              </label>
+            </div>
+
+            <label className="block">
+              <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]">
+                Content
+                <span>{form.body.length}/1000</span>
+              </span>
+              <textarea
+                className="min-h-32 w-full resize-y rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
+                maxLength={1000}
+                onChange={(event) => updateField("body", event.target.value)}
+                placeholder="Ex: Best products"
+                required
+                value={form.body}
+              />
+            </label>
+
+            <label className="block rounded-[18px] border border-dashed border-[rgba(58,31,61,.22)] bg-[rgba(255,252,245,.52)] p-5">
+              <span className="flex flex-wrap items-center gap-3 text-[var(--plum)]">
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-[rgba(180,145,76,.12)] text-[var(--gold)]">
+                  <UploadCloud aria-hidden="true" size={22} />
+                </span>
+                <span>
+                  <span className="block font-semibold">Upload up to 5 images</span>
+                  <span className="text-sm text-[var(--muted)]">
+                    JPG, PNG, WebP, or GIF. 5MB per image.
+                  </span>
+                </span>
+              </span>
+              <input
+                accept="image/gif,image/jpeg,image/png,image/webp"
+                className="mt-4 w-full text-sm text-[var(--muted)] file:mr-4 file:rounded-full file:border-0 file:bg-[var(--plum)] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[var(--cream)]"
+                multiple
+                onChange={handleFileChange}
+                type="file"
+              />
+              {files.length ? (
+                <p className="mt-3 text-sm text-[var(--muted)]">
+                  {files.length} image{files.length === 1 ? "" : "s"} selected
+                </p>
+              ) : null}
+            </label>
+
+            <label className="block">
+              <span className="buudy-mono mb-2 block text-[var(--plum-soft)]">
+                Your email
+              </span>
+              <input
+                className="w-full rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
+                onChange={(event) => updateField("customerEmail", event.target.value)}
+                placeholder="Your email"
+                required
+                type="email"
+                value={form.customerEmail}
+              />
+              <span className="mt-2 block text-xs text-[var(--muted)]">
+                Your email is stored privately for verification and is never shown publicly.
+              </span>
+            </label>
+
+            {error ? (
+              <p className="rounded-[14px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900">
+                {error}
+              </p>
+            ) : null}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                className="rounded-full border border-[rgba(58,31,61,.22)] px-6 py-3 font-semibold text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
+                disabled={isSubmitting}
+                onClick={onClose}
+                type="button"
+              >
+                Cancel
+              </button>
+              <Button disabled={isSubmitting} type="submit">
+                {isSubmitting ? (
+                  <>
+                    <LoaderCircle aria-hidden="true" className="animate-spin" size={18} />
+                    Publishing
+                  </>
+                ) : (
+                  <>
+                    <Send aria-hidden="true" size={18} />
+                    Submit review
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
 export function ProductReviewsGrid({
   averageRating,
   productHandle,
@@ -439,10 +797,14 @@ export function ProductReviewsGrid({
   const [reviews, setReviews] = useState<AnimatableProductReview[]>(initialReviews);
   const [activeRating, setActiveRating] = useState<number | null>(null);
   const [currentTotal, setCurrentTotal] = useState(total);
+  const [summaryTotal, setSummaryTotal] = useState(total);
+  const [currentAverageRating, setCurrentAverageRating] = useState(averageRating);
+  const [currentRatingDistribution, setCurrentRatingDistribution] = useState(ratingDistribution);
   const [columnCount, setColumnCount] = useState(4);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedReview, setSelectedReview] = useState<ProductReview | null>(null);
+  const [isWriteReviewOpen, setIsWriteReviewOpen] = useState(false);
   const requestIdRef = useRef(0);
   const closeSelectedReview = useCallback(() => setSelectedReview(null), []);
   const openSelectedReview = useCallback(async (review: ProductReview) => {
@@ -456,6 +818,35 @@ export function ProductReviewsGrid({
   const prefetchReviewImages = useCallback((review: ProductReview) => {
     void preloadReviewImages(review.images);
   }, []);
+  const closeWriteReview = useCallback(() => setIsWriteReviewOpen(false), []);
+
+  const applyReviewResponse = useCallback(
+    (data: ProductReviewsResponse, mode: "append" | "replace") => {
+      const mappedReviews = data.reviews.map((review, index) => ({
+        ...review,
+        isNew: mode === "replace" || data.nextOffset > pageSize,
+        staggerIndex: index,
+      }));
+
+      setReviews((currentReviews) =>
+        mode === "append" ? [...currentReviews, ...mappedReviews] : mappedReviews,
+      );
+      setCurrentTotal(data.total);
+
+      if (typeof data.summaryTotal === "number") {
+        setSummaryTotal(data.summaryTotal);
+      }
+
+      if (typeof data.averageRating === "number") {
+        setCurrentAverageRating(data.averageRating);
+      }
+
+      if (data.ratingDistribution) {
+        setCurrentRatingDistribution(data.ratingDistribution);
+      }
+    },
+    [pageSize],
+  );
 
   const visibleCount = reviews.length;
   const hasMore = visibleCount < currentTotal;
@@ -491,7 +882,7 @@ export function ProductReviewsGrid({
     return () => window.removeEventListener("resize", updateColumnCount);
   }, []);
 
-  async function fetchReviews(rating: number | null, offset: number) {
+  const fetchReviews = useCallback(async (rating: number | null, offset: number) => {
     const params = new URLSearchParams({
       limit: String(pageSize),
       offset: String(offset),
@@ -515,7 +906,45 @@ export function ProductReviewsGrid({
     }
 
     return (await response.json()) as ProductReviewsResponse;
-  }
+  }, [pageSize, productHandle]);
+
+  useEffect(() => {
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+
+    fetchReviews(null, 0)
+      .then((data) => {
+        if (requestId === requestIdRef.current) {
+          applyReviewResponse(data, "replace");
+        }
+      })
+      .catch(() => undefined);
+  }, [applyReviewResponse, fetchReviews]);
+
+  const handleReviewSubmitted = useCallback(
+    async (review: ProductReview) => {
+      setActiveRating(null);
+      setError("");
+      setReviews((currentReviews) => [
+        {
+          ...review,
+          isNew: true,
+          staggerIndex: 0,
+        },
+        ...currentReviews.filter((currentReview) => currentReview.id !== review.id),
+      ]);
+      setCurrentTotal((current) => current + 1);
+      setSummaryTotal((current) => current + 1);
+
+      try {
+        const data = await fetchReviews(null, 0);
+        applyReviewResponse(data, "replace");
+      } catch {
+        setError("Your review is live, but we could not refresh the full archive yet.");
+      }
+    },
+    [applyReviewResponse, fetchReviews],
+  );
 
   async function selectRating(rating: number | null) {
     if (isLoading || rating === activeRating) {
@@ -535,14 +964,7 @@ export function ProductReviewsGrid({
         return;
       }
 
-      setReviews(
-        data.reviews.map((review, index) => ({
-          ...review,
-          isNew: true,
-          staggerIndex: index,
-        })),
-      );
-      setCurrentTotal(data.total);
+      applyReviewResponse(data, "replace");
     } catch {
       setError("We could not filter reviews right now. Please try again.");
     } finally {
@@ -562,15 +984,7 @@ export function ProductReviewsGrid({
 
     try {
       const data = await fetchReviews(activeRating, reviews.length);
-      setReviews((currentReviews) => [
-        ...currentReviews,
-        ...data.reviews.map((review, index) => ({
-          ...review,
-          isNew: true,
-          staggerIndex: index,
-        })),
-      ]);
-      setCurrentTotal(data.total);
+      applyReviewResponse(data, "append");
     } catch {
       setError("We could not load more reviews right now. Please try again.");
     } finally {
@@ -581,47 +995,53 @@ export function ProductReviewsGrid({
   return (
     <div>
       <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_0.82fr] lg:items-end">
-        <SectionHeading
-          eyebrow="Product reviews"
-          title={
-            productHandle === "buudy-red-torch" ? (
-              <>
-                Buudy Red Torch <em className="buudy-italic">reviews</em>.
-              </>
-            ) : (
-              <>
-                Buudy Mask <em className="buudy-italic">customer reviews</em>.
-              </>
-            )
-          }
-          copy={
-            productHandle === "buudy-red-torch"
-              ? "Real feedback from customers who made the Buudy Red Torch part of their daily wellness ritual."
-              : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
-          }
-        />
+        <div>
+          <SectionHeading
+            eyebrow="Product reviews"
+            title={
+              productHandle === "buudy-red-torch" ? (
+                <>
+                  Buudy Red Torch <em className="buudy-italic">reviews</em>.
+                </>
+              ) : (
+                <>
+                  Buudy Mask <em className="buudy-italic">customer reviews</em>.
+                </>
+              )
+            }
+            copy={
+              productHandle === "buudy-red-torch"
+                ? "Real feedback from customers who made the Buudy Red Torch part of their daily wellness ritual."
+                : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
+            }
+          />
+          <Button className="mt-7" onClick={() => setIsWriteReviewOpen(true)}>
+            <PencilLine aria-hidden="true" size={18} />
+            Write a review
+          </Button>
+        </div>
 
         <div className="rounded-[22px] border border-[rgba(58,31,61,.14)] bg-[rgba(255,252,245,.72)] p-6 shadow-[0_20px_52px_-42px_rgba(58,31,61,.55)]">
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
               <p className="buudy-mono text-[var(--gold)]">Average rating</p>
               <p className="buudy-display mt-2 text-6xl leading-none text-[var(--plum)]">
-                {averageRating.toFixed(1)}
+                {currentAverageRating.toFixed(1)}
               </p>
             </div>
             <div className="text-right">
               <p className="buudy-mono text-[var(--plum-soft)]">Verified archive</p>
               <p className="mt-2 text-2xl font-semibold text-[var(--plum)]">
-                {total.toLocaleString(market.locale)} reviews
+                {summaryTotal.toLocaleString(market.locale)} reviews
               </p>
             </div>
           </div>
           <RatingBreakdown
             activeRating={activeRating}
             disabled={isLoading}
-            distribution={ratingDistribution}
+            distribution={currentRatingDistribution}
             onSelect={selectRating}
-            total={total}
+            total={summaryTotal}
           />
         </div>
       </div>
@@ -672,6 +1092,13 @@ export function ProductReviewsGrid({
 
       {selectedReview ? (
         <ReviewModal onClose={closeSelectedReview} review={selectedReview} />
+      ) : null}
+      {isWriteReviewOpen ? (
+        <WriteReviewModal
+          onClose={closeWriteReview}
+          onSubmitted={handleReviewSubmitted}
+          productHandle={productHandle}
+        />
       ) : null}
     </div>
   );

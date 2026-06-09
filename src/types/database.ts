@@ -196,6 +196,50 @@ export type Database = {
           },
         ];
       };
+      product_reviews: {
+        Row: {
+          id: string;
+          product_handle: string;
+          customer_name: string;
+          customer_email: string;
+          rating: number;
+          title: string;
+          body: string;
+          images: string[];
+          status: string;
+          source: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          product_handle: string;
+          customer_name: string;
+          customer_email: string;
+          rating: number;
+          title: string;
+          body: string;
+          images?: string[];
+          status?: string;
+          source?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          product_handle?: string;
+          customer_name?: string;
+          customer_email?: string;
+          rating?: number;
+          title?: string;
+          body?: string;
+          images?: string[];
+          status?: string;
+          source?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -207,3 +251,4 @@ export type Database = {
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 export type Order = Database["public"]["Tables"]["orders"]["Row"];
 export type OrderItem = Database["public"]["Tables"]["order_items"]["Row"];
+export type ProductReviewRow = Database["public"]["Tables"]["product_reviews"]["Row"];

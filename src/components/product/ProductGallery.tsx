@@ -59,9 +59,9 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
     return () => clearInterval(interval);
   }, [goNext, isLightboxOpen, isPaused]);
 
-  // 4. Center active thumbnail in mobile horizontal scrolling list
+  // 4. Center active thumbnail only in the stacked mobile gallery strip.
   useEffect(() => {
-    if (thumbsRef.current && window.innerWidth <= 768) {
+    if (thumbsRef.current && window.innerWidth < 768) {
       const activeThumb = thumbsRef.current.children[currentIndex] as HTMLElement;
       if (activeThumb) {
         const scrollPos =
@@ -121,7 +121,7 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
     setIsPaused(false);
     const touchEndX = e.changedTouches[0].screenX;
     const swipeThreshold = 50;
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth < 768) {
       if (touchEndX < touchStartXRef.current - swipeThreshold) {
         goNext();
       } else if (touchEndX > touchStartXRef.current + swipeThreshold) {
@@ -173,7 +173,7 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
         .buudyLED-23435t23-zoom_btn:hover { background-color: #fff; transform: scale(1.1); }
         
         /* 7. MOBILE RESPONSIVENESS */
-        @media (max-width: 768px) { 
+        @media (max-width: 767px) { 
             .buudyLED-23435t23-grid { 
                 display: flex; 
                 flex-wrap: nowrap;
