@@ -21,7 +21,7 @@ export function TrustBadges() {
   ];
 
   return (
-    <section className="bg-[#f6ede2] pt-2 md:pt-4 pb-14 md:pb-24">
+    <section className="hidden md:block bg-[#f6ede2] pt-2 md:pt-4 pb-14 md:pb-24">
       <div className="buudy-wrap">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 items-center">
           {badges.map((badge, idx) => (
