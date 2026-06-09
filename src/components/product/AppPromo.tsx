@@ -147,7 +147,7 @@ export function AppPromo() {
 
 export function BlueLightSection() {
   return (
-    <section className="buudy-section border-y border-[var(--border)] bg-[var(--ink)] text-[var(--cream)] md: md: py-14 md:py-24">
+    <section className="buudy-section border-y border-[var(--border)] bg-[var(--ink)] text-[var(--cream)] py-4 md:py-6">
       <div className="buudy-glow -left-40 top-1/2 h-[500px] w-[500px] -translate-y-1/2 bg-[#4a6acf]" />
       <div className="buudy-wrap relative z-10 grid items-center gap-8 md:gap-12 lg:grid-cols-[1fr_1.4fr]">
         <div className="relative aspect-[4/5] overflow-hidden rounded-[18px]">
