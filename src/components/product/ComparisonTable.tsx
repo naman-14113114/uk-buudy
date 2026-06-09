@@ -143,7 +143,7 @@ function ColorRow({ colorName, colorCode, description, values, borderBottom = fa
 
 export function ComparisonTable() {
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24">
+    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24">
       <div className="buudy-wrap max-w-[1144px]">
         {/* Section Header */}
         <div className="mb-8 px-4 text-center md:mb-12">

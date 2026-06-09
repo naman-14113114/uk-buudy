@@ -28,11 +28,11 @@ export function ProductPage({ product }: { product: Product }) {
       <DeferredBeforeAfterGrid />
       <DeferredWavelengthSelector />
       <DeferredExpertSection />
-      <ComparisonTable />
       {/* <TouchTechSection /> */}
       <AppPromo />
       <ProductReviewsSection />
       <BlueLightSection />
+      <ComparisonTable />
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />

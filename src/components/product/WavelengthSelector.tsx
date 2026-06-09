@@ -21,7 +21,7 @@ export function WavelengthSelector() {
   );
 
   return (
-    <section className="buudy-section overflow-hidden bg-[var(--ink)] py-14 text-[var(--cream)] md:py-24">
+    <section className="buudy-section overflow-hidden bg-[var(--ink)] text-[var(--cream)] md: md: py-14 md:py-24">
       <div
         className="buudy-glow -left-40 top-1/2 h-[500px] w-[500px] -translate-y-1/2 transition-colors duration-700"
         style={{ background: `${active.color}15` }}
@@ -34,8 +34,8 @@ export function WavelengthSelector() {
           </h2>
         </div>
 
-        <div className="mt-10 grid items-center gap-8 md:mt-14 md:gap-12 lg:grid-cols-[1fr_1.2fr]">
-          <div className="relative mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center">
+        <div className="mt-4 grid items-center gap-4 md:mt-6 md:gap-8 lg:grid-cols-[1fr_1.2fr]">
+          <div className="relative mx-auto flex aspect-square w-full max-w-[360px] items-center justify-center">
             {/* Soft, beautiful radial glow behind the mask */}
             <div
               className="absolute inset-0 rounded-full opacity-60 blur-xl transition duration-700"
@@ -85,7 +85,7 @@ export function WavelengthSelector() {
               return (
                 <li key={wavelength.name}>
                   <button
-                    className={`flex w-full items-center gap-4 border-b border-[rgba(247,241,232,.1)] py-5 text-left transition-all duration-300 hover:pl-3 group ${
+                    className={`flex w-full items-center gap-4 border-b border-[rgba(247,241,232,.1)] py-2 text-left transition-all duration-300 hover:pl-3 group ${
                       isActive ? "bg-[rgba(247,241,232,.03)] pl-3 border-l-2 border-l-[var(--gold)]" : ""
                     }`}
                     onClick={() => setActive(wavelength)}

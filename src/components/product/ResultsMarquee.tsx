@@ -5,7 +5,7 @@ export function ResultsMarquee() {
   const images = [...realLifeImages, ...realLifeImages];
 
   return (
-    <section className="buudy-section border-y border-[var(--border)] bg-[var(--plum)] py-16 text-[var(--cream)]">
+    <section className="buudy-section border-y border-[var(--border)] bg-[var(--plum)] text-[var(--cream)] md: py-14 md:py-24">
       <div className="buudy-wrap flex items-end justify-between gap-6">
         <div>
           <p className="buudy-mono text-[var(--gold)]">Reviews & Real Results</p>

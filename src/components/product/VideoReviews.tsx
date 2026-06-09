@@ -251,7 +251,7 @@ export function VideoReviews() {
   }, [userInteracted, isPaused, getStep, customSmoothScroll]);
 
   return (
-    <section className="buudy-section bg-[rgba(241,223,210,.3)] py-12 md:py-20">
+    <section className="buudy-section bg-[rgba(241,223,210,.3)] md: md: py-14 md:py-24">
       <div className="buudy-wrap">
         <SectionHeading
           align="center"

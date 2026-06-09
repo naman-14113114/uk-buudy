@@ -101,21 +101,35 @@ export function GiftBundle({ product }: { product: Product }) {
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(3);
-  const [deliveryIconData, setDeliveryIconData] = useState<Record<string, unknown> | null>(null);
-  
+  const [deliveryIconData, setDeliveryIconData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
+
   useEffect(() => {
-    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json")
+    fetch(
+      "/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json",
+    )
       .then((res) => res.json())
       .then((data) => setDeliveryIconData(data))
       .catch((err) => console.error("Error loading delivery lottie", err));
   }, []);
 
-  const giftValue = product.gifts.reduce((total, gift) => total + gift.valueCents, 0);
+  const giftValue = product.gifts.reduce(
+    (total, gift) => total + gift.valueCents,
+    0,
+  );
   const hasGifts = product.gifts.length > 0;
   return (
     <div>
-      <a href="#reviews" className="flex flex-wrap items-center gap-3 no-underline hover:no-underline cursor-pointer">
-        <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden>
+      <a
+        href="#reviews"
+        className="flex flex-wrap items-center gap-3 no-underline hover:no-underline cursor-pointer"
+      >
+        <div
+          className="text-xl sm:text-2xl leading-none text-[var(--gold)]"
+          aria-hidden
+        >
           ★★★★★
         </div>
         <span className="font-sans text-sm sm:text-base font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
@@ -131,16 +145,34 @@ export function GiftBundle({ product }: { product: Product }) {
       {/* Clinically Proven Badges */}
       <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <ShieldCheck size={14} strokeWidth={2} className="hidden sm:block shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">Clinically Proven</span>
+          <ShieldCheck
+            size={14}
+            strokeWidth={2}
+            className="hidden sm:block shrink-0 text-[var(--gold)]"
+          />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+            Clinically Proven
+          </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <RotateCcw size={13} strokeWidth={2} className="hidden sm:block shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">90-Day Returns</span>
+          <RotateCcw
+            size={13}
+            strokeWidth={2}
+            className="hidden sm:block shrink-0 text-[var(--gold)]"
+          />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+            90-Day Returns
+          </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <Sparkles size={14} strokeWidth={2} className="hidden sm:block shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">Dermatologist Approved</span>
+          <Sparkles
+            size={14}
+            strokeWidth={2}
+            className="hidden sm:block shrink-0 text-[var(--gold)]"
+          />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+            Dermatologist Approved
+          </span>
         </span>
       </div>
 
@@ -152,7 +184,11 @@ export function GiftBundle({ product }: { product: Product }) {
         />
         <div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[9.5px] sm:text-[13px] text-[var(--muted)]">
           <span className="whitespace-nowrap tracking-tight sm:tracking-normal">
-            or <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">4</strong> interest-free payments of{" "}
+            or{" "}
+            <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">
+              4
+            </strong>{" "}
+            interest-free payments of{" "}
             <strong className="buudy-display text-[10px] sm:text-[14px] font-semibold text-[var(--plum)]">
               {formatMoney(product.priceCents / 4, product.currency)}
             </strong>
@@ -187,7 +223,9 @@ export function GiftBundle({ product }: { product: Product }) {
                   <Lottie animationData={deliveryIconData} loop={true} />
                 </div>
               )}
-              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs">DELIVERY</p>
+              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs">
+                DELIVERY
+              </p>
             </div>
             <p className="buudy-display mt-1.5 text-base sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
               {deliveryDate || "soon"}
@@ -195,7 +233,7 @@ export function GiftBundle({ product }: { product: Product }) {
           </div>
           <div className="text-right">
             <p className="buudy-eyebrow text-[var(--gold)] whitespace-nowrap text-[9px] sm:text-[11px] tracking-tight sm:tracking-normal">
-              {hasGifts ? "FREE GIFTS UNLOCK IN" : "ORDER TODAY"}
+              {hasGifts ? "ORDER WITHIN" : "ORDER TODAY"}
             </p>
             <p className="buudy-display mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--plum)] leading-none">
               {timer}
@@ -216,7 +254,11 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="buudy-cart-pulse-ring absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />
           <span className="buudy-cart-pulse relative h-2 w-2 rounded-full bg-[var(--cream)]" />
         </span>
-        <span>{hasGifts ? "ADD TO CART + FREE GIFTS" : "ADD TO CART + FREE SHIPPING"}</span>
+        <span>
+          {hasGifts
+            ? "ADD TO CART + FREE GIFTS"
+            : "ADD TO CART + FREE SHIPPING"}
+        </span>
       </Button>
 
       {/* Benefits Grid Row (Mask Only) */}
@@ -227,31 +269,37 @@ export function GiftBundle({ product }: { product: Product }) {
               <FaceNeckIcon size={22} />
             </span>
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-              Full-Face &<br />Neck Coverage
+              Full-Face &<br />
+              Neck Coverage
             </p>
           </div>
-        <div className="flex flex-col items-center gap-2">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-            <BatteryCharging size={22} strokeWidth={1.5} />
-          </span>
-          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-            Wireless &<br />Rechargeable
-          </p>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-            <RotateCcw size={20} strokeWidth={1.5} />
-          </span>
-          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-            90 Days Money<br />Back Guarantee
-          </p>
-        </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
+              <BatteryCharging size={22} strokeWidth={1.5} />
+            </span>
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
+              Wireless &<br />
+              Rechargeable
+            </p>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
+              <RotateCcw size={20} strokeWidth={1.5} />
+            </span>
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
+              90 Days Money
+              <br />
+              Back Guarantee
+            </p>
+          </div>
           <div className="flex flex-col items-center gap-2">
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
               <Waves size={22} strokeWidth={1.5} />
             </span>
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-              Science-Backed<br />Light
+              Science-Backed
+              <br />
+              Light
             </p>
           </div>
         </div>
@@ -264,7 +312,9 @@ export function GiftBundle({ product }: { product: Product }) {
               Special Spring Sale
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
-              <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">{formatMoney(giftValue, product.currency)}</span>
+              <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
+                {formatMoney(giftValue, product.currency)}
+              </span>
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
           </div>

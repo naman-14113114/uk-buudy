@@ -44,7 +44,7 @@ export function TorchFeatureTabs() {
   const activeTab = tabs.find((t) => t.id === activeTabId) || tabs[0];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-24 text-[var(--plum)]">
+    <section className="buudy-section bg-[var(--cream)] text-[var(--plum)] md: py-14 md:py-24">
       <div className="buudy-wrap">
         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-16">
           {tabs.map((tab) => {

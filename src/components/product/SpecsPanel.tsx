@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function SpecsPanel({ product }: { product: Product }) {
   return (
-    <section className="buudy-section bg-[var(--cream)] py-24">
+    <section className="buudy-section bg-[var(--cream)] md: py-14 md:py-24">
       <div className="buudy-wrap grid gap-14 lg:grid-cols-2">
         <div>
           <SectionHeading eyebrow="Specifications" title="The numbers, in detail." />

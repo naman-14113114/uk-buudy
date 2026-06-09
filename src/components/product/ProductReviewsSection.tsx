@@ -15,7 +15,7 @@ export function ProductReviewsSection({ productHandle = "buudy-led-mask" }: { pr
   const initialReviews = getProductReviews(productHandle, 0, reviewPageSize);
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="reviews">
+    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24" id="reviews">
       <div className="buudy-wrap">
         <LazyProductReviewsGrid
           averageRating={summary.averageRating}

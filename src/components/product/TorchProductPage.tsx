@@ -14,7 +14,7 @@ import { StickyAddToCart } from "./StickyAddToCart";
 
 function TorchFeatureGrid({ product }: { product: Product }) {
   return (
-    <section className="buudy-section bg-[var(--plum)] py-20 text-[var(--cream)]">
+    <section className="buudy-section bg-[var(--plum)] text-[var(--cream)] md: py-14 md:py-24">
       <div className="buudy-wrap">
         <SectionHeading
           eyebrow="Portable therapy"
@@ -67,7 +67,7 @@ function TorchFeatureGrid({ product }: { product: Product }) {
 
 function TorchStorySection() {
   return (
-    <section className="buudy-section bg-[var(--blush)] py-24">
+    <section className="buudy-section bg-[var(--blush)] md: py-14 md:py-24">
       <div className="buudy-wrap grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
         <div>
           <SectionHeading
@@ -110,7 +110,7 @@ function TorchStorySection() {
 
 function TorchDetailSection() {
   return (
-    <section className="buudy-section bg-[var(--cream)] py-24">
+    <section className="buudy-section bg-[var(--cream)] md: py-14 md:py-24">
       <div className="buudy-wrap grid gap-10 lg:grid-cols-2">
         <div>
           <SectionHeading
@@ -156,7 +156,7 @@ function TorchDetailSection() {
 
 function TorchUseGuide() {
   return (
-    <section className="buudy-section bg-[var(--plum)] py-24 text-[var(--cream)]">
+    <section className="buudy-section bg-[var(--plum)] text-[var(--cream)] md: py-14 md:py-24">
       <div className="buudy-wrap grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
         <SectionHeading
           eyebrow="How to use"

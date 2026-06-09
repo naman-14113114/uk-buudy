@@ -165,7 +165,7 @@ export function BeforeAfterGrid() {
   }, [userInteracted, isPaused, getStep, customSmoothScroll]);
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24">
+    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24">
       <div className="buudy-wrap">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6 md:mb-12">
           <SectionHeading

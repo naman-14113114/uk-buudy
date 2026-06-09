@@ -26,7 +26,7 @@ export function FeatureGrid() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="buudy-section border-y border-[var(--border)] bg-[rgba(241,223,210,.42)] py-14 md:py-24">
+    <section className="buudy-section border-y border-[var(--border)] bg-[rgba(241,223,210,.42)] md: md: py-14 md:py-24">
       <div className="buudy-wrap">
         <SectionHeading
           eyebrow="Why Buudy"

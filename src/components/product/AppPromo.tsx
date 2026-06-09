@@ -7,7 +7,7 @@ import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 
 export function RitualSection() {
   return (
-    <section className="buudy-section bg-[rgba(241,223,210,.42)] py-14 md:py-24">
+    <section className="buudy-section bg-[rgba(241,223,210,.42)] md: md: py-14 md:py-24">
       <div className="buudy-wrap grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
         <div className="relative aspect-video overflow-hidden rounded-[18px] bg-[var(--ink)]">
           <Image
@@ -53,7 +53,7 @@ export function RitualSection() {
 
 export function TouchTechSection() {
   return (
-    <section className="buudy-section border-y border-[var(--border)] bg-[var(--plum)] py-14 text-[var(--cream)] md:py-24">
+    <section className="buudy-section border-y border-[var(--border)] bg-[var(--plum)] text-[var(--cream)] md: md: py-14 md:py-24">
       <div className="buudy-wrap grid items-center gap-8 md:gap-14 lg:grid-cols-2">
         <div>
           <p className="buudy-mono text-[var(--gold)]">Intuitive Touch</p>
@@ -96,7 +96,7 @@ export function TouchTechSection() {
 
 export function AppPromo() {
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="buudy-ai">
+    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24" id="buudy-ai">
       <div className="buudy-wrap grid items-center gap-8 md:gap-12 lg:grid-cols-[1fr_1.2fr]">
         <div className="relative aspect-[1200/799] w-full overflow-hidden rounded-[18px] bg-[var(--blush)] lg:order-last">
           <Image
@@ -147,7 +147,7 @@ export function AppPromo() {
 
 export function BlueLightSection() {
   return (
-    <section className="buudy-section border-y border-[var(--border)] bg-[var(--ink)] py-14 text-[var(--cream)] md:py-24">
+    <section className="buudy-section border-y border-[var(--border)] bg-[var(--ink)] text-[var(--cream)] md: md: py-14 md:py-24">
       <div className="buudy-glow -left-40 top-1/2 h-[500px] w-[500px] -translate-y-1/2 bg-[#4a6acf]" />
       <div className="buudy-wrap relative z-10 grid items-center gap-8 md:gap-12 lg:grid-cols-[1fr_1.4fr]">
         <div className="relative aspect-[4/5] overflow-hidden rounded-[18px]">

@@ -21,10 +21,10 @@ export function ExpertSection() {
   };
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="expert">
-      <div className="buudy-wrap grid items-center gap-8 md:gap-12 lg:grid-cols-[1fr_1.3fr]">
-        <div className="relative">
-          <div className="relative overflow-hidden rounded-[18px] border border-[rgba(58,31,61,.12)] bg-[var(--ink)] shadow-[0_24px_48px_-28px_rgba(0,0,0,.4)]">
+    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24" id="expert">
+      <div className="buudy-wrap grid items-center gap-6 md:gap-8 lg:grid-cols-[1fr_1.3fr]">
+        <div className="relative mx-auto w-full max-w-[360px] lg:max-w-[400px]">
+          <div className="relative overflow-hidden rounded-[18px] border border-[rgba(58,31,61,.12)] bg-[var(--ink)]">
             <video
               className="w-full aspect-[2/3] object-cover object-center block"
               playsInline
@@ -66,13 +66,13 @@ export function ExpertSection() {
 
         <div>
           <p className="buudy-eyebrow">Expert</p>
-          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
+          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
             Dr. Gabriella <em className="buudy-italic">Vasili</em>, MD
           </h2>
-          <p className="buudy-display mt-4 text-xl italic text-[var(--plum-soft)]">
+          <p className="buudy-display mt-2 text-xl italic text-[var(--plum-soft)]">
             Double Board-Certified Dermatologist
           </p>
-          <div className="buudy-copy mt-5 space-y-4">
+          <div className="buudy-copy mt-4 space-y-3">
             <p>
               Dr. Gabriella Vasili is an esteemed, double board-certified
               dermatologist based in Atlanta, Georgia. With an expert focus on
