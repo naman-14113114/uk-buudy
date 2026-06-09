@@ -9,9 +9,32 @@ import type { ProductReview, ProductReviewSummary } from "@/types/reviews";
 export const reviewPageSize = 20;
 export const maxReviewPageSize = 50;
 
+const submittedReviewDateFormatter = new Intl.DateTimeFormat(market.locale, {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+});
+
+function formatSubmittedReviewDate(value: string) {
+  const parsed = new Date(value);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return value;
+  }
+
+  return submittedReviewDateFormatter.format(parsed).toUpperCase();
+}
+
+function normalizeStaticReview(r: ProductReview) {
+  return {
+    ...r,
+    displayDate: formatSubmittedReviewDate(r.date),
+  };
+}
+
 const reviewCollections = {
-  "buudy-led-mask": maskReviews as ProductReview[],
-  "buudy-red-torch": torchReviews as ProductReview[],
+  "buudy-led-mask": maskReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-red-torch": torchReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;
@@ -20,12 +43,6 @@ type ProductReviewDataset = {
   reviews: ProductReview[];
   summary: ProductReviewSummary;
 };
-
-const submittedReviewDateFormatter = new Intl.DateTimeFormat(market.locale, {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-});
 
 function createReviewSummary(
   productHandle: ReviewProductHandle,
@@ -96,15 +113,6 @@ export function getProductReviewCount(productHandle: string, rating?: number) {
     : reviewCollections[productHandle].length;
 }
 
-function formatSubmittedReviewDate(value: string) {
-  const parsed = new Date(value);
-
-  if (Number.isNaN(parsed.getTime())) {
-    return value;
-  }
-
-  return submittedReviewDateFormatter.format(parsed).toUpperCase();
-}
 
 function getReviewTimestamp(review: ProductReview) {
   const timestamp = Date.parse(review.date);
