@@ -6,7 +6,7 @@ export function AboutPage() {
   return (
     <div className="bg-[var(--cream)] min-h-screen">
       {/* Hero Banner Section */}
-      <section className="relative overflow-hidden py-24 md:py-36 text-center bg-black">
+      <section className="relative overflow-hidden py-14 md:py-24 text-center bg-black">
         {/* Desktop Hero Image */}
         <div className="absolute inset-0 hidden md:block select-none pointer-events-none">
           <Image
@@ -49,14 +49,14 @@ export function AboutPage() {
       </section>
 
       {/* Main Alternating Sections */}
-      <div className="relative z-10 space-y-12 py-16 md:py-24">
+      <div className="relative z-10">
         {aboutSections.filter(s => s.id !== "customer-support").map((section) => {
           const isRight = section.align === "right";
           
           return (
             <section
               key={section.id}
-              className="buudy-section py-8 md:py-16 transition-all duration-300"
+              className="buudy-section py-6 md:py-10 transition-all duration-300"
             >
               <div className="buudy-wrap grid gap-12 lg:grid-cols-2 lg:items-center">
                 {/* Image Column */}
@@ -65,12 +65,10 @@ export function AboutPage() {
                     isRight ? "lg:order-2" : ""
                   }`}
                 >
-                  <Image
+                  <img
                     alt={section.image.alt}
                     src={section.image.src}
-                    fill
-                    sizes="(min-width: 1024px) 45vw, 95vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
                   />
                 </div>
 
@@ -146,7 +144,7 @@ export function AboutPage() {
         {aboutSections.filter(s => s.id === "customer-support").map((section) => (
           <section
             key={section.id}
-            className="buudy-section pt-0 pb-16 md:pb-24 transition-all duration-300"
+            className="buudy-section py-14 md:py-24 transition-all duration-300"
           >
             <div className="buudy-wrap max-w-3xl mx-auto text-center">
               <SectionHeading
