@@ -18,6 +18,13 @@ export type ProductReviewSummary = {
   ratingDistribution: Record<string, number>;
 };
 
+export type ProductReviewSortOption =
+  | "most-recent"
+  | "oldest"
+  | "with-photos"
+  | "highest-rating"
+  | "lowest-rating";
+
 export type ProductReviewsResponse = {
   reviews: ProductReview[];
   total: number;

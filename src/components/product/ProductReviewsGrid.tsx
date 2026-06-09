@@ -1,11 +1,13 @@
 "use client";
 
-import type { ChangeEvent, FormEvent } from "react";
+import type { ChangeEvent, FormEvent, RefObject } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import {
   BadgeCheck,
+  Check,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   LoaderCircle,
@@ -22,6 +24,7 @@ import type {
   ProductReview,
   ProductReviewSubmissionResponse,
   ProductReviewsResponse,
+  ProductReviewSortOption,
 } from "@/types/reviews";
 
 type AnimatableProductReview = ProductReview & {
@@ -37,6 +40,53 @@ type ProductReviewsGridProps = {
   ratingDistribution: Record<string, number>;
   total: number;
 };
+
+type ReviewFilters = {
+  rating: number | null;
+  sort: ProductReviewSortOption;
+  verifiedOnly: boolean;
+  withPhotos: boolean;
+};
+
+type OpenFilterMenu = "stars" | "sort" | null;
+
+const defaultReviewFilters: ReviewFilters = {
+  rating: null,
+  sort: "most-recent",
+  verifiedOnly: false,
+  withPhotos: false,
+};
+
+const starFilterOptions = [
+  { label: "All stars", value: null },
+  { label: "5 star", value: 5 },
+  { label: "4 star", value: 4 },
+  { label: "3 star", value: 3 },
+  { label: "2 star", value: 2 },
+  { label: "1 star", value: 1 },
+] as const;
+
+const reviewSortLabels: Record<ProductReviewSortOption, string> = {
+  "most-recent": "Most recent",
+  oldest: "Oldest",
+  "with-photos": "With photos",
+  "highest-rating": "Highest ratings",
+  "lowest-rating": "Lowest ratings",
+};
+
+const reviewSortOptions = Object.entries(reviewSortLabels).map(([value, label]) => ({
+  label,
+  value: value as ProductReviewSortOption,
+}));
+
+function areReviewFiltersEqual(a: ReviewFilters, b: ReviewFilters) {
+  return (
+    a.rating === b.rating &&
+    a.sort === b.sort &&
+    a.verifiedOnly === b.verifiedOnly &&
+    a.withPhotos === b.withPhotos
+  );
+}
 
 const reviewImageCache = new Map<string, Promise<void>>();
 
@@ -165,6 +215,186 @@ function RatingBreakdown({
           </button>
         );
       })}
+    </div>
+  );
+}
+
+function ReviewFilterCheckbox({
+  checked,
+  disabled,
+  label,
+  onToggle,
+}: {
+  checked: boolean;
+  disabled: boolean;
+  label: string;
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      aria-checked={checked}
+      className={cn(
+        "inline-flex items-center gap-3 rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.72)] px-4 py-3 text-sm font-semibold text-[var(--plum)] transition hover:border-[rgba(180,145,76,.5)] hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60",
+        checked && "border-[rgba(180,145,76,.62)] bg-[rgba(180,145,76,.14)]",
+      )}
+      disabled={disabled}
+      onClick={onToggle}
+      role="checkbox"
+      type="button"
+    >
+      <span
+        className={cn(
+          "grid h-5 w-5 place-items-center rounded-[6px] border border-[rgba(58,31,61,.22)] bg-[var(--cream)] text-[var(--cream)] transition",
+          checked && "border-[var(--gold)] bg-[var(--plum)]",
+        )}
+      >
+        <Check aria-hidden="true" size={14} strokeWidth={2.6} />
+      </span>
+      {label}
+    </button>
+  );
+}
+
+function ReviewFiltersToolbar({
+  disabled,
+  filters,
+  onRatingChange,
+  onSortChange,
+  onTogglePhotos,
+  onToggleVerified,
+  openMenu,
+  setOpenMenu,
+  toolbarRef,
+}: {
+  disabled: boolean;
+  filters: ReviewFilters;
+  onRatingChange: (rating: number | null) => void;
+  onSortChange: (sort: ProductReviewSortOption) => void;
+  onTogglePhotos: () => void;
+  onToggleVerified: () => void;
+  openMenu: OpenFilterMenu;
+  setOpenMenu: (menu: OpenFilterMenu) => void;
+  toolbarRef: RefObject<HTMLDivElement | null>;
+}) {
+  const activeStarsLabel =
+    filters.rating === null ? "All stars" : `${filters.rating} star`;
+  const dropdownButtonClass =
+    "inline-flex min-h-12 items-center justify-between gap-3 rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.72)] px-4 py-3 text-sm font-semibold text-[var(--plum)] transition hover:border-[rgba(180,145,76,.5)] hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60";
+  const menuClass =
+    "absolute z-30 mt-3 w-64 overflow-hidden rounded-[18px] border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-2 shadow-[0_24px_54px_-32px_rgba(58,31,61,.58)]";
+  const menuItemClass =
+    "flex w-full items-center justify-between rounded-[13px] px-4 py-3 text-left text-sm font-semibold text-[var(--plum)] transition hover:bg-[rgba(180,145,76,.12)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]";
+
+  return (
+    <div
+      className="mb-8 rounded-[22px] border border-[rgba(58,31,61,.12)] bg-[rgba(255,252,245,.68)] p-4 shadow-[0_18px_46px_-38px_rgba(58,31,61,.55)]"
+      ref={toolbarRef}
+    >
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="buudy-display text-xl text-[var(--plum)]">Filters</span>
+          <div className="relative">
+            <button
+              aria-controls="buudy-review-stars-menu"
+              aria-expanded={openMenu === "stars"}
+              className={dropdownButtonClass}
+              disabled={disabled}
+              onClick={() => setOpenMenu(openMenu === "stars" ? null : "stars")}
+              type="button"
+            >
+              <span>{activeStarsLabel}</span>
+              <ChevronDown
+                aria-hidden="true"
+                className={cn("transition", openMenu === "stars" && "rotate-180")}
+                size={17}
+              />
+            </button>
+            {openMenu === "stars" ? (
+              <div className={menuClass} id="buudy-review-stars-menu" role="menu">
+                {starFilterOptions.map((option) => {
+                  const isActive = filters.rating === option.value;
+
+                  return (
+                    <button
+                      className={menuItemClass}
+                      key={option.label}
+                      onClick={() => {
+                        onRatingChange(option.value);
+                        setOpenMenu(null);
+                      }}
+                      role="menuitemradio"
+                      aria-checked={isActive}
+                      type="button"
+                    >
+                      <span>{option.label}</span>
+                      {isActive ? <Check aria-hidden="true" size={16} /> : null}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
+          <ReviewFilterCheckbox
+            checked={filters.withPhotos}
+            disabled={disabled}
+            label="With photos"
+            onToggle={onTogglePhotos}
+          />
+          <ReviewFilterCheckbox
+            checked={filters.verifiedOnly}
+            disabled={disabled}
+            label="Verified purchase"
+            onToggle={onToggleVerified}
+          />
+        </div>
+
+        <div className="relative flex flex-wrap items-center gap-3 lg:justify-end">
+          <span className="buudy-display text-xl text-[var(--plum)]">Sort by</span>
+          <button
+            aria-controls="buudy-review-sort-menu"
+            aria-expanded={openMenu === "sort"}
+            className={cn(dropdownButtonClass, "min-w-56")}
+            disabled={disabled}
+            onClick={() => setOpenMenu(openMenu === "sort" ? null : "sort")}
+            type="button"
+          >
+            <span>{reviewSortLabels[filters.sort]}</span>
+            <ChevronDown
+              aria-hidden="true"
+              className={cn("transition", openMenu === "sort" && "rotate-180")}
+              size={17}
+            />
+          </button>
+          {openMenu === "sort" ? (
+            <div
+              className={cn(menuClass, "right-auto lg:right-0")}
+              id="buudy-review-sort-menu"
+              role="menu"
+            >
+              {reviewSortOptions.map((option) => {
+                const isActive = filters.sort === option.value;
+
+                return (
+                  <button
+                    aria-checked={isActive}
+                    className={menuItemClass}
+                    key={option.value}
+                    onClick={() => {
+                      onSortChange(option.value);
+                      setOpenMenu(null);
+                    }}
+                    role="menuitemradio"
+                    type="button"
+                  >
+                    <span>{option.label}</span>
+                    {isActive ? <Check aria-hidden="true" size={16} /> : null}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }
@@ -796,6 +1026,12 @@ export function ProductReviewsGrid({
 }: ProductReviewsGridProps) {
   const [reviews, setReviews] = useState<AnimatableProductReview[]>(initialReviews);
   const [activeRating, setActiveRating] = useState<number | null>(null);
+  const [reviewSort, setReviewSort] = useState<ProductReviewSortOption>(
+    defaultReviewFilters.sort,
+  );
+  const [verifiedOnly, setVerifiedOnly] = useState(defaultReviewFilters.verifiedOnly);
+  const [withPhotos, setWithPhotos] = useState(defaultReviewFilters.withPhotos);
+  const [openMenu, setOpenMenu] = useState<OpenFilterMenu>(null);
   const [currentTotal, setCurrentTotal] = useState(total);
   const [summaryTotal, setSummaryTotal] = useState(total);
   const [currentAverageRating, setCurrentAverageRating] = useState(averageRating);
@@ -805,6 +1041,7 @@ export function ProductReviewsGrid({
   const [error, setError] = useState("");
   const [selectedReview, setSelectedReview] = useState<ProductReview | null>(null);
   const [isWriteReviewOpen, setIsWriteReviewOpen] = useState(false);
+  const toolbarRef = useRef<HTMLDivElement | null>(null);
   const requestIdRef = useRef(0);
   const closeSelectedReview = useCallback(() => setSelectedReview(null), []);
   const openSelectedReview = useCallback(async (review: ProductReview) => {
@@ -848,6 +1085,15 @@ export function ProductReviewsGrid({
     [pageSize],
   );
 
+  const activeFilters = useMemo(
+    () => ({
+      rating: activeRating,
+      sort: reviewSort,
+      verifiedOnly,
+      withPhotos,
+    }),
+    [activeRating, reviewSort, verifiedOnly, withPhotos],
+  );
   const visibleCount = reviews.length;
   const hasMore = visibleCount < currentTotal;
   const progressLabel = useMemo(
@@ -855,6 +1101,27 @@ export function ProductReviewsGrid({
       `${visibleCount.toLocaleString(market.locale)} of ${currentTotal.toLocaleString(market.locale)}`,
     [currentTotal, visibleCount],
   );
+  const activeFilterSummary = useMemo(() => {
+    const labels: string[] = [];
+
+    if (activeRating) {
+      labels.push(`${activeRating}-star`);
+    }
+
+    if (withPhotos) {
+      labels.push("with photos");
+    }
+
+    if (verifiedOnly) {
+      labels.push("verified purchase");
+    }
+
+    if (reviewSort !== defaultReviewFilters.sort) {
+      labels.push(reviewSortLabels[reviewSort].toLowerCase());
+    }
+
+    return labels;
+  }, [activeRating, reviewSort, verifiedOnly, withPhotos]);
   const reviewColumns = useMemo(() => {
     const columns = Array.from({ length: columnCount }, () => [] as AnimatableProductReview[]);
 
@@ -882,14 +1149,50 @@ export function ProductReviewsGrid({
     return () => window.removeEventListener("resize", updateColumnCount);
   }, []);
 
-  const fetchReviews = useCallback(async (rating: number | null, offset: number) => {
+  useEffect(() => {
+    if (!openMenu) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (toolbarRef.current?.contains(event.target as Node)) {
+        return;
+      }
+
+      setOpenMenu(null);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpenMenu(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [openMenu]);
+
+  const fetchReviews = useCallback(async (filters: ReviewFilters, offset: number) => {
     const params = new URLSearchParams({
       limit: String(pageSize),
       offset: String(offset),
+      sort: filters.sort,
     });
 
-    if (rating !== null) {
-      params.set("rating", String(rating));
+    if (filters.rating !== null) {
+      params.set("rating", String(filters.rating));
+    }
+
+    if (filters.withPhotos) {
+      params.set("withPhotos", "true");
+    }
+
+    if (filters.verifiedOnly) {
+      params.set("verified", "true");
     }
 
     const response = await fetch(
@@ -912,7 +1215,7 @@ export function ProductReviewsGrid({
     const requestId = requestIdRef.current + 1;
     requestIdRef.current = requestId;
 
-    fetchReviews(null, 0)
+    fetchReviews(defaultReviewFilters, 0)
       .then((data) => {
         if (requestId === requestIdRef.current) {
           applyReviewResponse(data, "replace");
@@ -924,6 +1227,10 @@ export function ProductReviewsGrid({
   const handleReviewSubmitted = useCallback(
     async (review: ProductReview) => {
       setActiveRating(null);
+      setReviewSort(defaultReviewFilters.sort);
+      setVerifiedOnly(defaultReviewFilters.verifiedOnly);
+      setWithPhotos(defaultReviewFilters.withPhotos);
+      setOpenMenu(null);
       setError("");
       setReviews((currentReviews) => [
         {
@@ -937,7 +1244,7 @@ export function ProductReviewsGrid({
       setSummaryTotal((current) => current + 1);
 
       try {
-        const data = await fetchReviews(null, 0);
+        const data = await fetchReviews(defaultReviewFilters, 0);
         applyReviewResponse(data, "replace");
       } catch {
         setError("Your review is live, but we could not refresh the full archive yet.");
@@ -946,19 +1253,22 @@ export function ProductReviewsGrid({
     [applyReviewResponse, fetchReviews],
   );
 
-  async function selectRating(rating: number | null) {
-    if (isLoading || rating === activeRating) {
+  async function applyFilters(nextFilters: ReviewFilters) {
+    if (isLoading || areReviewFiltersEqual(activeFilters, nextFilters)) {
       return;
     }
 
     const requestId = requestIdRef.current + 1;
     requestIdRef.current = requestId;
-    setActiveRating(rating);
+    setActiveRating(nextFilters.rating);
+    setReviewSort(nextFilters.sort);
+    setVerifiedOnly(nextFilters.verifiedOnly);
+    setWithPhotos(nextFilters.withPhotos);
     setIsLoading(true);
     setError("");
 
     try {
-      const data = await fetchReviews(rating, 0);
+      const data = await fetchReviews(nextFilters, 0);
 
       if (requestId !== requestIdRef.current) {
         return;
@@ -974,6 +1284,34 @@ export function ProductReviewsGrid({
     }
   }
 
+  function selectRating(rating: number | null) {
+    void applyFilters({
+      ...activeFilters,
+      rating,
+    });
+  }
+
+  function selectSort(sort: ProductReviewSortOption) {
+    void applyFilters({
+      ...activeFilters,
+      sort,
+    });
+  }
+
+  function togglePhotos() {
+    void applyFilters({
+      ...activeFilters,
+      withPhotos: !withPhotos,
+    });
+  }
+
+  function toggleVerified() {
+    void applyFilters({
+      ...activeFilters,
+      verifiedOnly: !verifiedOnly,
+    });
+  }
+
   async function loadMoreReviews() {
     if (isLoading || !hasMore) {
       return;
@@ -983,7 +1321,7 @@ export function ProductReviewsGrid({
     setError("");
 
     try {
-      const data = await fetchReviews(activeRating, reviews.length);
+      const data = await fetchReviews(activeFilters, reviews.length);
       applyReviewResponse(data, "append");
     } catch {
       setError("We could not load more reviews right now. Please try again.");
@@ -1046,25 +1384,52 @@ export function ProductReviewsGrid({
         </div>
       </div>
 
-      <div aria-busy={isLoading} className="grid items-start gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {reviewColumns.map((column, index) => (
-          <div className="grid gap-5" key={`review-column-${index}`}>
-            {column.map((review) => (
-              <ReviewCard
-                key={review.id}
-                onOpen={openSelectedReview}
-                onPrefetch={prefetchReviewImages}
-                review={review}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
+      <ReviewFiltersToolbar
+        disabled={isLoading}
+        filters={activeFilters}
+        onRatingChange={selectRating}
+        onSortChange={selectSort}
+        onTogglePhotos={togglePhotos}
+        onToggleVerified={toggleVerified}
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
+        toolbarRef={toolbarRef}
+      />
+
+      {reviews.length ? (
+        <div aria-busy={isLoading} className="grid items-start gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {reviewColumns.map((column, index) => (
+            <div className="grid gap-5" key={`review-column-${index}`}>
+              {column.map((review) => (
+                <ReviewCard
+                  key={review.id}
+                  onOpen={openSelectedReview}
+                  onPrefetch={prefetchReviewImages}
+                  review={review}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div
+          aria-busy={isLoading}
+          className="rounded-[22px] border border-[rgba(58,31,61,.12)] bg-[rgba(255,252,245,.68)] px-6 py-12 text-center shadow-[0_18px_46px_-38px_rgba(58,31,61,.55)]"
+        >
+          <p className="buudy-display text-2xl text-[var(--plum)]">
+            {isLoading ? "Finding matching reviews..." : "No reviews match these filters yet."}
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[var(--muted)]">
+            Try clearing one filter or choosing a different star rating to keep browsing the
+            archive.
+          </p>
+        </div>
+      )}
 
       <div className="mt-10 flex flex-col items-center gap-4 text-center">
         <p className="buudy-mono text-[var(--plum-soft)]">
           Showing {progressLabel} reviews
-          {activeRating ? ` filtered to ${activeRating} star` : ""}
+          {activeFilterSummary.length ? ` matching ${activeFilterSummary.join(", ")}` : ""}
         </p>
         {error ? <p className="text-sm text-red-900">{error}</p> : null}
         {hasMore ? (

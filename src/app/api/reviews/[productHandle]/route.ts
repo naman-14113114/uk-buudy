@@ -11,6 +11,7 @@ import {
   reviewPageSize,
   toPublicProductReview,
 } from "@/data/reviews";
+import type { ProductReview, ProductReviewSortOption } from "@/types/reviews";
 
 const REVIEW_IMAGE_BUCKET = "product-review-images";
 const MAX_REVIEW_IMAGES = 5;
@@ -23,6 +24,13 @@ const imageExtensionByType: Record<string, string> = {
   "image/png": "png",
   "image/webp": "webp",
 };
+const reviewSortOptions = new Set<ProductReviewSortOption>([
+  "most-recent",
+  "oldest",
+  "with-photos",
+  "highest-rating",
+  "lowest-rating",
+]);
 
 const reviewSubmissionSchema = z.object({
   body: z.string().trim().min(10).max(1000),
@@ -46,6 +54,89 @@ function parseRating(value: string | null) {
   return Number.isFinite(parsed) && parsed >= 1 && parsed <= 5 ? parsed : null;
 }
 
+function parseBoolean(value: string | null) {
+  if (value === null || value === "") {
+    return false;
+  }
+
+  return value === "true" || value === "1";
+}
+
+function parseReviewSort(value: string | null): ProductReviewSortOption | null {
+  if (value === null || value === "") {
+    return "most-recent";
+  }
+
+  return reviewSortOptions.has(value as ProductReviewSortOption)
+    ? (value as ProductReviewSortOption)
+    : null;
+}
+
+function getReviewTimestamp(review: ProductReview) {
+  const timestamp = Date.parse(review.date);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+function compareNewestFirst(a: ProductReview, b: ProductReview) {
+  const dateDifference = getReviewTimestamp(b) - getReviewTimestamp(a);
+
+  if (dateDifference !== 0) {
+    return dateDifference;
+  }
+
+  return a.sourceIndex - b.sourceIndex;
+}
+
+function sortReviews(reviews: ProductReview[], sort: ProductReviewSortOption) {
+  const sortedReviews = [...reviews];
+
+  switch (sort) {
+    case "oldest":
+      return sortedReviews.sort((a, b) => {
+        const dateDifference = getReviewTimestamp(a) - getReviewTimestamp(b);
+
+        if (dateDifference !== 0) {
+          return dateDifference;
+        }
+
+        return a.sourceIndex - b.sourceIndex;
+      });
+    case "with-photos":
+      return sortedReviews.sort((a, b) => {
+        const imageDifference = Number(b.images.length > 0) - Number(a.images.length > 0);
+
+        if (imageDifference !== 0) {
+          return imageDifference;
+        }
+
+        return compareNewestFirst(a, b);
+      });
+    case "highest-rating":
+      return sortedReviews.sort((a, b) => {
+        const ratingDifference = b.rating - a.rating;
+
+        if (ratingDifference !== 0) {
+          return ratingDifference;
+        }
+
+        return compareNewestFirst(a, b);
+      });
+    case "lowest-rating":
+      return sortedReviews.sort((a, b) => {
+        const ratingDifference = a.rating - b.rating;
+
+        if (ratingDifference !== 0) {
+          return ratingDifference;
+        }
+
+        return compareNewestFirst(a, b);
+      });
+    case "most-recent":
+    default:
+      return sortedReviews.sort(compareNewestFirst);
+  }
+}
+
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ productHandle: string }> },
@@ -62,14 +153,35 @@ export async function GET(
   const requestedLimit = parsePositiveInteger(searchParams.get("limit"), reviewPageSize);
   const limit = Math.min(maxReviewPageSize, Math.max(1, requestedLimit));
   const rating = parseRating(searchParams.get("rating"));
+  const sort = parseReviewSort(searchParams.get("sort"));
+  const withPhotos = parseBoolean(searchParams.get("withPhotos"));
+  const verifiedOnly = parseBoolean(searchParams.get("verified"));
 
   if (rating === null) {
     return NextResponse.json({ message: "Rating must be between 1 and 5." }, { status: 400 });
   }
 
-  const filteredReviews = rating
-    ? dataset.reviews.filter((review) => review.rating === rating)
-    : dataset.reviews;
+  if (sort === null) {
+    return NextResponse.json({ message: "Sort option is not supported." }, { status: 400 });
+  }
+
+  const filteredReviews = sortReviews(
+    dataset.reviews.filter((review) => {
+      if (rating && review.rating !== rating) {
+        return false;
+      }
+
+      if (withPhotos && review.images.length === 0) {
+        return false;
+      }
+
+      // Current public Buudy reviews are all verified, so this flag is a no-op
+      // until a future import exposes non-verified review records.
+      void verifiedOnly;
+      return true;
+    }),
+    sort,
+  );
   const reviews = filteredReviews.slice(offset, offset + limit);
   const total = filteredReviews.length;
   const nextOffset = offset + reviews.length;

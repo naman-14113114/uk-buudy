@@ -261,27 +261,21 @@ export function GiftBundle({ product }: { product: Product }) {
       {product.id === "buudy-led-mask" && (
         <div className="mt-8 grid grid-cols-4 gap-2 border-b border-[rgba(58,31,61,.12)] pb-8 text-center">
           <div className="flex flex-col items-center gap-2">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-              <FaceNeckIcon size={22} />
-            </span>
+            <Image src="/media/products/buudy-led-mask/images/i5.png" alt="Full-Face & Neck Coverage" width={60} height={60} className="object-contain" />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               Full-Face &<br />
               Neck Coverage
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-              <BatteryCharging size={22} strokeWidth={1.5} />
-            </span>
+            <Image src="/media/products/buudy-led-mask/images/i6.png" alt="Wireless & Rechargeable" width={60} height={60} className="object-contain" />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               Wireless &<br />
               Rechargeable
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-              <RotateCcw size={20} strokeWidth={1.5} />
-            </span>
+            <Image src="/media/products/buudy-led-mask/images/i7.png" alt="90 Days Money Back Guarantee" width={60} height={60} className="object-contain" />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               90 Days Money
               <br />
@@ -289,9 +283,7 @@ export function GiftBundle({ product }: { product: Product }) {
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
-              <Waves size={22} strokeWidth={1.5} />
-            </span>
+            <Image src="/media/products/buudy-led-mask/images/i8.png" alt="Science-Backed Light" width={60} height={60} className="object-contain" />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               Science-Backed
               <br />
