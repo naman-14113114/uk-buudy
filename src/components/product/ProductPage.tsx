@@ -14,6 +14,7 @@ import {
   DeferredVideoReviews,
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
+import { TrustBadges } from "./TrustBadges";
 
 export function ProductPage({ product }: { product: Product }) {
   if (product.template === "torch") {
@@ -24,6 +25,7 @@ export function ProductPage({ product }: { product: Product }) {
     <>
       <ProductHero product={product} />
       <DeferredVideoReviews />
+      <TrustBadges />
       {/* <FeatureGrid /> */}
       <DeferredBeforeAfterGrid />
       <DeferredWavelengthSelector />

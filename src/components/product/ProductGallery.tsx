@@ -6,7 +6,13 @@ import { Search, X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
 import { market } from "@/lib/market";
 
-export function ProductGallery({ images, hasGifts = true }: { images: ProductImage[], hasGifts?: boolean }) {
+export function ProductGallery({
+  images,
+  hasGifts = true,
+}: {
+  images: ProductImage[];
+  hasGifts?: boolean;
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
   const [transitionOpacity, setTransitionOpacity] = useState(1);
@@ -41,12 +47,15 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
   const goPrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
-  const openLightbox = useCallback((index = currentIndex) => {
-    setCurrentIndex(index);
-    setDisplayIndex(index);
-    setTransitionOpacity(1);
-    setIsLightboxOpen(true);
-  }, [currentIndex]);
+  const openLightbox = useCallback(
+    (index = currentIndex) => {
+      setCurrentIndex(index);
+      setDisplayIndex(index);
+      setTransitionOpacity(1);
+      setIsLightboxOpen(true);
+    },
+    [currentIndex],
+  );
 
   // 3. Auto-rotate effect
   useEffect(() => {
@@ -62,7 +71,9 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
   // 4. Center active thumbnail only in the stacked mobile gallery strip.
   useEffect(() => {
     if (thumbsRef.current && window.innerWidth < 768) {
-      const activeThumb = thumbsRef.current.children[currentIndex] as HTMLElement;
+      const activeThumb = thumbsRef.current.children[
+        currentIndex
+      ] as HTMLElement;
       if (activeThumb) {
         const scrollPos =
           activeThumb.offsetLeft -
@@ -78,7 +89,8 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
     if (!isLightboxOpen) return;
 
     const previousOverflow = document.body.style.overflow;
-    previousActiveElementRef.current = document.activeElement as HTMLElement | null;
+    previousActiveElementRef.current =
+      document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
 
@@ -88,7 +100,9 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
       if (e.key === "Escape") setIsLightboxOpen(false);
       if (e.key === "Tab" && lightboxRef.current) {
         const focusable = Array.from(
-          lightboxRef.current.querySelectorAll<HTMLButtonElement>("button:not([disabled])"),
+          lightboxRef.current.querySelectorAll<HTMLButtonElement>(
+            "button:not([disabled])",
+          ),
         );
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
@@ -134,7 +148,9 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         /* --- CSS STYLES --- */
         /* 1. CONTAINER */
         .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
@@ -169,7 +185,8 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
         .buudyLED-23435t23-modal_nav:hover { background: rgba(0, 0, 0, 0.2); }
         .buudyLED-23435t23-modal_nav .buudyLED-23435t23-icon { border-color: #333; }
         /* 6. ZOOM BUTTON */
-        .buudyLED-23435t23-zoom_btn { position: absolute; bottom: 16px; left: 16px; width: 38px !important; min-height: 38px !important; background-color: rgba(247, 241, 232, 0.94); border: 1px solid rgba(58, 31, 61, .18); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 6px rgba(58, 31, 61, 0.18); transition: transform 0.2s ease, background-color 0.2s ease; color: var(--plum); }
+        .buudyLED-23435t23-zoom_btn { position: absolute; bottom: 16px; left: 16px; width: 38px !important; min-height: 38px !important; background-color: rgba(247, 241, 232, 0.94); border: 1px solid rgba(58, 31, 61, .18); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 6px rgba(58, 31, 61, 0.18); transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease; color: var(--plum); opacity: 0; }
+        .buudyLED-23435t23-main_wrapper:hover .buudyLED-23435t23-zoom_btn, .buudyLED-23435t23-zoom_btn:focus-visible { opacity: 1; }
         .buudyLED-23435t23-zoom_btn:hover { background-color: #fff; transform: scale(1.1); }
         
         /* 7. MOBILE RESPONSIVENESS */
@@ -207,9 +224,14 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
                 display: none !important;
             }
         }
-      ` }} />
+      `,
+        }}
+      />
 
-      <div className="buudyLED-23435t23-container" id="buudyLED-23435t23-Container">
+      <div
+        className="buudyLED-23435t23-container"
+        id="buudyLED-23435t23-Container"
+      >
         <div
           className="buudyLED-23435t23-main_wrapper"
           onMouseEnter={() => setIsPaused(true)}
@@ -217,7 +239,8 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {currentImage.src.endsWith('.mp4') || currentImage.src.endsWith('.webm') ? (
+          {currentImage.src.endsWith(".mp4") ||
+          currentImage.src.endsWith(".webm") ? (
             <video
               src={currentImage.src}
               id="buudyLED-23435t23-MainImg"
@@ -262,7 +285,9 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
               <path d="M30 0v30M0 15h60" stroke="#fff" strokeWidth="10" />
               <path d="M30 0v30M0 15h60" stroke="#c8102e" strokeWidth="6" />
             </svg>
-            <span className="buudy-mono leading-none">{market.madeInLabel}</span>
+            <span className="buudy-mono leading-none">
+              {market.madeInLabel}
+            </span>
           </span>
 
           <button
@@ -322,7 +347,7 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
               }}
               type="button"
             >
-              {image.src.endsWith('.mp4') || image.src.endsWith('.webm') ? (
+              {image.src.endsWith(".mp4") || image.src.endsWith(".webm") ? (
                 <video
                   src={image.src}
                   className="buudyLED-23435t23-thumb_img"
@@ -393,7 +418,8 @@ export function ProductGallery({ images, hasGifts = true }: { images: ProductIma
                 >
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
                 </button>
-                {images[currentIndex]?.src?.endsWith('.mp4') || images[currentIndex]?.src?.endsWith('.webm') ? (
+                {images[currentIndex]?.src?.endsWith(".mp4") ||
+                images[currentIndex]?.src?.endsWith(".webm") ? (
                   <video
                     className="buudyLED-23435t23-lightbox_img"
                     id="buudyLED-23435t23-ModalImg"

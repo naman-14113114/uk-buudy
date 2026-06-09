@@ -103,7 +103,7 @@ export function CartPageContent({
   }
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-8 md:py-12">
+    <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
         <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
           <div className="flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
