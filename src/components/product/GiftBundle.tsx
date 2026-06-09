@@ -224,7 +224,7 @@ export function GiftBundle({ product }: { product: Product }) {
                 </div>
               )}
               <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs">
-                DELIVERY
+                FREE DELIVERY
               </p>
             </div>
             <p className="buudy-display mt-1.5 text-base sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
@@ -243,18 +243,14 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <Button
-        className="buudy-cart-wipe mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px]"
+        className="proxy-bundle-btn mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px]"
         id="hero-cta"
         onClick={() => {
           addProduct(product);
           router.push("/cart");
         }}
       >
-        <span className="relative flex h-2 w-2">
-          <span className="buudy-cart-pulse-ring absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />
-          <span className="buudy-cart-pulse relative h-2 w-2 rounded-full bg-[var(--cream)]" />
-        </span>
-        <span>
+        <span className="relative z-20 whitespace-nowrap">
           {hasGifts
             ? "ADD TO CART + FREE GIFTS"
             : "ADD TO CART + FREE SHIPPING"}
