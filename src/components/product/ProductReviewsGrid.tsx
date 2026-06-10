@@ -234,7 +234,7 @@ function ReviewFilterCheckbox({
     <button
       aria-checked={checked}
       className={cn(
-        "inline-flex items-center gap-3 rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.72)] px-4 py-3 text-sm font-semibold text-[var(--plum)] transition hover:border-[rgba(180,145,76,.5)] hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex items-center gap-1 sm:gap-3 whitespace-nowrap rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.72)] px-1.5 sm:px-4 py-1.5 sm:py-3 text-[10px] sm:text-sm font-semibold text-[var(--plum)] transition hover:border-[rgba(180,145,76,.5)] hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60",
         checked && "border-[rgba(180,145,76,.62)] bg-[rgba(180,145,76,.14)]",
       )}
       disabled={disabled}
@@ -244,7 +244,7 @@ function ReviewFilterCheckbox({
     >
       <span
         className={cn(
-          "grid h-5 w-5 place-items-center rounded-[6px] border border-[rgba(58,31,61,.22)] bg-[var(--cream)] text-[var(--cream)] transition",
+          "grid h-4 w-4 sm:h-5 sm:w-5 place-items-center rounded-[5px] sm:rounded-[6px] border border-[rgba(58,31,61,.22)] bg-[var(--cream)] text-[var(--cream)] transition",
           checked && "border-[var(--gold)] bg-[var(--plum)]",
         )}
       >
@@ -279,7 +279,7 @@ function ReviewFiltersToolbar({
   const activeStarsLabel =
     filters.rating === null ? "All stars" : `${filters.rating} star`;
   const dropdownButtonClass =
-    "inline-flex min-h-12 items-center justify-between gap-3 rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.72)] px-4 py-3 text-sm font-semibold text-[var(--plum)] transition hover:border-[rgba(180,145,76,.5)] hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60";
+    "inline-flex min-h-8 sm:min-h-12 items-center justify-between gap-1 sm:gap-3 whitespace-nowrap rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.72)] px-2 sm:px-4 py-1.5 sm:py-3 text-[10px] sm:text-sm font-semibold text-[var(--plum)] transition hover:border-[rgba(180,145,76,.5)] hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60";
   const menuClass =
     "absolute z-30 mt-3 w-64 overflow-hidden rounded-[18px] border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-2 shadow-[0_24px_54px_-32px_rgba(58,31,61,.58)]";
   const menuItemClass =
@@ -291,8 +291,8 @@ function ReviewFiltersToolbar({
       ref={toolbarRef}
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="buudy-display text-xl text-[var(--plum)]">Filters</span>
+        <div className="flex flex-nowrap items-center gap-1.5 sm:gap-3">
+          <span className="buudy-display text-sm sm:text-xl text-[var(--plum)]">Filters</span>
           <div className="relative">
             <button
               aria-controls="buudy-review-stars-menu"
@@ -353,7 +353,7 @@ function ReviewFiltersToolbar({
           <button
             aria-controls="buudy-review-sort-menu"
             aria-expanded={openMenu === "sort"}
-            className={cn(dropdownButtonClass, "min-w-56")}
+            className={dropdownButtonClass}
             disabled={disabled}
             onClick={() => setOpenMenu(openMenu === "sort" ? null : "sort")}
             type="button"
@@ -1136,10 +1136,8 @@ export function ProductReviewsGrid({
     const updateColumnCount = () => {
       if (window.matchMedia("(min-width: 1024px)").matches) {
         setColumnCount(4);
-      } else if (window.matchMedia("(min-width: 768px)").matches) {
-        setColumnCount(2);
       } else {
-        setColumnCount(1);
+        setColumnCount(2);
       }
     };
 
@@ -1397,7 +1395,7 @@ export function ProductReviewsGrid({
       />
 
       {reviews.length ? (
-        <div aria-busy={isLoading} className="grid items-start gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div aria-busy={isLoading} className="grid items-start gap-3 grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {reviewColumns.map((column, index) => (
             <div className="grid gap-5" key={`review-column-${index}`}>
               {column.map((review) => (

@@ -336,7 +336,7 @@ export function GiftBundle({ product }: { product: Product }) {
                 </div>
 
                 {/* Gift Label / Title */}
-                <p className="buudy-display mt-0.5 md:mt-1 text-[10px] md:text-sm font-semibold text-[var(--plum)] leading-snug">
+                <p className="buudy-display mt-0.5 md:mt-1 text-base md:text-lg font-semibold text-[var(--plum)] leading-snug">
                   {gift.name}
                 </p>
               </Link>
