@@ -61,9 +61,9 @@ export const features: Feature[] = [
     body: "Your safety is our priority. The Buudy LED Mask is Health Canada Approved and carries CE, FCC, and ROHS certifications. It is also endorsed by Dermatologists and Licensed Aestheticians who recognize it as a superior way to boost the efficacy of your existing skincare routine at home.",
   },
   {
-    title: "Ultimate Value",
-    kicker: "A one-time investment",
-    body: "Compare the cost: while other high-end masks retail for £300-£400, Buudy offers superior technology and more LEDs for a fraction of the price. It is a one-time investment that replaces expensive salon visits and recurring spa subscriptions forever.",
+    title: "Buudy AI Companion App",
+    kicker: "Your personal skincare coach",
+    body: "Pair your mask with the free Buudy app at app.buudy.com for guided LED sessions, personalised treatment plans, and progress tracking. It walks you through each wavelength, times your sessions automatically, and adapts your routine as your skin improves.",
   },
 ];
 
@@ -183,35 +183,40 @@ export const reviewVideos: ReviewVideo[] = [
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486304350_448129a4-6d94-4e44-b8af-511f3e7999b2.webp",
     src: productMediaAsset("review-01.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1680194145059_06e68cf3-1a7d-4636-a05a-8c1922a066a4_h264c_h264q6clip.mp4#t=0.1",
+    fallbackSrc:
+      "https://cdn2.videowise.com/converted/videos/1680194145059_06e68cf3-1a7d-4636-a05a-8c1922a066a4_h264c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-02",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486138534_38dd960f-2287-4bfc-b1be-af40bc8ef5d6.webp",
     src: productMediaAsset("review-02.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1686511751028_e8ecbe6c-94ca-4754-bff1-4bdfff8aad16_h264q6clip.mp4#t=0.1",
+    fallbackSrc:
+      "https://cdn2.videowise.com/converted/videos/1686511751028_e8ecbe6c-94ca-4754-bff1-4bdfff8aad16_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-03",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485722607_ded18359-40b7-427c-b2a9-62e48436f87c.webp",
     src: productMediaAsset("review-03.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1679081088110_c7eea873-a477-4a43-aafb-bcbc47f285ca_h264q6clip.mp4#t=0.1",
+    fallbackSrc:
+      "https://cdn2.videowise.com/converted/videos/1679081088110_c7eea873-a477-4a43-aafb-bcbc47f285ca_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-04",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485860443_d12fd0ec-8701-4fe7-8e68-1c801ff59f85.webp",
     src: productMediaAsset("review-04.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1684780828045_7e4e871c-89be-45e4-9fb5-1d4c9ac1f30f_h264q6clip.mp4#t=0.1",
+    fallbackSrc:
+      "https://cdn2.videowise.com/converted/videos/1684780828045_7e4e871c-89be-45e4-9fb5-1d4c9ac1f30f_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-05",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485816239_f9dba8d1-d096-4067-aff8-eb4a72366122.webp",
     src: productMediaAsset("review-05.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1679081092710_1bac0b63-1caf-46ec-8a9e-33981ec0d67c_h264q6clip.mp4#t=0.1",
+    fallbackSrc:
+      "https://cdn2.videowise.com/converted/videos/1679081092710_1bac0b63-1caf-46ec-8a9e-33981ec0d67c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-06",
@@ -433,31 +438,36 @@ export const torchWavelengths: Wavelength[] = [
     nm: "460nm",
     name: "BLUE",
     color: "#4a6acf",
-    description: "Supports acne-focused routines and surface-level skin clarity.",
+    description:
+      "Supports acne-focused routines and surface-level skin clarity.",
   },
   {
     nm: "630nm",
     name: "RED",
     color: "#d4523a",
-    description: "Supports smoother-looking skin, fine-line care, and collagen rituals.",
+    description:
+      "Supports smoother-looking skin, fine-line care, and collagen rituals.",
   },
   {
     nm: "660nm",
     name: "DEEP RED",
     color: "#b9332c",
-    description: "A deeper red wavelength for targeted body and skin wellness sessions.",
+    description:
+      "A deeper red wavelength for targeted body and skin wellness sessions.",
   },
   {
     nm: "850nm",
     name: "NIR",
     color: "#7a2b2b",
-    description: "Near-infrared light for localized muscle stiffness and body relief routines.",
+    description:
+      "Near-infrared light for localized muscle stiffness and body relief routines.",
   },
   {
     nm: "900nm",
     name: "NIR+",
     color: "#4d2525",
-    description: "Near-infrared support for deeper, focused application on body areas.",
+    description:
+      "Near-infrared support for deeper, focused application on body areas.",
   },
 ];
 
@@ -538,7 +548,11 @@ export const torchFaqs: FAQItem[] = [
 
 export const expertVideo = {
   poster: productAsset("dermatologist-video-poster.png"),
-  src: productMediaAsset("Buudy Dermatologists Video.webm", "buudy-led-mask", "videos"),
+  src: productMediaAsset(
+    "Buudy Dermatologists Video.webm",
+    "buudy-led-mask",
+    "videos",
+  ),
 };
 
 export const comparison = {
@@ -556,7 +570,13 @@ export const comparison = {
     ["Customizable treatments", "Yes", "-", "-", "Yes"],
     ["Hands-free, cordless, rechargeable", "Yes", "Yes", "-", "-"],
     ["App companion (iPhone/Android)", "Yes", "-", "-", "-"],
-    ["Treatment Time (Full Face + Neck)", "3 mins", "10 mins", "10 mins", "3 mins"],
+    [
+      "Treatment Time (Full Face + Neck)",
+      "3 mins",
+      "10 mins",
+      "10 mins",
+      "3 mins",
+    ],
   ],
 };
 

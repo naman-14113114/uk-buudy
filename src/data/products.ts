@@ -1,6 +1,16 @@
-import { productAsset, productMediaAsset, type ProductImage } from "@/lib/media";
+import {
+  productAsset,
+  productMediaAsset,
+  type ProductImage,
+} from "@/lib/media";
 import { market, type StoreCurrency } from "@/lib/market";
-import { faqs, torchFaqs, torchWavelengths, type FAQItem, type Wavelength } from "./productSections";
+import {
+  faqs,
+  torchFaqs,
+  torchWavelengths,
+  type FAQItem,
+  type Wavelength,
+} from "./productSections";
 
 export type ProductGift = {
   id: string;
@@ -81,6 +91,10 @@ export const buudyMask: Product = {
   cartImage: productAsset("01-buudy-led-mask-front.webp"),
   gallery: [
     {
+      src: productMediaAsset("O13-w.webp"),
+      alt: "Cleopatra LED Red Light Mask",
+    },
+    {
       src: productAsset("01-buudy-led-mask-front.webp"),
       alt: "Buudy LED Mask front view",
     },
@@ -129,16 +143,12 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask starter kit",
     },
     {
-      src: productAsset("O3.png"),
+      src: productMediaAsset("O3-w.webp"),
       alt: "Buudy LED Mask O3",
     },
     {
       src: productAsset("buudy_purple.jpeg"),
       alt: "Buudy LED Mask Purple",
-    },
-    {
-      src: productMediaAsset("7 colors muted.webm", "buudy-led-mask", "videos"),
-      alt: "Buudy LED Mask light modes demonstration",
     },
   ],
   gifts: [
@@ -222,7 +232,8 @@ export const buudyMask: Product = {
   ],
 };
 
-const torchAsset = (fileName: string) => productAsset(fileName, "buudy-red-torch");
+const torchAsset = (fileName: string) =>
+  productAsset(fileName, "buudy-red-torch");
 
 export const buudyRedTorch: Product = {
   id: "buudy-red-torch",

@@ -4,16 +4,6 @@ import { useState } from "react";
 import { wavelengths } from "@/data/productSections";
 import { productMediaAsset } from "@/lib/media";
 
-const wavelengthImages: Record<string, string> = {
-  "INFRA-RED": productMediaAsset("ChatGPT Image May 31, 2026, 05_41_49 PM.png"),
-  RED: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_17 PM (1).png"),
-  BLUE: productMediaAsset("91.png"),
-  GREEN: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_20 PM (4).png"),
-  CYAN: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_17 PM (2).png"),
-  YELLOW: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_19 PM (3).png"),
-  PURPLE: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_22 PM (5).png"),
-  WHITE: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_24 PM (6).png"),
-};
 
 export function WavelengthSelector() {
   const [active, setActive] = useState(
@@ -44,38 +34,16 @@ export function WavelengthSelector() {
               }}
             />
             
-            {/* Stacked absolute images for preloading and instant transitions */}
-            <div className="relative w-full h-full">
-              {wavelengths.map((wavelength) => {
-                const imgPath = wavelengthImages[wavelength.name];
-                const isActive = active.name === wavelength.name;
-                return (
-                  <img
-                    key={wavelength.name}
-                    src={imgPath}
-                    alt={`Buudy LED Mask - ${wavelength.name} Light`}
-                    className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 ease-in-out ${
-                      isActive ? "opacity-100 scale-100 z-10" : "opacity-0 scale-95 z-0"
-                    }`}
-                    decoding="async"
-                    fetchPriority="low"
-                    loading="lazy"
-                    style={{
-                      filter: isActive ? `drop-shadow(0 0 35px ${wavelength.color}35)` : "none",
-                    }}
-                  />
-                );
-              })}
-            </div>
-
-            {/* Premium, floating glassmorphic badge for wavelength detail */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center justify-center rounded-full border border-[rgba(247,241,232,.15)] bg-[rgba(15,15,15,.65)] px-6 py-2.5 backdrop-blur-md text-center shadow-lg transition duration-500 hover:border-[rgba(247,241,232,.3)]">
-              <p className="buudy-mono text-[9px] uppercase tracking-[0.15em] text-[rgba(247,241,232,.5)]">Wavelength</p>
-              <div className="flex items-center gap-2.5 mt-0.5">
-                <span className="buudy-display text-2xl font-semibold text-[var(--cream)]">{active.nm}</span>
-                <span className="h-2 w-2 rounded-full shadow-glow" style={{ background: active.color, boxShadow: `0 0 8px ${active.color}` }} />
-                <span className="buudy-display text-sm font-medium tracking-wide text-[var(--gold)]">{active.name}</span>
-              </div>
+            {/* Autoplay video replacing stacked images */}
+            <div className="relative w-full h-full overflow-hidden rounded-2xl">
+              <video
+                src={productMediaAsset("7 colors muted.webm", "buudy-led-mask", "videos")}
+                className="absolute inset-0 w-full h-full object-contain"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
             </div>
           </div>
 

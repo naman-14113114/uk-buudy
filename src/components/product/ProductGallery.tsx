@@ -68,9 +68,9 @@ export function ProductGallery({
     return () => clearInterval(interval);
   }, [goNext, isLightboxOpen, isPaused]);
 
-  // 4. Center active thumbnail only in the stacked mobile gallery strip.
+  // 4. Center active thumbnail only in the stacked gallery strip.
   useEffect(() => {
-    if (thumbsRef.current && window.innerWidth < 768) {
+    if (thumbsRef.current && window.innerWidth < 1024) {
       const activeThumb = thumbsRef.current.children[
         currentIndex
       ] as HTMLElement;
@@ -189,8 +189,8 @@ export function ProductGallery({
         .buudyLED-23435t23-main_wrapper:hover .buudyLED-23435t23-zoom_btn, .buudyLED-23435t23-zoom_btn:focus-visible { opacity: 1; }
         .buudyLED-23435t23-zoom_btn:hover { background-color: #fff; transform: scale(1.1); }
         
-        /* 7. MOBILE RESPONSIVENESS */
-        @media (max-width: 767px) { 
+        /* 7. STACKED RESPONSIVENESS */
+        @media (max-width: 1023px) { 
             .buudyLED-23435t23-grid { 
                 display: flex; 
                 flex-wrap: nowrap;

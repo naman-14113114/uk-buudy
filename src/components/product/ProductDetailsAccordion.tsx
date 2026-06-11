@@ -27,7 +27,7 @@ import {
   IconColorFilter,
   IconBatteryCharging,
   IconShieldCheck,
-  IconDiamond,
+  IconDeviceMobile,
   IconBulb,
 } from "@tabler/icons-react";
 
@@ -37,7 +37,7 @@ const featureIcons = [
   IconColorFilter,
   IconBatteryCharging,
   IconShieldCheck,
-  IconDiamond,
+  IconDeviceMobile,
 ];
 
 type AccordionItem = {
@@ -119,7 +119,19 @@ function AccordionPanel({
 }
 
 export function ProductDetailsAccordion({ product }: { product: Product }) {
-  const [openItem, setOpenItem] = useState<AccordionItem["id"] | null>(null);
+  const [openItems, setOpenItems] = useState<Set<AccordionItem["id"]>>(new Set());
+
+  function toggleItem(id: AccordionItem["id"]) {
+    setOpenItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  }
 
   const items: AccordionItem[] = [
     {
@@ -262,12 +274,10 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
     >
       {items.filter(item => !(product.template === "torch" && item.id === "certifications")).map((item) => (
         <AccordionPanel
-          isOpen={openItem === item.id}
+          isOpen={openItems.has(item.id)}
           item={item}
           key={item.id}
-          onToggle={() =>
-            setOpenItem((current) => (current === item.id ? null : item.id))
-          }
+          onToggle={() => toggleItem(item.id)}
         />
       ))}
     </section>
