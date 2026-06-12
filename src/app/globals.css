@@ -31,16 +31,27 @@
 html {
   scroll-behavior: smooth;
   background: var(--cream);
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
   background:
     radial-gradient(circle at top left, oklch(82% 0.058 38 / 0.38), transparent 34rem),
     var(--cream);
   color: var(--foreground);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
 }
 
 button,

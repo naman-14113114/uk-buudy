@@ -1,87 +1,51 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
+  homeCustomerReviewsGrid,
   homeFeatureCards,
   homeLightTherapy,
   homeMaskSpotlight,
+  homeSkincareGuideIntro,
+  homeTechnologySpotlight,
   homeTorchSpotlight,
-  homeWavelengthMap,
   homeYoungerYou,
 } from "@/data/home";
-import { formatMoney } from "@/lib/money";
+import { productMediaAsset } from "@/lib/media";
 import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-function ProductSpotlight({
-  align = "mask",
-}: {
-  align?: "mask" | "torch";
-}) {
-  const data = align === "mask" ? homeMaskSpotlight : homeTorchSpotlight;
-  const isTorch = align === "torch";
-
+function TorchSpotlight() {
+  const data = homeTorchSpotlight;
   return (
-    <section
-      className={`buudy-section py-24 ${
-        isTorch ? "bg-[var(--plum)] text-[var(--cream)]" : "bg-[var(--blush)]"
-      }`}
-    >
-      <div className="buudy-wrap grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div className={isTorch ? "lg:order-2" : ""}>
+    <section className="buudy-section bg-[var(--plum)] py-12 md:py-16 text-[var(--cream)]">
+      <div className="buudy-wrap grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="lg:order-2">
           <SectionHeading
             eyebrow={data.eyebrow}
             title={
-              isTorch ? (
-                <>
-                  {data.title.split(" ").slice(0, -2).join(" ")}{" "}
-                  <em className="buudy-italic">
-                    {data.title.split(" ").slice(-2).join(" ")}
-                  </em>
-                </>
-              ) : (
-                <>
-                  The Buudy LED light therapy mask with{" "}
-                  <em className="buudy-italic">7 LED Colours + NIR</em>.
-                </>
-              )
+              <>
+                {data.title.split(" ").slice(0, -2).join(" ")}{" "}
+                <em className="buudy-italic">
+                  {data.title.split(" ").slice(-2).join(" ")}
+                </em>
+              </>
             }
             copy={data.copy}
-            invert={isTorch}
+            invert
           />
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Price
-              compareAtCents={data.product.compareAtCents}
-              currency={data.product.currency}
-              invert={isTorch}
-              priceCents={data.product.priceCents}
-            />
-            <span
-              className={`buudy-mono rounded-full px-3 py-2 ${
-                isTorch
-                  ? "bg-[rgba(247,241,232,.12)] text-[var(--gold)]"
-                  : "bg-[rgba(58,31,61,.08)] text-[var(--gold)]"
-              }`}
-            >
-              {data.product.promoLabel}
-            </span>
-          </div>
           <Button
             asChild
-            className={`mt-8 ${
-              isTorch
-                ? "!border-[var(--cream)] !text-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]"
-                : ""
-            }`}
+            className="mt-8 !border-[var(--cream)] !text-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]"
           >
             <Link href={`/products/${data.product.slug}`}>
-              {isTorch ? homeTorchSpotlight.ctaLabel : "Buy Now"}
+              {homeTorchSpotlight.ctaLabel}
               <ArrowRight size={17} />
             </Link>
           </Button>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-[var(--cream)]">
+        <div className="relative w-full aspect-square overflow-hidden rounded-[18px] bg-[var(--cream)]">
           <Image
             alt={data.image.alt}
             className="object-cover"
@@ -89,6 +53,91 @@ function ProductSpotlight({
             sizes="(min-width: 1024px) 45vw, 90vw"
             src={data.image.src}
           />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SkincareGuideIntro() {
+  return (
+    <section className="buudy-section bg-[var(--cream)] py-20 md:py-24">
+      <div className="buudy-wrap flex flex-col items-center text-center">
+        <SectionHeading
+          eyebrow={homeSkincareGuideIntro.eyebrow}
+          title={homeSkincareGuideIntro.title}
+          copy={homeSkincareGuideIntro.copy}
+          align="center"
+        />
+        <Button asChild className="mt-8">
+          <Link href={homeSkincareGuideIntro.ctaHref}>
+            {homeSkincareGuideIntro.ctaLabel}
+            <ArrowRight size={17} />
+          </Link>
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+function TechnologySpotlight() {
+  return (
+    <section className="buudy-section bg-[var(--cream)] py-20 md:py-28">
+      <div className="buudy-wrap">
+        <div className="grid gap-16 lg:grid-cols-2">
+
+          {/* LEFT — light therapy text + button + mask spotlight image */}
+          <div className="flex flex-col h-full">
+            <div className="flex flex-col items-center text-center gap-2 mb-8">
+              <SectionHeading
+                eyebrow=""
+                title={homeLightTherapy.title}
+                copy={homeLightTherapy.copy}
+                align="center"
+              />
+              <div className="py-6">
+                <Button asChild>
+                  <Link href={`/products/${homeTechnologySpotlight.ctaHref.split("/").pop()}`}>
+                    Buy Now
+                    <ArrowRight size={17} />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="w-full mt-auto">
+              <Image
+                alt={homeMaskSpotlight.image.alt}
+                className="block h-auto w-full object-cover rounded-[25px] shadow-sm"
+                width={544}
+                height={544}
+                sizes="(min-width: 1024px) 45vw, 90vw"
+                src={homeMaskSpotlight.image.src}
+              />
+            </div>
+          </div>
+
+          {/* RIGHT — stats image + REVEAL A YOUNGER YOU + copy stacked */}
+          <div className="flex flex-col h-full">
+            <div className="w-full mb-8">
+              <Image
+                alt={homeTechnologySpotlight.image.alt}
+                className="block h-auto w-full object-cover rounded-[25px] shadow-sm"
+                width={544}
+                height={544}
+                sizes="(min-width: 1024px) 45vw, 90vw"
+                src={homeTechnologySpotlight.image.src}
+              />
+            </div>
+            <div className="flex flex-col items-center text-center mt-auto">
+              <SectionHeading
+                eyebrow=""
+                title={homeYoungerYou.title}
+                copy={homeYoungerYou.copy}
+                align="center"
+              />
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -167,125 +216,36 @@ function LightTherapyStory() {
   );
 }
 
-function YoungerYou() {
-  return (
-    <section className="buudy-section bg-[var(--cream)] py-24">
-      <div className="buudy-wrap grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
-        <div>
-          <SectionHeading
-            eyebrow="Reveal a younger you"
-            title={
-              <>
-                Reveal a <em className="buudy-italic">younger you</em>.
-              </>
-            }
-            copy={homeYoungerYou.copy}
-          />
-          <Button asChild className="mt-8">
-            <Link href="/products/buudy-led-mask">
-              Shop the mask
-              <ArrowRight size={17} />
-            </Link>
-          </Button>
-        </div>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-[var(--blush)]">
-          <Image
-            alt={homeYoungerYou.image.alt}
-            className="object-cover"
-            fill
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            src={homeYoungerYou.image.src}
-          />
-        </div>
-      </div>
-    </section>
-  );
+function RevealYoungerYou() {
+  return null;
 }
 
-function WavelengthMapPreview() {
+function CustomerReviewsGrid() {
   return (
-    <section
-      className="buudy-section bg-[var(--blush)] py-24"
-      id="wavelength-map"
-    >
-      <div className="buudy-wrap grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
-        <SectionHeading
-          eyebrow={homeWavelengthMap.eyebrow}
-          title={
-            <>
-              Your wavelength <em className="buudy-italic">map</em>.
-            </>
-          }
-          copy={homeWavelengthMap.copy}
+    <section className="hidden md:block relative w-full overflow-hidden bg-[var(--plum)]">
+      <div className="relative w-full">
+        <Image
+          src={homeCustomerReviewsGrid.image}
+          alt={homeCustomerReviewsGrid.title}
+          width={1800}
+          height={1000}
+          className="w-full h-auto block"
+          sizes="100vw"
         />
-        <div className="rounded-[18px] border border-[var(--border)] bg-[var(--card)] p-5">
-          <div className="grid gap-3 sm:grid-cols-2">
-            {homeWavelengthMap.zones.map((zone, index) => (
-              <div
-                className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-[var(--cream)] px-4 py-3"
-                key={zone}
-              >
-                <span className="buudy-display text-xl text-[var(--plum)]">
-                  {zone}
-                </span>
-                <span className="buudy-display text-sm font-medium text-[var(--gold)]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-            ))}
-          </div>
-          <div className="mt-5 rounded-xl bg-[var(--plum)] p-5 text-[var(--cream)]">
-            <div className="flex items-center gap-3">
-              <Sparkles size={18} className="text-[var(--gold)]" />
-              <p className="buudy-mono text-[var(--gold)]">Recommended Wavelength</p>
-            </div>
-            <p className="buudy-display mt-3 text-3xl">Red 633nm</p>
-            <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.76)]">
-              Match each skin concern with a targeted wavelength, then build a
-              routine that feels easy to repeat.
-            </p>
-            <Button
-              asChild
-              className="mt-5 !border-[var(--gold)] !text-[var(--gold)]"
-            >
-              <Link href="/pages/skincare-quiz">
-                Take the skincare quiz
-                <ArrowRight size={17} />
-              </Link>
-            </Button>
-          </div>
-        </div>
       </div>
-    </section>
-  );
-}
-
-function WhyTryBuudy() {
-  return (
-    <section className="buudy-section bg-[var(--cream)] py-24">
-      <div className="buudy-wrap text-center">
-        <p className="buudy-eyebrow">Why try</p>
-        <h2 className="buudy-heading mx-auto mt-4 max-w-3xl">
-          The Buudy LED Mask?
-        </h2>
-        <p className="buudy-copy mx-auto mt-5 max-w-2xl">
-          Tons of glowing reviews from customers, a full face plus neck ritual,
-          and a one-time device that keeps the routine simple.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Button asChild>
-            <Link href="/products/buudy-led-mask">Shop mask</Link>
-          </Button>
-          <Button asChild variant="ghost">
-            <Link href="/products/red-light-torch">
-              Add targeted torch from{" "}
-              {formatMoney(
-                homeTorchSpotlight.product.priceCents,
-                homeTorchSpotlight.product.currency,
-              )}
-            </Link>
-          </Button>
-        </div>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+        <SectionHeading
+          eyebrow=""
+          title={homeCustomerReviewsGrid.title}
+          copy={homeCustomerReviewsGrid.copy}
+          align="center"
+          invert
+        />
+        <Button asChild className="mt-8 !border-[var(--cream)] !text-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]">
+          <Link href={homeCustomerReviewsGrid.ctaHref}>
+            {homeCustomerReviewsGrid.ctaLabel}
+          </Link>
+        </Button>
       </div>
     </section>
   );
@@ -310,13 +270,12 @@ export function HomePage() {
   return (
     <>
       <HomeVideoHero />
-      <ProductSpotlight />
+      <SkincareGuideIntro />
+      <TechnologySpotlight />
+      {/* <LightTherapyStory /> */}
       <HomeFeatureGrid />
-      <LightTherapyStory />
-      <YoungerYou />
-      <ProductSpotlight align="torch" />
-      <WavelengthMapPreview />
-      <WhyTryBuudy />
+      <TorchSpotlight />
+      <CustomerReviewsGrid />
     </>
   );
 }

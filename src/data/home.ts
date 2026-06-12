@@ -1,4 +1,4 @@
-import { homeAsset, productAsset } from "@/lib/media";
+import { homeAsset, productAsset, productMediaAsset } from "@/lib/media";
 import { buudyMask, buudyRedTorch } from "./products";
 
 export const homeHero = {
@@ -32,6 +32,26 @@ export const homeMaskSpotlight = {
     alt: "Buudy LED mask product spotlight",
   },
   product: buudyMask,
+};
+
+export const homeSkincareGuideIntro = {
+  eyebrow: "Skincare quiz",
+  title: "Start with a ritual that knows what your skin needs.",
+  copy: "Take the Buudy Skincare Quiz to understand your unique skin concerns, choose the right routine, and feel confident from your first session. It is simple, supportive, and made for real at-home consistency.",
+  ctaLabel: "Start Quiz",
+  ctaHref: "/pages/skincare-quiz",
+};
+
+export const homeTechnologySpotlight = {
+  eyebrow: "7 wavelengths plus 830nm near-infrared",
+  title: "A smarter way to plan your glow.",
+  copy: "Use the guide to match your skin goals with the right Buudy LED Mask mode. From collagen support to clearer-looking skin, each wavelength has a purpose and a place in your weekly routine.",
+  ctaLabel: "Shop the mask",
+  ctaHref: `/products/${buudyMask.slug}`,
+  image: {
+    src: productMediaAsset("buudy_7_wavelength.webp"),
+    alt: "Buudy 7 wavelengths plus near-infrared guide",
+  },
 };
 
 export const homeFeatureCards = [
@@ -71,6 +91,7 @@ export const homeYoungerYou = {
   },
 };
 
+
 export const homeTorchSpotlight = {
   eyebrow: "Portable and powerful",
   title: "Targeted light therapy in your hand.",
@@ -78,7 +99,7 @@ export const homeTorchSpotlight = {
   ctaLabel: "Buy Now",
   ctaHref: `/products/${buudyRedTorch.slug}`,
   image: {
-    src: homeAsset("10-home-red-torch.png"),
+    src: productMediaAsset("35-w.webp"),
     alt: "Buudy Red Torch product spotlight",
   },
   product: buudyRedTorch,
@@ -96,4 +117,12 @@ export const homeWavelengthMap = {
     "Neck",
     "Smile lines",
   ],
+};
+
+export const homeCustomerReviewsGrid = {
+  title: "Why try the Buudy LED mask?",
+  copy: "Tons of glowing reviews from customers!",
+  ctaLabel: "About Us",
+  ctaHref: "/pages/about-us",
+  image: productMediaAsset("banner_collage_image.jpeg")
 };

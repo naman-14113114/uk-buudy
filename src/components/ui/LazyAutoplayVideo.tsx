@@ -60,7 +60,7 @@ export function LazyAutoplayVideo({
     <video
       aria-label={ariaLabel}
       autoPlay={shouldPlay}
-      className={className}
+      className={["block", className].filter(Boolean).join(" ")}
       loop
       muted
       playsInline

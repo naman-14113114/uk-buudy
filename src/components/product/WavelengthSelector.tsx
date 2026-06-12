@@ -11,7 +11,7 @@ export function WavelengthSelector() {
   );
 
   return (
-    <section className="buudy-section overflow-hidden bg-[var(--ink)] text-[var(--cream)] md: md: py-14 md:py-24">
+    <section className="buudy-section overflow-hidden bg-[var(--ink)] py-14 text-[var(--cream)] md:py-24">
       <div
         className="buudy-glow -left-40 top-1/2 h-[500px] w-[500px] -translate-y-1/2 transition-colors duration-700"
         style={{ background: `${active.color}15` }}

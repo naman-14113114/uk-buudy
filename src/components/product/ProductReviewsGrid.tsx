@@ -464,7 +464,7 @@ function ReviewCard({
     <button
       aria-label={`Open full review from ${review.customerName}`}
       className={cn(
-        "w-full rounded-[18px] border border-[rgba(58,31,61,.14)] bg-[var(--card)] p-5 text-left shadow-[0_18px_44px_-34px_rgba(58,31,61,.45)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(180,145,76,.5)] hover:shadow-[0_24px_48px_-32px_rgba(58,31,61,.58)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]",
+        "w-full min-w-0 rounded-[18px] border border-[rgba(58,31,61,.14)] bg-[var(--card)] p-5 text-left shadow-[0_18px_44px_-34px_rgba(58,31,61,.45)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(180,145,76,.5)] hover:shadow-[0_24px_48px_-32px_rgba(58,31,61,.58)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]",
         review.isNew && "animate-fade-in-up",
       )}
       onClick={() => void onOpen(review)}
@@ -479,9 +479,9 @@ function ReviewCard({
       type="button"
     >
       <ReviewImages images={review.images} name={review.customerName} />
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
         <RatingStars rating={review.rating} />
-        <span className="buudy-mono text-[var(--plum-soft)]">
+        <span className="buudy-mono whitespace-nowrap text-[0.65rem] text-[var(--plum-soft)]">
           {review.displayDate || review.date}
         </span>
       </div>
@@ -494,12 +494,12 @@ function ReviewCard({
 
       <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{review.body}</p>
 
-      <div className="mt-6 flex items-center justify-between gap-4 border-t border-[rgba(58,31,61,.12)] pt-4">
-        <span className="buudy-display text-base text-[var(--plum)]">
+      <div className="mt-6 flex items-center justify-between gap-2 border-t border-[rgba(58,31,61,.12)] pt-4">
+        <span className="buudy-display min-w-0 truncate text-sm text-[var(--plum)]">
           {review.customerName}
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-[rgba(180,145,76,.12)] px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--plum-soft)]">
-          <BadgeCheck aria-hidden="true" size={14} />
+        <span className="inline-flex flex-none items-center gap-1 rounded-full bg-[rgba(180,145,76,.12)] px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-[var(--plum-soft)]">
+          <BadgeCheck aria-hidden="true" size={12} />
           Verified
         </span>
       </div>
@@ -1036,7 +1036,7 @@ export function ProductReviewsGrid({
   const [summaryTotal, setSummaryTotal] = useState(total);
   const [currentAverageRating, setCurrentAverageRating] = useState(averageRating);
   const [currentRatingDistribution, setCurrentRatingDistribution] = useState(ratingDistribution);
-  const [columnCount, setColumnCount] = useState(4);
+  const [columnCount, setColumnCount] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedReview, setSelectedReview] = useState<ProductReview | null>(null);
@@ -1395,9 +1395,9 @@ export function ProductReviewsGrid({
       />
 
       {reviews.length ? (
-        <div aria-busy={isLoading} className="grid items-start gap-3 grid-cols-2 sm:gap-5 lg:grid-cols-4">
+        <div aria-busy={isLoading} className="grid min-w-0 grid-cols-2 items-start gap-5 lg:grid-cols-4">
           {reviewColumns.map((column, index) => (
-            <div className="grid gap-5" key={`review-column-${index}`}>
+            <div className="grid min-w-0 gap-5" key={`review-column-${index}`}>
               {column.map((review) => (
                 <ReviewCard
                   key={review.id}
