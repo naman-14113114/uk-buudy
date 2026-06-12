@@ -517,20 +517,28 @@ function ReviewCard({
       </div>
 
       {review.title ? (
-        <h3 className="buudy-display mt-4 text-xl leading-snug text-[var(--plum)]">
+        <h3 className="buudy-display mt-4 text-[1.3rem] sm:text-xl leading-snug text-[var(--plum)]">
           {review.title}
         </h3>
       ) : null}
 
-      <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{review.body}</p>
+      <p className="mt-3 text-sm leading-7 text-[var(--muted)] line-clamp-4">{review.body}</p>
 
-      <div className="mt-6 flex items-center justify-between gap-2 border-t border-[rgba(58,31,61,.12)] pt-4">
-        <span className="buudy-display min-w-0 truncate text-sm text-[var(--plum)]">
-          {review.customerName}
+      <div className="mt-6 flex items-center justify-between gap-1.5 sm:gap-2 border-t border-[rgba(58,31,61,.12)] pt-4">
+        <span className="buudy-display min-w-0 text-sm text-[var(--plum)] whitespace-nowrap overflow-hidden text-ellipsis">
+          <span className="sm:hidden">
+            {(() => {
+              const parts = review.customerName.trim().split(" ");
+              return parts.length > 1 
+                ? `${parts[0]} ${parts[parts.length - 1][0]}.` 
+                : parts[0];
+            })()}
+          </span>
+          <span className="hidden sm:inline">{review.customerName}</span>
         </span>
-        <span className="inline-flex flex-none items-center gap-1 rounded-full bg-[rgba(180,145,76,.12)] px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-[var(--plum-soft)]">
+        <span className="inline-flex flex-none items-center gap-1 rounded-full bg-[rgba(180,145,76,.12)] px-1.5 py-1 sm:px-2 text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-[var(--plum-soft)]">
           <BadgeCheck aria-hidden="true" size={12} />
-          Verified
+          <span className="hidden sm:inline">Verified</span>
         </span>
       </div>
     </button>
