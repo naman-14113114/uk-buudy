@@ -331,21 +331,51 @@ function ReviewFiltersToolbar({
                     </button>
                   );
                 })}
+                <div className="sm:hidden mt-2 pt-2 border-t border-[rgba(58,31,61,.1)]">
+                  <button
+                    className={menuItemClass}
+                    onClick={() => {
+                      onTogglePhotos();
+                      setOpenMenu(null);
+                    }}
+                    role="menuitemcheckbox"
+                    aria-checked={filters.withPhotos}
+                    type="button"
+                  >
+                    <span>With photos</span>
+                    {filters.withPhotos ? <Check aria-hidden="true" size={16} /> : null}
+                  </button>
+                  <button
+                    className={menuItemClass}
+                    onClick={() => {
+                      onToggleVerified();
+                      setOpenMenu(null);
+                    }}
+                    role="menuitemcheckbox"
+                    aria-checked={filters.verifiedOnly}
+                    type="button"
+                  >
+                    <span>Verified purchase</span>
+                    {filters.verifiedOnly ? <Check aria-hidden="true" size={16} /> : null}
+                  </button>
+                </div>
               </div>
             ) : null}
           </div>
-          <ReviewFilterCheckbox
-            checked={filters.withPhotos}
-            disabled={disabled}
-            label="With photos"
-            onToggle={onTogglePhotos}
-          />
-          <ReviewFilterCheckbox
-            checked={filters.verifiedOnly}
-            disabled={disabled}
-            label="Verified purchase"
-            onToggle={onToggleVerified}
-          />
+          <div className="hidden sm:flex flex-nowrap items-center gap-1.5 sm:gap-3">
+            <ReviewFilterCheckbox
+              checked={filters.withPhotos}
+              disabled={disabled}
+              label="With photos"
+              onToggle={onTogglePhotos}
+            />
+            <ReviewFilterCheckbox
+              checked={filters.verifiedOnly}
+              disabled={disabled}
+              label="Verified purchase"
+              onToggle={onToggleVerified}
+            />
+          </div>
         </div>
 
         <div className="relative flex flex-wrap items-center gap-3 lg:justify-end">
