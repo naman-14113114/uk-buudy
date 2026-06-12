@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Lock } from "lucide-react";
+import Lottie from "lottie-react";
+import loadingLottie from "./loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import { attributionStorageKey } from "@/components/integrations/AttributionCapture";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
@@ -30,6 +32,20 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
   const hasItems = totals.itemCount > 0;
+
+  useEffect(() => {
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        setIsRedirecting(false);
+        setError("");
+      }
+    }
+
+    window.addEventListener("pageshow", handlePageShow);
+    return () => {
+      window.removeEventListener("pageshow", handlePageShow);
+    };
+  }, []);
   const maskQuantity =
     lines.find(
       (line) => line.type === "product" && line.productId === "buudy-led-mask",
@@ -129,13 +145,27 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   return (
     <>
       <Button
-        className="proxy-bundle-btn relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] buudy-display"
+        className={`relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] buudy-display ${!isRedirecting ? "proxy-bundle-btn" : "disabled:!opacity-100"}`}
         disabled={!hasItems || isRedirecting}
         onClick={handleCheckout}
         type="button"
       >
-        <Lock size={17} />
-        {isRedirecting ? "Opening secure checkout..." : "Checkout securely"}
+        {isRedirecting ? (
+          <>
+            <span style={{ visibility: "hidden" }} className="flex items-center gap-2">
+              <Lock size={17} />
+              Checkout securely
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center">
+              <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
+            </span>
+          </>
+        ) : (
+          <>
+            <Lock size={17} />
+            Checkout securely
+          </>
+        )}
       </Button>
       {error ? (
         <p className="mt-3 text-center text-xs font-semibold text-[var(--plum)]">
