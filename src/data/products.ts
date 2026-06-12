@@ -91,12 +91,8 @@ export const buudyMask: Product = {
   cartImage: productAsset("01-buudy-led-mask-front.webp"),
   gallery: [
     {
-      src: productMediaAsset("O13-w.webp"),
+      src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
       alt: "Cleopatra LED Red Light Mask",
-    },
-    {
-      src: productAsset("01-buudy-led-mask-front.webp"),
-      alt: "Buudy LED Mask front view",
     },
     {
       src: productAsset("02-buudy-led-mask-side-profile.webp"),
@@ -149,6 +145,10 @@ export const buudyMask: Product = {
     {
       src: productAsset("buudy_purple.jpeg"),
       alt: "Buudy LED Mask Purple",
+    },
+    {
+      src: productAsset("01-buudy-led-mask-front.webp"),
+      alt: "Buudy LED Mask front view",
     },
   ],
   gifts: [
