@@ -7,6 +7,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
+import { MarketingAnalytics } from "@/components/integrations/MarketingAnalytics";
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
 import { market } from "@/lib/market";
 import "./globals.css";
@@ -117,6 +118,7 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
         </CartProvider>
+        <MarketingAnalytics />
         <ClarityAnalytics />
         <KlaviyoAnalytics />
         <TawkToWidget />
