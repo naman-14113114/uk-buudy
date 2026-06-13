@@ -432,3 +432,6 @@
  GET /api/account/session 200 in 2.5s (next.js: 2.4s, proxy.ts: 13ms, application-code: 89ms)
  GET /api/account/session 200 in 91ms (next.js: 17ms, proxy.ts: 33ms, application-code: 41ms)
  POST /api/checkout/prepare 200 in 3.9s (next.js: 1270ms, proxy.ts: 18ms, application-code: 2.6s)
+ GET /cart 200 in 1692ms (next.js: 353ms, proxy.ts: 18ms, application-code: 1321ms)
+ GET /api/account/session 200 in 49ms (next.js: 9ms, proxy.ts: 13ms, application-code: 27ms)
+ GET /api/account/session 200 in 642ms (next.js: 126ms, proxy.ts: 367ms, application-code: 149ms)

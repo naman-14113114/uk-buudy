@@ -23672,3 +23672,137 @@ https://react.dev/link/hydration-mismatch
     at H (https://static.klaviyo.com/onsite/js/build-preview/commit-9e32f0b62269b170ff1d0c9cf9ccac55619fcd31/vendors~in_app_forms~signup_forms~reviews~atlas.0201e888d834a3782e3a.js?cb=2:1:14892)
     at I (https://static.klaviyo.com/onsite/js/build-preview/commit-9e32f0b62269b170ff1d0c9cf9ccac55619fcd31/vendors~in_app_forms~signup_forms~reviews~atlas.0201e888d834a3782e3a.js?cb=2:1:19629)
     at U (https://static.klaviyo.com/onsite/js/build-preview/commit-9e32f0b62269b170ff1d0c9cf9ccac55619fcd31/vendors~in_app_forms~signup_forms~reviews~atlas.0201e888d834a3782e3a.js?cb=2:1:14577)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/cart" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="en-GB" className="__variable..." data-scroll-behavior="smooth">
+                          <body
+-                           __processed_12222b5f-4562-4511-bcb4-b937b3b7f379__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            <CartProvider>
+                              <div>
+                              <Header>
+                                <header className="relative z...">
+                                  <div
+                                    className="buudy-wrap relative flex min-h-[64px] items-center justify-between gap-..."
+-                                   bis_skin_checked="1"
+                                  >
+                                    <button>
+                                    <nav>
+                                    <LinkComponent>
+                                    <div
+                                      className="flex items-center gap-3 lg:gap-6"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <nav>
+                                      <button>
+                                      <div
+                                        className="relative hidden lg:block"
+                                        ref={{current:null}}
+-                                       bis_skin_checked="1"
+                                      >
+                              ...
+                                <CartPage>
+                                  <CartPageContent initialCustomer={{fullName:"", ...}}>
+                                    <CartRestoringState>
+                                      <section aria-live="polite" aria-busy="true" className="buudy-sect...">
+                                        <div
+                                          className="buudy-wrap max-w-2xl text-center"
+-                                         bis_skin_checked="1"
+                                        >
+                              <Footer>
+                                <footer className="bg-[var(--...">
+                                  <div
+                                    className="buudy-wrap py-20"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                        <p>
+                                        <p>
+                                        <a>
+                                        <div
+                                          className="mt-6 flex items-center gap-4"
+-                                         bis_skin_checked="1"
+                                        >
+                                    <div
+                                      className="mt-16 flex flex-wrap items-center justify-between gap-6 border-t bord..."
+-                                     bis_skin_checked="1"
+                                    >
+                                      <p>
+                                      <div
+                                        className="flex gap-3"
+-                                       bis_skin_checked="1"
+                                      >
+                              <CartDrawer>
+                                <div
+                                  aria-hidden={true}
+                                  className="fixed inset-0 z-50 transition pointer-events-none"
+-                                 bis_skin_checked="1"
+                                >
+                                  <button>
+                                  <aside aria-label="Shopping cart" className="absolute r...">
+                                    <div
+                                      className="flex items-center justify-between border-b border-[var(--border)] px-..."
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                      ...
+                                    <div
+                                      className="flex-1 overflow-y-auto px-5"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        aria-busy="true"
+                                        aria-live="polite"
+                                        className="flex h-full flex-col items-center justify-center text-center"
+-                                       bis_skin_checked="1"
+                                      >
+                                    <div
+                                      className="border-t border-[var(--border)] p-5"
+-                                     bis_skin_checked="1"
+                                    >
+                            ...
+                  ...
+ 

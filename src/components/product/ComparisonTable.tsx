@@ -200,7 +200,7 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <img
-                      src={productMediaAsset("59 (2).png")}
+                      src={productMediaAsset("shark_logo.png")}
                       alt="Dr Dennis Gross"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
                       decoding="async"
@@ -247,7 +247,7 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
-                      src={productMediaAsset("Dr Dennis Gross.png")}
+                      src={productMediaAsset("shark.png")}
                       alt="Dr Dennis Gross Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
                       decoding="async"
@@ -264,7 +264,7 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Portable"
             subtitle="Hands-free, cordless and rechargeable"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
@@ -283,7 +283,7 @@ export function ComparisonTable() {
             colorName="Infrared"
             colorCode="#8B0000"
             description="Deep tissue repair and healing"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ColorRow
@@ -344,19 +344,19 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Eye Protection"
             subtitle="Integrated eye support"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="Customizable treatments"
             subtitle="Hands-free, cordless and rechargeable"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="App companion"
             subtitle="iPhone/Android"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
@@ -366,7 +366,7 @@ export function ComparisonTable() {
               <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">3 MINS</strong>,
               <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
               <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 MINS</strong>,
+              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
             ]}
           />
 
@@ -376,9 +376,9 @@ export function ComparisonTable() {
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
                 <span className="line-through mr-1.5 opacity-60">£449</span>£179
               </span>,
-              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£395</span>,
-              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£380</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£455</span>,
+              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£348</span>,
+              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£399</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£299</span>,
             ]}
             isLast={true}
           />
