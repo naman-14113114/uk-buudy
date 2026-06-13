@@ -40,9 +40,9 @@ function initGa4() {
   window.dataLayer = window.dataLayer || [];
   window.gtag =
     window.gtag ||
-    ((...args: unknown[]) => {
-      window.dataLayer?.push(args);
-    });
+    function gtag() {
+      window.dataLayer?.push(arguments);
+    };
 
   loadExternalScript(
     "buudy-ga4-loader",
