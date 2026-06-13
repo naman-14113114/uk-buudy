@@ -47,6 +47,9 @@ export const metadata: Metadata = {
   description:
     "UK LED face mask for red light therapy, blue light acne routines, anti-ageing skincare, full face and neck coverage, and salon-grade home treatments.",
   applicationName: "Buudy",
+  verification: {
+    google: "nqRKsSVoB5bni_WXRqWob9zh6fCXpxqGABAS_XxPr_w",
+  },
   keywords: [
     "best LED face mask UK",
     "LED face mask UK",
