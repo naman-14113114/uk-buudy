@@ -202,7 +202,8 @@ export function ComparisonTable() {
                     <img
                       src={productMediaAsset("shark_logo.png")}
                       alt="Dr Dennis Gross"
-                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
+                      className="w-auto object-contain"
+                      style={{ maxHeight: "28px", maxWidth: "70%" }}
                       decoding="async"
                       loading="lazy"
                     />
@@ -247,9 +248,10 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
-                      src={productMediaAsset("shark.png")}
+                      src={productMediaAsset("shark-2.png")}
                       alt="Dr Dennis Gross Mask"
-                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
+                      className="w-auto object-contain"
+                      style={{ maxHeight: "150px" }}
                       decoding="async"
                       loading="lazy"
                     />
@@ -344,7 +346,7 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Eye Protection"
             subtitle="Integrated eye support"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ComparisonRow
