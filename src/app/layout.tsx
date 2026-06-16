@@ -3,6 +3,7 @@ import { Fraunces, Inter, JetBrains_Mono, Playfair_Display } from "next/font/goo
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { HideOnPaths } from "@/components/layout/HideOnPaths";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
@@ -115,10 +116,14 @@ export default function RootLayout({
     >
       <body>
         <CartProvider>
-          <AnnouncementBar />
-          <Header />
+          <HideOnPaths paths={["/cart"]}>
+            <AnnouncementBar />
+            <Header />
+          </HideOnPaths>
           <main>{children}</main>
-          <Footer />
+          <HideOnPaths paths={["/cart"]}>
+            <Footer />
+          </HideOnPaths>
           <CartDrawer />
         </CartProvider>
         <MarketingAnalytics />
