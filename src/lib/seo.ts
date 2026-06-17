@@ -85,6 +85,42 @@ export function productJsonLd(product: Product) {
   };
 }
 
+export function productWebPageJsonLd(product: Product) {
+  const productUrl = absoluteUrl(`/products/${product.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${productUrl}#webpage`,
+    url: productUrl,
+    name: product.seoTitle,
+    description: product.seoDescription,
+    inLanguage: "en-GB",
+    dateModified: "2026-06-16",
+    isPartOf: {
+      "@id": `${absoluteUrl("/")}#website`,
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: absoluteUrl(product.gallery[0].src),
+    },
+    mainEntity: {
+      "@id": `${productUrl}#product`,
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: "UK skincare shoppers comparing LED face masks",
+    },
+    about: [
+      { "@type": "Thing", name: "best LED face mask UK" },
+      { "@type": "Thing", name: "red light therapy mask" },
+      { "@type": "Thing", name: "blue light acne routine" },
+      { "@type": "Thing", name: "anti-ageing skincare device" },
+      { "@type": "Thing", name: "near-infrared light therapy" },
+    ],
+  };
+}
+
 export function faqJsonLd(faqs: FAQItem[]) {
   return {
     "@context": "https://schema.org",

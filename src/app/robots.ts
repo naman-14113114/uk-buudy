@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
     "/my-profile",
     "/order-history",
     "/order-confirmation",
+    "/cart",
     "/sign-in",
     "/sign-up",
   ];
