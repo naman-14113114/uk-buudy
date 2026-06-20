@@ -24,7 +24,7 @@ export const contactHelpLinks = [
   },
   {
     label: "Order tracking",
-    href: "/policies/order-tracking",
+    href: "/order-tracking",
     copy: "Check the latest delivery status after your order has shipped.",
   },
   {

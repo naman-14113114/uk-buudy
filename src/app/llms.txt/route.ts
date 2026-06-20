@@ -11,8 +11,8 @@ Buudy UK sells at-home LED light therapy devices for skincare and wellness routi
 - [Buudy Red Torch](${market.siteUrl}/products/red-light-torch): Product page for the handheld red light therapy torch.
 - [Skincare Quiz](${market.siteUrl}/pages/skincare-quiz): Guided quiz for choosing a light therapy routine.
 - [FAQs](${market.siteUrl}/pages/faqs): Common questions about shipping, returns, product use, and safety.
-- [Shipping Policy](${market.siteUrl}/policies/shipping-policy): UK shipping timelines and tracking guidance.
-- [Return Policy](${market.siteUrl}/policies/return-policy): 90-day money-back guarantee and return steps.
+- [Shipping Policy](${market.siteUrl}/shipping-policy): UK shipping timelines and tracking guidance.
+- [Return Policy](${market.siteUrl}/return-policy): 90-day money-back guarantee and return steps.
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask
