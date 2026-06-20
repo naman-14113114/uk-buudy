@@ -11,7 +11,7 @@ const FOOTER_LINKS = [
 
 export function CartMinimalFooter() {
   return (
-    <footer className="border-t border-[rgba(247,241,232,.14)] bg-[var(--ink)] py-8">
+    <footer className="border-t border-[rgba(247,241,232,.14)] bg-[var(--ink)] pt-8 pb-28 lg:py-8">
       <div className="buudy-wrap text-center">
         <p className="buudy-mono text-[var(--gold)]">
           Secure Payments &bull; Free Tracked Shipping &bull; Easy Support

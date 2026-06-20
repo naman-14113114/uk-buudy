@@ -9,8 +9,11 @@ import {
   Gift,
   ShoppingBag,
   Truck,
+  Lock,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import Lottie from "lottie-react";
+import loadingLottie from "@/components/cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { CartLineItem } from "./CartLineItem";
@@ -103,6 +106,7 @@ export function CartPageContent({
   }
 
   return (
+    <>
     <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
         <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
@@ -120,7 +124,7 @@ export function CartPageContent({
                 </span>
               </p>
             </div>
-            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--gold)]">
+            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)]">
               Free tracked shipping
             </span>
           </div>
@@ -212,6 +216,62 @@ export function CartPageContent({
         </div>
       </div>
     </section>
+    <MobileStickyCheckout />
+    </>
+  );
+}
+
+function MobileStickyCheckout() {
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
+  useEffect(() => {
+    function handleCheckoutStarted() {
+      setIsRedirecting(true);
+    }
+
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        setIsRedirecting(false);
+      }
+    }
+
+    window.addEventListener("buudy:started-checkout", handleCheckoutStarted);
+    window.addEventListener("pageshow", handlePageShow);
+    return () => {
+      window.removeEventListener("buudy:started-checkout", handleCheckoutStarted);
+      window.removeEventListener("pageshow", handlePageShow);
+    };
+  }, []);
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-6 pointer-events-none flex justify-center lg:hidden">
+      <button
+        className={`pointer-events-auto buudy-cart-wipe buudy-display relative flex h-14 w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[35px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-[15px] font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
+        type="button"
+        disabled={isRedirecting}
+        onClick={() => {
+          const btn = document.getElementById('main-checkout-btn') as HTMLButtonElement;
+          btn?.click();
+        }}
+      >
+        {isRedirecting ? (
+          <>
+            <span style={{ visibility: "hidden" }} className="inline-flex items-center gap-2">
+              <Lock size={16} strokeWidth={1.8} />
+              <span>Buy Now</span>
+            </span>
+            <span style={{ position: "absolute", inset: 0 }} className="flex items-center justify-center">
+              <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
+            </span>
+          </>
+        ) : (
+          <span className="relative z-10 inline-flex items-center justify-center gap-2">
+            <Lock size={16} strokeWidth={1.8} />
+            <span>Buy Now</span>
+          </span>
+        )}
+      </button>
+    </div>
   );
 }
 
