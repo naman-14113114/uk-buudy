@@ -208,7 +208,6 @@ export function CartPageContent({
                 </div>
               </div>
             </div>
-            <PaymentTrustStrip />
           </aside>
         </div>
       </div>
@@ -265,18 +264,6 @@ function DigitalGiftNotice({ line }: { line: CartLine }) {
           src={line.image}
         />
       </div>
-    </div>
-  );
-}
-
-function PaymentTrustStrip() {
-  return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 flex justify-center items-center">
-      <img
-        alt="Payment Options"
-        className="w-full max-w-[340px] h-auto object-contain"
-        src="/media/products/buudy-led-mask/images/payment_options.png"
-      />
     </div>
   );
 }
