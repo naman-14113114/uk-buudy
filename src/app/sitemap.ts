@@ -13,7 +13,6 @@ const routes = [
   { path: "/pages/premium-travel-box", lastModified: "2026-06-16" },
   { path: "/pages/buudy-led-torch", lastModified: "2026-06-16" },
   { path: "/pages/skincare-guide", lastModified: "2026-06-16" },
-  { path: "/order-tracking", lastModified: "2026-06-16" },
   { path: "/shipping-policy", lastModified: "2026-06-16" },
   { path: "/return-policy", lastModified: "2026-06-16" },
   { path: "/refund-policy", lastModified: "2026-06-16" },
