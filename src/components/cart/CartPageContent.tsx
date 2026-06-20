@@ -110,11 +110,16 @@ export function CartPageContent({
     <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
         <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
-          <div className="flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
-            <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
-                <Truck size={22} />
-              </span>
+          <div className="flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
+            <div className="flex flex-col items-center gap-3 md:flex-row">
+              <div className="flex w-full items-center justify-center gap-3 md:w-auto">
+                <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                  <Truck size={22} />
+                </span>
+                <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)] md:hidden">
+                  Free tracked shipping
+                </span>
+              </div>
               <p className="buudy-display text-xl leading-snug text-[var(--plum)] md:text-2xl">
                 Order in next{" "}
                 <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
@@ -124,7 +129,7 @@ export function CartPageContent({
                 </span>
               </p>
             </div>
-            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)]">
+            <span className="buudy-mono hidden rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)] md:block">
               Free tracked shipping
             </span>
           </div>
@@ -299,12 +304,19 @@ function CartRestoringState() {
 function DigitalGiftNotice({ line }: { line: CartLine }) {
   return (
     <div className="relative overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-5 md:pl-6 md:pr-36">
-      <div className="flex items-start gap-4">
-        <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-[var(--card)] text-[var(--gold)] shadow-sm">
-          <BookOpen size={22} />
-        </span>
-        <div>
-          <p className="buudy-mono text-[var(--gold)]">Free digital reward</p>
+      <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:gap-4 md:text-left">
+        <div className="flex items-center justify-center gap-3 md:w-auto">
+          <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-[var(--card)] text-[var(--gold)] shadow-sm">
+            <BookOpen size={22} />
+          </span>
+          <span className="buudy-mono rounded-full bg-[var(--card)] px-4 py-2 text-[var(--plum)] md:hidden">
+            Free digital reward
+          </span>
+        </div>
+        <div className="flex flex-col items-center md:items-start">
+          <span className="buudy-mono hidden rounded-full bg-[var(--card)] px-4 py-2 text-[var(--plum)] md:block">
+            Free digital reward
+          </span>
           <p className="mt-2 buudy-display text-2xl leading-tight text-[var(--plum)]">
             {line.title} is sent by email after checkout.
           </p>
