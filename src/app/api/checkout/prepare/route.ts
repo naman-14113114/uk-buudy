@@ -5,8 +5,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const plusbaseOrigin = "https://buudy.com";
-const maskProductId = 1000000611225890;
-const maskVariantId = 1000019092784268;
+const maskProductId = 1000000667467053;
+const maskVariantId = 1000020450989467;
 const torchProductId = 1000000665008955;
 const torchVariantId = 1000020384558655;
 
