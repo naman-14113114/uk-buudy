@@ -27,6 +27,19 @@ const passthroughAttributionKeys = [
   "fbclid",
 ];
 
+function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["attribution"]) {
+  const properties: Array<{ name: string; value: string }> = [];
+
+  passthroughAttributionKeys.forEach((key) => {
+    const value = attribution?.[key];
+    if (value) {
+      properties.push({ name: `_blfm_${key}`, value: String(value).slice(0, 500) });
+    }
+  });
+
+  return properties;
+}
+
 function bridgeParams(attribution: CheckoutPrepareBody["attribution"]) {
   const params: Record<string, string> = {};
 
@@ -77,7 +90,10 @@ function appendCookies(current: string, response: Response) {
   return Array.from(cookieMap.values()).join("; ");
 }
 
-async function createPlusbaseCheckout(quantity: number) {
+async function createPlusbaseCheckout(
+  quantity: number,
+  attribution: CheckoutPrepareBody["attribution"],
+) {
   let cookie = "";
 
   const createResponse = await fetch(
@@ -99,7 +115,12 @@ async function createPlusbaseCheckout(quantity: number) {
     throw new Error("Could not create PlusBase cart.");
   }
 
-  async function addItem(productId: number, variantId: number, itemQuantity: number) {
+  async function addItem(
+    productId: number,
+    variantId: number,
+    itemQuantity: number,
+    properties: Array<{ name: string; value: string }> = [],
+  ) {
     const response = await fetch(
       `${plusbaseOrigin}/api/checkout/next/cart.json?cart_token=${encodeURIComponent(
         cartToken,
@@ -117,7 +138,7 @@ async function createPlusbaseCheckout(quantity: number) {
             product_id: productId,
             variant_id: variantId,
             qty: itemQuantity,
-            properties: [],
+            properties,
             metadata: {
               image_preview_id: "",
             },
@@ -134,7 +155,12 @@ async function createPlusbaseCheckout(quantity: number) {
     }
   }
 
-  await addItem(maskProductId, maskVariantId, quantity);
+  await addItem(
+    maskProductId,
+    maskVariantId,
+    quantity,
+    buildPlusbaseAttributionProperties(attribution),
+  );
   await addItem(torchProductId, torchVariantId, quantity);
 
   return {
@@ -149,7 +175,7 @@ export async function POST(request: NextRequest) {
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
 
   try {
-    const checkout = await createPlusbaseCheckout(quantity);
+    const checkout = await createPlusbaseCheckout(quantity, body.attribution);
 
     return NextResponse.json({
       checkoutToken: checkout.checkoutToken,
