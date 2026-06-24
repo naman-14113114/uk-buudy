@@ -613,3 +613,26 @@ export const faqs: FAQItem[] = [
       "The Buudy LED Mask is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
 ];
+
+export const iplFaqs: FAQItem[] = [
+  {
+    question: "Does the ice cooling really make it painless?",
+    answer: "Yes! The Buudy IPL device features an advanced sapphire ice-cooling head that lowers the temperature to 5-8°C during treatment. This counteracts the heat of the IPL flash, making the experience virtually painless, even on sensitive areas.",
+  },
+  {
+    question: "How many flashes does it have?",
+    answer: "The device comes packed with 999,999 flashes, which is enough for a lifetime of full-body treatments. You will never need to buy a replacement cartridge.",
+  },
+  {
+    question: "How often should I use it?",
+    answer: "For best results, we recommend using the device 2-3 times a week for the first 4 weeks, 1-2 times a week for weeks 5-8, and then just once a month for maintenance.",
+  },
+  {
+    question: "Is it safe for my skin tone and hair colour?",
+    answer: "IPL technology works best on high-contrast combinations, such as light skin with dark hair (black, brown, or dark blonde). It is less effective on very light blonde, red, or grey hair, and is not recommended for very dark skin tones due to the risk of burns.",
+  },
+  {
+    question: "Can I use it on my face and bikini line?",
+    answer: "Absolutely. The device has 9 adjustable intensity levels, allowing you to lower the power for sensitive areas like the upper lip, chin, and bikini line, while using higher power for legs and arms.",
+  },
+];

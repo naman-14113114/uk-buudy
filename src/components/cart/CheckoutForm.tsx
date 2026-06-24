@@ -112,7 +112,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         },
         body: JSON.stringify({
           customerEmail: initialCustomer.email,
-          quantity: maskQuantity,
+          quantity: maskQuantity, // fallback quantity
           cart: {
             lines,
             giftMessage,
@@ -127,15 +127,19 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         throw new Error("Could not prepare checkout.");
       }
 
+      const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";
+
       const data = (await response.json()) as { checkoutUrl?: string };
       window.location.assign(
-        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ quantity: maskQuantity }),
+        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ quantity: maskQuantity, productId: primaryProductId }),
       );
     } catch {
+      const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";
       setError("Opening secure checkout...");
       window.location.assign(
         buildPlusbaseCheckoutUrl({
           quantity: maskQuantity,
+          productId: primaryProductId,
           extraParams: attribution,
         }),
       );
