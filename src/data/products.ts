@@ -379,18 +379,6 @@ export const buudyIplDevice: Product = {
       src: "/images/products/buudy-ipl/arm.png",
       alt: "15-Min Full Body Treatment",
     },
-    {
-      src: "/images/products/buudy-ipl/web_img1.png",
-      alt: "Buudy IPL Device Feature",
-    },
-    {
-      src: "/images/products/buudy-ipl/web_img2.png",
-      alt: "Buudy IPL Device Feature",
-    },
-    {
-      src: "/images/products/buudy-ipl/web_img3.png",
-      alt: "Buudy IPL Device Feature",
-    },
   ],
   gifts: [],
   specs: [
