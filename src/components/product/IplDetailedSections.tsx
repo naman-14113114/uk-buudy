@@ -391,58 +391,23 @@ export function IplComparisonTable() {
 export function IplDescriptionBanners() {
   return (
     <section className="bg-[var(--plum)] w-full py-16 md:py-24 border-y border-[var(--border)]">
-      <div className="w-full max-w-[1000px] mx-auto flex flex-col gap-12 px-6">
+      <div className="w-full max-w-[1000px] mx-auto flex flex-col gap-8 md:gap-12 px-0 md:px-6">
         {[
           { src: "/images/products/buudy-ipl/original_desc_1.jpg", alt: "Skip the Salon IPL Treatment" },
           { src: "/images/products/buudy-ipl/original_desc_3.jpg", alt: "Ice Cooling IPL Technology" },
           { src: "/images/products/buudy-ipl/original_desc_2.jpg", alt: "4 Step IPL Process" },
         ].map((banner, idx) => (
-          <div key={idx} className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[rgba(247,241,232,0.1)] bg-[#eff4fd]">
-            
-            {/* Desktop View (Uncropped Landscape) */}
-            <div className="hidden md:block w-full">
-              <Image
-                src={banner.src}
-                alt={banner.alt}
-                width={1200}
-                height={800}
-                className="w-full h-auto object-contain"
-                sizes="100vw"
-                quality={100}
-                unoptimized={true}
-              />
-            </div>
-
-            {/* Mobile View (Split into two stacked squares to preserve text readability) */}
-            <div className="flex md:hidden flex-col w-full">
-              {/* Top half (Left side of the original image) */}
-              <div className="w-full relative overflow-hidden" style={{ aspectRatio: '1/1' }}>
-                <Image
-                  src={banner.src}
-                  alt={banner.alt + " (Part 1)"}
-                  fill
-                  className="object-cover object-left"
-                  sizes="100vw"
-                  quality={100}
-                  unoptimized={true}
-                  style={{ objectPosition: '0% 50%', width: '200%', maxWidth: 'none' }}
-                />
-              </div>
-              {/* Bottom half (Right side of the original image) */}
-              <div className="w-full relative overflow-hidden" style={{ aspectRatio: '1/1' }}>
-                <Image
-                  src={banner.src}
-                  alt={banner.alt + " (Part 2)"}
-                  fill
-                  className="object-cover object-right"
-                  sizes="100vw"
-                  quality={100}
-                  unoptimized={true}
-                  style={{ objectPosition: '100% 50%', width: '200%', maxWidth: 'none', right: 0, left: 'auto' }}
-                />
-              </div>
-            </div>
-
+          <div key={idx} className="relative w-full md:rounded-2xl overflow-hidden shadow-xl border-y md:border-[rgba(247,241,232,0.1)] bg-[#eff4fd]">
+            <Image
+              src={banner.src}
+              alt={banner.alt}
+              width={1200}
+              height={800}
+              className="w-full h-auto object-contain"
+              sizes="100vw"
+              quality={100}
+              unoptimized={true}
+            />
           </div>
         ))}
       </div>
