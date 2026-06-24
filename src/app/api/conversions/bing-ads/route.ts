@@ -35,9 +35,7 @@ export async function GET(request: NextRequest) {
       "Conversion Value",
       "Conversion Currency",
     ];
-
     const conversionName = "UK - Purchase"; 
-    const conversionValue = "10000"; 
 
     const rows = orders.map((order) => {
       const msclkid = extractMsclkidFromOrder(order);
@@ -49,7 +47,7 @@ export async function GET(request: NextRequest) {
         msclkid,
         conversionName,
         conversionTime,
-        conversionValue, 
+        order.total_price, 
         order.currency,
       ].join(",");
     });
