@@ -67,6 +67,34 @@ export const features: Feature[] = [
   },
 ];
 
+export const iplFeatures: Feature[] = [
+  {
+    title: "Sapphire Ice-Cooling Technology",
+    kicker: "Painless at 5°C",
+    body: "Unlike traditional IPL devices that can cause burning or discomfort, our built-in Sapphire Ice-Cooling head maintains a consistent 5-8°C temperature. This instantly soothes the skin while the light pulses, ensuring a completely painless and comfortable hair removal experience even on sensitive areas.",
+  },
+  {
+    title: "999,999 Lifetime Flashes",
+    kicker: "No Refills Needed",
+    body: "Never worry about running out of flashes. With up to 999,999 flashes, the Buudy IPL device provides enough pulses for a lifetime of full-body treatments for you and even your partner. It's a one-time investment that completely replaces expensive salon laser treatments.",
+  },
+  {
+    title: "9 Adjustable Intensity Levels",
+    kicker: "Customized for You",
+    body: "Whether you're treating stubborn thick hair on your legs or fine hair on your upper lip, you can customize the power output with 9 distinct intensity levels. Start low for sensitive areas and increase the intensity for faster results on thicker hair.",
+  },
+  {
+    title: "Dual Treatment Modes",
+    kicker: "Auto & Manual Glide",
+    body: "Use the Manual Mode for precision treatments on smaller areas like the bikini line, underarms, and face. Switch to Auto Glide Mode for effortless, continuous flashes while gliding the device across larger areas like your legs or back—completing a full body session in just 15 minutes.",
+  },
+  {
+    title: "Visible Results in 4 Weeks",
+    kicker: "Clinically Proven",
+    body: "Our high-energy IPL targets the hair follicle at the root, breaking the cycle of hair growth. With consistent use, you will see a noticeable reduction in hair growth in just 4 weeks, leading to permanently smooth, hair-free skin.",
+  },
+];
+
 export const realLifeImages = [
   {
     src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
