@@ -1,0 +1,22 @@
+name: Hourly Price Lock
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs at minute 0 past every hour
+  workflow_dispatch: # Allows manual trigger from the GitHub Actions UI
+
+jobs:
+  fix-prices:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Price Lock Script
+        run: node .github/scripts/price-lock.js
