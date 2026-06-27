@@ -63,6 +63,11 @@ select {
 
 button {
   cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 img,

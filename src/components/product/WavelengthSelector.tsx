@@ -81,6 +81,15 @@ export function WavelengthSelector() {
                       {wavelength.description}
                     </span>
                   </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 sm:hidden ${
+                      isActive ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <p className="buudy-display px-4 pb-3 pl-[3.25rem] text-sm leading-relaxed text-[rgba(247,241,232,.7)]">
+                      {wavelength.description}
+                    </p>
+                  </div>
                 </li>
               );
             })}
