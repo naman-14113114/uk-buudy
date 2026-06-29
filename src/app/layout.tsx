@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { HideOnPaths } from "@/components/layout/HideOnPaths";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { AttributionCapture } from "@/components/integrations/AttributionCapture";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
 import { MarketingAnalytics } from "@/components/integrations/MarketingAnalytics";
@@ -126,6 +127,7 @@ export default function RootLayout({
           </HideOnPaths>
           <CartDrawer />
         </CartProvider>
+        <AttributionCapture />
         <MarketingAnalytics />
         <ClarityAnalytics />
         <KlaviyoAnalytics />
