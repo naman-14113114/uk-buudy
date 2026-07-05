@@ -22,6 +22,10 @@ import {
 import type { Product } from "@/data/products";
 import { market } from "@/lib/market";
 import { formatMoney } from "@/lib/money";
+import {
+  appendAttributionToPath,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
@@ -247,7 +251,12 @@ export function GiftBundle({ product }: { product: Product }) {
         id="hero-cta"
         onClick={() => {
           addProduct(product);
-          router.push("/cart");
+          router.push(
+            appendAttributionToPath(
+              "/cart",
+              pickAttributionFromSearch(window.location.search),
+            ),
+          );
         }}
       >
         <span className="relative z-20 whitespace-nowrap">

@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 
 export const runtime = "nodejs";
@@ -46,6 +47,19 @@ function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["at
 }
 
 function bridgeParams(attribution: CheckoutPrepareBody["attribution"]) {
+  const params: Record<string, string> = {};
+
+  passthroughAttributionKeys.forEach((key) => {
+    const value = attribution?.[key];
+    if (value) {
+      params[key] = String(value).slice(0, 500);
+    }
+  });
+
+  return params;
+}
+
+function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
   const params: Record<string, string> = {};
 
   passthroughAttributionKeys.forEach((key) => {
@@ -205,7 +219,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       checkoutToken: checkout.checkoutToken,
-      checkoutUrl: checkout.checkoutUrl,
+      checkoutUrl: appendAttributionToAbsoluteUrl(
+        checkout.checkoutUrl,
+        cleanAttribution(body.attribution),
+      ),
     });
   } catch (error) {
     console.error("Direct PlusBase checkout creation failed", error);

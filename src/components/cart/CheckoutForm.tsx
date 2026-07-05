@@ -5,7 +5,11 @@ import { Lock } from "lucide-react";
 import Lottie from "lottie-react";
 import loadingLottie from "./loading-lottie.json";
 import { Button } from "@/components/ui/Button";
-import { attributionStorageKey } from "@/components/integrations/AttributionCapture";
+import {
+  appendAttributionToAbsoluteUrl,
+  attributionStorageKey,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 import { promoCode } from "@/lib/cart";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
@@ -52,25 +56,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     )?.quantity ?? totals.itemCount;
 
   function readAttribution() {
-    const currentParams = new URLSearchParams(window.location.search);
-    const current: Record<string, string> = {};
-
-    [
-      "utm_source",
-      "utm_medium",
-      "utm_campaign",
-      "utm_term",
-      "utm_content",
-      "msclkid",
-      "gclid",
-      "fbclid",
-      "source",
-    ].forEach((key) => {
-      const value = currentParams.get(key);
-      if (value) {
-        current[key] = value;
-      }
-    });
+    const current = pickAttributionFromSearch(window.location.search);
 
     try {
       return {
@@ -130,8 +116,15 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";
 
       const data = (await response.json()) as { checkoutUrl?: string };
+      const fallbackUrl = buildPlusbaseCheckoutUrl({
+        quantity: maskQuantity,
+        productId: primaryProductId,
+        extraParams: attribution,
+      });
       window.location.assign(
-        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ quantity: maskQuantity, productId: primaryProductId }),
+        data.checkoutUrl
+          ? appendAttributionToAbsoluteUrl(data.checkoutUrl, attribution)
+          : fallbackUrl,
       );
     } catch {
       const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";

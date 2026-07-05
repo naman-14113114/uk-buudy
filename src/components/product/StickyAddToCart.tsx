@@ -7,6 +7,10 @@ import { ShoppingBag } from "lucide-react";
 import Lottie from "lottie-react";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
+import {
+  appendAttributionToPath,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/components/cart/CartProvider";
 
@@ -108,7 +112,12 @@ export function StickyAddToCart({ product }: { product: Product }) {
           className="buudy-cart-wipe min-h-11 w-full flex-none px-3 text-[11px] sm:min-h-12 sm:w-auto sm:px-6 sm:text-sm whitespace-nowrap"
           onClick={() => {
             addProduct(product);
-            router.push("/cart");
+            router.push(
+              appendAttributionToPath(
+                "/cart",
+                pickAttributionFromSearch(window.location.search),
+              ),
+            );
           }}
         >
           {cartIconData ? (
