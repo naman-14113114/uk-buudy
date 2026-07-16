@@ -6,8 +6,9 @@ import { getSupabaseConfig, isSupabaseConfigured } from "@/lib/supabase/config";
 export async function proxy(request: NextRequest) {
   const country = request.headers.get("x-vercel-ip-country");
 
-  // Redirect all visitors from Vietnam
-  if (country === "VN") {
+  // Redirect visitors from specific countries
+  const blockedCountries = ["VN", "HK", "CN", "SG"];
+  if (country && blockedCountries.includes(country)) {
     return NextResponse.redirect("https://buudy.com", 308);
   }
   let response = NextResponse.next({
