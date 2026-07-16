@@ -4,6 +4,12 @@ import type { Database } from "@/types/database";
 import { getSupabaseConfig, isSupabaseConfigured } from "@/lib/supabase/config";
 
 export async function proxy(request: NextRequest) {
+  const country = request.headers.get("x-vercel-ip-country");
+
+  // Redirect all visitors from Vietnam
+  if (country === "VN") {
+    return NextResponse.redirect("https://buudy.com", 308);
+  }
   let response = NextResponse.next({
     request,
   });
