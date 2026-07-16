@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const path = require("path");
 
 const storeUrl = "https://buudy.onshopbase.com";

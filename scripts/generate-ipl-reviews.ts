@@ -75,7 +75,7 @@ function getRandomDate(start: Date, end: Date) {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-const reviews: any[] = [];
+const reviews: { date: string; [key: string]: unknown }[] = [];
 let currentIndex = 4275; // Start index
 
 const startDate = new Date('2024-01-01');

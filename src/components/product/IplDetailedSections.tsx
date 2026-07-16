@@ -238,7 +238,7 @@ export function IplBeforeAfterGrid() {
                   {story.title}
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                  "{story.quote}"
+                  &quot;{story.quote}&quot;
                 </p>
                 <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-3">
                   <span className="buudy-display text-sm text-[var(--plum)]">
@@ -324,7 +324,7 @@ export function IplExpertSection() {
       <div className="buudy-wrap max-w-4xl text-center">
         <p className="buudy-mono text-[var(--gold)] mb-6">CLINICALLY PROVEN</p>
         <blockquote className="buudy-display text-2xl md:text-4xl text-[var(--plum)] leading-relaxed">
-          "The integration of sapphire ice-cooling technology with IPL represents a massive leap forward for at-home treatments. It neutralizes the heat risk, allowing for higher efficacy without the pain associated with clinical lasers."
+          &quot;The integration of sapphire ice-cooling technology with IPL represents a massive leap forward for at-home treatments. It neutralizes the heat risk, allowing for higher efficacy without the pain associated with clinical lasers.&quot;
         </blockquote>
         <p className="mt-8 text-[var(--muted)] font-medium">— Dermatology & Skincare Advisory Board</p>
       </div>
