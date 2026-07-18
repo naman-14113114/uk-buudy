@@ -37,7 +37,7 @@ export type CheckoutBridgeOptions = {
 const PLUSBASE_PRODUCTS: Record<string, { productId: string; variantId: string }> = {
   "buudy-led-mask": { productId: "1000000667467053", variantId: "1000020450989467" },
   "buudy-ipl-device": { productId: "1000000667723529", variantId: "1000020460632985" },
-  "buudy-red-torch": { productId: "1000000665008955", variantId: "1000020384558655" },
+  "buudy-red-torch": { productId: "1000000670474158", variantId: "1000020550222900" },
 };
 
 export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
