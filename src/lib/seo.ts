@@ -21,7 +21,6 @@ export function productJsonLd(product: Product) {
         ? "LED light therapy face mask"
         : "Handheld red light therapy device",
     sku: product.sku,
-    mpn: product.sku,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: product.rating,
@@ -34,7 +33,6 @@ export function productJsonLd(product: Product) {
       url: productUrl,
       priceCurrency: product.currency,
       price: (product.priceCents / 100).toFixed(2),
-      priceValidUntil: "2026-12-31",
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: {
@@ -56,25 +54,17 @@ export function productJsonLd(product: Product) {
           "@type": "ShippingDeliveryTime",
           handlingTime: {
             "@type": "QuantitativeValue",
-            minValue: 0,
-            maxValue: 2,
+            minValue: 1,
+            maxValue: 3,
             unitCode: "DAY",
           },
           transitTime: {
             "@type": "QuantitativeValue",
-            minValue: 2,
-            maxValue: 5,
+            minValue: 3,
+            maxValue: 10,
             unitCode: "DAY",
           },
         },
-      },
-      hasMerchantReturnPolicy: {
-        "@type": "MerchantReturnPolicy",
-        applicableCountry: "GB",
-        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 90,
-        returnMethod: "https://schema.org/ReturnByMail",
-        returnFees: "https://schema.org/FreeReturn",
       },
     },
     additionalProperty: product.specs.map((spec) => ({
@@ -165,7 +155,7 @@ export function organizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: "support@buudy.com",
+      email: "support@buudy.co.uk",
       availableLanguage: ["en-GB", "English"],
     },
   };
