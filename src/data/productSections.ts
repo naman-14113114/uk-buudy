@@ -558,6 +558,11 @@ export const torchFaqs: FAQItem[] = [
     answer:
       "The Buudy Red Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
   },
+  {
+    question: "If I receive the Red Torch as a free gift with the LED Mask, does it include a battery or USB?",
+    answer:
+      "No. When the Red Torch is included as a free gift with the LED Mask, it comes as a standalone device and does not include a battery or USB cable.",
+  },
 ];
 
 export const expertVideo = {
@@ -639,6 +644,11 @@ export const faqs: FAQItem[] = [
     question: "Do you sell this anywhere else?",
     answer:
       "The Buudy LED Mask is exclusively sold through www.buudy.co.uk at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+  },
+  {
+    question: "If I receive the Red Torch as a free gift with the LED Mask, does it include a battery or USB?",
+    answer:
+      "No. When the Red Torch is included as a free gift with the LED Mask, it comes as a standalone device and does not include a battery or USB cable.",
   },
 ];
 
