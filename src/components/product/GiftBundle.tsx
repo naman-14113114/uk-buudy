@@ -376,8 +376,8 @@ export function GiftBundle({ product }: { product: Product }) {
             ))}
           </div>
         </section>
-      ) : (
-        <section
+      ) : null}
+      {/* <section
           className="mt-8 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-5"
           id="torch-offer"
         >
@@ -390,8 +390,7 @@ export function GiftBundle({ product }: { product: Product }) {
             glasses, and user manual for a complete targeted light therapy
             routine.
           </p>
-        </section>
-      )}
+        </section> */}
 
       <ProductDetailsAccordion product={product} />
     </div>

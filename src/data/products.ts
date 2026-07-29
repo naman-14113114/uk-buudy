@@ -286,14 +286,14 @@ export const buudyRedTorch: Product = {
       src: torchAsset("06-buudy-red-torch-body-relief.jpeg"),
       alt: "Buudy Red Torch body relief use",
     },
-    {
-      src: torchAsset("07-buudy-red-torch-closeup.jpeg"),
-      alt: "Buudy Red Torch LED close up",
-    },
-    {
-      src: torchAsset("08-buudy-red-torch-travel.jpeg"),
-      alt: "Buudy Red Torch travel-ready design",
-    },
+    // {
+    //   src: torchAsset("07-buudy-red-torch-closeup.jpeg"),
+    //   alt: "Buudy Red Torch LED close up",
+    // },
+    // {
+    //   src: torchAsset("08-buudy-red-torch-travel.jpeg"),
+    //   alt: "Buudy Red Torch travel-ready design",
+    // },
   ],
   gifts: [],
   specs: [
