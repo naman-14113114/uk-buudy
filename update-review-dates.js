@@ -43,9 +43,7 @@ function updateDatesInFile(filePath) {
 
     reviews.forEach(review => {
       if (review.date) {
-        // Extract the "YYYY-MM-DD" part and parse it as UTC to avoid local timezone shifts
-        const dateStr = review.date.split(' ')[0];
-        const dateObj = new Date(`${dateStr}T00:00:00Z`);
+        const dateObj = new Date(review.date);
         
         // Add/subtract days
         dateObj.setUTCDate(dateObj.getUTCDate() + daysToShift);
