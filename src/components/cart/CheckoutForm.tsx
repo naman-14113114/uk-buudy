@@ -32,7 +32,8 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
-  const { totals, lines, giftMessage, activePromoCodes } = useCart();
+  const { totals, lines, giftMessage, activePromoCodes, manualPromoCode } =
+    useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
   const hasItems = totals.itemCount > 0;
@@ -78,7 +79,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     }
 
     const attribution = readAttribution();
-    writeCheckoutSnapshot({ lines, giftMessage, promoCode });
+    writeCheckoutSnapshot({ lines, giftMessage, promoCode, manualPromoCode });
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
@@ -103,6 +104,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
             lines,
             giftMessage,
             promoCodes: activePromoCodes,
+            manualPromoCode,
           },
           totals,
           attribution,
@@ -119,6 +121,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       const fallbackUrl = buildPlusbaseCheckoutUrl({
         quantity: maskQuantity,
         productId: primaryProductId,
+        discountCode: manualPromoCode,
         extraParams: attribution,
       });
       window.location.assign(
@@ -133,6 +136,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         buildPlusbaseCheckoutUrl({
           quantity: maskQuantity,
           productId: primaryProductId,
+          discountCode: manualPromoCode,
           extraParams: attribution,
         }),
       );

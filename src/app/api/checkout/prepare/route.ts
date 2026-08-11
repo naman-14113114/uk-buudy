@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
+import { getAppliedManualPromoCode } from "@/lib/cart";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 
 export const runtime = "nodejs";
@@ -18,6 +19,8 @@ type CheckoutPrepareBody = {
   quantity?: number;
   cart?: {
     lines: Array<{ productId: string; quantity: number; type?: string }>;
+    manualPromoCode?: string;
+    promoCodes?: string[];
   };
   attribution?: Record<string, string | null | undefined>;
 };
@@ -70,6 +73,21 @@ function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
   });
 
   return params;
+}
+
+function getManualPromoFromCart(cart: CheckoutPrepareBody["cart"]) {
+  return getAppliedManualPromoCode(
+    cart?.manualPromoCode ??
+      cart?.promoCodes?.find((code) => getAppliedManualPromoCode(code)),
+  );
+}
+
+function appendDiscountCodeToUrl(href: string, discountCode: string) {
+  if (!discountCode) return href;
+
+  const url = new URL(href);
+  url.searchParams.set("discount", discountCode);
+  return url.toString();
 }
 
 function appendCookies(current: string, response: Response) {
@@ -187,10 +205,15 @@ async function createPlusbaseCheckout(
         );
       }
     }
-    // Also add the torch if there was a mask
-    const hasMask = cart.lines.some(l => l.productId === "buudy-led-mask");
-    if (hasMask) {
-      await addItem(PLUSBASE_PRODUCTS["buudy-red-torch"].productId, PLUSBASE_PRODUCTS["buudy-red-torch"].variantId, quantity);
+    const maskQuantity = cart.lines.find(
+      (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
+    )?.quantity;
+    if (maskQuantity) {
+      await addItem(
+        PLUSBASE_PRODUCTS["buudy-red-torch"].productId,
+        PLUSBASE_PRODUCTS["buudy-red-torch"].variantId,
+        maskQuantity,
+      );
     }
   } else {
     // Legacy fallback (assume mask)
@@ -213,6 +236,17 @@ export async function POST(request: NextRequest) {
   const token = crypto.randomUUID();
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
+  const appliedManualPromoCode = getManualPromoFromCart(body.cart);
+  const fallbackProductLine = body.cart?.lines.find(
+    (line) => line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId],
+  );
+  const fallbackProductId = fallbackProductLine?.productId ?? "buudy-led-mask";
+  const fallbackQuantity = fallbackProductLine?.quantity ?? quantity;
+  const requestedMaskQuantity = body.cart?.lines
+    ? (body.cart.lines.find(
+        (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
+      )?.quantity ?? 0)
+    : quantity;
 
   try {
     const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
@@ -220,7 +254,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       checkoutToken: checkout.checkoutToken,
       checkoutUrl: appendAttributionToAbsoluteUrl(
-        checkout.checkoutUrl,
+        appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
         cleanAttribution(body.attribution),
       ),
     });
@@ -232,8 +266,10 @@ export async function POST(request: NextRequest) {
     checkoutToken: token,
     checkoutUrl: buildPlusbaseCheckoutUrl({
       checkoutRef: token,
-      quantity,
-      giftQuantity: quantity,
+      quantity: fallbackQuantity,
+      giftQuantity: requestedMaskQuantity,
+      productId: fallbackProductId,
+      discountCode: appliedManualPromoCode,
       extraParams: bridgeParams(body.attribution),
     }),
   });

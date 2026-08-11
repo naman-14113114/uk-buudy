@@ -27,6 +27,8 @@ export type CheckoutBridgeOptions = {
   quantity?: number;
   giftQuantity?: number;
   productId?: string;
+  discountCode?: string;
+  discountCodes?: string[];
   source?: string;
   utmSource?: string;
   utmMedium?: string;
@@ -79,6 +81,13 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
+
+  Array.from(
+    new Set([
+      ...(options.discountCodes ?? []),
+      ...(options.discountCode ? [options.discountCode] : []),
+    ]),
+  ).forEach((code) => url.searchParams.append("discount", code));
 
   Object.entries(options.extraParams ?? {}).forEach(([key, value]) => {
     if (value != null && value !== "") {

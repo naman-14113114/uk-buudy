@@ -11,6 +11,7 @@ import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
 import { MarketingAnalytics } from "@/components/integrations/MarketingAnalytics";
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
+import { GlobalImageLoader } from "@/components/ui/GlobalImageLoader";
 import { market } from "@/lib/market";
 import "./globals.css";
 
@@ -116,6 +117,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body>
+        <GlobalImageLoader />
         <CartProvider>
           <HideOnPaths paths={["/cart"]}>
             <AnnouncementBar />

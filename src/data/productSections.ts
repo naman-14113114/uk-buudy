@@ -13,6 +13,11 @@ export type Transformation = {
   title: string;
   quote: string;
   name: string;
+  fullName: string;
+  age: number;
+  skinType: string;
+  routine: string;
+  experience: string;
 };
 
 export type ReviewVideo = {
@@ -139,6 +144,13 @@ export const transformations: Transformation[] = [
     quote:
       '"I have noticed a significant reduction in the sagging around my cheeks and jawline."',
     name: "Donna P.",
+    fullName: "Donna Parker",
+    age: 52,
+    skinType: "Dry, mature skin",
+    routine:
+      "Cleanse and dry the skin, use red and near-infrared light for 10 minutes four times a week, then apply a hydrating serum and moisturiser.",
+    experience:
+      "After eight weeks of consistent sessions, Donna felt that her cheeks and jawline looked firmer and more defined.",
   },
   {
     id: "result-02",
@@ -148,6 +160,13 @@ export const transformations: Transformation[] = [
     quote:
       '"After using for 1 month, I cannot believe the difference! Fine lines are much less noticeable."',
     name: "Jane P.",
+    fullName: "Jane Phillips",
+    age: 46,
+    skinType: "Normal-to-dry skin",
+    routine:
+      "Use red light on clean, dry skin for 10 minutes four times a week, followed by peptide serum and moisturiser, with SPF each morning.",
+    experience:
+      "After one month, Jane felt that the fine lines around her eyes and forehead looked softer and less noticeable.",
   },
   {
     id: "result-03",
@@ -157,6 +176,13 @@ export const transformations: Transformation[] = [
     quote:
       '"In less than 2 months, noticed the fine lines around my eyes and mouth are much less noticeable."',
     name: "Sarah K.",
+    fullName: "Sarah King",
+    age: 49,
+    skinType: "Dry, sensitive skin",
+    routine:
+      "Treat the face and neck with red and near-infrared light for 10 minutes four times a week, then finish with a fragrance-free ceramide moisturiser.",
+    experience:
+      "Within two months, Sarah noticed that fine lines around her eyes, mouth, and neck looked less pronounced.",
   },
   {
     id: "result-04",
@@ -166,6 +192,13 @@ export const transformations: Transformation[] = [
     quote:
       '"Within just a few weeks, my skin started to clear up and the scars began to fade."',
     name: "Michelle L.",
+    fullName: "Michelle Lewis",
+    age: 41,
+    skinType: "Combination, acne-prone skin",
+    routine:
+      "Alternate blue and red modes for 10 minutes four times a week on freshly cleansed skin, followed by niacinamide and a light moisturiser.",
+    experience:
+      "After several weeks, Michelle felt that her skin looked clearer and the appearance of old blemish marks had begun to fade.",
   },
   {
     id: "result-05",
@@ -175,6 +208,13 @@ export const transformations: Transformation[] = [
     quote:
       '"I never thought I would see my jawline again without surgery. This device is a total game changer."',
     name: "James D.",
+    fullName: "James Davies",
+    age: 44,
+    skinType: "Normal skin",
+    routine:
+      "Use red and near-infrared light for 10 minutes four evenings a week after cleansing, then apply a lightweight moisturiser.",
+    experience:
+      "After eight weeks, James felt that his jawline looked more defined and his skin appeared firmer overall.",
   },
   {
     id: "result-06",
@@ -184,6 +224,13 @@ export const transformations: Transformation[] = [
     quote:
       '"My skin looks so much more radiant and healthy. I have even stopped wearing heavy foundation!"',
     name: "Karen W.",
+    fullName: "Karen Wilson",
+    age: 38,
+    skinType: "Dehydrated, dull skin",
+    routine:
+      "Use red light for 10 minutes five times a week on clean, dry skin, then follow with hyaluronic serum and moisturiser.",
+    experience:
+      "After five weeks, Karen noticed a brighter, more radiant appearance and felt comfortable wearing lighter foundation.",
   },
   {
     id: "result-07",
@@ -193,6 +240,13 @@ export const transformations: Transformation[] = [
     quote:
       '"The puffiness under my eyes has vanished. I look like I have actually had 8 hours of sleep!"',
     name: "Linda S.",
+    fullName: "Linda Scott",
+    age: 55,
+    skinType: "Sensitive, mature skin",
+    routine:
+      "Use red and near-infrared light for 10 minutes four times a week, then apply a gentle eye cream and barrier-supporting moisturiser.",
+    experience:
+      "After six weeks, Linda felt that the under-eye area looked fresher and the appearance of puffiness was reduced.",
   },
   {
     id: "result-08",
@@ -202,6 +256,13 @@ export const transformations: Transformation[] = [
     quote:
       '"The overall texture of my skin has improved immensely. It feels incredibly soft and looks smooth."',
     name: "Jennifer H.",
+    fullName: "Jennifer Harris",
+    age: 36,
+    skinType: "Combination skin with uneven texture",
+    routine:
+      "Use red light for 10 minutes four times a week after cleansing, followed by a barrier serum and non-comedogenic moisturiser.",
+    experience:
+      "After six weeks, Jennifer felt that her skin looked smoother and more even and felt noticeably softer.",
   },
 ];
 
