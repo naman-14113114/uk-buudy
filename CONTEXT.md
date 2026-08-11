@@ -231,3 +231,48 @@ credential-bearing remote URLs.
 
 - Final local `main` remains at `799ca7f`, ahead/behind `0/0`; scoped source/assets plus this untracked append-only context are unstaged.
 - No commit, push, branch, pull request, pull, merge, rebase, stash, reset, deployment, promotion, rollback, live checkout, payment, order, alias, environment, Vercel, or PlusBase setting action occurred.
+
+## 2026-08-11 18:21:23 +05:30 - Desktop About Us, FAQs, and Contact Us header links restored locally
+
+### Repository And Starting State
+
+- Repository/domain: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`, serving the UK storefront at `https://www.buudy.co.uk` and the documented UK aliases.
+- Branch/HEAD: clean local `main` at `6026edaae7dcb0638e06493c1f47f0c76cbaee0f`, tracking identical `origin/main`; a fresh `git fetch --all --prune` confirmed ahead/behind `0/0` before editing.
+- Latest commit inspected: `6026eda feat: Apply promo code on cart, fix before after and and loading cta animation behind images`.
+- Muuhu reference: clean/fetched `muuhu-store` `main` at `f4786b7a`, aligned `0/0`; its latest commit contains the working UK header visibility correction.
+
+### User Request, Diagnosis, And Protected Scope
+
+- The user supplied a production screenshot of `/products/buudy-led-mask` where the left product navigation and Buudy logo appeared but `About Us`, `FAQs`, and `Contact Us` were missing on the right. They asked for the same correction already made successfully in Muuhu.
+- Live production reproduction showed the primary navigation switches on at Tailwind `lg` (1024px) while the secondary navigation remained `hidden` until `xl` (1280px). A physically wide Windows/browser screenshot can therefore have a CSS viewport below 1280px because of display scaling or browser zoom, producing exactly the supplied result.
+- Scope was limited to desktop header visibility and spacing. Protected and unchanged: navigation labels/routes, mobile menu, logo asset/positioning, cart/account behavior, product content/layout, prices, checkout, analytics, SEO, feeds, images/video, page order, Vercel configuration, and production state.
+
+### Files And Routes Inspected
+
+- Inspected the supplied screenshot, current `src/components/layout/Header.tsx`, `src/data/navigation.ts`, local Next.js 16 CSS/Tailwind documentation, and Muuhu `apps/uk/src/components/layout/Header.tsx` plus commit `f4786b7a`'s header diff.
+- Inspected live `https://www.buudy.co.uk/products/buudy-led-mask` at 1024, 1100, 1279, 1280, and 1365 CSS-pixel widths. Before the change, live primary navigation was `flex` at 1100 while secondary navigation was `none`; it became `flex` only at 1280.
+- Local routes checked: `/products/buudy-led-mask`, `/pages/about-us`, `/pages/faqs`, and `/pages/contact-us`.
+
+### File Changed And Implementation
+
+- Changed only `src/components/layout/Header.tsx` plus this append-only context.
+- Mirrored Muuhu's responsive classes: secondary navigation now uses `lg:flex` instead of `xl:flex`; primary/secondary link gaps use `gap-5` on desktop and restore the existing `gap-7` at `2xl`; container/right-control gaps use compact `lg` values and restore existing spacing at `2xl`.
+- The links remain `/pages/about-us`, `/pages/faqs`, and `/pages/contact-us`. Mobile behavior remains unchanged because both desktop navs are still hidden below `lg` and the menu button remains visible.
+
+### Verification
+
+- `npm run lint`: passed with `0` errors and the repository's existing `34` warnings.
+- `npm run build`: passed on Next.js `16.2.6`; TypeScript completed and all `33/33` routes generated.
+- `git diff --check`: passed with only the expected Windows LF-to-CRLF notice.
+- Playwright on `http://localhost:3101/products/buudy-led-mask`: at 1024, 1100, 1279, and 1536px both primary and secondary navs computed to `display:flex`, all three expected secondary labels/routes were present, desktop menu button was hidden, header stayed 73px high, and no horizontal overflow existed.
+- At 390x844 both desktop navs computed to `display:none`, the menu button computed to `display:grid`, header stayed 65px high, and no horizontal overflow existed.
+- Desktop 1100x850 and mobile 390x844 screenshots were visually inspected. The desktop links sit to the right of the centred Buudy logo with cart/account controls intact; mobile remains unchanged. Generated `.playwright-cli` files were verified as task-created and removed after inspection.
+- All three destination routes returned local HTTP `200`. Final Playwright console inspection reported `0` errors; development warnings were non-blocking.
+
+### Mistakes, Not Tested, And Final State
+
+- A first long Playwright metrics expression was split by PowerShell because of nested selector quoting. It did not modify the application; the same checks were rerun with simpler expressions and passed.
+- The first cleanup attempt used a policy-blocked recursive `Remove-Item`. The target was then explicitly resolved inside the repository, its nine generated files were listed, and those exact files plus the empty directory were removed non-recursively through PowerShell/.NET. No user file was deleted.
+- No production deployment or post-deployment production check was performed because the user did not authorize publishing. The live page was inspected only to establish the pre-fix defect; the corrected result was verified locally.
+- Final Git HEAD/upstream remain `6026eda` and `0/0`. The scoped header and append-only context changes are local and unstaged. No commit, push, branch, PR, pull, merge, rebase, stash, reset, deployment, promotion, rollback, Vercel/domain/alias/environment change, checkout, payment, or order occurred.
+- The local dev server was intentionally left available at `http://localhost:3101` for user review.
