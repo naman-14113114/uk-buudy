@@ -68,22 +68,45 @@ function isSavedQuiz(value: unknown): value is SavedQuiz {
   }
 
   const saved = value as Partial<SavedQuiz>;
+  const savedAnswers = saved.answers as Partial<QuizAnswers> | undefined;
+  const hasValidAnswers = skincareQuizQuestions.every((question) => {
+    const answer = savedAnswers?.[question.id];
+    const allowedValues = new Set(
+      question.options.map((option) => option.value),
+    );
+
+    if (question.selection === "multiple") {
+      return (
+        Array.isArray(answer) &&
+        answer.every(
+          (selected) =>
+            typeof selected === "string" && allowedValues.has(selected),
+        )
+      );
+    }
+
+    return (
+      typeof answer === "string" &&
+      (answer === "" || allowedValues.has(answer))
+    );
+  });
+  const hasCompleteResult =
+    saved.stage !== "results" ||
+    (Boolean(savedAnswers) &&
+      skincareQuizQuestions.every((question) =>
+        isQuestionAnswered(question, savedAnswers as QuizAnswers),
+      ));
 
   return (
     (saved.stage === "questions" || saved.stage === "results") &&
     typeof saved.questionIndex === "number" &&
+    Number.isInteger(saved.questionIndex) &&
     saved.questionIndex >= 0 &&
     saved.questionIndex < skincareQuizQuestions.length &&
     typeof saved.planStartDate === "string" &&
     Number.isFinite(Date.parse(saved.planStartDate)) &&
-    Boolean(saved.answers) &&
-    Array.isArray(saved.answers?.concern) &&
-    Array.isArray(saved.answers?.eyes) &&
-    typeof saved.answers?.skinType === "string" &&
-    typeof saved.answers?.pregnant === "string" &&
-    Array.isArray(saved.answers?.sensitivity) &&
-    typeof saved.answers?.routineTime === "string" &&
-    typeof saved.answers?.age === "string"
+    hasValidAnswers &&
+    hasCompleteResult
   );
 }
 
@@ -128,7 +151,11 @@ export function SkincareQuiz() {
         }
       }
     } catch {
-      window.localStorage.removeItem(STORAGE_KEY);
+      try {
+        window.localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        // Storage can be unavailable in privacy-restricted browser contexts.
+      }
     }
 
     const hydrationTimer = window.setTimeout(() => {
