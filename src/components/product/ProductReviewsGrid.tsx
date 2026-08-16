@@ -1261,32 +1261,15 @@ export function ProductReviewsGrid({
   }, [applyReviewResponse, fetchReviews]);
 
   const handleReviewSubmitted = useCallback(
-    async (review: ProductReview) => {
+    async (_review: ProductReview) => {
       setActiveRating(null);
       setReviewSort(defaultReviewFilters.sort);
       setVerifiedOnly(defaultReviewFilters.verifiedOnly);
       setWithPhotos(defaultReviewFilters.withPhotos);
       setOpenMenu(null);
       setError("");
-      setReviews((currentReviews) => [
-        {
-          ...review,
-          isNew: true,
-          staggerIndex: 0,
-        },
-        ...currentReviews.filter((currentReview) => currentReview.id !== review.id),
-      ]);
-      setCurrentTotal((current) => current + 1);
-      setSummaryTotal((current) => current + 1);
-
-      try {
-        const data = await fetchReviews(defaultReviewFilters, 0);
-        applyReviewResponse(data, "replace");
-      } catch {
-        setError("Your review is live, but we could not refresh the full archive yet.");
-      }
     },
-    [applyReviewResponse, fetchReviews],
+    [],
   );
 
   async function applyFilters(nextFilters: ReviewFilters) {
