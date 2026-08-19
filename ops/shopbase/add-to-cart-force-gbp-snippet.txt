@@ -1,0 +1,42 @@
+Paste this block immediately after this existing line in the PlusBase
+/pages/add-to-cart custom code:
+
+var params = new URLSearchParams(location.search);
+
+--- START BLOCK ---
+
+var FORCE_UK_GBP =
+  (params.get("currency") || "").toUpperCase() === "GBP" &&
+  (params.get("country") || "").toUpperCase() === "GB";
+
+if (FORCE_UK_GBP) {
+  var COOKIE_TTL = 60 * 60 * 24 * 365;
+  var COOKIE_OPTIONS =
+    "; Path=/; Max-Age=" + COOKIE_TTL + "; SameSite=Lax; Secure";
+
+  document.cookie = "X-Global-Market=GB" + COOKIE_OPTIONS;
+  document.cookie = "X-Global-Market-Currency=GBP" + COOKIE_OPTIONS;
+  document.cookie = "X-Lang=en-gb" + COOKIE_OPTIONS;
+
+  var NEXT_CHECKOUT = params.get("next");
+
+  if (NEXT_CHECKOUT) {
+    try {
+      var NEXT_URL = new URL(NEXT_CHECKOUT, location.origin);
+      var IS_SAFE_CHECKOUT =
+        NEXT_URL.origin === location.origin &&
+        /^\/checkouts\/[a-f0-9]{32}\/?$/i.test(NEXT_URL.pathname);
+
+      if (IS_SAFE_CHECKOUT) {
+        location.replace(
+          NEXT_URL.pathname + NEXT_URL.search + NEXT_URL.hash
+        );
+        return;
+      }
+    } catch (error) {
+      // Continue with the normal add-to-cart bridge if the target is invalid.
+    }
+  }
+}
+
+--- END BLOCK ---

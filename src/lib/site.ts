@@ -36,6 +36,31 @@ export type CheckoutBridgeOptions = {
   extraParams?: Record<string, string | number | boolean | null | undefined>;
 };
 
+function isAllowedPlusbaseCheckoutTarget(url: URL) {
+  return (
+    url.origin === plusbaseStoreUrl &&
+    /^\/checkouts\/[a-f0-9]{32}\/?$/i.test(url.pathname)
+  );
+}
+
+export function buildPlusbaseGbpHandoffUrl(targetUrl: string) {
+  const target = new URL(targetUrl, plusbaseStoreUrl);
+
+  if (!isAllowedPlusbaseCheckoutTarget(target)) {
+    throw new Error("Unsupported PlusBase checkout target.");
+  }
+
+  const handoff = new URL(getPlusbaseCheckoutBridgeUrl());
+  handoff.searchParams.set(
+    "next",
+    `${target.pathname}${target.search}${target.hash}`,
+  );
+  handoff.searchParams.set("currency", market.currency);
+  handoff.searchParams.set("country", "GB");
+
+  return handoff.toString();
+}
+
 const PLUSBASE_PRODUCTS: Record<string, { productId: string; variantId: string }> = {
   "buudy-led-mask": { productId: "1000000667467053", variantId: "1000020450989467" },
   "buudy-ipl-device": { productId: "1000000667723529", variantId: "1000020460632985" },
@@ -65,6 +90,8 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
     utm_source: options.utmSource ?? market.checkoutUtmSource,
     utm_medium: options.utmMedium ?? "store_cart_checkout",
     utm_campaign: options.utmCampaign ?? market.checkoutUtmCampaign,
+    currency: market.currency,
+    country: "GB",
   };
 
   if (targetProductId === "buudy-led-mask") {
