@@ -100,13 +100,12 @@ credential-bearing remote URLs.
 
 ### Checkout And PlusBase Facts Inspected
 
-- `src/lib/site.ts` uses `plusbaseStoreUrl = "https://new-buudy.onshopbase.com"` and bridge path `/pages/add-to-cart`.
-- Current PlusBase mappings in `src/lib/site.ts`:
+- `src/lib/site.ts` uses PlusBase's public primary domain, `https://buudy.com`, for order tracking and checkout URLs.
+- Current PlusBase mappings in `src/app/api/checkout/prepare/route.ts`:
   - `buudy-led-mask`: product ID `1000000671255940`, variant ID `1000020579664196`.
   - `buudy-ipl-device`: product ID `1000000671255943`, variant ID `1000020579664199`.
   - `buudy-red-torch`: product ID `1000000671255948`, variant ID `1000020579664204`.
 - For LED mask checkout, the builder adds a red torch gift using the current red torch IDs.
-- `src/app/api/checkout/prepare/route.ts` contains matching numeric PlusBase product mappings for the same three products.
 - This differs from the older multi-region `Buudy-Vercel` UK app, which has older hardcoded LED/red-torch IDs and no IPL mapping in the inspected checkout builder.
 
 ### Files Inspected
@@ -202,7 +201,7 @@ credential-bearing remote URLs.
 - Approved profiles added exactly for Donna Parker 52, Jane Phillips 46, Sarah King 49, Michelle Lewis 41, James Davies 44, Karen Wilson 38, Linda Scott 55, and Jennifer Harris 36.
 - Cart persistence now includes backward-compatible `manualPromoCode`. Only `BUUDY10` is valid, case-insensitively; it normalizes to uppercase, deducts exactly GBP 10 once per cart, floors totals at zero, supports accessible error/success/removal UI, and persists safely across reload.
 - Cart subtotal, promotion discount, free-gift value, savings, and final total derive from actual cart lines. The promo control is in the right summary above totals and checkout.
-- `/api/checkout/prepare` revalidates the code with `getAppliedManualPromoCode`; client discount amounts are never trusted. UK sends no automatic gift coupon. Torch gift quantity equals the actual mask quantity, IPL/torch-only carts do not receive a mask gift, and bridge fallback uses the actual first paid product and quantity.
+- `/api/checkout/prepare` revalidates the code with `getAppliedManualPromoCode`; client discount amounts are never trusted. UK sends no automatic gift coupon. Torch gift quantity equals the actual mask quantity, IPL/torch-only carts do not receive a mask gift, and checkout is created directly through PlusBase rather than a bridge page.
 - Current PlusBase IDs: mask `1000000671255940`/`1000020579664196`, IPL `1000000671255943`/`1000020579664199`, torch `1000000671255948`/`1000020579664204`.
 
 ### Mistakes, Findings, And Corrections

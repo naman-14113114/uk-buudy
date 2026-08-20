@@ -1,15 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
-import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const plusbaseOrigin = "https://new-buudy.onshopbase.com";
-// This PlusBase store reports checkout_api_supported=false. Keep cart creation in
-// the browser bridge so the checkout receives the store's market/session cookies.
-const directPlusbaseCheckoutEnabled = false;
+// Buudy's replacement PlusBase store uses this public primary domain for checkout.
+const plusbaseOrigin = "https://buudy.com";
 
 const PLUSBASE_PRODUCTS: Record<string, { productId: number; variantId: number }> = {
   "buudy-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
@@ -50,19 +47,6 @@ function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["at
   });
 
   return properties;
-}
-
-function bridgeParams(attribution: CheckoutPrepareBody["attribution"]) {
-  const params: Record<string, string> = {};
-
-  passthroughAttributionKeys.forEach((key) => {
-    const value = attribution?.[key];
-    if (value) {
-      params[key] = String(value).slice(0, 500);
-    }
-  });
-
-  return params;
 }
 
 function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
@@ -236,46 +220,25 @@ async function createPlusbaseCheckout(
 }
 
 export async function POST(request: NextRequest) {
-  const token = crypto.randomUUID();
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
   const appliedManualPromoCode = getManualPromoFromCart(body.cart);
-  const fallbackProductLine = body.cart?.lines.find(
-    (line) => line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId],
-  );
-  const fallbackProductId = fallbackProductLine?.productId ?? "buudy-led-mask";
-  const fallbackQuantity = fallbackProductLine?.quantity ?? quantity;
-  const requestedMaskQuantity = body.cart?.lines
-    ? (body.cart.lines.find(
-        (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
-      )?.quantity ?? 0)
-    : quantity;
 
-  if (directPlusbaseCheckoutEnabled) {
-    try {
-      const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
+  try {
+    const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
 
-      return NextResponse.json({
-        checkoutToken: checkout.checkoutToken,
-        checkoutUrl: appendAttributionToAbsoluteUrl(
-          appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
-          cleanAttribution(body.attribution),
-        ),
-      });
-    } catch (error) {
-      console.error("Direct PlusBase checkout creation failed", error);
-    }
+    return NextResponse.json({
+      checkoutToken: checkout.checkoutToken,
+      checkoutUrl: appendAttributionToAbsoluteUrl(
+        appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
+        cleanAttribution(body.attribution),
+      ),
+    });
+  } catch (error) {
+    console.error("Direct PlusBase checkout creation failed", error);
+    return NextResponse.json(
+      { error: "Could not prepare checkout. Please try again." },
+      { status: 502 },
+    );
   }
-
-  return NextResponse.json({
-    checkoutToken: token,
-    checkoutUrl: buildPlusbaseCheckoutUrl({
-      checkoutRef: token,
-      quantity: fallbackQuantity,
-      giftQuantity: requestedMaskQuantity,
-      productId: fallbackProductId,
-      discountCode: appliedManualPromoCode,
-      extraParams: bridgeParams(body.attribution),
-    }),
-  });
 }
