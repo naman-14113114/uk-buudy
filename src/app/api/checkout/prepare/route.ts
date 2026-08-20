@@ -1,10 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
-import {
-  buildPlusbaseCheckoutUrl,
-  buildPlusbaseGbpHandoffUrl,
-} from "@/lib/site";
+import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -256,11 +253,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       checkoutToken: checkout.checkoutToken,
-      checkoutUrl: buildPlusbaseGbpHandoffUrl(
-        appendAttributionToAbsoluteUrl(
-          appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
-          cleanAttribution(body.attribution),
-        ),
+      checkoutUrl: appendAttributionToAbsoluteUrl(
+        appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
+        cleanAttribution(body.attribution),
       ),
     });
   } catch (error) {
