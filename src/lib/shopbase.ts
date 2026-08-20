@@ -14,20 +14,24 @@ export type PlusbaseOrder = {
   }>;
 };
 
-export function getShopbaseAdminConfig() {
-  const apiKey = process.env.SHOPBASE_API_KEY?.trim();
-  const password = process.env.SHOPBASE_PASSWORD?.trim();
+const shopbaseStoreUrl = "https://new-buudy.onshopbase.com";
+const shopbaseApiKey = "c27b188dca3143890d0f6392d0a33b7e";
+const shopbasePassword =
+  "fd05b2ad5618507f202cd486b4dc4198ec9b734fc3762fef5f02a11f4e9c9a50";
+const shopbaseSharedSecret = "8c5068ad0c47efdb4787c7b1d7dc2245";
 
-  if (!apiKey || !password) {
-    throw new Error("Missing SHOPBASE_API_KEY or SHOPBASE_PASSWORD.");
-  }
+export function getShopbaseAdminConfig() {
+  const apiKey = process.env.SHOPBASE_API_KEY?.trim() || shopbaseApiKey;
+  const password = process.env.SHOPBASE_PASSWORD?.trim() || shopbasePassword;
 
   return {
     storeUrl: (
-      process.env.SHOPBASE_STORE_URL || "https://buudy.onshopbase.com"
+      process.env.SHOPBASE_STORE_URL || shopbaseStoreUrl
     ).replace(/\/+$/, ""),
     apiKey,
     password,
+    sharedSecret:
+      process.env.SHOPBASE_SHARED_SECRET?.trim() || shopbaseSharedSecret,
   };
 }
 

@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-const path = require("path");
-
-const storeUrl = "https://buudy.onshopbase.com";
-const apiKey = "c35179509dca16265e5115771cf29982";
-const password = "765e5d46582881f4bee786ba44ce77577f21aae46751cbba0351f92f1b3d25b1";
+const storeUrl = "https://new-buudy.onshopbase.com";
+const apiKey = "c27b188dca3143890d0f6392d0a33b7e";
+const password = "fd05b2ad5618507f202cd486b4dc4198ec9b734fc3762fef5f02a11f4e9c9a50";
 
 if (!apiKey || !password) {
   console.error("Missing SHOPBASE_API_KEY or SHOPBASE_PASSWORD environment variables.");
@@ -13,44 +11,25 @@ if (!apiKey || !password) {
 const PRODUCTS = [
   {
     name: "Buudy LED Mask (UK)",
-    variantId: "1000020450989467",
-    productUrl: "https://buudy.com/products/led-face-mask?variant=1000020450989467",
+    variantId: "1000020579664196",
+    productUrl: "https://new-buudy.onshopbase.com/products/led-face-mask?variant=1000020579664196",
     targetPriceGbp: 179,
     targetCompareAtGbp: 449,
     fallbackRate: 0.78093
   },
   {
     name: "Buudy Red Torch",
-    variantId: "1000020384558655",
-    productUrl: "https://buudy.com/products/buudy-red-torch?variant=1000020384558655",
+    variantId: "1000020579664204",
+    productUrl: "https://new-buudy.onshopbase.com/products/buudy-led-torch?variant=1000020579664204",
     targetPriceGbp: 70,
     targetCompareAtGbp: 175,
     fallbackRate: 0.78093,
     floorPriceUsd: true
   },
   {
-    name: "Buudy Red Torch (Light Therapy)",
-    variantId: "1000020018633106",
-    productUrl: "https://buudy.com/products/light-therapy-torch?variant=1000020018633106",
-    targetPriceGbp: 70,
-    targetCompareAtGbp: 175,
-    fallbackRate: 0.78093,
-    floorPriceUsd: true,
-    optional: true
-  },
-  {
-    name: "Buudy Led Face Wand",
-    variantId: "1000020291098406",
-    productUrl: "https://buudy.com/products/buudy-led-face-wand?variant=1000020291098406",
-    targetPriceGbp: 149,
-    targetCompareAtGbp: 299,
-    fallbackRate: 0.78093,
-    optional: true
-  },
-  {
     name: "Buudy IPL Hair Removal Device",
-    variantId: "1000020460632985",
-    productUrl: "https://buudy.com/products/buudy-ipl-device?variant=1000020460632985",
+    variantId: "1000020579664199",
+    productUrl: "https://new-buudy.onshopbase.com/products/buudy-ipl-device?variant=1000020579664199",
     targetPriceGbp: 129,
     targetCompareAtGbp: 249,
     fallbackRate: 0.78093

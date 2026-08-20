@@ -6,12 +6,15 @@ import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const plusbaseOrigin = "https://buudy.com";
+const plusbaseOrigin = "https://new-buudy.onshopbase.com";
+// This PlusBase store reports checkout_api_supported=false. Keep cart creation in
+// the browser bridge so the checkout receives the store's market/session cookies.
+const directPlusbaseCheckoutEnabled = false;
 
 const PLUSBASE_PRODUCTS: Record<string, { productId: number; variantId: number }> = {
-  "buudy-led-mask": { productId: 1000000667467053, variantId: 1000020450989467 },
-  "buudy-ipl-device": { productId: 1000000667723529, variantId: 1000020460632985 },
-  "buudy-red-torch": { productId: 1000000670474158, variantId: 1000020550222900 },
+  "buudy-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
+  "buudy-ipl-device": { productId: 1000000671255943, variantId: 1000020579664199 },
+  "buudy-red-torch": { productId: 1000000671255948, variantId: 1000020579664204 },
 };
 
 type CheckoutPrepareBody = {
@@ -248,18 +251,20 @@ export async function POST(request: NextRequest) {
       )?.quantity ?? 0)
     : quantity;
 
-  try {
-    const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
+  if (directPlusbaseCheckoutEnabled) {
+    try {
+      const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
 
-    return NextResponse.json({
-      checkoutToken: checkout.checkoutToken,
-      checkoutUrl: appendAttributionToAbsoluteUrl(
-        appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
-        cleanAttribution(body.attribution),
-      ),
-    });
-  } catch (error) {
-    console.error("Direct PlusBase checkout creation failed", error);
+      return NextResponse.json({
+        checkoutToken: checkout.checkoutToken,
+        checkoutUrl: appendAttributionToAbsoluteUrl(
+          appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
+          cleanAttribution(body.attribution),
+        ),
+      });
+    } catch (error) {
+      console.error("Direct PlusBase checkout creation failed", error);
+    }
   }
 
   return NextResponse.json({

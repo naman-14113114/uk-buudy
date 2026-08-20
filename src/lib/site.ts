@@ -1,7 +1,7 @@
 import { market } from "@/lib/market";
 
 export const defaultSiteUrl = market.siteUrl;
-export const plusbaseStoreUrl = "https://buudy.com";
+export const plusbaseStoreUrl = "https://new-buudy.onshopbase.com";
 
 const plusbaseBridgePath = "/pages/add-to-cart";
 
@@ -37,9 +37,9 @@ export type CheckoutBridgeOptions = {
 };
 
 const PLUSBASE_PRODUCTS: Record<string, { productId: string; variantId: string }> = {
-  "buudy-led-mask": { productId: "1000000667467053", variantId: "1000020450989467" },
-  "buudy-ipl-device": { productId: "1000000667723529", variantId: "1000020460632985" },
-  "buudy-red-torch": { productId: "1000000670474158", variantId: "1000020550222900" },
+  "buudy-led-mask": { productId: "1000000671255940", variantId: "1000020579664196" },
+  "buudy-ipl-device": { productId: "1000000671255943", variantId: "1000020579664199" },
+  "buudy-red-torch": { productId: "1000000671255948", variantId: "1000020579664204" },
 };
 
 export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
