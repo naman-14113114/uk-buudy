@@ -19,7 +19,6 @@ const shopbaseApiKey = "c27b188dca3143890d0f6392d0a33b7e";
 const shopbasePassword =
   "fd05b2ad5618507f202cd486b4dc4198ec9b734fc3762fef5f02a11f4e9c9a50";
 const shopbaseSharedSecret = "8c5068ad0c47efdb4787c7b1d7dc2245";
-
 export function getShopbaseAdminConfig() {
   const apiKey = process.env.SHOPBASE_API_KEY?.trim() || shopbaseApiKey;
   const password = process.env.SHOPBASE_PASSWORD?.trim() || shopbasePassword;
@@ -45,7 +44,7 @@ export async function fetchRecentPlusbaseOrders(options: {
 
   url.searchParams.set("created_at_min", options.createdAtMin);
   url.searchParams.set("limit", String(limit));
-  url.searchParams.set("financial_status", "paid");
+  url.searchParams.set("status", "any");
   url.searchParams.set(
     "fields",
     "id,created_at,financial_status,total_price,currency,line_items",
