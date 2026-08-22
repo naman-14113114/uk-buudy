@@ -233,59 +233,6 @@ export const buudyMask: Product = {
   ],
 };
 
-export const buudy7ColourMask: Product = {
-  id: "buudy-7-colour-led-mask",
-  sku: "BUUDY-7C-LED-MASK-UK",
-  slug: "buudy-7-colour-led-face-mask",
-  template: "mask",
-  name: "Buudy 7 Colour LED Light Therapy Face Mask",
-  heroTitle: "Buudy 7 Colour LED",
-  heroEmphasis: "Face & Neck Mask",
-  shortDescription:
-    "Rated UK's #1 LED Mask: 7 clinical light wavelengths + 830nm NIR, dedicated neck collar, cordless design, and Free £70 Red Torch glow kit.",
-  description:
-    "The UK's premier clinical-grade at-home LED light therapy system. Featuring 192 precision LEDs across 7 targeted wavelengths plus 830nm Near-Infrared (NIR) technology, complete face and neck coverage, cordless tap control, 90-day risk-free trial, and complimentary £70 Red Torch gift bundle.",
-  seoTitle: "Buudy 7 Colour LED Light Therapy Face Mask UK | Best LED Mask",
-  seoDescription:
-    "Shop the Buudy 7 Colour LED Face Mask in the UK: 7 colours + 830nm near-infrared, full face and neck coverage, cordless design, 90-day returns, and free £70 glow kit.",
-  currency: market.currency,
-  priceCents: 17900,
-  compareAtCents: 44900,
-  rating: 4.9,
-  reviewCount: 16000,
-  customerCount: "16,000+",
-  promoCode: "GLOWKIT",
-  promoLabel: "Glow kit promo applied",
-  cartImage: productAsset("01-buudy-led-mask-front.webp"),
-  gallery: buudyMask.gallery,
-  gifts: buudyMask.gifts,
-  specs: buudyMask.specs,
-  included: buudyMask.included,
-  highlights: [
-    "7 LED light colours + 830nm Near-Infrared",
-    "Complete face & neck collar coverage",
-    "Stimulates collagen & clears acne",
-    "Cordless, rechargeable, and hands-free",
-  ],
-  keyBenefits: buudyMask.keyBenefits,
-  differentiators: [
-    "7 wavelengths plus 830nm near-infrared",
-    "Full-face and neck coverage included",
-    "Buudy AI app for guided sessions",
-    "Cordless, rechargeable design",
-    "3-minute daily treatment routine",
-    "Tap-to-cycle touch control",
-    "Integrated eye protection",
-  ],
-  faqs,
-  badges: [
-    "Rated #1 UK LED Mask",
-    "90-Day Money Back Trial",
-    "CE / FCC / RoHS Certified",
-    "Dermatologist Endorsed",
-  ],
-};
-
 const torchAsset = (fileName: string) =>
   productAsset(fileName, "buudy-red-torch");
 
@@ -470,7 +417,7 @@ export const buudyIplDevice: Product = {
   ],
 };
 
-export const products = [buudyMask, buudy7ColourMask, buudyRedTorch, buudyIplDevice];
+export const products = [buudyMask, buudyRedTorch, buudyIplDevice];
 
 export const productsById = Object.fromEntries(
   products.map((product) => [product.id, product]),

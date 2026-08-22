@@ -1,4 +1,4 @@
-import { buudyMask, buudy7ColourMask, buudyRedTorch } from "@/data/products";
+import { buudyMask, buudyRedTorch } from "@/data/products";
 import { absoluteUrl } from "@/lib/site";
 
 export type MerchantProductDetail = {
@@ -115,7 +115,7 @@ export const googleMerchantProducts: MerchantProduct[] = [
       productImage("/images/products/buudy-led-mask/11-buudy-led-mask-flexible-silicone.webp"),
     ],
     availability: "in_stock",
-    price: priceFromCents(buudy7ColourMask.priceCents),
+    price: priceFromCents(buudyMask.priceCents),
     brand: "Buudy",
     googleProductCategory,
     productType: "Health & Beauty > Personal Care > Light Therapy Devices",

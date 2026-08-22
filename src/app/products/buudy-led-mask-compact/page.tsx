@@ -7,52 +7,30 @@ import {
   faqJsonLd,
   organizationJsonLd,
   productJsonLd,
-  productWebPageJsonLd,
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
-const pagePath = "/products/buudy-7-colour-led-face-mask";
-const pageProduct = {
-  ...buudyMask,
-  slug: "buudy-7-colour-led-face-mask",
-};
-
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: buudyMask.seoTitle,
-  description: buudyMask.seoDescription,
-  keywords: [
-    "best LED face mask UK",
-    "LED face mask UK",
-    "red light therapy mask UK",
-    "LED face mask for acne UK",
-    "anti ageing LED mask",
-    "LED mask with neck coverage",
-    "near infrared LED face mask",
-  ],
+  title: "Buudy LED Mask | Compact UK Product Page",
+  description:
+    "A tighter Buudy LED Mask UK product page with reviews earlier, compact expert video, and a faster path through the main buying sections.",
   alternates: {
-    canonical: pagePath,
+    canonical: "/products/buudy-led-mask",
     languages: {
-      "en-GB": pagePath,
+      "en-GB": "/products/buudy-led-mask-compact",
     },
   },
   robots: {
-    index: true,
+    index: false,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
   },
   openGraph: {
-    title: buudyMask.seoTitle,
+    title: "Buudy LED Mask | Compact UK Product Page",
     description: buudyMask.description,
-    url: absoluteUrl(pagePath),
+    url: absoluteUrl("/products/buudy-led-mask-compact"),
     type: "website",
     images: [
       {
@@ -63,15 +41,9 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: buudyMask.seoTitle,
-    description: buudyMask.seoDescription,
-    images: [buudyMask.gallery[0].src],
-  },
 };
 
-export default function Buudy7ColourMaskProductRoute() {
+export default function CompactBuudyMaskProductRoute() {
   const productFaqs = [...ledMaskSeoFaqs, ...buudyMask.faqs];
 
   return (
@@ -79,11 +51,10 @@ export default function Buudy7ColourMaskProductRoute() {
       {[
         organizationJsonLd(),
         websiteJsonLd(),
-        productWebPageJsonLd(pageProduct),
-        productJsonLd(pageProduct),
+        productJsonLd(buudyMask),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },
-          { name: buudyMask.name, url: pagePath },
+          { name: buudyMask.name, url: "/products/buudy-led-mask-compact" },
         ]),
         faqJsonLd(productFaqs),
       ].map((schema, index) => (
@@ -93,7 +64,7 @@ export default function Buudy7ColourMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={buudyMask} />
+      <ProductPage product={buudyMask} variant="compact" />
     </>
   );
 }
