@@ -10,6 +10,7 @@ const plusbaseOrigin = "https://buudy.com";
 
 const PLUSBASE_PRODUCTS: Record<string, { productId: number; variantId: number }> = {
   "buudy-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
+  "buudy-7-colour-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
   "buudy-ipl-device": { productId: 1000000671255943, variantId: 1000020579664199 },
   "buudy-red-torch": { productId: 1000000671255948, variantId: 1000020579664204 },
 };
@@ -193,7 +194,7 @@ async function createPlusbaseCheckout(
       }
     }
     const maskQuantity = cart.lines.find(
-      (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
+      (line) => line.type !== "gift" && (line.productId === "buudy-led-mask" || line.productId === "buudy-7-colour-led-mask"),
     )?.quantity;
     if (maskQuantity) {
       await addItem(
