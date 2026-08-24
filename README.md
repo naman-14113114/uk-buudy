@@ -121,3 +121,31 @@ Recommended production settings:
 - Environment variable: `WEB3FORMS_ACCESS_KEY` for the contact form
 - Supabase env variables listed above for accounts, orders, checkout recording,
   and admin dashboard
+
+## Microsoft Shopping purchase tracking
+
+Microsoft Shopping purchases are reported server-side only after PlusBase marks
+an order as `paid`. The storefront preserves `msclkid` as a PlusBase line-item
+property, the `orders/paid` webhook sends the `purchase` event immediately, and
+a daily reconciliation job recovers any missed webhook deliveries using the same
+stable event ID for deduplication.
+
+Set these server-only variables in the Vercel project that serves
+`www.buudy.co.uk`:
+
+```bash
+MICROSOFT_SHOPPING_UET_TAG_ID=
+MICROSOFT_SHOPPING_CAPI_TOKEN=
+SHOPBASE_WEBHOOK_SECRET=
+CRON_SECRET=
+```
+
+Register an `orders/paid` ShopBase webhook at:
+
+```txt
+https://www.buudy.co.uk/api/webhooks/shopbase/orders-paid
+```
+
+The Microsoft CAPI token must never use a `NEXT_PUBLIC_` name or be committed to
+Git. The pre-existing browser UET tag remains unchanged and is intentionally
+separate from this server-side Shopping purchase integration.
