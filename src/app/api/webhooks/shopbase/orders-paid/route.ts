@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     const result = await sendMicrosoftPurchase(order);
     const orderSummary = describeMicrosoftPurchaseOrder(order);
 
-    console.info("Microsoft Shopping paid-order webhook processed", {
+    console.info("Microsoft Shopping conversion-order webhook processed", {
       ...orderSummary,
       result: result.status,
     });

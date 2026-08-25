@@ -9,8 +9,10 @@ import {
 } from "@/lib/shopbase";
 
 const MICROSOFT_CAPI_ORIGIN = "https://capi.uet.microsoft.com";
+const MICROSOFT_SHOPPING_UET_TAG_ID = "355003164";
 const PURCHASE_EVENT_NAME = "purchase";
 const MAX_EVENT_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+const CONVERSION_FINANCIAL_STATUSES = new Set(["authorized", "paid"]);
 
 type MicrosoftCapiEvent = {
   eventType: "custom";
@@ -31,11 +33,23 @@ type MicrosoftCapiEvent = {
 
 export type MicrosoftPurchaseBuildResult =
   | { status: "ready"; event: MicrosoftCapiEvent }
-  | { status: "not_paid" | "missing_msclkid" | "invalid_order" | "stale" };
+  | {
+      status:
+        | "not_authorized_or_paid"
+        | "missing_msclkid"
+        | "invalid_order"
+        | "stale";
+    };
 
 export type MicrosoftPurchaseSendResult =
   | { status: "sent"; eventId: string }
-  | { status: "not_paid" | "missing_msclkid" | "invalid_order" | "stale" };
+  | {
+      status:
+        | "not_authorized_or_paid"
+        | "missing_msclkid"
+        | "invalid_order"
+        | "stale";
+    };
 
 function requireEnv(name: string) {
   const value = process.env[name]?.trim();
@@ -47,7 +61,9 @@ function requireEnv(name: string) {
 
 function getMicrosoftCapiConfig() {
   return {
-    tagId: requireEnv("MICROSOFT_SHOPPING_UET_TAG_ID"),
+    tagId:
+      process.env.MICROSOFT_SHOPPING_UET_TAG_ID?.trim() ||
+      MICROSOFT_SHOPPING_UET_TAG_ID,
     token: requireEnv("MICROSOFT_SHOPPING_CAPI_TOKEN"),
   };
 }
@@ -67,8 +83,9 @@ export function buildMicrosoftPurchaseEvent(
   order: PlusbaseOrder,
   now = new Date(),
 ): MicrosoftPurchaseBuildResult {
-  if (order.financial_status?.trim().toLowerCase() !== "paid") {
-    return { status: "not_paid" };
+  const financialStatus = order.financial_status?.trim().toLowerCase();
+  if (!CONVERSION_FINANCIAL_STATUSES.has(financialStatus)) {
+    return { status: "not_authorized_or_paid" };
   }
 
   const msclkid = extractMsclkidFromOrder(order)?.trim();

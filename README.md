@@ -124,23 +124,28 @@ Recommended production settings:
 
 ## Microsoft Shopping purchase tracking
 
-Microsoft Shopping purchases are reported server-side only after PlusBase marks
-an order as `paid`. The storefront preserves `msclkid` as a PlusBase line-item
-property, the `orders/paid` webhook sends the `purchase` event immediately, and
-a daily reconciliation job recovers any missed webhook deliveries using the same
-stable event ID for deduplication.
+Microsoft Shopping purchases are reported server-side as soon as PlusBase marks
+an order as `authorized` or `paid`. The storefront preserves `msclkid` as a
+PlusBase line-item property, the order webhooks send the `purchase` event
+immediately, and a daily reconciliation job recovers any missed webhook
+deliveries using the same stable event ID for deduplication. The later `paid`
+update therefore cannot count the same PlusBase order twice.
 
 Set these server-only variables in the Vercel project that serves
 `www.buudy.co.uk`:
 
 ```bash
-MICROSOFT_SHOPPING_UET_TAG_ID=
 MICROSOFT_SHOPPING_CAPI_TOKEN=
 SHOPBASE_WEBHOOK_SECRET=
 CRON_SECRET=
 ```
 
-Register an `orders/paid` ShopBase webhook at:
+The Shopping UET tag ID is fixed server-side to `355003164`. An environment
+override remains available through `MICROSOFT_SHOPPING_UET_TAG_ID`, but is not
+required for this account.
+
+Register `orders/create`, `orders/updated`, and `orders/paid` ShopBase webhooks
+at the same endpoint:
 
 ```txt
 https://www.buudy.co.uk/api/webhooks/shopbase/orders-paid

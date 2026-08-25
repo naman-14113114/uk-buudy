@@ -16,7 +16,7 @@ export async function reconcileMicrosoftPurchases() {
     checked: orders.length,
     ready: 0,
     sent: 0,
-    notPaid: 0,
+    notAuthorizedOrPaid: 0,
     missingMsclkid: 0,
     invalidOrder: 0,
     stale: 0,
@@ -27,8 +27,8 @@ export async function reconcileMicrosoftPurchases() {
     if (result.status === "ready") {
       events.push(result.event);
       summary.ready += 1;
-    } else if (result.status === "not_paid") {
-      summary.notPaid += 1;
+    } else if (result.status === "not_authorized_or_paid") {
+      summary.notAuthorizedOrPaid += 1;
     } else if (result.status === "missing_msclkid") {
       summary.missingMsclkid += 1;
     } else if (result.status === "invalid_order") {
