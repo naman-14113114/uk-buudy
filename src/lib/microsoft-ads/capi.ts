@@ -9,7 +9,7 @@ import {
 } from "@/lib/shopbase";
 
 const MICROSOFT_CAPI_ORIGIN = "https://capi.uet.microsoft.com";
-const MICROSOFT_SHOPPING_UET_TAG_ID = "355003164";
+const MICROSOFT_SHOPPING_UET_TAG_ID = "355060364";
 const MICROSOFT_SHOPPING_CAPI_TOKEN =
   "2274c80c-0548-429a-906e-52553e564beb";
 const PURCHASE_EVENT_NAME = "purchase";
