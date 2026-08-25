@@ -1,6 +1,11 @@
 export type PlusbaseOrder = {
-  id: number;
+  id: number | string;
+  name?: string;
+  order_number?: number | string;
+  checkout_token?: string;
   created_at: string;
+  updated_at?: string;
+  paid_at?: string;
   financial_status: string;
   total_price: string;
   currency: string;
@@ -35,19 +40,25 @@ export function getShopbaseAdminConfig() {
 }
 
 export async function fetchRecentPlusbaseOrders(options: {
-  createdAtMin: string;
+  createdAtMin?: string;
+  updatedAtMin?: string;
   limit?: number;
 }): Promise<PlusbaseOrder[]> {
   const config = getShopbaseAdminConfig();
   const limit = Math.max(1, Math.min(250, options.limit ?? 250));
   const url = new URL(`${config.storeUrl}/admin/orders.json`);
 
-  url.searchParams.set("created_at_min", options.createdAtMin);
+  if (options.createdAtMin) {
+    url.searchParams.set("created_at_min", options.createdAtMin);
+  }
+  if (options.updatedAtMin) {
+    url.searchParams.set("updated_at_min", options.updatedAtMin);
+  }
   url.searchParams.set("limit", String(limit));
   url.searchParams.set("status", "any");
   url.searchParams.set(
     "fields",
-    "id,created_at,financial_status,total_price,currency,line_items",
+    "id,name,order_number,checkout_token,created_at,updated_at,paid_at,financial_status,total_price,currency,line_items",
   );
 
   const auth = Buffer.from(`${config.apiKey}:${config.password}`).toString(
@@ -85,4 +96,8 @@ export function extractMsclkidFromOrder(order: PlusbaseOrder): string | null {
   }
 
   return null;
+}
+
+export function getPlusbaseOrderReference(order: PlusbaseOrder): string {
+  return String(order.name || order.order_number || order.id).trim();
 }
