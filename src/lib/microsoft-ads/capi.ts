@@ -10,6 +10,8 @@ import {
 
 const MICROSOFT_CAPI_ORIGIN = "https://capi.uet.microsoft.com";
 const MICROSOFT_SHOPPING_UET_TAG_ID = "355003164";
+const MICROSOFT_SHOPPING_CAPI_TOKEN =
+  "2274c80c-0548-429a-906e-52553e564beb";
 const PURCHASE_EVENT_NAME = "purchase";
 const MAX_EVENT_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 const CONVERSION_FINANCIAL_STATUSES = new Set(["authorized", "paid"]);
@@ -51,20 +53,10 @@ export type MicrosoftPurchaseSendResult =
         | "stale";
     };
 
-function requireEnv(name: string) {
-  const value = process.env[name]?.trim();
-  if (!value) {
-    throw new Error(`Missing ${name}.`);
-  }
-  return value;
-}
-
 function getMicrosoftCapiConfig() {
   return {
-    tagId:
-      process.env.MICROSOFT_SHOPPING_UET_TAG_ID?.trim() ||
-      MICROSOFT_SHOPPING_UET_TAG_ID,
-    token: requireEnv("MICROSOFT_SHOPPING_CAPI_TOKEN"),
+    tagId: MICROSOFT_SHOPPING_UET_TAG_ID,
+    token: MICROSOFT_SHOPPING_CAPI_TOKEN,
   };
 }
 

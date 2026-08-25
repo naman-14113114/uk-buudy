@@ -135,14 +135,12 @@ Set these server-only variables in the Vercel project that serves
 `www.buudy.co.uk`:
 
 ```bash
-MICROSOFT_SHOPPING_CAPI_TOKEN=
 SHOPBASE_WEBHOOK_SECRET=
 CRON_SECRET=
 ```
 
-The Shopping UET tag ID is fixed server-side to `355003164`. An environment
-override remains available through `MICROSOFT_SHOPPING_UET_TAG_ID`, but is not
-required for this account.
+The Shopping UET tag ID and its CAPI token are fixed inside the server-only
+Microsoft Ads integration for this account.
 
 Register `orders/create`, `orders/updated`, and `orders/paid` ShopBase webhooks
 at the same endpoint:
@@ -151,6 +149,5 @@ at the same endpoint:
 https://www.buudy.co.uk/api/webhooks/shopbase/orders-paid
 ```
 
-The Microsoft CAPI token must never use a `NEXT_PUBLIC_` name or be committed to
-Git. The pre-existing browser UET tag remains unchanged and is intentionally
-separate from this server-side Shopping purchase integration.
+The pre-existing browser UET tag remains unchanged and is intentionally separate
+from this server-side Shopping purchase integration.
