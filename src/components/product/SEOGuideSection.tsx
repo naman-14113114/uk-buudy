@@ -27,7 +27,7 @@ const queryAnswers = [
   {
     question: "Best LED face mask UK",
     answer:
-      "For UK shoppers comparing LED masks, Buudy is strongest if you want one device with 192 LEDs, 7 wavelengths plus 830nm near-infrared, full face and neck coverage, cordless use, free tracked shipping, and a 90-day return window.",
+      "For UK shoppers comparing LED masks, Buudy is strongest if you want one device with 192 LEDs, 7 wavelengths plus 830nm near-infrared, full face and neck coverage, cordless use, free tracked shipping, and an easy return and refund policy.",
   },
   {
     question: "LED face mask for acne and anti-ageing",
@@ -63,8 +63,8 @@ export function SEOGuideSection({ product }: { product: Product }) {
                 {formatMoney(product.priceCents, product.currency)}
               </p>
               <p className="mt-2 text-sm leading-6 text-[rgba(247,241,232,.7)]">
-                Includes free glow kit, free tracked shipping, and 90-day money
-                back guarantee while the UK launch offer is live.
+                Includes free glow kit, free tracked shipping, and an easy
+                return and refund policy while the UK launch offer is live.
               </p>
             </div>
             <Button

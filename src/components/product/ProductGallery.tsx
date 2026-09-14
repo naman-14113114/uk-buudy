@@ -2,9 +2,8 @@
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Search, X } from "lucide-react";
+import { X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
-import { market } from "@/lib/market";
 
 export function ProductGallery({
   images,
@@ -138,17 +137,14 @@ export function ProductGallery({
         /* 1. CONTAINER */
         .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
-        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
+        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
         .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; }
         /* 3. THUMBNAILS GRID */
         .buudyLED-23435t23-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
-        .buudyLED-23435t23-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
+        .buudyLED-23435t23-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
         .buudyLED-23435t23-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
-        .buudyLED-23435t23-thumb_zoom { position: absolute; bottom: 9px; left: 9px; z-index: 2; display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid rgba(58, 31, 61, .16); border-radius: 50%; background: rgba(247, 241, 232, .92); color: var(--plum); opacity: 0; transform: translateY(5px); transition: opacity .2s ease, transform .2s ease; }
         .buudyLED-23435t23-thumb_item:hover { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16), inset 0 0 0 1px rgba(0, 0, 0, 0.05); z-index: 1; }
         .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_img { transform: scale(1.08); }
-        .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_zoom,
-        .buudyLED-23435t23-thumb_item:focus-visible .buudyLED-23435t23-thumb_zoom { opacity: 1; transform: translateY(0); }
         .buudyLED-23435t23-thumb_item.buudyLED-23435t23-active { box-shadow: inset 0 0 0 2px #000; }
         /* 4. ARROWS */
         .buudyLED-23435t23-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); padding: 0; transition: transform 0.2s, background-color 0.2s; }
@@ -167,12 +163,8 @@ export function ProductGallery({
         .buudyLED-23435t23-modal_nav { width: 60px; height: 60px; background: rgba(0, 0, 0, 0.1); border-radius: 50%; }
         .buudyLED-23435t23-modal_nav:hover { background: rgba(0, 0, 0, 0.2); }
         .buudyLED-23435t23-modal_nav .buudyLED-23435t23-icon { border-color: #333; }
-        /* 6. ZOOM BUTTON */
-        .buudyLED-23435t23-zoom_btn { position: absolute; bottom: 16px; left: 16px; width: 38px !important; min-height: 38px !important; background-color: rgba(247, 241, 232, 0.94); border: 1px solid rgba(58, 31, 61, .18); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 6px rgba(58, 31, 61, 0.18); transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease; color: var(--plum); opacity: 0; }
-        .buudyLED-23435t23-main_wrapper:hover .buudyLED-23435t23-zoom_btn, .buudyLED-23435t23-zoom_btn:focus-visible { opacity: 1; }
-        .buudyLED-23435t23-zoom_btn:hover { background-color: #fff; transform: scale(1.1); }
         
-        /* 7. STACKED RESPONSIVENESS */
+        /* 6. STACKED RESPONSIVENESS */
         @media (max-width: 1023px) { 
             .buudyLED-23435t23-grid { 
                 display: flex; 
@@ -189,10 +181,6 @@ export function ProductGallery({
             .buudyLED-23435t23-grid::-webkit-scrollbar {
                 display: none;
             }
-            /* Hide Zoom Button on Mobile */
-            .buudyLED-23435t23-zoom_btn {
-                display: none !important;
-            }
             .buudyLED-23435t23-thumb_item {
                 flex: 0 0 28%; /* Show ~3.5 items to hint at scrolling */
                 min-width: 80px; 
@@ -202,9 +190,6 @@ export function ProductGallery({
             }
             .buudyLED-23435t23-thumb_img {
                 height: 100%; /* Reset the 100.5% height to exact fit */
-            }
-            .buudyLED-23435t23-thumb_zoom {
-                display: none !important;
             }
         }
       `,
@@ -255,34 +240,6 @@ export function ProductGallery({
               3 Free Gifts
             </span>
           )}
-          <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
-            <svg
-              aria-hidden="true"
-              className="h-3 w-[21px] flex-shrink-0 object-contain rounded-[1px]"
-              viewBox="0 0 60 30"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect fill="#012169" height="30" width="60" />
-              <path d="M0 0 60 30M60 0 0 30" stroke="#fff" strokeWidth="6" />
-              <path d="M0 0 60 30M60 0 0 30" stroke="#c8102e" strokeWidth="3" />
-              <path d="M30 0v30M0 15h60" stroke="#fff" strokeWidth="10" />
-              <path d="M30 0v30M0 15h60" stroke="#c8102e" strokeWidth="6" />
-            </svg>
-            <span className="buudy-mono leading-none">
-              {market.madeInLabel}
-            </span>
-          </span>
-
-          <button
-            aria-label="Magnify current product image"
-            className="buudyLED-23435t23-zoom_btn"
-            onClick={(event) => {
-              event.stopPropagation();
-              openLightbox();
-            }}
-          >
-            <Search aria-hidden="true" size={16} strokeWidth={2.2} />
-          </button>
 
           <button
             className="buudyLED-23435t23-arrow buudyLED-23435t23-prev"
@@ -349,9 +306,6 @@ export function ProductGallery({
                   loading="lazy"
                 />
               )}
-              <span aria-hidden="true" className="buudyLED-23435t23-thumb_zoom">
-                <Search size={14} strokeWidth={2.2} />
-              </span>
             </button>
           ))}
         </div>

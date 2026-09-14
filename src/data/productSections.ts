@@ -571,16 +571,25 @@ export const torchFeatures: Feature[] = [
 
 export const torchDetailImages = [
   {
-    src: productAsset("09-buudy-red-torch-detail-wide.jpeg", "buudy-red-torch"),
-    alt: "Buudy Red Torch detail image",
+    src: productAsset(
+      "07-buudy-red-light-torch-lifestyle-portable-relief.webp",
+      "buudy-red-torch",
+    ),
+    alt: "Buudy Red Light Therapy Torch held by a woman for portable on-the-go body and skin wellness",
   },
   {
-    src: productAsset("10-buudy-red-torch-wellness.jpeg", "buudy-red-torch"),
-    alt: "Buudy Red Torch wellness use",
+    src: productAsset(
+      "08-buudy-red-light-torch-neck-targeted-wellness.webp",
+      "buudy-red-torch",
+    ),
+    alt: "Woman using Buudy Red Light Torch with protective eyewear for targeted neck light therapy",
   },
   {
-    src: productAsset("11-buudy-red-torch-treatment.jpeg", "buudy-red-torch"),
-    alt: "Buudy Red Torch treatment application",
+    src: productAsset(
+      "11-buudy-red-light-torch-multi-body-treatment-grid.webp",
+      "buudy-red-torch",
+    ),
+    alt: "Buudy Red Light Therapy Torch multi-zone application guide for elbow, hand, back, and knee relief",
   },
 ];
 

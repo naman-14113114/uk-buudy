@@ -125,7 +125,7 @@ export const googleMerchantProducts: MerchantProduct[] = [
       "Cordless, rechargeable, tap-to-cycle control",
       "Four adjustable intensity levels",
       "192 high-density LEDs",
-      "90-day money back guarantee",
+      "Easy return and refund policy",
     ],
     productDetails: [
       {
@@ -163,14 +163,24 @@ export const googleMerchantProducts: MerchantProduct[] = [
       "Buudy Red Light Therapy Torch is a compact handheld device for targeted adult at-home skincare and wellness routines. It combines red and near-infrared light at 630 nm, 660 nm and 850 nm in a portable format. The torch is supplied with a USB charging cable and wrist strap for easy storage and travel.",
     link: absoluteUrl("/products/red-light-torch"),
     imageLink: productImage(
-      "/images/products/buudy-red-torch/07-buudy-red-torch-closeup.jpeg",
+      "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
     ),
     additionalImageLinks: [
-      productImage("/images/products/buudy-red-torch/01-buudy-red-torch-main.png"),
-      productImage("/images/products/buudy-red-torch/03-buudy-red-torch-handheld.jpeg"),
-      productImage("/images/products/buudy-red-torch/05-buudy-red-torch-kit.jpeg"),
-      productImage("/images/products/buudy-red-torch/06-buudy-red-torch-body-relief.jpeg"),
-      productImage("/images/products/buudy-red-torch/08-buudy-red-torch-travel.jpeg"),
+      productImage(
+        "/images/products/buudy-red-torch/02-buudy-red-light-torch-product-travel-case.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/03-buudy-red-light-torch-handheld-ergonomics.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/04-buudy-red-light-torch-neck-shoulder-treatment.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/05-buudy-red-light-torch-arm-joint-pain-relief.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/06-buudy-red-light-torch-deep-tissue-muscle-recovery.webp",
+      ),
     ],
     availability: "in_stock",
     price: priceFromCents(buudyRedTorch.priceCents),

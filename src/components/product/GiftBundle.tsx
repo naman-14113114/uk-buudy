@@ -165,7 +165,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            90-Day Returns
+            Easy Returns
           </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -298,15 +298,15 @@ export function GiftBundle({ product }: { product: Product }) {
           <div className="flex flex-col items-center gap-2">
             <Image
               src="/media/products/buudy-led-mask/images/i7.png"
-              alt="90 Days Money Back Guarantee"
+              alt="Easy Returns & Refunds"
               width={60}
               height={60}
               className="object-contain"
             />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-              90 Days Money
+              Easy Returns
               <br />
-              Back Guarantee
+              & Refunds
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">

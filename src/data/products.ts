@@ -80,7 +80,7 @@ export const buudyMask: Product = {
     "Salon-grade light therapy reimagined for UK homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colours plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
   seoTitle: "Best LED Face Mask UK | Buudy Red Light Therapy Mask",
   seoDescription:
-    "Shop the Buudy LED Face Mask in the UK: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, 90-day returns, and free glow kit.",
+    "Shop the Buudy LED Face Mask in the UK: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns and refunds, and free glow kit.",
   currency: market.currency,
   priceCents: 17900,
   compareAtCents: 44900,
@@ -228,7 +228,7 @@ export const buudyMask: Product = {
   badges: [
     "Health Canada approved",
     "CE / FCC / ROHS",
-    "90-day money back",
+    "Easy return and refund",
     "Dermatologist endorsed",
   ],
 };
@@ -259,41 +259,32 @@ export const buudyRedTorch: Product = {
   customerCount: "16,000+",
   promoCode: "TORCH60",
   promoLabel: "Red torch offer applied",
-  cartImage: torchAsset("01-buudy-red-torch-main.png"),
+  cartImage: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
   gallery: [
     {
-      src: torchAsset("01-buudy-red-torch-main.png"),
-      alt: "Buudy Red Torch handheld light therapy device",
+      src: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
+      alt: "Buudy Red Light Therapy Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
     },
     {
-      src: torchAsset("02-buudy-red-torch-animation.gif"),
-      alt: "Buudy Red Torch light therapy in use",
-      animated: true,
+      src: torchAsset("02-buudy-red-light-torch-product-travel-case.webp"),
+      alt: "Buudy Red Light Therapy Torch with sleek aluminium body and red LED emitter alongside its protective black zippered travel storage case",
     },
     {
-      src: torchAsset("03-buudy-red-torch-handheld.jpeg"),
-      alt: "Buudy Red Torch compact handheld device",
+      src: torchAsset("03-buudy-red-light-torch-handheld-ergonomics.webp"),
+      alt: "Compact and ergonomic Buudy Red Light Therapy Torch held in hand with safety wrist strap demonstrating portable travel-ready size",
     },
     {
-      src: torchAsset("04-buudy-red-torch-wavelengths.jpeg"),
-      alt: "Buudy Red Torch wavelength detail",
+      src: torchAsset("04-buudy-red-light-torch-neck-shoulder-treatment.webp"),
+      alt: "Woman using the Buudy Red Light Torch for targeted red and near-infrared light therapy on her neck and shoulder for skin smoothing and tension relief",
     },
     {
-      src: torchAsset("05-buudy-red-torch-kit.jpeg"),
-      alt: "Buudy Red Torch kit and accessories",
+      src: torchAsset("05-buudy-red-light-torch-arm-joint-pain-relief.webp"),
+      alt: "Targeted application of the Buudy Red Light Therapy Torch on forearm and wrist joint for localized pain relief and cellular repair",
     },
     {
-      src: torchAsset("06-buudy-red-torch-body-relief.jpeg"),
-      alt: "Buudy Red Torch body relief use",
+      src: torchAsset("06-buudy-red-light-torch-deep-tissue-muscle-recovery.webp"),
+      alt: "Close-up of Buudy Red Light Torch emitting concentrated 630nm, 660nm, and 850nm wavelengths for deep tissue muscle recovery and elbow joint relief",
     },
-    // {
-    //   src: torchAsset("07-buudy-red-torch-closeup.jpeg"),
-    //   alt: "Buudy Red Torch LED close up",
-    // },
-    // {
-    //   src: torchAsset("08-buudy-red-torch-travel.jpeg"),
-    //   alt: "Buudy Red Torch travel-ready design",
-    // },
   ],
   gifts: [],
   specs: [
