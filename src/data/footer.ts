@@ -5,7 +5,7 @@ export const footerMenus = [
       { label: "Home", href: "/" },
       { label: "LED Face Mask", href: "/products/buudy-led-mask" },
       { label: "Best LED Mask UK Guide", href: "/pages/best-led-face-mask-uk" },
-      { label: "Red Light Torch", href: "/products/red-light-torch" },
+      { label: "Buudy LED Torch", href: "/products/red-light-torch" },
       { label: "Skincare Quiz", href: "/pages/skincare-quiz" },
       { label: "Privacy Policy", href: "/policies/privacy-policy" },
       { label: "Return Policy", href: "/policies/return-policy" },

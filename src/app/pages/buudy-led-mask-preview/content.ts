@@ -29,10 +29,10 @@ export const gifts = [
     alt: "Buudy's white protective travel case being held upright",
   },
   {
-    name: "Buudy Red Torch",
+    name: "Buudy LED Torch",
     description: "A compact addition to your light routine.",
     src: "/images/products/buudy-led-mask/buudy-led-torch.jpg",
-    alt: "The silver Buudy Red Torch held beside a woman's cheek",
+    alt: "The silver Buudy LED Torch held beside a woman's cheek",
   },
   {
     name: "Skincare eBook",

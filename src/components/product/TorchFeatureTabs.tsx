@@ -9,7 +9,7 @@ const tabs = [
     id: "compact-build",
     tabLabel: "Compact Build",
     title: "Take your Wellness Anywhere",
-    body: "Lightweight 200g design (4.9 inches) works at home, the office, or during travel. Durable one-button operation.",
+    body: "Lightweight 74g design (12cm / 4.72 inches) works at home, the office, or during travel. Durable one-button operation.",
     image: productAsset(
       "07-buudy-red-light-torch-lifestyle-portable-relief.webp",
       "buudy-red-torch",
@@ -19,7 +19,7 @@ const tabs = [
     id: "clinical-strength",
     tabLabel: "Clinical Strength",
     title: "Clinical Strength",
-    body: "The T5 torch combines blue, red, deep red, and near-infrared wavelengths for a focused skin and body care routine.",
+    body: "The Buudy LED Torch combines red (630nm), deep red (660nm), and near-infrared (850nm) wavelengths for a focused skin and body care routine.",
     image: productAsset(
       "08-buudy-red-light-torch-neck-targeted-wellness.webp",
       "buudy-red-torch",

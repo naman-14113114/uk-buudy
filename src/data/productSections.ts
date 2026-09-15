@@ -549,8 +549,8 @@ export const torchWavelengths: Wavelength[] = [
 export const torchFeatures: Feature[] = [
   {
     title: "Compact Build",
-    kicker: "4.92 inch handheld design",
-    body: "Lightweight enough for home, the office, or travel, with durable one-button operation for quick targeted sessions.",
+    kicker: "12cm (4.72 in) handheld design",
+    body: "Lightweight 74g design works at home, the office, or during travel, with durable one-button operation for quick targeted sessions.",
   },
   {
     title: "Clinical Strength",
@@ -575,21 +575,21 @@ export const torchDetailImages = [
       "07-buudy-red-light-torch-lifestyle-portable-relief.webp",
       "buudy-red-torch",
     ),
-    alt: "Buudy Red Light Therapy Torch held by a woman for portable on-the-go body and skin wellness",
+    alt: "Buudy LED Torch held by a woman for portable on-the-go body and skin wellness",
   },
   {
     src: productAsset(
       "08-buudy-red-light-torch-neck-targeted-wellness.webp",
       "buudy-red-torch",
     ),
-    alt: "Woman using Buudy Red Light Torch with protective eyewear for targeted neck light therapy",
+    alt: "Woman using Buudy LED Torch with protective eyewear for targeted neck light therapy",
   },
   {
     src: productAsset(
       "11-buudy-red-light-torch-multi-body-treatment-grid.webp",
       "buudy-red-torch",
     ),
-    alt: "Buudy Red Light Therapy Torch multi-zone application guide for elbow, hand, back, and knee relief",
+    alt: "Buudy LED Torch multi-zone application guide for elbow, hand, back, and knee relief",
   },
 ];
 
@@ -615,7 +615,7 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Can I use it in my country?",
     answer:
-      "Yes. The Buudy Red Torch is dual voltage, which means it can be used worldwide without any issues.",
+      "Yes. The Buudy LED Torch is dual voltage, which means it can be used worldwide without any issues.",
   },
   {
     question:
@@ -626,12 +626,7 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy Red Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
-  },
-  {
-    question: "If I receive the Red Torch as a free gift with the LED Mask, does it include a battery or USB?",
-    answer:
-      "No. When the Red Torch is included as a free gift with the LED Mask, it comes as a standalone device and does not include a battery or USB cable.",
+      "The Buudy LED Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
   },
 ];
 

@@ -1304,7 +1304,7 @@ export function ProductReviewsGrid({
             title={
               productHandle === "buudy-red-torch" ? (
                 <>
-                  Buudy Red Torch <em className="buudy-italic">reviews</em>.
+                  Buudy LED Torch <em className="buudy-italic">reviews</em>.
                 </>
               ) : (
                 <>
@@ -1314,7 +1314,7 @@ export function ProductReviewsGrid({
             }
             copy={
               productHandle === "buudy-red-torch"
-                ? "Real feedback from customers who made the Buudy Red Torch part of their daily wellness ritual."
+                ? "Real feedback from customers who made the Buudy LED Torch part of their daily wellness ritual."
                 : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
             }
           />

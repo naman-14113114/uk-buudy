@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 const questions = [
   {
     title: "What is included with my mask?",
-    answer: <>The preview shows the Buudy LED Mask, premium travel case, Buudy Red Torch and digital skincare eBook. Free UK delivery is included in the displayed offer. The final offer and contents will be confirmed when the new checkout is connected.</>,
+    answer: <>The preview shows the Buudy LED Mask, premium travel case, Buudy LED Torch and digital skincare eBook. Free UK delivery is included in the displayed offer. The final offer and contents will be confirmed when the new checkout is connected.</>,
   },
   {
     title: "How do I use the mask?",
