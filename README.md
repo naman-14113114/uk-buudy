@@ -47,10 +47,37 @@ The cart is handled in `src/components/cart/CartProvider.tsx` and persisted in
 the browser. It supports multiple product lines, product-specific gifts, editable
 quantities, gift messaging, promo summaries, and checkout recording.
 
-Checkout currently treats the checkout click as the v1 sale record. It validates
-customer details, recalculates totals on the server from product data, writes the
-order to Supabase, clears the local cart, and redirects to
-`/order-confirmation/[orderNumber]`.
+LED Mask checkout uses XPageDrop. `/api/checkout/prepare` reads the published
+mask offer server-side, creates a fresh unpaid bundle checkout, and returns the
+hosted checkout URL directly. Shoppers do not visit the `mask.buudy.com` landing
+page. No payment is collected locally and clicking checkout is not a paid sale.
+The cart remains available when a shopper returns or checkout preparation fails.
+
+- Each mask receives one real BUUDY torch, discounted 100% by XPage.
+- BUUDY10 selects the separate 5.59%-off option in the same XPage bundle. It is
+  recorded as a bundle discount, **not a native coupon redemption**. The original
+  BUUDY10 coupon definition is unchanged. Updating/disabling that coupon alone
+  does not update this bundle option: manage the bundle option too.
+- `/api/checkout/prices` supplies current converted GBP cart estimates. XPage
+  confirms the final amount, shipping and payment currency. Conversion/rounding
+  can differ slightly between its landing-page price and checkout summary.
+- The adapter discovers fresh condition/gift IDs on each request (XPage changes
+  those IDs on save), checks the approved variants and discount amounts, and
+  fails closed if the offer changes. No admin credentials or shared CSRF/session
+  cookies are stored. Checkout POSTs are not automatically retried.
+- Non-mask carts retain their existing PlusBase flow. Mixed mask/non-mask carts
+  are rejected with a clear message instead of dropping products or splitting
+  a payment silently. Quantities must be whole numbers from 1 to 100.
+- Existing storefront analytics remain unchanged. Attribution is passed in the
+  checkout URL and XPage custom fields. **The existing PlusBase paid-order webhook
+  does not report XPage purchases**; XPage paid-order attribution/reporting needs
+  its own verified integration. Never fire purchase events on checkout creation.
+
+Checkout adapter regression tests (Node 22):
+
+```bash
+node --experimental-strip-types --test scripts/test-xpage-checkout.mjs
+```
 
 ## Accounts, Orders, And Admin
 

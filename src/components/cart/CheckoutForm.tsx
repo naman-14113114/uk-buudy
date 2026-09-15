@@ -110,19 +110,18 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         }),
       });
 
+      const data = (await response.json()) as { checkoutUrl?: string; error?: string };
       if (!response.ok) {
-        throw new Error("Could not prepare checkout.");
+        throw new Error(data.error || "Could not prepare checkout.");
       }
-
-      const data = (await response.json()) as { checkoutUrl?: string };
       if (!data.checkoutUrl) {
         throw new Error("Could not prepare checkout.");
       }
 
       window.location.assign(appendAttributionToAbsoluteUrl(data.checkoutUrl, attribution));
-    } catch {
+    } catch (checkoutError) {
       setIsRedirecting(false);
-      setError("Checkout could not be opened. Please try again.");
+      setError(checkoutError instanceof Error ? checkoutError.message : "Checkout could not be opened. Please try again.");
     }
   }
 

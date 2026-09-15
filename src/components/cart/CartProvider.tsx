@@ -145,6 +145,34 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<CartState>(emptyCart);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [maskPrices, setMaskPrices] = useState<{ maskUnitPriceCents: number; torchUnitPriceCents: number } | null>(null);
+  const hasMask = state.lines.some((line) => line.type === "product" && line.productId === "buudy-led-mask");
+
+  useEffect(() => {
+    if (!hydrated || !hasMask) return;
+    const controller = new AbortController();
+    async function refreshPrices() {
+      try {
+        const response = await fetch("/api/checkout/prices", { signal: controller.signal });
+        if (!response.ok) return;
+        const prices = await response.json();
+        if (prices.currency === "GBP" && Number.isSafeInteger(prices.maskUnitPriceCents) &&
+            prices.maskUnitPriceCents > 0 && Number.isSafeInteger(prices.torchUnitPriceCents) && prices.torchUnitPriceCents >= 0) {
+          setMaskPrices(prices);
+        }
+      } catch { /* The cart remains an estimate; hosted checkout confirms the final total. */ }
+    }
+    void refreshPrices();
+    window.addEventListener("focus", refreshPrices);
+    return () => { controller.abort(); window.removeEventListener("focus", refreshPrices); };
+  }, [hydrated, hasMask]);
+
+  const pricedLines = useMemo(() => state.lines.map((line) => {
+    if (!maskPrices || line.productId !== "buudy-led-mask") return line;
+    if (line.type === "product") return { ...line, unitPriceCents: maskPrices.maskUnitPriceCents };
+    if (line.id.endsWith(":buudy-led-torch")) return { ...line, compareAtCents: maskPrices.torchUnitPriceCents };
+    return line;
+  }), [state.lines, maskPrices]);
 
   useLayoutEffect(() => {
     function recoverStoredCart() {
@@ -176,8 +204,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [hydrated, state]);
 
   const totals = useMemo(
-    () => calculateCartTotals(state.lines, state.manualPromoCode),
-    [state.lines, state.manualPromoCode],
+    () => calculateCartTotals(pricedLines, state.manualPromoCode),
+    [pricedLines, state.manualPromoCode],
   );
   const activePromoCodes = useMemo(() => {
     const productIds = new Set(
@@ -280,6 +308,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const value = useMemo<CartContextValue>(
     () => ({
       ...state,
+      lines: pricedLines,
       isHydrated: hydrated,
       isOpen,
       totals,
@@ -295,7 +324,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setGiftMessage: (message: string) =>
         setState((current) => ({ ...current, giftMessage: message })),
     }),
-    [activePromoCodes, hydrated, isOpen, state, totals],
+    [activePromoCodes, hydrated, isOpen, state, totals, pricedLines],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

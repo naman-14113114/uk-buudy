@@ -17,6 +17,7 @@ type CartSummaryProps = {
 export function CartSummary({ action = "summary", children }: CartSummaryProps) {
   const { lines, totals, closeCart, manualPromoCode } = useCart();
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const hasMask = lines.some((line) => line.type === "product" && line.productId === "buudy-led-mask");
   const giftLines = getDisplayLines(lines).filter(
     (line) =>
       line.type === "gift" &&
@@ -91,10 +92,19 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
         </>
       ) : null}
 
-      <div className="mb-6 mt-1 text-sm">
+      {!hasMask || !manualPromoCode ? <div className="mb-6 mt-1 text-sm">
+        {hasMask && action === "cart" ? (
+          <Link className="font-medium text-[var(--plum)] transition-colors hover:underline" href="/cart" onClick={closeCart}>
+            + Add BUUDY10 in your cart for 5.59% off your mask
+          </Link>
+        ) : (
         <button
           className="font-medium text-[var(--plum)] transition-colors hover:underline"
           onClick={() => {
+            if (hasMask) {
+              document.querySelector<HTMLInputElement>('input[aria-label="Promo code"]')?.focus();
+              return;
+            }
             const button = document.querySelector(
               ".proxy-bundle-btn",
             ) as HTMLButtonElement | null;
@@ -102,9 +112,10 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
           }}
           type="button"
         >
-          + Wanna add more discount? Move to checkout
+          {hasMask ? "+ Add BUUDY10 below for 5.59% off your mask" : "+ Wanna add more discount? Move to checkout"}
         </button>
-      </div>
+        )}
+      </div> : null}
 
       {action === "summary" ? (
         <div className="mt-4">
@@ -115,10 +126,10 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
       <div className="mt-4 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-5">
         <span>
           <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
-            Subtotal
+            {hasMask ? "Estimated total" : "Subtotal"}
           </span>
           <span className="mt-1 block text-xs text-[var(--muted)]">
-            Includes all taxes.
+            {hasMask ? "GBP conversion and final total confirmed at checkout." : "Includes all taxes."}
           </span>
         </span>
         <span className="buudy-display block text-right text-4xl text-[var(--plum)]">
