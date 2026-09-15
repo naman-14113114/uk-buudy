@@ -116,18 +116,6 @@ async function loadPublishedOffer(fetcher: Fetcher, attribution: Record<string, 
   return { published: parsePublishedOffer(await response.text()), cookie: cookieHeader(response), url };
 }
 
-export async function getXpageCartPrices(fetcher: Fetcher = fetch) {
-  const { published } = await loadPublishedOffer(fetcher);
-  const regular = selectOffer(published, false);
-  selectOffer(published, true);
-  return {
-    currency: "GBP" as const,
-    maskUnitPriceCents: Math.round(regular.maskVariant.price * 100),
-    torchUnitPriceCents: Math.round(regular.torchVariant.price * 100),
-    promoPercent: 5.59,
-  };
-}
-
 export function validateCheckoutUrl(href: unknown, token: unknown) {
   if (typeof href !== "string" || typeof token !== "string" || !/^[\da-f]{64}$/.test(token)) {
     throw new Error("XPage did not return a checkout session.");
@@ -155,7 +143,11 @@ export async function createXpageCheckout(quantity: number, promo: boolean,
   if (!response.ok) throw new Error(`XPage checkout request failed (${response.status}).`);
   const result = await response.json() as { status?: string; checkout_url?: string; checkout_token?: string };
   if (result.status !== "success") throw new Error("XPage could not prepare checkout.");
-  const checkoutUrl = validateCheckoutUrl(result.checkout_url, result.checkout_token);
+  const platformCheckoutUrl = validateCheckoutUrl(result.checkout_url, result.checkout_token);
+  const checkoutUrl = new URL(
+    `${platformCheckoutUrl.pathname}${platformCheckoutUrl.search}`,
+    XPAGE.origin,
+  );
   checkoutUrl.searchParams.set("currency", "GBP");
   for (const [key, value] of Object.entries(attribution)) checkoutUrl.searchParams.set(key, value);
   return { checkoutUrl: checkoutUrl.toString(), checkoutToken: result.checkout_token };

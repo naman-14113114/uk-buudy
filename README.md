@@ -50,7 +50,9 @@ quantities, gift messaging, promo summaries, and checkout recording.
 LED Mask checkout uses XPageDrop. `/api/checkout/prepare` reads the published
 mask offer server-side, creates a fresh unpaid bundle checkout, and returns the
 hosted checkout URL directly. Shoppers do not visit the `mask.buudy.com` landing
-page. No payment is collected locally and clicking checkout is not a paid sale.
+page. The verified XPage checkout path is presented on the customer-facing
+`https://mask.buudy.com` domain, not the XPage platform hostname. No payment is
+collected locally and clicking checkout is not a paid sale.
 The cart remains available when a shopper returns or checkout preparation fails.
 
 - Each mask receives one real BUUDY torch, discounted 100% by XPage.
@@ -58,9 +60,9 @@ The cart remains available when a shopper returns or checkout preparation fails.
   recorded as a bundle discount, **not a native coupon redemption**. The original
   BUUDY10 coupon definition is unchanged. Updating/disabling that coupon alone
   does not update this bundle option: manage the bundle option too.
-- `/api/checkout/prices` supplies current converted GBP cart estimates. XPage
-  confirms the final amount, shipping and payment currency. Conversion/rounding
-  can differ slightly between its landing-page price and checkout summary.
+- The Buudy storefront keeps its catalog price at exactly GBP 179 and does not
+  replace it with XPage's converted price. XPage confirms the final checkout
+  amount, shipping and payment currency while its own price correction is pending.
 - The adapter discovers fresh condition/gift IDs on each request (XPage changes
   those IDs on save), checks the approved variants and discount amounts, and
   fails closed if the offer changes. No admin credentials or shared CSRF/session

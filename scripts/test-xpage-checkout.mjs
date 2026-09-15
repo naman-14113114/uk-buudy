@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { XPAGE, parsePublishedOffer, selectOffer, buildBundlePayload,
-  validateCheckoutUrl, getXpageCartPrices, createXpageCheckout } from "../src/lib/xpage-checkout.ts";
+  validateCheckoutUrl, createXpageCheckout } from "../src/lib/xpage-checkout.ts";
 
 function fixture() {
   const option = (promo) => ({
@@ -101,6 +101,7 @@ test("creates a fresh cookie session, preserves attribution, and returns GBP che
   };
   const result = await createXpageCheckout(2, true, { msclkid: "qa-click" }, fetcher);
   assert.equal(calls, 2);
+  assert.equal(new URL(result.checkoutUrl).origin, XPAGE.origin);
   assert.equal(new URL(result.checkoutUrl).searchParams.get("currency"), "GBP");
   assert.equal(new URL(result.checkoutUrl).searchParams.get("msclkid"), "qa-click");
 });
@@ -112,8 +113,4 @@ test("does not retry failed checkout POSTs", async () => {
     throw new Error("timeout");
   }));
   assert.equal(calls, 2);
-});
-test("cart prices do not expose CSRF tokens, cookies or descriptions", async () => {
-  const prices = await getXpageCartPrices(async () => new Response(html(fixture())));
-  assert.deepEqual(prices, { currency: "GBP", maskUnitPriceCents: 17956, torchUnitPriceCents: 3623, promoPercent: 5.59 });
 });
