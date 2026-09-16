@@ -26,7 +26,6 @@ export type CartState = {
 export const promoCode = "AUTO";
 export const manualPromoCode = "BUUDY10";
 export const manualPromoDiscountCents = 1000;
-export const maskPromoPercent = 5.59;
 
 export const emptyCart: CartState = {
   lines: [],
@@ -132,11 +131,8 @@ export function calculateCartTotals(lines: CartLine[], appliedManualPromo = "") 
     0,
   );
   const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
-  const maskSubtotalCents = productLines
-    .filter((line) => line.productId === "buudy-led-mask" || line.productId === "buudy-7-colour-led-mask")
-    .reduce((total, line) => total + line.unitPriceCents * line.quantity, 0);
   const promoDiscountCents = isValidManualPromoCode(appliedManualPromo)
-    ? Math.min(maskSubtotalCents > 0 ? Math.round(maskSubtotalCents * maskPromoPercent / 100) : manualPromoDiscountCents, subtotalCents)
+    ? Math.min(manualPromoDiscountCents, subtotalCents)
     : 0;
 
   return {
