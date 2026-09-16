@@ -138,24 +138,50 @@ export function BeforeAfterGrid() {
     }, reduceMotion ? 50 : 850);
   }, []);
 
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftStartRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track) return;
+    isDraggingRef.current = true;
+    hasDraggedRef.current = false;
+    startXRef.current = e.pageX - track.offsetLeft;
+    scrollLeftStartRef.current = track.scrollLeft;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const track = trackRef.current;
+    if (!track) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startXRef.current) * 1.2;
+    if (Math.abs(walk) > 4) {
+      hasDraggedRef.current = true;
+      stopAutoScroll();
+    }
+    track.scrollLeft = scrollLeftStartRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    isDraggingRef.current = false;
+  };
+
   const handleScroll = useCallback(() => {
     if (!isAutoScrollingRef.current) stopAutoScroll();
-    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
-    scrollTimeoutRef.current = setTimeout(() => {
-      const track = trackRef.current;
-      const setWidth = setWidthRef.current;
-      if (!track || setWidth <= 0) return;
+    const track = trackRef.current;
+    const setWidth = setWidthRef.current;
+    if (!track || setWidth <= 0) return;
 
-      if (track.scrollLeft >= setWidth * 2 - 10) {
-        track.style.scrollBehavior = "auto";
-        track.scrollLeft -= setWidth;
-      } else if (track.scrollLeft <= 10) {
-        track.style.scrollBehavior = "auto";
-        track.scrollLeft += setWidth;
-      }
-      isAutoScrollingRef.current = false;
-    }, 150);
+    if (track.scrollLeft >= setWidth * 2) {
+      track.scrollLeft -= setWidth;
+    } else if (track.scrollLeft <= 5) {
+      track.scrollLeft += setWidth;
+    }
   }, [stopAutoScroll]);
 
   useEffect(() => {
@@ -288,42 +314,60 @@ export function BeforeAfterGrid() {
       >
         <div
           aria-label="Customer transformation stories"
-          className="no-scrollbar flex snap-x gap-5 overflow-x-auto px-4 pb-4 md:px-10"
+          className="no-scrollbar flex gap-5 overflow-x-auto px-4 pb-4 md:px-10 cursor-grab active:cursor-grabbing select-none"
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseUpOrLeave}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
           onPointerDown={stopAutoScroll}
           onScroll={handleScroll}
           onTouchStart={stopAutoScroll}
           onWheel={stopAutoScroll}
           ref={trackRef}
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+            overscrollBehaviorX: "contain",
+          }}
         >
           {loopedStories.map((story, index) => (
             <button
               aria-label={`Open ${story.fullName}'s ${story.concern} story`}
-              className="w-[min(82vw,21rem)] flex-none snap-start overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)] text-left transition duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]"
+              className="flex w-[min(82vw,21rem)] flex-none flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)] text-left transition duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]"
               data-story-card
               key={`${story.id}-${index}`}
-              onClick={() => openStory(story)}
+              onClick={(e) => {
+                if (hasDraggedRef.current) {
+                  e.preventDefault();
+                  return;
+                }
+                openStory(story);
+              }}
               type="button"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--blush)]">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--blush)]">
                 <Image
                   alt={story.concern}
-                  className="object-cover"
+                  className="object-cover pointer-events-none select-none"
                   fill
                   sizes="(min-width: 1024px) 336px, 82vw"
                   src={story.image}
                 />
               </div>
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="buudy-mono text-[var(--gold)]">{story.concern}</p>
-                  <span className="buudy-mono text-[var(--plum-soft)]">5.0</span>
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="buudy-mono text-[var(--gold)]">{story.concern}</p>
+                    <span className="buudy-mono text-[var(--plum-soft)]">5.0</span>
+                  </div>
+                  <h3 className="buudy-display mt-3 text-xl text-[var(--plum)]">
+                    {story.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                    {story.quote}
+                  </p>
                 </div>
-                <h3 className="buudy-display mt-3 text-xl text-[var(--plum)]">
-                  {story.title}
-                </h3>
-                <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                  {story.quote}
-                </p>
                 <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-3">
                   <span className="buudy-display text-sm text-[var(--plum)]">
                     {story.name}
