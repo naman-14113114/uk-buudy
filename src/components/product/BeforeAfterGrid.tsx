@@ -366,7 +366,12 @@ export function BeforeAfterGrid() {
         <div
           aria-labelledby="transformation-dialog-title"
           aria-modal="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-3 sm:p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.75)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
           onClick={(event) => {
             if (event.currentTarget === event.target) closeStory();
           }}
@@ -374,7 +379,7 @@ export function BeforeAfterGrid() {
         >
           <button
             aria-label="Previous story"
-            className="absolute left-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--cream)]/30 bg-[var(--cream)]/10 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--plum)] md:flex xl:left-8"
+            className="absolute left-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:left-8"
             onClick={handlePrevStory}
             type="button"
           >
@@ -394,7 +399,7 @@ export function BeforeAfterGrid() {
           >
             <button
               aria-label="Close transformation details"
-              className="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full bg-[rgba(247,241,232,.9)] text-[var(--plum)] shadow-sm transition hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
+              className="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-sm transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
               onClick={closeStory}
               ref={closeButtonRef}
               type="button"
@@ -481,7 +486,7 @@ export function BeforeAfterGrid() {
 
           <button
             aria-label="Next story"
-            className="absolute right-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--cream)]/30 bg-[var(--cream)]/10 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--plum)] md:flex xl:right-8"
+            className="absolute right-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:right-8"
             onClick={handleNextStory}
             type="button"
           >

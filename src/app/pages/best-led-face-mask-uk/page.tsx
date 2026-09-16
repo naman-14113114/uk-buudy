@@ -132,13 +132,13 @@ export default function BestLedFaceMaskUkPage() {
               whether the device fits your real skincare routine.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]">
+              <Button asChild className="!bg-[var(--cream)] !text-[var(--plum)] !border-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]">
                 <Link href="/products/buudy-led-mask">
                   Shop Buudy LED Mask
                   <ArrowRight size={17} />
                 </Link>
               </Button>
-              <Button asChild variant="ghost" className="border-[rgba(247,241,232,.36)] text-[var(--cream)] hover:bg-[rgba(247,241,232,.1)]">
+              <Button asChild variant="ghost" className="!border-[rgba(247,241,232,.4)] !text-[var(--cream)] hover:!bg-[rgba(247,241,232,.12)] hover:!text-[var(--cream)]">
                 <Link href="#comparison">Compare features</Link>
               </Button>
             </div>

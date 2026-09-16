@@ -234,13 +234,6 @@ export function ProductGallery({
             />
           )}
 
-          {/* Overlaid Badges */}
-          {hasGifts && (
-            <span className="buudy-mono absolute left-5 top-5 z-10 rounded-full bg-[var(--plum)] px-4 py-2 text-[var(--cream)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.8)]">
-              3 Free Gifts
-            </span>
-          )}
-
           <button
             className="buudyLED-23435t23-arrow buudyLED-23435t23-prev"
             aria-label="Previous Image"

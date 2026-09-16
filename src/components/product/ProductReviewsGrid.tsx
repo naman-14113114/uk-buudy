@@ -564,7 +564,12 @@ function ReviewModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100000100] grid place-items-center bg-[rgba(30,12,31,.62)] p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[100000100] grid place-items-center p-4"
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 0.75)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
@@ -792,7 +797,12 @@ function WriteReviewModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100000100] grid place-items-center bg-[rgba(30,12,31,.62)] p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[100000100] grid place-items-center p-4"
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 0.75)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();

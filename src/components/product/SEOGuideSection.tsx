@@ -69,7 +69,7 @@ export function SEOGuideSection({ product }: { product: Product }) {
             </div>
             <Button
               asChild
-              className="mt-6 bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]"
+              className="mt-6 !bg-[var(--cream)] !text-[var(--plum)] !border-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]"
             >
               <Link href="/pages/best-led-face-mask-uk">Read the full UK guide</Link>
             </Button>

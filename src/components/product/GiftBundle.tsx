@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
+import loadingLottie from "@/components/cart/loading-lottie.json";
 import {
   BatteryCharging,
   ShieldCheck,
@@ -104,11 +105,25 @@ export function GiftBundle({ product }: { product: Product }) {
   const { addProduct } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
-  const deliveryDate = useDeliveryDate(3);
+  const deliveryDate = useDeliveryDate(5);
+  const [isAdding, setIsAdding] = useState(false);
   const [deliveryIconData, setDeliveryIconData] = useState<Record<
     string,
     unknown
   > | null>(null);
+
+  useEffect(() => {
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        setIsAdding(false);
+      }
+    }
+
+    window.addEventListener("pageshow", handlePageShow);
+    return () => {
+      window.removeEventListener("pageshow", handlePageShow);
+    };
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -247,9 +262,11 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <Button
-        className="proxy-bundle-btn mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px]"
+        className={`proxy-bundle-btn relative overflow-hidden mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${isAdding ? "disabled:!opacity-100" : ""}`}
+        disabled={isAdding}
         id="hero-cta"
         onClick={() => {
+          setIsAdding(true);
           addProduct(product);
           router.push(
             appendAttributionToPath(
@@ -259,11 +276,24 @@ export function GiftBundle({ product }: { product: Product }) {
           );
         }}
       >
-        <span className="relative z-20 whitespace-nowrap">
-          {hasGifts
-            ? "ADD TO CART + FREE GIFTS"
-            : "ADD TO CART + FREE SHIPPING"}
-        </span>
+        {isAdding ? (
+          <>
+            <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
+              {hasGifts
+                ? "ADD TO CART + FREE GIFTS"
+                : "ADD TO CART + FREE SHIPPING"}
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center">
+              <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
+            </span>
+          </>
+        ) : (
+          <span className="relative z-20 whitespace-nowrap">
+            {hasGifts
+              ? "ADD TO CART + FREE GIFTS"
+              : "ADD TO CART + FREE SHIPPING"}
+          </span>
+        )}
       </Button>
 
       {/* Benefits Grid Row (Mask Only) */}
