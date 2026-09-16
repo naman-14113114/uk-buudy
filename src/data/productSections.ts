@@ -628,6 +628,11 @@ export const torchFaqs: FAQItem[] = [
     answer:
       "The Buudy LED Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
   },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
+  },
 ];
 
 export const expertVideo = {
@@ -710,6 +715,11 @@ export const faqs: FAQItem[] = [
     answer:
       "The Buudy LED Mask is exclusively sold through www.buudy.co.uk at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
+  },
 ];
 
 export const iplFaqs: FAQItem[] = [
@@ -732,5 +742,10 @@ export const iplFaqs: FAQItem[] = [
   {
     question: "Can I use it on my face and bikini line?",
     answer: "Absolutely. The device has 9 adjustable intensity levels, allowing you to lower the power for sensitive areas like the upper lip, chin, and bikini line, while using higher power for legs and arms.",
+  },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
   },
 ];
