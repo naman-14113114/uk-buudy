@@ -6,8 +6,8 @@ export const XPAGE = {
   bundleId: "a2bc86b5-9455-4d66-aa55-d0bc8d865563",
   regularOptionId: "a2bc86b5-9d77-49d0-80ae-228378b5e042",
   promoOptionId: "a2be21a3-7bb0-4f74-8878-9dc88d152f25",
-  maskProductId: "a2b82691-4817-4d7f-b091-4cafd6b09cb2",
-  maskVariantId: "a2b826aa-a15f-4e62-bcfd-937e9286baed",
+  maskProductId: "a2c07c2a-bf3e-4b92-b7a3-0abd9217195b",
+  maskVariantId: "a2c07c3b-1aa2-457e-96ba-b2ae0bf2d3f7",
   torchProductId: "a2bd4da0-e5f8-4b1e-a1af-e51e924915ad",
   torchVariantId: "a2bd4db9-992d-4f1a-84b8-472d1e173efd",
 } as const;
