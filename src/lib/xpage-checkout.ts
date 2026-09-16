@@ -121,7 +121,7 @@ export function validateCheckoutUrl(href: unknown, token: unknown) {
     throw new Error("XPage did not return a checkout session.");
   }
   const url = new URL(href);
-  if (url.origin !== XPAGE.checkoutOrigin || url.username || url.password ||
+  if ((url.origin !== XPAGE.checkoutOrigin && url.origin !== XPAGE.origin) || url.username || url.password ||
       !url.pathname.endsWith(`/checkout/${token}`)) {
     throw new Error("XPage returned an unexpected checkout destination.");
   }
