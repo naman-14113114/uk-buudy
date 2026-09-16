@@ -68,10 +68,6 @@ const assets = [
         "https://img.thesitebase.net/10650/10650730/themes/17682450181b5f55beb5.png?width=640&height=0&min_height=0",
       ],
       [
-        "buudy-led-torch.png",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/176738038817f3610740.png?width=640&height=0&min_height=0",
-      ],
-      [
         "skincare-ebook.png",
         "https://img.thesitebase.net/10650/10650730/themes/17682431737d583cc2df.png?width=640&height=0&min_height=0",
       ],

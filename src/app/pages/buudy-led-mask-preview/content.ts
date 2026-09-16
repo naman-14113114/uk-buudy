@@ -31,8 +31,8 @@ export const gifts = [
   {
     name: "Buudy LED Torch",
     description: "A compact addition to your light routine.",
-    src: "/images/products/buudy-led-mask/buudy-led-torch.jpg",
-    alt: "The silver Buudy LED Torch held beside a woman's cheek",
+    src: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
+    alt: "Buudy LED Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
   },
   {
     name: "Skincare eBook",
