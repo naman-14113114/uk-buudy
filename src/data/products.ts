@@ -118,7 +118,7 @@ export const buudyMask: Product = {
         title: "FAST 3-MIN\nTREATMENTS",
         sub: "Green light helps fade dark spots & evens skin tone",
         position: "top-left",
-        theme: "dark",
+        theme: "white",
       },
     },
     {
@@ -144,6 +144,12 @@ export const buudyMask: Product = {
     {
       src: productAsset("06-buudy-led-mask-results.webp"),
       alt: "Buudy LED Mask results",
+      badge: {
+        title: "PROVEN CLINICAL\nRESULTS",
+        sub: "Noticeable collagen boost & radiant skin in 4 weeks",
+        position: "top-right",
+        theme: "white",
+      },
     },
     {
       src: productAsset("07-buudy-led-mask-controller.webp"),
@@ -160,7 +166,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask lifestyle use",
       badge: {
         title: "100% CORDLESS &\nPORTABLE",
-        sub: "Lightweight hands-free design to read, relax & multitask",
+        sub: "Hands-free cordless design to read, relax & multitask",
         position: "top-right",
         theme: "dark",
       },
@@ -172,6 +178,12 @@ export const buudyMask: Product = {
     {
       src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
       alt: "Buudy LED Mask dermatologist recommended",
+      badge: {
+        title: "DERMATOLOGIST\nRECOMMENDED",
+        sub: "Expert-approved non-invasive skincare for all skin types",
+        position: "bottom-right",
+        theme: "dark",
+      },
     },
     {
       src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
@@ -184,20 +196,38 @@ export const buudyMask: Product = {
         title: "SAFETY & CLINICALLY\nCERTIFIED",
         sub: "CE, RoHS & FCC certified for safe everyday home use",
         position: "top-left",
-        theme: "dark",
+        theme: "white",
       },
     },
     {
       src: productMediaAsset("O3-w.webp"),
       alt: "Buudy LED Mask O3",
+      badge: {
+        title: "FREE BUUDY\nLED TORCH",
+        sub: "£70 targeted red light device included free with your order",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("buudy_purple.jpeg"),
       alt: "Buudy LED Mask Purple",
+      badge: {
+        title: "FREE PREMIUM\nTRAVEL CASE",
+        sub: "Custom luxury hard-shell box included with every order",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("01-buudy-led-mask-front.webp"),
       alt: "Buudy LED Mask front view",
+      badge: {
+        title: "633NM DEEP RED\nLIGHT THERAPY",
+        sub: "Stimulates natural collagen production & smooths fine lines",
+        position: "top-right",
+        theme: "white",
+      },
     },
   ],
   gifts: [
