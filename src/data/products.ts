@@ -94,22 +94,52 @@ export const buudyMask: Product = {
     {
       src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
       alt: "Cleopatra LED Red Light Mask",
+      badge: {
+        title: "FULL FACE & NECK\nCOVERAGE",
+        sub: "Targeted firming & smoothing for jawline & neck",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("02-buudy-led-mask-side-profile.webp"),
       alt: "Buudy LED Mask side profile",
+      badge: {
+        title: "7 CLINICAL\nWAVELENGTHS",
+        sub: "Complete spectrum for rejuvenation, clarity & glow",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
       alt: "Buudy LED Mask anti-ageing mode",
+      badge: {
+        title: "FAST 3-MIN\nTREATMENTS",
+        sub: "Green light helps fade dark spots & evens skin tone",
+        position: "top-left",
+        theme: "dark",
+      },
     },
     {
       src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
       alt: "Buudy LED Mask blue light acne mode",
+      badge: {
+        title: "415NM TARGETED\nBLUE LIGHT",
+        sub: "Purifies active blemishes & eliminates acne bacteria",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("05-buudy-led-mask-packaging.webp"),
       alt: "Buudy LED Mask packaging",
+      badge: {
+        title: "830NM DEEP NEAR\nINFRARED LIGHT",
+        sub: "Deep dermal penetration boosts collagen & elasticity",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("06-buudy-led-mask-results.webp"),
@@ -118,10 +148,22 @@ export const buudyMask: Product = {
     {
       src: productAsset("07-buudy-led-mask-controller.webp"),
       alt: "Buudy LED Mask tap controller",
+      badge: {
+        title: "SMART BUUDY\nAPP COMPANION",
+        sub: "Personalised guided routines & progress tracking",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
       alt: "Buudy LED Mask lifestyle use",
+      badge: {
+        title: "100% CORDLESS &\nPORTABLE",
+        sub: "Lightweight hands-free design to read, relax & multitask",
+        position: "top-right",
+        theme: "dark",
+      },
     },
     {
       src: productAsset("09-buudy-led-mask-home-spa.webp"),
@@ -138,6 +180,12 @@ export const buudyMask: Product = {
     {
       src: productAsset("13-buudy-led-mask-starter-kit.webp"),
       alt: "Buudy LED Mask starter kit",
+      badge: {
+        title: "SAFETY & CLINICALLY\nCERTIFIED",
+        sub: "CE, RoHS & FCC certified for safe everyday home use",
+        position: "top-left",
+        theme: "dark",
+      },
     },
     {
       src: productMediaAsset("O3-w.webp"),
