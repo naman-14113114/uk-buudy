@@ -126,8 +126,6 @@ export function ProductGallery({
     }
   };
 
-  const currentImage = images[currentIndex] ?? images[0];
-
   return (
     <>
       <style
@@ -138,11 +136,11 @@ export function ProductGallery({
         .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
         .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
-        .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; }
+        .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         /* 3. THUMBNAILS GRID */
         .buudyLED-23435t23-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
         .buudyLED-23435t23-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
-        .buudyLED-23435t23-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
+        .buudyLED-23435t23-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
         .buudyLED-23435t23-thumb_item:hover { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16), inset 0 0 0 1px rgba(0, 0, 0, 0.05); z-index: 1; }
         .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_img { transform: scale(1.08); }
         .buudyLED-23435t23-thumb_item.buudyLED-23435t23-active { box-shadow: inset 0 0 0 2px #000; }
@@ -158,7 +156,7 @@ export function ProductGallery({
         .buudyLED-23435t23-lightbox { position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: none; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 99999999; pointer-events: auto; }
         .buudyLED-23435t23-lightbox_content { position: relative; z-index: 100000000; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
         .buudyLED-23435t23-lightbox_stage { position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 90vw; max-height: 85vh; border-radius: 25px; overflow: hidden; }
-        .buudyLED-23435t23-lightbox_img { max-width: 90vw; max-height: 85vh; border-radius: 25px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); user-select: none; object-fit: contain; }
+        .buudyLED-23435t23-lightbox_img { max-width: 90vw; max-height: 85vh; border-radius: 25px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); user-select: none; object-fit: contain; transition: opacity 0.3s ease; }
         .buudyLED-23435t23-close { position: absolute; top: 20px; right: 30px; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; background: rgba(247, 241, 232, .94); border: 1px solid rgba(58, 31, 61, .18); color: var(--plum); cursor: pointer; z-index: 100000001; transition: transform .2s ease, background-color .2s ease; }
         .buudyLED-23435t23-close:hover { background: var(--cream); transform: scale(1.06); }
         .buudyLED-23435t23-modal_nav { width: 60px; height: 60px; background: rgba(0, 0, 0, 0.1); border-radius: 50%; }
@@ -426,36 +424,60 @@ export function ProductGallery({
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {currentImage.src.endsWith(".mp4") ||
-          currentImage.src.endsWith(".webm") ? (
-            <video
-              src={currentImage.src}
-              id="buudyLED-23435t23-MainImg"
-              className="buudyLED-23435t23-main_img"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onClick={() => openLightbox()}
-            />
-          ) : (
-            <img
-              src={currentImage.src}
-              id="buudyLED-23435t23-MainImg"
-              className="buudyLED-23435t23-main_img"
-              alt={currentImage.alt}
-              decoding="async"
-              fetchPriority="high"
-              loading="eager"
-              onClick={() => openLightbox()}
-            />
-          )}
+          {images.map((image, index) => {
+            const isActive = index === currentIndex;
+            const isVideo =
+              image.src.endsWith(".mp4") || image.src.endsWith(".webm");
 
-          {currentImage.badge && (
-            <div key={`badge-${currentIndex}-${currentImage.src}`}>
-              <GalleryImageBadge badge={currentImage.badge} />
-            </div>
-          )}
+            return (
+              <div
+                key={image.src}
+                className={`buudyLED-23435t23-slide ${
+                  isActive ? "buudyLED-23435t23-slide_active" : ""
+                }`}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  opacity: isActive ? 1 : 0,
+                  zIndex: isActive ? 2 : 1,
+                  pointerEvents: isActive ? "auto" : "none",
+                  transition: "opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1)",
+                }}
+                onClick={() => openLightbox(index)}
+              >
+                {isVideo ? (
+                  <video
+                    src={image.src}
+                    id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
+                    className="buudyLED-23435t23-main_img"
+                    autoPlay={isActive}
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={image.src}
+                    id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
+                    className="buudyLED-23435t23-main_img"
+                    alt={image.alt}
+                    decoding="async"
+                    fetchPriority={index === 0 ? "high" : "low"}
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                )}
+
+                {isActive && image.badge && (
+                  <div key={`badge-${index}-${image.src}`}>
+                    <GalleryImageBadge badge={image.badge} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
 
           <button
             className="buudyLED-23435t23-arrow buudyLED-23435t23-prev"
