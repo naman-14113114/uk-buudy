@@ -42,12 +42,13 @@ for (const quantity of [1, 2, 100]) {
   for (const promo of [false, true]) {
     test(`preserves ${quantity} masks and free torches with promo=${promo}`, () => {
       const data = fixture();
-      const payload = buildBundlePayload(data, quantity, promo, { msclkid: "qa-click" });
+      const payload = buildBundlePayload(data, quantity, promo);
       assert.equal(payload.bundle_option_id, promo ? XPAGE.promoOptionId : XPAGE.regularOptionId);
       assert.deepEqual(payload.bundle_selected_variants.conditions[`fresh-mask-${promo}`], Array(quantity).fill(XPAGE.maskVariantId));
       assert.deepEqual(payload.bundle_selected_variants.offered[`fresh-torch-${promo}`], Array(quantity).fill(XPAGE.torchVariantId));
-      assert.equal(payload.custom_fields.msclkid, "qa-click");
-      assert.equal(payload.custom_fields.buudy_promo_code, promo ? "BUUDY10" : undefined);
+      assert.deepEqual(Object.keys(payload).sort(), [
+        "bundle_option_id", "bundle_selected_variants", "landing_page_id",
+      ]);
     });
   }
 }
@@ -80,13 +81,13 @@ test("rejects unexpected checkout destinations and invalid tokens", () => {
   }
   assert.throws(() => validateCheckoutUrl(url, "invalid"));
 });
-test("creates a fresh cookie session, preserves attribution, and returns GBP checkout", async () => {
+test("creates a fresh cookie session with only order data and returns a clean GBP checkout", async () => {
   let calls = 0;
   const fetcher = async (url, init) => {
     calls++;
     assert.equal(init.cache, "no-store");
     if (calls === 1) {
-      assert.equal(new URL(url).searchParams.get("currency"), "GBP");
+      assert.equal(url.toString(), `${XPAGE.origin}/?currency=GBP`);
       assert.equal(init.headers.cookie, "xp_currency=GBP");
       return new Response(html(fixture()), { headers: { "set-cookie": "session=unique; HttpOnly; Secure" } });
     }
@@ -94,20 +95,24 @@ test("creates a fresh cookie session, preserves attribution, and returns GBP che
     assert.equal(init.headers["X-CSRF-Token"], fixture().csrf);
     assert.match(init.headers.cookie, /session=unique/);
     const payload = JSON.parse(init.body);
-    assert.equal(payload.custom_fields.msclkid, "qa-click");
+    assert.deepEqual(Object.keys(payload).sort(), [
+      "bundle_option_id", "bundle_selected_variants", "landing_page_id",
+    ]);
+    assert.equal(init.headers.referer, `${XPAGE.origin}/?currency=GBP`);
+    assert.doesNotMatch(JSON.stringify({ url, init }), /buudy\.co\.uk|utm_|msclkid|gclid|fbclid|custom_fields|buudy_promo_code/);
     const token = "b".repeat(64);
     return Response.json({ status: "success", checkout_token: token,
-      checkout_url: `${XPAGE.checkoutOrigin}/session/checkout/${token}` });
+      checkout_url: `${XPAGE.checkoutOrigin}/session/checkout/${token}?utm_source=buudy.co.uk&msclkid=qa-click&source=cart&gclid=test&fbclid=test&redirect=https%3A%2F%2Fwww.buudy.co.uk%2Fcart#buudy.co.uk` });
   };
-  const result = await createXpageCheckout(2, true, { msclkid: "qa-click" }, fetcher);
+  const result = await createXpageCheckout(2, true, fetcher);
   assert.equal(calls, 2);
   assert.equal(new URL(result.checkoutUrl).origin, XPAGE.origin);
-  assert.equal(new URL(result.checkoutUrl).searchParams.get("currency"), "GBP");
-  assert.equal(new URL(result.checkoutUrl).searchParams.get("msclkid"), "qa-click");
+  assert.equal(new URL(result.checkoutUrl).search, "?currency=GBP");
+  assert.equal(new URL(result.checkoutUrl).hash, "");
 });
 test("does not retry failed checkout POSTs", async () => {
   let calls = 0;
-  await assert.rejects(createXpageCheckout(1, false, {}, async () => {
+  await assert.rejects(createXpageCheckout(1, false, async () => {
     calls++;
     if (calls === 1) return new Response(html(fixture()));
     throw new Error("timeout");

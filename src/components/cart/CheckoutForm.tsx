@@ -6,7 +6,6 @@ import Lottie from "lottie-react";
 import loadingLottie from "./loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import {
-  appendAttributionToAbsoluteUrl,
   attributionStorageKey,
   pickAttributionFromSearch,
 } from "@/lib/attribution";
@@ -118,7 +117,17 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         throw new Error("Could not prepare checkout.");
       }
 
-      window.location.assign(appendAttributionToAbsoluteUrl(data.checkoutUrl, attribution));
+      // Use the server's final URL without adding browser attribution. A link
+      // policy also works after a client-side cart navigation, where a cart-only
+      // HTTP Referrer-Policy header would not apply to the existing document.
+      const checkoutLink = document.createElement("a");
+      checkoutLink.href = data.checkoutUrl;
+      checkoutLink.rel = "noreferrer noopener";
+      checkoutLink.referrerPolicy = "no-referrer";
+      checkoutLink.hidden = true;
+      document.body.appendChild(checkoutLink);
+      checkoutLink.click();
+      checkoutLink.remove();
     } catch (checkoutError) {
       setIsRedirecting(false);
       setError(checkoutError instanceof Error ? checkoutError.message : "Checkout could not be opened. Please try again.");

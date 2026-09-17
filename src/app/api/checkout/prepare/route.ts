@@ -276,7 +276,7 @@ export async function POST(request: NextRequest) {
   }
   if (!body.cart || maskLines?.length) {
     try {
-      const checkout = await createXpageCheckout(quantity, Boolean(appliedManualPromoCode), cleanAttribution(body.attribution));
+      const checkout = await createXpageCheckout(quantity, Boolean(appliedManualPromoCode));
       return NextResponse.json(checkout, { headers: { "Cache-Control": "no-store" } });
     } catch (error) {
       // Never log session cookies, CSRF tokens, checkout URLs or customer data.

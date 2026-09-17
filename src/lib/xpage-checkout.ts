@@ -83,8 +83,7 @@ export function selectOffer(published: PublishedOffer, promo: boolean) {
   return { option, mask, torch, maskVariant, torchVariant };
 }
 
-export function buildBundlePayload(published: PublishedOffer, quantity: number, promo: boolean,
-  attribution: Record<string, string> = {}) {
+export function buildBundlePayload(published: PublishedOffer, quantity: number, promo: boolean) {
   if (!Number.isInteger(quantity) || quantity < 1 || quantity > 100) {
     throw new Error("Mask quantity must be between 1 and 100.");
   }
@@ -96,8 +95,6 @@ export function buildBundlePayload(published: PublishedOffer, quantity: number, 
       offered: { [torch.id]: Array<string>(quantity).fill(XPAGE.torchVariantId) },
     },
     landing_page_id: published.landingPageId,
-    custom_fields: { buudy_checkout_source: "buudy.co.uk", ...attribution,
-      ...(promo ? { buudy_promo_code: "BUUDY10" } : {}) },
   };
 }
 
@@ -105,9 +102,8 @@ function cookieHeader(response: Response) {
   return response.headers.getSetCookie().map((cookie) => cookie.split(";")[0]).join("; ");
 }
 
-async function loadPublishedOffer(fetcher: Fetcher, attribution: Record<string, string> = {}) {
+async function loadPublishedOffer(fetcher: Fetcher) {
   const url = new URL("/?currency=GBP", XPAGE.origin);
-  for (const [key, value] of Object.entries(attribution)) url.searchParams.set(key, value);
   const response = await fetcher(url, {
     cache: "no-store", redirect: "error", signal: AbortSignal.timeout(12000),
     headers: { "accept-language": "en-GB,en;q=0.9", cookie: "xp_currency=GBP" },
@@ -128,10 +124,10 @@ export function validateCheckoutUrl(href: unknown, token: unknown) {
   return url;
 }
 
-export async function createXpageCheckout(quantity: number, promo: boolean,
-  attribution: Record<string, string> = {}, fetcher: Fetcher = fetch) {
-  const { published, cookie, url: landingUrl } = await loadPublishedOffer(fetcher, attribution);
-  const payload = buildBundlePayload(published, quantity, promo, attribution);
+// Attribution stays in the storefront; this boundary accepts only order inputs.
+export async function createXpageCheckout(quantity: number, promo: boolean, fetcher: Fetcher = fetch) {
+  const { published, cookie, url: landingUrl } = await loadPublishedOffer(fetcher);
+  const payload = buildBundlePayload(published, quantity, promo);
   // Do not retry this POST: a timeout may still have created an unpaid checkout.
   const response = await fetcher(`${XPAGE.origin}/create-bundle-order`, {
     method: "POST", cache: "no-store", redirect: "error", signal: AbortSignal.timeout(15000),
@@ -144,11 +140,9 @@ export async function createXpageCheckout(quantity: number, promo: boolean,
   const result = await response.json() as { status?: string; checkout_url?: string; checkout_token?: string };
   if (result.status !== "success") throw new Error("XPage could not prepare checkout.");
   const platformCheckoutUrl = validateCheckoutUrl(result.checkout_url, result.checkout_token);
-  const checkoutUrl = new URL(
-    `${platformCheckoutUrl.pathname}${platformCheckoutUrl.search}`,
-    XPAGE.origin,
-  );
+  // The session is in the path. Do not copy optional provider query parameters
+  // or fragments, which could reintroduce attribution into the browser handoff.
+  const checkoutUrl = new URL(platformCheckoutUrl.pathname, XPAGE.origin);
   checkoutUrl.searchParams.set("currency", "GBP");
-  for (const [key, value] of Object.entries(attribution)) checkoutUrl.searchParams.set(key, value);
   return { checkoutUrl: checkoutUrl.toString(), checkoutToken: result.checkout_token };
 }
