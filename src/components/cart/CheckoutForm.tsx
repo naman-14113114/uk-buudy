@@ -34,6 +34,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
+  const [isMorocco, setIsMorocco] = useState(false);
   const hasItems = totals.itemCount > 0;
 
   useEffect(() => {
@@ -48,6 +49,21 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     return () => {
       window.removeEventListener("pageshow", handlePageShow);
     };
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const countryParam = params.get("country")
+      ? `?country=${encodeURIComponent(params.get("country")!)}`
+      : "";
+    fetch(`/api/geo${countryParam}`)
+      .then((res) => res.json())
+      .then((data: { country?: string }) => {
+        if (data?.country === "MA" || data?.country === "MOROCCO") {
+          setIsMorocco(true);
+        }
+      })
+      .catch(() => {});
   }, []);
   const maskQuantity =
     lines.find(
@@ -73,6 +89,11 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
 
   async function handleCheckout() {
     if (!hasItems || isRedirecting) {
+      return;
+    }
+
+    if (isMorocco) {
+      setError("The checkout has not been connected, and no order has been placed.");
       return;
     }
 

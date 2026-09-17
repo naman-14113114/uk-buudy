@@ -254,6 +254,23 @@ async function createPlusbaseCheckout(
 }
 
 export async function POST(request: NextRequest) {
+  const clientCountry =
+    request.headers.get("x-vercel-ip-country") ||
+    request.headers.get("cf-ipcountry") ||
+    request.headers.get("x-country-code") ||
+    request.headers.get("x-country");
+
+  if (
+    clientCountry &&
+    (clientCountry.trim().toUpperCase() === "MA" ||
+      clientCountry.trim().toUpperCase() === "MOROCCO")
+  ) {
+    return NextResponse.json(
+      { error: "The checkout has not been connected, and no order has been placed." },
+      { status: 400 },
+    );
+  }
+
   const parsed = prepareSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Please check your cart quantities and try again." }, { status: 400 });
