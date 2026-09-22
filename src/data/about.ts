@@ -1,7 +1,7 @@
 export const aboutHero = {
   eyebrow: "About Buudy",
-  title: "Welcome to Buudy.com!",
-  copy: "At Buudy.com, we are more than just an online store; we are a community dedicated to providing high-quality, affordable products that enhance your daily life. Our mission is to make shopping easy, enjoyable, and reliable for our customers around the world.",
+  title: "Welcome to Buudy!",
+  copy: "At Buudy, we are more than just an online store; we are a community dedicated to providing high-quality, affordable products that enhance your daily life. Our mission is to make shopping easy, enjoyable, and reliable for our customers around the world.",
   imageDesktop: "/images/about/about-hero-desktop-v4.webp",
   imageMobile: "/images/about/about-hero-desktop-v4.webp",
 };
