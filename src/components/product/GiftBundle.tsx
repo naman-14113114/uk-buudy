@@ -299,7 +299,8 @@ export function GiftBundle({ product }: { product: Product }) {
             }}
             aria-label="Shipping information"
             aria-expanded={showShippingInfo}
-            className="flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent text-[7.5px] sm:text-[8.5px] font-bold leading-none text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
+            style={{ fontSize: "8px", lineHeight: 1 }}
+            className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent font-medium text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
           >
             ?
           </button>
