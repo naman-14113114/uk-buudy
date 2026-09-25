@@ -139,6 +139,7 @@ export async function POST(request: Request) {
         submitted_at: new Date().toISOString(),
         public_support_email: publicSupportEmail,
         notification_recipient: contactRecipientEmail,
+        recipient: contactRecipientEmail,
       }),
     });
 
