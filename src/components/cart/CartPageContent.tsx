@@ -187,7 +187,7 @@ export function CartPageContent({
                   }}
                   aria-label="Shipping information"
                   aria-expanded={showShippingInfo}
-                  className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full border border-[rgba(58,31,61,.22)] bg-[var(--card)] text-xs font-semibold text-[var(--plum)] shadow-xs transition hover:border-[var(--gold)] hover:text-[var(--gold)] active:scale-95 cursor-pointer"
+                  className="flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent text-[8px] sm:text-[9px] font-bold leading-none text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
                 >
                   ?
                 </button>
