@@ -322,7 +322,7 @@ export function GiftBundle({ product }: { product: Product }) {
                 </button>
               </div>
               <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0">
-                This is the earliest date you can receive your order, but the average shipping time is 4–7 days. For more information, please visit our shipping policy page.
+                This is the earliest date you can receive your order, but standard delivery transit is 7–20 business days. For more information, please visit our shipping policy page.
               </p>
             </div>
           )}
