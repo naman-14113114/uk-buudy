@@ -539,3 +539,38 @@ Evidence files:
 - An unpaid checkout prepared using buudy-mask-lp-7-colour with quantity 2 and BUUDY10 returns HTTP 200 on mask.buudy.com; rendered order summary shows two Buudy LED Mask + Premium Travel Box units, two Buudy LED Torch units and BUUDY10 + FREE TORCH. No customer data or payment was submitted.
 - Deployment discovery: local .vercel/project.json points to a legacy elato-tests-projects/uk-buudy project with only uk-buudy-eight.vercel.app and no Git link. It does not own www.buudy.co.uk. GitHub main's Vercel status and Production deployment identify sahiljainsj07-5803s-projects/uk-buudy. Release through the existing GitHub pipeline, not the obsolete local Vercel project. Live release verification follows after push.
 - Documentation: docs/mask-landing-identities.md; regression checks: scripts/test-mask-landing-pages.mjs plus the existing scripts/test-xpage-checkout.mjs.
+
+## 2026-09-30 22:38 IST - Complete removal of order-tracking, sign-in, and sign-up pages
+
+- User request: Explain why `https://www.buudy.co.uk/order-tracking` was still present when order-tracking, sign-in, and sign-up are not in navigation; perform audit, then remove these pages entirely.
+- Root cause analysis:
+  1. `/order-tracking` and duplicate `/pages/order-tracking` existed as Next.js route components (`src/app/order-tracking/page.tsx`, `src/app/pages/order-tracking/page.tsx`), backed by `src/components/policies/OrderTrackingPage.tsx` and API route `src/app/api/order-tracking/route.ts`.
+  2. In `src/app/sitemap.ts`, `/order-tracking` was explicitly indexed in the sitemap.
+  3. In `next.config.ts`, permanent redirects mapped `/policies/order-tracking` and `/pages/order-tracking` to `/order-tracking`.
+  4. In `src/data/footer.ts`, order-tracking was previously commented out rather than deleted from source, leaving the page generated and published in static builds.
+  5. Similarly, `/sign-in` and `/sign-up` were orphaned route components with client component `AuthForm.tsx`, despite being absent from the site's navigation header.
+- Actions completed:
+  1. Removed `src/app/order-tracking/page.tsx` and `src/app/pages/order-tracking/page.tsx`.
+  2. Removed `src/app/api/order-tracking/route.ts` and `src/components/policies/OrderTrackingPage.tsx`.
+  3. Removed `orderTrackingData` export from `src/data/policies.ts`.
+  4. Removed `/order-tracking` from `src/app/sitemap.ts`.
+  5. Removed `/policies/order-tracking` and `/pages/order-tracking` redirect aliases from `next.config.ts`.
+  6. Removed commented-out order-tracking reference from `src/data/footer.ts`.
+  7. Removed `src/app/sign-in/page.tsx` and `src/app/sign-up/page.tsx`.
+  8. Removed orphaned `src/components/account/AuthForm.tsx`.
+  9. Removed `/sign-in` and `/sign-up` from `privatePaths` in `src/app/robots.ts`.
+- Verification & Test results:
+  1. `git grep -i "order-tracking"` returned 0 occurrences across entire repository.
+  2. `git grep -i "sign-up"` returned 0 occurrences across entire repository.
+  3. All 16 regression tests passed (3 landing ID tests + 13 XPage checkout tests).
+  4. `npx eslint src/` passed with 0 errors.
+  5. Clean `next build` completed with Exit Code 0 (all 44 static/SSG routes prerendered).
+  6. Tested production server (`next start -p 3005`):
+     - `GET /order-tracking` -> 404
+     - `GET /pages/order-tracking` -> 404
+     - `GET /sign-in` -> 404
+     - `GET /sign-up` -> 404
+     - `GET /` -> 200
+     - `GET /products/buudy-led-mask` -> 200
+     - `GET /sitemap.xml` -> 200 (verified 0 occurrences of order-tracking, sign-in, sign-up)
+     - `GET /robots.txt` -> 200 (verified sign-in and sign-up cleanly removed)
