@@ -7,8 +7,8 @@ function fixture() {
   const option = (promo) => ({
     id: promo ? XPAGE.promoOptionId : XPAGE.regularOptionId,
     discount_target: promo ? "TOTAL" : null,
-    discount_type: promo ? "PERCENTAGE" : null,
-    discount_amount: promo ? "5.59" : 0,
+    discount_type: promo ? "FIXED" : null,
+    discount_amount: promo ? "10.00" : 0,
     conditions: [{ id: `fresh-mask-${promo}`, quantity: 1,
       product: { id: XPAGE.maskProductId, status: "ACTIVE", variants: [
         { id: XPAGE.maskVariantId, price: 179.56, is_visible: true },
@@ -80,7 +80,9 @@ test("rejects invalid numeric prices even when the provider uses strings", () =>
 test("fails closed if gift, promo, variant or product configuration changes", () => {
   const mutations = [
     (o) => { o.offered[0].discount_amount = "99"; },
-    (o) => { o.discount_amount = "10"; },
+    (o) => { o.discount_amount = "11"; },
+    (o) => { o.discount_type = "PERCENTAGE"; },
+    (o) => { o.discount_target = "CONDITIONS"; },
     (o) => { o.conditions[0].quantity = 2; },
     (o) => { o.offered[0].product.id = "different-product"; },
     (o) => { o.conditions[0].product.variants[0].is_visible = false; },
@@ -90,6 +92,12 @@ test("fails closed if gift, promo, variant or product configuration changes", ()
     const data = fixture(); mutate(data.bundle.options[1]);
     assert.throws(() => selectOffer(data, true));
   }
+});
+test("rejects the old percentage promo so checkout matches the fixed GBP10 cart discount", () => {
+  const data = fixture();
+  Object.assign(data.bundle.options[1], { discount_type: "PERCENTAGE", discount_amount: "5.59" });
+  assert.throws(() => selectOffer(data, true));
+  assert.equal(selectOffer(data, false).option.id, XPAGE.regularOptionId);
 });
 test("rejects unexpected checkout destinations and invalid tokens", () => {
   const token = "a".repeat(64);

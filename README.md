@@ -56,7 +56,8 @@ collected locally and clicking checkout is not a paid sale.
 The cart remains available when a shopper returns or checkout preparation fails.
 
 - Each mask receives one real BUUDY torch, discounted 100% by XPage.
-- BUUDY10 selects the separate 5.59%-off option in the same XPage bundle. It is
+- BUUDY10 selects the separate option that deducts GBP 10 from the total in the
+  same XPage bundle. It is
   recorded as a bundle discount, **not a native coupon redemption**. The original
   BUUDY10 coupon definition is unchanged. Updating/disabling that coupon alone
   does not update this bundle option: manage the bundle option too.

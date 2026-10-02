@@ -85,8 +85,8 @@ export function selectOffer(published: PublishedOffer, promo: boolean) {
       !Number.isFinite(maskPrice) || maskPrice <= 0 ||
       !Number.isFinite(torchPrice) || torchPrice < 0 ||
       torch.discount_type !== "PERCENTAGE" || Number(torch.discount_amount) !== 100 ||
-      (promo ? option.discount_type !== "PERCENTAGE" || option.discount_target !== "TOTAL" ||
-        Number(option.discount_amount) !== 5.59 : Number(option.discount_amount) !== 0)) {
+      (promo ? option.discount_type !== "FIXED" || option.discount_target !== "TOTAL" ||
+        Number(option.discount_amount) !== 10 : Number(option.discount_amount) !== 0)) {
     throw new Error("XPage's mask or free-torch offer has changed. Checkout was not created.");
   }
   return { option, mask, torch, maskVariant, torchVariant };
