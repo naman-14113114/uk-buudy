@@ -57,6 +57,26 @@ test("rejects invalid quantities instead of silently reducing the order", () => 
     assert.throws(() => buildBundlePayload(fixture(), quantity, false));
   }
 });
+
+test("accepts native GBP variant prices serialized as decimal strings", () => {
+  for (const promo of [false, true]) {
+    const data = fixture();
+    const option = data.bundle.options[promo ? 1 : 0];
+    option.conditions[0].product.variants[0].price = "179.00";
+    option.offered[0].product.variants[0].price = "70.00";
+    assert.equal(buildBundlePayload(data, 1, promo).bundle_option_id, option.id);
+  }
+});
+
+test("rejects invalid numeric prices even when the provider uses strings", () => {
+  for (const price of ["", " ", "Infinity", "NaN", "179oops", "-1", null, true, Infinity, NaN]) {
+    for (const field of ["conditions", "offered"]) {
+      const data = fixture();
+      data.bundle.options[0][field][0].product.variants[0].price = price;
+      assert.throws(() => selectOffer(data, false));
+    }
+  }
+});
 test("fails closed if gift, promo, variant or product configuration changes", () => {
   const mutations = [
     (o) => { o.offered[0].discount_amount = "99"; },
