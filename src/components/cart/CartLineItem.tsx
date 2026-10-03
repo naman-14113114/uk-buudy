@@ -61,7 +61,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between gap-3">
+        <div className="mt-1.5 flex items-center justify-between gap-3">
           {line.locked ? (
             <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-[var(--gold)]">
               Unlocked x {line.quantity}
