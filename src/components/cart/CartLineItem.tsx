@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import type { CartLine } from "@/lib/cart";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
 
 export function CartLineItem({ line }: { line: CartLine }) {
-  const { setQuantity, removeProduct } = useCart();
+  const { setQuantity } = useCart();
 
   return (
     <div className="flex gap-4 border-b border-[var(--border)] py-5">
@@ -67,7 +67,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
               Unlocked x {line.quantity}
             </span>
           ) : (
-            <div className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)]">
+            <div className="ml-auto inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)]">
               <button
                 aria-label="Decrease quantity"
                 className="grid h-9 w-9 place-items-center"
@@ -91,18 +91,6 @@ export function CartLineItem({ line }: { line: CartLine }) {
               </button>
             </div>
           )}
-          {!line.locked ? (
-            <button
-              aria-label={`Remove ${line.title}`}
-              className="inline-flex items-center gap-2 text-xs text-[var(--muted)] transition hover:text-[var(--plum)]"
-              data-testid={`remove-${line.productId}`}
-              onClick={() => removeProduct(line.productId)}
-              type="button"
-            >
-              <Trash2 size={14} />
-              Remove
-            </button>
-          ) : null}
         </div>
       </div>
     </div>
