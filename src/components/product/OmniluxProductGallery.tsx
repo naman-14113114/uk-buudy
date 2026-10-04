@@ -401,6 +401,9 @@ export function OmniluxProductGallery({
           object-position: center;
           display: block;
         }
+        .omni-main-img--contain {
+          object-fit: contain !important;
+        }
 
         /* 2. TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (TIGHT PADDING, SINGLE LINE) */
         .omni-tabs-row {
@@ -961,7 +964,7 @@ export function OmniluxProductGallery({
                   <img
                     src={currentItem.src}
                     alt={currentItem.alt}
-                    className="omni-main-img"
+                    className="omni-main-img omni-main-img--contain"
                     decoding="async"
                     loading="eager"
                   />
