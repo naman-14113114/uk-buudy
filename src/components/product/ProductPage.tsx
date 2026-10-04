@@ -17,7 +17,15 @@ import {
 } from "./DeferredClientSections";
 import { TrustBadges } from "./TrustBadges";
 
-export function ProductPage({ product, variant }: { product: Product; variant?: string }) {
+export function ProductPage({
+  product,
+  variant,
+  galleryVariant = "default",
+}: {
+  product: Product;
+  variant?: string;
+  galleryVariant?: "default" | "omnilux";
+}) {
   if (product.template === "torch") {
     return <TorchProductPage product={product} />;
   }
@@ -28,7 +36,7 @@ export function ProductPage({ product, variant }: { product: Product; variant?: 
 
   return (
     <>
-      <ProductHero product={product} />
+      <ProductHero product={product} galleryVariant={galleryVariant} />
       <DeferredVideoReviews />
       <TrustBadges />
       {/* <FeatureGrid /> */}
