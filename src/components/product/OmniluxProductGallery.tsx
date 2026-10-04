@@ -14,7 +14,29 @@ import {
   X,
 } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
-import { transformations } from "@/data/productSections";
+// 4 Dedicated SEO/GEO Before & After Transformation Images for Gallery
+const GALLERY_BEFORE_AFTER_ITEMS: { src: string; alt: string; concern: string }[] = [
+  {
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-calms-redness-uk.webp",
+    alt: "Buudy 7 Colour LED Mask before and after results: calms redness and inflammation UK",
+    concern: "Calms Redness",
+  },
+  {
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-evens-skin-tone-uk.webp",
+    alt: "Buudy 7 Colour LED Face Mask clinical results: evens skin tone and fades pigmentation UK",
+    concern: "Evens Skin Tone",
+  },
+  {
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-acne-breakouts-uk.webp",
+    alt: "Buudy 7 Colour LED Mask before and after: targets acne and prevents future breakouts UK",
+    concern: "Targets Acne & Breakouts",
+  },
+  {
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-anti-ageing-results-uk.webp",
+    alt: "Buudy 7 Colour LED Mask before and after: anti-ageing skin tightening and smoothing UK",
+    concern: "Anti-Ageing & Smoothing",
+  },
+];
 
 // Video playing on product page just above footer (GuaranteeSection)
 const PRODUCT_FOOTER_VIDEO_SRC = "/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4";
@@ -45,7 +67,7 @@ export function OmniluxProductGallery({
   images: ProductImage[];
   hasGifts?: boolean;
 }) {
-  // Build unified continuous array: 15 Gallery + 8 Before & After + 1 Video = 24 items in sequence
+  // Build unified continuous array: 17 Gallery + 4 Before & After + 1 Video = 22 items in sequence
   const allMediaItems: MediaItem[] = useMemo(() => {
     const galleryItems: MediaItem[] = images.map((img) => ({
       type: "gallery",
@@ -54,10 +76,10 @@ export function OmniluxProductGallery({
       badge: img.badge,
     }));
 
-    const beforeAfterItems: MediaItem[] = transformations.map((item) => ({
+    const beforeAfterItems: MediaItem[] = GALLERY_BEFORE_AFTER_ITEMS.map((item) => ({
       type: "before-after",
-      src: item.image,
-      alt: `${item.concern} before and after result`,
+      src: item.src,
+      alt: item.alt,
       concern: item.concern,
     }));
 
@@ -71,8 +93,8 @@ export function OmniluxProductGallery({
   }, [images]);
 
   const galleryStartIndex = 0;
-  const beforeAfterStartIndex = images.length; // e.g. 15
-  const videoStartIndex = images.length + transformations.length; // e.g. 23
+  const beforeAfterStartIndex = images.length; // e.g. 17
+  const videoStartIndex = images.length + GALLERY_BEFORE_AFTER_ITEMS.length; // e.g. 21
 
   // Current global media index (0..23). By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
