@@ -17,8 +17,14 @@ export function ProductHero({
     >
       <div className="buudy-glow -left-20 -top-24 h-[500px] w-[500px] bg-[#f4a17b]" />
       <div className="buudy-glow -right-24 top-52 h-[560px] w-[560px] bg-[#a05080]" />
-      <div className="buudy-wrap relative z-10 grid gap-8 [overflow-anchor:none] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[1.05fr_1fr] xl:gap-16">
-        <div className="lg:sticky lg:top-6 lg:self-start">
+      <div
+        className={`buudy-wrap relative z-10 grid gap-8 [overflow-anchor:none] ${
+          galleryVariant === "omnilux"
+            ? "lg:grid-cols-[minmax(0,1.18fr)_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[1.24fr_1fr] xl:gap-12"
+            : "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[1.05fr_1fr] xl:gap-16"
+        }`}
+      >
+        <div className="lg:sticky lg:top-6 lg:self-start w-full">
           {galleryVariant === "omnilux" ? (
             <OmniluxProductGallery images={product.gallery} hasGifts={product.gifts.length > 0} />
           ) : (
