@@ -76,6 +76,7 @@ export function OmniluxProductGallery({
 
   // Current global media index (0..23). By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [hoverSide, setHoverSide] = useState<"left" | "right">("right");
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -110,6 +111,28 @@ export function OmniluxProductGallery({
   const goPrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + allMediaItems.length) % allMediaItems.length);
   }, [allMediaItems.length]);
+
+  // Handle mouse move on main stage to toggle < or > cursor depending on side from center
+  const handleStageMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    if (mouseX < rect.width / 2) {
+      setHoverSide("left");
+    } else {
+      setHoverSide("right");
+    }
+  }, []);
+
+  // Handle click on main stage: left side goes backward (<), right side goes forward (>)
+  const handleStageClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    if (mouseX < rect.width / 2) {
+      goPrev();
+    } else {
+      goNext();
+    }
+  }, [goNext, goPrev]);
 
   // Dynamic Thumbnail Centering Scroll (1:1 from Miroooo): centers active thumbnail vertically on desktop & horizontally on mobile
   useEffect(() => {
@@ -224,7 +247,7 @@ export function OmniluxProductGallery({
           display: flex;
           flex-direction: row;
           align-items: stretch;
-          gap: clamp(10px, 1.4vw, 20px);
+          gap: clamp(8px, 1.2vw, 16px);
           position: relative;
           z-index: 1;
         }
@@ -336,36 +359,13 @@ export function OmniluxProductGallery({
           min-width: 0;
         }
 
-        /* 1. MAIN DISPLAY CARD WITH OUTSIDE NAVIGATION ARROWS */
+        /* 1. MAIN DISPLAY CARD WITH DYNAMIC < AND > HOVER CURSORS */
         .omni-stage-row {
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: clamp(6px, 1vw, 14px);
           flex: 1 1 auto;
-        }
-        .omni-stage-arrow {
-          position: static;
-          width: clamp(32px, 3.2vw, 40px);
-          height: clamp(32px, 3.2vw, 40px);
-          border-radius: 50%;
-          background: #ffffff;
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #1c1917;
-          cursor: pointer;
-          flex-shrink: 0;
-          transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
-          z-index: 5;
-        }
-        .omni-stage-arrow:hover {
-          background-color: #f5f5f4;
-          transform: scale(1.08);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         .omni-main-stage {
           position: relative;
@@ -380,8 +380,11 @@ export function OmniluxProductGallery({
           user-select: none;
           flex: 1 1 auto;
         }
-        .omni-main-stage--zoomable {
-          cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in;
+        .omni-main-stage--cursor-left {
+          cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='13' fill='%23ffffff' stroke='%23e5e7eb' stroke-width='1' fill-opacity='0.94'/%3E%3Cpath d='M16 8.5L10.5 14L16 19.5' stroke='%231f2937' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") 14 14, w-resize !important;
+        }
+        .omni-main-stage--cursor-right {
+          cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='13' fill='%23ffffff' stroke='%23e5e7eb' stroke-width='1' fill-opacity='0.94'/%3E%3Cpath d='M12 8.5L17.5 14L12 19.5' stroke='%231f2937' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") 14 14, e-resize !important;
         }
         .omni-main-img-wrap {
           position: absolute;
@@ -399,15 +402,16 @@ export function OmniluxProductGallery({
           display: block;
         }
 
-        /* 2. TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE */
+        /* 2. TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (TIGHT PADDING, SINGLE LINE) */
         .omni-tabs-row {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: clamp(18px, 3vw, 42px);
-          margin-top: clamp(14px, 1.8vw, 22px);
+          flex-wrap: nowrap;
+          gap: clamp(12px, 1.8vw, 28px);
+          margin-top: clamp(6px, 1vw, 10px);
           margin-bottom: 0;
-          padding-bottom: 8px;
+          padding-bottom: 2px;
           border-bottom: 1px solid rgba(58, 31, 61, 0.1);
           width: 100%;
         }
@@ -417,10 +421,11 @@ export function OmniluxProductGallery({
           border: none;
           padding: 4px 4px;
           font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-          font-size: clamp(13px, 1.25vw, 15px);
+          font-size: clamp(12px, 1.15vw, 14.5px);
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
+          white-space: nowrap;
           color: #78716c;
           cursor: pointer;
           display: inline-flex;
@@ -915,28 +920,21 @@ export function OmniluxProductGallery({
 
         {/* RIGHT MAIN GALLERY COLUMN (STAGE + TABS) */}
         <div className="omni-gallery-main-col">
-          {/* TOP MAIN DISPLAY STAGE ROW WITH OUTSIDE NAVIGATION ARROWS */}
+          {/* TOP MAIN DISPLAY STAGE ROW */}
           <div className="omni-stage-row">
-            {/* Outside Left Navigation Arrow */}
-            <button
-              type="button"
-              aria-label="Previous item"
-              className="omni-stage-arrow omni-stage-arrow--prev"
-              onClick={goPrev}
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            {/* MAIN DISPLAY STAGE */}
+            {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS */}
             <div
               className={`omni-main-stage ${
-                currentItem.type !== "video" ? "omni-main-stage--zoomable" : ""
+                currentItem.type !== "video"
+                  ? hoverSide === "left"
+                    ? "omni-main-stage--cursor-left"
+                    : "omni-main-stage--cursor-right"
+                  : ""
               }`}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
-              onClick={() => {
-                if (currentItem.type !== "video") openLightbox();
-              }}
+              onMouseMove={handleStageMouseMove}
+              onClick={currentItem.type !== "video" ? handleStageClick : undefined}
             >
               {/* 1. GALLERY IMAGE DISPLAY */}
               {currentItem.type === "gallery" && (
@@ -1017,16 +1015,6 @@ export function OmniluxProductGallery({
                 </div>
               )}
             </div>
-
-            {/* Outside Right Navigation Arrow */}
-            <button
-              type="button"
-              aria-label="Next item"
-              className="omni-stage-arrow omni-stage-arrow--next"
-              onClick={goNext}
-            >
-              <ChevronRight size={20} />
-            </button>
           </div>
 
           {/* 3 OPTIONS / TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (Beige/Gold Star Dot) */}

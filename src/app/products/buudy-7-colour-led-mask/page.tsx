@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product/ProductPage";
 import { buudyMask } from "@/data/products";
+import { productAsset } from "@/lib/media";
 import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
@@ -16,6 +17,17 @@ const pagePath = "/products/buudy-7-colour-led-mask";
 const pageProduct = {
   ...buudyMask,
   slug: "buudy-7-colour-led-mask",
+  gallery: [
+    {
+      src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
+      alt: "Buudy 7 Colour LED Mask for anti-ageing and skin rejuvenation in the UK",
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-skin-rejuvenation-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask clinical light therapy device with neck coverage",
+    },
+    ...buudyMask.gallery,
+  ],
 };
 
 export const revalidate = 86400;
@@ -56,10 +68,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: buudyMask.gallery[0].src,
+        url: pageProduct.gallery[0].src,
         width: 1200,
         height: 1500,
-        alt: buudyMask.gallery[0].alt,
+        alt: pageProduct.gallery[0].alt,
       },
     ],
   },
@@ -67,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: buudyMask.seoTitle,
     description: buudyMask.seoDescription,
-    images: [buudyMask.gallery[0].src],
+    images: [pageProduct.gallery[0].src],
   },
 };
 
@@ -93,7 +105,7 @@ export default function Buudy7ColourLedMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={buudyMask} galleryVariant="omnilux" />
+      <ProductPage product={pageProduct} galleryVariant="omnilux" />
     </>
   );
 }

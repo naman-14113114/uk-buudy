@@ -12,7 +12,11 @@ export function ProductHero({
 }) {
   return (
     <section
-      className="buudy-section bg-[var(--cream)] pt-4 pb-12 [overflow-anchor:none] md:pt-6 md:pb-20"
+      className={`buudy-section bg-[var(--cream)] [overflow-anchor:none] ${
+        galleryVariant === "omnilux"
+          ? "pt-2 pb-10 md:pt-3 md:pb-16"
+          : "pt-4 pb-12 md:pt-6 md:pb-20"
+      }`}
       style={{ overflowX: "clip", overflowY: "visible" }}
     >
       <div className="buudy-glow -left-20 -top-24 h-[500px] w-[500px] bg-[#f4a17b]" />
@@ -20,7 +24,7 @@ export function ProductHero({
       <div
         className={`buudy-wrap relative z-10 grid gap-8 [overflow-anchor:none] ${
           galleryVariant === "omnilux"
-            ? "lg:grid-cols-[minmax(0,1.18fr)_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[1.24fr_1fr] xl:gap-12"
+            ? "lg:grid-cols-[minmax(0,0.96fr)_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[1.02fr_1fr] xl:gap-12"
             : "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[1.05fr_1fr] xl:gap-16"
         }`}
       >
