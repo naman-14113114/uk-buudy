@@ -26,6 +26,10 @@ const pageProduct = {
       src: productAsset("buudy-7-colour-led-mask-skin-rejuvenation-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask clinical light therapy device with neck coverage",
     },
+    {
+      src: productAsset("buudy-7-colour-led-mask-red-light-therapy-studio-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask glowing in red light therapy mode for collagen and skin rejuvenation in the UK",
+    },
     ...buudyMask.gallery,
   ],
 };
