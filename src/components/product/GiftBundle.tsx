@@ -168,6 +168,9 @@ export function GiftBundle({ product }: { product: Product }) {
     0,
   );
   const hasGifts = product.gifts.length > 0;
+  const giftButtonLabel = hasGifts
+    ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
+    : "ADD TO CART + FREE SHIPPING";
   return (
     <div>
       <a
@@ -347,9 +350,7 @@ export function GiftBundle({ product }: { product: Product }) {
         {isAdding ? (
           <>
             <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
-              {hasGifts
-                ? "ADD TO CART + FREE GIFTS"
-                : "ADD TO CART + FREE SHIPPING"}
+              {giftButtonLabel}
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
               <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
@@ -357,9 +358,7 @@ export function GiftBundle({ product }: { product: Product }) {
           </>
         ) : (
           <span className="relative z-20 whitespace-nowrap">
-            {hasGifts
-              ? "ADD TO CART + FREE GIFTS"
-              : "ADD TO CART + FREE SHIPPING"}
+            {giftButtonLabel}
           </span>
         )}
       </Button>

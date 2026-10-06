@@ -12,6 +12,7 @@ export function ProductHero({
 }) {
   return (
     <section
+      id="product-hero"
       className={`buudy-section bg-[var(--cream)] [overflow-anchor:none] ${
         galleryVariant === "omnilux"
           ? "pt-2 pb-10 md:pt-3 md:pb-16"
