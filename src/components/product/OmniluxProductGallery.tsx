@@ -905,7 +905,7 @@ export function OmniluxProductGallery({
                 }`}
                 onClick={() => setCurrentIndex(idx)}
               >
-                {item.type === "video" ? (
+                {item.type === "video" || item.src.endsWith(".mp4") || item.src.endsWith(".webm") ? (
                   <>
                     <video
                       src={item.src}
@@ -950,7 +950,7 @@ export function OmniluxProductGallery({
             {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS */}
             <div
               className={`omni-main-stage ${
-                currentItem.type !== "video"
+                currentItem.type !== "video" && !currentItem.src.endsWith(".mp4") && !currentItem.src.endsWith(".webm")
                   ? hoverSide === "left"
                     ? "omni-main-stage--cursor-left"
                     : "omni-main-stage--cursor-right"
@@ -959,19 +959,27 @@ export function OmniluxProductGallery({
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
               onMouseMove={handleStageMouseMove}
-              onClick={currentItem.type !== "video" ? handleStageClick : undefined}
+              onClick={currentItem.type !== "video" && !currentItem.src.endsWith(".mp4") && !currentItem.src.endsWith(".webm") ? handleStageClick : undefined}
             >
-              {/* 1. GALLERY IMAGE DISPLAY */}
+              {/* 1. GALLERY IMAGE / VIDEO DISPLAY */}
               {currentItem.type === "gallery" && (
                 <div className="omni-main-img-wrap">
-                  <img
-                    src={currentItem.src}
-                    alt={currentItem.alt}
-                    className="omni-main-img"
-                    decoding="async"
-                    fetchPriority={currentIndex === 0 ? "high" : "low"}
-                    loading={currentIndex === 0 ? "eager" : "lazy"}
-                  />
+                  {currentItem.src.endsWith(".mp4") || currentItem.src.endsWith(".webm") ? (
+                    <GalleryVideo
+                      src={currentItem.src}
+                      isActive={true}
+                      className="omni-main-img"
+                    />
+                  ) : (
+                    <img
+                      src={currentItem.src}
+                      alt={currentItem.alt}
+                      className="omni-main-img"
+                      decoding="async"
+                      fetchPriority={currentIndex === 0 ? "high" : "low"}
+                      loading={currentIndex === 0 ? "eager" : "lazy"}
+                    />
+                  )}
                   {currentItem.badge && (
                     <div key={`badge-${currentIndex}-${currentItem.src}`}>
                       <GalleryImageBadge badge={currentItem.badge} />
@@ -1132,7 +1140,7 @@ export function OmniluxProductGallery({
                 </button>
 
                 <div className="buudyLED-23435t23-lightbox_stage">
-                  {currentItem.type === "video" ? (
+                  {currentItem.type === "video" || currentItem.src.endsWith(".mp4") || currentItem.src.endsWith(".webm") ? (
                     <video
                       className="buudyLED-23435t23-lightbox_img"
                       src={currentItem.src}
@@ -1203,5 +1211,52 @@ function GalleryImageBadge({
       </span>
       {badge.sub && <span className="buudy-gallery-badge__sub">{badge.sub}</span>}
     </div>
+  );
+}
+
+function GalleryVideo({
+  src,
+  isActive,
+  id,
+  className,
+}: {
+  src: string;
+  isActive: boolean;
+  id?: string;
+  className?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isActive) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      video.pause();
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      id={id}
+      className={className}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+    />
   );
 }

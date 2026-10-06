@@ -98,24 +98,30 @@ export const buudyMask: Product = {
     {
       src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
+      badge: {
+        title: "FULL FACE & NECK\nCOVERAGE",
+        sub: "Targeted firming & smoothing for jawline & neck",
+        position: "bottom-right",
+        theme: "white",
+      },
     },
     {
       src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
-    },
-    {
-      src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
-      alt: "Cleopatra LED Red Light Mask",
       badge: {
-        title: "FULL FACE & NECK\nCOVERAGE",
-        sub: "Targeted firming & smoothing for jawline & neck",
+        title: "FREE BUUDY\nLED TORCH",
+        sub: "£70 targeted red light device included free with your order",
         position: "top-left",
         theme: "white",
       },
     },
     {
-      src: productAsset("02-buudy-led-mask-side-profile.webp"),
-      alt: "Buudy LED Mask side profile",
+      src: productMediaAsset(
+        "buudy-7-colour-led-mask-7-light-modes-showcase-uk.mp4",
+        "buudy-led-mask",
+        "videos",
+      ),
+      alt: "Buudy 7 Colour LED Face Mask 7 clinical light wavelengths and modes video showcase UK",
       badge: {
         title: "7 CLINICAL\nWAVELENGTHS",
         sub: "Complete spectrum for rejuvenation, clarity & glow",
@@ -124,14 +130,48 @@ export const buudyMask: Product = {
       },
     },
     {
-      src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
-      alt: "Buudy LED Mask anti-ageing mode",
+      src: productAsset("07-buudy-led-mask-controller.webp"),
+      alt: "Buudy LED Mask tap controller",
       badge: {
-        title: "FAST 3-MIN\nTREATMENTS",
-        sub: "Green light helps fade dark spots & evens skin tone",
+        title: "SMART BUUDY\nAPP COMPANION",
+        sub: "Personalised guided routines & progress tracking",
         position: "top-left",
         theme: "white",
       },
+    },
+    {
+      src: productAsset("02-buudy-led-mask-side-profile.webp"),
+      alt: "Buudy LED Mask side profile",
+      badge: {
+        title: "100% CORDLESS &\nPORTABLE",
+        sub: "Hands-free cordless design to read, relax & multitask",
+        position: "bottom-left",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-skin-rejuvenation-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask dermatologist recommended for skin rejuvenation in the UK",
+      badge: {
+        title: "DERMATOLOGIST\nRECOMMENDED",
+        sub: "Expert-approved non-invasive skincare for all skin types",
+        position: "bottom-right",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("buudy_purple.jpeg"),
+      alt: "Buudy 7 Colour LED Face Mask with 192 high-density clinical LEDs across face and neck UK",
+      badge: {
+        title: "192 HIGH-DENSITY\nCLINICAL LEDS",
+        sub: "Maximum coverage & optical power across face & neck",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("09-buudy-led-mask-home-spa.webp"),
+      alt: "Buudy LED Mask home spa",
     },
     {
       src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
@@ -154,6 +194,24 @@ export const buudyMask: Product = {
       },
     },
     {
+      src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
+      alt: "Buudy 7 Colour LED Mask for anti-ageing and skin rejuvenation in the UK",
+    },
+    {
+      src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
+      alt: "Cleopatra LED Red Light Mask",
+    },
+    {
+      src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
+      alt: "Buudy LED Mask anti-ageing mode",
+      badge: {
+        title: "FAST 3-MIN\nTREATMENTS",
+        sub: "Green light helps fade dark spots & evens skin tone",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
       src: productAsset("06-buudy-led-mask-results.webp"),
       alt: "Buudy LED Mask results",
       badge: {
@@ -164,38 +222,12 @@ export const buudyMask: Product = {
       },
     },
     {
-      src: productAsset("07-buudy-led-mask-controller.webp"),
-      alt: "Buudy LED Mask tap controller",
-      badge: {
-        title: "SMART BUUDY\nAPP COMPANION",
-        sub: "Personalised guided routines & progress tracking",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
       src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
       alt: "Buudy LED Mask lifestyle use",
-      badge: {
-        title: "100% CORDLESS &\nPORTABLE",
-        sub: "Hands-free cordless design to read, relax & multitask",
-        position: "top-right",
-        theme: "dark",
-      },
-    },
-    {
-      src: productAsset("09-buudy-led-mask-home-spa.webp"),
-      alt: "Buudy LED Mask home spa",
     },
     {
       src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
       alt: "Buudy LED Mask dermatologist recommended",
-      badge: {
-        title: "DERMATOLOGIST\nRECOMMENDED",
-        sub: "Expert-approved non-invasive skincare for all skin types",
-        position: "bottom-right",
-        theme: "dark",
-      },
     },
     {
       src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
@@ -214,22 +246,6 @@ export const buudyMask: Product = {
     {
       src: productMediaAsset("O3-w.webp"),
       alt: "Buudy LED Mask O3",
-      badge: {
-        title: "FREE BUUDY\nLED TORCH",
-        sub: "£70 targeted red light device included free with your order",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("buudy_purple.jpeg"),
-      alt: "Buudy LED Mask Purple",
-      badge: {
-        title: "FREE PREMIUM\nTRAVEL CASE",
-        sub: "Custom luxury hard-shell box included with every order",
-        position: "top-left",
-        theme: "white",
-      },
     },
     {
       src: productAsset("01-buudy-led-mask-front.webp"),

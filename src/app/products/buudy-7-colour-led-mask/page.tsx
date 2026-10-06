@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product/ProductPage";
 import { buudyMask } from "@/data/products";
-import { productAsset } from "@/lib/media";
 import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
@@ -17,29 +16,6 @@ const pagePath = "/products/buudy-7-colour-led-mask";
 const pageProduct = {
   ...buudyMask,
   slug: "buudy-7-colour-led-mask",
-  gallery: [
-    {
-      src: productAsset("buudy-7-colour-led-mask-ce-certified-red-light-therapy-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask CE certified and FCC approved in red light therapy mode for anti-ageing in the UK",
-    },
-    {
-      src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
-    },
-    {
-      src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
-    },
-    {
-      src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
-      alt: "Buudy 7 Colour LED Mask for anti-ageing and skin rejuvenation in the UK",
-    },
-    {
-      src: productAsset("buudy-7-colour-led-mask-skin-rejuvenation-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask clinical light therapy device with neck coverage",
-    },
-    ...buudyMask.gallery.slice(3),
-  ],
 };
 
 export const revalidate = 86400;

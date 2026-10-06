@@ -14,15 +14,12 @@ export function ProductGallery({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
 
   const thumbsRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef(0);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lightboxRef = useRef<HTMLDivElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
-
-
 
   // 2. Navigation controls
   const goNext = useCallback(() => {
@@ -39,18 +36,7 @@ export function ProductGallery({
     [currentIndex],
   );
 
-  // 3. Auto-rotate effect
-  useEffect(() => {
-    if (isLightboxOpen || isPaused) return;
-
-    const interval = setInterval(() => {
-      goNext();
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [goNext, isLightboxOpen, isPaused]);
-
-  // 4. Center active thumbnail only in the stacked gallery strip.
+  // 3. Center active thumbnail only in the stacked gallery strip.
   useEffect(() => {
     if (thumbsRef.current && window.innerWidth < 1024) {
       const activeThumb = thumbsRef.current.children[
@@ -107,14 +93,12 @@ export function ProductGallery({
     };
   }, [goNext, goPrev, isLightboxOpen]);
 
-  // 6. Mobile swipe gesture handlers on main wrapper
+  // 5. Mobile swipe gesture handlers on main wrapper
   const handleTouchStart = (e: React.TouchEvent) => {
-    setIsPaused(true);
     touchStartXRef.current = e.changedTouches[0].screenX;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    setIsPaused(false);
     const touchEndX = e.changedTouches[0].screenX;
     const swipeThreshold = 50;
     if (window.innerWidth < 768) {
@@ -419,8 +403,6 @@ export function ProductGallery({
       >
         <div
           className="buudyLED-23435t23-main_wrapper"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -449,14 +431,11 @@ export function ProductGallery({
                 onClick={() => openLightbox(index)}
               >
                 {isVideo ? (
-                  <video
+                  <GalleryVideo
                     src={image.src}
+                    isActive={isActive}
                     id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
                     className="buudyLED-23435t23-main_img"
-                    autoPlay={isActive}
-                    muted
-                    loop
-                    playsInline
                   />
                 ) : (
                   <img
@@ -507,21 +486,17 @@ export function ProductGallery({
           className="buudyLED-23435t23-grid"
           id="buudyLED-23435t23-Thumbs"
           ref={thumbsRef}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={() => setIsPaused(true)}
-          onTouchEnd={() => setIsPaused(false)}
         >
           {images.map((image, index) => (
             <button
-              aria-label={`Magnify ${image.alt}`}
+              aria-label={`Select ${image.alt}`}
               key={image.src}
               className={`buudyLED-23435t23-thumb_item ${
                 index === currentIndex ? "buudyLED-23435t23-active" : ""
               }`}
               onClick={(e) => {
                 e.stopPropagation();
-                openLightbox(index);
+                setCurrentIndex(index);
               }}
               type="button"
             >
@@ -604,6 +579,7 @@ export function ProductGallery({
                       muted
                       loop
                       playsInline
+                      controls
                     />
                   ) : (
                     <img
@@ -671,5 +647,52 @@ function GalleryImageBadge({
         <span className="buudy-gallery-badge__sub">{badge.sub}</span>
       )}
     </div>
+  );
+}
+
+function GalleryVideo({
+  src,
+  isActive,
+  id,
+  className,
+}: {
+  src: string;
+  isActive: boolean;
+  id?: string;
+  className?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isActive) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      video.pause();
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      id={id}
+      className={className}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+    />
   );
 }
