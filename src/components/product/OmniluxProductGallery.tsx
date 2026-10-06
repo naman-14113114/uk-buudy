@@ -437,7 +437,7 @@ export function OmniluxProductGallery({
           margin-top: clamp(6px, 1vw, 10px);
           margin-bottom: 0;
           padding-bottom: 2px;
-          border-bottom: 1px solid rgba(58, 31, 61, 0.1);
+          border-bottom: none;
           width: 100%;
         }
         .omni-tab-btn {
@@ -473,16 +473,6 @@ export function OmniluxProductGallery({
           background-color: var(--gold, #b89556);
           display: inline-block;
           animation: omniDotPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .omni-tab-btn--active::after {
-          content: "";
-          position: absolute;
-          bottom: -9px;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background-color: #1c1917;
-          border-radius: 2px;
         }
         @keyframes omniDotPop {
           0% { transform: scale(0); opacity: 0; }
