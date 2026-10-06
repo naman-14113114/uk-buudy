@@ -92,6 +92,14 @@ export const buudyMask: Product = {
   cartImage: productAsset("01-buudy-led-mask-front.webp"),
   gallery: [
     {
+      src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
+    },
+    {
       src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
       alt: "Cleopatra LED Red Light Mask",
       badge: {

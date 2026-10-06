@@ -23,12 +23,12 @@ const pageProduct = {
       alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
     },
     {
-      src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
-      alt: "Buudy 7 Colour LED Mask for anti-ageing and skin rejuvenation in the UK",
-    },
-    {
       src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
+      alt: "Buudy 7 Colour LED Mask for anti-ageing and skin rejuvenation in the UK",
     },
     {
       src: productAsset("buudy-7-colour-led-mask-skin-rejuvenation-uk.webp"),
@@ -38,7 +38,7 @@ const pageProduct = {
       src: productAsset("buudy-7-colour-led-mask-red-light-therapy-studio-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask glowing in red light therapy mode studio shot UK",
     },
-    ...buudyMask.gallery,
+    ...buudyMask.gallery.slice(2),
   ],
 };
 
