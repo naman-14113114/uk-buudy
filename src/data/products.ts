@@ -92,6 +92,10 @@ export const buudyMask: Product = {
   cartImage: productAsset("01-buudy-led-mask-front.webp"),
   gallery: [
     {
+      src: productAsset("buudy-7-colour-led-mask-ce-certified-red-light-therapy-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask CE certified and FCC approved in red light therapy mode for anti-ageing in the UK",
+    },
+    {
       src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
     },

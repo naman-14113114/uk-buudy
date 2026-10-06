@@ -19,6 +19,10 @@ const pageProduct = {
   slug: "buudy-7-colour-led-mask",
   gallery: [
     {
+      src: productAsset("buudy-7-colour-led-mask-ce-certified-red-light-therapy-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask CE certified and FCC approved in red light therapy mode for anti-ageing in the UK",
+    },
+    {
       src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
     },
@@ -34,11 +38,7 @@ const pageProduct = {
       src: productAsset("buudy-7-colour-led-mask-skin-rejuvenation-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask clinical light therapy device with neck coverage",
     },
-    {
-      src: productAsset("buudy-7-colour-led-mask-red-light-therapy-studio-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask glowing in red light therapy mode studio shot UK",
-    },
-    ...buudyMask.gallery.slice(2),
+    ...buudyMask.gallery.slice(3),
   ],
 };
 
