@@ -912,11 +912,15 @@ export function OmniluxProductGallery({
                       className="omni-thumb-img"
                       muted
                       playsInline
+                      autoPlay
+                      loop
                       preload="metadata"
                     />
-                    <div className="omni-video-thumb-overlay">
-                      <Play size={15} fill="currentColor" />
-                    </div>
+                    {item.type === "video" && (
+                      <div className="omni-video-thumb-overlay">
+                        <Play size={15} fill="currentColor" />
+                      </div>
+                    )}
                   </>
                 ) : (
                   <img
@@ -950,7 +954,7 @@ export function OmniluxProductGallery({
             {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS */}
             <div
               className={`omni-main-stage ${
-                currentItem.type !== "video" && !currentItem.src.endsWith(".mp4") && !currentItem.src.endsWith(".webm")
+                currentItem.type !== "video"
                   ? hoverSide === "left"
                     ? "omni-main-stage--cursor-left"
                     : "omni-main-stage--cursor-right"
@@ -959,7 +963,7 @@ export function OmniluxProductGallery({
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
               onMouseMove={handleStageMouseMove}
-              onClick={currentItem.type !== "video" && !currentItem.src.endsWith(".mp4") && !currentItem.src.endsWith(".webm") ? handleStageClick : undefined}
+              onClick={currentItem.type !== "video" ? handleStageClick : undefined}
             >
               {/* 1. GALLERY IMAGE / VIDEO DISPLAY */}
               {currentItem.type === "gallery" && (
