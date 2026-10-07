@@ -415,12 +415,12 @@ export const reviewVideos: ReviewVideo[] = [
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486127842_b494c98a-fffc-4212-a210-fa087c5557a5.webp",
     src: "https://cdn2.videowise.com/converted/videos/1686511754055_118a8958-9318-41c7-a32d-7274fcd00e1f_h264q6clip.mp4#t=0.1",
   },
-  {
-    id: "review-24",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486148762_77c98016-f2cb-4ac8-ace0-858d47fa077f.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511755900_b02e84dc-b238-4083-8adc-bf1e03031116_h264q6clip.mp4#t=0.1",
-  },
+  // {
+  //   id: "review-24",
+  //   poster:
+  //     "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486148762_77c98016-f2cb-4ac8-ace0-858d47fa077f.webp",
+  //   src: "https://cdn2.videowise.com/converted/videos/1686511755900_b02e84dc-b238-4083-8adc-bf1e03031116_h264q6clip.mp4#t=0.1",
+  // },
   {
     id: "review-25",
     poster:
