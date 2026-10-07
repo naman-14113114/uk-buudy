@@ -55,6 +55,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: { src: string; alt: string; concern: string }[
 
 // Video playing on product page just above footer (GuaranteeSection)
 const PRODUCT_FOOTER_VIDEO_SRC = "/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4";
+const HOW_TO_USE_VIDEO_SRC = "/media/products/buudy-led-mask/videos/buudy-7-colour-led-mask-how-to-use-guide-uk.mp4";
 
 type MediaItem =
   | {
@@ -82,7 +83,7 @@ export function OmniluxProductGallery({
   images: ProductImage[];
   hasGifts?: boolean;
 }) {
-  // Build unified continuous array: Gallery + 7 Before & After + 1 Video items in sequence
+  // Build unified continuous array: Gallery + 7 Before & After + 2 Videos in sequence
   const allMediaItems: MediaItem[] = useMemo(() => {
     const galleryItems: MediaItem[] = images.map((img) => ({
       type: "gallery",
@@ -98,13 +99,20 @@ export function OmniluxProductGallery({
       concern: item.concern,
     }));
 
-    const videoItem: MediaItem = {
-      type: "video",
-      src: PRODUCT_FOOTER_VIDEO_SRC,
-      alt: "Buudy LED Mask Product Video",
-    };
+    const videoItems: MediaItem[] = [
+      {
+        type: "video",
+        src: PRODUCT_FOOTER_VIDEO_SRC,
+        alt: "Buudy LED Mask Product Video",
+      },
+      {
+        type: "video",
+        src: HOW_TO_USE_VIDEO_SRC,
+        alt: "Buudy 7 Colour LED Face Mask how to use guide and 4-step daily ritual video UK",
+      },
+    ];
 
-    return [...galleryItems, ...beforeAfterItems, videoItem];
+    return [...galleryItems, ...beforeAfterItems, ...videoItems];
   }, [images]);
 
   const galleryStartIndex = 0;
@@ -1014,9 +1022,11 @@ export function OmniluxProductGallery({
               {currentItem.type === "video" && (
                 <div className="omni-video-wrapper">
                   <video
+                    key={currentItem.src}
                     className="omni-video-element"
                     playsInline
                     loop
+                    autoPlay
                     muted={isVideoMuted}
                     preload="auto"
                     ref={videoPlayerRef}

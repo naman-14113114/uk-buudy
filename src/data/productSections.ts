@@ -686,6 +686,11 @@ export const touchTech = [
 
 export const faqs: FAQItem[] = [
   {
+    question: "Is Buudy the best LED face mask for UK buyers?",
+    answer:
+      "Buudy is designed for UK shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current UK launch offer is £179 with a £449 compare-at price, free tracked UK shipping, a free glow kit while available, and an easy return and refund policy.",
+  },
+  {
     question: "Does this cover the neck?",
     answer:
       "Yes, one of the best things about the Buudy LED Mask is that it covers your neck as well! So many LED masks neglect the neck entirely or do not include it.",

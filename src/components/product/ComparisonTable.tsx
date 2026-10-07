@@ -307,23 +307,6 @@ export function ComparisonTable() {
           />
 
           <ComparisonRow
-            title="Treatment Time"
-            subtitle="Full Face + Neck"
-            values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">3 MINS</strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-            ]}
-          />
-
-          <ComparisonRow
-            title="90-Day Guarantee"
-            subtitle="Risk-free home trial"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ComparisonRow
             title="Price"
             values={[
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
@@ -331,7 +314,7 @@ export function ComparisonTable() {
               </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£348</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£399</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£299</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£259</span>,
             ]}
             isLast={true}
           />

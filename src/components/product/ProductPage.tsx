@@ -43,12 +43,12 @@ export function ProductPage({
       {/* <FeatureGrid /> */}
       <DeferredBeforeAfterGrid />
       <DeferredWavelengthSelector />
+      <DeferredHowToUseSection />
       <DeferredExpertSection />
       <ComparisonTable />
       {/* <TouchTechSection /> */}
-      <AppPromo />
-      <DeferredHowToUseSection />
       <ProductReviewsSection />
+      <AppPromo />
       <BlueLightSection />
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
