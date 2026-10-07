@@ -235,25 +235,21 @@ export const buudyMask: Product = {
     },
     {
       src: productAsset("buudy-7-colour-led-mask-cyan-light-therapy-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask cyan light therapy mode for soothing capillaries and redness UK",
+      alt: "Buudy 7 Colour LED Face Mask white light therapy mode for accelerating skin metabolism and renewal UK",
       badge: {
-        title: "490NM CYAN\nLIGHT THERAPY",
-        sub: "Calms swollen capillaries,\nreduces inflammation & redness",
+        title: "510NM WHITE\nLIGHT THERAPY",
+        sub: "Accelerates skin metabolism,\ntightens skin & boosts cellular repair",
         position: "top-left",
         theme: "white",
       },
     },
     {
-      src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
-      alt: "Buudy LED Mask lifestyle use",
-    },
-    {
-      src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
-      alt: "Buudy LED Mask white light mode for accelerating skin metabolism and renewal",
+      src: productAsset("13-buudy-led-mask-starter-kit.webp"),
+      alt: "Buudy LED Mask starter kit in cyan light therapy mode for calming capillaries and redness",
       badge: {
-        title: "510NM WHITE\nLIGHT THERAPY",
-        sub: "Accelerates skin metabolism,\ntightens skin & boosts cellular repair",
-        position: "bottom-right",
+        title: "490NM CYAN\nLIGHT THERAPY",
+        sub: "Calms swollen capillaries,\nreduces inflammation & redness",
+        position: "top-left",
         theme: "white",
       },
     },
@@ -266,14 +262,8 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask flexible silicone",
     },
     {
-      src: productAsset("13-buudy-led-mask-starter-kit.webp"),
-      alt: "Buudy LED Mask starter kit",
-      badge: {
-        title: "SAFETY & CLINICALLY\nCERTIFIED",
-        sub: "CE, RoHS & FCC certified\nfor safe everyday home use",
-        position: "top-left",
-        theme: "white",
-      },
+      src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
+      alt: "Buudy LED Mask lifestyle use",
     },
     {
       src: productAsset("buudy-7-colour-led-mask-unisex-skincare-uk.webp"),
