@@ -586,9 +586,9 @@ export function OmniluxProductGallery({
           animation: buudyBadgeSlideInRight 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
         }
         .buudy-gallery-badge__title {
-          font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: var(--font-fraunces), var(--font-serif), ui-serif, Georgia, serif;
           font-size: clamp(13.5px, 1.6vw, 16.5px);
-          font-weight: 800;
+          font-weight: 700;
           line-height: 1.15;
           letter-spacing: 0.01em;
           text-transform: uppercase;
@@ -1043,51 +1043,6 @@ export function OmniluxProductGallery({
               )}
             </div>
           </div>
-
-          {/* 3 OPTIONS / TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (Beige/Gold Star Dot) */}
-          <div className="omni-tabs-row" role="tablist" aria-label="Product Media Options">
-            {/* TAB 1: GALLERY */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeTab === "gallery"}
-              className={`omni-tab-btn ${
-                activeTab === "gallery" ? "omni-tab-btn--active" : ""
-              }`}
-              onClick={() => handleTabClick("gallery")}
-            >
-              {activeTab === "gallery" && <span className="omni-tab-indicator" />}
-              Gallery
-            </button>
-
-            {/* TAB 2: BEFORE & AFTER */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeTab === "before-after"}
-              className={`omni-tab-btn ${
-                activeTab === "before-after" ? "omni-tab-btn--active" : ""
-              }`}
-              onClick={() => handleTabClick("before-after")}
-            >
-              {activeTab === "before-after" && <span className="omni-tab-indicator" />}
-              Before & After
-            </button>
-
-            {/* TAB 3: VIDEO */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeTab === "video"}
-              className={`omni-tab-btn ${
-                activeTab === "video" ? "omni-tab-btn--active" : ""
-              }`}
-              onClick={() => handleTabClick("video")}
-            >
-              {activeTab === "video" && <span className="omni-tab-indicator" />}
-              Video
-            </button>
-          </div>
         </div>
       </div>
 
@@ -1203,7 +1158,16 @@ function GalleryImageBadge({
           </span>
         ))}
       </span>
-      {badge.sub && <span className="buudy-gallery-badge__sub">{badge.sub}</span>}
+      {badge.sub && (
+        <span className="buudy-gallery-badge__sub">
+          {badge.sub.split("\n").map((line, idx, arr) => (
+            <span key={idx}>
+              {line}
+              {idx < arr.length - 1 && <br />}
+            </span>
+          ))}
+        </span>
+      )}
     </div>
   );
 }

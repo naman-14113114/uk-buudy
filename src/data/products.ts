@@ -100,18 +100,8 @@ export const buudyMask: Product = {
       alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
       badge: {
         title: "FULL FACE & NECK\nCOVERAGE",
-        sub: "Targeted firming & smoothing for jawline & neck",
+        sub: "Targeted firming & smoothing\nfor jawline & neck",
         position: "bottom-right",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
-      badge: {
-        title: "FREE BUUDY\nLED TORCH",
-        sub: "£70 targeted red light device included free with your order",
-        position: "top-left",
         theme: "white",
       },
     },
@@ -124,17 +114,27 @@ export const buudyMask: Product = {
       alt: "Buudy 7 Colour LED Face Mask 7 clinical light wavelengths and modes video showcase UK",
       badge: {
         title: "7 CLINICAL\nWAVELENGTHS",
-        sub: "Complete spectrum for rejuvenation, clarity & glow",
+        sub: "Complete spectrum for\nrejuvenation, clarity & glow",
         position: "bottom-left",
         theme: "white",
       },
     },
     {
-      src: productAsset("07-buudy-led-mask-controller.webp"),
-      alt: "Buudy LED Mask tap controller",
+      src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
       badge: {
-        title: "SMART BUUDY\nAPP COMPANION",
-        sub: "Personalised guided routines & progress tracking",
+        title: "FREE BUUDY\nLED TORCH",
+        sub: "£70 targeted red light device\nincluded free with your order",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("buudy_purple.jpeg"),
+      alt: "Buudy 7 Colour LED Face Mask with 192 high-density clinical LEDs across face and neck UK",
+      badge: {
+        title: "192 HIGH-DENSITY\nCLINICAL LEDS",
+        sub: "Maximum coverage & optical\npower across face & neck",
         position: "top-left",
         theme: "white",
       },
@@ -144,7 +144,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask side profile",
       badge: {
         title: "100% CORDLESS &\nPORTABLE",
-        sub: "Hands-free cordless design to read, relax & multitask",
+        sub: "Hands-free cordless design\nto read, relax & multitask",
         position: "bottom-left",
         theme: "white",
       },
@@ -154,17 +154,17 @@ export const buudyMask: Product = {
       alt: "Buudy 7 Colour LED Face Mask dermatologist recommended for skin rejuvenation in the UK",
       badge: {
         title: "DERMATOLOGIST\nRECOMMENDED",
-        sub: "Expert-approved non-invasive skincare for all skin types",
+        sub: "Expert-approved skincare\nfor all skin types",
         position: "bottom-right",
         theme: "white",
       },
     },
     {
-      src: productAsset("buudy_purple.jpeg"),
-      alt: "Buudy 7 Colour LED Face Mask with 192 high-density clinical LEDs across face and neck UK",
+      src: productAsset("07-buudy-led-mask-controller.webp"),
+      alt: "Buudy LED Mask tap controller",
       badge: {
-        title: "192 HIGH-DENSITY\nCLINICAL LEDS",
-        sub: "Maximum coverage & optical power across face & neck",
+        title: "SMART BUUDY\nAPP COMPANION",
+        sub: "Personalised guided routines\n& progress tracking",
         position: "top-left",
         theme: "white",
       },
@@ -178,7 +178,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask blue light acne mode",
       badge: {
         title: "415NM TARGETED\nBLUE LIGHT",
-        sub: "Purifies active blemishes & eliminates acne bacteria",
+        sub: "Purifies active blemishes\n& eliminates acne bacteria",
         position: "bottom-left",
         theme: "white",
       },
@@ -188,7 +188,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask packaging",
       badge: {
         title: "830NM DEEP NEAR\nINFRARED LIGHT",
-        sub: "Deep dermal penetration boosts collagen & elasticity",
+        sub: "Deep dermal penetration\nboosts collagen & elasticity",
         position: "top-left",
         theme: "white",
       },
@@ -206,7 +206,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask anti-ageing mode",
       badge: {
         title: "FAST 3-MIN\nTREATMENTS",
-        sub: "Green light helps fade dark spots & evens skin tone",
+        sub: "Green light helps fade dark\nspots & evens skin tone",
         position: "top-left",
         theme: "white",
       },
@@ -216,7 +216,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask results",
       badge: {
         title: "PROVEN CLINICAL\nRESULTS",
-        sub: "Noticeable collagen boost & radiant skin in 4 weeks",
+        sub: "Noticeable collagen boost\n& radiant skin in 4 weeks",
         position: "top-right",
         theme: "white",
       },
@@ -238,7 +238,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask starter kit",
       badge: {
         title: "SAFETY & CLINICALLY\nCERTIFIED",
-        sub: "CE, RoHS & FCC certified for safe everyday home use",
+        sub: "CE, RoHS & FCC certified\nfor safe everyday home use",
         position: "top-left",
         theme: "white",
       },
@@ -252,7 +252,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask front view",
       badge: {
         title: "633NM DEEP RED\nLIGHT THERAPY",
-        sub: "Stimulates natural collagen production & smooths fine lines",
+        sub: "Stimulates collagen production\n& smooths fine lines",
         position: "top-right",
         theme: "white",
       },

@@ -206,10 +206,10 @@ export function ProductGallery({
           padding: 0;
         }
         .buudy-gallery-badge__title {
-          font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          font-size: clamp(16px, 2.2vw, 20px);
-          font-weight: 800;
-          line-height: 1.18;
+          font-family: var(--font-fraunces), var(--font-serif), ui-serif, Georgia, serif;
+          font-size: clamp(15.5px, 2.1vw, 19.5px);
+          font-weight: 700;
+          line-height: 1.15;
           letter-spacing: 0.01em;
           text-transform: uppercase;
           color: #111111;
@@ -644,7 +644,14 @@ function GalleryImageBadge({
         </span>
       </div>
       {badge.sub && (
-        <span className="buudy-gallery-badge__sub">{badge.sub}</span>
+        <span className="buudy-gallery-badge__sub">
+          {badge.sub.split("\n").map((line, idx, arr) => (
+            <span key={idx}>
+              {line}
+              {idx < arr.length - 1 && <br />}
+            </span>
+          ))}
+        </span>
       )}
     </div>
   );
