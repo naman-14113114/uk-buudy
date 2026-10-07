@@ -141,10 +141,10 @@ export const buudyMask: Product = {
     },
     {
       src: productAsset("02-buudy-led-mask-side-profile.webp"),
-      alt: "Buudy LED Mask side profile",
+      alt: "Buudy LED Mask side profile with built-in touch controls and cordless design",
       badge: {
         title: "100% CORDLESS &\nPORTABLE",
-        sub: "Hands-free cordless design\nto read, relax & multitask",
+        sub: "Built-in touch controls on mask —\nno remote needed to carry or charge",
         position: "bottom-left",
         theme: "white",
       },
@@ -174,16 +174,6 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask home spa",
     },
     {
-      src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
-      alt: "Buudy LED Mask blue light acne mode",
-      badge: {
-        title: "415NM TARGETED\nBLUE LIGHT",
-        sub: "Purifies active blemishes\n& eliminates acne bacteria",
-        position: "bottom-left",
-        theme: "white",
-      },
-    },
-    {
       src: productAsset("05-buudy-led-mask-packaging.webp"),
       alt: "Buudy LED Mask packaging",
       badge: {
@@ -194,30 +184,62 @@ export const buudyMask: Product = {
       },
     },
     {
-      src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
-      alt: "Buudy 7 Colour LED Mask for anti-ageing and skin rejuvenation in the UK",
+      src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
+      alt: "Buudy LED Mask blue light acne mode",
+      badge: {
+        title: "415NM TARGETED\nBLUE LIGHT",
+        sub: "Purifies active blemishes\n& eliminates acne bacteria",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
-      alt: "Cleopatra LED Red Light Mask",
+      alt: "Buudy LED Mask red light therapy mode for anti-ageing and collagen stimulation",
+      badge: {
+        title: "633NM RED LIGHT\nTHERAPY",
+        sub: "Stimulates collagen production\n& reduces fine lines and wrinkles",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
+      alt: "Buudy 7 Colour LED Mask purple light mode for skin rejuvenation in the UK",
+      badge: {
+        title: "390NM PURPLE\nLIGHT THERAPY",
+        sub: "Combines red & blue wavelengths\nfor deep repair & blemish control",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
-      alt: "Buudy LED Mask anti-ageing mode",
+      alt: "Buudy LED Mask green light mode for dark spots and even skin tone",
       badge: {
-        title: "FAST 3-MIN\nTREATMENTS",
-        sub: "Green light helps fade dark\nspots & evens skin tone",
+        title: "525NM GREEN LIGHT\nTHERAPY",
+        sub: "Fades dark spots, calms\nredness & evens skin tone",
         position: "top-left",
         theme: "white",
       },
     },
     {
       src: productAsset("06-buudy-led-mask-results.webp"),
-      alt: "Buudy LED Mask results",
+      alt: "Buudy LED Mask yellow light mode for balanced skin texture and tone",
       badge: {
-        title: "PROVEN CLINICAL\nRESULTS",
-        sub: "Noticeable collagen boost\n& radiant skin in 4 weeks",
+        title: "590NM YELLOW\nLIGHT THERAPY",
+        sub: "Balances skin texture, soothes\nsensitivity & boosts radiance",
         position: "top-right",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-cyan-light-therapy-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask cyan light therapy mode for soothing capillaries and redness UK",
+      badge: {
+        title: "490NM CYAN\nLIGHT THERAPY",
+        sub: "Calms swollen capillaries,\nreduces inflammation & redness",
+        position: "top-left",
         theme: "white",
       },
     },
@@ -227,7 +249,17 @@ export const buudyMask: Product = {
     },
     {
       src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
-      alt: "Buudy LED Mask dermatologist recommended",
+      alt: "Buudy LED Mask white light mode for accelerating skin metabolism and renewal",
+      badge: {
+        title: "510NM WHITE\nLIGHT THERAPY",
+        sub: "Accelerates skin metabolism,\ntightens skin & boosts cellular repair",
+        position: "bottom-right",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-cleopatra-edition-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask luxury at-home light therapy session UK",
     },
     {
       src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
@@ -240,6 +272,16 @@ export const buudyMask: Product = {
         title: "SAFETY & CLINICALLY\nCERTIFIED",
         sub: "CE, RoHS & FCC certified\nfor safe everyday home use",
         position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: productAsset("buudy-7-colour-led-mask-unisex-skincare-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask unisex skincare treatment for men and women UK",
+      badge: {
+        title: "UNIVERSAL UNISEX\nDESIGN",
+        sub: "Ergonomic fit designed for all\nskin types, both men & women",
+        position: "bottom-right",
         theme: "white",
       },
     },
