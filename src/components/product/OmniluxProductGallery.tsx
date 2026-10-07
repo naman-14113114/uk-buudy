@@ -14,27 +14,42 @@ import {
   X,
 } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
-// 4 Dedicated SEO/GEO Before & After Transformation Images for Gallery
+// 7 Dedicated SEO/GEO Before & After Transformation Images for Gallery
 const GALLERY_BEFORE_AFTER_ITEMS: { src: string; alt: string; concern: string }[] = [
   {
-    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-calms-redness-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after results: calms redness and inflammation UK",
-    concern: "Calms Redness",
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-dark-spots-pigmentation-uk.webp",
+    alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation UK",
+    concern: "Fades Dark Spots & Pigmentation",
   },
   {
-    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-evens-skin-tone-uk.webp",
-    alt: "Buudy 7 Colour LED Face Mask clinical results: evens skin tone and fades pigmentation UK",
-    concern: "Evens Skin Tone",
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-acne-breakouts-complexion-uk.webp",
+    alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion UK",
+    concern: "Clears Acne & Blemishes",
   },
   {
-    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-acne-breakouts-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after: targets acne and prevents future breakouts UK",
-    concern: "Targets Acne & Breakouts",
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-blemish-clarity-radiance-uk.webp",
+    alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance UK",
+    concern: "Improves Skin Texture & Radiance",
   },
   {
-    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-anti-ageing-results-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after: anti-ageing skin tightening and smoothing UK",
-    concern: "Anti-Ageing & Smoothing",
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-anti-ageing-eye-wrinkles-uk.webp",
+    alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines UK",
+    concern: "Smooths Fine Lines & Wrinkles",
+  },
+  {
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-cystic-acne-jawline-uk.webp",
+    alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline UK",
+    concern: "Targets Cystic Acne & Breakouts",
+  },
+  {
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-calms-redness-rosacea-uk.webp",
+    alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush UK",
+    concern: "Calms Redness & Rosacea",
+  },
+  {
+    src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-evens-skin-tone-smoothing-uk.webp",
+    alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture UK",
+    concern: "Evens Skin Tone & Smoothing",
   },
 ];
 
@@ -67,7 +82,7 @@ export function OmniluxProductGallery({
   images: ProductImage[];
   hasGifts?: boolean;
 }) {
-  // Build unified continuous array: 17 Gallery + 4 Before & After + 1 Video = 22 items in sequence
+  // Build unified continuous array: Gallery + 7 Before & After + 1 Video items in sequence
   const allMediaItems: MediaItem[] = useMemo(() => {
     const galleryItems: MediaItem[] = images.map((img) => ({
       type: "gallery",
