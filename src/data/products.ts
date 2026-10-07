@@ -254,14 +254,6 @@ export const buudyMask: Product = {
       },
     },
     {
-      src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
-      alt: "Buudy 7 Colour LED Face Mask luxury at-home light therapy session UK",
-    },
-    {
-      src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
-      alt: "Buudy LED Mask flexible silicone",
-    },
-    {
       src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
       alt: "Buudy LED Mask easy to use 3 minute daily skincare session",
       badge: {
@@ -282,18 +274,20 @@ export const buudyMask: Product = {
       },
     },
     {
+      src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
+      alt: "Buudy 7 Colour LED Face Mask luxury at-home light therapy session UK",
+    },
+    {
+      src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
+      alt: "Buudy LED Mask flexible silicone",
+    },
+    {
       src: productMediaAsset("O3-w.webp"),
       alt: "Buudy LED Mask O3",
     },
     {
       src: productAsset("01-buudy-led-mask-front.webp"),
       alt: "Buudy LED Mask front view",
-      badge: {
-        title: "633NM DEEP RED\nLIGHT THERAPY",
-        sub: "Stimulates collagen production\n& smooths fine lines",
-        position: "top-right",
-        theme: "white",
-      },
     },
   ],
   gifts: [
