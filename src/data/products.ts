@@ -96,7 +96,7 @@ export const buudyMask: Product = {
       alt: "Buudy 7 Colour LED Face Mask CE certified and FCC approved in red light therapy mode for anti-ageing in the UK",
     },
     {
-      src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
+      src: productAsset("buudy-7-colour-led-mask-cleopatra-edition-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in the UK",
       badge: {
         title: "FULL FACE & NECK\nCOVERAGE",
@@ -254,7 +254,7 @@ export const buudyMask: Product = {
       },
     },
     {
-      src: productAsset("buudy-7-colour-led-mask-cleopatra-edition-uk.webp"),
+      src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
       alt: "Buudy 7 Colour LED Face Mask luxury at-home light therapy session UK",
     },
     {
@@ -263,7 +263,13 @@ export const buudyMask: Product = {
     },
     {
       src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
-      alt: "Buudy LED Mask lifestyle use",
+      alt: "Buudy LED Mask easy to use 3 minute daily skincare session",
+      badge: {
+        title: "FAST 3-MIN\nDAILY SESSIONS",
+        sub: "Quick, effortless & easy to use —\njust 3 minutes a day for visible results",
+        position: "bottom-right",
+        theme: "white",
+      },
     },
     {
       src: productAsset("buudy-7-colour-led-mask-unisex-skincare-uk.webp"),
