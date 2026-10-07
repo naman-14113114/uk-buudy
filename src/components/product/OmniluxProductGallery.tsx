@@ -1058,6 +1058,51 @@ export function OmniluxProductGallery({
               )}
             </div>
           </div>
+
+          {/* 3 OPTIONS / TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (Beige/Gold Star Dot) */}
+          <div className="omni-tabs-row" role="tablist" aria-label="Product Media Options">
+            {/* TAB 1: GALLERY */}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === "gallery"}
+              className={`omni-tab-btn ${
+                activeTab === "gallery" ? "omni-tab-btn--active" : ""
+              }`}
+              onClick={() => handleTabClick("gallery")}
+            >
+              {activeTab === "gallery" && <span className="omni-tab-indicator" />}
+              Gallery
+            </button>
+
+            {/* TAB 2: BEFORE & AFTER */}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === "before-after"}
+              className={`omni-tab-btn ${
+                activeTab === "before-after" ? "omni-tab-btn--active" : ""
+              }`}
+              onClick={() => handleTabClick("before-after")}
+            >
+              {activeTab === "before-after" && <span className="omni-tab-indicator" />}
+              Before & After
+            </button>
+
+            {/* TAB 3: VIDEO */}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === "video"}
+              className={`omni-tab-btn ${
+                activeTab === "video" ? "omni-tab-btn--active" : ""
+              }`}
+              onClick={() => handleTabClick("video")}
+            >
+              {activeTab === "video" && <span className="omni-tab-indicator" />}
+              Video
+            </button>
+          </div>
         </div>
       </div>
 
