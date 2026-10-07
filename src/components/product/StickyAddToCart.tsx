@@ -109,11 +109,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
               fill
               loading="eager"
               sizes="56px"
-              src={
-                product.template === "mask"
-                  ? "/images/products/buudy-led-mask/buudy-7-colour-led-mask-ce-certified-red-light-therapy-uk.webp"
-                  : product.cartImage
-              }
+              src={product.cartImage}
             />
           </div>
           <div className="min-w-0">
