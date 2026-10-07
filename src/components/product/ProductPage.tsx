@@ -12,6 +12,7 @@ import { IplProductPage } from "./IplProductPage";
 import {
   DeferredBeforeAfterGrid,
   DeferredExpertSection,
+  DeferredHowToUseSection,
   DeferredVideoReviews,
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
@@ -46,6 +47,7 @@ export function ProductPage({
       <ComparisonTable />
       {/* <TouchTechSection /> */}
       <AppPromo />
+      <DeferredHowToUseSection />
       <ProductReviewsSection />
       <BlueLightSection />
       <FAQSection faqs={product.faqs} />
