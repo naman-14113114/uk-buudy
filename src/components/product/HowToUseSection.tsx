@@ -87,7 +87,7 @@ export function HowToUseSection() {
         {/* Content Column: Left on Desktop (lg:order-1), Below on Mobile (order-2) */}
         <div className="order-2 lg:order-1 flex flex-col justify-center">
           <h2 className="buudy-display text-3xl sm:text-4xl lg:text-[2.6rem] leading-tight text-[var(--plum)]">
-            How to <em className="buudy-italic">use</em>
+            Buudy unboxing &amp; <em className="buudy-italic">review</em>
           </h2>
 
           {/* Compact Steps Matching Video Height */}
