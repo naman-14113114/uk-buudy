@@ -764,9 +764,9 @@ export const buudyLedMaskFaqs: FAQItem[] = [
       "The Buudy LED Mask is exclusively sold through www.buudy.co.uk at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
   {
-    question: "Why is this device named the Buudy LED Mask instead of the Cleopatra LED Mask?",
+    question: "Why is Cleopatra written on the mask?",
     answer:
-      "This is the authentic Cleopatra Edition LED Face Mask exclusively curated and supplied by Buudy in the UK. When ordering from Buudy, you receive the exact genuine multi-spectrum clinical technology, backed by our official UK warranty, fast domestic tracked delivery, and dedicated British customer support.",
+      "This is the genuine Cleopatra Edition LED Face Mask, supplied and distributed exclusively by Buudy in the UK. When you order from Buudy, you receive the authentic clinical multi-spectrum mask, backed by our official UK warranty, fast tracked UK delivery, and dedicated local customer support.",
   },
   {
     question: "How do I track my order?",

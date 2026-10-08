@@ -194,8 +194,8 @@ export function GiftBundle({ product }: { product: Product }) {
         <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
 
-      {/* Cleopatra Edition Ribbon (Strictly on /products/buudy-led-mask) */}
-      {product.slug === "buudy-led-mask" && (
+      {/* Cleopatra Edition Ribbon on all mask pages */}
+      {product.template === "mask" && (
         <div className="mt-2 mb-1 flex items-center">
           <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
             Cleopatra Edition
