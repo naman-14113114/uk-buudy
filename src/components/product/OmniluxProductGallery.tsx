@@ -14,42 +14,91 @@ import {
   X,
 } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
-// 7 Dedicated SEO/GEO Before & After Transformation Images for Gallery
-const GALLERY_BEFORE_AFTER_ITEMS: { src: string; alt: string; concern: string }[] = [
+interface BeforeAfterPill {
+  text: string;
+  bg: string;
+  textColor: string;
+  borderColor?: string;
+}
+
+interface BeforeAfterItem {
+  src: string;
+  alt: string;
+  concern: string;
+  pills: [BeforeAfterPill, BeforeAfterPill, BeforeAfterPill];
+}
+
+// 7 Dedicated SEO/GEO Before & After Transformation Images for Gallery with 3 Bottom Oval Pills
+const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-dark-spots-pigmentation-uk.webp",
     alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation UK",
     concern: "Fades Dark Spots & Pigmentation",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Green 7-min", bg: "#16A34A", textColor: "#FFFFFF" },
+      { text: "Red 3-min", bg: "#DC2626", textColor: "#FFFFFF" },
+    ],
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-acne-breakouts-complexion-uk.webp",
     alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion UK",
     concern: "Clears Acne & Blemishes",
+    pills: [
+      { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Blue 7-min", bg: "#2563EB", textColor: "#FFFFFF" },
+      { text: "Yellow 3-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-blemish-clarity-radiance-uk.webp",
     alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance UK",
     concern: "Improves Skin Texture & Radiance",
+    pills: [
+      { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Purple 3-min", bg: "#9333EA", textColor: "#FFFFFF" },
+      { text: "Blue 7-min", bg: "#2563EB", textColor: "#FFFFFF" },
+    ],
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-anti-ageing-eye-wrinkles-uk.webp",
     alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines UK",
     concern: "Smooths Fine Lines & Wrinkles",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Red 6-min", bg: "#DC2626", textColor: "#FFFFFF" },
+      { text: "White 4-min", bg: "#FFFFFF", textColor: "#1C1917", borderColor: "rgba(0, 0, 0, 0.18)" },
+    ],
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-cystic-acne-jawline-uk.webp",
     alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline UK",
     concern: "Targets Cystic Acne & Breakouts",
+    pills: [
+      { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Blue 6-min", bg: "#2563EB", textColor: "#FFFFFF" },
+      { text: "Purple 4-min", bg: "#9333EA", textColor: "#FFFFFF" },
+    ],
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-calms-redness-rosacea-uk.webp",
     alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush UK",
     concern: "Calms Redness & Rosacea",
+    pills: [
+      { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Cyan 7-min", bg: "#0891B2", textColor: "#FFFFFF" },
+      { text: "Yellow 3-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-evens-skin-tone-smoothing-uk.webp",
     alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture UK",
     concern: "Evens Skin Tone & Smoothing",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Green 6-min", bg: "#16A34A", textColor: "#FFFFFF" },
+      { text: "Yellow 4-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
   },
 ];
 
@@ -69,6 +118,7 @@ type MediaItem =
       src: string;
       alt: string;
       concern: string;
+      pills?: [BeforeAfterPill, BeforeAfterPill, BeforeAfterPill];
     }
   | {
       type: "video";
@@ -97,6 +147,7 @@ export function OmniluxProductGallery({
       src: item.src,
       alt: item.alt,
       concern: item.concern,
+      pills: item.pills,
     }));
 
     const videoItems: MediaItem[] = [
@@ -687,6 +738,57 @@ export function OmniluxProductGallery({
           }
         }
 
+        /* 4. BEFORE & AFTER 3 BOTTOM OVAL PILLS */
+        .omni-ba-pills-row {
+          position: absolute;
+          bottom: clamp(12px, 1.8vw, 18px);
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(6px, 1vw, 10px);
+          width: auto;
+          max-width: calc(100% - 24px);
+          z-index: 10;
+          pointer-events: none;
+        }
+        .omni-ba-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: clamp(4px, 0.6vw, 6.5px) clamp(10px, 1.2vw, 15px);
+          border-radius: 9999px;
+          font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-size: clamp(10.5px, 1.15vw, 12.5px);
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+          border-width: 1px;
+          border-style: solid;
+          animation: buudyBadgeSlideInUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+          will-change: opacity, transform;
+        }
+        @keyframes buudyBadgeSlideInUp {
+          0% {
+            opacity: 0;
+            transform: translate3d(0, 18px, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        .omni-ba-pills-row--lightbox {
+          bottom: clamp(20px, 3vw, 32px);
+          gap: clamp(8px, 1.5vw, 14px);
+        }
+        .omni-ba-pill--lightbox {
+          padding: clamp(6px, 0.9vw, 9px) clamp(14px, 1.8vw, 20px);
+          font-size: clamp(12px, 1.3vw, 15px);
+        }
+
         /* 5. LIGHTBOX OVERLAY (1:1 IDENTICAL WITH BUUDY-LED-MASK PRODUCTGALLERY) */
         .buudyLED-23435t23-lightbox {
           position: fixed;
@@ -1005,7 +1107,7 @@ export function OmniluxProductGallery({
                 </div>
               )}
 
-              {/* 2. BEFORE & AFTER DISPLAY (Completely Clean Image - No Text at Bottom) */}
+              {/* 2. BEFORE & AFTER DISPLAY (With 3 Bottom Treatment Pills) */}
               {currentItem.type === "before-after" && (
                 <div className="omni-main-img-wrap">
                   <img
@@ -1015,6 +1117,27 @@ export function OmniluxProductGallery({
                     decoding="async"
                     loading="eager"
                   />
+                  {currentItem.pills && (
+                    <div
+                      key={`ba-pills-${currentIndex}-${currentItem.src}`}
+                      className="omni-ba-pills-row"
+                    >
+                      {currentItem.pills.map((pill, pIdx) => (
+                        <span
+                          key={pIdx}
+                          className="omni-ba-pill"
+                          style={{
+                            backgroundColor: pill.bg,
+                            color: pill.textColor,
+                            borderColor: pill.borderColor || "transparent",
+                            animationDelay: `${0.08 + pIdx * 0.08}s`,
+                          }}
+                        >
+                          {pill.text}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -1179,6 +1302,27 @@ export function OmniluxProductGallery({
                   {currentItem.type === "gallery" && currentItem.badge && (
                     <div key={`modal-badge-${currentIndex}-${currentItem.src}`}>
                       <GalleryImageBadge badge={currentItem.badge} isLightbox />
+                    </div>
+                  )}
+                  {currentItem.type === "before-after" && currentItem.pills && (
+                    <div
+                      key={`modal-ba-pills-${currentIndex}-${currentItem.src}`}
+                      className="omni-ba-pills-row omni-ba-pills-row--lightbox"
+                    >
+                      {currentItem.pills.map((pill, pIdx) => (
+                        <span
+                          key={pIdx}
+                          className="omni-ba-pill omni-ba-pill--lightbox"
+                          style={{
+                            backgroundColor: pill.bg,
+                            color: pill.textColor,
+                            borderColor: pill.borderColor || "transparent",
+                            animationDelay: `${0.08 + pIdx * 0.08}s`,
+                          }}
+                        >
+                          {pill.text}
+                        </span>
+                      ))}
                     </div>
                   )}
                 </div>
