@@ -1164,6 +1164,11 @@ export function OmniluxProductGallery({
                     autoPlay
                     muted={isVideoMuted}
                     preload="auto"
+                    poster={
+                      currentItem.src.includes("how-to-use")
+                        ? "/images/products/buudy-led-mask/buudy-7-colour-led-mask-unboxing-video-poster-16s-uk.webp"
+                        : undefined
+                    }
                     ref={videoPlayerRef}
                     src={currentItem.src}
                     onPlay={() => setIsVideoPlaying(true)}

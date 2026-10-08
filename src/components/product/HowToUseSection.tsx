@@ -30,7 +30,7 @@ export function HowToUseSection() {
               className="w-full aspect-video object-cover object-center block"
               playsInline
               controls={isPlaying}
-              poster={productAsset("buudy-7-colour-led-mask-how-to-use-poster-uk.webp")}
+              poster={productAsset("buudy-7-colour-led-mask-unboxing-video-poster-16s-uk.webp")}
               preload="metadata"
               ref={videoRef}
               onPlay={() => setIsPlaying(true)}
