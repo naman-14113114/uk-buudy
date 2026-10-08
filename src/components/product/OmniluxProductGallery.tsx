@@ -11,6 +11,7 @@ import {
   Pause,
   Volume2,
   VolumeX,
+  Maximize2,
   X,
 } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
@@ -580,7 +581,7 @@ export function OmniluxProductGallery({
           align-items: center;
           justify-content: center;
           color: #2e102f;
-          cursor: pointer;
+          cursor: pointer !important;
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
           transition: transform 0.2s ease, background-color 0.2s ease;
           z-index: 10;
@@ -589,10 +590,16 @@ export function OmniluxProductGallery({
           transform: scale(1.1);
           background: #ffffff;
         }
-        .omni-video-mute-btn {
+        .omni-video-controls-bottom-right {
           position: absolute;
           bottom: 12px;
           right: 12px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          z-index: 11;
+        }
+        .omni-video-control-btn {
           width: 34px;
           height: 34px;
           border-radius: 50%;
@@ -602,12 +609,12 @@ export function OmniluxProductGallery({
           align-items: center;
           justify-content: center;
           color: #ffffff;
-          cursor: pointer;
-          z-index: 11;
-          transition: background-color 0.2s ease;
+          cursor: pointer !important;
+          transition: background-color 0.2s ease, transform 0.2s ease;
         }
-        .omni-video-mute-btn:hover {
+        .omni-video-control-btn:hover {
           background: rgba(0, 0, 0, 0.85);
+          transform: scale(1.08);
         }
 
         /* 4. EDITORIAL INFOGRAPHIC BADGES (RESTORED SLIDE-IN MOTION ANIMATIONS) */
@@ -1069,16 +1076,14 @@ export function OmniluxProductGallery({
             {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS */}
             <div
               className={`omni-main-stage ${
-                currentItem.type !== "video"
-                  ? hoverSide === "left"
-                    ? "omni-main-stage--cursor-left"
-                    : "omni-main-stage--cursor-right"
-                  : ""
+                hoverSide === "left"
+                  ? "omni-main-stage--cursor-left"
+                  : "omni-main-stage--cursor-right"
               }`}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
               onMouseMove={handleStageMouseMove}
-              onClick={currentItem.type !== "video" ? handleStageClick : undefined}
+              onClick={handleStageClick}
             >
               {/* 1. GALLERY IMAGE / VIDEO DISPLAY */}
               {currentItem.type === "gallery" && (
@@ -1141,7 +1146,7 @@ export function OmniluxProductGallery({
                 </div>
               )}
 
-              {/* 3. FOOTER GUARANTEE VIDEO DISPLAY */}
+              {/* 3. DEDICATED VIDEO DISPLAY (Footer Guarantee Video & How-To-Use Video) */}
               {currentItem.type === "video" && (
                 <div className="omni-video-wrapper">
                   <video
@@ -1156,7 +1161,6 @@ export function OmniluxProductGallery({
                     src={currentItem.src}
                     onPlay={() => setIsVideoPlaying(true)}
                     onPause={() => setIsVideoPlaying(false)}
-                    onClick={toggleVideoPlay}
                   />
 
                   {/* Centered Play / Pause Button Overlay */}
@@ -1178,15 +1182,31 @@ export function OmniluxProductGallery({
                     )}
                   </button>
 
-                  {/* Mute / Unmute Toggle Button */}
-                  <button
-                    type="button"
-                    aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
-                    className="omni-video-mute-btn"
-                    onClick={toggleVideoMute}
-                  >
-                    {isVideoMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
-                  </button>
+                  {/* Bottom Right Controls: Mute + Enlarge/Expand Lightbox */}
+                  <div className="omni-video-controls-bottom-right">
+                    <button
+                      type="button"
+                      aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
+                      className="omni-video-control-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleVideoMute(e);
+                      }}
+                    >
+                      {isVideoMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Enlarge video in fullscreen modal"
+                      className="omni-video-control-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openLightbox();
+                      }}
+                    >
+                      <Maximize2 size={16} />
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

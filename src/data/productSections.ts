@@ -684,7 +684,7 @@ export const touchTech = [
   },
 ];
 
-export const faqs: FAQItem[] = [
+export const standardMaskFaqs: FAQItem[] = [
   {
     question: "Is Buudy the best LED face mask for UK buyers?",
     answer:
@@ -726,6 +726,56 @@ export const faqs: FAQItem[] = [
       "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
   },
 ];
+
+export const buudyLedMaskFaqs: FAQItem[] = [
+  {
+    question: "Is Buudy the best LED face mask for UK buyers?",
+    answer:
+      "Buudy is designed for UK shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current UK launch offer is £179 with a £449 compare-at price, free tracked UK shipping, a free glow kit while available, and an easy return and refund policy.",
+  },
+  {
+    question: "Does this cover the neck?",
+    answer:
+      "Yes, one of the best things about the Buudy LED Mask is that it covers your neck as well! So many LED masks neglect the neck entirely or do not include it.",
+  },
+  {
+    question: "How many LEDs does the Buudy LED Mask have?",
+    answer: "The Buudy LED Mask has 192 LEDs.",
+  },
+  {
+    question: "What are the wavelengths? Irradiance / Power Density?",
+    answer:
+      "Infra-red: 830nm. Red: 633nm. Blue: 415nm. Green: 525nm. Cyan: 490nm. Yellow: 590nm. Purple: 390nm. White: 510nm. Irradiance / Power Density: 32mW/cm2.",
+  },
+  {
+    question: "Can I use it in my country?",
+    answer:
+      "Yes! The Buudy LED Mask is dual voltage which means it can be used worldwide without any issues.",
+  },
+  {
+    question:
+      "What if I am pregnant, sensitive to light, have epilepsy, or taking light sensitive medication?",
+    answer:
+      "We always recommend that you consult with your physician or other qualified health care professional before using LED products. Anyone who is potentially sensitive to light should take caution before using LED products. For example, women who are pregnant, people with epilepsy, or people who are taking certain medications such as tetracycline, steroids, or cortisone injections (which may cause light sensitivity) should not use LED products and must consult with their physician or healthcare provider.",
+  },
+  {
+    question: "Do you sell this anywhere else?",
+    answer:
+      "The Buudy LED Mask is exclusively sold through www.buudy.co.uk at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+  },
+  {
+    question: "Why is this device named the Buudy LED Mask instead of the Cleopatra LED Mask?",
+    answer:
+      "This is the authentic Cleopatra Edition LED Face Mask exclusively curated and supplied by Buudy in the UK. When ordering from Buudy, you receive the exact genuine multi-spectrum clinical technology, backed by our official UK warranty, fast domestic tracked delivery, and dedicated British customer support.",
+  },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
+  },
+];
+
+export const faqs: FAQItem[] = buudyLedMaskFaqs;
 
 export const iplFaqs: FAQItem[] = [
   {

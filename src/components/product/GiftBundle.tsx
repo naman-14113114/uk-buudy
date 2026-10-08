@@ -194,6 +194,15 @@ export function GiftBundle({ product }: { product: Product }) {
         <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
 
+      {/* Cleopatra Edition Ribbon (Strictly on /products/buudy-led-mask) */}
+      {product.slug === "buudy-led-mask" && (
+        <div className="mt-2 mb-1 flex items-center">
+          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
+            Cleopatra Edition
+          </span>
+        </div>
+      )}
+
       {/* Clinically Proven Badges */}
       <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -431,6 +440,7 @@ export function GiftBundle({ product }: { product: Product }) {
                     fill
                     sizes="120px"
                     src={gift.image}
+                    unoptimized
                   />
                 </div>
 

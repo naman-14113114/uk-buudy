@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product/ProductPage";
-import { buudyMask } from "@/data/products";
+import { buudyMask, fullLedMaskGallery, standardMaskFaqs } from "@/data/products";
 import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
@@ -16,6 +16,8 @@ const pagePath = "/products/buudy-7-colour-led-mask";
 const pageProduct = {
   ...buudyMask,
   slug: "buudy-7-colour-led-mask",
+  gallery: fullLedMaskGallery,
+  faqs: standardMaskFaqs,
 };
 
 export const revalidate = 86400;
