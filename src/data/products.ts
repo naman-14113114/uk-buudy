@@ -719,10 +719,6 @@ export const buudyRedTorch: Product = {
       alt: "Buudy LED Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
     },
     {
-      src: torchAsset("02-buudy-red-light-torch-product-travel-case.webp"),
-      alt: "Buudy LED Torch with sleek aluminium body and red LED emitter alongside its protective black zippered travel storage case",
-    },
-    {
       src: torchAsset("03-buudy-red-light-torch-handheld-ergonomics.webp"),
       alt: "Compact and ergonomic Buudy LED Torch held in hand with safety wrist strap demonstrating portable travel-ready size",
     },
