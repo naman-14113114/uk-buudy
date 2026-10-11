@@ -712,27 +712,109 @@ export const buudyRedTorch: Product = {
   customerCount: "16,000+",
   promoCode: "TORCH60",
   promoLabel: "LED torch offer applied",
-  cartImage: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
+  cartImage: torchAsset("buudy-led-torch-premium-gift-set.webp"),
   gallery: [
+    {
+      src: torchAsset("buudy-led-torch-premium-gift-set.webp"),
+      alt: "Buudy LED Torch complete gift set with 2x rechargeable batteries, dock charger, tripod and travel case",
+    },
+    {
+      src: torchAsset("buudy-led-torch-sculptural-warm-stone.webp"),
+      alt: "Buudy LED Torch in precision-crafted aircraft-grade aluminum alloy on warm stone",
+      badge: {
+        title: "AIRCRAFT-GRADE\nALUMINUM ALLOY",
+        sub: "Precision-milled metal body engineered\nfor durability & rapid heat dissipation",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-silver-black-on-blush.webp"),
+      alt: "Buudy LED Torch precision silver and black aesthetic with 3 clinical wavelengths",
+      badge: {
+        title: "3 CLINICAL\nWAVELENGTHS",
+        sub: "630nm, 660nm visible red light\nplus 850nm deep near-infrared",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-mini-tripod-red-glow.webp"),
+      alt: "Buudy LED Torch emitting active red and near-infrared light on mini tripod stand",
+      badge: {
+        title: "HANDS-FREE\nTRIPOD STAND",
+        sub: "Stationary targeted treatment with\nincluded adjustable bracket",
+        position: "bottom-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-handheld-ergonomics.webp"),
+      alt: "Buudy LED Torch held in hand demonstrating portable compact ergonomics",
+      badge: {
+        title: "ULTRA-LIGHTWEIGHT\n& ERGONOMIC",
+        sub: "Only 74g with one-button control\nand anti-drop lanyard",
+        position: "top-right",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-travel-case-scale.webp"),
+      alt: "Buudy LED Torch beside custom zipper travel case demonstrating portable scale",
+      badge: {
+        title: "TRAVEL-READY\nPROTECTION",
+        sub: "Compact 12cm form factor fits\nsecurely in dedicated zipper case",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
     {
       src: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
       alt: "Buudy LED Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
-    },
-    {
-      src: torchAsset("03-buudy-red-light-torch-handheld-ergonomics.webp"),
-      alt: "Compact and ergonomic Buudy LED Torch held in hand with safety wrist strap demonstrating portable travel-ready size",
+      badge: {
+        title: "TARGETED FACIAL\nREJUVENATION",
+        sub: "Concentrated red wavelengths support\ncollagen & natural skin firmness",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: torchAsset("04-buudy-red-light-torch-neck-shoulder-treatment.webp"),
       alt: "Woman using the Buudy LED Torch for targeted red and near-infrared light therapy on her neck and shoulder for skin smoothing and tension relief",
+      badge: {
+        title: "NECK & SHOULDER\nRELIEF",
+        sub: "Targeted soothing warmth & light\nfor everyday muscle tension",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: torchAsset("05-buudy-red-light-torch-arm-joint-pain-relief.webp"),
       alt: "Targeted application of the Buudy LED Torch on forearm and wrist joint for localized pain relief and cellular repair",
+      badge: {
+        title: "LOCALIZED JOINT\nRECOVERY",
+        sub: "Direct deep-tissue light therapy\nfor joints, wrists & elbows",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: torchAsset("06-buudy-red-light-torch-deep-tissue-muscle-recovery.webp"),
       alt: "Close-up of Buudy LED Torch emitting concentrated 630nm, 660nm, and 850nm wavelengths for deep tissue muscle recovery and elbow joint relief",
+      badge: {
+        title: "DEEP TISSUE\nRECOVERY",
+        sub: "850nm near-infrared light penetrates\ndeep into tired muscles",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("07-buudy-red-light-torch-lifestyle-portable-relief.webp"),
+      alt: "Buudy LED Torch held by a woman for portable on-the-go body and skin wellness",
+    },
+    {
+      src: torchAsset("11-buudy-red-light-torch-multi-body-treatment-grid.webp"),
+      alt: "Buudy LED Torch multi-zone application guide for elbow, hand, back, and knee relief",
     },
   ],
   gifts: [],
