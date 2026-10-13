@@ -134,6 +134,11 @@ const nextConfig: NextConfig = {
         destination: "/policies/cookies-policy",
         permanent: true,
       },
+      {
+        source: "/policies/order-tracking",
+        destination: "/order-tracking",
+        permanent: true,
+      },
     ];
   },
 };

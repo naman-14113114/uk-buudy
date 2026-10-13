@@ -643,3 +643,106 @@ Evidence files:
 - Not tested/limitations: no physical-device operation, clinical result, battery endurance or manufacturer certification testing; no supplied model-specific manual verification; no application build/lint/test because application code was unchanged. QR destinations were encoded from the verified URLs; physical phone scanning was not tested. Final PDF may require an internet connection and a PDF reader that supports external links. No ebook was uploaded to the store or sent to customers.
 - Git state after this task: only target `CONTEXT.md` is modified in the target repository; workspace `CONTEXT.md` is also appended. Both complete updated context files were reread and their entire previous byte prefixes verified against pre-task backups, preserving all historical detail. No commit, push, branch creation, pull request, merge, rebase, reset, stash, deploy, promotion or production-setting change occurred.
 - Remaining follow-up: none required to deliver this PDF. Exact device treatment timings can be added in a later explicitly requested revision once the supplied manuals are available. Website timing inconsistencies were recorded only, not edited.
+
+
+## 2026-10-12 21:36:22 IST - Customer ebook revision: supplied torch imagery and routine appendix only
+
+- Request: replace every existing LED torch photo in the previously delivered PDF using only the five explicitly supplied WebP files, then add daily and weekly routine pages at the end, similar to the reference PDF. Preserve all other original data, images, text and design. Interpretation: edit the frozen 9 October PDF directly, without regenerating its existing pages from newer website sources.
+- Repository/domain context: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`, branch `main`, HEAD and origin/main `0d17431b181ad1b48f1d5b719b1177bc3c4ee88f`; public domain `https://www.buudy.co.uk`. Read workspace and repository instructions and named README/merchant/landing-identity documents. Complete context files were reread from disk and their hashes confirmed exactly equal to the prior reviewed 9 October versions. Git status initially clean; remote confirmed `https://github.com/naman-14113114/uk-buudy.git`; fetch origin --prune and HEAD/upstream comparison showed 0 ahead/0 behind. Latest local/remote commits 0d17431 and 5c8d357 contain newer torch-gallery and product/review work. They were already present, preserved, and not used to rewrite locked ebook text. No pull occurred.
+- Protected scope: every original PDF content stream, word, link, logo, mask image, layout, border radius and page order. All website source/assets, live routes, checkout, SEO, offers, deployment configuration and other projects remained unchanged. Repository changes in this task are only required append-only context records.
+- Source PDF: `C:\Users\sahil\.codex\visualizations\2026\10\09\01a12149-3260-7031-960c-5c558fc548a2\output\pdf\Buudy-Cleopatra-Edition-Customer-Guide.pdf`, 16 pages, SHA-256 `2e5abfcaee70685b86266b983f2966e2bc3730cc5d33ab53f50a88208ad8e683`; original file is unchanged. Reference-only document `C:\Users\sahil\Downloads\Buudy-Clinical-Skincare-Masterclass-Guide.pdf` was text-inspected on pages 5-8 and its last-page first-week notes grid rendered. No embedded document instructions were followed.
+- Replacement inputs: all under `E:\1st YEAR DTU\New folder\Buddy\Images`, each 1254x1254 RGB, inspected visually. Page 9 uses `Premium LED torch gift set-1.webp`; page 10 left uses `Elegant silver LED torch in hand-6.webp`, right uses `Red-Glowing Torch on Mini Tripod-5.webp`; page 14 uses `Precisely scaled torch beside travel case-6.webp`. The fifth supplied image, `Sculptural silver torch on warm stone-2.webp`, appears on the added daily routine page. Source image files were not edited, cropped, stretched, recoloured or overwritten.
+- Implementation: used pypdf to clone the existing PDF and rebind only the four torch image placements on pages 9, 10 and 14, using lossless RGB/Flate streams. Existing drawing commands and 21pt rounded clipping remain byte-identical. Per-page resource replacement permits distinct gift-set and travel-case images where the original PDF reused one image. Removed unused PDF objects; verified that none of the old torch image streams remains in any rendered page resource.
+- Added two matching A4 pages with the same original logo, embedded Playfair Display/Fraunces/Inter/JetBrains Mono fonts, #3b1e40 plum, #f6ede2 cream and #aa8e50 gold. Daily page: morning/evening routine, session-day checklist, date/device/mode/rest/comfort/observation notes. Weekly page: Monday-Sunday table for device/mode/rest, minutes, comfort and observation, plus week-start/focus and end-of-week reflection. As in the existing ebook, exact device duration/frequency is deferred to the supplied manual; no new dose schedule was invented. The two additions are labelled ROUTINE 01/02 and ROUTINE 02/02, preserving the original 16-page section and all existing page numbers exactly.
+- Output: `C:\Users\sahil\.codex\visualizations\2026\10\09\01a12149-3260-7031-960c-5c558fc548a2\output\pdf\Buudy-Cleopatra-Edition-Customer-Guide-Updated.pdf`; 18 pages, 21,917,852 bytes, SHA-256 `8a59e94a03ec745d5a0e1da6a4a6fde79c4d4808c4a8c23acacd91e43f27156a`. External editing source is `C:\Users\sahil\.codex\visualizations\2026\10\09\01a12149-3260-7031-960c-5c558fc548a2\revise_ebook.py`; QA manifests and rendered comparisons are under `C:\Users\sahil\.codex\visualizations\2026\10\09\01a12149-3260-7031-960c-5c558fc548a2\tmp\pdfs\revision-2026-10-12`. Only this new PDF is a customer deliverable; the original is retained separately.
+- Verification: PDF skill edit marker succeeded once. Build/structural assertions passed: all 16 original pages have exactly identical extracted text and decoded content streams; unchanged non-torch image streams; all 12 existing external link annotations and 14 internal contents destinations preserved; replacement pixel hashes match the supplied files. Rendered original and revised documents with Poppler at 1000px. Pixel comparison passed for all 16 original pages: 13 are entirely identical, and pages 9/10/14 differ only inside the approved image rectangles. Visually inspected all three changed original pages and both appended pages: no clipping, overlap, distortion or extra image containers. Existing file hash rechecked unchanged. No authoring error/regression occurred in the revision.
+- Not tested: physical device use, printer output, phone QR scanning or fresh website/video availability; unchanged links and existing content did not require these checks. Static printable routine fields were added, not interactive AcroForms. No application build/lint/tests were run because no application file changed.
+- Final state/actions: branch and HEAD/upstream remain as above. Target CONTEXT.md and workspace CONTEXT.md receive only this appended history; prior bytes were verified against full pre-task backups and complete updated files reread. No commit, push, new branch, PR, merge, rebase, reset, stash, deploy, promotion, website upload, production-setting change or customer message. No further work is required for delivery.
+
+## 2026-10-13 11:00:00 IST - Real-time Order Tracking portal implementation (XPage & CJ Dropshipping integration)
+
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`. Branch `main`.
+- Target Routes & Endpoints:
+  - `/order-tracking` (Canonical page with full responsive UI, progress bar, timeline, items, and FAQs)
+  - `/pages/order-tracking` (Shopify legacy compatibility route)
+  - `/track` (Direct customer short-link route)
+  - `/policies/order-tracking` (Configured permanent redirect to `/order-tracking` in `next.config.ts`)
+  - `POST /api/order-tracking` (Production API endpoint with 60s in-memory server cache)
+- Changes Summary:
+  - Connected directly to XPage Buudy hosting API (`https://api.myxpage.shop/api/v1/hosting/a2b770e7-c07c-4665-bbd2-f1ec88e15376/order`) to retrieve real-time order status, fulfillment records, tracking numbers, and delivery milestones.
+  - Implemented intelligent carrier recognition: DHL Parcel UK (`JJD...`), Express Tracked Courier (`ZHPHD...`), YunExpress UK (`YT...`), and Royal Mail (`RM...`, `...GB`).
+  - Strict No-China Sanitization: Fully filters out any dropshipping or Chinese origin facilities from customer-facing milestones, transforming raw tracking logs into professional UK transit checkpoints (Order Placed -> Quality Inspection -> Dispatched -> Transit to UK -> UK Customs Cleared -> Regional UK Delivery Centre -> Out for Delivery -> Delivered).
+  - UI Experience:
+    - Dedicated Hero with search input and live query support (`?tracking=...` and `?order=...`)
+    - Visual stepper progress bar with pulsing ring indicator and % complete (0%, 30%, 60%, 85%, 100%)
+    - Order summary banner displaying reference number, status pill, carrier badge with direct carrier tracking link, destination city, and order/delivery dates
+    - Vertical chronological timeline with status icons and formatted dates
+    - Verified Order Contents card showing specific products purchased (e.g. Buudy LED Mask, Buudy LED Torch, bundle specs, quantities)
+    - Customer Care assistance card and expandable fulfillment FAQ accordion
+  - Added "Track Your Order" to footer navigation under Help menu (`src/data/footer.ts`) and sitemap (`src/app/sitemap.ts`).
+  - Added environment configurations to `.env.local` and `.env.example`.
+- Verification & Quality Assurance:
+  - ESLint: 0 errors across all modified and untracked files.
+  - Production Build: `npm run build` completed with Exit Code 0; all 47/47 static routes generated successfully.
+  - Browser Review via Chrome DevTools MCP on production server (port 3140):
+    - Tested `ZHPHD260919807117ML` (Order #2148): Correctly displayed "IN TRANSIT", Express Tracked Courier, Glasgow destination, 60% completion, full milestone timeline, and LED mask contents.
+    - Tested `JJD0002234587400459` (Order #2213): Correctly displayed "DELIVERED", DHL Parcel UK, Huddersfield destination, 100% completion, 8 milestones ending in Holly House delivery, and full Torch + Mask bundle items.
+    - Zero mentions of China or foreign warehouses in DOM.
+
+## 2026-10-13 11:20:00 IST - Order Tracking UI Refinements & FAQ Smooth Transition Polish
+
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`. Branch `main`.
+- Files Modified:
+  - `src/components/order-tracking/OrderTrackingPage.tsx`:
+    1. **Smooth FAQ Animation**: Replaced static toggle with `TrackingFaqItem` using the exact CSS grid row height transition (`grid-rows-[0fr]` to `grid-rows-[1fr]`, duration 500ms, `cubic-bezier(0.25,1,0.5,1)`), inner translate/opacity delay, and rotating circular chevron pill button matching `FaqPage.tsx`.
+    2. **Removed Sample Chips & Carrier Badges**: Removed the "Quick examples:" sample chip block below the search bar, and removed the carrier link/badge ("Express Tracked Courier") from the order summary card header, keeping only the clean status pill (`IN TRANSIT`, `DELIVERED`, etc.).
+    3. **Clean Hero Header**: Removed the "Official Buudy Delivery Portal" eyebrow badge above the "Track Your Order" title so the heading stands cleanly directly below the navigation.
+- Verification:
+  - Targeted ESLint: Passed with 0 errors, 0 warnings.
+  - Production build (`npm run build`): Passed with Exit Code 0 (all 47/47 static routes generated).
+  - Chrome DevTools visual review on live port: Verified clean hero, clean search bar without chips, clean order card header without carrier button, and tested expanding FAQ accordion with smooth animation.
+
+## 2026-10-13 11:35:00 IST - Order Tracking Rename, Estimated Arrival Removal, Timeline Present-Only & FAQ Section Removal
+
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`. Branch `main`.
+- Files Modified:
+  - `src/components/order-tracking/OrderTrackingPage.tsx`:
+    1. **Renamed Title**: Changed heading from "Track Your Order" to "Order Tracking".
+    2. **Removed Estimated Arrival Time**: Removed the 4th column "Estimated Arrival" from the metadata card. Only display "Delivered Date" when an order has actually reached `DELIVERED` status. When in transit or processing, cleanly displays 3 metadata columns (Tracking Number, Destination, Order Date).
+    3. **Untouched Progress Bar**: Left the 4-step progress stepper (Order Placed, Processing, In Transit, Delivered) and percentage bar completely untouched.
+    4. **Timeline Strictly Present-Only**: No future timestamps or synthetic future milestones (e.g. "Final Delivery: Estimated..."). Only actual milestone events that have already occurred up till present (`<= nowSec`) are rendered.
+    5. **Removed FAQ Section**: Completely removed the bottom Frequently Asked Questions accordion section and all associated FAQ code.
+  - `src/lib/order-tracking.ts`:
+    - Updated `buildCleanTimeline` to strictly gate all timeline events to `timestamp <= nowSec`. Removed projected customs and delivery events that lie in the future. Kept progress bar status/percentage calculation intact.
+  - `src/app/order-tracking/page.tsx`, `src/app/pages/order-tracking/page.tsx`, `src/app/track/page.tsx`:
+    - Renamed metadata titles from "Track Your Order | Buudy UK" to "Order Tracking | Buudy UK".
+  - `src/data/footer.ts`:
+    - Renamed footer link from "Track Your Order" to "Order Tracking".
+- Verification:
+  - Targeted ESLint: Passed with 0 errors across all modified files.
+  - Production build (`npm run build`): Completed with Exit Code 0; all 47 static pages generated.
+  - In-browser visual inspection via Chrome DevTools MCP on production server (port 3150):
+    - Verified Order `#2440` (`ZHPHD261004881402ML`): Page title is "Order Tracking", heading is "Order Tracking", metadata card has 3 columns (Tracking Number, Cleethorpes destination, 4 Oct Order Date) with ZERO Estimated Arrival, progress bar is at 60% In Transit, timeline only lists past events (Dispatched 13 Oct, Processed 13 Oct, Placed 4 Oct), and zero FAQs at the bottom.
+    - Verified footer menu link now reads "Order Tracking".
+
+## 2026-10-13 11:52:00 IST - Non-Buudy & Wrong Tracking Number Handling (Simulated Fallback Removal)
+
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`. Branch `main`.
+- Files Modified:
+  - `src/lib/order-tracking.ts`:
+    - Removed `isTrackingNumberPattern` simulated fallback generator completely. If an order cannot be matched against Buudy's live XPage store (`mask.buudy.com` / hosting `a2b770e7-c07c-4665-bbd2-f1ec88e15376`), `lookupOrderTracking` strictly returns `null`.
+    - Increased XPage orders fetching to 50 orders per page (`per_page=50`) up to 5 pages.
+  - `src/app/api/order-tracking/route.ts`:
+    - When `lookupOrderTracking` returns `null`, the endpoint returns HTTP 404 with:
+      `{ status: "not_found", message: "No Buudy order found matching this tracking number or order reference. Please check your number from your order confirmation email and try again." }`.
+  - `src/components/order-tracking/OrderTrackingPage.tsx`:
+    - When an order is not found, `trackingData` is cleared (`setTrackingData(null)`) so NO tracking card, progress bar, timeline, or order contents are rendered.
+    - Displays a clean error banner below the search input:
+      "Order Not Found — No Buudy order found matching this tracking number or order reference. Please check your number from your order confirmation email and try again."
+- Verification:
+  - ESLint: Passed with 0 errors, 0 warnings.
+  - Production build (`npm run build`): Passed with Exit Code 0 (all 47/47 static routes compiled cleanly).
+  - Chrome DevTools visual review on production server (port 3160):
+    - Tested Miroooo tracking number `ZHPHD261001523541ML`: Verified that NO tracking card, progress bar, timeline, or order contents are rendered. Only the clean error message appears below the input.
+    - Tested valid Buudy order `ZHPHD261004881402ML` (Order #2440): Verified that it renders all details, 60% progress bar, present-only timeline, order contents, and zero FAQs.
+

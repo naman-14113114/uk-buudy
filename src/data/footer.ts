@@ -20,6 +20,7 @@ export const footerMenus = [
       { label: "Contact Us", href: "/pages/contact-us" },
       { label: "About Us", href: "/pages/about-us" },
       { label: "FAQs", href: "/pages/faqs" },
+      { label: "Order Tracking", href: "/order-tracking" },
       { label: "Cookies Policy", href: "/policies/cookies-policy" },
     ],
   },

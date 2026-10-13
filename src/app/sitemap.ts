@@ -9,6 +9,7 @@ const routes = [
   { path: "/pages/contact-us", lastModified: "2026-06-16" },
   { path: "/pages/about-us", lastModified: "2026-06-16" },
   { path: "/pages/faqs", lastModified: "2026-06-16" },
+  { path: "/order-tracking", lastModified: "2026-10-13" },
   { path: "/pages/skincare-quiz", lastModified: "2026-06-16" },
   { path: "/pages/premium-travel-box", lastModified: "2026-06-16" },
   { path: "/pages/buudy-led-torch", lastModified: "2026-06-16" },
