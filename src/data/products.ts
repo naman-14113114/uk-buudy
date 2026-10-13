@@ -712,8 +712,12 @@ export const buudyRedTorch: Product = {
   customerCount: "16,000+",
   promoCode: "TORCH60",
   promoLabel: "LED torch offer applied",
-  cartImage: torchAsset("buudy-led-torch-premium-gift-set.webp"),
+  cartImage: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
   gallery: [
+    {
+      src: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
+      alt: "Buudy LED Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
+    },
     {
       src: torchAsset("buudy-led-torch-premium-gift-set.webp"),
       alt: "Buudy LED Torch complete gift set with 2x rechargeable batteries, dock charger, tripod and travel case",
@@ -766,16 +770,6 @@ export const buudyRedTorch: Product = {
         sub: "Compact 12cm form factor fits\nsecurely in dedicated zipper case",
         position: "top-left",
         theme: "dark",
-      },
-    },
-    {
-      src: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
-      alt: "Buudy LED Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
-      badge: {
-        title: "TARGETED FACIAL\nREJUVENATION",
-        sub: "Concentrated red wavelengths support\ncollagen & natural skin firmness",
-        position: "bottom-left",
-        theme: "white",
       },
     },
     {
