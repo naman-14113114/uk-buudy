@@ -13,6 +13,7 @@ import {
   Check,
   AlertCircle,
   HelpCircle,
+  MapPin,
 } from "lucide-react";
 import type { TrackingData } from "@/lib/order-tracking";
 
@@ -238,7 +239,7 @@ export function OrderTrackingPage() {
                     {trackingData.statusCode === "DELIVERED" ? (
                       <CheckCircle2 size={14} className="text-emerald-600" />
                     ) : trackingData.statusCode === "OUT_FOR_DELIVERY" ? (
-                      <Truck size={14} className="text-amber-600" />
+                      <MapPin size={14} className="text-amber-600" />
                     ) : (
                       <Clock size={14} className="text-[var(--gold)]" />
                     )}
@@ -322,7 +323,7 @@ export function OrderTrackingPage() {
                 </div>
 
                 {/* Step Icons & Labels */}
-                <div className="mt-6 grid grid-cols-4 gap-2">
+                <div className="mt-6 grid grid-cols-5 gap-1.5 sm:gap-2">
                   {[
                     {
                       label: "Order Placed",
@@ -343,6 +344,12 @@ export function OrderTrackingPage() {
                       step: 2,
                     },
                     {
+                      label: "Out for Delivery",
+                      desc: "With Courier",
+                      icon: MapPin,
+                      step: 3,
+                    },
+                    {
                       label: "Delivered",
                       desc: "Arrived",
                       icon: Home,
@@ -350,12 +357,7 @@ export function OrderTrackingPage() {
                     },
                   ].map((s) => {
                     const isCompleted = trackingData.activeStepIndex >= s.step;
-                    const isCurrent =
-                      (s.step === 0 && trackingData.activeStepIndex === 0) ||
-                      (s.step === 1 && trackingData.activeStepIndex === 1) ||
-                      (s.step === 2 &&
-                        (trackingData.activeStepIndex === 2 || trackingData.activeStepIndex === 3)) ||
-                      (s.step === 4 && trackingData.activeStepIndex === 4);
+                    const isCurrent = trackingData.activeStepIndex === s.step;
 
                     const IconComponent = s.icon;
 
@@ -378,7 +380,7 @@ export function OrderTrackingPage() {
                         </div>
 
                         <span
-                          className={`mt-2 text-xs font-bold sm:text-sm ${
+                          className={`mt-2 text-[11px] font-bold leading-tight sm:text-xs md:text-sm ${
                             isCompleted ? "text-[var(--plum)]" : "text-[var(--muted)]"
                           }`}
                         >

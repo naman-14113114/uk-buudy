@@ -218,13 +218,43 @@ function buildCleanTimeline(
   const shippedAt = delivery.shipped_at;
   const deliveredAt = delivery.delivered_at;
 
-  const isDelivered = delivery.status === "DELIVERED" || Boolean(deliveredAt);
-  const isShipped = delivery.status === "SHIPPED" || Boolean(shippedAt) || isDelivered;
+  const rawStatus = (delivery.status || "").trim().toUpperCase();
+  const isDeliveryStatusOut =
+    rawStatus === "OUT_FOR_DELIVERY" ||
+    rawStatus === "OUT FOR DELIVERY" ||
+    rawStatus === "OUT_FOR_SHIPPING";
+
+  const isDelivered = rawStatus === "DELIVERED" || Boolean(deliveredAt);
+  const isShipped = rawStatus === "SHIPPED" || Boolean(shippedAt) || isDeliveryStatusOut || isDelivered;
+
+  const isDHL =
+    trackingNumber.toUpperCase().startsWith("JJD") ||
+    trackingNumber.toUpperCase().startsWith("4150") ||
+    trackingNumber.toUpperCase().startsWith("0034");
+
+  let localHubTime: number;
+  let outForDelTime: number;
+
+  if (deliveredAt) {
+    localHubTime = deliveredAt - 86400;
+    outForDelTime = deliveredAt - 3600 * 4;
+  } else if (isDHL) {
+    localHubTime = (shippedAt || createdAt) + 86400 * 1;
+    outForDelTime = (shippedAt || createdAt) + 86400 * 2;
+  } else {
+    localHubTime = (shippedAt || createdAt) + 86400 * 8;
+    outForDelTime = (shippedAt || createdAt) + 86400 * 9;
+  }
+
+  if (isDeliveryStatusOut && !deliveredAt) {
+    outForDelTime = Math.min(outForDelTime, nowSec - 1800);
+    localHubTime = Math.min(localHubTime, outForDelTime - 3600 * 4);
+  }
+
   const isOutForDelivery =
     isDelivered ||
-    (isShipped &&
-      (trackingNumber.toUpperCase().startsWith("JJD") ||
-        (shippedAt && nowSec - shippedAt > 86400 * 6)));
+    isDeliveryStatusOut ||
+    (isShipped && outForDelTime <= nowSec);
 
   const destinationCity = order.customer_city?.trim() || "UK Hub";
 
@@ -264,7 +294,7 @@ function buildCleanTimeline(
     });
 
     const flightTransitTime = shippedAt + 86400 * 4;
-    if (flightTransitTime <= nowSec) {
+    if (flightTransitTime <= nowSec && !isDHL) {
       events.push({
         title: "In Transit to UK Distribution Centre",
         description: "Shipment in transit through international express logistics network.",
@@ -275,7 +305,7 @@ function buildCleanTimeline(
     }
 
     const customsTime = shippedAt + 86400 * 7;
-    if (customsTime <= nowSec) {
+    if (customsTime <= nowSec && !isDHL) {
       events.push({
         title: "UK Customs & Border Clearance Completed",
         description: "Package arrived in the United Kingdom and cleared international import controls.",
@@ -288,7 +318,6 @@ function buildCleanTimeline(
 
   // Stage 4: Out for Delivery (past/present only)
   if (isOutForDelivery) {
-    const localHubTime = deliveredAt ? deliveredAt - 86400 : (shippedAt || createdAt) + 86400 * 8;
     if (localHubTime <= nowSec) {
       events.push({
         title: `Processed at Regional Hub (${destinationCity})`,
@@ -299,30 +328,33 @@ function buildCleanTimeline(
       });
     }
 
-    const outForDelTime = deliveredAt ? deliveredAt - 3600 * 4 : (shippedAt || createdAt) + 86400 * 9;
     if (outForDelTime <= nowSec) {
       events.push({
         title: "Out for Delivery",
         description: `Loaded onto local courier van for delivery to ${destinationCity} address.`,
         date: formatDisplayDateTime(outForDelTime),
-        completed: isDelivered,
+        completed: true,
         stage: "OUT_FOR_DELIVERY",
       });
     }
   }
 
   // Stage 5: Delivered (past/present only)
-  if (isDelivered && deliveredAt && deliveredAt <= nowSec) {
-    events.push({
-      title: "Delivered",
-      description: `Package safely delivered and signed for at ${order.customer_address || "delivery address"}.`,
-      date: formatDisplayDateTime(deliveredAt) || "Delivered",
-      completed: true,
-      stage: "DELIVERED",
-    });
+  if (isDelivered) {
+    const effectiveDeliveredAt = deliveredAt || nowSec;
+    if (effectiveDeliveredAt <= nowSec) {
+      events.push({
+        title: "Delivered",
+        description: `Package safely delivered and signed for at ${order.customer_address || "delivery address"}.`,
+        date: formatDisplayDateTime(effectiveDeliveredAt) || "Delivered",
+        completed: true,
+        stage: "DELIVERED",
+      });
+    }
   }
 
-  // Bar remains exactly as requested - untouched
+  const isOutForDeliveryNow = !isDelivered && isOutForDelivery && outForDelTime <= nowSec;
+
   let status: "Processing" | "In Transit" | "Out for Delivery" | "Delivered" = "Processing";
   let statusCode: TrackingStage = "PROCESSING";
   let progressPercentage = 25;
@@ -333,7 +365,12 @@ function buildCleanTimeline(
     statusCode = "DELIVERED";
     progressPercentage = 100;
     activeStepIndex = 4;
-  } else if (delivery.status === "SHIPPED" || isShipped) {
+  } else if (isOutForDeliveryNow) {
+    status = "Out for Delivery";
+    statusCode = "OUT_FOR_DELIVERY";
+    progressPercentage = 85;
+    activeStepIndex = 3;
+  } else if (rawStatus === "SHIPPED" || isShipped) {
     status = "In Transit";
     statusCode = "IN_TRANSIT";
     progressPercentage = 60;
