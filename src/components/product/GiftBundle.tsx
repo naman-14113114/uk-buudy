@@ -267,7 +267,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <div className="flex items-center gap-2 min-w-0">
           <Clock className="h-4 w-4 shrink-0 text-[var(--gold)]" />
           <p className="m-0 leading-snug">
-            Free delivery: Order within <span className="font-semibold text-[var(--plum)]">{timer}</span> to receive it by <span className="font-semibold text-[var(--plum)]">{deliveryDate || "soon"}</span>
+            Free delivery: Order within <span className="font-semibold text-[var(--plum)]">{timer}</span> to get as fast as <span className="font-semibold text-[var(--plum)]">{deliveryDate || "soon"}</span>
           </p>
         </div>
 
