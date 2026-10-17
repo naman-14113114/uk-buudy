@@ -53,7 +53,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
                 ? "Free"
                 : formatMoney(line.unitPriceCents)}
             </p>
-            {line.compareAtCents ? (
+            {line.compareAtCents && line.compareAtCents > line.unitPriceCents ? (
               <p className="text-xs text-[var(--muted)] line-through">
                 {formatMoney(line.compareAtCents)}
               </p>

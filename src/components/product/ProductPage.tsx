@@ -9,6 +9,7 @@ import { ProductReviewsSection } from "./ProductReviewsSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
 import { IplProductPage } from "./IplProductPage";
+import { MinimalProductPage } from "./MinimalProductPage";
 import {
   DeferredBeforeAfterGrid,
   DeferredExpertSection,
@@ -35,6 +36,10 @@ export function ProductPage({
 
   if (product.template === "ipl") {
     return <IplProductPage product={product} />;
+  }
+
+  if (product.template === "minimal") {
+    return <MinimalProductPage product={product} />;
   }
 
   return (

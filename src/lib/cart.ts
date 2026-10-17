@@ -62,7 +62,10 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
     subtitle: product.shortDescription,
     image: product.cartImage,
     unitPriceCents: product.priceCents,
-    compareAtCents: product.compareAtCents,
+    compareAtCents:
+      product.compareAtCents && product.compareAtCents > product.priceCents
+        ? product.compareAtCents
+        : undefined,
     quantity: normalizedQuantity,
   };
 
