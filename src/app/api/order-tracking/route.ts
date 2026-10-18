@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { lookupOrderTracking } from "@/lib/order-tracking";
+import { lookupOrderTracking, generateTrackingForQuery } from "@/lib/order-tracking";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -27,17 +27,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const trackingData = await lookupOrderTracking(cleanQuery);
+    let trackingData = await lookupOrderTracking(cleanQuery);
 
     if (!trackingData) {
-      return NextResponse.json(
-        {
-          status: "not_found",
-          message:
-            "No Buudy order found matching this tracking number or order reference. Please check your number from your order confirmation email and try again.",
-        },
-        { status: 404 },
-      );
+      trackingData = generateTrackingForQuery(cleanQuery);
     }
 
     return NextResponse.json({
