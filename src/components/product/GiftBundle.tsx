@@ -427,9 +427,11 @@ export function GiftBundle({ product }: { product: Product }) {
                   <span className="text-black text-[11px] sm:text-[13px] font-bold tracking-wider uppercase font-sans">
                     FREE
                   </span>
-                  <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
-                    {formatMoney(gift.valueCents, product.currency)}
-                  </span>
+                  {gift.valueCents > 0 && (
+                    <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
+                      {formatMoney(gift.valueCents, product.currency)}
+                    </span>
+                  )}
                 </div>
 
                 {/* Gift Image (No inner box container, directly given standard even border-radius) */}

@@ -42,7 +42,7 @@ export function ProductHero({
             <ProductGallery images={product.gallery} hasGifts={product.gifts.length > 0} />
           )}
         </div>
-        <div className="lg:sticky lg:top-6 lg:self-start w-full [overflow-anchor:none]">
+        <div className="w-full [overflow-anchor:none]">
           <GiftBundle product={product} />
         </div>
       </div>

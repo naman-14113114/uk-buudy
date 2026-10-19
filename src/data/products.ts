@@ -626,9 +626,9 @@ export const buudyMask: Product = {
       id: "skincare-ebook",
       name: "Skincare E-Book",
       valueCents: 1900,
-      image: productMediaAsset("free_guide-v2.webp"),
+      image: "/images/products/skincare-ebook/skincare-ebook.png",
       label: "Digital copy",
-      href: "/pages/skincare-guide",
+      href: "/products/skincare-ebook",
     },
   ],
   specs: [

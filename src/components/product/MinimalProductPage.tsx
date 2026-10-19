@@ -48,7 +48,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
 
   const isGiftCard = product.id === "buudy-gift-card";
   const isPackageProtection = product.id === "buudy-package-protection";
-  const isEbook = product.id === "buudy-skincare-ebook";
+  const isEbook = product.id === "buudy-skincare-ebook" || product.slug === "skincare-ebook";
   const isDigital = isGiftCard || isPackageProtection || isEbook;
 
   const unitPriceCents = product.priceCents;
@@ -85,7 +85,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
   };
 
   return (
-    <div className="bg-[var(--cream)] relative overflow-hidden">
+    <div className="bg-[var(--cream)] relative">
       {/* Subtle ambient luxury glow */}
       <div className="buudy-glow -left-20 -top-24 h-[500px] w-[500px] bg-[#f4a17b] pointer-events-none" />
       <div className="buudy-glow -right-24 top-52 h-[560px] w-[560px] bg-[#a05080] pointer-events-none" />
@@ -94,26 +94,27 @@ export function MinimalProductPage({ product }: { product: Product }) {
       <section
         id="product-hero"
         className="buudy-section pt-4 pb-2 md:pt-6 md:pb-4 relative z-10"
-        style={{ overflowX: "clip", overflowY: "visible" }}
       >
         <div className="buudy-wrap">
-          {/* Breadcrumbs */}
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-6 flex items-center gap-2 buudy-mono text-xs uppercase tracking-wider text-[var(--plum)]/60"
-          >
-            <Link href="/" className="hover:text-[var(--plum)] transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <Link href="/" className="hover:text-[var(--plum)] transition-colors">
-              Products
-            </Link>
-            <span>/</span>
-            <span className="text-[var(--plum)] font-semibold truncate max-w-[200px] sm:max-w-none">
-              {product.name}
-            </span>
-          </nav>
+          {/* Breadcrumbs (Hidden on digital products) */}
+          {!isDigital && (
+            <nav
+              aria-label="Breadcrumb"
+              className="mb-6 flex items-center gap-2 buudy-mono text-xs uppercase tracking-wider text-[var(--plum)]/60"
+            >
+              <Link href="/" className="hover:text-[var(--plum)] transition-colors">
+                Home
+              </Link>
+              <span>/</span>
+              <Link href="/" className="hover:text-[var(--plum)] transition-colors">
+                Products
+              </Link>
+              <span>/</span>
+              <span className="text-[var(--plum)] font-semibold truncate max-w-[200px] sm:max-w-none">
+                {product.name}
+              </span>
+            </nav>
+          )}
 
           {/* 2-Column Hero Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -194,7 +195,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
               {/* Pricing Row */}
               <div className="mt-5 flex items-baseline gap-3 flex-wrap">
                 <span className="buudy-display text-3xl sm:text-4xl font-bold text-[var(--plum)]">
-                  {formatMoney(unitPriceCents, product.currency)}
+                  {unitPriceCents === 0 ? "FREE" : formatMoney(unitPriceCents, product.currency)}
                 </span>
                 {showCompareAt && (
                   <>
