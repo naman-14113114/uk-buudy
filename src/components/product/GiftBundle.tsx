@@ -32,6 +32,7 @@ import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
 import { ProductDetailsAccordion } from "./ProductDetailsAccordion";
+import { HalloweenSaleBadge } from "./HalloweenOverlay";
 
 function useCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -102,7 +103,7 @@ const keyBenefitIcons = [
   Waves,
 ];
 
-export function GiftBundle({ product }: { product: Product }) {
+export function GiftBundle({ product, isHalloween = false }: { product: Product; isHalloween?: boolean }) {
   const { addProduct } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
@@ -237,12 +238,14 @@ export function GiftBundle({ product }: { product: Product }) {
         </span>
       </div>
 
-      <div className="mt-4 flex flex-col gap-2.5">
+      <div className="mt-4 flex flex-wrap items-center gap-3">
         <Price
           compareAtCents={product.compareAtCents}
           currency={product.currency}
           priceCents={product.priceCents}
+          hideDiscount={isHalloween}
         />
+        {isHalloween && <HalloweenSaleBadge />}
       </div>
 
       {/* Premium Compact Bullet Points List */}
