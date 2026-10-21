@@ -402,10 +402,10 @@ img[data-buudy-image-loading="true"] {
 
 .halloween-ghost-float { animation: halloween-ghost-float 5s ease-in-out infinite; }
 
-/* Pumpkin glow */
+/* Pumpkin pulse - crisp scale without blur filters */
 @keyframes halloween-pumpkin-glow {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 122, 0, 0.3)); }
-  50% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(255, 122, 0, 0.5)); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
 .halloween-pumpkin-glow { animation: halloween-pumpkin-glow 3s ease-in-out infinite; }

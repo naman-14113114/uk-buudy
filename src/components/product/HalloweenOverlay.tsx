@@ -62,22 +62,7 @@ export function HalloweenOverlay() {
         <path d="M 195.0 0.0 Q 148.4 23.5 185.5 60.3 Q 133.9 68.2 157.8 114.6 Q 106.2 106.2 114.6 157.8 Q 68.2 133.9 60.3 185.5 Q 23.5 148.4 0.0 195.0" />
       </svg>
 
-      {/* ── Spider Hanging Below Cart Icon ── */}
-      <div
-        className="absolute top-[40px] lg:top-[50px] right-[32px] sm:right-[48px] md:right-[58px] lg:right-[calc((100vw-min(1180px,calc(100vw-80px)))/2+14px)] z-30"
-        style={{ animation: "halloween-spider-dangle 4.5s ease-in-out infinite" }}
-      >
-        <Image
-          src="/images/halloween-spider.png"
-          alt="Halloween Spider"
-          width={28}
-          height={98}
-          className="w-[24px] sm:w-[28px] h-auto object-contain"
-          unoptimized
-        />
-      </div>
-
-      {/* ── Bat (Upper hero right side, clear of images) ── */}
+      {/* ── Bat (Upper hero right side, crisp and clearly visible) ── */}
       <div
         className="absolute top-[160px] sm:top-[175px] right-[80px] sm:right-[130px] md:right-[160px] z-20"
         style={{ animation: "halloween-bat-float-2 6s ease-in-out infinite" }}
@@ -85,14 +70,14 @@ export function HalloweenOverlay() {
         <Image
           src="/images/halloween-bat.png"
           alt="Halloween Bat"
-          width={30}
-          height={18}
-          className="w-[24px] sm:w-[28px] h-auto object-contain rotate-[10deg]"
-          unoptimized
+          width={40}
+          height={20}
+          className="w-[28px] sm:w-[32px] h-auto object-contain rotate-[10deg]"
+          priority
         />
       </div>
 
-      {/* ── Pumpkin (Upper hero right side near price badge, clear of images) ── */}
+      {/* ── Pumpkin (Upper hero right side, sharp and clearly visible with zero blur) ── */}
       <div
         className="absolute top-[225px] sm:top-[240px] right-[14px] sm:right-[28px] md:right-[38px] z-20"
         style={{ animation: "halloween-pumpkin-glow 3.5s ease-in-out infinite" }}
@@ -100,10 +85,10 @@ export function HalloweenOverlay() {
         <Image
           src="/images/halloween-pumpkin.png"
           alt="Halloween Pumpkin"
-          width={30}
-          height={30}
-          className="w-[26px] sm:w-[30px] h-auto object-contain drop-shadow-[0_2px_8px_rgba(255,122,0,0.35)]"
-          unoptimized
+          width={34}
+          height={34}
+          className="w-[28px] sm:w-[32px] h-auto object-contain"
+          priority
         />
       </div>
     </div>
