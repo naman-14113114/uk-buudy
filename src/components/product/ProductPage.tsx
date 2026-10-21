@@ -25,7 +25,7 @@ export function ProductPage({
   variant,
   galleryVariant = product.template === "mask" ? "omnilux" : "default",
   comparisonPosition = "default",
-  isHalloween = false,
+  isHalloween = true,
 }: {
   product: Product;
   variant?: string;
@@ -34,11 +34,11 @@ export function ProductPage({
   isHalloween?: boolean;
 }) {
   if (product.template === "torch") {
-    return <TorchProductPage product={product} />;
+    return <TorchProductPage product={product} isHalloween={isHalloween} />;
   }
 
   if (product.template === "ipl") {
-    return <IplProductPage product={product} />;
+    return <IplProductPage product={product} isHalloween={isHalloween} />;
   }
 
   if (product.template === "minimal") {

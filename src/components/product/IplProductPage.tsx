@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Product } from "@/data/products";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductHero } from "./ProductHero";
+import { HalloweenOverlay } from "./HalloweenOverlay";
 import { FAQSection } from "./FAQSection";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { StickyAddToCart } from "./StickyAddToCart";
@@ -135,10 +136,17 @@ function IplSkinGuideSection() {
   );
 }
 
-export function IplProductPage({ product }: { product: Product }) {
+export function IplProductPage({
+  product,
+  isHalloween = true,
+}: {
+  product: Product;
+  isHalloween?: boolean;
+}) {
   return (
-    <>
-      <ProductHero product={product} />
+    <div className="relative">
+      {isHalloween && <HalloweenOverlay />}
+      <ProductHero product={product} isHalloween={isHalloween} />
       <TrustBadges />
       <IplHeroVideo />
       <IplFeatureGrid />
@@ -152,6 +160,6 @@ export function IplProductPage({ product }: { product: Product }) {
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />
-    </>
+    </div>
   );
 }

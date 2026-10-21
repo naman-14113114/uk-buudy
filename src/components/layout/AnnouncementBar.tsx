@@ -1,12 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { announcementItems } from "@/data/navigation";
-
-const halloweenPaths = [
-  "/products/buudy-7-colour-led-mask",
-];
-
 const halloweenItems = [
   "🎃 HALLOWEEN SALE - SAVE 60% 🎃",
   "🦇 SIGN UP AND ENJOY £10 OFF 🦇",
@@ -15,23 +8,10 @@ const halloweenItems = [
 ];
 
 export function AnnouncementBar() {
-  const pathname = usePathname();
-  const isHalloween = halloweenPaths.some(
-    (p) => pathname === p || pathname === `${p}/`,
-  );
-
-  const items = isHalloween
-    ? [...halloweenItems, ...halloweenItems, ...halloweenItems]
-    : [...announcementItems, ...announcementItems, ...announcementItems];
+  const items = [...halloweenItems, ...halloweenItems, ...halloweenItems];
 
   return (
-    <div
-      className={`overflow-hidden py-3 ${
-        isHalloween
-          ? "bg-[#200e24] text-[#f7f1e8]"
-          : "bg-[var(--plum)] text-[var(--cream)]"
-      }`}
-    >
+    <div className="overflow-hidden py-3 bg-[#200e24] text-[#f7f1e8]">
       <div className="buudy-marquee buudy-marquee-slow flex items-center gap-6">
         {items.map((item, index) => (
           <span
@@ -39,7 +19,7 @@ export function AnnouncementBar() {
             key={`${item}-${index}`}
           >
             {item}
-            <span className={isHalloween ? "text-[#f7f1e8] opacity-80" : ""}>✦</span>
+            <span className="text-[#f7f1e8] opacity-80">✦</span>
           </span>
         ))}
       </div>

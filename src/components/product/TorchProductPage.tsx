@@ -7,6 +7,7 @@ import {
 } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductHero } from "./ProductHero";
+import { HalloweenOverlay } from "./HalloweenOverlay";
 import { SpecsPanel } from "./SpecsPanel";
 import { FAQSection } from "./FAQSection";
 import { GuaranteeSection } from "./GuaranteeSection";
@@ -189,10 +190,17 @@ function TorchUseGuide() {
 import { TorchFeatureTabs } from "./TorchFeatureTabs";
 import { ProductReviewsSection } from "./ProductReviewsSection";
 
-export function TorchProductPage({ product }: { product: Product }) {
+export function TorchProductPage({
+  product,
+  isHalloween = true,
+}: {
+  product: Product;
+  isHalloween?: boolean;
+}) {
   return (
-    <>
-      <ProductHero product={product} galleryVariant="omnilux" />
+    <div className="relative">
+      {isHalloween && <HalloweenOverlay />}
+      <ProductHero product={product} galleryVariant="omnilux" isHalloween={isHalloween} />
       <TorchFeatureTabs />
       <TorchStorySection />
       {/* <TorchDetailSection /> */}
@@ -201,6 +209,6 @@ export function TorchProductPage({ product }: { product: Product }) {
       <FAQSection faqs={product.faqs} />
       {/* <GuaranteeSection showVideo={false} /> */}
       <StickyAddToCart product={product} />
-    </>
+    </div>
   );
 }

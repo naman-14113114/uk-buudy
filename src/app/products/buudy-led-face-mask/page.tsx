@@ -99,6 +99,7 @@ export default function BuudyLedFaceMaskProductRoute() {
         product={pageProduct}
         galleryVariant="omnilux"
         comparisonPosition="below-app"
+        isHalloween
       />
     </>
   );
