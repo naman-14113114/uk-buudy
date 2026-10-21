@@ -14,16 +14,16 @@ export function HalloweenOverlay() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 -top-[64px] lg:-top-[72px] h-[800px] z-50 overflow-hidden select-none"
+      className="pointer-events-none absolute inset-x-0 -top-[64px] lg:-top-[72px] h-[380px] z-50 overflow-hidden select-none"
     >
-      {/* ── Top-Left Corner Cobweb ── */}
+      {/* ── Top-Left Corner Cobweb (Shortened & Subtle Opacity) ── */}
       <svg
-        className="absolute top-0 left-0 w-[170px] sm:w-[200px] md:w-[230px] h-[170px] sm:h-[200px] md:h-[230px]"
+        className="absolute top-0 left-0 w-[85px] sm:w-[95px] md:w-[110px] h-[85px] sm:h-[95px] md:h-[110px]"
         viewBox="0 0 215 215"
         fill="none"
         stroke="#2c1630"
-        strokeWidth="1.15"
-        opacity="0.82"
+        strokeWidth="1.0"
+        opacity="0.22"
         xmlns="http://www.w3.org/2000/svg"
       >
         <line x1="0" y1="0" x2="210.0" y2="0.0" />
@@ -39,14 +39,14 @@ export function HalloweenOverlay() {
         <path d="M 195.0 0.0 Q 148.4 23.5 185.5 60.3 Q 133.9 68.2 157.8 114.6 Q 106.2 106.2 114.6 157.8 Q 68.2 133.9 60.3 185.5 Q 23.5 148.4 0.0 195.0" />
       </svg>
 
-      {/* ── Top-Right Corner Cobweb ── */}
+      {/* ── Top-Right Corner Cobweb (Shortened & Subtle Opacity) ── */}
       <svg
-        className="absolute top-0 right-0 w-[170px] sm:w-[200px] md:w-[230px] h-[170px] sm:h-[200px] md:h-[230px] -scale-x-100"
+        className="absolute top-0 right-0 w-[85px] sm:w-[95px] md:w-[110px] h-[85px] sm:h-[95px] md:h-[110px] -scale-x-100"
         viewBox="0 0 215 215"
         fill="none"
         stroke="#2c1630"
-        strokeWidth="1.15"
-        opacity="0.82"
+        strokeWidth="1.0"
+        opacity="0.22"
         xmlns="http://www.w3.org/2000/svg"
       >
         <line x1="0" y1="0" x2="210.0" y2="0.0" />
@@ -77,22 +77,7 @@ export function HalloweenOverlay() {
         />
       </div>
 
-      {/* ── Bat 1 (Above left carousel arrow / mask top) ── */}
-      <div
-        className="absolute top-[140px] sm:top-[155px] left-[70px] sm:left-[110px] md:left-[135px] z-20"
-        style={{ animation: "halloween-bat-float-1 5s ease-in-out infinite" }}
-      >
-        <Image
-          src="/images/halloween-bat.png"
-          alt="Halloween Bat"
-          width={30}
-          height={18}
-          className="w-[24px] sm:w-[30px] h-auto object-contain -rotate-[15deg]"
-          unoptimized
-        />
-      </div>
-
-      {/* ── Bat 2 (Upper right below web / next to Cleopatra) ── */}
+      {/* ── Bat (Upper hero right side, clear of images) ── */}
       <div
         className="absolute top-[160px] sm:top-[175px] right-[80px] sm:right-[130px] md:right-[160px] z-20"
         style={{ animation: "halloween-bat-float-2 6s ease-in-out infinite" }}
@@ -107,22 +92,7 @@ export function HalloweenOverlay() {
         />
       </div>
 
-      {/* ── Bat 3 (Far left margin between thumbnails) ── */}
-      <div
-        className="absolute top-[340px] sm:top-[370px] left-[10px] sm:left-[22px] z-20"
-        style={{ animation: "halloween-bat-float-3 5.5s ease-in-out infinite" }}
-      >
-        <Image
-          src="/images/halloween-bat.png"
-          alt="Halloween Bat"
-          width={26}
-          height={16}
-          className="w-[22px] sm:w-[26px] h-auto object-contain -rotate-[8deg]"
-          unoptimized
-        />
-      </div>
-
-      {/* ── Pumpkin 1 (Right side near price/badges) ── */}
+      {/* ── Pumpkin (Upper hero right side near price badge, clear of images) ── */}
       <div
         className="absolute top-[225px] sm:top-[240px] right-[14px] sm:right-[28px] md:right-[38px] z-20"
         style={{ animation: "halloween-pumpkin-glow 3.5s ease-in-out infinite" }}
@@ -133,36 +103,6 @@ export function HalloweenOverlay() {
           width={30}
           height={30}
           className="w-[26px] sm:w-[30px] h-auto object-contain drop-shadow-[0_2px_8px_rgba(255,122,0,0.35)]"
-          unoptimized
-        />
-      </div>
-
-      {/* ── Pumpkin 2 (Bottom left below thumbnail) ── */}
-      <div
-        className="absolute top-[500px] sm:top-[525px] left-[12px] sm:left-[24px] z-20"
-        style={{ animation: "halloween-pumpkin-glow 4s ease-in-out infinite 0.8s" }}
-      >
-        <Image
-          src="/images/halloween-pumpkin.png"
-          alt="Halloween Pumpkin"
-          width={32}
-          height={32}
-          className="w-[26px] sm:w-[30px] h-auto object-contain drop-shadow-[0_2px_8px_rgba(255,122,0,0.35)]"
-          unoptimized
-        />
-      </div>
-
-      {/* ── Pumpkin 3 (Bottom right) ── */}
-      <div
-        className="absolute top-[505px] sm:top-[530px] right-[16px] sm:right-[32px] md:right-[44px] z-20"
-        style={{ animation: "halloween-pumpkin-glow 3.8s ease-in-out infinite 1.5s" }}
-      >
-        <Image
-          src="/images/halloween-pumpkin.png"
-          alt="Halloween Pumpkin"
-          width={30}
-          height={30}
-          className="w-[25px] sm:w-[28px] h-auto object-contain drop-shadow-[0_2px_8px_rgba(255,122,0,0.35)]"
           unoptimized
         />
       </div>
