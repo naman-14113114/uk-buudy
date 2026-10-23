@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { Product } from "@/data/products";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductHero } from "./ProductHero";
-import { HalloweenOverlay } from "./HalloweenOverlay";
 import { FAQSection } from "./FAQSection";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { StickyAddToCart } from "./StickyAddToCart";
@@ -145,7 +144,6 @@ export function IplProductPage({
 }) {
   return (
     <div className="relative">
-      {isHalloween && <HalloweenOverlay />}
       <ProductHero product={product} isHalloween={isHalloween} />
       <TrustBadges />
       <IplHeroVideo />

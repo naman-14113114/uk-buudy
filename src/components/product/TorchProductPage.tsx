@@ -7,7 +7,6 @@ import {
 } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductHero } from "./ProductHero";
-import { HalloweenOverlay } from "./HalloweenOverlay";
 import { SpecsPanel } from "./SpecsPanel";
 import { FAQSection } from "./FAQSection";
 import { GuaranteeSection } from "./GuaranteeSection";
@@ -199,7 +198,6 @@ export function TorchProductPage({
 }) {
   return (
     <div className="relative">
-      {isHalloween && <HalloweenOverlay />}
       <ProductHero product={product} galleryVariant="omnilux" isHalloween={isHalloween} />
       <TorchFeatureTabs />
       <TorchStorySection />

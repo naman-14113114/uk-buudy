@@ -18,7 +18,6 @@ import {
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
 import { TrustBadges } from "./TrustBadges";
-import { HalloweenOverlay } from "./HalloweenOverlay";
 
 export function ProductPage({
   product,
@@ -47,7 +46,6 @@ export function ProductPage({
 
   return (
     <div className="relative">
-      {isHalloween && <HalloweenOverlay />}
       <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} />
       <DeferredVideoReviews />
       <TrustBadges />
