@@ -97,6 +97,46 @@ const INITIAL_BUUDY_ORDERS: Array<{
   carrier?: string | null;
 }> = [
   {
+    id: "a30d5a5a-554c-4708-ac8f-28355370d28b",
+    ref: "#2536",
+    first: "Paula",
+    last: "Davey",
+    city: "London",
+    country: "United Kingdom",
+    createdAt: 1792777457,
+    tracking: "ZHPHD261024737846ML",
+  },
+  {
+    id: "a30d0126-475a-43df-93bd-07f767e05af2",
+    ref: "#2534",
+    first: "Jean",
+    last: "George",
+    city: "Durham",
+    country: "United Kingdom",
+    createdAt: 1792762491,
+    tracking: null,
+  },
+  {
+    id: "a30ca9ea-f70a-436c-a58b-910af4d249bd",
+    ref: "#2533",
+    first: "Wendy",
+    last: "Smith",
+    city: "Sidbury",
+    country: "United Kingdom",
+    createdAt: 1792747856,
+    tracking: null,
+  },
+  {
+    id: "a30aa6d7-1044-47a7-b05b-263d2e398bc9",
+    ref: "#2532",
+    first: "Tony",
+    last: "Whitfield",
+    city: "Consett",
+    country: "United Kingdom",
+    createdAt: 1792661441,
+    tracking: "ZHPHD261022960967ML",
+  },
+  {
     id: "a2efacf2-ca6f-4433-8c85-f1ae782d7006",
     ref: "#2458",
     first: "Krisella",
@@ -187,6 +227,46 @@ const INITIAL_BUUDY_ORDERS: Array<{
     tracking: null,
   },
   {
+    id: "a2dfd1d0-4759-46dd-92ce-9639ef615e1a",
+    ref: "#2374",
+    first: "Sahil",
+    last: "Ji",
+    city: "New York",
+    country: "United Kingdom",
+    createdAt: 1790821814,
+    tracking: null,
+  },
+  {
+    id: "a2dfcf1f-4dc5-4549-8969-565ae1de5874",
+    ref: "#2373",
+    first: "Customer",
+    last: "Smith",
+    city: "London",
+    country: "United Kingdom",
+    createdAt: 1790821363,
+    tracking: null,
+  },
+  {
+    id: "a2dfcc7f-720e-43b8-b2b1-e63980a7c171",
+    ref: "#2371",
+    first: "Customer",
+    last: "Smith",
+    city: "UK Ellesmere Port",
+    country: "United Kingdom",
+    createdAt: 1790820923,
+    tracking: null,
+  },
+  {
+    id: "a2dfca7c-1900-4506-abab-184c6b0d03fd",
+    ref: "#2370",
+    first: "Karen",
+    last: "Smith",
+    city: "Ellesmere Port",
+    country: "United Kingdom",
+    createdAt: 1790820585,
+    tracking: null,
+  },
+  {
     id: "a2dfbac3-d4ac-4ba5-a970-70fdc03a7cdf",
     ref: "#2363",
     first: "John",
@@ -227,6 +307,16 @@ const INITIAL_BUUDY_ORDERS: Array<{
     tracking: "JJD0002234587412691",
   },
   {
+    id: "a2d676ea-3388-4b23-8c76-bf6be39d371f",
+    ref: "#2295",
+    first: "Customer",
+    last: "Usagai",
+    city: "Aberdeen",
+    country: "United Kingdom",
+    createdAt: 1790420017,
+    tracking: null,
+  },
+  {
     id: "a2d67367-2cb8-488e-a544-42910f679a03",
     ref: "#2293",
     first: "Anna",
@@ -234,6 +324,16 @@ const INITIAL_BUUDY_ORDERS: Array<{
     city: "Aberdeen",
     country: "United Kingdom",
     createdAt: 1790419428,
+    tracking: null,
+  },
+  {
+    id: "a2d2521d-7895-4e3b-9fa3-5f14fd910f8b",
+    ref: "#2260",
+    first: "Katie",
+    last: "Hardy",
+    city: "Shipmeadow",
+    country: "United Kingdom",
+    createdAt: 1790242044,
     tracking: null,
   },
   {
@@ -245,6 +345,106 @@ const INITIAL_BUUDY_ORDERS: Array<{
     country: "United Kingdom",
     createdAt: 1790242776,
     tracking: "JJD0002234587407213",
+  },
+  {
+    id: "a2cd5ae8-ecf9-426a-87a8-47cddc821c8d",
+    ref: "#2223",
+    first: "Karen",
+    last: "Smith",
+    city: "Ellesmere Port",
+    country: "United Kingdom",
+    createdAt: 1790028772,
+    tracking: null,
+  },
+  {
+    id: "a2cca0f0-6c24-472b-9c8f-385026c7fdee",
+    ref: "#2220",
+    first: "Karen",
+    last: "Smith",
+    city: "Ellesmere Port",
+    country: "United Kingdom",
+    createdAt: 1789997571,
+    tracking: null,
+  },
+  {
+    id: "a2ca1b6f-2c5e-444f-9ebc-195f7f84c29e",
+    ref: "#2213",
+    first: "Marie",
+    last: "Laskowksi",
+    city: "Huddersfield",
+    country: "United Kingdom",
+    createdAt: 1789889273,
+    tracking: "JJD0002234587400459",
+  },
+  {
+    id: "a2c84aa3-2fd8-46a8-9a01-fd5a67df7627",
+    ref: "#2193",
+    first: "Marie",
+    last: "Hockey",
+    city: "Minster",
+    country: "United Kingdom",
+    createdAt: 1789811293,
+    tracking: "JJD0002234587400128",
+  },
+  {
+    id: "a2c64af9-e9fd-4270-8481-d3048316be59",
+    ref: "#2154",
+    first: "Katy",
+    last: "Wells",
+    city: "Leicester",
+    country: "United Kingdom",
+    createdAt: 1789725451,
+    tracking: null,
+  },
+  {
+    id: "a2c6495f-dc00-4ca0-bbcd-4a0d3ebd401c",
+    ref: "#2153",
+    first: "Brandon",
+    last: "Haigh",
+    city: "Erdington, Birmingham",
+    country: "United Kingdom",
+    createdAt: 1789725182,
+    tracking: "JJD0002234587400454",
+  },
+  {
+    id: "a2c645b4-85c5-4471-a880-71940f5b21f1",
+    ref: "#2148",
+    first: "Pauline",
+    last: "Mitchell",
+    city: "Glasgow",
+    country: "United Kingdom",
+    createdAt: 1789724566,
+    tracking: "JJD0002234587400456",
+  },
+  {
+    id: "a2c5454a-e674-4f1b-83a3-2adf4e0891af",
+    ref: "#2124",
+    first: "Pauline",
+    last: "Mitchell",
+    city: "Glasgow",
+    country: "United Kingdom",
+    createdAt: 1789681547,
+    tracking: null,
+  },
+  {
+    id: "a2c4b1cb-374b-4ae3-8290-294d8481c2f9",
+    ref: "#2107",
+    first: "Chloe",
+    last: "Lofas",
+    city: "Manchester",
+    country: "United Kingdom",
+    createdAt: 1789656801,
+    tracking: "JJD0002234587387104",
+  },
+  {
+    id: "a2bbabf8-70e3-4518-8d3f-85f024f051c2",
+    ref: "#2000",
+    first: "Sahil",
+    last: "Ji",
+    city: "Delhi",
+    country: "United Kingdom",
+    createdAt: 1789269277,
+    tracking: null,
   },
 ];
 
@@ -343,7 +543,41 @@ async function fetchFromXPageLive(query: string, orderId?: string): Promise<Cach
 
         if (res.ok) {
           const json = await res.json();
-          const orders = json.orders || [];
+          let orders = json.orders || [];
+
+          // If search by term returned 0 orders (e.g. term was a carrier tracking barcode),
+          // scan recent orders list to match delivery tracking numbers dynamically
+          if (orders.length === 0) {
+            try {
+              const listUrl = `https://api.myxpage.shop/api/v1/hosting/${BUUDY_HOSTING_ID}/order?page=1&per_page=35`;
+              const listRes = await fetch(listUrl, {
+                headers: {
+                  cookie: `xpage_user_token=${activeXPageToken}`,
+                  accept: "application/json",
+                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) BuudyOrderTracking/1.0",
+                },
+                cache: "no-store",
+              });
+              if (listRes.ok) {
+                const listJson = await listRes.json();
+                const matchedOrder = (listJson.orders || []).find(
+                  (item: any) =>
+                    item.ref.toLowerCase() === term.toLowerCase() ||
+                    item.ref.replace("#", "").toLowerCase() === term.toLowerCase() ||
+                    (item.deliveries &&
+                      item.deliveries.some(
+                        (d: any) => (d.tracking_number || "").toLowerCase() === term.toLowerCase(),
+                      )),
+                );
+                if (matchedOrder) {
+                  orders = [matchedOrder];
+                }
+              }
+            } catch {
+              // fallback gracefully
+            }
+          }
+
           if (orders.length > 0) {
             const o =
               orders.find(
