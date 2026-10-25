@@ -77,7 +77,7 @@ const BUUDY_HOSTING_ID = process.env.XPAGE_BUUDY_HOSTING_ID || "a2b770e7-c07c-46
 
 let activeXPageToken =
   process.env.XPAGE_USER_TOKEN ||
-  "123339617fac21499c648bcf48d173bbdc9800e744470a5c35259d3ba3f9694878c18df813f30d6f8669e09fe58f002db8dcfb86d6e11c9410d9a475d86932a3";
+  "90613b8abcd7143e866cb7f46d66aa113b92efd283ee6bcf106f9902e9296d64664daf2a62533d0ecdaf0855e10c463512b8370545adcad46a3790aaee11ddf1";
 
 // -----------------------------------------------------------------------------
 // IN-MEMORY ORDERS MAP (Stores Buudy orders for fast lookup & dynamic expansion)
@@ -96,6 +96,26 @@ const INITIAL_BUUDY_ORDERS: Array<{
   tracking: string | null;
   carrier?: string | null;
 }> = [
+  {
+    id: "a3100d5e-8e7a-41d7-a213-2ba70af50f95",
+    ref: "#2541",
+    first: "Conny",
+    last: "Doros",
+    city: "St Albans",
+    country: "United Kingdom",
+    createdAt: 1792893391,
+    tracking: null,
+  },
+  {
+    id: "a30ecd4d-ee84-407d-b5cc-545441f1fce3",
+    ref: "#2538",
+    first: "Jean",
+    last: "George",
+    city: "Durham",
+    country: "United Kingdom",
+    createdAt: 1792839693,
+    tracking: null,
+  },
   {
     id: "a30d5a5a-554c-4708-ac8f-28355370d28b",
     ref: "#2536",

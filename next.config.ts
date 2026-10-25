@@ -145,26 +145,6 @@ const nextConfig: NextConfig = {
         destination: "/products/skincare-ebook",
         permanent: true,
       },
-      {
-        source: "/pages/skincare-ebook",
-        destination: "/products/skincare-ebook",
-        permanent: true,
-      },
-      {
-        source: "/skincare-ebook",
-        destination: "/products/skincare-ebook",
-        permanent: true,
-      },
-      {
-        source: "/ebook",
-        destination: "/products/skincare-ebook",
-        permanent: true,
-      },
-      {
-        source: "/pages/ebook",
-        destination: "/products/skincare-ebook",
-        permanent: true,
-      },
     ];
   },
 };
