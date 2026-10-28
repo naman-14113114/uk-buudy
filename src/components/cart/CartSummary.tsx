@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, ChevronDown, Tag } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
 import { getDisplayLines, getPromoDiscountCents } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
@@ -17,6 +17,18 @@ type CartSummaryProps = {
 export function CartSummary({ action = "summary", children }: CartSummaryProps) {
   const { lines, totals, closeCart, manualPromoCode, manualPromoCodes } = useCart();
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [isPriceUpdated, setIsPriceUpdated] = useState(false);
+  const prevTotalRef = useRef(totals.totalCents);
+
+  useEffect(() => {
+    if (prevTotalRef.current !== totals.totalCents) {
+      prevTotalRef.current = totals.totalCents;
+      setIsPriceUpdated(true);
+      const timer = setTimeout(() => setIsPriceUpdated(false), 350);
+      return () => clearTimeout(timer);
+    }
+  }, [totals.totalCents]);
+
   const appliedCodes =
     manualPromoCodes && manualPromoCodes.length > 0
       ? manualPromoCodes
@@ -86,7 +98,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                       <div className="flex justify-between gap-4" key={code}>
                         <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
                           <Tag aria-hidden="true" size={14} />
-                          {code.length > 4 ? `${code.slice(0, 4)}...` : code}
+                          {code}
                         </span>
                         <span className="font-semibold text-[var(--muted)]">
                           -{formatMoney(getPromoDiscountCents(code))}
@@ -121,7 +133,11 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
         <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
           Sub Total
         </span>
-        <span className="buudy-display block text-right text-4xl text-[var(--plum)]">
+        <span
+          className={`buudy-display block text-right text-4xl transition-all duration-300 ease-out ${
+            isPriceUpdated ? "opacity-60 text-[var(--gold)]" : "opacity-100 text-[var(--plum)]"
+          }`}
+        >
           {formatMoney(totals.totalCents)}
         </span>
       </div>

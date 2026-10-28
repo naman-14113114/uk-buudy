@@ -76,6 +76,7 @@ export function PromoCodeBox() {
               if (!appliedCodes.includes(canonical)) {
                 applyManualPromoCode(canonical);
               }
+              setCode("");
               setMessage("Code applied successfully.");
               setStatus("success");
             } else if (status !== "idle") {
@@ -87,6 +88,7 @@ export function PromoCodeBox() {
             const canonical = getAppliedManualPromoCode(code);
             if (canonical && !appliedCodes.includes(canonical)) {
               applyManualPromoCode(canonical);
+              setCode("");
               setMessage("Code applied successfully.");
               setStatus("success");
             }
@@ -116,18 +118,17 @@ export function PromoCodeBox() {
         </p>
       ) : null}
 
-      {/* Applied Promo Code Pills (4 chars + ... with cross on right end) */}
+      {/* Applied Promo Code Pills (showing full code) */}
       {appliedCodes.length > 0 && (
         <div className="flex flex-wrap gap-2 pt-1">
           {appliedCodes.map((applied) => {
-            const displayCode = applied.length > 4 ? `${applied.slice(0, 4)}...` : applied;
             return (
               <div
                 key={applied}
                 className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--cream)] py-1 pl-3.5 pr-1.5 text-xs text-[var(--plum)] shadow-sm"
               >
                 <span className="font-semibold uppercase tracking-wider font-mono text-xs">
-                  {displayCode}
+                  {applied}
                 </span>
                 <button
                   type="button"
