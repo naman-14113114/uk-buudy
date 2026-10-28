@@ -9,7 +9,7 @@ import {
   attributionStorageKey,
   pickAttributionFromSearch,
 } from "@/lib/attribution";
-import { promoCode } from "@/lib/cart";
+import { calculateCartTotals, getAppliedManualPromoCode, promoCode } from "@/lib/cart";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
 
 export type CheckoutCustomer = {
@@ -30,8 +30,15 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
-  const { totals, lines, giftMessage, activePromoCodes, manualPromoCode, manualPromoCodes } =
-    useCart();
+  const {
+    totals,
+    lines,
+    giftMessage,
+    activePromoCodes,
+    manualPromoCode,
+    manualPromoCodes,
+    applyManualPromoCode,
+  } = useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
   const [isMorocco, setIsMorocco] = useState(false);
@@ -98,14 +105,46 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     }
 
     const attribution = readAttribution();
-    writeCheckoutSnapshot({ lines, giftMessage, promoCode, manualPromoCode, manualPromoCodes });
+
+    // Ensure any promo code typed into the promo input is captured even if not clicked or submitted
+    let activeCodes = [...activePromoCodes];
+    let appliedCode = manualPromoCode;
+    let appliedCodesList =
+      manualPromoCodes && manualPromoCodes.length > 0
+        ? [...manualPromoCodes]
+        : manualPromoCode
+        ? [manualPromoCode]
+        : [];
+
+    if (typeof document !== "undefined") {
+      const promoInput = document.querySelector('input[aria-label="Promo code"]') as HTMLInputElement | null;
+      if (promoInput?.value) {
+        const canonical = getAppliedManualPromoCode(promoInput.value);
+        if (canonical && !appliedCodesList.includes(canonical)) {
+          appliedCodesList.push(canonical);
+          if (!appliedCode) appliedCode = canonical;
+          if (!activeCodes.includes(canonical)) activeCodes.push(canonical);
+          applyManualPromoCode(canonical);
+        }
+      }
+    }
+
+    const effectiveTotals = calculateCartTotals(lines, appliedCodesList);
+
+    writeCheckoutSnapshot({
+      lines,
+      giftMessage,
+      promoCode,
+      manualPromoCode: appliedCode,
+      manualPromoCodes: appliedCodesList,
+    });
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
       new CustomEvent("buudy:started-checkout", {
         detail: {
           lines,
-          totals,
+          totals: effectiveTotals,
         },
       }),
     );
@@ -122,11 +161,11 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
           cart: {
             lines,
             giftMessage,
-            promoCodes: activePromoCodes,
-            manualPromoCode,
-            manualPromoCodes,
+            promoCodes: activeCodes,
+            manualPromoCode: appliedCode,
+            manualPromoCodes: appliedCodesList,
           },
-          totals,
+          totals: effectiveTotals,
           attribution,
         }),
       });

@@ -33,7 +33,6 @@ export const VALID_PROMO_CODES: Record<
   { code: string; discountCents: number; type: "promo" | "gift_card" }
 > = {
   BUUDY10: { code: "BUUDY10", discountCents: 1000, type: "promo" },
-  BUUDY: { code: "BUUDY10", discountCents: 1000, type: "promo" },
   "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2000, type: "gift_card" },
 };
 
@@ -46,7 +45,7 @@ export const emptyCart: CartState = {
 };
 
 export function normalizeManualPromoCode(code: string | null | undefined) {
-  return (code ?? "").trim().toUpperCase();
+  return (code ?? "").trim().toUpperCase().replace(/\s+/g, "");
 }
 
 export function getPromoCodeConfig(code: string | null | undefined) {

@@ -27,18 +27,21 @@ export function PromoCodeBox() {
 
   function handleApply(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const trimmed = code.trim().toUpperCase();
+    const trimmed = code.trim();
     if (!trimmed) return;
 
     const canonical = getAppliedManualPromoCode(trimmed);
-    if (canonical && appliedCodes.includes(canonical)) {
-      setMessage("Code already applied.");
-      setStatus("error");
+    if (canonical) {
+      if (!appliedCodes.includes(canonical)) {
+        applyManualPromoCode(canonical);
+      }
+      setCode("");
+      setMessage("Code applied successfully.");
+      setStatus("success");
       return;
     }
 
-    const applied = applyManualPromoCode(trimmed);
-    if (applied) {
+    if (appliedCodes.some((c) => c.toUpperCase() === trimmed.toUpperCase())) {
       setCode("");
       setMessage("Code applied successfully.");
       setStatus("success");
@@ -51,6 +54,7 @@ export function PromoCodeBox() {
 
   function handleRemove(codeToRemove: string) {
     removeManualPromoCode(codeToRemove);
+    setCode("");
     setMessage("");
     setStatus("idle");
   }
@@ -64,10 +68,27 @@ export function PromoCodeBox() {
           className="buudy-display h-10 min-w-0 flex-1 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 text-sm uppercase text-[var(--plum)] outline-none transition placeholder:text-[rgba(58,31,61,.45)] focus:border-[var(--gold)] disabled:opacity-50"
           disabled={!active}
           onChange={(event) => {
-            setCode(event.target.value);
-            if (status !== "idle") {
+            const nextValue = event.target.value;
+            setCode(nextValue);
+
+            const canonical = getAppliedManualPromoCode(nextValue);
+            if (canonical) {
+              if (!appliedCodes.includes(canonical)) {
+                applyManualPromoCode(canonical);
+              }
+              setMessage("Code applied successfully.");
+              setStatus("success");
+            } else if (status !== "idle") {
               setMessage("");
               setStatus("idle");
+            }
+          }}
+          onBlur={() => {
+            const canonical = getAppliedManualPromoCode(code);
+            if (canonical && !appliedCodes.includes(canonical)) {
+              applyManualPromoCode(canonical);
+              setMessage("Code applied successfully.");
+              setStatus("success");
             }
           }}
           placeholder="Enter Promo Code"
