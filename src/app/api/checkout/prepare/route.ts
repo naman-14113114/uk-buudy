@@ -2,7 +2,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
 import { z } from "zod";
-import { createXpageCheckout } from "@/lib/xpage-checkout";
 import { normalizeCheckoutProductIds } from "@/lib/maskLandingPages";
 
 export const runtime = "nodejs";
@@ -336,36 +335,17 @@ export async function POST(request: NextRequest) {
     const hasPromo = allPromoCodes.some(
       (c) => c === "BUUDY10" || c === "BUUDY",
     );
-    const hasGiftCard =
-      allPromoCodes.includes("9PQ28ENBLJ") ||
-      Boolean(productLines?.some((line) => isGiftCardId(line.productId)));
-    const hasProtection = Boolean(
-      productLines?.some((line) => isProtectionId(line.productId)),
+    // Whop owns the final price and payment. Pass the exact mask quantity and
+    // only the supported manual discount; included gifts are part of its bundle.
+    const planId = "plan_IY6bXASo3Gh15";
+    const checkout = new URL(`/checkout/${planId}`, "https://buudy.com");
+    checkout.searchParams.set("quantity", String(quantity));
+    checkout.searchParams.set("items", `${planId}:${quantity}`);
+    if (hasPromo) checkout.searchParams.set("promoCode", "BUUDY10");
+    return NextResponse.json(
+      { checkoutUrl: appendAttributionToAbsoluteUrl(checkout.toString(), cleanAttribution(body.attribution)) },
+      { headers: { "Cache-Control": "no-store" } },
     );
-
-    try {
-      const checkout = await createXpageCheckout(quantity, {
-        hasPromo,
-        hasGiftCard,
-        hasProtection,
-      });
-      return NextResponse.json(checkout, {
-        headers: { "Cache-Control": "no-store" },
-      });
-    } catch (error) {
-      // Never log session cookies, CSRF tokens, checkout URLs or customer data.
-      console.error(
-        "XPage checkout preparation failed",
-        error instanceof Error ? error.message : "Unknown error",
-      );
-      return NextResponse.json(
-        {
-          error:
-            "Could not prepare the mask offer. Please try again; your cart has been kept.",
-        },
-        { status: 502, headers: { "Cache-Control": "no-store" } },
-      );
-    }
   }
 
   if (
