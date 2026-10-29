@@ -341,7 +341,8 @@ export async function POST(request: NextRequest) {
     const checkout = new URL(`/checkout/${planId}`, "https://buudy.com");
     checkout.searchParams.set("quantity", String(quantity));
     checkout.searchParams.set("items", `${planId}:${quantity}`);
-    if (hasPromo) checkout.searchParams.set("promoCode", "BUUDY10");
+    checkout.searchParams.set("checkoutSource", "buudy-uk");
+    checkout.searchParams.set("promoCode", hasPromo ? "BUUDY10" : "");
     return NextResponse.json(
       { checkoutUrl: appendAttributionToAbsoluteUrl(checkout.toString(), cleanAttribution(body.attribution)) },
       { headers: { "Cache-Control": "no-store" } },
