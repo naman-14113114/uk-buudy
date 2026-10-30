@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Lock, Truck } from "lucide-react";
 import Lottie from "lottie-react";
 import loadingLottie from "./loading-lottie.json";
@@ -10,6 +10,7 @@ import {
   pickAttributionFromSearch,
 } from "@/lib/attribution";
 import { calculateCartTotals, getAppliedManualPromoCode, promoCode } from "@/lib/cart";
+import { buildFastWhopCheckoutUrl } from "@/lib/checkout";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
 
 export type CheckoutCustomer = {
@@ -46,13 +47,16 @@ export function CheckoutForm({
     applyManualPromoCode,
   } = useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const redirectingRef = useRef(false);
   const [error, setError] = useState("");
   const [isMorocco, setIsMorocco] = useState(false);
+  const [hasKnownCountry, setHasKnownCountry] = useState(false);
   const hasItems = totals.itemCount > 0;
 
   useEffect(() => {
     function handlePageShow(event: PageTransitionEvent) {
       if (event.persisted) {
+        redirectingRef.current = false;
         setIsRedirecting(false);
         setError("");
       }
@@ -72,6 +76,9 @@ export function CheckoutForm({
     fetch(`/api/geo${countryParam}`)
       .then((res) => res.json())
       .then((data: { country?: string }) => {
+        // A query override is useful for previewing copy, not for bypassing
+        // the server's country guard. Unknown countries also retain that path.
+        setHasKnownCountry(Boolean(data?.country) && !params.has("country"));
         if (data?.country === "MA" || data?.country === "MOROCCO") {
           setIsMorocco(true);
         }
@@ -101,7 +108,7 @@ export function CheckoutForm({
   }
 
   async function handleCheckout() {
-    if (!hasItems || isRedirecting) {
+    if (!hasItems || redirectingRef.current) {
       return;
     }
 
@@ -113,9 +120,9 @@ export function CheckoutForm({
     const attribution = readAttribution();
 
     // Ensure any promo code typed into the promo input is captured even if not clicked or submitted
-    let activeCodes = [...activePromoCodes];
+    const activeCodes = [...activePromoCodes];
     let appliedCode = manualPromoCode;
-    let appliedCodesList =
+    const appliedCodesList =
       manualPromoCodes && manualPromoCodes.length > 0
         ? [...manualPromoCodes]
         : manualPromoCode
@@ -145,6 +152,7 @@ export function CheckoutForm({
       manualPromoCodes: appliedCodesList,
     });
     setError("");
+    redirectingRef.current = true;
     setIsRedirecting(true);
     window.dispatchEvent(
       new CustomEvent("buudy:started-checkout", {
@@ -156,39 +164,37 @@ export function CheckoutForm({
     );
 
     try {
-      const response = await fetch("/api/checkout/prepare", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          customerEmail: initialCustomer.email,
-          quantity: maskQuantity, // fallback quantity
-          cart: {
-            lines,
-            giftMessage,
-            promoCodes: activeCodes,
-            manualPromoCode: appliedCode,
-            manualPromoCodes: appliedCodesList,
+      let checkoutUrl = hasKnownCountry ? buildFastWhopCheckoutUrl(lines, activeCodes, attribution) : null;
+      if (!checkoutUrl) {
+        const response = await fetch("/api/checkout/prepare", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-          totals: effectiveTotals,
-          attribution,
-        }),
-      });
+          body: JSON.stringify({
+            customerEmail: initialCustomer.email,
+            quantity: maskQuantity, // fallback quantity
+            cart: {
+              lines,
+              giftMessage,
+              promoCodes: activeCodes,
+              manualPromoCode: appliedCode,
+              manualPromoCodes: appliedCodesList,
+            },
+            totals: effectiveTotals,
+            attribution,
+          }),
+        });
 
-      const data = (await response.json()) as { checkoutUrl?: string; error?: string };
-      if (!response.ok) {
-        throw new Error(data.error || "Could not prepare checkout.");
-      }
-      if (!data.checkoutUrl) {
-        throw new Error("Could not prepare checkout.");
+        const data = (await response.json()) as { checkoutUrl?: string; error?: string };
+        if (!response.ok || !data.checkoutUrl) throw new Error(data.error || "Could not prepare checkout.");
+        checkoutUrl = data.checkoutUrl;
       }
 
-      // Use the server's final URL without adding browser attribution. A link
-      // policy also works after a client-side cart navigation, where a cart-only
-      // HTTP Referrer-Policy header would not apply to the existing document.
+      // Both paths whitelist attribution. Suppress the referrer so unrelated
+      // cart URL parameters never become visible on the payment page.
       const checkoutLink = document.createElement("a");
-      checkoutLink.href = data.checkoutUrl;
+      checkoutLink.href = checkoutUrl;
       checkoutLink.rel = "noreferrer noopener";
       checkoutLink.referrerPolicy = "no-referrer";
       checkoutLink.hidden = true;
@@ -196,6 +202,7 @@ export function CheckoutForm({
       checkoutLink.click();
       checkoutLink.remove();
     } catch (checkoutError) {
+      redirectingRef.current = false;
       setIsRedirecting(false);
       setError(checkoutError instanceof Error ? checkoutError.message : "Checkout could not be opened. Please try again.");
     }

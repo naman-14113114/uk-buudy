@@ -2,17 +2,23 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
+  type SetStateAction,
 } from "react";
+import { useRouter } from "next/navigation";
+import { appendAttributionToPath, pickAttributionFromSearch } from "@/lib/attribution";
 import { getProductById, type Product } from "@/data/products";
 import {
   calculateCartTotals,
   emptyCart,
+  ensureProductInCart,
   getAppliedManualPromoCode,
   normalizeManualPromoCode,
   normalizeCartLines,
@@ -25,7 +31,7 @@ type CartContextValue = CartState & {
   isOpen: boolean;
   totals: ReturnType<typeof calculateCartTotals>;
   activePromoCodes: string[];
-  addProduct: (product: Product) => void;
+  addProduct: (product: Product, quantity?: number) => void;
   setQuantity: (productId: string, quantity: number) => void;
   removeProduct: (productId: string) => void;
   clearCart: () => void;
@@ -160,7 +166,16 @@ function clearCheckoutRecovery(state: CartState) {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<CartState>(emptyCart);
+  const [state, setRenderedState] = useState<CartState>(emptyCart);
+  const latestState = useRef(state);
+  const router = useRouter();
+  // Synchronous shared state also covers clicks on two different CTAs before
+  // React renders either button's disabled state.
+  const setState = useCallback((update: SetStateAction<CartState>) => {
+    const next = typeof update === "function" ? update(latestState.current) : update;
+    latestState.current = next;
+    setRenderedState(next);
+  }, []);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
@@ -180,7 +195,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     window.addEventListener("pageshow", recoverStoredCart);
 
     return () => window.removeEventListener("pageshow", recoverStoredCart);
-  }, []);
+  }, [setState]);
+
+  useEffect(() => {
+    if (window.location.pathname === "/cart") return;
+    router.prefetch(appendAttributionToPath("/cart", pickAttributionFromSearch(window.location.search)));
+  }, [router]);
 
   useEffect(() => {
     if (!hydrated) {
@@ -226,20 +246,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return Array.from(new Set([...productPromoCodes, ...manualCodes]));
   }, [state.lines, state.manualPromoCode, state.manualPromoCodes]);
 
-  function addProduct(product: Product) {
-    dispatchAddToCartEvent(product);
-
-    setState((current) => {
-      const currentProduct = current.lines.find(
-        (line) => line.type === "product" && line.productId === product.id,
-      );
-      const quantity = (currentProduct?.quantity ?? 0) + 1;
-
-      return {
-        ...current,
-        lines: upsertProductCartLines(current.lines, product, quantity),
-      };
-    });
+  function addProduct(product: Product, quantity = 1) {
+    const current = latestState.current;
+    const next = ensureProductInCart(current, product, quantity);
+    if (next === current) return;
+    const previousQuantity = current.lines.find(line => line.type === "product" && line.productId === product.id)?.quantity ?? 0;
+    setState(next);
+    // Persist before navigation, including for a full reload or interrupted tab.
+    writeCheckoutSnapshot(next);
+    for (let added = previousQuantity; added < quantity; added++) dispatchAddToCartEvent(product);
   }
 
   function setQuantity(productId: string, quantity: number) {
@@ -362,7 +377,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setGiftMessage: (message: string) =>
         setState((current) => ({ ...current, giftMessage: message })),
     }),
-    [activePromoCodes, hydrated, isOpen, state, totals],
+    [activePromoCodes, hydrated, isOpen, state, totals, setState],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

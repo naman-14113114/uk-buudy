@@ -72,9 +72,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
   const handleAddToCart = () => {
     setIsAdding(true);
 
-    for (let i = 0; i < quantity; i++) {
-      addProduct(product);
-    }
+    addProduct(product, quantity);
 
     router.push(
       appendAttributionToPath(

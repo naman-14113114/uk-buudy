@@ -144,6 +144,19 @@ export function upsertProductCartLines(
   return [...withoutProduct, ...buildProductCartLines(product, quantity)];
 }
 
+// Product CTAs express "put this in my bag", rather than an instruction to
+// increment an existing quantity. The cart controls own explicit increments.
+export function ensureProductInCart(
+  state: CartState,
+  product: Product,
+  requestedQuantity = 1,
+): CartState {
+  if (!Number.isSafeInteger(requestedQuantity) || requestedQuantity < 1) return state;
+  const existing = state.lines.find(line => line.type === "product" && line.productId === product.id);
+  if (existing && existing.quantity >= requestedQuantity) return state;
+  return { ...state, lines: upsertProductCartLines(state.lines, product, requestedQuantity) };
+}
+
 export function calculateCartTotals(
   lines: CartLine[],
   appliedManualPromo: string | string[] = "",
