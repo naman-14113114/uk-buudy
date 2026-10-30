@@ -603,7 +603,7 @@ export const buudyMask: Product = {
   customerCount: "16,000+",
   promoCode: "GLOWKIT",
   promoLabel: "Glow kit promo applied",
-  cartImage: productAsset("01-buudy-led-mask-front.webp"),
+  cartImage: fullLedMaskGallery[0].src,
   gallery: buudyLedMaskGallery,
   gifts: [
     {
