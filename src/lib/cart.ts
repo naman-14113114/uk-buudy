@@ -215,7 +215,7 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
       return {
         ...line,
         title: "Buudy LED Mask + Premium Travel Box",
-        image: "/media/products/buudy-led-mask/images/84-w.webp",
+        image: getProductById("buudy-led-mask")?.cartImage ?? line.image,
       };
     }
     if (

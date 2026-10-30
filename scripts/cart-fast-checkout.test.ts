@@ -1,11 +1,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { emptyCart, ensureProductInCart, upsertProductCartLines } from '../src/lib/cart';
-import { getProductById } from '../src/data/products';
+import { emptyCart, ensureProductInCart, getDisplayLines, upsertProductCartLines } from '../src/lib/cart';
+import { fullLedMaskGallery, getProductById } from '../src/data/products';
 import { buildFastWhopCheckoutUrl } from '../src/lib/checkout';
 
 const mask = getProductById('buudy-led-mask')!;
 const cart = (quantity = 1) => ({ ...emptyCart, lines: upsertProductCartLines([], mask, quantity) });
+
+test('cart presentation uses the first gallery image even for an older saved thumbnail', () => {
+  const lines = cart().lines.map(line => ({...line, image:'/old-cart-thumbnail.webp'}));
+  assert.equal(getDisplayLines(lines).find(line => line.type === 'product')?.image, fullLedMaskGallery[0].src);
+});
 
 test('rapid repeated adds through any button keep one mask and one set of gift lines', () => {
   let state = { ...emptyCart };
