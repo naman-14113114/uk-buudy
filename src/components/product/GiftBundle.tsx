@@ -181,8 +181,8 @@ export function GiftBundle({
   const hasGifts = product.gifts.length > 0;
   const giftButtonLabel = isEarlyBlackFriday
     ? hasGifts
-      ? `CLAIM EARLY BF DEAL + ${product.gifts.length} FREE GIFTS`
-      : "CLAIM EARLY BLACK FRIDAY DEAL"
+      ? `CLAIM EARLY ACCESS + ${product.gifts.length} FREE GIFTS`
+      : "CLAIM BLACK FRIDAY EARLY ACCESS"
     : hasGifts
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
     : "ADD TO CART + FREE SHIPPING";
@@ -203,17 +203,19 @@ export function GiftBundle({
         </span>
       </a>
 
-      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:gap-x-3.5">
-        <h1 className="font-playfair whitespace-nowrap text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem]">
+      <div className="mt-3">
+        <h1 className="font-playfair text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem]">
           {product.heroTitle}{" "}
           <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
         </h1>
 
-        {/* Cleopatra Edition Ribbon on all mask pages beside title on desktop */}
+        {/* Cleopatra Edition subtitle at bottom left of heading */}
         {product.template === "mask" && (
-          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)] bg-[var(--plum)] px-2.5 py-0.5 rounded-md inline-flex items-center shrink-0">
-            Cleopatra Edition
-          </span>
+          <div className="mt-1 flex items-center justify-start">
+            <span className="font-sans text-[11px] sm:text-xs font-normal text-[var(--plum)]/70 bg-[rgba(58,31,61,.05)] border border-[rgba(58,31,61,.12)] px-2 py-0.5 rounded tracking-wide inline-flex items-center">
+              Cleopatra Edition
+            </span>
+          </div>
         )}
       </div>
 
@@ -426,7 +428,7 @@ export function GiftBundle({
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
-              {isEarlyBlackFriday ? "Early Black Friday Gifts" : isHalloween ? "Halloween Free Gifts" : "Exclusive Free Gifts"}
+              {isEarlyBlackFriday ? "Black Friday FREE Gifts" : isHalloween ? "Halloween Free Gifts" : "Exclusive Free Gifts"}
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">

@@ -96,7 +96,7 @@ export function EarlyBlackFridaySaleBadge() {
   return (
     <span className="buudy-mono inline-flex items-center gap-1.5 rounded-full bg-[#18081b] border border-[rgba(184,149,86,0.55)] px-3.5 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e5c17d] shadow-sm">
       <Sparkles className="w-3.5 h-3.5 text-[#e5c17d]" />
-      <span>60% OFF · EARLY BLACK FRIDAY</span>
+      <span>60% OFF · BLACK FRIDAY EARLY ACCESS</span>
     </span>
   );
 }

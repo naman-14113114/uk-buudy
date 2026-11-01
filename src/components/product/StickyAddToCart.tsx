@@ -156,7 +156,7 @@ export function StickyAddToCart({
                 ) : (
                   <ShoppingBag size={17} />
                 )}
-                <span>{isEarlyBlackFriday ? `Early BF Deal${giftLabel}` : `Add to cart${giftLabel}`}</span>
+                <span>{isEarlyBlackFriday ? `Early Access${giftLabel}` : `Add to cart${giftLabel}`}</span>
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
                 <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
