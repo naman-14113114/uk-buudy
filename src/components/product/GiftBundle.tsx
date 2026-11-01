@@ -203,19 +203,17 @@ export function GiftBundle({
         </span>
       </a>
 
-      <div className="mt-3">
-        <h1 className="font-playfair text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem]">
+      <div className="mt-3 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+        <h1 className="font-playfair text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem] inline">
           {product.heroTitle}{" "}
           <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
         </h1>
 
-        {/* Cleopatra Edition subtitle at bottom left of heading */}
+        {/* Cleopatra Edition subtitle placed right beside heading aligned to text baseline */}
         {product.template === "mask" && (
-          <div className="mt-1 flex items-center justify-start">
-            <span className="font-sans text-[11px] sm:text-xs font-normal text-[var(--plum)]/70 bg-[rgba(58,31,61,.05)] border border-[rgba(58,31,61,.12)] px-2 py-0.5 rounded tracking-wide inline-flex items-center">
-              Cleopatra Edition
-            </span>
-          </div>
+          <span className="font-sans text-[11px] sm:text-xs font-normal text-[var(--plum)]/70 bg-[rgba(58,31,61,.05)] border border-[rgba(58,31,61,.12)] px-2 py-0.5 rounded tracking-wide inline-flex items-center align-baseline">
+            Cleopatra Edition
+          </span>
         )}
       </div>
 
