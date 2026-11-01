@@ -91,13 +91,32 @@ export function EarlyBlackFridayTopBanner() {
 
 /**
  * Early Black Friday Sale Badge next to the price
+ * Editorial luxury aesthetic matching reference: Serif "60% OFF" in gold | stacked "BLACK FRIDAY / EARLY ACCESS"
  */
 export function EarlyBlackFridaySaleBadge() {
   return (
-    <span className="buudy-mono inline-flex items-center gap-1.5 rounded-full bg-[#18081b] border border-[rgba(184,149,86,0.55)] px-3.5 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e5c17d] shadow-sm">
-      <Sparkles className="w-3.5 h-3.5 text-[#e5c17d]" />
-      <span>60% OFF · BLACK FRIDAY EARLY ACCESS</span>
-    </span>
+    <div className="inline-flex items-center gap-2 sm:gap-2.5 py-0.5">
+      {/* 60% OFF in elegant serif gold */}
+      <span className="font-playfair text-[26px] sm:text-[30px] font-normal leading-none text-[var(--gold)] tracking-tight whitespace-nowrap">
+        60% OFF
+      </span>
+
+      {/* Thin vertical divider */}
+      <span
+        aria-hidden="true"
+        className="h-6 sm:h-7 w-[1px] bg-[var(--plum)]/35 shrink-0"
+      />
+
+      {/* Stacked Black Friday Early Access */}
+      <div className="flex flex-col text-left leading-[1.12] shrink-0">
+        <span className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--plum)]">
+          BLACK FRIDAY
+        </span>
+        <span className="font-sans text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--plum)]/80">
+          EARLY ACCESS
+        </span>
+      </div>
+    </div>
   );
 }
 
