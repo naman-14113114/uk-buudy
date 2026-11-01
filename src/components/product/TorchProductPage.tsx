@@ -191,14 +191,14 @@ import { ProductReviewsSection } from "./ProductReviewsSection";
 
 export function TorchProductPage({
   product,
-  isHalloween = true,
+  isHalloween = false, isEarlyBlackFriday = true,
 }: {
   product: Product;
-  isHalloween?: boolean;
+  isHalloween?: boolean; isEarlyBlackFriday?: boolean;
 }) {
   return (
     <div className="relative">
-      <ProductHero product={product} galleryVariant="omnilux" isHalloween={isHalloween} />
+      <ProductHero product={product} galleryVariant="omnilux" isHalloween={false} isEarlyBlackFriday={true} />
       <TorchFeatureTabs />
       <TorchStorySection />
       {/* <TorchDetailSection /> */}

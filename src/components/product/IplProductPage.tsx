@@ -137,14 +137,14 @@ function IplSkinGuideSection() {
 
 export function IplProductPage({
   product,
-  isHalloween = true,
+  isHalloween = false, isEarlyBlackFriday = true,
 }: {
   product: Product;
-  isHalloween?: boolean;
+  isHalloween?: boolean; isEarlyBlackFriday?: boolean;
 }) {
   return (
     <div className="relative">
-      <ProductHero product={product} isHalloween={isHalloween} />
+      <ProductHero product={product} isHalloween={false} isEarlyBlackFriday={true} />
       <TrustBadges />
       <IplHeroVideo />
       <IplFeatureGrid />

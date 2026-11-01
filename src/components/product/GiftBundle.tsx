@@ -107,7 +107,7 @@ const keyBenefitIcons = [
 export function GiftBundle({
   product,
   isHalloween = false,
-  isEarlyBlackFriday = false,
+  isEarlyBlackFriday = true,
 }: {
   product: Product;
   isHalloween?: boolean;

@@ -49,11 +49,42 @@ function useUKMidnightCountdown() {
 export function EarlyBlackFridayTopBanner() {
   const timer = useUKMidnightCountdown();
 
+  const marqueeItem = (
+    <div className="flex items-center gap-3 shrink-0 text-xs">
+      <span className="font-bold tracking-wider uppercase text-[#e5c17d] text-[11px] flex items-center gap-1.5">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e5c17d] opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e5c17d]"></span>
+        </span>
+        BLACK FRIDAY EARLY ACCESS
+      </span>
+      <span className="text-[rgba(247,241,232,0.4)]">|</span>
+      <span className="text-[#f7f1e8]/90 font-medium text-[11px] whitespace-nowrap">
+        Save 60% + Extra £10 Off with code{" "}
+        <span className="font-mono font-bold text-[#e5c17d] bg-[rgba(184,149,86,0.22)] px-1.5 py-0.5 rounded border border-[rgba(184,149,86,0.4)]">
+          BLACKFRIDAY10
+        </span>
+      </span>
+      <span className="text-[rgba(247,241,232,0.4)]">|</span>
+      <div className="flex items-center gap-1 text-[#e5c17d] font-mono font-semibold text-[11px]">
+        <span className="text-[10px] uppercase tracking-wider text-[#f7f1e8]/70 font-sans">Ends In:</span>
+        <span>{timer}</span>
+      </div>
+      <span className="text-[rgba(247,241,232,0.3)]">·</span>
+      <div className="flex items-center gap-1 text-[#f7f1e8]/90 text-[11px]">
+        <Flame className="w-3.5 h-3.5 text-[#e5c17d]" />
+        <span>88% UK Batch Claimed</span>
+      </div>
+      <span className="text-[#e5c17d]/60 mx-1">✦</span>
+    </div>
+  );
+
   return (
-    <div className="w-full bg-gradient-to-r from-[#140617] via-[#280e2d] to-[#140617] border-y border-[rgba(184,149,86,0.35)] py-2.5 px-3 sm:px-4 text-[#f7f1e8] shadow-md">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 text-xs sm:text-[13px]">
+    <div className="w-full bg-gradient-to-r from-[#140617] via-[#280e2d] to-[#140617] border-y border-[rgba(184,149,86,0.35)] text-[#f7f1e8] shadow-md">
+      {/* Desktop: Fixed 2-sided bar */}
+      <div className="hidden sm:flex max-w-6xl mx-auto py-2.5 px-4 items-center justify-between gap-4 text-xs sm:text-[13px]">
         {/* Left: Event & Code */}
-        <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start text-center sm:text-left">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e5c17d] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e5c17d]"></span>
@@ -61,7 +92,7 @@ export function EarlyBlackFridayTopBanner() {
           <span className="font-bold tracking-wider uppercase text-[#e5c17d] text-[11px] sm:text-xs">
             BLACK FRIDAY EARLY ACCESS
           </span>
-          <span className="hidden sm:inline text-[rgba(247,241,232,0.4)]">|</span>
+          <span className="text-[rgba(247,241,232,0.4)]">|</span>
           <span className="text-[#f7f1e8]/90 font-medium">
             Save 60% + Extra £10 Off with code{" "}
             <span className="font-mono font-bold text-[#e5c17d] bg-[rgba(184,149,86,0.22)] px-1.5 py-0.5 rounded border border-[rgba(184,149,86,0.4)]">
@@ -83,6 +114,16 @@ export function EarlyBlackFridayTopBanner() {
             <Flame className="w-3.5 h-3.5 text-[#e5c17d]" />
             <span className="font-medium text-[11px]">88% UK Batch Claimed</span>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile: 1-line smoothly scrolling marquee */}
+      <div className="sm:hidden overflow-hidden py-2 whitespace-nowrap">
+        <div className="buudy-marquee flex items-center gap-6">
+          {marqueeItem}
+          {marqueeItem}
+          {marqueeItem}
+          {marqueeItem}
         </div>
       </div>
     </div>

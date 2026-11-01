@@ -17,7 +17,7 @@ import { useCart } from "@/components/cart/CartProvider";
 
 export function StickyAddToCart({
   product,
-  isEarlyBlackFriday = false,
+  isEarlyBlackFriday = true,
 }: {
   product: Product;
   isEarlyBlackFriday?: boolean;

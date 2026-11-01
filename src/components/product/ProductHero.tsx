@@ -9,7 +9,7 @@ export function ProductHero({
     ? "omnilux"
     : "default",
   isHalloween = false,
-  isEarlyBlackFriday = false,
+  isEarlyBlackFriday = true,
 }: {
   product: Product;
   galleryVariant?: "default" | "omnilux";

@@ -24,8 +24,8 @@ export function ProductPage({
   variant,
   galleryVariant = product.template === "mask" ? "omnilux" : "default",
   comparisonPosition = "default",
-  isHalloween = true,
-  isEarlyBlackFriday = false,
+  isHalloween = false,
+  isEarlyBlackFriday = true,
 }: {
   product: Product;
   variant?: string;
