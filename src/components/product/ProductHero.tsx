@@ -2,6 +2,7 @@ import type { Product } from "@/data/products";
 import { ProductGallery } from "./ProductGallery";
 import { OmniluxProductGallery } from "./OmniluxProductGallery";
 import { GiftBundle } from "./GiftBundle";
+import { EarlyBlackFridayTopBanner } from "./EarlyBlackFridayElements";
 
 export function ProductHero({
   product,
@@ -9,13 +10,17 @@ export function ProductHero({
     ? "omnilux"
     : "default",
   isHalloween = false,
+  isEarlyBlackFriday = false,
 }: {
   product: Product;
   galleryVariant?: "default" | "omnilux";
   isHalloween?: boolean;
+  isEarlyBlackFriday?: boolean;
 }) {
   return (
-    <section
+    <>
+      {isEarlyBlackFriday && <EarlyBlackFridayTopBanner />}
+      <section
       id="product-hero"
       className={`buudy-section bg-[var(--cream)] [overflow-anchor:none] ${
         galleryVariant === "omnilux"
@@ -45,9 +50,10 @@ export function ProductHero({
           )}
         </div>
         <div className="w-full [overflow-anchor:none]">
-          <GiftBundle product={product} isHalloween={isHalloween} />
+          <GiftBundle product={product} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
         </div>
       </div>
     </section>
+    </>
   );
 }

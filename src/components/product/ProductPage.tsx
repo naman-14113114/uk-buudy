@@ -25,12 +25,14 @@ export function ProductPage({
   galleryVariant = product.template === "mask" ? "omnilux" : "default",
   comparisonPosition = "default",
   isHalloween = true,
+  isEarlyBlackFriday = false,
 }: {
   product: Product;
   variant?: string;
   galleryVariant?: "default" | "omnilux";
   comparisonPosition?: "default" | "below-app";
   isHalloween?: boolean;
+  isEarlyBlackFriday?: boolean;
 }) {
   if (product.template === "torch") {
     return <TorchProductPage product={product} isHalloween={isHalloween} />;
@@ -46,7 +48,7 @@ export function ProductPage({
 
   return (
     <div className="relative">
-      <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} />
+      <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
       <DeferredVideoReviews />
       <TrustBadges />
       {/* <FeatureGrid /> */}
@@ -62,7 +64,7 @@ export function ProductPage({
       <BlueLightSection />
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
-      <StickyAddToCart product={product} />
+      <StickyAddToCart product={product} isEarlyBlackFriday={isEarlyBlackFriday} />
     </div>
   );
 }

@@ -33,6 +33,11 @@ import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
 import { ProductDetailsAccordion } from "./ProductDetailsAccordion";
 import { HalloweenSaleBadge } from "./HalloweenOverlay";
+import {
+  EarlyBlackFridaySaleBadge,
+  EarlyBlackFridayVoucherCallout,
+  EarlyBlackFridayGuarantees,
+} from "./EarlyBlackFridayElements";
 
 function useCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -103,8 +108,16 @@ const keyBenefitIcons = [
   Waves,
 ];
 
-export function GiftBundle({ product, isHalloween = false }: { product: Product; isHalloween?: boolean }) {
-  const { addProduct } = useCart();
+export function GiftBundle({
+  product,
+  isHalloween = false,
+  isEarlyBlackFriday = false,
+}: {
+  product: Product;
+  isHalloween?: boolean;
+  isEarlyBlackFriday?: boolean;
+}) {
+  const { addProduct, applyManualPromoCode } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(5);
@@ -170,7 +183,11 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
     0,
   );
   const hasGifts = product.gifts.length > 0;
-  const giftButtonLabel = hasGifts
+  const giftButtonLabel = isEarlyBlackFriday
+    ? hasGifts
+      ? `CLAIM EARLY BF DEAL + ${product.gifts.length} FREE GIFTS`
+      : "CLAIM EARLY BLACK FRIDAY DEAL"
+    : hasGifts
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
     : "ADD TO CART + FREE SHIPPING";
   return (
@@ -243,10 +260,16 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
           compareAtCents={product.compareAtCents}
           currency={product.currency}
           priceCents={product.priceCents}
-          hideDiscount={isHalloween}
+          hideDiscount={isHalloween || isEarlyBlackFriday}
         />
         {isHalloween && <HalloweenSaleBadge />}
+        {isEarlyBlackFriday && <EarlyBlackFridaySaleBadge />}
       </div>
+      {isEarlyBlackFriday && (
+        <EarlyBlackFridayVoucherCallout
+          onApply={() => applyManualPromoCode("BUUDY10")}
+        />
+      )}
 
       {/* Premium Compact Bullet Points List */}
       <ul className="mt-4 mb-4 flex flex-col gap-1.5 pl-1.5">
@@ -319,6 +342,9 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
         id="hero-cta"
         onClick={() => {
           setIsAdding(true);
+          if (isEarlyBlackFriday) {
+            applyManualPromoCode("BUUDY10");
+          }
           addProduct(product);
           router.push(
             appendAttributionToPath(
@@ -408,7 +434,7 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
-              Halloween Free Gifts
+              {isEarlyBlackFriday ? "Early Black Friday VIP Gift Bundle" : isHalloween ? "Halloween Free Gifts" : "Exclusive Free Gifts"}
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
@@ -473,6 +499,7 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
           </p>
         </section> */}
 
+      {isEarlyBlackFriday && <EarlyBlackFridayGuarantees />}
       <ProductDetailsAccordion product={product} />
     </div>
   );

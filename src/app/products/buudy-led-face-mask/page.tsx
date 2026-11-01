@@ -23,8 +23,8 @@ const pageProduct = {
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: buudyMask.seoTitle,
-  description: buudyMask.seoDescription,
+  title: "Buudy 7 Colour LED Face Mask | Early Black Friday Sale - 60% + £10 OFF",
+  description: "Early Black Friday UK Sale: Save 60% on the Buudy 7 Colour LED Face Mask plus an extra £10 OFF with code BUUDY10. Includes Free £70 Red Torch gift bundle, 90-day money-back guarantee, and fast UK delivery.",
   keywords: [
     "best LED face mask UK",
     "LED face mask UK",
@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: buudyMask.seoTitle,
-    description: buudyMask.description,
+    title: "Buudy 7 Colour LED Face Mask | Early Black Friday Sale - 60% + £10 OFF",
+    description: "Early Black Friday UK Sale: Save 60% on the Buudy 7 Colour LED Face Mask plus an extra £10 OFF with code BUUDY10. Includes Free £70 Red Torch gift bundle.",
     url: absoluteUrl(pagePath),
     type: "website",
     images: [
@@ -67,8 +67,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: buudyMask.seoTitle,
-    description: buudyMask.seoDescription,
+    title: "Buudy 7 Colour LED Face Mask | Early Black Friday Sale - 60% + £10 OFF",
+    description: "Early Black Friday UK Sale: Save 60% on the Buudy 7 Colour LED Face Mask plus an extra £10 OFF with code BUUDY10. Includes Free £70 Red Torch gift bundle.",
     images: [pageProduct.gallery[0].src],
   },
 };
@@ -99,7 +99,8 @@ export default function BuudyLedFaceMaskProductRoute() {
         product={pageProduct}
         galleryVariant="omnilux"
         comparisonPosition="below-app"
-        isHalloween
+        isHalloween={false}
+        isEarlyBlackFriday={true}
       />
     </>
   );
