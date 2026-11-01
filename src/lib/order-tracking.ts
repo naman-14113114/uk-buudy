@@ -95,6 +95,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
   createdAt: number;
   tracking: string | null;
   carrier?: string | null;
+  items?: TrackingItem[];
 }> = [
   {
     id: "a3151b5a-4fb7-4e77-8950-40df1412584d",
@@ -193,8 +194,29 @@ const INITIAL_BUUDY_ORDERS: Array<{
     last: "Smith",
     city: "Sidbury",
     country: "United Kingdom",
-    createdAt: 1792747856,
-    tracking: null,
+    createdAt: 1792764000,
+    tracking: "QP118176663GB",
+    carrier: "Royal Mail Tracked",
+    items: [
+      {
+        title: "Buudy LED Mask + Premium Travel Box",
+        quantity: 1,
+        variant: "Cleopatra Edition",
+        image: "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
+      },
+      {
+        title: "Buudy LED Torch",
+        quantity: 1,
+        variant: "BUUDY TORCH BUNDLE",
+        image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
+      },
+      {
+        title: "Skincare E-Book",
+        quantity: 1,
+        variant: "Digital Guide",
+        image: "/images/products/skincare-ebook/skincare-ebook.png",
+      },
+    ],
   },
   {
     id: "a30aa6d7-1044-47a7-b05b-263d2e398bc9",
@@ -538,7 +560,8 @@ for (const ord of INITIAL_BUUDY_ORDERS) {
     customerCountry: ord.country,
     createdAt: ord.createdAt,
     trackingNumber: ord.tracking,
-    items: [
+    shippingCarrier: ord.carrier || null,
+    items: ord.items || [
       {
         title: "Buudy 7 Colour LED Mask",
         quantity: 1,
@@ -714,7 +737,14 @@ async function fetchFromXPageLive(query: string, orderId?: string): Promise<Cach
 // CJ LOGISTICS TRACKER (Place 2: Real-time live current courier milestones)
 // -----------------------------------------------------------------------------
 async function fetchCJTracking(trackingNumber: string): Promise<CJTrackingRecord | null> {
+  if (!trackingNumber || /^[A-Z]{2}\d{9}GB$/i.test(trackingNumber) || trackingNumber.startsWith("#")) {
+    return null;
+  }
+
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+
     const res = await fetch("https://www.cjpacket.com/cj-logistics-api/refactoring/cjpacket/track", {
       method: "POST",
       headers: {
@@ -726,7 +756,8 @@ async function fetchCJTracking(trackingNumber: string): Promise<CJTrackingRecord
       },
       body: JSON.stringify([trackingNumber]),
       cache: "no-store",
-    });
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeoutId));
 
     if (!res.ok) return null;
 
@@ -768,6 +799,25 @@ function formatCJEventDate(eventTime: string): string {
     // fallback
   }
   return eventTime;
+}
+
+function formatUKDateTime(timestampInSeconds: number): string {
+  try {
+    const d = new Date(timestampInSeconds * 1000);
+    return d
+      .toLocaleString("en-GB", {
+        timeZone: "Europe/London",
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+      .replace("Sept", "Sep");
+  } catch {
+    return formatCJEventDate(new Date(timestampInSeconds * 1000).toISOString().replace("T", " ").slice(0, 19));
+  }
 }
 
 // Formats order date strictly in UK timezone (Europe/London), date only, without time
@@ -1023,16 +1073,28 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
     const activeTrackingNumber =
       orderRecord?.trackingNumber || cjData?.lastTrackNumber || cjData?.trackNumber || trackingBarcode;
 
-    const rawCarrier = cjData?.providerEnName || orderRecord?.shippingCarrier || "yodel";
-    const carrierName = rawCarrier.toLowerCase().includes("yodel")
-      ? "Yodel UK"
-      : rawCarrier.toLowerCase().includes("dhl")
-        ? "DHL Parcel UK"
-        : rawCarrier.toLowerCase().includes("royal mail")
-          ? "Royal Mail Tracked"
-          : "Express Tracked Courier";
+    const isRoyalMail =
+      /^[A-Z]{2}\d{9}GB$/i.test(activeTrackingNumber) ||
+      Boolean(orderRecord?.shippingCarrier && orderRecord.shippingCarrier.toLowerCase().includes("royal mail"));
 
-    const carrierTrackingUrl = `https://www.aftership.com/track/${encodeURIComponent(activeTrackingNumber)}`;
+    const rawCarrier =
+      cjData?.providerEnName ||
+      orderRecord?.shippingCarrier ||
+      (isRoyalMail ? "Royal Mail Tracked" : "yodel");
+
+    const carrierName = isRoyalMail
+      ? "Royal Mail Tracked"
+      : rawCarrier.toLowerCase().includes("yodel")
+        ? "Yodel UK"
+        : rawCarrier.toLowerCase().includes("dhl")
+          ? "DHL Parcel UK"
+          : rawCarrier.toLowerCase().includes("royal mail")
+            ? "Royal Mail Tracked"
+            : "Express Tracked Courier";
+
+    const carrierTrackingUrl = isRoyalMail
+      ? `https://www.royalmail.com/track-your-item#/tracking-results/${encodeURIComponent(activeTrackingNumber)}`
+      : `https://www.aftership.com/track/${encodeURIComponent(activeTrackingNumber)}`;
 
     const destCity = orderRecord?.customerCity || "United Kingdom";
     const destCountry = orderRecord?.customerCountry || "United Kingdom";
@@ -1085,7 +1147,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       timelineEvents.push({
         title: "Order Placed & Confirmed",
         description: "Your order payment was verified and sent to fulfillment queue.",
-        date: formatCJEventDate(new Date(createdAt * 1000).toISOString().replace("T", " ").slice(0, 19)),
+        date: formatUKDateTime(createdAt),
         completed: true,
         stage: "ORDER_PLACED",
       });
@@ -1093,7 +1155,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       timelineEvents.push({
         title: "Dispatched with Carrier",
         description: `Package picked up by express courier. Assigned tracking barcode: ${activeTrackingNumber}.`,
-        date: formatCJEventDate(new Date((createdAt + 86400 * 2) * 1000).toISOString().replace("T", " ").slice(0, 19)),
+        date: formatUKDateTime(createdAt + 86400 * 2),
         completed: true,
         stage: "IN_TRANSIT",
       });
