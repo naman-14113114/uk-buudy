@@ -33,11 +33,7 @@ import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
 import { ProductDetailsAccordion } from "./ProductDetailsAccordion";
 import { HalloweenSaleBadge } from "./HalloweenOverlay";
-import {
-  EarlyBlackFridaySaleBadge,
-  EarlyBlackFridayVoucherCallout,
-  EarlyBlackFridayGuarantees,
-} from "./EarlyBlackFridayElements";
+import { EarlyBlackFridaySaleBadge } from "./EarlyBlackFridayElements";
 
 function useCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -265,11 +261,7 @@ export function GiftBundle({
         {isHalloween && <HalloweenSaleBadge />}
         {isEarlyBlackFriday && <EarlyBlackFridaySaleBadge />}
       </div>
-      {isEarlyBlackFriday && (
-        <EarlyBlackFridayVoucherCallout
-          onApply={() => applyManualPromoCode("BUUDY10")}
-        />
-      )}
+
 
       {/* Premium Compact Bullet Points List */}
       <ul className="mt-4 mb-4 flex flex-col gap-1.5 pl-1.5">
@@ -434,7 +426,7 @@ export function GiftBundle({
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
-              {isEarlyBlackFriday ? "Early Black Friday VIP Gift Bundle" : isHalloween ? "Halloween Free Gifts" : "Exclusive Free Gifts"}
+              {isEarlyBlackFriday ? "Early Black Friday Gifts" : isHalloween ? "Halloween Free Gifts" : "Exclusive Free Gifts"}
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
@@ -499,7 +491,6 @@ export function GiftBundle({
           </p>
         </section> */}
 
-      {isEarlyBlackFriday && <EarlyBlackFridayGuarantees />}
       <ProductDetailsAccordion product={product} />
     </div>
   );
