@@ -335,7 +335,7 @@ export function GiftBundle({
         onClick={() => {
           setIsAdding(true);
           if (isEarlyBlackFriday) {
-            applyManualPromoCode("BUUDY10");
+            applyManualPromoCode("BLACKFRIDAY10");
           }
           addProduct(product);
           router.push(

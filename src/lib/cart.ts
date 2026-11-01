@@ -25,13 +25,14 @@ export type CartState = {
 };
 
 export const promoCode = "AUTO";
-export const manualPromoCode = "BUUDY10";
+export const manualPromoCode = "BLACKFRIDAY10";
 export const manualPromoDiscountCents = 1000;
 
 export const VALID_PROMO_CODES: Record<
   string,
   { code: string; discountCents: number; type: "promo" | "gift_card" }
 > = {
+  BLACKFRIDAY10: { code: "BLACKFRIDAY10", discountCents: 1000, type: "promo" },
   BUUDY10: { code: "BUUDY10", discountCents: 1000, type: "promo" },
   "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2000, type: "gift_card" },
 };

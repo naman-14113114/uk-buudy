@@ -21,12 +21,15 @@ export function buildFastWhopCheckoutUrl(
   const quantity = products.reduce((sum, line) => sum + line.quantity, 0);
   if (quantity > 100) return null;
   const promoCodes = codes.map(code => code.trim().toUpperCase()).filter(Boolean);
-  if (promoCodes.some(code => !["AUTO", "GLOWKIT", "BUUDY", "BUUDY10"].includes(code))) return null;
+  if (promoCodes.some(code => !["AUTO", "GLOWKIT", "BUUDY", "BUUDY10", "BLACKFRIDAY10"].includes(code))) return null;
   const checkout = new URL("/checkout/plan_IY6bXASo3Gh15", "https://buudy.com");
   checkout.searchParams.set("quantity", String(quantity));
   checkout.searchParams.set("items", `plan_IY6bXASo3Gh15:${quantity}`);
   checkout.searchParams.set("checkoutSource", "buudy-uk");
-  checkout.searchParams.set("promoCode", promoCodes.some(code => code === "BUUDY10" || code === "BUUDY") ? "BUUDY10" : "");
+  const promoToSend = promoCodes.includes("BUUDY10") && !promoCodes.includes("BLACKFRIDAY10")
+    ? "BUUDY10"
+    : (promoCodes.some(code => code === "BLACKFRIDAY10" || code === "BUUDY10" || code === "BUUDY") ? "BLACKFRIDAY10" : "");
+  checkout.searchParams.set("promoCode", promoToSend);
   const clean = Object.fromEntries(Object.entries(attribution).filter((entry): entry is [string, string] => typeof entry[1] === "string").map(([key, value]) => [key, value.slice(0, 500)]));
   return appendAttributionToAbsoluteUrl(checkout.toString(), clean);
 }

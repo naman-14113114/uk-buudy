@@ -333,8 +333,11 @@ export async function POST(request: NextRequest) {
     ].map((c) => c.trim().toUpperCase());
 
     const hasPromo = allPromoCodes.some(
-      (c) => c === "BUUDY10" || c === "BUUDY",
+      (c) => c === "BLACKFRIDAY10" || c === "BUUDY10" || c === "BUUDY",
     );
+    const promoToSend = allPromoCodes.includes("BUUDY10") && !allPromoCodes.includes("BLACKFRIDAY10")
+      ? "BUUDY10"
+      : (hasPromo ? "BLACKFRIDAY10" : "");
     // Whop owns the final price and payment. Pass the exact mask quantity and
     // only the supported manual discount; included gifts are part of its bundle.
     const planId = "plan_IY6bXASo3Gh15";
@@ -342,7 +345,7 @@ export async function POST(request: NextRequest) {
     checkout.searchParams.set("quantity", String(quantity));
     checkout.searchParams.set("items", `${planId}:${quantity}`);
     checkout.searchParams.set("checkoutSource", "buudy-uk");
-    checkout.searchParams.set("promoCode", hasPromo ? "BUUDY10" : "");
+    checkout.searchParams.set("promoCode", promoToSend);
     return NextResponse.json(
       { checkoutUrl: appendAttributionToAbsoluteUrl(checkout.toString(), cleanAttribution(body.attribution)) },
       { headers: { "Cache-Control": "no-store" } },
