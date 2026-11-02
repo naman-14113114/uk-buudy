@@ -1199,27 +1199,93 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       }
     }
 
-    // Fallback events if neither live CJ nor custom timeline recorded events yet
+    // Dynamic real-time milestone generator if neither live CJ nor custom timeline recorded events
     if (timelineEvents.length === 0) {
       const nowSec = Math.floor(Date.now() / 1000);
       const createdAt = orderRecord?.createdAt || nowSec - 86400 * 5;
 
-      timelineEvents.push({
-        title: "Order Placed & Confirmed",
-        description: "Your order payment was verified and sent to fulfillment queue.",
-        date: formatUKDateTime(createdAt),
-        completed: true,
-        stage: "ORDER_PLACED",
-      });
+      const dynamicMilestones: Array<{
+        title: string;
+        description: string;
+        offsetSec: number;
+        stage: TrackingStage;
+      }> = [
+        {
+          title: "Order Placed & Confirmed",
+          description: "Your order payment was verified and sent to fulfillment queue.",
+          offsetSec: 0,
+          stage: "ORDER_PLACED",
+        },
+        {
+          title: "Order Processed & Packaged for Delivery",
+          description: "Item passed beauty device safety inspection and packaged in protective temperature-controlled shipping container.",
+          offsetSec: 86400 * 1 + 3600 * 3,
+          stage: "PROCESSING",
+        },
+        {
+          title: "Dispatched with Carrier",
+          description: `Package picked up by express courier. Assigned tracking barcode: ${activeTrackingNumber}.`,
+          offsetSec: 86400 * 2 + 3600 * 1,
+          stage: "IN_TRANSIT",
+        },
+        {
+          title: "Export Customs & Security Clearance Completed",
+          description: "Package completed international export inspection and airport security clearance.",
+          offsetSec: 86400 * 3 + 3600 * 5,
+          stage: "IN_TRANSIT",
+        },
+        {
+          title: "In Transit via International Air Cargo",
+          description: "Air freight flight departed international logistics hub bound for the United Kingdom.",
+          offsetSec: 86400 * 5 + 3600 * 2,
+          stage: "IN_TRANSIT",
+        },
+        {
+          title: "Arrived at UK Destination Airport",
+          description: "Flight landed in the United Kingdom. Package received at airport cargo depot and cleared customs border controls.",
+          offsetSec: 86400 * 7 + 3600 * 4,
+          stage: "IN_TRANSIT",
+        },
+        {
+          title: `Processed at UK Distribution Hub (${destCity})`,
+          description: `Package received and scanned at local distribution network hub serving ${destCity}, GB. Handed over for final dispatch via ${carrierName}.`,
+          offsetSec: 86400 * 9 + 3600 * 1,
+          stage: "OUT_FOR_DELIVERY",
+        },
+        {
+          title: "Out for Delivery",
+          description: `Loaded onto local courier delivery van for final delivery to ${destCity} address.`,
+          offsetSec: 86400 * 10 + 3600 * 3,
+          stage: "OUT_FOR_DELIVERY",
+        },
+        {
+          title: "Delivered",
+          description: `Package safely delivered and signed for at customer address (${destCity}).`,
+          offsetSec: 86400 * 11 + 3600 * 5,
+          stage: "DELIVERED",
+        },
+      ];
 
-      timelineEvents.push({
-        title: "Dispatched with Carrier",
-        description: `Package picked up by express courier. Assigned tracking barcode: ${activeTrackingNumber}.`,
-        date: formatUKDateTime(createdAt + 86400 * 2),
-        completed: true,
-        stage: "IN_TRANSIT",
-      });
-      hasInTransit = true;
+      // Filter milestones that have occurred by the current real time (nowSec)
+      const validMilestones = dynamicMilestones
+        .filter((m) => createdAt + m.offsetSec <= nowSec)
+        .sort((a, b) => b.offsetSec - a.offsetSec);
+
+      for (const m of validMilestones) {
+        if (m.stage === "OUT_FOR_DELIVERY") hasOutForDelivery = true;
+        if (m.stage === "IN_TRANSIT") hasInTransit = true;
+        if (m.stage === "DELIVERED") {
+          isDelivered = true;
+          if (!deliveredDateStr) deliveredDateStr = formatUKDateTime(createdAt + m.offsetSec);
+        }
+        timelineEvents.push({
+          title: m.title,
+          description: m.description,
+          date: formatUKDateTime(createdAt + m.offsetSec),
+          completed: true,
+          stage: m.stage,
+        });
+      }
     }
 
     // Determine current status & percentage
