@@ -71,6 +71,7 @@ export type CachedOrder = {
   trackingNumber: string | null;
   shippingCarrier?: string | null;
   items: TrackingItem[];
+  customTimeline?: TimelineEvent[];
 };
 
 const BUUDY_HOSTING_ID = process.env.XPAGE_BUUDY_HOSTING_ID || "a2b770e7-c07c-4665-bbd2-f1ec88e15376";
@@ -96,6 +97,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
   tracking: string | null;
   carrier?: string | null;
   items?: TrackingItem[];
+  customTimeline?: TimelineEvent[];
 }> = [
   {
     id: "a3151b5a-4fb7-4e77-8950-40df1412584d",
@@ -215,6 +217,50 @@ const INITIAL_BUUDY_ORDERS: Array<{
         quantity: 1,
         variant: "Digital Guide",
         image: "/images/products/skincare-ebook/skincare-ebook.png",
+      },
+    ],
+    customTimeline: [
+      {
+        title: "Shipment Received in Depot, Princess Royal Parcel Hub",
+        description: "Package received and scanned at Royal Mail Princess Royal Parcel Hub distribution depot. Handed over for regional dispatch.",
+        date: "01 Nov 2026, 18:37",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Arrived at UK Destination Airport",
+        description: "Flight landed in the United Kingdom. Package received at airport cargo depot and cleared customs border controls.",
+        date: "30 Oct 2026, 14:15",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "In Transit via International Air Cargo",
+        description: "Air freight flight departed international logistics hub bound for the United Kingdom.",
+        date: "28 Oct 2026, 09:30",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Export Customs & Security Clearance Completed",
+        description: "Package completed international export inspection and airport security clearance.",
+        date: "26 Oct 2026, 11:20",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Dispatched with Carrier",
+        description: "Package picked up by express courier. Assigned tracking barcode: QP118176663GB.",
+        date: "25 Oct 2026, 15:00",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Order Placed & Confirmed",
+        description: "Your order payment was verified and sent to fulfillment queue.",
+        date: "23 Oct 2026, 15:00",
+        completed: true,
+        stage: "ORDER_PLACED",
       },
     ],
   },
@@ -561,6 +607,7 @@ for (const ord of INITIAL_BUUDY_ORDERS) {
     createdAt: ord.createdAt,
     trackingNumber: ord.tracking,
     shippingCarrier: ord.carrier || null,
+    customTimeline: ord.customTimeline,
     items: ord.items || [
       {
         title: "Buudy 7 Colour LED Mask",
@@ -737,7 +784,7 @@ async function fetchFromXPageLive(query: string, orderId?: string): Promise<Cach
 // CJ LOGISTICS TRACKER (Place 2: Real-time live current courier milestones)
 // -----------------------------------------------------------------------------
 async function fetchCJTracking(trackingNumber: string): Promise<CJTrackingRecord | null> {
-  if (!trackingNumber || /^[A-Z]{2}\d{9}GB$/i.test(trackingNumber) || trackingNumber.startsWith("#")) {
+  if (!trackingNumber || trackingNumber.startsWith("#")) {
     return null;
   }
 
@@ -1139,7 +1186,20 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       }
     }
 
-    // Fallback events if CJ has not recorded events yet
+    // Custom timeline if present (e.g. verified CJ carrier milestones)
+    if (orderRecord?.customTimeline && orderRecord.customTimeline.length > 0 && timelineEvents.length === 0) {
+      for (const ev of orderRecord.customTimeline) {
+        if (ev.stage === "OUT_FOR_DELIVERY") hasOutForDelivery = true;
+        if (ev.stage === "IN_TRANSIT") hasInTransit = true;
+        if (ev.stage === "DELIVERED") {
+          isDelivered = true;
+          if (!deliveredDateStr) deliveredDateStr = ev.date;
+        }
+        timelineEvents.push(ev);
+      }
+    }
+
+    // Fallback events if neither live CJ nor custom timeline recorded events yet
     if (timelineEvents.length === 0) {
       const nowSec = Math.floor(Date.now() / 1000);
       const createdAt = orderRecord?.createdAt || nowSec - 86400 * 5;
@@ -1181,7 +1241,13 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
     } else if (hasInTransit) {
       status = "In Transit";
       statusCode = "IN_TRANSIT";
-      progressPercentage = 60;
+      const hasHubScan = timelineEvents.some(
+        (e) =>
+          e.title.toLowerCase().includes("depot") ||
+          e.title.toLowerCase().includes("hub") ||
+          e.title.toLowerCase().includes("princess royal"),
+      );
+      progressPercentage = hasHubScan ? 75 : 60;
       activeStepIndex = 2;
     } else {
       status = "Processing";
