@@ -92,14 +92,17 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
 
   const gifts = product.gifts.map<CartLine>((gift) => {
     const isEbook = gift.id === "skincare-ebook";
+    const isTravelBox = gift.id === "premium-travel-box";
     return {
       id: `${product.id}:${gift.id}`,
       productId: product.id,
-      slug: isEbook ? "skincare-ebook" : product.slug,
+      slug: isEbook ? "skincare-ebook" : isTravelBox ? "premium-travel-box" : product.slug,
       type: "gift",
-      title: gift.name,
+      title: isTravelBox ? "Premium Travel Case" : gift.name,
       subtitle: isEbook
         ? "Delivered digitally via email after checkout"
+        : isTravelBox
+        ? "Luxury protective hard travel case"
         : `${product.name} free gift unlocked`,
       image: gift.image,
       unitPriceCents: 0,
@@ -208,12 +211,27 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
     (line) => line.productId === "buudy-led-mask" && line.type === "product"
   );
 
-  const formattedLines = lines.map((line) => {
+  return lines.map((line) => {
     if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "product") {
       return {
         ...line,
-        title: "Buudy LED Mask + Premium Travel Box",
+        title: "Buudy LED Mask",
         image: getProductById("buudy-led-mask")?.cartImage ?? line.image,
+      };
+    }
+    if (
+      line.id.includes("premium-travel-box") ||
+      line.productId === "premium-travel-box" ||
+      line.title.toLowerCase().includes("travel")
+    ) {
+      return {
+        ...line,
+        title: "Premium Travel Case",
+        subtitle: "Luxury protective hard travel case",
+        compareAtCents:
+          line.type === "gift"
+            ? line.compareAtCents || 3900
+            : line.compareAtCents,
       };
     }
     if (
@@ -232,15 +250,5 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
       };
     }
     return line;
-  });
-
-  return formattedLines.filter((line) => {
-    if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "gift") {
-      const giftId = line.id.split(":")[1];
-      if (giftId === "premium-travel-box") {
-        return false;
-      }
-    }
-    return true;
   });
 }

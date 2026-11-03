@@ -201,7 +201,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
     carrier: "Royal Mail Tracked",
     items: [
       {
-        title: "Buudy LED Mask + Premium Travel Box",
+        title: "Buudy LED Mask",
         quantity: 1,
         variant: "Cleopatra Edition",
         image: "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
