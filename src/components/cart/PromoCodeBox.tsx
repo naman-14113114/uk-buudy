@@ -18,12 +18,9 @@ export function PromoCodeBox() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const active = totals.itemCount > 0;
 
-  const appliedCodes =
-    manualPromoCodes && manualPromoCodes.length > 0
-      ? manualPromoCodes
-      : manualPromoCode
-      ? [manualPromoCode]
-      : [];
+  const activePromoCode =
+    manualPromoCode ||
+    (manualPromoCodes && manualPromoCodes.length > 0 ? manualPromoCodes[0] : "");
 
   function handleApply(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,18 +29,20 @@ export function PromoCodeBox() {
 
     const canonical = getAppliedManualPromoCode(trimmed);
     if (canonical) {
-      if (!appliedCodes.includes(canonical)) {
-        applyManualPromoCode(canonical);
-      }
+      applyManualPromoCode(canonical);
       setCode("");
-      setMessage("Code applied successfully.");
+      setMessage(
+        activePromoCode && activePromoCode !== canonical
+          ? `Switched code to ${canonical}.`
+          : "Code applied successfully.",
+      );
       setStatus("success");
       return;
     }
 
-    if (appliedCodes.some((c) => c.toUpperCase() === trimmed.toUpperCase())) {
+    if (activePromoCode && activePromoCode.toUpperCase() === trimmed.toUpperCase()) {
       setCode("");
-      setMessage("Code applied successfully.");
+      setMessage("Code already applied.");
       setStatus("success");
       return;
     }
@@ -52,8 +51,8 @@ export function PromoCodeBox() {
     setStatus("error");
   }
 
-  function handleRemove(codeToRemove: string) {
-    removeManualPromoCode(codeToRemove);
+  function handleRemove() {
+    removeManualPromoCode(activePromoCode);
     setCode("");
     setMessage("");
     setStatus("idle");
@@ -73,11 +72,13 @@ export function PromoCodeBox() {
 
             const canonical = getAppliedManualPromoCode(nextValue);
             if (canonical) {
-              if (!appliedCodes.includes(canonical)) {
-                applyManualPromoCode(canonical);
-              }
+              applyManualPromoCode(canonical);
               setCode("");
-              setMessage("Code applied successfully.");
+              setMessage(
+                activePromoCode && activePromoCode !== canonical
+                  ? `Switched code to ${canonical}.`
+                  : "Code applied successfully.",
+              );
               setStatus("success");
             } else if (status !== "idle") {
               setMessage("");
@@ -86,10 +87,14 @@ export function PromoCodeBox() {
           }}
           onBlur={() => {
             const canonical = getAppliedManualPromoCode(code);
-            if (canonical && !appliedCodes.includes(canonical)) {
+            if (canonical) {
               applyManualPromoCode(canonical);
               setCode("");
-              setMessage("Code applied successfully.");
+              setMessage(
+                activePromoCode && activePromoCode !== canonical
+                  ? `Switched code to ${canonical}.`
+                  : "Code applied successfully.",
+              );
               setStatus("success");
             }
           }}
@@ -118,31 +123,27 @@ export function PromoCodeBox() {
         </p>
       ) : null}
 
-      {/* Applied Promo Code Pills (showing full code) */}
-      {appliedCodes.length > 0 && (
+      {/* Single Active Promo Code Pill (BUUDY10 or BLACKFRIDAY10) */}
+      {activePromoCode ? (
         <div className="flex flex-wrap gap-2 pt-1">
-          {appliedCodes.map((applied) => {
-            return (
-              <div
-                key={applied}
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--cream)] py-1 pl-3.5 pr-1.5 text-xs text-[var(--plum)] shadow-sm"
-              >
-                <span className="font-semibold uppercase tracking-wider font-mono text-xs">
-                  {applied}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => handleRemove(applied)}
-                  className="flex h-5 w-5 items-center justify-center rounded-full text-[var(--muted)] hover:bg-[rgba(58,31,61,.12)] hover:text-[var(--plum)] transition focus-visible:outline-2 focus-visible:outline-[var(--gold)]"
-                  aria-label={`Remove ${applied} promo code`}
-                >
-                  <X size={13} strokeWidth={2.5} />
-                </button>
-              </div>
-            );
-          })}
+          <div
+            key={activePromoCode}
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--cream)] py-1 pl-3.5 pr-1.5 text-xs text-[var(--plum)] shadow-sm"
+          >
+            <span className="font-semibold uppercase tracking-wider font-mono text-xs">
+              {activePromoCode}
+            </span>
+            <button
+              type="button"
+              onClick={handleRemove}
+              className="flex h-5 w-5 items-center justify-center rounded-full text-[var(--muted)] hover:bg-[rgba(58,31,61,.12)] hover:text-[var(--plum)] transition focus-visible:outline-2 focus-visible:outline-[var(--gold)]"
+              aria-label={`Remove ${activePromoCode} promo code`}
+            >
+              <X size={13} strokeWidth={2.5} />
+            </button>
+          </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

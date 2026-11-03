@@ -26,9 +26,18 @@ export function buildFastWhopCheckoutUrl(
   checkout.searchParams.set("quantity", String(quantity));
   checkout.searchParams.set("items", `plan_IY6bXASo3Gh15:${quantity}`);
   checkout.searchParams.set("checkoutSource", "buudy-uk");
-  const promoToSend = promoCodes.includes("BUUDY10") && !promoCodes.includes("BLACKFRIDAY10")
-    ? "BUUDY10"
-    : (promoCodes.some(code => code === "BLACKFRIDAY10" || code === "BUUDY10" || code === "BUUDY") ? "BLACKFRIDAY10" : "");
+  // Only 1 promo code is sent to Whop: strictly either BUUDY10 or BLACKFRIDAY10
+  const lastPromo = promoCodes[promoCodes.length - 1];
+  let promoToSend = "";
+  if (lastPromo === "BUUDY10" || lastPromo === "BUUDY") {
+    promoToSend = "BUUDY10";
+  } else if (lastPromo === "BLACKFRIDAY10") {
+    promoToSend = "BLACKFRIDAY10";
+  } else if (promoCodes.includes("BUUDY10") || promoCodes.includes("BUUDY")) {
+    promoToSend = "BUUDY10";
+  } else if (promoCodes.includes("BLACKFRIDAY10")) {
+    promoToSend = "BLACKFRIDAY10";
+  }
   checkout.searchParams.set("promoCode", promoToSend);
   const clean = Object.fromEntries(Object.entries(attribution).filter((entry): entry is [string, string] => typeof entry[1] === "string").map(([key, value]) => [key, value.slice(0, 500)]));
   return appendAttributionToAbsoluteUrl(checkout.toString(), clean);

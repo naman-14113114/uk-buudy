@@ -120,29 +120,21 @@ export function CheckoutForm({
     const attribution = readAttribution();
 
     // Ensure any promo code typed into the promo input is captured even if not clicked or submitted
-    const activeCodes = [...activePromoCodes];
-    let appliedCode = manualPromoCode;
-    const appliedCodesList =
-      manualPromoCodes && manualPromoCodes.length > 0
-        ? [...manualPromoCodes]
-        : manualPromoCode
-        ? [manualPromoCode]
-        : [];
+    let appliedCode = manualPromoCode || (manualPromoCodes && manualPromoCodes.length > 0 ? manualPromoCodes[0] : "");
 
     if (typeof document !== "undefined") {
       const promoInput = document.querySelector('input[aria-label="Promo code"]') as HTMLInputElement | null;
       if (promoInput?.value) {
         const canonical = getAppliedManualPromoCode(promoInput.value);
-        if (canonical && !appliedCodesList.includes(canonical)) {
-          appliedCodesList.push(canonical);
-          if (!appliedCode) appliedCode = canonical;
-          if (!activeCodes.includes(canonical)) activeCodes.push(canonical);
+        if (canonical) {
+          appliedCode = canonical;
           applyManualPromoCode(canonical);
         }
       }
     }
 
-    const effectiveTotals = calculateCartTotals(lines, appliedCodesList);
+    const appliedCodesList = appliedCode ? [appliedCode] : [];
+    const effectiveTotals = calculateCartTotals(lines, appliedCode);
 
     writeCheckoutSnapshot({
       lines,
@@ -164,7 +156,7 @@ export function CheckoutForm({
     );
 
     try {
-      let checkoutUrl = hasKnownCountry ? buildFastWhopCheckoutUrl(lines, activeCodes, attribution) : null;
+      let checkoutUrl = hasKnownCountry ? buildFastWhopCheckoutUrl(lines, appliedCodesList, attribution) : null;
       if (!checkoutUrl) {
         const response = await fetch("/api/checkout/prepare", {
           method: "POST",
@@ -177,7 +169,7 @@ export function CheckoutForm({
             cart: {
               lines,
               giftMessage,
-              promoCodes: activeCodes,
+              promoCodes: appliedCodesList,
               manualPromoCode: appliedCode,
               manualPromoCodes: appliedCodesList,
             },

@@ -330,14 +330,20 @@ export async function POST(request: NextRequest) {
       ...(body.cart?.manualPromoCodes || []),
       ...(body.cart?.promoCodes || []),
       ...(body.cart?.manualPromoCode ? [body.cart.manualPromoCode] : []),
-    ].map((c) => c.trim().toUpperCase());
+    ].map((c) => c.trim().toUpperCase()).filter(Boolean);
 
-    const hasPromo = allPromoCodes.some(
-      (c) => c === "BLACKFRIDAY10" || c === "BUUDY10" || c === "BUUDY",
-    );
-    const promoToSend = allPromoCodes.includes("BUUDY10") && !allPromoCodes.includes("BLACKFRIDAY10")
-      ? "BUUDY10"
-      : (hasPromo ? "BLACKFRIDAY10" : "");
+    // Only 1 promo code is allowed: strictly either BUUDY10 or BLACKFRIDAY10
+    const lastPromo = allPromoCodes[allPromoCodes.length - 1];
+    let promoToSend = "";
+    if (lastPromo === "BUUDY10" || lastPromo === "BUUDY") {
+      promoToSend = "BUUDY10";
+    } else if (lastPromo === "BLACKFRIDAY10") {
+      promoToSend = "BLACKFRIDAY10";
+    } else if (allPromoCodes.includes("BUUDY10") || allPromoCodes.includes("BUUDY")) {
+      promoToSend = "BUUDY10";
+    } else if (allPromoCodes.includes("BLACKFRIDAY10")) {
+      promoToSend = "BLACKFRIDAY10";
+    }
     // Whop owns the final price and payment. Pass the exact mask quantity and
     // only the supported manual discount; included gifts are part of its bundle.
     const planId = "plan_IY6bXASo3Gh15";

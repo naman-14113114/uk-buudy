@@ -38,7 +38,7 @@ type CartContextValue = CartState & {
   openCart: () => void;
   closeCart: () => void;
   applyManualPromoCode: (code: string) => boolean;
-  removeManualPromoCode: (code: string) => void;
+  removeManualPromoCode: (code?: string) => void;
   clearManualPromoCode: () => void;
   setGiftMessage: (message: string) => void;
 };
@@ -74,26 +74,17 @@ function readStoredCart() {
   for (const stored of readStoredCartCandidates()) {
     try {
       const parsed = JSON.parse(stored) as CartState;
+      const rawCode =
+        Array.isArray(parsed.manualPromoCodes) && parsed.manualPromoCodes.length > 0
+          ? parsed.manualPromoCodes[parsed.manualPromoCodes.length - 1]
+          : parsed.manualPromoCode;
+      const singleActiveCode = getAppliedManualPromoCode(rawCode);
+
       const storedState = {
         ...emptyCart,
         ...parsed,
-        manualPromoCodes: Array.from(
-          new Set(
-            (Array.isArray(parsed.manualPromoCodes)
-              ? parsed.manualPromoCodes
-              : parsed.manualPromoCode
-              ? [parsed.manualPromoCode]
-              : []
-            )
-              .map((c) => getAppliedManualPromoCode(c))
-              .filter(Boolean),
-          ),
-        ),
-        manualPromoCode: getAppliedManualPromoCode(
-          Array.isArray(parsed.manualPromoCodes) && parsed.manualPromoCodes[0]
-            ? parsed.manualPromoCodes[0]
-            : parsed.manualPromoCode,
-        ),
+        manualPromoCode: singleActiveCode,
+        manualPromoCodes: singleActiveCode ? [singleActiveCode] : [],
         lines: normalizeCartLines(Array.isArray(parsed.lines) ? parsed.lines : []),
       };
 
@@ -214,37 +205,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [hydrated, state]);
 
   const totals = useMemo(
-    () =>
-      calculateCartTotals(
-        state.lines,
-        state.manualPromoCodes && state.manualPromoCodes.length > 0
-          ? state.manualPromoCodes
-          : state.manualPromoCode
-          ? [state.manualPromoCode]
-          : [],
-      ),
-    [state.lines, state.manualPromoCode, state.manualPromoCodes],
+    () => calculateCartTotals(state.lines, state.manualPromoCode),
+    [state.lines, state.manualPromoCode],
   );
   const activePromoCodes = useMemo(() => {
-    const productIds = new Set(
-      state.lines
-        .filter((line) => line.type === "product")
-        .map((line) => line.productId),
-    );
-
-    const productPromoCodes = Array.from(productIds)
-      .map((productId) => getProductById(productId)?.promoCode)
-      .filter((code): code is string => Boolean(code));
-
-    const manualCodes =
-      state.manualPromoCodes && state.manualPromoCodes.length > 0
-        ? state.manualPromoCodes
-        : state.manualPromoCode
-        ? [state.manualPromoCode]
-        : [];
-
-    return Array.from(new Set([...productPromoCodes, ...manualCodes]));
-  }, [state.lines, state.manualPromoCode, state.manualPromoCodes]);
+    return state.manualPromoCode ? [state.manualPromoCode] : [];
+  }, [state.manualPromoCode]);
 
   function addProduct(product: Product, quantity = 1) {
     const current = latestState.current;
@@ -303,53 +269,36 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     let applied = false;
     setState((current) => {
-      const currentCodes =
-        current.manualPromoCodes && current.manualPromoCodes.length > 0
-          ? current.manualPromoCodes
-          : current.manualPromoCode
-          ? [current.manualPromoCode]
-          : [];
-
-      if (currentCodes.includes(canonical)) {
+      // Only 1 coupon is allowed: either BUUDY10 or BLACKFRIDAY10
+      // Applying a coupon replaces any previous coupon (zero stacking)
+      if (current.manualPromoCode === canonical) {
         return current;
       }
 
       applied = true;
-      const nextCodes = [...currentCodes, canonical];
       return {
         ...current,
-        manualPromoCodes: nextCodes,
-        manualPromoCode: nextCodes[0] || "",
+        manualPromoCode: canonical,
+        manualPromoCodes: [canonical],
       };
     });
 
     return applied;
   }
 
-  function removeManualPromoCode(code: string) {
-    const canonical = getAppliedManualPromoCode(code) || normalizeManualPromoCode(code);
-    setState((current) => {
-      const currentCodes =
-        current.manualPromoCodes && current.manualPromoCodes.length > 0
-          ? current.manualPromoCodes
-          : current.manualPromoCode
-          ? [current.manualPromoCode]
-          : [];
-
-      const nextCodes = currentCodes.filter((c) => c !== canonical && c !== code);
-      return {
-        ...current,
-        manualPromoCodes: nextCodes,
-        manualPromoCode: nextCodes[0] || "",
-      };
-    });
+  function removeManualPromoCode(_code?: string) {
+    setState((current) => ({
+      ...current,
+      manualPromoCode: "",
+      manualPromoCodes: [],
+    }));
   }
 
   function clearManualPromoCode() {
     setState((current) => ({
       ...current,
-      manualPromoCodes: [],
       manualPromoCode: "",
+      manualPromoCodes: [],
     }));
   }
 

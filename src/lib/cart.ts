@@ -34,7 +34,6 @@ export const VALID_PROMO_CODES: Record<
 > = {
   BLACKFRIDAY10: { code: "BLACKFRIDAY10", discountCents: 1000, type: "promo" },
   BUUDY10: { code: "BUUDY10", discountCents: 1000, type: "promo" },
-  "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2000, type: "gift_card" },
 };
 
 export const emptyCart: CartState = {
@@ -162,11 +161,15 @@ export function calculateCartTotals(
   lines: CartLine[],
   appliedManualPromo: string | string[] = "",
 ) {
+  // Only 1 coupon is allowed: either BUUDY10 or BLACKFRIDAY10 (no stacking)
   const promoCodesList = Array.isArray(appliedManualPromo)
     ? appliedManualPromo
     : appliedManualPromo
     ? [appliedManualPromo]
     : [];
+
+  const rawActiveCode = promoCodesList[promoCodesList.length - 1] || "";
+  const singleCode = getAppliedManualPromoCode(rawActiveCode);
 
   const productLines = lines.filter((line) => line.type === "product");
   const giftLines = lines.filter((line) => line.type === "gift");
@@ -185,14 +188,8 @@ export function calculateCartTotals(
   );
   const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
 
-  // Sum unique applied promo code discounts
-  const uniqueAppliedCodes = Array.from(
-    new Set(promoCodesList.map((c) => getAppliedManualPromoCode(c)).filter(Boolean)),
-  );
-  const totalPromoDiscountCents = uniqueAppliedCodes.reduce((acc, code) => {
-    return acc + getPromoDiscountCents(code);
-  }, 0);
-  const promoDiscountCents = Math.min(totalPromoDiscountCents, subtotalCents);
+  // Strictly single coupon discount: max 1000 cents (£10)
+  const promoDiscountCents = Math.min(getPromoDiscountCents(singleCode), subtotalCents);
 
   return {
     itemCount: productLines.reduce((total, line) => total + line.quantity, 0),
