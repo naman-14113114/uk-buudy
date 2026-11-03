@@ -607,20 +607,20 @@ export const buudyMask: Product = {
   gallery: buudyLedMaskGallery,
   gifts: [
     {
-      id: "premium-travel-box",
-      name: "Premium Travel Box",
-      valueCents: 3900,
-      image: productMediaAsset("ChatGPT Image May 31, 2026, 11_53_13 PM.png"),
-      label: "Exclusive item",
-      href: "/pages/premium-travel-box",
-    },
-    {
       id: "buudy-led-torch",
       name: "Buudy LED Torch",
       valueCents: 7000,
       image: productAsset("01-buudy-red-light-therapy-torch-main.webp", "buudy-red-torch"),
       label: "Limited edition",
       href: "/products/red-light-torch",
+    },
+    {
+      id: "premium-travel-box",
+      name: "Premium Travel Box",
+      valueCents: 3900,
+      image: productMediaAsset("ChatGPT Image May 31, 2026, 11_53_13 PM.png"),
+      label: "Exclusive item",
+      href: "/pages/premium-travel-box",
     },
     {
       id: "skincare-ebook",

@@ -211,7 +211,7 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
     (line) => line.productId === "buudy-led-mask" && line.type === "product"
   );
 
-  return lines.map((line) => {
+  const formatted = lines.map((line) => {
     if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "product") {
       return {
         ...line,
@@ -251,4 +251,14 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
     }
     return line;
   });
+
+  const lineOrder = (line: CartLine) => {
+    if (line.type === "product") return 0;
+    if (line.id.includes("buudy-led-torch") || line.title.toLowerCase().includes("torch")) return 1;
+    if (line.id.includes("premium-travel-box") || line.title.toLowerCase().includes("travel")) return 2;
+    if (line.id.includes("skincare-ebook") || line.title.toLowerCase().includes("ebook") || line.title.toLowerCase().includes("e-book")) return 3;
+    return 4;
+  };
+
+  return [...formatted].sort((a, b) => lineOrder(a) - lineOrder(b));
 }
