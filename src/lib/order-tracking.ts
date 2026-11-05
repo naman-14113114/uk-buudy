@@ -60,6 +60,25 @@ type CJTrackingRecord = {
   trackEvent?: CJTrackEvent[];
 };
 
+type HyperSKUTrackEvent = {
+  eventTime: string;
+  eventThing: string;
+  eventDetail?: string | null;
+  place?: string | null;
+};
+
+type HyperSKURecord = {
+  finalNo?: string;
+  status?: number; // 1: Delivered, 2: In Transit, 3: Pick Up, 4: Undelivered, 5: Expired, 6: Returned, 0: Not Find, -5: Does not exist, -2: Alert
+  deliveredDay?: string;
+  flow_0?: HyperSKUTrackEvent[]; // Origin & international transit flow
+  flow_1?: HyperSKUTrackEvent[]; // Destination & last-mile courier flow (e.g. Royal Mail, Yodel)
+  express_company_info?: { website?: string; name?: string; contact?: string };
+  express_company_info_to?: { website?: string; name?: string; contact?: string };
+  lasttime?: string;
+  createTime?: string;
+};
+
 export type CachedOrder = {
   id: string;
   ref: string;
@@ -101,6 +120,49 @@ const INITIAL_BUUDY_ORDERS: Array<{
   customTimeline?: TimelineEvent[];
   additionalTracking?: string[];
 }> = [
+  {
+    id: "a323bb89-82bc-400d-859f-55d8df748b60",
+    ref: "#2570",
+    first: "Verified",
+    last: "Mayoro",
+    city: "Horley",
+    country: "United Kingdom",
+    createdAt: 1793738655,
+    tracking: null,
+  },
+  {
+    id: "a3179b57-a68e-47ab-82cd-d1a46cf932bd",
+    ref: "#2560",
+    first: "Frances",
+    last: "Carroll",
+    city: "Dundee",
+    country: "United Kingdom",
+    createdAt: 1793217857,
+    tracking: "QP272594975GB",
+    carrier: "Royal Mail Tracked",
+  },
+  {
+    id: "a3177e7c-bdba-4792-a7da-fc6249a797f1",
+    ref: "#2559",
+    first: "Frances",
+    last: "Carroll",
+    city: "Dundee",
+    country: "United Kingdom",
+    createdAt: 1793213016,
+    tracking: "QP272594984GB",
+    carrier: "Royal Mail Tracked",
+  },
+  {
+    id: "a3172e7b-7d83-4a6e-8b5e-58ce95d62404",
+    ref: "#2557",
+    first: "Dickie",
+    last: "Copner",
+    city: "Cannock",
+    country: "United Kingdom",
+    createdAt: 1793199594,
+    tracking: "QP272594967GB",
+    carrier: "Royal Mail Tracked",
+  },
   {
     id: "a3151b5a-4fb7-4e77-8950-40df1412584d",
     ref: "#2552",
@@ -901,6 +963,63 @@ async function fetchCJTracking(trackingNumber: string): Promise<CJTrackingRecord
 }
 
 // -----------------------------------------------------------------------------
+// HYPERSKU LOGISTICS TRACKER (Place 3: Real-time live HyperSKU / Hyperlogistix network)
+// -----------------------------------------------------------------------------
+async function fetchHyperSKUTracking(trackingNumber: string): Promise<HyperSKURecord | null> {
+  if (!trackingNumber || trackingNumber.startsWith("#")) {
+    return null;
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4500);
+
+    const postBody = new URLSearchParams({
+      finalNo: trackingNumber.trim(),
+      doFinalType: "0",
+      finalId: "0",
+    }).toString();
+
+    const res = await fetch("https://track.hypersku.com/Index/track_all.html", {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        origin: "https://track.hypersku.com",
+        referer: "https://track.hypersku.com/",
+        "x-requested-with": "XMLHttpRequest",
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      },
+      body: postBody,
+      cache: "no-store",
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeoutId));
+
+    if (!res.ok) return null;
+
+    const json = await res.json();
+    if (json && Number(json.retCode) > 0 && json.retInfo) {
+      const trimmed = trackingNumber.trim();
+      const record = json.retInfo[trimmed] || Object.values(json.retInfo)[0];
+      if (
+        record &&
+        record.status !== 0 &&
+        record.status !== -5 &&
+        (record.status > 0 ||
+          (Array.isArray(record.flow_0) && record.flow_0.length > 0) ||
+          (Array.isArray(record.flow_1) && record.flow_1.length > 0))
+      ) {
+        return record as HyperSKURecord;
+      }
+    }
+  } catch (err) {
+    console.warn("HyperSKU tracking network fetch error:", err);
+  }
+
+  return null;
+}
+
+// -----------------------------------------------------------------------------
 // DATA SANITIZATION (Prevents customer data leakage in public responses)
 // -----------------------------------------------------------------------------
 function maskName(firstName?: string, lastName?: string): string {
@@ -1027,6 +1146,89 @@ export function sanitizeTrackingText(text: string): string {
   return cleaned.trim();
 }
 
+// Helper to parse dates into epoch milliseconds for accurate descending chronological sorting
+function parseMilestoneTimestamp(dateStr: string): number {
+  if (!dateStr) return 0;
+  const parsed = Date.parse(dateStr);
+  if (!isNaN(parsed)) return parsed;
+
+  const m = dateStr.match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4}),?\s+(\d{1,2}):(\d{2})/);
+  if (m) {
+    const months: Record<string, number> = {
+      jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+      jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+    };
+    const day = parseInt(m[1], 10);
+    const month = months[m[2].toLowerCase()] ?? 0;
+    const year = parseInt(m[3], 10);
+    const hour = parseInt(m[4], 10);
+    const min = parseInt(m[5], 10);
+    return Date.UTC(year, month, day, hour, min);
+  }
+
+  return 0;
+}
+
+// Strict verification function ensuring orders are NEVER prematurely marked as Delivered
+export function isExplicitCustomerDelivery(text: string): boolean {
+  if (!text) return false;
+  const t = text.trim().toLowerCase();
+
+  // 1. Exclude negative, pending, attempted, or transit phrasing
+  if (
+    t.includes("undelivered") ||
+    t.includes("not delivered") ||
+    t.includes("failed delivery") ||
+    t.includes("delivery failed") ||
+    t.includes("delivery attempt") ||
+    t.includes("attempted delivery") ||
+    t.includes("out for delivery") ||
+    t.includes("on vehicle for delivery") ||
+    t.includes("with courier for delivery") ||
+    t.includes("with driver") ||
+    t.includes("scheduled for delivery") ||
+    t.includes("held at") ||
+    t.includes("ready for delivery") ||
+    t.includes("awaiting delivery") ||
+    t.includes("missed delivery") ||
+    t.includes("sorting for delivery") ||
+    t.includes("delivery depot") ||
+    t.includes("service centre") ||
+    t.includes("service center")
+  ) {
+    return false;
+  }
+
+  // 2. Exclude "delivered to [intermediate facility / carrier / hub / agent]"
+  if (
+    /delivered\s+to\s+(?:the\s+)?(?:local\s+)?(?:carrier|depot|hub|facility|sorting|terminal|airport|airline|station|office|unit|agent|network|warehouse|distribution\s*centre|distribution\s*center|yodel|royal\s*mail|dhl|evri|hermes)/i.test(
+      t,
+    ) ||
+    /delivered\s+(?:at|in)\s+(?:the\s+)?(?:local\s+)?(?:carrier|depot|hub|facility|sorting|terminal|airport|airline|station|office|unit|agent|network|warehouse)/i.test(
+      t,
+    ) ||
+    /handed\s+over\s+to/i.test(t) ||
+    /received\s+at\s+depot/i.test(t)
+  ) {
+    return false;
+  }
+
+  // 3. Positive confirmation of final delivery to recipient / address
+  if (
+    /\b(?:delivered\s+to\s+(?:recipient|customer|resident|addressee|front\s*door|porch|safe\s*place|letterbox|neighbour|neighbor|reception|mailbox))\b/i.test(
+      t,
+    ) ||
+    /\b(?:signed\s+for\s+by|delivered\s*-\s*signed|delivered\s+and\s+signed)\b/i.test(t) ||
+    /\b(?:successfully\s+delivered|item\s+delivered|package\s+delivered|parcel\s+delivered)\b/i.test(t) ||
+    t === "delivered" ||
+    /^delivered\b/i.test(t)
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
 function mapCJEvent(
   activity: string,
   location: string,
@@ -1041,11 +1243,18 @@ function mapCJEvent(
   const act = activity.trim();
   const dest = destinationCity || "UK Regional";
 
-  if (/delivered/i.test(act)) {
+  // Check Out for Delivery and Depot Scans FIRST to prevent premature delivery classification
+  if (
+    /out for delivery/i.test(act) ||
+    /loaded onto (?:courier\s+)?van/i.test(act) ||
+    /with (?:delivery\s+)?courier/i.test(act) ||
+    /with (?:delivery\s+)?driver/i.test(act) ||
+    /on vehicle for delivery/i.test(act)
+  ) {
     return {
-      title: "Delivered",
-      description: `Package safely delivered and signed for at customer address${loc}.`,
-      stage: "DELIVERED",
+      title: "Out for Delivery",
+      description: `Loaded onto local courier delivery van for final delivery to ${dest} address.`,
+      stage: "OUT_FOR_DELIVERY",
     };
   }
 
@@ -1054,7 +1263,9 @@ function mapCJEvent(
     /arrived at (?:your\s+)?delivery depot/i.test(act) ||
     /courier facility/i.test(act) ||
     /service centre/i.test(act) ||
-    /delivery depot/i.test(act)
+    /service center/i.test(act) ||
+    /delivery depot/i.test(act) ||
+    /local distribution/i.test(act)
   ) {
     return {
       title: `Processed at UK Distribution Hub (${dest})`,
@@ -1063,15 +1274,16 @@ function mapCJEvent(
     };
   }
 
-  if (/out for delivery/i.test(act)) {
+  // Explicit delivery check
+  if (isExplicitCustomerDelivery(act)) {
     return {
-      title: "Out for Delivery",
-      description: `Loaded onto local courier delivery van for final delivery to ${dest} address.`,
-      stage: "OUT_FOR_DELIVERY",
+      title: "Delivered",
+      description: `Package safely delivered and signed for at customer address${loc}.`,
+      stage: "DELIVERED",
     };
   }
 
-  if (/national hub/i.test(act) || /terminal/i.test(act) || /sorting centre/i.test(act)) {
+  if (/national hub/i.test(act) || /terminal/i.test(act) || /sorting centre/i.test(act) || /sorting center/i.test(act)) {
     return {
       title: "Processed at UK National Sorting Hub",
       description: `Package sorted and scanned at national carrier sorting facility. En route to regional delivery depot.`,
@@ -1079,7 +1291,7 @@ function mapCJEvent(
     };
   }
 
-  if (/arrive at the destination airport/i.test(act)) {
+  if (/arrive at the destination airport/i.test(act) || /arrived in (?:the\s+)?uk/i.test(act)) {
     return {
       title: "Arrived at UK Destination Airport",
       description: `Flight landed in the United Kingdom. Package received at airport cargo depot and cleared customs border controls.`,
@@ -1087,7 +1299,7 @@ function mapCJEvent(
     };
   }
 
-  if (/depart from the original airport/i.test(act)) {
+  if (/depart from the original airport/i.test(act) || /departed from airport/i.test(act) || /flight departed/i.test(act)) {
     return {
       title: "In Transit via International Air Cargo",
       description: `Air freight flight departed international logistics hub bound for the United Kingdom.`,
@@ -1095,7 +1307,7 @@ function mapCJEvent(
     };
   }
 
-  if (/export customs declaration completed/i.test(act)) {
+  if (/export customs declaration completed/i.test(act) || /export customs/i.test(act)) {
     return {
       title: "Export Customs & Security Clearance Completed",
       description: `Package completed international export inspection and airport security clearance.`,
@@ -1111,7 +1323,7 @@ function mapCJEvent(
     };
   }
 
-  if (/departed from the original facility/i.test(act)) {
+  if (/departed from the original facility/i.test(act) || /dispatched from logistics/i.test(act)) {
     return {
       title: "Dispatched from Logistics Center",
       description: `Package sorted and dispatched from regional processing center.`,
@@ -1158,8 +1370,147 @@ function mapCJEvent(
   };
 }
 
+function mapHyperSKUEvent(
+  thing: string,
+  detail: string | null | undefined,
+  place: string | null | undefined,
+  carrierName: string,
+  destinationCity?: string,
+): { title: string; description: string; stage: TrackingStage } {
+  const fullText = [thing, detail].filter(Boolean).join(" ").trim();
+  const dest = destinationCity || "UK Regional";
+  const loc = place ? ` (${place.trim()})` : "";
+
+  // 1. Check Out for Delivery and local delivery unit first
+  if (
+    /out for delivery/i.test(fullText) ||
+    /loaded onto (?:courier\s+)?van/i.test(fullText) ||
+    /with (?:delivery\s+)?courier/i.test(fullText) ||
+    /with (?:delivery\s+)?driver/i.test(fullText) ||
+    /on vehicle for delivery/i.test(fullText)
+  ) {
+    return {
+      title: "Out for Delivery",
+      description: `Loaded onto local courier delivery van for final delivery to ${dest} address.`,
+      stage: "OUT_FOR_DELIVERY",
+    };
+  }
+
+  if (
+    /arrived at (?:your\s+)?delivery depot/i.test(fullText) ||
+    /delivery depot/i.test(fullText) ||
+    /service centre/i.test(fullText) ||
+    /service center/i.test(fullText) ||
+    /courier facility/i.test(fullText) ||
+    /local distribution/i.test(fullText)
+  ) {
+    return {
+      title: `Processed at UK Distribution Hub (${dest})`,
+      description: `Package received and scanned at local distribution network hub serving ${dest}, GB. Handed over for final dispatch via ${carrierName}.`,
+      stage: "OUT_FOR_DELIVERY",
+    };
+  }
+
+  // 2. Explicit delivery check
+  if (isExplicitCustomerDelivery(fullText)) {
+    return {
+      title: "Delivered",
+      description: `Package safely delivered and signed for at customer address${loc}.`,
+      stage: "DELIVERED",
+    };
+  }
+
+  // 3. National hub / Sorting
+  if (
+    /national hub/i.test(fullText) ||
+    /terminal/i.test(fullText) ||
+    /sorting centre/i.test(fullText) ||
+    /sorting center/i.test(fullText)
+  ) {
+    return {
+      title: "Processed at UK National Sorting Hub",
+      description: `Package sorted and scanned at national carrier sorting facility. En route to regional delivery depot.`,
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  // 4. UK Airport
+  if (
+    /destination airport/i.test(fullText) ||
+    /arrived at destination/i.test(fullText) ||
+    /arrived in (?:the\s+)?uk/i.test(fullText)
+  ) {
+    return {
+      title: "Arrived at UK Destination Airport",
+      description: `Flight landed in the United Kingdom. Package received at airport cargo depot and cleared customs border controls.`,
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  // 5. International Air cargo
+  if (
+    /departed from airport/i.test(fullText) ||
+    /flight departed/i.test(fullText) ||
+    /air cargo/i.test(fullText) ||
+    /in transit via/i.test(fullText)
+  ) {
+    return {
+      title: "In Transit via International Air Cargo",
+      description: `Air freight flight departed international logistics hub bound for the United Kingdom.`,
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  // 6. Customs
+  if (/export customs/i.test(fullText) || /security clearance/i.test(fullText) || /customs cleared/i.test(fullText)) {
+    return {
+      title: "Export Customs & Security Clearance Completed",
+      description: `Package completed international export inspection and airport security clearance.`,
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  // 7. Dispatched / picked up
+  if (/dispatched/i.test(fullText) || /picked up/i.test(fullText) || /received at facility/i.test(fullText)) {
+    return {
+      title: "Dispatched with Carrier",
+      description: `Package sorted and dispatched via carrier network.`,
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  // 8. Processing / Packaged
+  if (/packed/i.test(fullText) || /processing/i.test(fullText) || /ready for outbound/i.test(fullText)) {
+    return {
+      title: "Order Processed & Packaged for Delivery",
+      description: "Item passed beauty device safety inspection and packaged in protective temperature-controlled shipping container.",
+      stage: "PROCESSING",
+    };
+  }
+
+  // 9. Order placed / info received
+  if (
+    /electronic/i.test(fullText) ||
+    /manifest/i.test(fullText) ||
+    /label created/i.test(fullText) ||
+    /information received/i.test(fullText)
+  ) {
+    return {
+      title: "Order Placed & Shipping Label Generated",
+      description: "Your order payment was verified and sent to the fulfillment queue.",
+      stage: "ORDER_PLACED",
+    };
+  }
+
+  return {
+    title: sanitizeTrackingText(thing || fullText || "In Transit"),
+    description: sanitizeTrackingText([thing, detail, loc].filter(Boolean).join(" - ")),
+    stage: "IN_TRANSIT",
+  };
+}
+
 // -----------------------------------------------------------------------------
-// MAIN LOOKUP ENGINE: (In-Memory Map -> XPage Dynamic Miss -> CJTracker Live Checkpoints)
+// MAIN LOOKUP ENGINE: (In-Memory Map -> XPage Dynamic Miss -> CJ + HyperSKU Live Checkpoints)
 // -----------------------------------------------------------------------------
 export async function lookupOrderTracking(rawQuery: string): Promise<TrackingData | null> {
   const query = rawQuery.trim();
@@ -1170,9 +1521,13 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
   try {
     let orderRecord: CachedOrder | null = null;
 
-    // STEP A: Check in-memory Map first
+    // STEP A: Check in-memory Map first (by raw query, normalized key, without # or with #)
     if (ordersMap.has(normalizedKey)) {
       orderRecord = ordersMap.get(normalizedKey)!;
+    } else if (normalizedKey.startsWith("#") && ordersMap.has(normalizedKey.slice(1))) {
+      orderRecord = ordersMap.get(normalizedKey.slice(1))!;
+    } else if (!normalizedKey.startsWith("#") && ordersMap.has(`#${normalizedKey}`)) {
+      orderRecord = ordersMap.get(`#${normalizedKey}`)!;
     }
 
     // STEP B: If NOT in Map (Cache Miss), query XPage dynamically
@@ -1180,15 +1535,39 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       orderRecord = await fetchFromXPageLive(query);
     }
 
-    // Determine the tracking barcode to query on CJTracker
+    // Determine the primary tracking barcode to query
     let trackingBarcode = orderRecord?.trackingNumber || query;
 
-    // STEP C: Query Place 2 (CJ Logistics Tracker for real-time live current checkpoints)
-    let cjData = await fetchCJTracking(trackingBarcode);
+    // STEP C: Query Place 2 (CJ Logistics) AND Place 3 (HyperSKU Logistics) in parallel
+    let [cjData, hyperskuData] = await Promise.all([
+      fetchCJTracking(trackingBarcode),
+      fetchHyperSKUTracking(trackingBarcode),
+    ]);
 
-    // If query was an order number and trackingBarcode was not yet known, check CJ with query
-    if (!cjData && trackingBarcode !== query) {
-      cjData = await fetchCJTracking(query);
+    // If query was an order number and trackingBarcode was not yet known, check with query
+    if (!cjData && !hyperskuData && trackingBarcode !== query) {
+      const [retryCj, retryHypersku] = await Promise.all([
+        fetchCJTracking(query),
+        fetchHyperSKUTracking(query),
+      ]);
+      if (retryCj) cjData = retryCj;
+      if (retryHypersku) hyperskuData = retryHypersku;
+    }
+
+    // If still no live data, check additional tracking numbers (e.g. Yodel last mile JJD...)
+    if (!cjData && !hyperskuData && orderRecord?.additionalTracking && orderRecord.additionalTracking.length > 0) {
+      for (const altBarcode of orderRecord.additionalTracking) {
+        if (!altBarcode) continue;
+        const [altCj, altHypersku] = await Promise.all([
+          fetchCJTracking(altBarcode),
+          fetchHyperSKUTracking(altBarcode),
+        ]);
+        if (altCj || altHypersku) {
+          if (altCj) cjData = altCj;
+          if (altHypersku) hyperskuData = altHypersku;
+          break;
+        }
+      }
     }
 
     // If orderRecord was still not found, but CJ recognizes this as a Buudy order:
@@ -1201,8 +1580,8 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       }
     }
 
-    // If neither the Map / XPage nor CJTracker found a Buudy order, reject cleanly
-    if (!orderRecord && !cjData) {
+    // If neither the Map / XPage nor CJ nor HyperSKU found an order or shipment, reject cleanly
+    if (!orderRecord && !cjData && !hyperskuData) {
       return null;
     }
 
@@ -1211,32 +1590,51 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       return null;
     }
 
-    // Build the consolidated TrackingData
+    // Active tracking barcode
     const activeTrackingNumber =
-      orderRecord?.trackingNumber || cjData?.lastTrackNumber || cjData?.trackNumber || trackingBarcode;
+      orderRecord?.trackingNumber ||
+      hyperskuData?.finalNo ||
+      cjData?.lastTrackNumber ||
+      cjData?.trackNumber ||
+      trackingBarcode;
 
     const isRoyalMail =
       /^[A-Z]{2}\d{9}GB$/i.test(activeTrackingNumber) ||
       Boolean(orderRecord?.shippingCarrier && orderRecord.shippingCarrier.toLowerCase().includes("royal mail"));
 
+    // Carrier name detection across HyperSKU, CJ, and known barcode schemes
+    const hyperskuCarrierName =
+      hyperskuData?.express_company_info_to?.name ||
+      hyperskuData?.express_company_info?.name ||
+      "";
+
     const rawCarrier =
+      hyperskuCarrierName ||
       cjData?.providerEnName ||
       orderRecord?.shippingCarrier ||
       (isRoyalMail ? "Royal Mail Tracked" : "yodel");
 
     const carrierName = isRoyalMail
       ? "Royal Mail Tracked"
-      : rawCarrier.toLowerCase().includes("yodel")
+      : rawCarrier.toLowerCase().includes("yodel") || activeTrackingNumber.startsWith("JJD")
         ? "Yodel UK"
         : rawCarrier.toLowerCase().includes("dhl")
           ? "DHL Parcel UK"
-          : rawCarrier.toLowerCase().includes("royal mail")
-            ? "Royal Mail Tracked"
-            : "Express Tracked Courier";
+          : rawCarrier.toLowerCase().includes("evri") || rawCarrier.toLowerCase().includes("hermes")
+            ? "Evri UK"
+            : rawCarrier.toLowerCase().includes("yunexpress")
+              ? "YunExpress"
+              : rawCarrier.toLowerCase().includes("4px")
+                ? "4PX Express"
+                : rawCarrier.toLowerCase().includes("royal mail")
+                  ? "Royal Mail Tracked"
+                  : hyperskuCarrierName || "Express Tracked Courier";
 
     const carrierTrackingUrl = isRoyalMail
       ? `https://www.royalmail.com/track-your-item#/tracking-results/${encodeURIComponent(activeTrackingNumber)}`
-      : `https://www.aftership.com/track/${encodeURIComponent(activeTrackingNumber)}`;
+      : hyperskuData?.express_company_info_to?.website && hyperskuData.express_company_info_to.website.startsWith("http")
+        ? hyperskuData.express_company_info_to.website
+        : `https://www.aftership.com/track/${encodeURIComponent(activeTrackingNumber)}`;
 
     const destCity = orderRecord?.customerCity || "United Kingdom";
     const destCountry = orderRecord?.customerCountry || "United Kingdom";
@@ -1245,32 +1643,58 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
     const recipientName = maskName(orderRecord?.customerFirstName, orderRecord?.customerLastName);
     const orderRef = orderRecord?.ref || (query.startsWith("#") ? query : `#${query}`);
 
-    // Parse live checkpoints from CJ Logistics
+    // Parse live checkpoints from both backends
     const timelineEvents: TimelineEvent[] = [];
-    const lastMileBarcode = cjData?.lastTrackNumber || cjData?.trackNumber;
+    const lastMileBarcode = cjData?.lastTrackNumber || cjData?.trackNumber || hyperskuData?.finalNo;
 
-    let hasOutForDelivery = false;
-    let hasInTransit = false;
-    let isDelivered = Boolean(
-      (cjData?.statusDescription && cjData.statusDescription.toLowerCase().includes("delivered")) ||
+    // 1. Process HyperSKU live events if present
+    if (hyperskuData) {
+      const rawHyperSKUEvents: Array<{ time: string; thing: string; detail?: string | null; place?: string | null }> = [];
 
-        cjData?.status === 7,
-    );
+      // Destination leg events first (flow_1)
+      if (Array.isArray(hyperskuData.flow_1) && hyperskuData.flow_1.length > 0) {
+        for (const ev of hyperskuData.flow_1) {
+          if (ev && (ev.eventThing || ev.eventDetail)) {
+            rawHyperSKUEvents.push({
+              time: ev.eventTime,
+              thing: ev.eventThing,
+              detail: ev.eventDetail,
+              place: ev.place,
+            });
+          }
+        }
+      }
 
-    let deliveredDateStr = "";
+      // Origin & transit leg events (flow_0)
+      if (Array.isArray(hyperskuData.flow_0) && hyperskuData.flow_0.length > 0) {
+        for (const ev of hyperskuData.flow_0) {
+          if (ev && (ev.eventThing || ev.eventDetail)) {
+            rawHyperSKUEvents.push({
+              time: ev.eventTime,
+              thing: ev.eventThing,
+              detail: ev.eventDetail,
+              place: ev.place,
+            });
+          }
+        }
+      }
 
+      for (const ev of rawHyperSKUEvents) {
+        const mapped = mapHyperSKUEvent(ev.thing, ev.detail, ev.place, carrierName, destCity);
+        timelineEvents.push({
+          title: sanitizeTrackingText(mapped.title),
+          description: sanitizeTrackingText(mapped.description),
+          date: formatCJEventDate(ev.time),
+          completed: true,
+          stage: mapped.stage,
+        });
+      }
+    }
+
+    // 2. Process CJ Logistics live events if present
     if (cjData?.trackEvent && Array.isArray(cjData.trackEvent) && cjData.trackEvent.length > 0) {
       for (const ev of cjData.trackEvent) {
         const mapped = mapCJEvent(ev.activity, ev.location, carrierName, lastMileBarcode, destCity);
-        if (mapped.stage === "OUT_FOR_DELIVERY") hasOutForDelivery = true;
-        if (mapped.stage === "IN_TRANSIT") hasInTransit = true;
-        if (mapped.stage === "DELIVERED") {
-          isDelivered = true;
-          if (!deliveredDateStr) {
-            deliveredDateStr = formatCJEventDate(ev.eventTime);
-          }
-        }
-
         timelineEvents.push({
           title: sanitizeTrackingText(mapped.title),
           description: sanitizeTrackingText(mapped.description),
@@ -1281,20 +1705,20 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       }
     }
 
-    // Custom timeline if present (e.g. verified CJ carrier milestones)
-    if (orderRecord?.customTimeline && orderRecord.customTimeline.length > 0 && timelineEvents.length === 0) {
+    // 3. Fallback to custom timeline if present (verified carrier checkpoints, e.g. Order #2538, #2533)
+    if (timelineEvents.length === 0 && orderRecord?.customTimeline && orderRecord.customTimeline.length > 0) {
       for (const ev of orderRecord.customTimeline) {
-        if (ev.stage === "OUT_FOR_DELIVERY") hasOutForDelivery = true;
-        if (ev.stage === "IN_TRANSIT") hasInTransit = true;
-        if (ev.stage === "DELIVERED") {
-          isDelivered = true;
-          if (!deliveredDateStr) deliveredDateStr = ev.date;
-        }
-        timelineEvents.push(ev);
+        timelineEvents.push({
+          title: sanitizeTrackingText(ev.title),
+          description: sanitizeTrackingText(ev.description),
+          date: ev.date,
+          completed: true,
+          stage: ev.stage,
+        });
       }
     }
 
-    // Dynamic real-time milestone generator if neither live CJ nor custom timeline recorded events
+    // 4. Fallback to dynamic real-time milestone generator if no checkpoints recorded
     if (timelineEvents.length === 0) {
       const nowSec = Math.floor(Date.now() / 1000);
       const createdAt = orderRecord?.createdAt || nowSec - 86400 * 5;
@@ -1356,15 +1780,13 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       ];
 
       // Filter milestones that have occurred by the current real time (nowSec)
+      // Dynamic milestones strictly NEVER include a Delivered event.
+      // Delivery requires explicit courier scan confirmation or verified customer receipt.
       const validMilestones = dynamicMilestones
         .filter((m) => createdAt + m.offsetSec <= nowSec)
         .sort((a, b) => b.offsetSec - a.offsetSec);
 
       for (const m of validMilestones) {
-        if (m.stage === "OUT_FOR_DELIVERY") hasOutForDelivery = true;
-        if (m.stage === "IN_TRANSIT") hasInTransit = true;
-        // Dynamic milestones are strictly tracking estimates and NEVER mark an order as delivered.
-        // Delivery requires explicit courier scan confirmation or verified customer receipt.
         timelineEvents.push({
           title: m.title,
           description: m.description,
@@ -1375,41 +1797,72 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       }
     }
 
-    // Determine current status & percentage
+    // 5. Deduplicate and sort all timeline events strictly descending (newest milestone at index 0)
+    const seenEventKeys = new Set<string>();
+    const deduplicatedEvents: TimelineEvent[] = [];
+
+    for (const ev of timelineEvents) {
+      const key = `${ev.date}_${ev.title}`.toLowerCase();
+      if (!seenEventKeys.has(key)) {
+        seenEventKeys.add(key);
+        deduplicatedEvents.push(ev);
+      }
+    }
+
+    deduplicatedEvents.sort((a, b) => {
+      const timeA = parseMilestoneTimestamp(a.date);
+      const timeB = parseMilestoneTimestamp(b.date);
+      return timeB - timeA;
+    });
+
+    // 6. Evaluate live status strictly from the latest (most recent) tracking milestone
+    // ENFORCEMENT: Never show Delivered until explicitly delivered to recipient! Out for delivery remains OUT_FOR_DELIVERY.
     let status: "Processing" | "In Transit" | "Out for Delivery" | "Delivered" = "In Transit";
     let statusCode: TrackingStage = "IN_TRANSIT";
     let progressPercentage = 60;
     let activeStepIndex = 2;
+    let deliveredDateStr = "";
 
-    if (isDelivered) {
-      status = "Delivered";
-      statusCode = "DELIVERED";
-      progressPercentage = 100;
-      activeStepIndex = 4;
-    } else if (hasOutForDelivery || (cjData?.statusDescription && cjData.statusDescription.toLowerCase().includes("facility"))) {
-      status = "Out for Delivery";
-      statusCode = "OUT_FOR_DELIVERY";
-      progressPercentage = 85;
-      activeStepIndex = 3;
-    } else if (hasInTransit) {
-      status = "In Transit";
-      statusCode = "IN_TRANSIT";
-      const hasHubScan = timelineEvents.some(
-        (e) =>
-          e.title.toLowerCase().includes("depot") ||
-          e.title.toLowerCase().includes("hub") ||
-          e.title.toLowerCase().includes("princess royal"),
-      );
-      progressPercentage = hasHubScan ? 75 : 60;
-      activeStepIndex = 2;
-    } else {
-      status = "Processing";
-      statusCode = "PROCESSING";
-      progressPercentage = 25;
-      activeStepIndex = 1;
+    const latestMilestone = deduplicatedEvents[0];
+
+    if (latestMilestone) {
+      if (
+        latestMilestone.stage === "DELIVERED" &&
+        isExplicitCustomerDelivery(latestMilestone.title + " " + latestMilestone.description)
+      ) {
+        status = "Delivered";
+        statusCode = "DELIVERED";
+        progressPercentage = 100;
+        activeStepIndex = 4;
+        deliveredDateStr = latestMilestone.date;
+      } else if (latestMilestone.stage === "OUT_FOR_DELIVERY") {
+        // STRICT RULE: Parcel is Out for Delivery! Never Delivered!
+        status = "Out for Delivery";
+        statusCode = "OUT_FOR_DELIVERY";
+        progressPercentage = 85;
+        activeStepIndex = 3;
+      } else if (latestMilestone.stage === "IN_TRANSIT") {
+        status = "In Transit";
+        statusCode = "IN_TRANSIT";
+        const hasHubScan = deduplicatedEvents.some(
+          (e) =>
+            e.title.toLowerCase().includes("depot") ||
+            e.title.toLowerCase().includes("hub") ||
+            e.title.toLowerCase().includes("sorting") ||
+            e.title.toLowerCase().includes("terminal") ||
+            e.title.toLowerCase().includes("princess royal"),
+        );
+        progressPercentage = hasHubScan ? 75 : 60;
+        activeStepIndex = 2;
+      } else {
+        status = "Processing";
+        statusCode = latestMilestone.stage === "ORDER_PLACED" ? "ORDER_PLACED" : "PROCESSING";
+        progressPercentage = latestMilestone.stage === "ORDER_PLACED" ? 10 : 25;
+        activeStepIndex = latestMilestone.stage === "ORDER_PLACED" ? 0 : 1;
+      }
     }
 
-    const earliestEvent = timelineEvents[timelineEvents.length - 1];
+    const earliestEvent = deduplicatedEvents[deduplicatedEvents.length - 1];
     const orderDate = formatUKOrderDate(orderRecord?.createdAt, earliestEvent?.date);
 
     return {
@@ -1425,7 +1878,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       progressPercentage,
       activeStepIndex,
       orderDate,
-      estimatedDelivery: isDelivered ? (deliveredDateStr ? `Delivered on ${deliveredDateStr}` : "Delivered") : "",
+      estimatedDelivery: status === "Delivered" ? (deliveredDateStr ? `Delivered on ${deliveredDateStr}` : "Delivered") : "",
       items: orderRecord?.items || [
         {
           title: "Buudy 7 Colour LED Mask",
@@ -1440,7 +1893,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
           image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
         },
       ],
-      timeline: timelineEvents,
+      timeline: deduplicatedEvents,
     };
   } catch (err) {
     console.error("Critical error in lookupOrderTracking:", err);
