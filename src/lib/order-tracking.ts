@@ -72,6 +72,7 @@ export type CachedOrder = {
   shippingCarrier?: string | null;
   items: TrackingItem[];
   customTimeline?: TimelineEvent[];
+  additionalTracking?: string[];
 };
 
 const BUUDY_HOSTING_ID = process.env.XPAGE_BUUDY_HOSTING_ID || "a2b770e7-c07c-4665-bbd2-f1ec88e15376";
@@ -98,6 +99,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
   carrier?: string | null;
   items?: TrackingItem[];
   customTimeline?: TimelineEvent[];
+  additionalTracking?: string[];
 }> = [
   {
     id: "a3151b5a-4fb7-4e77-8950-40df1412584d",
@@ -168,6 +170,79 @@ const INITIAL_BUUDY_ORDERS: Array<{
     country: "United Kingdom",
     createdAt: 1792839693,
     tracking: "ZHPHD261024120642ML",
+    carrier: "Yodel UK",
+    additionalTracking: ["JJD0002234587495447"],
+    items: [
+      {
+        title: "Buudy LED Mask + Premium Travel Box",
+        quantity: 1,
+        variant: "Cleopatra Edition",
+        image: "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
+      },
+      {
+        title: "Buudy LED Torch",
+        quantity: 1,
+        variant: "BUUDY TORCH BUNDLE",
+        image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
+      },
+      {
+        title: "Skincare E-Book",
+        quantity: 1,
+        variant: "Digital Guide",
+        image: "/images/products/skincare-ebook/skincare-ebook.png",
+      },
+    ],
+    customTimeline: [
+      {
+        title: "Your parcel has arrived at your delivery depot STOCKTON ON TEES SERVICE CENTRE",
+        description: "Your parcel has arrived at your local delivery depot (Stockton-on-Tees Service Centre) serving Durham. Handed over for final delivery dispatch via Yodel UK (Last Mile Tracking: JJD0002234587495447).",
+        date: "05 Nov 2026, 02:05",
+        completed: true,
+        stage: "OUT_FOR_DELIVERY",
+      },
+      {
+        title: "Your parcel is at our national hub HATFIELD TERMINAL",
+        description: "Your parcel has been processed through the national sorting terminal at Hatfield.",
+        date: "04 Nov 2026, 13:38",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Arrived at UK Destination Airport",
+        description: "Flight landed in the United Kingdom. Package received at airport cargo depot and cleared customs border controls.",
+        date: "02 Nov 2026, 08:44",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "In Transit via International Air Cargo",
+        description: "Air freight flight departed international logistics hub bound for the United Kingdom.",
+        date: "31 Oct 2026, 17:54",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Export Customs & Security Clearance Completed",
+        description: "Package completed international export inspection and airport security clearance.",
+        date: "26 Oct 2026, 11:20",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Dispatched with Carrier",
+        description: "Package picked up by express courier. Assigned tracking barcode: ZHPHD261024120642ML (Yodel barcode: JJD0002234587495447).",
+        date: "25 Oct 2026, 15:00",
+        completed: true,
+        stage: "IN_TRANSIT",
+      },
+      {
+        title: "Order Placed & Confirmed",
+        description: "Your order payment was verified and sent to fulfillment queue.",
+        date: "24 Oct 2026, 14:41",
+        completed: true,
+        stage: "ORDER_PLACED",
+      },
+    ],
   },
   {
     id: "a30d5a5a-554c-4708-ac8f-28355370d28b",
@@ -593,6 +668,11 @@ function registerOrderInMap(record: CachedOrder) {
   if (record.trackingNumber) {
     ordersMap.set(record.trackingNumber.toLowerCase(), record);
   }
+  if (record.additionalTracking && Array.isArray(record.additionalTracking)) {
+    for (const alt of record.additionalTracking) {
+      if (alt) ordersMap.set(alt.toLowerCase(), record);
+    }
+  }
 }
 
 // Populate initial Map
@@ -608,6 +688,7 @@ for (const ord of INITIAL_BUUDY_ORDERS) {
     trackingNumber: ord.tracking,
     shippingCarrier: ord.carrier || null,
     customTimeline: ord.customTimeline,
+    additionalTracking: ord.additionalTracking,
     items: ord.items || [
       {
         title: "Buudy 7 Colour LED Mask",
@@ -968,7 +1049,13 @@ function mapCJEvent(
     };
   }
 
-  if (/scan in\s*-\s*hub/i.test(act)) {
+  if (
+    /scan in\s*-\s*hub/i.test(act) ||
+    /arrived at (?:your\s+)?delivery depot/i.test(act) ||
+    /courier facility/i.test(act) ||
+    /service centre/i.test(act) ||
+    /delivery depot/i.test(act)
+  ) {
     return {
       title: `Processed at UK Distribution Hub (${dest})`,
       description: `Package received and scanned at local distribution network hub serving ${dest}, GB. Handed over for final dispatch via ${carrierName}${lastMileNumber ? ` (Tracking barcode: ${lastMileNumber})` : ""}.`,
@@ -981,6 +1068,14 @@ function mapCJEvent(
       title: "Out for Delivery",
       description: `Loaded onto local courier delivery van for final delivery to ${dest} address.`,
       stage: "OUT_FOR_DELIVERY",
+    };
+  }
+
+  if (/national hub/i.test(act) || /terminal/i.test(act) || /sorting centre/i.test(act)) {
+    return {
+      title: "Processed at UK National Sorting Hub",
+      description: `Package sorted and scanned at national carrier sorting facility. En route to regional delivery depot.`,
+      stage: "IN_TRANSIT",
     };
   }
 
@@ -1158,8 +1253,8 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
     let hasInTransit = false;
     let isDelivered = Boolean(
       (cjData?.statusDescription && cjData.statusDescription.toLowerCase().includes("delivered")) ||
-        cjData?.status === 7 ||
-        cjData?.status === 4,
+
+        cjData?.status === 7,
     );
 
     let deliveredDateStr = "";
@@ -1258,12 +1353,6 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
           offsetSec: 86400 * 10 + 3600 * 3,
           stage: "OUT_FOR_DELIVERY",
         },
-        {
-          title: "Delivered",
-          description: `Package safely delivered and signed for at customer address (${destCity}).`,
-          offsetSec: 86400 * 11 + 3600 * 5,
-          stage: "DELIVERED",
-        },
       ];
 
       // Filter milestones that have occurred by the current real time (nowSec)
@@ -1274,10 +1363,8 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
       for (const m of validMilestones) {
         if (m.stage === "OUT_FOR_DELIVERY") hasOutForDelivery = true;
         if (m.stage === "IN_TRANSIT") hasInTransit = true;
-        if (m.stage === "DELIVERED") {
-          isDelivered = true;
-          if (!deliveredDateStr) deliveredDateStr = formatUKDateTime(createdAt + m.offsetSec);
-        }
+        // Dynamic milestones are strictly tracking estimates and NEVER mark an order as delivered.
+        // Delivery requires explicit courier scan confirmation or verified customer receipt.
         timelineEvents.push({
           title: m.title,
           description: m.description,
