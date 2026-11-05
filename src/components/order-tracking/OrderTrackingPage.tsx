@@ -17,10 +17,21 @@ import {
 } from "lucide-react";
 import type { TrackingData } from "@/lib/order-tracking";
 
-// Client-side text sanitizer ensuring no origin country codes (CN / China) are visible to customers
+// Client-side text sanitizer ensuring no origin country codes (CN / China) or "Origin Country" bracketed text are visible to customers
 function cleanTrackingText(text?: string): string {
   if (!text) return "";
   let cleaned = text;
+
+  // 0. Remove parenthesized or bracketed Origin Country / Origin references (e.g. " - (Origin Country)", "(Origin Country)")
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\(\s*(?:origin\s*country|origin)\s*\)/gi, "");
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\[\s*(?:origin\s*country|origin)\s*\]/gi, "");
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\borigin\s+country\b/gi, "");
+  cleaned = cleaned.replace(/\bthe country of origin\b/gi, "international facility");
+  cleaned = cleaned.replace(/\bcountry of origin\b/gi, "international facility");
+  cleaned = cleaned.replace(/\borigin international airport\b/gi, "international departure airport");
+  cleaned = cleaned.replace(/\borigin facility\b/gi, "logistics processing hub");
+  cleaned = cleaned.replace(/\boriginal facility\b/gi, "logistics processing hub");
+  cleaned = cleaned.replace(/\boriginal airport\b/gi, "international departure airport");
 
   // 1. Remove parenthesized or bracketed CN / China / PRC / HK references
   cleaned = cleaned.replace(/\s*\(\s*(?:CN|China|PRC|HK|Hong Kong)\s*\)/gi, "");
@@ -264,14 +275,16 @@ export function OrderTrackingPage() {
             <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-white/95 p-6 shadow-sm sm:p-8">
               <div className="flex flex-col justify-between gap-4 border-b border-[var(--border)]/60 pb-6 sm:flex-row sm:items-center">
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
-                      Order Reference
-                    </span>
-                    <span className="font-mono text-sm font-bold text-[var(--plum)]">
-                      {trackingData.orderRef}
-                    </span>
-                  </div>
+                  {trackingData.orderRef ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+                        Order Reference
+                      </span>
+                      <span className="font-mono text-sm font-bold text-[var(--plum)]">
+                        {trackingData.orderRef}
+                      </span>
+                    </div>
+                  ) : null}
                   <h2 className="mt-1 text-2xl font-bold text-[var(--plum)] sm:text-3xl">
                     {trackingData.status}
                   </h2>

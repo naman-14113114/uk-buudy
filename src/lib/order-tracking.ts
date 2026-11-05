@@ -89,6 +89,7 @@ export type CachedOrder = {
   createdAt: number;
   trackingNumber: string | null;
   shippingCarrier?: string | null;
+  backend?: "hypersku" | "cj";
   items: TrackingItem[];
   customTimeline?: TimelineEvent[];
   additionalTracking?: string[];
@@ -116,6 +117,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
   createdAt: number;
   tracking: string | null;
   carrier?: string | null;
+  backend?: "hypersku" | "cj";
   items?: TrackingItem[];
   customTimeline?: TimelineEvent[];
   additionalTracking?: string[];
@@ -140,6 +142,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
     createdAt: 1793217857,
     tracking: "QP272594975GB",
     carrier: "Royal Mail Tracked",
+    backend: "hypersku",
   },
   {
     id: "a3177e7c-bdba-4792-a7da-fc6249a797f1",
@@ -151,6 +154,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
     createdAt: 1793213016,
     tracking: "QP272594984GB",
     carrier: "Royal Mail Tracked",
+    backend: "hypersku",
   },
   {
     id: "a3172e7b-7d83-4a6e-8b5e-58ce95d62404",
@@ -162,6 +166,7 @@ const INITIAL_BUUDY_ORDERS: Array<{
     createdAt: 1793199594,
     tracking: "QP272594967GB",
     carrier: "Royal Mail Tracked",
+    backend: "hypersku",
   },
   {
     id: "a3151b5a-4fb7-4e77-8950-40df1412584d",
@@ -749,6 +754,7 @@ for (const ord of INITIAL_BUUDY_ORDERS) {
     createdAt: ord.createdAt,
     trackingNumber: ord.tracking,
     shippingCarrier: ord.carrier || null,
+    backend: ord.backend,
     customTimeline: ord.customTimeline,
     additionalTracking: ord.additionalTracking,
     items: ord.items || [
@@ -1092,12 +1098,37 @@ function formatUKOrderDate(timestampInSeconds?: number | null, fallbackDateStr?:
   return "Verified";
 }
 
+// Helper to sanitize geographical origin places (strips "Origin Country", "China", "CN", etc.)
+function cleanPlace(place?: string | null): string {
+  if (!place) return "";
+  const p = place.trim();
+  if (
+    /origin(?:\s+country)?/i.test(p) ||
+    /china|cn|prc|hong kong|hk/i.test(p) ||
+    /unknown/i.test(p)
+  ) {
+    return "";
+  }
+  return p;
+}
+
 // -----------------------------------------------------------------------------
 // TEXT SANITIZATION (Removes origin country codes like CN/China for customer privacy)
 // -----------------------------------------------------------------------------
 export function sanitizeTrackingText(text: string): string {
   if (!text) return "";
   let cleaned = text;
+
+  // 0. Remove parenthesized or bracketed Origin Country / Origin references (e.g. " - (Origin Country)", "(Origin Country)")
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\(\s*(?:origin\s*country|origin)\s*\)/gi, "");
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\[\s*(?:origin\s*country|origin)\s*\]/gi, "");
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\borigin\s+country\b/gi, "");
+  cleaned = cleaned.replace(/\bthe country of origin\b/gi, "international facility");
+  cleaned = cleaned.replace(/\bcountry of origin\b/gi, "international facility");
+  cleaned = cleaned.replace(/\borigin international airport\b/gi, "international departure airport");
+  cleaned = cleaned.replace(/\borigin facility\b/gi, "logistics processing hub");
+  cleaned = cleaned.replace(/\boriginal facility\b/gi, "logistics processing hub");
+  cleaned = cleaned.replace(/\boriginal airport\b/gi, "international departure airport");
 
   // 1. Remove parenthesized or bracketed CN / China / PRC / HK references
   cleaned = cleaned.replace(/\s*\(\s*(?:CN|China|PRC|HK|Hong Kong)\s*\)/gi, "");
@@ -1236,10 +1267,11 @@ function mapCJEvent(
   lastMileNumber?: string,
   destinationCity?: string,
 ): { title: string; description: string; stage: TrackingStage } {
+  const cleanLoc = cleanPlace(location);
   const isChinaLoc = /^(CN|CHINA|PRC|HK|HONG KONG|SHENZHEN|GUANGZHOU|YIWU|HANGZHOU|SHANGHAI|BEIJING|DONGGUAN|FOSHAN|NINGBO|ZHEJIANG|GUANGDONG)$/i.test(
-    (location || "").trim(),
+    cleanLoc,
   );
-  const loc = location && !isChinaLoc ? ` (${location.trim().toUpperCase()})` : "";
+  const loc = cleanLoc && !isChinaLoc ? ` (${cleanLoc.toUpperCase()})` : "";
   const act = activity.trim();
   const dest = destinationCity || "UK Regional";
 
@@ -1379,7 +1411,8 @@ function mapHyperSKUEvent(
 ): { title: string; description: string; stage: TrackingStage } {
   const fullText = [thing, detail].filter(Boolean).join(" ").trim();
   const dest = destinationCity || "UK Regional";
-  const loc = place ? ` (${place.trim()})` : "";
+  const cleanLoc = cleanPlace(place);
+  const loc = cleanLoc ? ` (${cleanLoc})` : "";
 
   // 1. Check Out for Delivery and local delivery unit first
   if (
@@ -1447,7 +1480,20 @@ function mapHyperSKUEvent(
     };
   }
 
-  // 5. International Air cargo
+  // 5. Origin Departure Airport
+  if (
+    /origin international airport/i.test(fullText) ||
+    /origin airport/i.test(fullText) ||
+    /original airport/i.test(fullText)
+  ) {
+    return {
+      title: "Arrived at International Departure Airport",
+      description: "Package arrived at departure airport cargo terminal awaiting scheduled UK flight departure.",
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  // 6. International Air cargo
   if (
     /departed from airport/i.test(fullText) ||
     /flight departed/i.test(fullText) ||
@@ -1456,30 +1502,60 @@ function mapHyperSKUEvent(
   ) {
     return {
       title: "In Transit via International Air Cargo",
-      description: `Air freight flight departed international logistics hub bound for the United Kingdom.`,
+      description: "Air freight flight departed international logistics hub bound for the United Kingdom.",
       stage: "IN_TRANSIT",
     };
   }
 
-  // 6. Customs
-  if (/export customs/i.test(fullText) || /security clearance/i.test(fullText) || /customs cleared/i.test(fullText)) {
+  // 7. Customs
+  if (
+    /customs declaration/i.test(fullText) ||
+    /export customs/i.test(fullText) ||
+    /security clearance/i.test(fullText) ||
+    /customs cleared/i.test(fullText)
+  ) {
     return {
       title: "Export Customs & Security Clearance Completed",
-      description: `Package completed international export inspection and airport security clearance.`,
+      description: "Package completed international export inspection and airport security clearance.",
       stage: "IN_TRANSIT",
     };
   }
 
-  // 7. Dispatched / picked up
+  // 8. Sorting facility / transit to next facility / origin facility
+  if (/departed from sort(?:ing)? facility/i.test(fullText)) {
+    return {
+      title: "Departed from Sorting Facility",
+      description: "Package sorted and dispatched to the international logistics departure hub.",
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  if (/arrived at origin(?:al)? facility/i.test(fullText)) {
+    return {
+      title: "Arrived at Logistics Processing Hub",
+      description: "Package received and scanned at logistics processing center.",
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  if (/transit to next facility/i.test(fullText) || /in transit to next/i.test(fullText)) {
+    return {
+      title: "Shipment in Transit to Next Facility",
+      description: "Package is moving within the carrier logistics network towards departure hub.",
+      stage: "IN_TRANSIT",
+    };
+  }
+
+  // 9. Dispatched / picked up
   if (/dispatched/i.test(fullText) || /picked up/i.test(fullText) || /received at facility/i.test(fullText)) {
     return {
       title: "Dispatched with Carrier",
-      description: `Package sorted and dispatched via carrier network.`,
+      description: "Package sorted and dispatched via carrier network.",
       stage: "IN_TRANSIT",
     };
   }
 
-  // 8. Processing / Packaged
+  // 10. Processing / Packaged
   if (/packed/i.test(fullText) || /processing/i.test(fullText) || /ready for outbound/i.test(fullText)) {
     return {
       title: "Order Processed & Packaged for Delivery",
@@ -1488,7 +1564,7 @@ function mapHyperSKUEvent(
     };
   }
 
-  // 9. Order placed / info received
+  // 11. Order placed / info received
   if (
     /electronic/i.test(fullText) ||
     /manifest/i.test(fullText) ||
@@ -1865,9 +1941,19 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
     const earliestEvent = deduplicatedEvents[deduplicatedEvents.length - 1];
     const orderDate = formatUKOrderDate(orderRecord?.createdAt, earliestEvent?.date);
 
+    // Check if this order is fulfilled via HyperSKU
+    const isHyperSKUOrder = Boolean(
+      hyperskuData ||
+      orderRecord?.backend === "hypersku" ||
+      (activeTrackingNumber && /^QP\d+GB$/i.test(activeTrackingNumber))
+    );
+
+    // HyperSKU orders do not show order reference ID to customers
+    const finalOrderRef = isHyperSKUOrder ? "" : orderRef;
+
     return {
       found: true,
-      orderRef,
+      orderRef: finalOrderRef,
       trackingNumber: activeTrackingNumber,
       carrierName,
       carrierTrackingUrl,
