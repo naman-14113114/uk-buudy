@@ -89,20 +89,25 @@ export function OrderTrackingPage() {
 
   const requestRef = useRef<AbortController | null>(null);
   const activeQueryRef = useRef("");
+  const verifiedResultRef = useRef<TrackingData | null>(null);
+  const resultVersionRef = useRef("");
 
-  const handleSearch = useCallback((searchQuery: string) => {
+  const handleSearch = useCallback((searchQuery: string, background = false) => {
     const q = searchQuery.trim();
     if (!q) {
-      requestRef.current?.abort(); activeQueryRef.current = ""; setTrackingData(null);
+      requestRef.current?.abort(); activeQueryRef.current = ""; verifiedResultRef.current = null; setTrackingData(null);
       setError("Please enter your tracking number or order number."); return;
     }
+    if (background && requestRef.current) return;
     requestRef.current?.abort();
     const request = new AbortController();
     requestRef.current = request;
-    if (activeQueryRef.current !== q) setTrackingData(null);
+    if (activeQueryRef.current.toLowerCase() !== q.toLowerCase()) {
+      verifiedResultRef.current = null; resultVersionRef.current = ""; setTrackingData(null);
+    }
     activeQueryRef.current = q;
     setError(null);
-    startTransition(async () => {
+    const search = async () => {
       try {
         const res = await fetch("/api/order-tracking", {
           method: "POST", headers: { "Content-Type": "application/json" },
@@ -110,19 +115,26 @@ export function OrderTrackingPage() {
         });
         const json = await res.json();
         if (request.signal.aborted) return;
-        if (res.ok && json.status === "found" && json.data) {
-          setTrackingData(json.data); setError(null);
-        } else {
-          setTrackingData(null);
-          setError(json.message || "Tracking is temporarily unavailable. Please try again shortly.");
+        if (res.ok && json.status === "found" && json.data && json.data.statusCode !== "UNAVAILABLE") {
+          const data: TrackingData = json.data;
+          // Timestamps for a backend check are not a shipment update.
+          const version = JSON.stringify({ ...data, checkedAt: undefined, statusMessage: undefined });
+          if (version !== resultVersionRef.current) {
+            resultVersionRef.current = version; verifiedResultRef.current = data; setTrackingData(data);
+          }
+          setError(null);
+        } else if (!verifiedResultRef.current) {
+          setError(res.status === 404 ? json.message : "Your tracking update is taking longer than usual. Please try again shortly.");
         }
       } catch {
-        if (!request.signal.aborted) {
-          setTrackingData(null);
-          setError("Unable to connect to the tracking network right now. Please try again shortly.");
+        if (!request.signal.aborted && !verifiedResultRef.current) {
+          setError("Your tracking update is taking longer than usual. Please try again shortly.");
         }
+      } finally {
+        if (requestRef.current === request) requestRef.current = null;
       }
-    });
+    };
+    if (background) void search(); else startTransition(search);
   }, []);
 
   useEffect(() => {
@@ -133,13 +145,11 @@ export function OrderTrackingPage() {
       if (mounted) { setQuery(initialQuery); handleSearch(initialQuery); }
     });
     const refresh = () => {
-      if (document.visibilityState === "visible" && activeQueryRef.current) handleSearch(activeQueryRef.current);
+      if (document.visibilityState === "visible" && activeQueryRef.current) handleSearch(activeQueryRef.current, true);
     };
-    const timer = window.setInterval(refresh, 60000);
-    document.addEventListener("visibilitychange", refresh);
+    const timer = window.setInterval(refresh, 5 * 60 * 1000);
     return () => {
       mounted = false; requestRef.current?.abort(); window.clearInterval(timer);
-      document.removeEventListener("visibilitychange", refresh);
     };
   }, [handleSearch]);
 
@@ -189,7 +199,8 @@ export function OrderTrackingPage() {
                   <button
                     type="button"
                     onClick={() => {
-                      requestRef.current?.abort(); activeQueryRef.current = "";
+                      requestRef.current?.abort(); requestRef.current = null; activeQueryRef.current = "";
+                      verifiedResultRef.current = null; resultVersionRef.current = "";
                       setQuery(""); setTrackingData(null); setError(null);
                     }}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[var(--muted)] hover:text-[var(--plum)]"
@@ -294,14 +305,6 @@ export function OrderTrackingPage() {
                 </div>
               </div>
 
-              <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]" role="status">
-                {trackingData.statusMessage}
-              </p>
-              <p className="mt-2 text-xs text-[var(--muted)]">
-                Checked {new Date(trackingData.checkedAt).toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit" })} UK time · Refreshes every minute
-                {trackingData.carrierTrackingUrl && <> · <a className="underline" href={trackingData.carrierTrackingUrl} target="_blank" rel="noopener noreferrer">Check carrier</a></>}
-              </p>
-
               {/* Order Metadata Grid */}
               <div
                 className={`mt-6 grid grid-cols-2 gap-4 ${
@@ -377,37 +380,31 @@ export function OrderTrackingPage() {
                 </div>
 
                 {/* Step Icons & Labels */}
-                <div className="mt-6 grid grid-cols-5 gap-1.5 sm:gap-2">
+                <div className="mt-6 grid grid-cols-4 gap-1.5 sm:gap-2">
                   {[
-                    {
-                      label: "Order Placed",
-                      desc: "Confirmed",
-                      icon: CheckCircle2,
-                      step: 0,
-                    },
                     {
                       label: "Processing",
                       desc: "Preparing order",
                       icon: Package,
-                      step: 1,
+                      step: 0,
                     },
                     {
                       label: "In Transit",
                       desc: "On the way",
                       icon: Truck,
-                      step: 2,
+                      step: 1,
                     },
                     {
                       label: "Out for Delivery",
                       desc: "With Courier",
                       icon: MapPin,
-                      step: 3,
+                      step: 2,
                     },
                     {
                       label: "Delivered",
                       desc: "Arrived",
                       icon: Home,
-                      step: 4,
+                      step: 3,
                     },
                   ].map((s) => {
                     const isCompleted = trackingData.activeStepIndex >= s.step;

@@ -1,5 +1,8 @@
 // Server-side order tracking service for Buudy UK.
-// Integrates dynamically with XPage order records and live CJ Logistics / AfterShip carrier network.
+// Integrates XPage order records with CJ and HyperSKU carrier checkpoints.
+import { getCache } from "@vercel/functions";
+import { AsyncLocalStorage } from "node:async_hooks";
+import { createHash } from "node:crypto";
 
 export type TrackingStage = "ORDER_PLACED" | "PROCESSING" | "IN_TRANSIT" | "OUT_FOR_DELIVERY" | "DELIVERED";
 
@@ -29,7 +32,7 @@ export type TrackingData = {
   status: "Processing" | "In Transit" | "Out for Delivery" | "Delivered" | "Tracking unavailable";
   statusCode: TrackingStage | "UNAVAILABLE";
   progressPercentage: number;
-  activeStepIndex: number; // 0: Placed, 1: Processing, 2: In Transit, 3: Out for Delivery, 4: Delivered
+  activeStepIndex: number; // Processing, In Transit, Out for Delivery, Delivered
   orderDate: string;
   estimatedDelivery: string;
   items: TrackingItem[];
@@ -323,10 +326,77 @@ export class TrackingUnavailableError extends Error {
 let cjToken: { value: string; expires: number } | null = null;
 let cjTokenRequest: Promise<string> | null = null;
 
-async function fetchTrackingJson(url: string, options: RequestInit = {}) {
-  const response = await fetch(url, { ...options, cache: "no-store", signal: AbortSignal.timeout(8000) });
-  if (!response.ok) throw new TrackingUnavailableError();
-  try { return await response.json(); } catch { throw new TrackingUnavailableError(); }
+let nextCJRequestAt = 0;
+const lookupDeadline = new AsyncLocalStorage<number>();
+async function fetchTrackingJson(url: string, options: RequestInit = {}, timeout = 8000, attempts = 1) {
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    if (url.includes("developers.cjdropshipping.com")) {
+      // CJ applies an account-wide QPS limit. Reserve start times synchronously
+      // so simultaneous lookups in this runtime do not burst requests.
+      const start = Math.max(Date.now(), nextCJRequestAt);
+      if (start >= (lookupDeadline.getStore() || Infinity)) throw new TrackingUnavailableError();
+      nextCJRequestAt = start + 1100;
+      if (start > Date.now()) await new Promise(resolve => setTimeout(resolve, start - Date.now()));
+    }
+    try {
+      const remaining = Math.min(timeout, (lookupDeadline.getStore() || Infinity) - Date.now());
+      if (remaining <= 0) throw new TrackingUnavailableError();
+      const response = await fetch(url, { ...options, cache: "no-store", signal: AbortSignal.timeout(remaining) });
+      if (response.ok) return await response.json();
+      if (response.status !== 429 && response.status < 500) throw new TrackingUnavailableError();
+      if (attempt + 1 < attempts) {
+        const delay = Math.min(3000, Math.max(1100, Number(response.headers.get("retry-after")) * 1000 || 1100));
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    } catch (error) {
+      if (error instanceof TrackingUnavailableError || attempt + 1 === attempts) throw new TrackingUnavailableError();
+    }
+  }
+  throw new TrackingUnavailableError();
+}
+
+type CarrierSnapshot = { record: CJTrackingRecord | HyperSKURecord; checkedAt: number };
+const carrierSnapshots = new Map<string, CarrierSnapshot>();
+const carrierRequests = new Map<string, Promise<CJTrackingRecord | HyperSKURecord | null>>();
+const SNAPSHOT_TTL = 30 * 24 * 60 * 60;
+const CHECK_INTERVAL = 5 * 60 * 1000;
+
+async function verifiedCarrier<T extends CJTrackingRecord | HyperSKURecord>(provider: "cj" | "hypersku", number: string, fetcher: () => Promise<T | null>): Promise<T | null> {
+  const key = `buudy-tracking-v2:${provider}:${number.toUpperCase()}`;
+  const pending = carrierRequests.get(key);
+  if (pending) return pending as Promise<T | null>;
+  const request = (async () => {
+    let previous = carrierSnapshots.get(key);
+    if (process.env.VERCEL) {
+      try {
+        const shared = await getCache().get(key) as CarrierSnapshot | undefined;
+        if (shared && (!previous || shared.checkedAt > previous.checkedAt)) previous = shared;
+      } catch { /* Cache availability must never block a carrier lookup. */ }
+    }
+    if (previous && Date.now() - previous.checkedAt > SNAPSHOT_TTL * 1000) previous = undefined;
+    if (previous && Date.now() - previous.checkedAt < CHECK_INTERVAL) return previous.record as T;
+    try {
+      const record = await fetcher();
+      const events = buildCarrierEvents(provider === "cj" ? record as CJTrackingRecord : null, provider === "hypersku" ? record as HyperSKURecord : null);
+      if (events.length) {
+        const oldEvents = previous ? buildCarrierEvents(provider === "cj" ? previous.record as CJTrackingRecord : null, provider === "hypersku" ? previous.record as HyperSKURecord : null) : [];
+        // A truncated/lagging provider response must not erase newer verified scans.
+        const snapshot = { record: oldEvents[0]?.timestamp > events[0].timestamp ? previous!.record : record!, checkedAt: Date.now() };
+        carrierSnapshots.set(key, snapshot);
+        if (carrierSnapshots.size > 1000) carrierSnapshots.delete(carrierSnapshots.keys().next().value!);
+        if (process.env.VERCEL) {
+          try { await getCache().set(key, snapshot, { ttl: SNAPSHOT_TTL }); } catch { /* Keep the local copy. */ }
+        }
+        return snapshot.record as T;
+      }
+      return previous ? previous.record as T : record;
+    } catch (error) {
+      if (previous) return previous.record as T;
+      throw error;
+    }
+  })().finally(() => { carrierRequests.delete(key); });
+  carrierRequests.set(key, request);
+  return request;
 }
 
 async function getCJToken(): Promise<string> {
@@ -334,6 +404,17 @@ async function getCJToken(): Promise<string> {
   if (cjToken && cjToken.expires > Date.now() + 60000) return cjToken.value;
   if (!cjTokenRequest) {
     cjTokenRequest = (async () => {
+      // Serverless instances share the token to avoid repeated authentication
+      // calls against CJ's stricter token-generation quota. Never expose it.
+      const tokenKey = `buudy-cj-auth-v1:${createHash("sha256").update(process.env.CJ_API_KEY || "").digest("hex")}`;
+      if (process.env.VERCEL) {
+        try {
+          const shared = await getCache().get(tokenKey) as typeof cjToken;
+          if (shared?.value && shared.expires > Date.now() + 60000) {
+            cjToken = shared; return shared.value;
+          }
+        } catch { /* Authentication remains available without the cache. */ }
+      }
       const json = await fetchTrackingJson("https://developers.cjdropshipping.com/api2.0/v1/authentication/getAccessToken", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ apiKey: process.env.CJ_API_KEY }),
@@ -341,20 +422,24 @@ async function getCJToken(): Promise<string> {
       if (!json.result || !json.data?.accessToken) throw new TrackingUnavailableError();
       const expires = Date.parse(json.data.accessTokenExpiryDate);
       cjToken = { value: json.data.accessToken, expires: Number.isFinite(expires) ? expires : Date.now() + 3600000 };
+      if (process.env.VERCEL) {
+        try { await getCache().set(tokenKey, cjToken, { ttl: Math.max(1, Math.floor((cjToken.expires - Date.now() - 60000) / 1000)) }); }
+        catch { /* The current instance can still use its token. */ }
+      }
       return cjToken.value;
     })().finally(() => { cjTokenRequest = null; });
   }
   return cjTokenRequest;
 }
 
-async function fetchCJTracking(trackingNumber: string): Promise<CJTrackingRecord | null> {
+async function fetchCJTracking(trackingNumber: string, resolveReplacement = true): Promise<CJTrackingRecord | null> {
   if (!isTrackingBarcode(trackingNumber)) return null;
   const number = trackingNumber.trim().toUpperCase();
   if (process.env.CJ_API_KEY || process.env.CJ_ACCESS_TOKEN) {
     const token = await getCJToken();
     const json = await fetchTrackingJson(
       "https://developers.cjdropshipping.com/api2.0/v1/logistic/trackInfo?trackNumber=" + encodeURIComponent(number),
-      { headers: { "CJ-Access-Token": token } },
+      { headers: { "CJ-Access-Token": token } }, 8000, 2,
     );
     if (!json.result || !Array.isArray(json.data)) throw new TrackingUnavailableError();
     const records: CJTrackingRecord[] = json.data;
@@ -364,7 +449,20 @@ async function fetchCJTracking(trackingNumber: string): Promise<CJTrackingRecord
     // number (e.g. ZHPHD... -> Royal Mail ...GB). Its single resolved record
     // is valid; never choose an arbitrary record from a multi-record response.
     const record = matched || (records.length === 1 && records[0].trackingNumber ? records[0] : null);
-    if (!record) return null;
+    if (!record) {
+      if (resolveReplacement && /^ZHPHD/i.test(number)) {
+        const history = await fetchTrackingJson("https://developers.cjdropshipping.com/api2.0/v1/logistic/getOrderTrackHistory", {
+          method: "POST", headers: { "Content-Type": "application/json", "CJ-Access-Token": token },
+          body: JSON.stringify({ trackNumbers: [number] }),
+        }, 8000, 2);
+        if (!history.result || !Array.isArray(history.data)) throw new TrackingUnavailableError();
+        const replacements = history.data.filter((item: { trackNumber?: string; currentTrackNumber?: string }) => item.trackNumber?.toUpperCase() === number && item.currentTrackNumber);
+        if (replacements.length === 1 && replacements[0].currentTrackNumber.toUpperCase() !== number) {
+          return fetchCJTracking(replacements[0].currentTrackNumber, false);
+        }
+      }
+      return null;
+    }
     return { ...record, destCountryCode: record.trackingTo, trackEvent: record.routes?.map(route => ({
       eventTime: route.acceptTime, activity: route.remark, location: route.acceptAddress || "", eventTimestamp: null,
     })) || record.trackEvent };
@@ -386,7 +484,7 @@ async function fetchHyperSKUTracking(trackingNumber: string): Promise<HyperSKURe
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "X-Requested-With": "XMLHttpRequest" },
     body: new URLSearchParams({ finalNo: number, doFinalType: "0", finalId: "0" }).toString(),
-  });
+  }, 18000, 2);
   if (String(json.retCode) !== "100" || !json.retInfo) throw new TrackingUnavailableError();
   const key = Object.keys(json.retInfo).find(key => key.toUpperCase() === number);
   const record: HyperSKURecord | undefined = key ? json.retInfo[key] : undefined;
@@ -547,7 +645,7 @@ export function classifyTrackingEvent(text: string): TrackingStage {
   const t = text.trim().toLowerCase();
   if (isExplicitCustomerDelivery(t)) return "DELIVERED";
   const pendingOrFailed = /\b(pending|not|not yet|failed|unsuccessful|attempt|attempted|unable|scheduled|expected|estimated|tomorrow|will be|awaiting|returned|return to sender|cancelled)\b/.test(t);
-  if (!pendingOrFailed && /\b(out for delivery|on (?:the )?vehicle for delivery|with (?:your |the )?(?:delivery )?driver|with (?:the )?courier for delivery|loaded onto (?:the |a )?(?:courier |delivery )?van)\b/.test(t)) return "OUT_FOR_DELIVERY";
+  if (!pendingOrFailed && /\b(out for delivery|on (?:the )?vehicle for delivery|with (?:your |the )?(?:delivery )?driver|with one of our drivers for delivery|with (?:the )?courier for delivery|loaded onto (?:the |a )?(?:courier |delivery )?van)\b/.test(t)) return "OUT_FOR_DELIVERY";
   if (/\b(label (?:created|generated)|(?:shipment |electronic |shipping )?information received|pre[ -]?advice|awaiting (?:your |the )?(?:item|parcel|shipment)|expecting (?:your |the )?(?:item|parcel)|ready for outbound|packed|packaged|warehouse is processing)\b/.test(t)) return "PROCESSING";
   return "IN_TRANSIT";
 }
@@ -598,10 +696,10 @@ export function buildCarrierEvents(cj: CJTrackingRecord | null, hyper: HyperSKUR
 function summarizeStage(stage: TrackingStage | "UNAVAILABLE") {
   const statuses = {
     ORDER_PLACED: { status: "Processing", progressPercentage: 10, activeStepIndex: 0 },
-    PROCESSING: { status: "Processing", progressPercentage: 25, activeStepIndex: 1 },
-    IN_TRANSIT: { status: "In Transit", progressPercentage: 60, activeStepIndex: 2 },
-    OUT_FOR_DELIVERY: { status: "Out for Delivery", progressPercentage: 85, activeStepIndex: 3 },
-    DELIVERED: { status: "Delivered", progressPercentage: 100, activeStepIndex: 4 },
+    PROCESSING: { status: "Processing", progressPercentage: 25, activeStepIndex: 0 },
+    IN_TRANSIT: { status: "In Transit", progressPercentage: 50, activeStepIndex: 1 },
+    OUT_FOR_DELIVERY: { status: "Out for Delivery", progressPercentage: 75, activeStepIndex: 2 },
+    DELIVERED: { status: "Delivered", progressPercentage: 100, activeStepIndex: 3 },
     UNAVAILABLE: { status: "Tracking unavailable", progressPercentage: 0, activeStepIndex: -1 },
   } as const;
   return { ...statuses[stage], statusCode: stage };
@@ -609,6 +707,10 @@ function summarizeStage(stage: TrackingStage | "UNAVAILABLE") {
 
 // No elapsed-time, seed-timeline, or generic-product fallback is permitted here.
 export async function lookupOrderTracking(rawQuery: string): Promise<TrackingData | null> {
+  return lookupDeadline.run(Date.now() + 50000, () => lookupTracking(rawQuery));
+}
+
+async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
   const query = rawQuery.trim();
   if (!query || query.length > 100) return null;
   const key = query.toLowerCase();
@@ -623,12 +725,23 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
   let cj: CJTrackingRecord | null = null;
   let hyper: HyperSKURecord | null = null;
   const load = async (number: string) => {
-    const results = await Promise.allSettled([fetchCJTracking(number), fetchHyperSKUTracking(number)]);
+    const preferHyper = historical?.backend === "hypersku";
+    const preferCJ = historical?.backend === "cj" || (!preferHyper && /^(ZHPHD|JJD)/i.test(number));
+    const results = await Promise.allSettled([
+      preferHyper ? Promise.resolve(null) : verifiedCarrier("cj", number, () => fetchCJTracking(number)),
+      preferCJ ? Promise.resolve(null) : verifiedCarrier("hypersku", number, () => fetchHyperSKUTracking(number)),
+    ]);
     failed ||= results.some(r => r.status === "rejected");
-    return {
+    const result = {
       cj: results[0].status === "fulfilled" ? results[0].value : null,
       hyper: results[1].status === "fulfilled" ? results[1].value : null,
     };
+    // Carrier prefixes are routing hints, not proof of the fulfillment supplier.
+    if (preferCJ && !result.cj) {
+      try { result.hyper = await verifiedCarrier("hypersku", number, () => fetchHyperSKUTracking(number)); }
+      catch { failed = true; }
+    }
+    return result;
   };
   if (barcode) ({ cj, hyper } = await load(barcode));
   // CJ can expose the actual last-mile barcode even when its public tracker is
@@ -656,7 +769,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
   let stage: TrackingStage | "UNAVAILABLE" = latest?.stage || "UNAVAILABLE";
   const summary = cj?.trackingStatus || cj?.statusDescription || "";
   const hasRawScans = Boolean(cj?.trackEvent?.length || hyper?.flow_0?.length || hyper?.flow_1?.length);
-  if (!latest && !hasRawScans && /delivered|delivery|transit|shipped|courier|facility|pickup|pick up|label|processing/i.test(summary)) stage = classifyTrackingEvent(summary);
+  if (!latest && !hasRawScans && /delivered|delivery|transit|en route|shipped|courier|facility|pickup|pick up|label|processing/i.test(summary)) stage = classifyTrackingEvent(summary);
   if (!latest && !hasRawScans && stage === "UNAVAILABLE" && hyper) {
     // Only documented statuses; 'Pick Up' means awaiting collection, not van dispatch.
     if (Number(hyper.status) === 1) stage = "DELIVERED";
@@ -664,6 +777,9 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
   }
   // An order with no fulfillment barcode is still processing, but has no invented scans.
   if (!barcode && liveOrder) stage = "PROCESSING";
+  // A provider failure is not a parcel stage. The client keeps a previously
+  // verified result; a first lookup without evidence uses the normal retry UI.
+  if (stage === "UNAVAILABLE") throw new TrackingUnavailableError();
   const rawCarrier = cj?.lastMileCarrier || cj?.providerEnName || hyper?.express_company_info_to?.enName || hyper?.express_company_info_to?.name || order?.shippingCarrier || hyper?.express_company_info?.enName || hyper?.express_company_info?.name || "";
   const carrierNumber = lastMile || hyper?.finalNo || barcode;
   const royalMail = /royal\s*mail/i.test(rawCarrier) || /^[A-Z]{2}\d{9}GB$/i.test(carrierNumber);
@@ -674,9 +790,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
     : `https://track.hypersku.com/?nums=${encodeURIComponent(barcode)}`;
   const destination = (order ? Array.from(new Set([order.customerCity, order.customerCountry].filter(Boolean))).join(", ") : cj?.destCountryCode) || "Not available";
   const isHyperOrder = historical?.backend === "hypersku" || (!cj && Boolean(hyper)) || /^QP\d+GB$/i.test(barcode);
-  const statusMessage = stage === "UNAVAILABLE"
-    ? "The carrier could not provide a current tracking update. Please try again shortly or check the carrier directly. No delivery stage has been assumed."
-    : !barcode ? "Your order is recorded. Carrier tracking has not been assigned yet."
+  const statusMessage = !barcode ? "Your order is recorded. Carrier tracking has not been assigned yet."
     : "Latest information reported by the carrier. New scans appear after the carrier publishes them.";
   return {
     found: true, orderRef: isHyperOrder ? "" : order?.ref || "", trackingNumber: barcode || "Not yet assigned",
