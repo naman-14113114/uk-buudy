@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useEffect, useCallback } from "react";
+import { useState, useTransition, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -87,83 +87,61 @@ export function OrderTrackingPage() {
   const [isPending, startTransition] = useTransition();
   const [copied, setCopied] = useState(false);
 
+  const requestRef = useRef<AbortController | null>(null);
+  const activeQueryRef = useRef("");
+
   const handleSearch = useCallback((searchQuery: string) => {
     const q = searchQuery.trim();
     if (!q) {
-      setError("Please enter your tracking number or order number.");
-      return;
+      requestRef.current?.abort(); activeQueryRef.current = ""; setTrackingData(null);
+      setError("Please enter your tracking number or order number."); return;
     }
-
+    requestRef.current?.abort();
+    const request = new AbortController();
+    requestRef.current = request;
+    if (activeQueryRef.current !== q) setTrackingData(null);
+    activeQueryRef.current = q;
     setError(null);
-
     startTransition(async () => {
       try {
         const res = await fetch("/api/order-tracking", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: q }),
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: q }), cache: "no-store", signal: request.signal,
         });
-
         const json = await res.json();
-
+        if (request.signal.aborted) return;
         if (res.ok && json.status === "found" && json.data) {
-          setTrackingData(json.data);
-          setError(null);
+          setTrackingData(json.data); setError(null);
         } else {
           setTrackingData(null);
-          setError(
-            json.message ||
-              "No tracking record was found for this number. Please verify the code from your confirmation email.",
-          );
+          setError(json.message || "Tracking is temporarily unavailable. Please try again shortly.");
         }
       } catch {
-        setTrackingData(null);
-        setError("Unable to connect to the tracking network right now. Please try again shortly.");
+        if (!request.signal.aborted) {
+          setTrackingData(null);
+          setError("Unable to connect to the tracking network right now. Please try again shortly.");
+        }
       }
     });
   }, []);
 
-  // Check URL query parameter on initial load (e.g. ?tracking=... or ?number=...)
   useEffect(() => {
-    if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    const rawQuery = params.get("tracking") || params.get("number") || params.get("order");
-    if (!rawQuery) return;
-    const initialQuery = rawQuery.trim();
-    if (!initialQuery) return;
-
-    let ignore = false;
-    async function loadInitial() {
-      try {
-        const res = await fetch("/api/order-tracking", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: initialQuery }),
-        });
-        const json = await res.json();
-        if (!ignore) {
-          setQuery(initialQuery);
-          if (res.ok && json.status === "found" && json.data) {
-            setTrackingData(json.data);
-            setError(null);
-          } else {
-            setTrackingData(null);
-            setError(
-              json.message ||
-                "No Buudy order found matching this tracking number. Please check your tracking number and try again.",
-            );
-          }
-        }
-      } catch {
-        // Ignore initial load network errors
-      }
-    }
-
-    void loadInitial();
-    return () => {
-      ignore = true;
+    const initialQuery = (params.get("tracking") || params.get("number") || params.get("order") || "").trim();
+    let mounted = true;
+    if (initialQuery) void Promise.resolve().then(() => {
+      if (mounted) { setQuery(initialQuery); handleSearch(initialQuery); }
+    });
+    const refresh = () => {
+      if (document.visibilityState === "visible" && activeQueryRef.current) handleSearch(activeQueryRef.current);
     };
-  }, []);
+    const timer = window.setInterval(refresh, 60000);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      mounted = false; requestRef.current?.abort(); window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, [handleSearch]);
 
   const handleCopy = (text: string) => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
@@ -183,7 +161,7 @@ export function OrderTrackingPage() {
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-            Enter your tracking number or Buudy order number below to check the real-time status of your delivery.
+            Enter your tracking number or Buudy order number below to see the latest carrier updates for your delivery.
           </p>
 
           {/* Search Box */}
@@ -210,7 +188,10 @@ export function OrderTrackingPage() {
                 {query && (
                   <button
                     type="button"
-                    onClick={() => setQuery("")}
+                    onClick={() => {
+                      requestRef.current?.abort(); activeQueryRef.current = "";
+                      setQuery(""); setTrackingData(null); setError(null);
+                    }}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[var(--muted)] hover:text-[var(--plum)]"
                   >
                     Clear
@@ -258,7 +239,7 @@ export function OrderTrackingPage() {
                   <AlertCircle size={18} />
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-sm font-bold text-[var(--plum)]">Order Not Found</p>
+                  <p className="text-sm font-bold text-[var(--plum)]">Tracking Update</p>
                   <p className="text-xs sm:text-sm font-light text-[var(--muted)] leading-relaxed">
                     {error}
                   </p>
@@ -312,6 +293,14 @@ export function OrderTrackingPage() {
                   </span>
                 </div>
               </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]" role="status">
+                {trackingData.statusMessage}
+              </p>
+              <p className="mt-2 text-xs text-[var(--muted)]">
+                Checked {new Date(trackingData.checkedAt).toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit" })} UK time · Refreshes every minute
+                {trackingData.carrierTrackingUrl && <> · <a className="underline" href={trackingData.carrierTrackingUrl} target="_blank" rel="noopener noreferrer">Check carrier</a></>}
+              </p>
 
               {/* Order Metadata Grid */}
               <div
@@ -376,7 +365,7 @@ export function OrderTrackingPage() {
               <div className="mt-10 pt-6">
                 <div className="mb-3 flex items-center justify-between text-xs font-semibold text-[var(--muted)]">
                   <span>Delivery Journey</span>
-                  <span className="text-[var(--plum)]">{trackingData.progressPercentage}% Complete</span>
+                  <span className="text-[var(--plum)]">{trackingData.statusCode === "UNAVAILABLE" ? "Awaiting carrier update" : trackingData.status}</span>
                 </div>
 
                 {/* Linear Bar */}
@@ -398,7 +387,7 @@ export function OrderTrackingPage() {
                     },
                     {
                       label: "Processing",
-                      desc: "Quality Check",
+                      desc: "Preparing order",
                       icon: Package,
                       step: 1,
                     },
@@ -470,9 +459,11 @@ export function OrderTrackingPage() {
                     Shipment Timeline
                   </h3>
                 </div>
-                <span className="text-xs text-[var(--muted)]">Updates in Real-Time</span>
+                <span className="text-xs text-[var(--muted)]">Latest carrier scans</span>
               </div>
 
+              <p className="mt-4 text-xs text-[var(--muted)]">Carrier event times are shown as supplied by the tracking provider.</p>
+              {trackingData.timeline.length === 0 && <p className="mt-6 text-sm text-[var(--muted)]">No carrier checkpoints are available yet.</p>}
               <div className="relative mt-8 space-y-8 pl-6 before:absolute before:bottom-3 before:left-3 before:top-3 before:w-[2px] before:bg-[var(--border)] sm:pl-8 sm:before:left-4">
                 {trackingData.timeline.map((event, index) => {
                   return (
@@ -523,6 +514,7 @@ export function OrderTrackingPage() {
                   <h4 className="font-bold text-[var(--plum)]">Order Contents</h4>
                 </div>
                 <div className="mt-4 divide-y divide-[var(--border)]/40">
+                  {trackingData.items.length === 0 && <p className="text-sm text-[var(--muted)]">Order contents are currently unavailable.</p>}
                   {trackingData.items.map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between py-3">
                       <div>
