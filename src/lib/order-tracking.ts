@@ -803,7 +803,7 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
   const matchedRef = historical || LEGACY_SHIPMENT_REFERENCES.find(ref =>
     [ref.trackingNumber, ...(ref.additionalTracking || [])]
       .some(value => value.toLowerCase() === barcode.toLowerCase()));
-  const destination = (order && order.customerCity ? Array.from(new Set([order.customerCity, order.customerCountry].filter(Boolean))).join(", ") : matchedRef?.destination || cj?.destCountryCode) || "Not available";
+  const destination = matchedRef?.destination || (order && order.customerCity ? Array.from(new Set([order.customerCity, order.customerCountry].filter(Boolean))).join(", ") : cj?.destCountryCode) || "Not available";
   const isHyperOrder = historical?.backend === "hypersku" || (!cj && Boolean(hyper)) || /^QP\d+GB$/i.test(barcode);
   const statusMessage = !barcode ? "Your order is recorded. Carrier tracking has not been assigned yet."
     : "Latest information reported by the carrier. New scans appear after the carrier publishes them.";
