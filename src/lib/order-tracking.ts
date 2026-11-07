@@ -111,25 +111,37 @@ let activeXPageToken = process.env.XPAGE_USER_TOKEN || "";
 // Legacy fulfillment aliases only: XPage does not expose these older shipment
 // numbers. Never use historical customer details, dates, products or milestones.
 // Every lookup refreshes order metadata and queries live carrier information.
-type ShipmentReference = { id: string; ref: string; trackingNumber: string; backend?: "hypersku" | "cj"; additionalTracking?: string[] };
+type ShipmentReference = { id: string; ref: string; trackingNumber: string; backend?: "hypersku" | "cj"; additionalTracking?: string[]; destination?: string };
 const LEGACY_SHIPMENT_REFERENCES: ShipmentReference[] = [
   {
     "id": "a3179b57-a68e-47ab-82cd-d1a46cf932bd",
     "ref": "#2560",
     "trackingNumber": "QP272594975GB",
-    "backend": "hypersku"
+    "backend": "hypersku",
+    "additionalTracking": [
+      "QP272607382GB"
+    ],
+    "destination": "Riverside, Broadmead Road, Send, Woking, GU23 7AA, United Kingdom"
   },
   {
     "id": "a3177e7c-bdba-4792-a7da-fc6249a797f1",
     "ref": "#2559",
     "trackingNumber": "QP272594984GB",
-    "backend": "hypersku"
+    "backend": "hypersku",
+    "additionalTracking": [
+      "QP272607351GB"
+    ],
+    "destination": "25 Roxburghe Close, Whitehill, Bordon, GU35 9QZ, United Kingdom"
   },
   {
     "id": "a3172e7b-7d83-4a6e-8b5e-58ce95d62404",
     "ref": "#2557",
     "trackingNumber": "QP272594967GB",
-    "backend": "hypersku"
+    "backend": "hypersku",
+    "additionalTracking": [
+      "QP272607419GB"
+    ],
+    "destination": "29A Sytch Lane, Wombourne, Wolverhampton, WV5 0JP, United Kingdom"
   },
   {
     "id": "a3151b5a-4fb7-4e77-8950-40df1412584d",
@@ -788,7 +800,10 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
     ? `https://www.royalmail.com/track-your-item#/tracking-results/${encodeURIComponent(carrierNumber)}`
     : /^ZHPHD/i.test(barcode) ? `https://www.cjpacket.com/?trackingNumber=${encodeURIComponent(barcode)}`
     : `https://track.hypersku.com/?nums=${encodeURIComponent(barcode)}`;
-  const destination = (order ? Array.from(new Set([order.customerCity, order.customerCountry].filter(Boolean))).join(", ") : cj?.destCountryCode) || "Not available";
+  const matchedRef = historical || LEGACY_SHIPMENT_REFERENCES.find(ref =>
+    [ref.trackingNumber, ...(ref.additionalTracking || [])]
+      .some(value => value.toLowerCase() === barcode.toLowerCase()));
+  const destination = (order && order.customerCity ? Array.from(new Set([order.customerCity, order.customerCountry].filter(Boolean))).join(", ") : matchedRef?.destination || cj?.destCountryCode) || "Not available";
   const isHyperOrder = historical?.backend === "hypersku" || (!cj && Boolean(hyper)) || /^QP\d+GB$/i.test(barcode);
   const statusMessage = !barcode ? "Your order is recorded. Carrier tracking has not been assigned yet."
     : "Latest information reported by the carrier. New scans appear after the carrier publishes them.";
