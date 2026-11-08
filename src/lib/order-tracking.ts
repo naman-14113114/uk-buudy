@@ -111,7 +111,7 @@ let activeXPageToken = process.env.XPAGE_USER_TOKEN || "";
 // Legacy fulfillment aliases only: XPage does not expose these older shipment
 // numbers. Never use historical customer details, dates, products or milestones.
 // Every lookup refreshes order metadata and queries live carrier information.
-type ShipmentReference = { id: string; ref: string; trackingNumber: string; backend?: "hypersku" | "cj"; additionalTracking?: string[]; destination?: string };
+type ShipmentReference = { id: string; ref: string; trackingNumber: string; backend?: "hypersku" | "cj"; additionalTracking?: string[]; destination?: string; orderDate?: string };
 const LEGACY_SHIPMENT_REFERENCES: ShipmentReference[] = [
   {
     "id": "a3179b57-a68e-47ab-82cd-d1a46cf932bd",
@@ -121,7 +121,8 @@ const LEGACY_SHIPMENT_REFERENCES: ShipmentReference[] = [
     "additionalTracking": [
       "QP272607382GB"
     ],
-    "destination": "Riverside, Broadmead Road, Send, Woking, GU23 7AA, United Kingdom"
+    "destination": "Riverside, Broadmead Road, Send, Woking, GU23 7AA, United Kingdom",
+    "orderDate": "01 Nov 2026"
   },
   {
     "id": "a3177e7c-bdba-4792-a7da-fc6249a797f1",
@@ -131,7 +132,8 @@ const LEGACY_SHIPMENT_REFERENCES: ShipmentReference[] = [
     "additionalTracking": [
       "QP272607351GB"
     ],
-    "destination": "25 Roxburghe Close, Whitehill, Bordon, GU35 9QZ, United Kingdom"
+    "destination": "25 Roxburghe Close, Whitehill, Bordon, GU35 9QZ, United Kingdom",
+    "orderDate": "01 Nov 2026"
   },
   {
     "id": "a3172e7b-7d83-4a6e-8b5e-58ce95d62404",
@@ -141,7 +143,32 @@ const LEGACY_SHIPMENT_REFERENCES: ShipmentReference[] = [
     "additionalTracking": [
       "QP272607419GB"
     ],
-    "destination": "29A Sytch Lane, Wombourne, Wolverhampton, WV5 0JP, United Kingdom"
+    "destination": "29A Sytch Lane, Wombourne, Wolverhampton, WV5 0JP, United Kingdom",
+    "orderDate": "01 Nov 2026"
+  },
+  {
+    "id": "pay_Rpb6CH3Z1lhL0n",
+    "ref": "1189980024543928325",
+    "trackingNumber": "YT2631200700256406",
+    "backend": "hypersku",
+    "destination": "29 Burnside Drive, Derby, DE21 7QR, United Kingdom",
+    "orderDate": "07 Nov 2026"
+  },
+  {
+    "id": "pay_vbrgevVyAX75ch",
+    "ref": "1189979806339457028",
+    "trackingNumber": "H00RVA0567707764",
+    "backend": "hypersku",
+    "destination": "31 Apley Drive, Wellington, Telford, TF1 3DU, United Kingdom",
+    "orderDate": "07 Nov 2026"
+  },
+  {
+    "id": "pay_h4M8uTUfM2XI5x",
+    "ref": "1189657874570174464",
+    "trackingNumber": "YT2631200700856353",
+    "backend": "hypersku",
+    "destination": "Georgia House Poplar Estate Beck Row, Bury St Edmunds, IP28 8EH, United Kingdom",
+    "orderDate": "06 Nov 2026"
   },
   {
     "id": "a3151b5a-4fb7-4e77-8950-40df1412584d",
@@ -501,7 +528,7 @@ async function fetchHyperSKUTracking(trackingNumber: string): Promise<HyperSKURe
   const key = Object.keys(json.retInfo).find(key => key.toUpperCase() === number);
   const record: HyperSKURecord | undefined = key ? json.retInfo[key] : undefined;
   if (!record || (record.finalNo && record.finalNo.toUpperCase() !== number)) return null;
-  if (record.flow_0?.length || record.flow_1?.length || Number(record.status) > 0) return record;
+  if (record.flow_0?.length || record.flow_1?.length || Number(record.status) > 0 || record.createTime) return record;
   return null;
 }
 
@@ -782,10 +809,11 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
   const summary = cj?.trackingStatus || cj?.statusDescription || "";
   const hasRawScans = Boolean(cj?.trackEvent?.length || hyper?.flow_0?.length || hyper?.flow_1?.length);
   if (!latest && !hasRawScans && /delivered|delivery|transit|en route|shipped|courier|facility|pickup|pick up|label|processing/i.test(summary)) stage = classifyTrackingEvent(summary);
-  if (!latest && !hasRawScans && stage === "UNAVAILABLE" && hyper) {
+  if (!latest && !hasRawScans && stage === "UNAVAILABLE" && (hyper || historical?.backend === "hypersku")) {
     // Only documented statuses; 'Pick Up' means awaiting collection, not van dispatch.
-    if (Number(hyper.status) === 1) stage = "DELIVERED";
-    else if ([2, 3, 4, 5, 6, -2].includes(Number(hyper.status))) stage = "IN_TRANSIT";
+    if (Number(hyper?.status) === 1) stage = "DELIVERED";
+    else if ([2, 3, 4, 5, 6, -2].includes(Number(hyper?.status))) stage = "IN_TRANSIT";
+    else if (hyper || historical?.backend === "hypersku") stage = "PROCESSING";
   }
   // An order with no fulfillment barcode is still processing, but has no invented scans.
   if (!barcode && liveOrder) stage = "PROCESSING";
@@ -795,7 +823,9 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
   const rawCarrier = cj?.lastMileCarrier || cj?.providerEnName || hyper?.express_company_info_to?.enName || hyper?.express_company_info_to?.name || order?.shippingCarrier || hyper?.express_company_info?.enName || hyper?.express_company_info?.name || "";
   const carrierNumber = lastMile || hyper?.finalNo || barcode;
   const royalMail = /royal\s*mail/i.test(rawCarrier) || /^[A-Z]{2}\d{9}GB$/i.test(carrierNumber);
-  const carrierName = royalMail ? "Royal Mail" : rawCarrier || "Carrier";
+  const evri = /evri|hermes/i.test(rawCarrier) || /^H[0-9A-Z]{15}$/i.test(carrierNumber);
+  const yunExpress = /yun\s*express/i.test(rawCarrier) || /^YT\d+$/i.test(carrierNumber);
+  const carrierName = royalMail ? "Royal Mail" : evri ? "Evri" : yunExpress ? "YunExpress" : rawCarrier || "Carrier";
   const carrierTrackingUrl = royalMail
     ? `https://www.royalmail.com/track-your-item#/tracking-results/${encodeURIComponent(carrierNumber)}`
     : /^ZHPHD/i.test(barcode) ? `https://www.cjpacket.com/?trackingNumber=${encodeURIComponent(barcode)}`
@@ -804,14 +834,14 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
     [ref.trackingNumber, ...(ref.additionalTracking || [])]
       .some(value => value.toLowerCase() === barcode.toLowerCase()));
   const destination = matchedRef?.destination || (order && order.customerCity ? Array.from(new Set([order.customerCity, order.customerCountry].filter(Boolean))).join(", ") : cj?.destCountryCode) || "Not available";
-  const isHyperOrder = historical?.backend === "hypersku" || (!cj && Boolean(hyper)) || /^QP\d+GB$/i.test(barcode);
+  const isHyperOrder = historical?.backend === "hypersku" || matchedRef?.backend === "hypersku" || (!cj && Boolean(hyper)) || /^(QP\d+GB|YT\d+|H[0-9A-Z]{15})$/i.test(barcode);
   const statusMessage = !barcode ? "Your order is recorded. Carrier tracking has not been assigned yet."
     : "Latest information reported by the carrier. New scans appear after the carrier publishes them.";
   return {
     found: true, orderRef: isHyperOrder ? "" : order?.ref || "", trackingNumber: barcode || "Not yet assigned",
     carrierName, carrierTrackingUrl: barcode ? carrierTrackingUrl : undefined,
     recipientName: order ? maskName(order.customerFirstName, order.customerLastName) : undefined,
-    destination, ...summarizeStage(stage), orderDate: formatUKOrderDate(order?.createdAt),
+    destination, ...summarizeStage(stage), orderDate: matchedRef?.orderDate || formatUKOrderDate(order?.createdAt),
     estimatedDelivery: stage === "DELIVERED" && latest?.stage === "DELIVERED" ? latest.date : "",
     items: order?.items || [], timeline: events.map(e => ({ title: e.title, description: e.description, date: e.date, stage: e.stage, completed: e.completed })),
     checkedAt: new Date().toISOString(), statusMessage,
