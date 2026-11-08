@@ -120,27 +120,37 @@ export function CheckoutForm({
     const attribution = readAttribution();
 
     // Ensure any promo code typed into the promo input is captured even if not clicked or submitted
-    let appliedCode = manualPromoCode || (manualPromoCodes && manualPromoCodes.length > 0 ? manualPromoCodes[0] : "");
-
+    let extraCode = "";
     if (typeof document !== "undefined") {
       const promoInput = document.querySelector('input[aria-label="Promo code"]') as HTMLInputElement | null;
       if (promoInput?.value) {
         const canonical = getAppliedManualPromoCode(promoInput.value);
         if (canonical) {
-          appliedCode = canonical;
+          extraCode = canonical;
           applyManualPromoCode(canonical);
         }
       }
     }
 
-    const appliedCodesList = appliedCode ? [appliedCode] : [];
-    const effectiveTotals = calculateCartTotals(lines, appliedCode);
+    const appliedCodesList = Array.from(
+      new Set(
+        [
+          ...(manualPromoCodes || []),
+          manualPromoCode,
+          extraCode,
+        ]
+          .map((c) => getAppliedManualPromoCode(c))
+          .filter(Boolean),
+      ),
+    );
+    const primaryCode = appliedCodesList[0] || "";
+    const effectiveTotals = calculateCartTotals(lines, appliedCodesList);
 
     writeCheckoutSnapshot({
       lines,
       giftMessage,
       promoCode,
-      manualPromoCode: appliedCode,
+      manualPromoCode: primaryCode,
       manualPromoCodes: appliedCodesList,
     });
     setError("");
@@ -170,7 +180,7 @@ export function CheckoutForm({
               lines,
               giftMessage,
               promoCodes: appliedCodesList,
-              manualPromoCode: appliedCode,
+              manualPromoCode: primaryCode,
               manualPromoCodes: appliedCodesList,
             },
             totals: effectiveTotals,
