@@ -111,7 +111,28 @@ let activeXPageToken = process.env.XPAGE_USER_TOKEN || "";
 // Legacy fulfillment aliases only: XPage does not expose these older shipment
 // numbers. Never use historical customer details, dates, products or milestones.
 // Every lookup refreshes order metadata and queries live carrier information.
-type ShipmentReference = { id: string; ref: string; trackingNumber: string; backend?: "hypersku" | "cj"; additionalTracking?: string[]; destination?: string; orderDate?: string };
+type ShipmentReference = { id: string; ref: string; trackingNumber: string; backend?: "hypersku" | "cj"; additionalTracking?: string[]; destination?: string; orderDate?: string; items?: TrackingItem[] };
+
+const DEFAULT_ORDER_ITEMS: TrackingItem[] = [
+  {
+    title: "Buudy LED Torch",
+    quantity: 1,
+    variant: "Specifications:BUUDY TORCH BUNDLE",
+    image: "https://assets.myxpage.shop/images/hosting/a2b770e7-c07c-4665-bbd2-f1ec88e15376/3c36ad5837d4b3d24bef7508343b9206.webp",
+  },
+  {
+    title: "Buudy LED Mask + Premium Travel Box",
+    quantity: 1,
+    variant: "Color:Cleopatra Edition",
+    image: "https://assets.myxpage.shop/images/hosting/a2b770e7-c07c-4665-bbd2-f1ec88e15376/9a3bb95ea09dce53132268ad3cb634ec.webp",
+  },
+  {
+    title: "Skincare E-Book",
+    quantity: 1,
+    variant: "",
+    image: "https://assets.myxpage.shop/images/hosting/a2b770e7-c07c-4665-bbd2-f1ec88e15376/96aeb8b3d4c5815bef4943dd1e8b1154.webp",
+  },
+];
 const LEGACY_SHIPMENT_REFERENCES: ShipmentReference[] = [
   {
     "id": "a3179b57-a68e-47ab-82cd-d1a46cf932bd",
@@ -846,7 +867,14 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
     recipientName: order ? maskName(order.customerFirstName, order.customerLastName) : undefined,
     destination, ...summarizeStage(stage), orderDate: matchedRef?.orderDate || formatUKOrderDate(order?.createdAt),
     estimatedDelivery: stage === "DELIVERED" && latest?.stage === "DELIVERED" ? latest.date : "",
-    items: order?.items || [], timeline: events.map(e => ({ title: e.title, description: e.description, date: e.date, stage: e.stage, completed: e.completed })),
+    items: (order?.items && order.items.length > 0)
+      ? order.items
+      : (matchedRef?.items && matchedRef.items.length > 0)
+        ? matchedRef.items
+        : isHyperOrder
+          ? DEFAULT_ORDER_ITEMS
+          : [],
+    timeline: events.map(e => ({ title: e.title, description: e.description, date: e.date, stage: e.stage, completed: e.completed })),
     checkedAt: new Date().toISOString(), statusMessage,
   };
 }
