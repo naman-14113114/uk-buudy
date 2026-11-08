@@ -157,8 +157,11 @@ const LEGACY_SHIPMENT_REFERENCES: ShipmentReference[] = [
   {
     "id": "pay_vbrgevVyAX75ch",
     "ref": "1189979806339457028",
-    "trackingNumber": "H00RVA0567707764",
+    "trackingNumber": "H00RVA0567787764",
     "backend": "hypersku",
+    "additionalTracking": [
+      "H00RVA0567707764"
+    ],
     "destination": "31 Apley Drive, Wellington, Telford, TF1 3DU, United Kingdom",
     "orderDate": "07 Nov 2026"
   },
