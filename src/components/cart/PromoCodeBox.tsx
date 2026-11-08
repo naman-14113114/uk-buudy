@@ -18,9 +18,12 @@ export function PromoCodeBox() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const active = totals.itemCount > 0;
 
-  const activePromoCode =
-    manualPromoCode ||
-    (manualPromoCodes && manualPromoCodes.length > 0 ? manualPromoCodes[0] : "");
+  const appliedList =
+    manualPromoCodes && manualPromoCodes.length > 0
+      ? manualPromoCodes
+      : manualPromoCode
+      ? [manualPromoCode]
+      : [];
 
   function handleApply(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,39 +31,39 @@ export function PromoCodeBox() {
     if (!trimmed) return;
 
     const canonical = getAppliedManualPromoCode(trimmed);
-    if (canonical) {
-      applyManualPromoCode(canonical);
+    if (!canonical) {
+      setMessage("Invalid promo code.");
+      setStatus("error");
+      return;
+    }
+
+    if (appliedList.includes(canonical)) {
       setCode("");
-      setMessage(
-        activePromoCode && activePromoCode !== canonical
-          ? `Switched code to ${canonical}.`
-          : "Code applied successfully.",
-      );
+      setMessage(`${canonical} is already applied.`);
       setStatus("success");
       return;
     }
 
-    if (activePromoCode && activePromoCode.toUpperCase() === trimmed.toUpperCase()) {
+    const applied = applyManualPromoCode(canonical);
+    if (applied) {
       setCode("");
-      setMessage("Code already applied.");
+      setMessage(`Code ${canonical} applied successfully.`);
       setStatus("success");
-      return;
+    } else {
+      setMessage("Invalid promo code.");
+      setStatus("error");
     }
-
-    setMessage("Invalid promo code.");
-    setStatus("error");
   }
 
-  function handleRemove() {
-    removeManualPromoCode(activePromoCode);
-    setCode("");
+  function handleRemove(codeToRemove: string) {
+    removeManualPromoCode(codeToRemove);
     setMessage("");
     setStatus("idle");
   }
 
   return (
     <div className="space-y-2.5">
-      {/* Promo Code Input Form (Always Visible) */}
+      {/* Promo Code Input Form */}
       <form className="flex gap-2 max-[420px]:flex-col" onSubmit={handleApply}>
         <input
           aria-label="Promo code"
@@ -71,31 +74,14 @@ export function PromoCodeBox() {
             setCode(nextValue);
 
             const canonical = getAppliedManualPromoCode(nextValue);
-            if (canonical) {
+            if (canonical && !appliedList.includes(canonical)) {
               applyManualPromoCode(canonical);
               setCode("");
-              setMessage(
-                activePromoCode && activePromoCode !== canonical
-                  ? `Switched code to ${canonical}.`
-                  : "Code applied successfully.",
-              );
+              setMessage(`Code ${canonical} applied successfully.`);
               setStatus("success");
             } else if (status !== "idle") {
               setMessage("");
               setStatus("idle");
-            }
-          }}
-          onBlur={() => {
-            const canonical = getAppliedManualPromoCode(code);
-            if (canonical) {
-              applyManualPromoCode(canonical);
-              setCode("");
-              setMessage(
-                activePromoCode && activePromoCode !== canonical
-                  ? `Switched code to ${canonical}.`
-                  : "Code applied successfully.",
-              );
-              setStatus("success");
             }
           }}
           placeholder="Enter Promo Code"
@@ -103,7 +89,7 @@ export function PromoCodeBox() {
         />
         <button
           className="buudy-display h-10 rounded-full bg-[var(--plum)] px-6 text-sm uppercase text-[var(--cream)] transition hover:bg-[var(--ink)] disabled:cursor-not-allowed disabled:opacity-50 md:px-7"
-          disabled={!active}
+          disabled={!active || !code.trim()}
           type="submit"
         >
           Apply
@@ -123,25 +109,27 @@ export function PromoCodeBox() {
         </p>
       ) : null}
 
-      {/* Single Active Promo Code Pill (BUUDY10 or BLACKFRIDAY10) */}
-      {activePromoCode ? (
+      {/* Active Promo Code Pills (supports multiple applied promo codes, e.g. BUUDY10 and BLACKFRIDAY10) */}
+      {appliedList.length > 0 ? (
         <div className="flex flex-wrap gap-2 pt-1">
-          <div
-            key={activePromoCode}
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--cream)] py-1 pl-3.5 pr-1.5 text-xs text-[var(--plum)] shadow-sm"
-          >
-            <span className="font-semibold uppercase tracking-wider font-mono text-xs">
-              {activePromoCode}
-            </span>
-            <button
-              type="button"
-              onClick={handleRemove}
-              className="flex h-5 w-5 items-center justify-center rounded-full text-[var(--muted)] hover:bg-[rgba(58,31,61,.12)] hover:text-[var(--plum)] transition focus-visible:outline-2 focus-visible:outline-[var(--gold)]"
-              aria-label={`Remove ${activePromoCode} promo code`}
+          {appliedList.map((applied) => (
+            <div
+              key={applied}
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--cream)] py-1 pl-3.5 pr-1.5 text-xs text-[var(--plum)] shadow-sm"
             >
-              <X size={13} strokeWidth={2.5} />
-            </button>
-          </div>
+              <span className="font-semibold uppercase tracking-wider font-mono text-xs">
+                {applied}
+              </span>
+              <button
+                type="button"
+                onClick={() => handleRemove(applied)}
+                className="flex h-5 w-5 items-center justify-center rounded-full text-[var(--muted)] hover:bg-[rgba(58,31,61,.12)] hover:text-[var(--plum)] transition focus-visible:outline-2 focus-visible:outline-[var(--gold)]"
+                aria-label={`Remove ${applied} promo code`}
+              >
+                <X size={13} strokeWidth={2.5} />
+              </button>
+            </div>
+          ))}
         </div>
       ) : null}
     </div>

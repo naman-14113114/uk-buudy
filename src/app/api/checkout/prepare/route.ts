@@ -332,20 +332,19 @@ export async function POST(request: NextRequest) {
       ...(body.cart?.manualPromoCode ? [body.cart.manualPromoCode] : []),
     ].map((c) => c.trim().toUpperCase()).filter(Boolean);
 
-    // Only 1 promo code is allowed: strictly either BUUDY10 or BLACKFRIDAY10
-    const lastPromo = allPromoCodes[allPromoCodes.length - 1];
+    const hasBuudy = allPromoCodes.includes("BUUDY10") || allPromoCodes.includes("BUUDY");
+    const hasBlackFriday = allPromoCodes.includes("BLACKFRIDAY10");
+
     let promoToSend = "";
-    if (lastPromo === "BUUDY10" || lastPromo === "BUUDY") {
-      promoToSend = "BUUDY10";
-    } else if (lastPromo === "BLACKFRIDAY10") {
+    if (hasBuudy && hasBlackFriday) {
+      promoToSend = "BUUDYBF20";
+    } else if (hasBlackFriday) {
       promoToSend = "BLACKFRIDAY10";
-    } else if (allPromoCodes.includes("BUUDY10") || allPromoCodes.includes("BUUDY")) {
+    } else if (hasBuudy) {
       promoToSend = "BUUDY10";
-    } else if (allPromoCodes.includes("BLACKFRIDAY10")) {
-      promoToSend = "BLACKFRIDAY10";
+    } else if (allPromoCodes.includes("BUUDYBF20") || allPromoCodes.includes("BUUDY10BLACKFRIDAY10")) {
+      promoToSend = "BUUDYBF20";
     }
-    // Whop owns the final price and payment. Pass the exact mask quantity and
-    // only the supported manual discount; included gifts are part of its bundle.
     const planId = "plan_IY6bXASo3Gh15";
     const checkout = new URL(`/checkout/${planId}`, "https://buudy.com");
     checkout.searchParams.set("quantity", String(quantity));

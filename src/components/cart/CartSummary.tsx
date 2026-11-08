@@ -29,9 +29,16 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
     }
   }, [totals.totalCents]);
 
+  const activeCodes =
+    manualPromoCodes && manualPromoCodes.length > 0
+      ? manualPromoCodes
+      : manualPromoCode
+      ? [manualPromoCode]
+      : [];
   const activePromoCode =
-    manualPromoCode ||
-    (manualPromoCodes && manualPromoCodes.length > 0 ? manualPromoCodes[0] : "");
+    activeCodes.length > 1
+      ? activeCodes.join(" + ")
+      : activeCodes[0] || "";
 
   const giftLines = getDisplayLines(lines).filter(
     (line) =>

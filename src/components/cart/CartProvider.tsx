@@ -74,17 +74,20 @@ function readStoredCart() {
   for (const stored of readStoredCartCandidates()) {
     try {
       const parsed = JSON.parse(stored) as CartState;
-      const rawCode =
-        Array.isArray(parsed.manualPromoCodes) && parsed.manualPromoCodes.length > 0
-          ? parsed.manualPromoCodes[parsed.manualPromoCodes.length - 1]
-          : parsed.manualPromoCode;
-      const singleActiveCode = getAppliedManualPromoCode(rawCode);
+      const rawCodes = Array.isArray(parsed.manualPromoCodes)
+        ? parsed.manualPromoCodes
+        : parsed.manualPromoCode
+        ? [parsed.manualPromoCode]
+        : [];
+      const validCodes = Array.from(
+        new Set(rawCodes.map((c) => getAppliedManualPromoCode(c)).filter(Boolean)),
+      );
 
       const storedState = {
         ...emptyCart,
         ...parsed,
-        manualPromoCode: singleActiveCode,
-        manualPromoCodes: singleActiveCode ? [singleActiveCode] : [],
+        manualPromoCode: validCodes[0] || "",
+        manualPromoCodes: validCodes,
         lines: normalizeCartLines(Array.isArray(parsed.lines) ? parsed.lines : []),
       };
 
@@ -205,12 +208,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [hydrated, state]);
 
   const totals = useMemo(
-    () => calculateCartTotals(state.lines, state.manualPromoCode),
-    [state.lines, state.manualPromoCode],
+    () =>
+      calculateCartTotals(
+        state.lines,
+        state.manualPromoCodes && state.manualPromoCodes.length > 0
+          ? state.manualPromoCodes
+          : state.manualPromoCode
+          ? [state.manualPromoCode]
+          : [],
+      ),
+    [state.lines, state.manualPromoCode, state.manualPromoCodes],
   );
   const activePromoCodes = useMemo(() => {
-    return state.manualPromoCode ? [state.manualPromoCode] : [];
-  }, [state.manualPromoCode]);
+    const codes =
+      state.manualPromoCodes && state.manualPromoCodes.length > 0
+        ? state.manualPromoCodes
+        : state.manualPromoCode
+        ? [state.manualPromoCode]
+        : [];
+    return Array.from(new Set(codes.map(getAppliedManualPromoCode).filter(Boolean)));
+  }, [state.manualPromoCode, state.manualPromoCodes]);
 
   function addProduct(product: Product, quantity = 1) {
     const current = latestState.current;

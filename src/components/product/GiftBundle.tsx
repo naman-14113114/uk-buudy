@@ -113,7 +113,7 @@ export function GiftBundle({
   isHalloween?: boolean;
   isEarlyBlackFriday?: boolean;
 }) {
-  const { addProduct, applyManualPromoCode } = useCart();
+  const { addProduct } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(5);
@@ -334,9 +334,6 @@ export function GiftBundle({
         id="hero-cta"
         onClick={() => {
           setIsAdding(true);
-          if (isEarlyBlackFriday) {
-            applyManualPromoCode("BLACKFRIDAY10");
-          }
           addProduct(product);
           router.push(
             appendAttributionToPath(

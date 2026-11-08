@@ -22,7 +22,7 @@ export function StickyAddToCart({
   product: Product;
   isEarlyBlackFriday?: boolean;
 }) {
-  const { addProduct, applyManualPromoCode } = useCart();
+  const { addProduct } = useCart();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -134,9 +134,6 @@ export function StickyAddToCart({
           disabled={isAdding}
           onClick={() => {
             setIsAdding(true);
-            if (isEarlyBlackFriday) {
-              applyManualPromoCode("BLACKFRIDAY10");
-            }
             addProduct(product);
             router.push(
               appendAttributionToPath(

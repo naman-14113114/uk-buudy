@@ -25,7 +25,7 @@ export type CartState = {
 };
 
 export const promoCode = "AUTO";
-export const manualPromoCode = "BLACKFRIDAY10";
+export const manualPromoCode = "";
 export const manualPromoDiscountCents = 1000;
 
 export const VALID_PROMO_CODES: Record<
@@ -34,6 +34,9 @@ export const VALID_PROMO_CODES: Record<
 > = {
   BLACKFRIDAY10: { code: "BLACKFRIDAY10", discountCents: 1000, type: "promo" },
   BUUDY10: { code: "BUUDY10", discountCents: 1000, type: "promo" },
+  BUUDY: { code: "BUUDY10", discountCents: 1000, type: "promo" },
+  BUUDYBF20: { code: "BUUDYBF20", discountCents: 2000, type: "promo" },
+  BUUDY10BLACKFRIDAY10: { code: "BUUDY10BLACKFRIDAY10", discountCents: 2000, type: "promo" },
 };
 
 export const emptyCart: CartState = {
@@ -164,15 +167,15 @@ export function calculateCartTotals(
   lines: CartLine[],
   appliedManualPromo: string | string[] = "",
 ) {
-  // Only 1 coupon is allowed: either BUUDY10 or BLACKFRIDAY10 (no stacking)
   const promoCodesList = Array.isArray(appliedManualPromo)
     ? appliedManualPromo
     : appliedManualPromo
     ? [appliedManualPromo]
     : [];
 
-  const rawActiveCode = promoCodesList[promoCodesList.length - 1] || "";
-  const singleCode = getAppliedManualPromoCode(rawActiveCode);
+  const uniqueAppliedCodes = Array.from(
+    new Set(promoCodesList.map((c) => getAppliedManualPromoCode(c)).filter(Boolean)),
+  );
 
   const productLines = lines.filter((line) => line.type === "product");
   const giftLines = lines.filter((line) => line.type === "gift");
@@ -191,8 +194,11 @@ export function calculateCartTotals(
   );
   const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
 
-  // Strictly single coupon discount: max 1000 cents (£10)
-  const promoDiscountCents = Math.min(getPromoDiscountCents(singleCode), subtotalCents);
+  // Sum unique applied promo code discounts (allows both BUUDY10 and BLACKFRIDAY10)
+  const totalPromoDiscountCents = uniqueAppliedCodes.reduce((acc, code) => {
+    return acc + getPromoDiscountCents(code);
+  }, 0);
+  const promoDiscountCents = Math.min(totalPromoDiscountCents, subtotalCents);
 
   return {
     itemCount: productLines.reduce((total, line) => total + line.quantity, 0),
