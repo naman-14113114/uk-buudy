@@ -286,29 +286,48 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     let applied = false;
     setState((current) => {
-      // Only 1 coupon is allowed: either BUUDY10 or BLACKFRIDAY10
-      // Applying a coupon replaces any previous coupon (zero stacking)
-      if (current.manualPromoCode === canonical) {
+      const existingCodes =
+        current.manualPromoCodes && current.manualPromoCodes.length > 0
+          ? current.manualPromoCodes
+          : current.manualPromoCode
+          ? [current.manualPromoCode]
+          : [];
+
+      if (existingCodes.includes(canonical)) {
         return current;
       }
 
       applied = true;
+      const nextCodes = [...existingCodes, canonical];
       return {
         ...current,
-        manualPromoCode: canonical,
-        manualPromoCodes: [canonical],
+        manualPromoCode: nextCodes[0] || "",
+        manualPromoCodes: nextCodes,
       };
     });
 
     return applied;
   }
 
-  function removeManualPromoCode(_code?: string) {
-    setState((current) => ({
-      ...current,
-      manualPromoCode: "",
-      manualPromoCodes: [],
-    }));
+  function removeManualPromoCode(code?: string) {
+    setState((current) => {
+      if (!code) {
+        return {
+          ...current,
+          manualPromoCode: "",
+          manualPromoCodes: [],
+        };
+      }
+      const canonical = getAppliedManualPromoCode(code);
+      const nextCodes = (current.manualPromoCodes || []).filter(
+        (c) => c !== canonical && c !== code,
+      );
+      return {
+        ...current,
+        manualPromoCode: nextCodes[0] || "",
+        manualPromoCodes: nextCodes,
+      };
+    });
   }
 
   function clearManualPromoCode() {
