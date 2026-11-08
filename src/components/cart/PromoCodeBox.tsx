@@ -25,8 +25,8 @@ export function PromoCodeBox() {
       ? [manualPromoCode]
       : [];
 
-  function handleApply(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function handleApply(event?: FormEvent<HTMLFormElement>) {
+    if (event) event.preventDefault();
     const trimmed = code.trim();
     if (!trimmed) return;
 
@@ -70,16 +70,8 @@ export function PromoCodeBox() {
           className="buudy-display h-10 min-w-0 flex-1 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 text-sm uppercase text-[var(--plum)] outline-none transition placeholder:text-[rgba(58,31,61,.45)] focus:border-[var(--gold)] disabled:opacity-50"
           disabled={!active}
           onChange={(event) => {
-            const nextValue = event.target.value;
-            setCode(nextValue);
-
-            const canonical = getAppliedManualPromoCode(nextValue);
-            if (canonical && !appliedList.includes(canonical)) {
-              applyManualPromoCode(canonical);
-              setCode("");
-              setMessage(`Code ${canonical} applied successfully.`);
-              setStatus("success");
-            } else if (status !== "idle") {
+            setCode(event.target.value);
+            if (status !== "idle") {
               setMessage("");
               setStatus("idle");
             }
