@@ -192,7 +192,7 @@ export function OrderTrackingPage() {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Enter tracking number (e.g. ZHPHD... or JJD...)"
+                  placeholder="Enter tracking number, order reference (e.g. pay_...), or UK postcode..."
                   className="h-14 w-full rounded-full border border-[var(--border)] bg-white/90 pl-11 pr-10 text-sm font-medium text-[var(--plum)] shadow-sm outline-none transition placeholder:text-[var(--muted)]/60 focus:border-[var(--plum)] focus:bg-white focus:ring-2 focus:ring-[var(--plum)]/10"
                 />
                 {query && (
@@ -308,7 +308,7 @@ export function OrderTrackingPage() {
               {/* Order Metadata Grid */}
               <div
                 className={`mt-6 grid grid-cols-2 gap-4 ${
-                  trackingData.statusCode === "DELIVERED" ? "sm:grid-cols-4" : "sm:grid-cols-3"
+                  trackingData.estimatedDelivery ? "sm:grid-cols-4" : "sm:grid-cols-3"
                 } sm:gap-6`}
               >
                 <div>
@@ -352,12 +352,18 @@ export function OrderTrackingPage() {
                   </span>
                 </div>
 
-                {trackingData.statusCode === "DELIVERED" && trackingData.estimatedDelivery && (
+                {trackingData.estimatedDelivery && (
                   <div>
                     <span className="block text-xs font-medium uppercase tracking-wider text-[var(--muted)]">
-                      Delivered Date
+                      {trackingData.statusCode === "DELIVERED" ? "Delivered Date" : "Estimated Delivery"}
                     </span>
-                    <span className="mt-1 block text-sm font-semibold text-emerald-700">
+                    <span
+                      className={`mt-1 block text-sm font-semibold ${
+                        trackingData.statusCode === "DELIVERED"
+                          ? "text-emerald-700"
+                          : "text-[var(--plum)]"
+                      }`}
+                    >
                       {trackingData.estimatedDelivery}
                     </span>
                   </div>
@@ -444,6 +450,20 @@ export function OrderTrackingPage() {
                     );
                   })}
                 </div>
+
+                {trackingData.statusMessage && (
+                  <div className="mt-8 flex items-start gap-3 rounded-2xl border border-[rgba(58,31,61,0.12)] bg-[var(--cream)]/60 p-4 text-left">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--plum)]/10 text-[var(--plum)]">
+                      <Truck size={15} />
+                    </div>
+                    <div className="space-y-0.5">
+                      <p className="text-xs font-bold uppercase tracking-wider text-[var(--plum)]">Logistics Update</p>
+                      <p className="text-xs sm:text-sm font-medium leading-relaxed text-[var(--muted)]">
+                        {trackingData.statusMessage}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
