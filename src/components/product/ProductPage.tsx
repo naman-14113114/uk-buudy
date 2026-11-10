@@ -1,4 +1,5 @@
 import type { Product } from "@/data/products";
+import { serumFeatures, serumTransformations } from "@/data/productSections";
 import { AppPromo, BlueLightSection, TouchTechSection } from "./AppPromo";
 import { ComparisonTable } from "./ComparisonTable";
 import { FAQSection } from "./FAQSection";
@@ -22,7 +23,7 @@ import { TrustBadges } from "./TrustBadges";
 export function ProductPage({
   product,
   variant,
-  galleryVariant = product.template === "mask" ? "omnilux" : "default",
+  galleryVariant = product.template === "mask" || product.template === "serum" ? "omnilux" : "default",
   comparisonPosition = "default",
   isHalloween = false,
   isEarlyBlackFriday = true,
@@ -49,19 +50,31 @@ export function ProductPage({
   return (
     <div className="relative">
       <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
-      <DeferredVideoReviews />
+      {product.template === "mask" && <DeferredVideoReviews />}
       <TrustBadges />
-      {/* <FeatureGrid /> */}
-      <DeferredBeforeAfterGrid />
-      <DeferredWavelengthSelector />
-      <DeferredHowToUseSection />
-      <DeferredExpertSection />
-      {comparisonPosition === "default" && <ComparisonTable />}
+      {product.template === "mask" && <FeatureGrid />}
+      {product.template === "serum" && (
+        <FeatureGrid
+          featuresList={serumFeatures}
+          eyebrow="Formulation Science"
+          title={
+            <>
+              What makes our formula{" "}
+              <em className="buudy-italic text-[var(--gold)]">unique</em>?
+            </>
+          }
+        />
+      )}
+      <DeferredBeforeAfterGrid items={product.template === "serum" ? serumTransformations : undefined} />
+      {product.template === "mask" && <DeferredWavelengthSelector />}
+      {product.template === "mask" && <DeferredHowToUseSection />}
+      {product.template === "mask" && <DeferredExpertSection />}
+      {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
-      <ProductReviewsSection />
-      <AppPromo />
-      {comparisonPosition === "below-app" && <ComparisonTable />}
-      <BlueLightSection />
+      <ProductReviewsSection productHandle={product.slug} />
+      {product.template === "mask" && <AppPromo />}
+      {product.template === "mask" && comparisonPosition === "below-app" && <ComparisonTable />}
+      {product.template === "mask" && <BlueLightSection />}
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} isEarlyBlackFriday={isEarlyBlackFriday} />

@@ -41,7 +41,7 @@ export type Product = {
   id: string;
   sku: string;
   slug: string;
-  template: "mask" | "torch" | "ipl" | "minimal";
+  template: "mask" | "torch" | "ipl" | "minimal" | "serum";
   name: string;
   heroTitle: string;
   heroEmphasis: string;
@@ -1188,6 +1188,320 @@ export const buudyPackageProtection: Product = {
   faqs: packageProtectionFaqs,
 };
 
+// Clinical Serums for The Buudy Clinical Light Regimen (Selfnamed Sourced)
+export const clinicalSerumFaqs: FAQItem[] = [
+  {
+    question: "When should I apply this in my light therapy routine?",
+    answer: "Step 1 (Hyaluronic Serum) should be applied immediately before putting on your LED mask to hydrate without scattering light. Step 2 (Collagen-Lock Hexapeptide Serum) should be applied immediately after your 10-minute session when cellular pathways are primed for peptide signaling. Step 3 (Botanical Retinol Alternative) is for overnight repair, and Step 4 (5% Niacinamide Gel) pairs specifically with 415nm Blue Light for acne and pore control.",
+  },
+  {
+    question: "Are these formulas safe to use with all 7 LED wavelengths?",
+    answer: "Yes, every formula in The Buudy Clinical Light Regimen is specifically formulated to be 100% compatible with phototherapy. They are free from photosensitizing synthetic compounds, heavy occlusives, and artificial dyes.",
+  },
+  {
+    question: "Is the packaging recyclable and travel-friendly?",
+    answer: "All Buudy Clinical Serums are packaged in airless glass and recyclable containers that preserve delicate peptide and botanical actives from oxidation while remaining 100% airport security friendly.",
+  },
+  {
+    question: "What is the return and guarantee policy?",
+    answer: "All Buudy clinical skincare items are backed by our 30-day satisfaction guarantee and ship via tracked UK delivery.",
+  },
+];
+
+export const buudyCollagenSerum: Product = {
+  id: "buudy-collagen-boost-serum",
+  sku: "BUUDY-SERUM-COL-30",
+  slug: "buudy-collagen-boost-serum",
+  template: "serum",
+  name: "Buudy Collagen-Lock™ Hexapeptide Restorative Serum (30ml)",
+  heroTitle: "Buudy Collagen-Lock™ Hexapeptide Restorative Serum",
+  heroEmphasis: "Post-Light Restoration",
+  shortDescription: "STEP 2: POST-LIGHT PEPTIDE BOOSTER & COLLAGEN LOCK (30ml)",
+  description: "Applied immediately post-treatment. Powered by 2% bio-fermented Hexapeptide-11 to communicate directly with newly stimulated fibroblasts during the critical 30-minute post-light window, locking in accelerated structural collagen synthesis.",
+  seoTitle: "Buudy Collagen-Lock™ Hexapeptide Restorative Serum | Buudy UK",
+  seoDescription: "Clinically formulated post-light therapy peptide serum. 2% Hexapeptide-11 expression line relaxer + 1% Sodium PCA. Locks in collagen synthesis.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 486,
+  customerCount: "14,000+",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "/images/products/buudy-serum/serum-bottle-front.jpg",
+  gallery: [
+    {
+      src: "/images/products/buudy-serum/serum-bottle-box-front.jpg",
+      alt: "Buudy Collagen-Lock™ Serum 30ml Bottle & Luxury Folding Carton",
+      badge: {
+        title: "2% HEXAPEPTIDE-11\nBIO-FERMENTED",
+        sub: "Signals fibroblasts to accelerate\ncollagen type I & III synthesis",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-bottle-front.jpg",
+      alt: "Buudy Collagen-Lock™ 30ml Precision Treatment Dropper Bottle",
+      badge: {
+        title: "PRECISION DROPPER\nCLINICAL DELIVERY",
+        sub: "Micro-dosing pipette delivers\noptimal active absorption",
+        position: "bottom-left",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-texture-macro.jpg",
+      alt: "Velvet Restorative Droplet with Multi-Molecular Hyaluronic Acid",
+      badge: {
+        title: "MULTI-DEPTH\nHYDRATION PLUMP",
+        sub: "Plumps freshly stimulated dermis\nwithout congesting sensitive pores",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-ugc-application.jpg",
+      alt: "Buudy Collagen-Lock™ Gentle Pipette Application to Skin",
+      badge: {
+        title: "DAILY LUXURY\nRITUAL",
+        sub: "Silky, fast-absorbing texture\nleaves skin radiant and calm",
+        position: "bottom-right",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-bottle-box-back.jpg",
+      alt: "Full ECOCERT Cosmos Organic Certified INCI Specifications",
+      badge: {
+        title: "TRANSPARENT INCI\nCLEAN FORMULATION",
+        sub: "1% Sodium PCA + Elderberry Extract\nsoothes and protects dermal barrier",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Active Complex", value: "2% Hexapeptide-11 & 1% Sodium PCA" },
+    { label: "Regimen Step", value: "Step 2: Immediate Post-Phototherapy" },
+    { label: "Volume", value: "30ml Airless Dropper" },
+    { label: "Skin Compatibility", value: "All skin types & sensitive barriers" },
+    { label: "Manufacturing", value: "ECOCERT Cosmos Certified Organic" },
+  ],
+  included: [{ quantity: "1x", label: "30ml Collagen-Lock™ Hexapeptide Restorative Serum" }],
+  highlights: [
+    "Aqua/Water", "Glycerin", "Caprylic/Capric Triglyceride", "Helianthus Annuus Seed Oil", "Pentylene Glycol",
+    "Sodium PCA", "Hydrolyzed Hyaluronic Acid", "Hexapeptide-11", "Nasturtium Officinale Extract",
+    "Sambucus Nigra Fruit Extract", "Ascorbyl Palmitate", "Sodium Hyaluronate"
+  ],
+  keyBenefits: [
+    "Signals fibroblasts to accelerate structural collagen type I & III synthesis",
+    "Hexapeptide-11 relaxes facial tension and smooths stubborn expression lines",
+    "Multi-molecular hyaluronic acid plumps freshly stimulated dermis 2.5x deeper",
+    "1% Sodium PCA strengthens the natural barrier without congesting pores"
+  ],
+  badges: ["Post-Light Step 2", "Hexapeptide-11", "Clinically Formulated"],
+  faqs: clinicalSerumFaqs,
+};
+
+export const buudyHyaluronicSerum: Product = {
+  id: "buudy-light-activating-hyaluronic-serum",
+  sku: "BUUDY-SERUM-HA-50",
+  slug: "buudy-light-activating-hyaluronic-serum",
+  template: "serum",
+  name: "Buudy Light-Activating Hyaluronic Serum (50ml)",
+  heroTitle: "Buudy Light-Activating Hyaluronic Serum",
+  heroEmphasis: "Pre-Light Hydration",
+  shortDescription: "STEP 1: PRE / DURING-LIGHT HYDROGEL PRIMER (50ml)",
+  description: "100% water-based, crystal-clear optical matrix engineered specifically for clinical LED masks. Zero oils, zero silicones, zero reflection. Matches the refractive index of skin moisture (n ≈ 1.33) so 100% of 630nm red and 830nm near-infrared wavelengths penetrate unhindered into dermal tissue.",
+  seoTitle: "Buudy Light-Activating Hyaluronic Serum | Buudy UK",
+  seoDescription: "Zero-reflection light-transmitting hyaluronic serum for LED light therapy masks. 100% water-based multi-molecular HA.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 512,
+  customerCount: "16,000+",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "/images/products/buudy-serum/serum-bottle-front.jpg",
+  gallery: [
+    {
+      src: "/images/products/buudy-serum/serum-bottle-box-front.jpg",
+      alt: "Buudy Light-Activating Hyaluronic Serum & Luxury Outer Carton",
+      badge: {
+        title: "100% OPTICAL\nTRANSMISSION",
+        sub: "Zero-scattering water matrix\nmatches skin moisture (n ≈ 1.33)",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-bottle-front.jpg",
+      alt: "Buudy Light-Activating Hyaluronic Serum 30ml Dropper Bottle",
+      badge: {
+        title: "PRECISION DROPPER\nCLINICAL DOSING",
+        sub: "Graduated pipette delivers\nexact treatment volume",
+        position: "bottom-left",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-texture-macro.jpg",
+      alt: "Crystal-Clear Zero-Scattering Multi-Molecular Hydrogel Droplet Texture",
+      badge: {
+        title: "MULTI-MOLECULAR\nHYDROGEL MATRIX",
+        sub: "Deep dermal plumping without\noils, silicones, or sticky residue",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-ugc-application.jpg",
+      alt: "Buudy Light-Activating Serum Smooth Dermal Application",
+      badge: {
+        title: "LIGHT-ACTIVATING\nHYDRATION",
+        sub: "Optimizes light penetration\nfor enhanced phototherapy",
+        position: "bottom-right",
+        theme: "white",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/serum-bottle-box-back.jpg",
+      alt: "COSMOS Certified Organic Ingredients & Full INCI Specifications",
+      badge: {
+        title: "TRANSPARENT INCI\nCLEAN FORMULATION",
+        sub: "100% vegan, cruelty-free &\nlaboratory tested phototherapy primer",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Optical Transparency", value: "100% Zero-Scattering Clear Hydrogel" },
+    { label: "Active Matrix", value: "Multi-Molecular Hyaluronic Acid & White Tea" },
+    { label: "Regimen Step", value: "Step 1: Prior to Mask Application" },
+    { label: "Volume", value: "50ml Generous Treatment Pump" },
+    { label: "Light Synergy", value: "Red (630nm), NIR (830nm) & Blue (415nm)" },
+  ],
+  included: [{ quantity: "1x", label: "50ml Light-Activating Hyaluronic Serum" }],
+  highlights: [
+    "Aqua/Water", "Propanediol", "Cellulose Gum", "Camellia Sinensis (White Tea) Leaf Extract",
+    "Salvia Officinalis (Sage) Leaf Extract", "Hydrolyzed Hyaluronic Acid", "Sodium Hyaluronate"
+  ],
+  keyBenefits: [
+    "100% water-based formulation prevents light scattering & refraction",
+    "Multi-molecular hyaluronic acid hydrates and cools skin during phototherapy",
+    "White tea and sage extracts protect skin barrier against warmth dehydration",
+    "Zero oils or silicones ensuring full clinical wavelength absorption"
+  ],
+  badges: ["Pre-Light Step 1", "Zero Light Reflection", "Pure Hydrogel"],
+  faqs: clinicalSerumFaqs,
+};
+
+export const buudyRetinolAlternativeSerum: Product = {
+  id: "buudy-phyto-renew-retinol-alternative-serum",
+  sku: "BUUDY-SERUM-RET-30",
+  slug: "buudy-phyto-renew-retinol-alternative-serum",
+  template: "serum",
+  name: "Buudy Phyto-Renew™ Botanical Retinol Alternative (30ml)",
+  heroTitle: "Buudy Phyto-Renew™ Botanical Retinol Alternative",
+  heroEmphasis: "Overnight Cellular Renewal",
+  shortDescription: "STEP 3: LED-SAFE NIGHT CELLULAR RENEWAL (30ml)",
+  description: "2% Bidens Pilosa botanical retinoid complex delivering retinol-strength anti-ageing without peeling, irritation, or light sensitivity.",
+  seoTitle: "Buudy Phyto-Renew™ Botanical Retinol Alternative | Buudy UK",
+  seoDescription: "LED-safe natural retinol alternative. 2% Bidens Pilosa + Organic Sea Buckthorn. Zero photosensitivity, 100% clinical efficacy.",
+  currency: market.currency,
+  priceCents: 4400,
+  compareAtCents: 8800,
+  rating: 4.9,
+  reviewCount: 286,
+  customerCount: "12,000+",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01-3d-flat-selfnamed.jpg?width=1440",
+  gallery: [
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01-3d-flat-selfnamed.jpg?width=1440", alt: "Buudy Phyto-Renew™ Botanical Retinol Alternative 30ml" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01c-3d-box-flat-badge-selfnamed.jpg?width=1440", alt: "Buudy Phyto-Renew™ Serum Bottle and Packaging" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01b-mood-usps-selfnamed.jpg?width=1440", alt: "Buudy Retinol Alternative Key Benefits and USPs" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-02-texture-selfnamed.jpg?width=1440", alt: "Golden Nectar Texture Swatch" },
+    { src: "https://static.selfnamed.com/gallery-photos/3CUSiRBXYQG-Wa5JnD8H9u5wsYXfs5sJ.jpg", alt: "Buudy Phyto-Renew™ Serum Studio Shot" }
+  ],
+  gifts: [],
+  specs: [
+    { label: "Phyto-Retinoid Actives", value: "2% Bidens Pilosa & Sea Buckthorn Oil" },
+    { label: "Photosensitivity", value: "Zero (Safe alongside LED phototherapy)" },
+    { label: "Regimen Step", value: "Step 3: Overnight Cellular Rejuvenation" },
+    { label: "Volume", value: "30ml Dropper" },
+    { label: "Texture", value: "Silky Botanical Nectar" },
+  ],
+  included: [{ quantity: "1x", label: "30ml Phyto-Renew™ Botanical Retinol Alternative" }],
+  highlights: [
+    "Aqua/Water", "Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract", "Bidens Pilosa Extract",
+    "Rosa Canina Fruit Oil", "Sodium Hyaluronate", "Tocopherol (Vitamin E)"
+  ],
+  keyBenefits: [
+    "Accelerates cellular turnover matching standard retinol without redness or peeling",
+    "100% safe to use alongside daily LED light therapy with zero photosensitivity",
+    "Sea buckthorn and rosehip botanicals replenish depleted lipid barrier",
+    "Fades hyperpigmentation and softens stubborn static wrinkles"
+  ],
+  badges: ["Night Repair Step 3", "2% Bidens Pilosa", "Zero Photosensitivity"],
+  faqs: clinicalSerumFaqs,
+};
+
+export const buudyNiacinamideGel: Product = {
+  id: "buudy-blemish-defense-niacinamide-gel",
+  sku: "BUUDY-SERUM-NIA-50",
+  slug: "buudy-blemish-defense-niacinamide-gel",
+  template: "serum",
+  name: "Buudy Blemish-Defense™ 5% Niacinamide Gel (50ml)",
+  heroTitle: "Buudy Blemish-Defense™ 5% Niacinamide Gel",
+  heroEmphasis: "Blue Light Clarifier",
+  shortDescription: "TARGETED: 415nm BLUE LIGHT BLEMISH COMPANION (50ml)",
+  description: "5% pure Niacinamide and Ginkgo Biloba gel formulated to pair synergistically with 415nm Blue Light therapy to clear breakouts and refine pores.",
+  seoTitle: "Buudy Blemish-Defense™ 5% Niacinamide Gel | Buudy UK",
+  seoDescription: "5% Niacinamide blemish gel for 415nm blue light therapy. Regulates sebum, shrinks enlarged pores, fades marks.",
+  currency: market.currency,
+  priceCents: 2900,
+  compareAtCents: 5800,
+  rating: 4.8,
+  reviewCount: 198,
+  customerCount: "10,000+",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01-3d-flat-selfnamed.jpg?width=1440",
+  gallery: [
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01-3d-flat-selfnamed.jpg?width=1440", alt: "Buudy Blemish-Defense™ 5% Niacinamide Gel 50ml" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01c-3d-box-flat-badge-selfnamed.jpg?width=1440", alt: "Buudy Blemish-Defense™ Gel Packaging and Bottle" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-02-texture-selfnamed.jpg?width=1440", alt: "Clear Matte Gel Swatch" },
+    { src: "https://static.selfnamed.com/gallery-photos/C9k-L1c7X_j5wLgP5z8N-v-w9K1q4x7.jpg", alt: "Buudy Blemish-Defense™ Lifestyle Shot" }
+  ],
+  gifts: [],
+  specs: [
+    { label: "Active Concentration", value: "5% Pure Vitamin B3 (Niacinamide)" },
+    { label: "Botanical Base", value: "Ginkgo Biloba & Zinc PCA" },
+    { label: "Regimen Step", value: "Targeted: 415nm Blue Light Companion" },
+    { label: "Volume", value: "50ml Airless Pump" },
+    { label: "Finish", value: "Matte, non-greasy, non-comedogenic" },
+  ],
+  included: [{ quantity: "1x", label: "50ml Blemish-Defense™ 5% Niacinamide Gel" }],
+  highlights: [
+    "Aqua/Water", "Niacinamide (5%)", "Glycerin", "Ginkgo Biloba Leaf Extract",
+    "Sodium Hyaluronate", "Zinc PCA", "Cellulose Gum"
+  ],
+  keyBenefits: [
+    "Pairs with 415nm Blue Light to stop active breakouts and calm redness",
+    "5% Niacinamide visibly tightens enlarged pores and regulates sebum",
+    "Ginkgo Biloba antioxidants protect congested skin against oxidation",
+    "Lightweight matte gel absorbs instantly without shine or residue"
+  ],
+  badges: ["Blue Light Companion", "5% Pure Niacinamide", "Pore & Sebum Control"],
+  faqs: clinicalSerumFaqs,
+};
+
 export const products = [
   buudyMask,
   buudyRedTorch,
@@ -1195,6 +1509,10 @@ export const products = [
   buudySkincareEbook,
   buudyGiftCard,
   buudyPackageProtection,
+  buudyCollagenSerum,
+  buudyHyaluronicSerum,
+  buudyRetinolAlternativeSerum,
+  buudyNiacinamideGel,
 ];
 
 export const productsById = Object.fromEntries(

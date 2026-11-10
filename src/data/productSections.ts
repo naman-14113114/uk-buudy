@@ -100,6 +100,39 @@ export const iplFeatures: Feature[] = [
   },
 ];
 
+export const serumFeatures: Feature[] = [
+  {
+    title: "100% Optical Permeability",
+    kicker: "Zero-Scattering Hydrogel Matrix",
+    body: "Unlike traditional serums loaded with silicones and oils that reflect up to 34% of therapeutic light, Buudy's 100% water-based matrix matches the refractive index of skin moisture (n ≈ 1.33), allowing Red (630nm) and NIR (830nm) photons to penetrate directly into dermal fibroblasts.",
+  },
+  {
+    title: "2% Bio-Fermented Hexapeptide-11",
+    kicker: "Cellular Fibroblast Signaling",
+    body: "Signals freshly photostimulated fibroblasts to accelerate structural collagen type I & III synthesis during the critical 30-minute post-light window, visibly firming skin tone and relaxing persistent expression lines.",
+  },
+  {
+    title: "Multi-Molecular Hyaluronic Acid",
+    kicker: "Deep Dermal Plumping",
+    body: "Combines low, medium, and high molecular weight hyaluronic acids. Low weights penetrate deep into extracellular matrices to bind water, while high weights protect the stratum corneum from warmth dehydration during 10-minute phototherapy sessions.",
+  },
+  {
+    title: "Alteromonas & Botanical Complex",
+    kicker: "Antioxidant Barrier Defence",
+    body: "Enriched with fermented Alteromonas extract, Organic White Tea, and Elderberry to defend against environmental oxidative stress, soothe micro-inflammation, and lock in lasting dermal hydration.",
+  },
+  {
+    title: "Device & Diode Safe",
+    kicker: "Zero Diode Clouding",
+    body: "Completely oil-free, non-comedogenic, and non-sticky. Leaves zero greasy film on medical-grade silicone LED diodes and wipes clean in seconds, safeguarding your LED mask investment.",
+  },
+  {
+    title: "COSMOS Certified Organic",
+    kicker: "100% Natural Origin Formulation",
+    body: "Free from parabens, synthetic fragrances, silicones, and mineral oils. Formulated in Europe under strict ECOCERT COSMOS standards to calm sensitive skin barriers and prevent thermal redness flush.",
+  },
+];
+
 export const realLifeImages = [
   {
     src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
@@ -263,6 +296,73 @@ export const transformations: Transformation[] = [
       "Use red light for 10 minutes four times a week after cleansing, followed by a barrier serum and non-comedogenic moisturiser.",
     experience:
       "After six weeks, Jennifer felt that her skin looked smoother and more even and felt noticeably softer.",
+  },
+];
+
+export const serumTransformations: Transformation[] = [
+  {
+    id: "serum-result-01",
+    image: "/images/products/buudy-serum/transformations/serum-transformation-01.jpg",
+    concern: "Sunspots & Tone Radiance",
+    title: "Pigmentation completely transformed",
+    quote:
+      '"Using the Light-Activating Serum before my 10-minute red light session faded my stubborn sunspots in just 8 weeks."',
+    name: "Trish B.",
+    fullName: "Trish Bennett",
+    age: 51,
+    skinType: "Sun-damaged, mature skin",
+    routine:
+      "Apply 2 pumps of Light-Activating Hyaluronic Serum to clean skin, wear Buudy 7-Colour LED Mask for 10 minutes, lock with Collagen-Lock Hexapeptide Serum.",
+    experience:
+      "Within 8 to 14 weeks of consistent light therapy combined with our zero-scattering hydrogel, Trish saw dramatic fading of localized sunspots and renewed overall tone radiance.",
+  },
+  {
+    id: "serum-result-02",
+    image: "/images/products/buudy-serum/transformations/serum-transformation-02.jpg",
+    concern: "Firmness & Contour Lift",
+    title: "My skin feels so much firmer",
+    quote:
+      '"This combination is super easy to use, and the results have been fantastic. My skin feels firmer, and my complexion looks visibly plumped."',
+    name: "Lily H.",
+    fullName: "Lily Henderson",
+    age: 44,
+    skinType: "Loss of elasticity, dry skin",
+    routine:
+      "Pre-treat with Light-Activating Hyaluronic Hydrogel, 10 min LED Mask session, followed immediately by Collagen-Lock Hexapeptide Booster.",
+    experience:
+      "After 6 weeks, Lily noticed a marked improvement in skin density, bounce, and firmness along the cheeks and mid-face.",
+  },
+  {
+    id: "serum-result-03",
+    image: "/images/products/buudy-serum/transformations/serum-transformation-03.jpg",
+    concern: "Deep Expression Lines",
+    title: "Noticeable smoothing in weeks",
+    quote:
+      '"In less than 6 weeks, the stubborn lines around my eyes and mouth were visibly softened. The serum lets the light work twice as fast."',
+    name: "Clare W.",
+    fullName: "Clare Wilson",
+    age: 39,
+    skinType: "Dehydrated, expression lines",
+    routine:
+      "Daily morning cleanse, Buudy LED Mask with Light-Activating Serum, followed by SPF 50.",
+    experience:
+      "Clare observed rapid softening of fine lines around the periorbital area and nasolabial folds, driven by enhanced optical light penetration.",
+  },
+  {
+    id: "serum-result-04",
+    image: "/images/products/buudy-serum/transformations/serum-transformation-04.jpg",
+    concern: "Elasticity & Dermal Radiance",
+    title: "Dullness gone, lit from within",
+    quote:
+      '"My esthetician asked what I was doing differently. The zero-oil clear gel gives that glass-skin finish without clogging pores under the silicone mask."',
+    name: "Emma T.",
+    fullName: "Emma Turner",
+    age: 48,
+    skinType: "Normal to sensitive skin",
+    routine:
+      "4 sessions weekly with Buudy 7-Colour LED Mask + Collagen-Lock Hexapeptide Restorative Serum.",
+    experience:
+      "Emma experienced sustained improvements in dermal hydration and overall complexion radiance, with zero breakouts or mask irritation.",
   },
 ];
 
