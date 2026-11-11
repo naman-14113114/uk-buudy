@@ -1233,19 +1233,13 @@ export const buudyCollagenSerum: Product = {
     {
       src: "/images/products/buudy-serum/serum-bottle-box-front.jpg",
       alt: "Buudy Collagen-Lock™ Serum 30ml Bottle & Luxury Folding Carton",
-      badge: {
-        title: "2% HEXAPEPTIDE-11\nBIO-FERMENTED",
-        sub: "Signals fibroblasts to accelerate\ncollagen type I & III synthesis",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/serum-bottle-front.jpg",
       alt: "Buudy Collagen-Lock™ 30ml Precision Treatment Dropper Bottle",
       badge: {
-        title: "PRECISION DROPPER\nCLINICAL DELIVERY",
-        sub: "Micro-dosing pipette delivers\noptimal active absorption",
+        title: "PRECISION DROPPER\nTARGETED APPLICATION",
+        sub: "Graduated pipette delivers\noptimal active absorption",
         position: "top-left",
         theme: "dark",
       },
@@ -1320,18 +1314,12 @@ export const buudyHyaluronicSerum: Product = {
     {
       src: "/images/products/buudy-serum/serum-bottle-box-front.jpg",
       alt: "Buudy Light-Activating Hyaluronic Serum & Luxury Outer Carton",
-      badge: {
-        title: "100% OPTICAL\nTRANSMISSION",
-        sub: "Zero-scattering water matrix\nmatches skin moisture (n ≈ 1.33)",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/serum-bottle-front.jpg",
       alt: "Buudy Light-Activating Hyaluronic Serum 30ml Dropper Bottle",
       badge: {
-        title: "PRECISION DROPPER\nCLINICAL DOSING",
+        title: "PRECISION DROPPER\nDAILY REGIMEN",
         sub: "Graduated pipette delivers\nexact treatment volume",
         position: "top-left",
         theme: "dark",
