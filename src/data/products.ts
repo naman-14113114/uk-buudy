@@ -1237,7 +1237,7 @@ export const buudyCollagenSerum: Product = {
         title: "2% HEXAPEPTIDE-11\nBIO-FERMENTED",
         sub: "Signals fibroblasts to accelerate\ncollagen type I & III synthesis",
         position: "top-left",
-        theme: "white",
+        theme: "dark",
       },
     },
     {
@@ -1246,8 +1246,8 @@ export const buudyCollagenSerum: Product = {
       badge: {
         title: "PRECISION DROPPER\nCLINICAL DELIVERY",
         sub: "Micro-dosing pipette delivers\noptimal active absorption",
-        position: "bottom-left",
-        theme: "white",
+        position: "top-left",
+        theme: "dark",
       },
     },
     {
@@ -1257,17 +1257,7 @@ export const buudyCollagenSerum: Product = {
         title: "MULTI-DEPTH\nHYDRATION PLUMP",
         sub: "Plumps freshly stimulated dermis\nwithout congesting sensitive pores",
         position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: "/images/products/buudy-serum/serum-ugc-application.jpg",
-      alt: "Buudy Collagen-Lock™ Gentle Pipette Application to Skin",
-      badge: {
-        title: "DAILY LUXURY\nRITUAL",
-        sub: "Silky, fast-absorbing texture\nleaves skin radiant and calm",
-        position: "bottom-right",
-        theme: "white",
+        theme: "dark",
       },
     },
     {
@@ -1277,7 +1267,7 @@ export const buudyCollagenSerum: Product = {
         title: "TRANSPARENT INCI\nCLEAN FORMULATION",
         sub: "1% Sodium PCA + Elderberry Extract\nsoothes and protects dermal barrier",
         position: "top-left",
-        theme: "white",
+        theme: "dark",
       },
     },
   ],
@@ -1334,7 +1324,7 @@ export const buudyHyaluronicSerum: Product = {
         title: "100% OPTICAL\nTRANSMISSION",
         sub: "Zero-scattering water matrix\nmatches skin moisture (n ≈ 1.33)",
         position: "top-left",
-        theme: "white",
+        theme: "dark",
       },
     },
     {
@@ -1343,8 +1333,8 @@ export const buudyHyaluronicSerum: Product = {
       badge: {
         title: "PRECISION DROPPER\nCLINICAL DOSING",
         sub: "Graduated pipette delivers\nexact treatment volume",
-        position: "bottom-left",
-        theme: "white",
+        position: "top-left",
+        theme: "dark",
       },
     },
     {
@@ -1354,17 +1344,7 @@ export const buudyHyaluronicSerum: Product = {
         title: "MULTI-MOLECULAR\nHYDROGEL MATRIX",
         sub: "Deep dermal plumping without\noils, silicones, or sticky residue",
         position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: "/images/products/buudy-serum/serum-ugc-application.jpg",
-      alt: "Buudy Light-Activating Serum Smooth Dermal Application",
-      badge: {
-        title: "LIGHT-ACTIVATING\nHYDRATION",
-        sub: "Optimizes light penetration\nfor enhanced phototherapy",
-        position: "bottom-right",
-        theme: "white",
+        theme: "dark",
       },
     },
     {
@@ -1374,7 +1354,7 @@ export const buudyHyaluronicSerum: Product = {
         title: "TRANSPARENT INCI\nCLEAN FORMULATION",
         sub: "100% vegan, cruelty-free &\nlaboratory tested phototherapy primer",
         position: "top-left",
-        theme: "white",
+        theme: "dark",
       },
     },
   ],

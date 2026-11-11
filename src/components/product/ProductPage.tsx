@@ -1,5 +1,6 @@
 import type { Product } from "@/data/products";
 import { serumFeatures, serumTransformations } from "@/data/productSections";
+import { SerumClinicalResults, SerumHowToUse } from "./SerumClinicalSections";
 import { AppPromo, BlueLightSection, TouchTechSection } from "./AppPromo";
 import { ComparisonTable } from "./ComparisonTable";
 import { FAQSection } from "./FAQSection";
@@ -65,9 +66,25 @@ export function ProductPage({
           }
         />
       )}
-      <DeferredBeforeAfterGrid items={product.template === "serum" ? serumTransformations : undefined} />
+      {product.template === "serum" && <SerumClinicalResults />}
+      <DeferredBeforeAfterGrid
+        items={product.template === "serum" ? serumTransformations : undefined}
+        title={
+          product.template === "serum" ? (
+            <>
+              Real users, <em className="buudy-italic">visible dermal renewal</em>.
+            </>
+          ) : undefined
+        }
+        description={
+          product.template === "serum"
+            ? "Verified customer transformations, photographed in their own homes after consistent daily use of Buudy Light-Activating Serum."
+            : undefined
+        }
+      />
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
+      {product.template === "serum" && <SerumHowToUse />}
       {product.template === "mask" && <DeferredExpertSection />}
       {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
