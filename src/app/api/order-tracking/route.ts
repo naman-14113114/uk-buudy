@@ -14,10 +14,14 @@ export async function POST(request: NextRequest) {
     const parsed: unknown = await request.json().catch(() => null);
     const body = parsed && typeof parsed === "object" ? parsed as Record<string, unknown> : {};
     const query =
+      (typeof body.tracking === "string" && body.tracking) ||
       (typeof body.trackingNumber === "string" && body.trackingNumber) ||
       (typeof body.tracking_number === "string" && body.tracking_number) ||
       (typeof body.orderNumber === "string" && body.orderNumber) ||
       (typeof body.order_number === "string" && body.order_number) ||
+      (typeof body.orderId === "string" && body.orderId) ||
+      (typeof body.order_id === "string" && body.order_id) ||
+      (typeof body.q === "string" && body.q) ||
       (typeof body.query === "string" && body.query) ||
       "";
 
@@ -67,10 +71,14 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const query =
+      searchParams.get("tracking") ||
       searchParams.get("trackingNumber") ||
       searchParams.get("tracking_number") ||
       searchParams.get("orderNumber") ||
       searchParams.get("order_number") ||
+      searchParams.get("orderId") ||
+      searchParams.get("order_id") ||
+      searchParams.get("q") ||
       searchParams.get("query") ||
       "";
 
