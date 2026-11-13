@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
       (typeof body.tracking === "string" && body.tracking) ||
       (typeof body.trackingNumber === "string" && body.trackingNumber) ||
       (typeof body.tracking_number === "string" && body.tracking_number) ||
+      (typeof body.order === "string" && body.order) ||
       (typeof body.orderNumber === "string" && body.orderNumber) ||
       (typeof body.order_number === "string" && body.order_number) ||
       (typeof body.orderId === "string" && body.orderId) ||
@@ -74,6 +75,7 @@ export async function GET(request: NextRequest) {
       searchParams.get("tracking") ||
       searchParams.get("trackingNumber") ||
       searchParams.get("tracking_number") ||
+      searchParams.get("order") ||
       searchParams.get("orderNumber") ||
       searchParams.get("order_number") ||
       searchParams.get("orderId") ||
