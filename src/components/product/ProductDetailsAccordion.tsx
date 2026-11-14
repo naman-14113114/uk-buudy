@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import type { ReactNode } from "react";
-import { features, torchFeatures, iplFeatures, serumFeatures } from "@/data/productSections";
+import { features, torchFeatures, iplFeatures, serumFeatures, peptideSerumFeatures, prebioticSerumFeatures, cleanserFeatures } from "@/data/productSections";
 import {
   IconGrid4x4,
   IconShieldHeart,
@@ -148,14 +148,24 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
     });
   }
 
+  const isPeptide =
+    product.id.includes("peptide") ||
+    product.slug.includes("peptide") ||
+    product.slug.includes("collagen");
+
+  const isPrebiotic =
+    product.id.includes("prebiotic") ||
+    product.slug.includes("prebiotic") ||
+    product.slug.includes("noni");
+
   const items: AccordionItem[] = [
     {
       id: "unique",
       eyebrow: "Features",
-      title: product.template === "torch" ? "What makes our torch unique?" : product.template === "ipl" ? "What makes our IPL unique?" : product.template === "serum" ? "What makes our formula unique?" : "What makes our mask unique?",
+      title: product.template === "torch" ? "What makes our torch unique?" : product.template === "ipl" ? "What makes our IPL unique?" : product.template === "cleanser" ? "What makes our cleanser unique?" : product.template === "serum" ? "What makes our formula unique?" : "What makes our mask unique?",
       content: (
         <ul className="grid gap-3">
-          {(product.template === "torch" ? torchFeatures : product.template === "ipl" ? iplFeatures : product.template === "serum" ? serumFeatures : features).map((feature, index) => {
+          {(product.template === "torch" ? torchFeatures : product.template === "ipl" ? iplFeatures : product.template === "cleanser" ? cleanserFeatures : product.template === "serum" ? (isPeptide ? peptideSerumFeatures : isPrebiotic ? prebioticSerumFeatures : serumFeatures) : features).map((feature, index) => {
             const Icon = product.template === "torch" ? IconBulb : featureIcons[index % featureIcons.length];
             return (
             <li

@@ -5,7 +5,7 @@ import { GiftBundle } from "./GiftBundle";
 
 export function ProductHero({
   product,
-  galleryVariant = product.template === "mask" || product.template === "torch" || product.template === "serum"
+  galleryVariant = product.template === "mask" || product.template === "torch" || product.template === "serum" || product.template === "cleanser"
     ? "omnilux"
     : "default",
   isHalloween = false,

@@ -32,6 +32,23 @@ export function generateStaticParams() {
     { slug: "double-hydration-boost-gel" },
     { slug: "buudy-double-hydration-boost-gel" },
     { slug: "buudy-hyaluronic-serum" },
+    { slug: "peptide-serum" },
+    { slug: "buudy-peptide-serum" },
+    { slug: "buudy-collagen-boost-serum" },
+    { slug: "collagen-boost-serum" },
+    { slug: "buudy-peptide-anti-aging-serum" },
+    { slug: "blemish-purifying-face-wash" },
+    { slug: "buudy-blemish-purifying-face-wash" },
+    { slug: "acne-purifying-face-wash" },
+    { slug: "buudy-acne-purifying-face-wash" },
+    { slug: "buudy-face-wash" },
+    { slug: "bioactive-prebiotics-jelly-serum" },
+    { slug: "buudy-bioactive-prebiotics-jelly-serum" },
+    { slug: "buudy-bioactive-prebiotics-serum" },
+    { slug: "buudy-prebiotics-serum" },
+    { slug: "prebiotics-jelly-serum" },
+    { slug: "buudy-noni-serum" },
+    { slug: "noni-serum" },
   ];
   return [...baseParams, ...aliases];
 }
@@ -80,17 +97,61 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             "painless hair removal UK",
           ]
         : product.template === "serum"
+        ? product.id.includes("prebiotic") || product.slug.includes("prebiotic") || product.slug.includes("noni")
+          ? [
+              "prebiotics jelly serum UK",
+              "bioactive prebiotics serum",
+              "microbiome face serum UK",
+              "best serum for skin barrier UK",
+              "Lactobacillus ferment lysate serum",
+              "prebiotic serum for LED mask",
+              "hydrating jelly serum UK",
+              "Buudy prebiotic serum",
+              "ECOCERT organic prebiotic serum",
+              "lightweight barrier serum UK",
+              "Selfnamed prebiotic jelly serum",
+              "Noni balancing serum UK",
+            ]
+          : product.id.includes("peptide") || product.slug.includes("peptide") || product.slug.includes("collagen")
+          ? [
+              "peptide serum UK",
+              "peptide anti aging serum UK",
+              "Hexapeptide-11 serum UK",
+              "best peptide serum for LED mask",
+              "collagen boost peptide serum",
+              "post light therapy peptide serum",
+              "anti aging peptide serum UK",
+              "Buudy peptide serum",
+              "ECOCERT organic peptide serum",
+              "firming facial peptide serum",
+              "Selfnamed peptide serum",
+            ]
+          : [
+              "hyaluronic acid serum UK",
+              "best hyaluronic acid serum for LED mask",
+              "LED face mask serum UK",
+              "double hydration boost gel UK",
+              "water based hyaluronic acid gel",
+              "Buudy hyaluronic acid 2% B5",
+              "phototherapy hyaluronic serum",
+              "light activating serum UK",
+              "ECOCERT organic hyaluronic serum",
+              "non sticky hydration serum UK",
+            ]
+        : product.template === "cleanser" || product.slug.includes("face-wash") || product.slug.includes("purifying")
         ? [
-            "hyaluronic acid serum UK",
-            "best hyaluronic acid serum for LED mask",
-            "LED face mask serum UK",
-            "double hydration boost gel UK",
-            "water based hyaluronic acid gel",
-            "Buudy hyaluronic acid 2% B5",
-            "phototherapy hyaluronic serum",
-            "light activating serum UK",
-            "ECOCERT organic hyaluronic serum",
-            "non sticky hydration serum UK",
+            "blemish purifying face wash UK",
+            "acne purifying face wash UK",
+            "gentle face wash for blemishes UK",
+            "mate leaf face wash",
+            "iceland moss cleanser",
+            "juniper callus cleanser UK",
+            "salicylic acid cleanser alternative",
+            "LED face mask cleanser UK",
+            "blue light therapy cleanser UK",
+            "ECOCERT organic face wash",
+            "sulfate free acne cleanser UK",
+            "Buudy blemish purifying face wash",
           ]
         : product.slug === "skincare-ebook" || product.id === "buudy-skincare-ebook"
         ? [

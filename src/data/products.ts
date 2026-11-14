@@ -41,7 +41,7 @@ export type Product = {
   id: string;
   sku: string;
   slug: string;
-  template: "mask" | "torch" | "ipl" | "minimal" | "serum";
+  template: "mask" | "torch" | "ipl" | "minimal" | "serum" | "cleanser";
   name: string;
   heroTitle: string;
   heroEmphasis: string;
@@ -964,18 +964,49 @@ export const clinicalSerumFaqs: FAQItem[] = [
   },
 ];
 
-export const buudyCollagenSerum: Product = {
-  id: "buudy-collagen-boost-serum",
-  sku: "BUUDY-SERUM-COL-30",
-  slug: "buudy-collagen-boost-serum",
+export const peptideSerumFaqs: FAQItem[] = [
+  {
+    question: "Why should I use Buudy Peptide Anti-Aging Serum with LED light therapy?",
+    answer: "During and immediately after a 10-minute session with your Buudy LED Mask, cellular microcirculation and mitochondrial ATP synthesis are elevated, creating an optimal biological window for active peptide absorption. Applying Buudy Peptide Serum immediately post-phototherapy allows bio-fermented Hexapeptide-11 and Dipalmitoyl Hydroxyproline to signal fibroblasts directly, dramatically accelerating collagen type I and III synthesis and locking in skin firmness.",
+  },
+  {
+    question: "How does Hexapeptide-11 differ from regular peptide serums?",
+    answer: "Hexapeptide-11 is a high-potency bio-fermented peptide naturally isolated from yeast ferment. Clinical studies show it upregulates key extracellular matrix genes responsible for collagen and elastin production. It specifically targets loss of skin elasticity, relaxes stubborn facial expression lines, and improves cellular dermal bounce.",
+  },
+  {
+    question: "Can I use this peptide serum daily without an LED mask?",
+    answer: "Yes, absolutely! While formulated to maximize post-phototherapy collagen remodeling, it is an exceptional daily anti-aging treatment. Apply 2-3 pumps morning and night to clean skin before your heavier moisturiser or daily SPF for all-day skin density, barrier defense, and wrinkle smoothing.",
+  },
+  {
+    question: "Will this serum clog pores, cause breakouts, or feel greasy?",
+    answer: "No. The formula features a lightweight, silky botanical emulsion matrix that absorbs cleanly within 30 seconds. Powered by organic Jojoba and Strawberry seed oils alongside multi-molecular Hyaluronic Acid and Sodium PCA, it delivers intensive nourishment without heaviness, silicones, or comedogenic oils.",
+  },
+  {
+    question: "Is it safe for medical-grade silicone LED masks?",
+    answer: "Yes, 100%. The formula is diode-safe, free from degrading synthetic occlusives or mineral oils. It will never cloud or damage medical-grade silicone LED diodes and wipes cleanly off with a damp cloth.",
+  },
+  {
+    question: "What makes the ECOCERT COSMOS certification important?",
+    answer: "Our formula is certified under European ECOCERT COSMOS standards, guaranteeing 100% natural origin ingredients, organic farming provenance for our botanical extracts (Aloe, Blueberry, Ginkgo Biloba), zero parabens, zero phthalates, and cruelty-free European formulation.",
+  },
+  {
+    question: "What is the return and guarantee policy?",
+    answer: "All Buudy clinical skincare items are backed by our 30-day satisfaction guarantee and ship via tracked UK delivery.",
+  },
+];
+
+export const buudyPeptideSerum: Product = {
+  id: "buudy-peptide-serum",
+  sku: "BUUDY-SERUM-PEP-30",
+  slug: "buudy-peptide-serum",
   template: "serum",
-  name: "Buudy Collagen-Lock™ Hexapeptide Restorative Serum (30ml)",
-  heroTitle: "Buudy Collagen-Lock™ Hexapeptide Restorative Serum",
-  heroEmphasis: "Post-Light Restoration",
+  name: "Buudy Peptide Anti-Aging Serum (30ml)",
+  heroTitle: "Buudy Peptide Anti-Aging Serum",
+  heroEmphasis: "Collagen-Lock™ Hexapeptide Complex",
   shortDescription: "STEP 2: POST-LIGHT PEPTIDE BOOSTER & COLLAGEN LOCK (30ml)",
-  description: "Applied immediately post-treatment. Powered by 2% bio-fermented Hexapeptide-11 to communicate directly with newly stimulated fibroblasts during the critical 30-minute post-light window, locking in accelerated structural collagen synthesis.",
-  seoTitle: "Buudy Collagen-Lock™ Hexapeptide Restorative Serum | Buudy UK",
-  seoDescription: "Clinically formulated post-light therapy peptide serum. 2% Hexapeptide-11 expression line relaxer + 1% Sodium PCA. Locks in collagen synthesis.",
+  description: "High-performance anti-aging peptide serum powered by bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular hyaluronic acid. Formulated to stimulate cellular collagen synthesis, relax facial expression lines, and restore dermal firmness. Enriched with antioxidant-rich Blueberry, Ginkgo Biloba, and nourishing Jojoba. Engineered specifically for post-phototherapy synergy and intensive daily age-defense.",
+  seoTitle: "Buudy Peptide Anti-Aging Serum (30ml) | Hexapeptide-11 Collagen Booster | Buudy UK",
+  seoDescription: "Clinical-grade Buudy Peptide Anti-Aging Serum 30ml with Hexapeptide-11 and Dipalmitoyl Hydroxyproline. ECOCERT COSMOS certified, stimulates collagen, smooths wrinkles.",
   currency: market.currency,
   priceCents: 9900,
   compareAtCents: 19900,
@@ -984,48 +1015,150 @@ export const buudyCollagenSerum: Product = {
   customerCount: "14,000+",
   promoCode: "",
   promoLabel: "",
-  cartImage: "/images/products/buudy-serum/serum-bottle-front.jpg",
+  cartImage: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-and-box-hero-uk.webp",
   gallery: [
     {
-      src: "/images/products/buudy-serum/serum-bottle-box-front.jpg",
-      alt: "Buudy Collagen-Lock™ Serum 30ml Bottle & Luxury Folding Carton",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-and-box-hero-uk.webp",
+      alt: "Buudy Peptide Anti-Aging Serum 30ml bottle and luxury deep plum carton on studio plinth for LED light therapy UK",
     },
     {
-      src: "/images/products/buudy-serum/serum-bottle-front.jpg",
-      alt: "Buudy Collagen-Lock™ 30ml Precision Treatment Dropper Bottle",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-front-uk.webp",
+      alt: "Buudy 30ml Peptide Anti-Aging Serum bottle with precision treatment pump dispenser",
     },
     {
-      src: "/images/products/buudy-serum/serum-texture-macro.jpg",
-      alt: "Velvet Restorative Droplet with Multi-Molecular Hyaluronic Acid",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-luxury-carton-box-three-quarter-uk.webp",
+      alt: "Buudy Peptide Anti-Aging Serum luxury deep plum folding carton packaging with vertical logo",
     },
     {
-      src: "/images/products/buudy-serum/serum-bottle-box-back.jpg",
-      alt: "Full ECOCERT Cosmos Organic Certified INCI Specifications",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-angle-plum-uk.webp",
+      alt: "Buudy Peptide Anti-Aging Serum bottle angled portrait on signature plum background",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-overhead-pair-flatlay-uk.webp",
+      alt: "Overhead flatlay composition of Buudy Peptide Anti-Aging Serum bottle and outer folding box",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-architectural-pair-plinth-uk.webp",
+      alt: "Buudy Peptide Anti-Aging Serum bottle and carton displayed on sculptural architectural cream plinth",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-pump-label-macro-uk.webp",
+      alt: "Macro detail of Buudy Peptide Anti-Aging Serum label and precision hygienic treatment pump",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-glass-light-study-uk.webp",
+      alt: "Optical study of Buudy Peptide Anti-Aging Serum glass bottle with crystal light refraction",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-side-profile-uk.webp",
+      alt: "Side profile of Buudy Peptide Anti-Aging Serum 30ml glass pump bottle",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-campaign-editorial-pair-uk.webp",
+      alt: "Editorial campaign pairing of Buudy Peptide Serum bottle and carton on plinth against deep plum backdrop",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-neck-collarbone-beauty-uk.webp",
+      alt: "Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
+      alt: "Two-hand dispensing ritual using Buudy Peptide Anti-Aging Serum precision pump bottle",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
+      alt: "Model hand with signature plum manicure holding Buudy Peptide Anti-Aging Serum bottle",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-on-hand-editorial-texture-uk.webp",
+      alt: "Silky botanical peptide emulsion texture swatch of Buudy Peptide Serum on back of hand",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plump-smooth-benefits-uk.webp",
+      alt: "Clinical anti-aging benefits: visible line smoothing, restored skin bounce, and accelerated collagen support",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-targeted-daily-care-uk.webp",
+      alt: "Targeted daily care guide: facial tension relaxation and extracellular matrix reinforcement",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-key-ingredients-texture-uk.webp",
+      alt: "Key ingredients breakdown: Hexapeptide-11, Dipalmitoyl Hydroxyproline, and Multi-Molecular Hyaluronic Acid",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredient-spotlight-uk.webp",
+      alt: "Ingredient spotlight on bio-fermented peptides, Ginkgo Biloba, and Blueberry antioxidant botanicals",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-types-and-ritual-uk.webp",
+      alt: "Skin types and daily application ritual guide for mature, dry, and combination skin barriers",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-verified-formula-facts-uk.webp",
+      alt: "Verified formula facts: ECOCERT COSMOS certified, vegan, cruelty-free, and diode-safe",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-campaign-hero-display-uk.webp",
+      alt: "Buudy Peptide Anti-Aging Serum campaign hero display highlighting comprehensive firming and anti-wrinkle results",
     },
   ],
   gifts: [],
   specs: [
-    { label: "Active Complex", value: "2% Hexapeptide-11 & 1% Sodium PCA" },
-    { label: "Regimen Step", value: "Step 2: Immediate Post-Phototherapy" },
-    { label: "Volume", value: "30ml Airless Dropper" },
-    { label: "Skin Compatibility", value: "All skin types & sensitive barriers" },
-    { label: "Manufacturing", value: "ECOCERT Cosmos Certified Organic" },
+    { label: "Active Complex", value: "Bio-Fermented Hexapeptide-11 & Hydroxyproline" },
+    { label: "Hydration Matrix", value: "Multi-Molecular Hyaluronic Acid & Sodium PCA" },
+    { label: "Regimen Step", value: "Step 2: Immediate Post-Phototherapy & Daily AM/PM" },
+    { label: "Volume", value: "30ml Precision Treatment Pump (Airless Glass)" },
+    { label: "Skin Compatibility", value: "All skin types, mature skin & sensitive barriers" },
+    { label: "Manufacturing", value: "ECOCERT COSMOS Certified Organic / 100% Natural Origin" },
   ],
-  included: [{ quantity: "1x", label: "30ml Collagen-Lock™ Hexapeptide Restorative Serum" }],
+  included: [{ quantity: "1x", label: "30ml Buudy Peptide Anti-Aging Serum" }],
   highlights: [
-    "Aqua/Water", "Glycerin", "Caprylic/Capric Triglyceride", "Helianthus Annuus Seed Oil", "Pentylene Glycol",
-    "Sodium PCA", "Hydrolyzed Hyaluronic Acid", "Hexapeptide-11", "Nasturtium Officinale Extract",
-    "Sambucus Nigra Fruit Extract", "Ascorbyl Palmitate", "Sodium Hyaluronate"
+    "Aloe Barbadensis (Aloe) Leaf Juice➀",
+    "Glycerin",
+    "Simmondsia Chinensis (Jojoba) Seed Oil➀",
+    "Aqua/Water",
+    "Pentylene Glycol",
+    "Cetearyl Alcohol",
+    "Sodium PCA",
+    "Isoamyl Laurate",
+    "Glyceryl Stearate Citrate",
+    "Dipalmitoyl Hydroxyproline",
+    "Propanediol",
+    "Parfum/Fragrance",
+    "Caprylic/Capric Triglyceride",
+    "Fragaria Ananassa (Strawberry) Seed Oil",
+    "Xanthan Gum",
+    "Hexapeptide-11",
+    "Phytosterols",
+    "Vaccinium Myrtillus (Blueberry) Fruit Extract➀",
+    "Ricinus Communis (Castor) Seed Oil➀",
+    "Ascorbyl Palmitate",
+    "Hydrolyzed Hyaluronic Acid",
+    "Potassium Hydroxide",
+    "Sodium Hyaluronate",
+    "Sodium Phytate",
+    "Tocopherol",
+    "Leuconostoc/Radish Root Ferment Filtrate",
+    "Ginkgo Biloba (Ginkgo) Leaf Extract➀",
+    "CI 77491 (Iron Oxides)➂",
+    "Citric Acid",
+    "Sodium Benzoate",
+    "Potassium Sorbate",
+    "Glycolipids"
   ],
   keyBenefits: [
-    "Signals fibroblasts to accelerate structural collagen type I & III synthesis",
-    "Hexapeptide-11 relaxes facial tension and smooths stubborn expression lines",
-    "Multi-molecular hyaluronic acid plumps freshly stimulated dermis 2.5x deeper",
-    "1% Sodium PCA strengthens the natural barrier without congesting pores"
+    "Bio-fermented Hexapeptide-11 communicates with fibroblasts to accelerate collagen type I & III synthesis",
+    "Plant-derived Dipalmitoyl Hydroxyproline vectors deep into dermal architecture to remodel collagen and restore elasticity",
+    "Multi-molecular hyaluronic acid and Sodium PCA deliver deep intercellular hydration and immediate bouncy plumpness",
+    "Antioxidant-rich organic Blueberry and Ginkgo Biloba protect newly stimulated skin from environmental free-radical damage",
+    "Cold-pressed organic Jojoba and Strawberry seed oils reinforce lipid barrier resilience without clogging pores",
+    "Completely free from heavy occlusives and silicones—100% diode-safe and compatible with medical-grade LED devices",
   ],
-  badges: ["Post-Light Step 2", "Hexapeptide-11", "Clinically Formulated"],
-  faqs: clinicalSerumFaqs,
+  badges: ["Post-Light Step 2", "Hexapeptide-11", "Collagen Lock"],
+  faqs: peptideSerumFaqs,
 };
+
+export const buudyCollagenSerum: Product = buudyPeptideSerum;
 
 export const doubleHydrationBoostGelFaqs: FAQItem[] = [
   {
@@ -1151,6 +1284,34 @@ export const buudyHyaluronicSerum: Product = {
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-lifestyle-handheld-studio-uk.webp",
       alt: "Hand holding Buudy Hyaluronic Acid 2% + B5 serum bottle in bright studio lighting",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-daily-ritual-guide-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 Serum skin type compatibility and AM PM daily application ritual guide UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-formula-specifications-ph-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 formula at a glance: 99% natural origin, 11% organic content, pH 5.0 to 5.25",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-plump-finish-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel moisture support and natural plumper looking finish UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-inside-formula-botanicals-uk.webp",
+      alt: "Inside the Buudy Hyaluronic Acid Serum formula: multi-molecular HA, sodium PCA, and aloe leaf juice with white tea and sage",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-carton-still-life-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 30ml serum bottle and luxury plum packaging carton in studio still life UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-benefits-uk.webp",
+      alt: "A lighter way to hydrate: Buudy Double Hydration Boost Gel lightweight hydrogel benefits and dewy finish",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-hydrogel-macro-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 key ingredients macro droplet swatch showing sodium PCA and pure water hydrogel texture",
     },
   ],
   gifts: [],
@@ -1291,6 +1452,376 @@ export const buudyNiacinamideGel: Product = {
   faqs: clinicalSerumFaqs,
 };
 
+export const buudyFaceWashGallery: ProductImage[] = [
+  {
+    src: "/images/products/buudy-face-wash/02-bottle-front-cream.webp",
+    alt: "Buudy Blemish Purifying Face Wash 140ml bottle on cream architectural plinth for blemish-prone skin UK",
+  },
+  {
+    src: "/images/products/buudy-face-wash/04-face-wash.webp",
+    alt: "Buudy 140ml Blemish Purifying Face Wash bottle with precision treatment pump",
+  },
+  {
+    src: "/images/products/buudy-face-wash/06-side-angle-architectural-shadow.webp",
+    alt: "Architectural side shadow profile of Buudy Blemish Purifying Face Wash bottle",
+  },
+  {
+    src: "/images/products/buudy-face-wash/07-pump-and-wordmark-macro.webp",
+    alt: "Macro detail of Buudy hygienic face wash pump and crisp typography",
+  },
+  {
+    src: "/images/products/buudy-face-wash/08-water-ripple-studio.webp",
+    alt: "Buudy Blemish Purifying Face Wash in pure water ripple studio setting showing gentle purifying formula",
+  },
+  {
+    src: "/images/products/buudy-face-wash/09-face-wash.webp",
+    alt: "Buudy Blemish Purifying Face Wash bottle still life against minimalist backdrop",
+  },
+  {
+    src: "/images/products/buudy-face-wash/08-two-hand-pump-ritual.webp",
+    alt: "Two-hand pump dispensing ritual of Buudy Blemish Purifying Face Wash",
+  },
+  {
+    src: "/images/products/buudy-face-wash/10-damp-hand-beauty-editorial (1).webp",
+    alt: "Model damp hand beauty editorial demonstrating silky gentle lathering action",
+  },
+  {
+    src: "/images/products/buudy-face-wash/10-damp-hand-beauty-editorial.webp",
+    alt: "Close-up model editorial with cleansed, refreshed, calm blemish-free skin",
+  },
+  {
+    src: "/images/products/buudy-face-wash/09-neck-and-collarbone-beauty.webp",
+    alt: "Radiant, clear skin on face and neck after using Buudy Purifying Cleanser",
+  },
+  {
+    src: "/images/products/buudy-face-wash/11-plum-manicure-hand-hero.webp",
+    alt: "Model hand holding Buudy Blemish Purifying Face Wash with signature plum manicure",
+  },
+  {
+    src: "/images/products/buudy-face-wash/01-skin-and-ritual.webp",
+    alt: "Skin and ritual daily protocol for Buudy Blemish Purifying Face Wash",
+  },
+  {
+    src: "/images/products/buudy-face-wash/03-targeted-cleansing-benefits.webp",
+    alt: "Targeted cleansing benefits: pore refinement, sebum regulation, and soothing hydration",
+  },
+  {
+    src: "/images/products/buudy-face-wash/02-verified-formula-facts.webp",
+    alt: "Verified formula facts: 98% Natural Origin, ECOCERT COSMOS Natural, sulfate-free",
+  },
+  {
+    src: "/images/products/buudy-face-wash/04-botanical-blend.webp",
+    alt: "Botanical blend: Organic Mate Leaf, Iceland Moss, and Alpine Juniper Callus extracts",
+  },
+  {
+    src: "/images/products/buudy-face-wash/05-cleanse-rinse-reset-still-life.webp",
+    alt: "Cleanse, Rinse, Reset still life showing refreshing non-drying post-wash feel",
+  },
+  {
+    src: "/images/products/buudy-face-wash/01-ingredients-with-copy-no-bottle.webp",
+    alt: "Active ingredients guide: Mate Leaf, Iceland Moss, Juniper Callus, and humectants",
+  },
+  {
+    src: "/images/products/buudy-face-wash/03-ingredients-minimal-no-bottle.webp",
+    alt: "Minimal botanical ingredients breakdown: clean European natural formulation",
+  },
+];
+
+export const blemishPurifyingFaceWashFaqs: FAQItem[] = [
+  {
+    question: "Why should I cleanse with Blemish Purifying Face Wash before LED light therapy?",
+    answer: "Natural surface sebum, sweat, daily pollution, cosmetics, and SPF create an optical barrier that scatters up to 40% of therapeutic LED photons away from your skin. Buudy Blemish Purifying Face Wash effectively clears these light-blocking residues without stripping your moisture barrier, ensuring 100% of 415nm blue (anti-acne) and 630nm red (healing) wavelengths penetrate deep into target pores and dermal tissue.",
+  },
+  {
+    question: "Can I use this cleanser daily without an LED mask?",
+    answer: "Yes, absolutely! While specifically optimized as an optical pre-light purifying cleanser, it is an exceptional clinical-grade daily face wash for blemish-prone, oily, and combination skin. Use 1–2 pumps morning and evening on damp skin to maintain a balanced, calm, and clear complexion.",
+  },
+  {
+    question: "How does this face wash cleanse without sulfates?",
+    answer: "Conventional acne washes rely on harsh sulfates (like SLS/SLES) that strip the acid mantle, triggering rebound oiliness, flakiness, and barrier irritation. Buudy uses gentle, plant-derived micellar surfactants (Coco-Glucoside and Cocamidopropyl Betaine) that dissolve sebum and lift impurities while respecting skin pH and natural cellular moisture.",
+  },
+  {
+    question: "What makes Mate Leaf, Iceland Moss, and Juniper Callus effective for blemishes?",
+    answer: "Organic Mate Leaf provides potent antioxidant polyphenols and caffeine to calm inflammation and energize tired skin. Arctic Iceland Moss and Lichen deliver natural antimicrobial lichen acids that purify acne-causing bacteria without drying out tissue. Alpine Juniper Callus stem cells help regulate overactive sebaceous activity, tightening enlarged pores and smoothing rough texture.",
+  },
+  {
+    question: "Will this cleanser dry out or strip my skin barrier?",
+    answer: "No. Unlike harsh acne washes that leave skin squeaky and tight, our formula is pH-balanced and infused with physiological osmolytes Glycerin and Sodium PCA. These humectants lock water into stratum corneum cells, ensuring your face feels soft, comfortable, and supple after rinsing.",
+  },
+  {
+    question: "What is the texture, lather, and aroma?",
+    answer: "It is a silky, refreshing purifying gel that transforms into a soft, gentle micro-foam with lukewarm water. It features an uplifting, natural green tea aroma derived directly from botanical extracts, with zero artificial perfumes or synthetic dyes.",
+  },
+  {
+    question: "What certifications does this face wash carry?",
+    answer: "Formulated under strict European ECOCERT COSMOS Natural standards, 98% of the total ingredients are of natural origin. It is 100% certified vegan, cruelty-free, nut-free, and housed in a recyclable PET #1 bottle with a durable PP #5 pump.",
+  },
+  {
+    question: "What is the return and guarantee policy?",
+    answer: "All Buudy clinical skincare items are backed by our 30-day satisfaction guarantee and ship via tracked UK delivery.",
+  },
+];
+
+export const buudyFaceWash: Product = {
+  id: "buudy-blemish-purifying-face-wash",
+  sku: "BUUDY-WASH-BL-140",
+  slug: "buudy-blemish-purifying-face-wash",
+  template: "cleanser",
+  name: "Buudy Blemish Purifying Face Wash (140ml)",
+  heroTitle: "Buudy Blemish Purifying Face Wash",
+  heroEmphasis: "Clarifying Botanical Cleanser (140ml)",
+  shortDescription: "STEP 1: PRE-LIGHT PURIFYING & SEBUM BALANCING CLEANSER (140ml)",
+  description: "Gentle, pH-balanced facial cleanser without harsh surfactants that purifies blemish-prone and oily skin while preserving essential barrier moisture. Formulated with organic Mate Leaf, Arctic Iceland Moss, and Alpine Juniper Callus stem cells to dissolve excess sebum, eliminate daily impurities, and soothe redness. Perfectly preps pores for maximum photon penetration during 415nm Blue Light and 630nm Red Light therapy sessions. ECOCERT COSMOS Natural certified with 98% natural origin ingredients and a fresh green tea aroma.",
+  seoTitle: "Buudy Blemish Purifying Face Wash (140ml) | Buudy UK",
+  seoDescription: "ECOCERT COSMOS Natural gentle face wash for blemish-prone skin. Mate Leaf, Iceland Moss, and Juniper Callus clear impurities and sebum without stripping. 140ml.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 485,
+  customerCount: "14,000+",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "/images/products/buudy-face-wash/02-bottle-front-cream.webp",
+  gallery: buudyFaceWashGallery,
+  gifts: [],
+  specs: [
+    { label: "Active Botanicals", value: "Organic Mate Leaf, Iceland Moss & Juniper Callus" },
+    { label: "Surfactant Base", value: "Sulfate-Free Coco-Glucoside & Cocamidopropyl Betaine" },
+    { label: "Regimen Step", value: "Step 1: AM/PM Cleanser & Pre-Light Phototherapy Primer" },
+    { label: "Volume", value: "140ml / 4.73 fl oz (Precision Treatment Pump)" },
+    { label: "Skin Compatibility", value: "Blemish-prone, oily, combination & sensitive skin" },
+    { label: "Manufacturing", value: "ECOCERT COSMOS Natural (98% Natural Origin) / Vegan" },
+  ],
+  included: [{ quantity: "1x", label: "140ml Buudy Blemish Purifying Face Wash" }],
+  highlights: [
+    "Aqua/Water",
+    "Coco-Glucoside",
+    "Cocamidopropyl Betaine",
+    "Glycerin",
+    "Xanthan Gum",
+    "Propanediol",
+    "Sodium PCA",
+    "Sodium Levulinate",
+    "Lactic Acid",
+    "Ilex Paraguariensis (Mate) Leaf Extract➀",
+    "Parfum/Fragrance",
+    "Acacia Senegal Gum",
+    "Sodium Anisate",
+    "Cetraria Islandica (Iceland Moss) Extract",
+    "Usnea Barbata (Lichen) Extract",
+    "Juniperus Communis (Juniper) Callus Extract",
+    "Silica",
+    "Kaolin",
+    "Linalool➁",
+    "Linalyl Acetate➁"
+  ],
+  keyBenefits: [
+    "Gentle, sulfate-free micellar wash removes excess sebum, makeup, and daily impurities without disrupting the protective acid mantle",
+    "Organic Mate Leaf extract delivers rich polyphenols and caffeine to soothe active inflammation and energize congested skin",
+    "Arctic Iceland Moss and Lichen provide natural antimicrobial defense, helping to purify blemish-prone skin and prevent breakouts",
+    "Alpine Juniper Callus stem cell extract helps regulate sebum production and visibly refines enlarged, congested pores",
+    "Natural osmolytes Glycerin and Sodium PCA maintain vital moisture balance, leaving the complexion soft, calm, and fresh with zero tightness",
+    "Prepares skin for 415nm Blue Light and 630nm Red Light phototherapy by clearing light-scattering surface oils and cellular debris",
+  ],
+  badges: ["Cleanse Step 1", "Mate Leaf + Iceland Moss", "ECOCERT COSMOS Natural"],
+  faqs: blemishPurifyingFaceWashFaqs,
+};
+
+export const buudyPrebioticSerumGallery: ProductImage[] = [
+  {
+    src: "/images/products/buudy-prebiotics-serum/01-noni.webp",
+    alt: "Buudy Bioactive Prebiotics Jelly Serum 30ml bottle and luxury plum box for skin microbiome barrier UK",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/02-noni.webp",
+    alt: "Buudy 30ml Bioactive Prebiotics Jelly Serum bottle with precision dropper",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/03-noni.webp",
+    alt: "Buudy Bioactive Prebiotics Jelly Serum bottle and folding packaging three-quarter angle",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/04-noni.webp",
+    alt: "Buudy Bioactive Prebiotics Jelly Serum bottle on signature plum backdrop",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/05-noni.webp",
+    alt: "Overhead flatlay of Buudy Bioactive Prebiotics Jelly Serum bottle and carton packaging",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp",
+    alt: "Buudy Bioactive Prebiotics Jelly Serum and box on architectural stone plinth display",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/07-dropper-and-serum-detail.webp",
+    alt: "Macro detail of Buudy glass dropper dispensing clear prebiotic jelly serum droplet",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/08-clear-glass-caustics.webp",
+    alt: "Buudy Bioactive Prebiotics Jelly Serum submerged in clear water with refractive light caustics",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/09-bottle-diagonal-editorial.webp",
+    alt: "Diagonal editorial still life of Buudy Bioactive Prebiotics Jelly Serum bottle",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/10-noni.webp",
+    alt: "Buudy Bioactive Prebiotics Jelly Serum campaign editorial pair on stone plinth",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/08-two-hand-dropper-ritual.webp",
+    alt: "Two-hand precision dropper dispensing ritual of Buudy Bioactive Prebiotics Jelly Serum",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/09-neck-collarbone-beauty.webp",
+    alt: "Model with radiant, calm, balanced skin on neck and décolletage after using Prebiotic Jelly Serum",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/10-serum-on-hand-editorial.webp",
+    alt: "Silky weightless fluid jelly texture swatch of Buudy Bioactive Prebiotics Serum on hand",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/11-plum-manicure.webp",
+    alt: "Model hand with signature plum manicure holding Buudy Bioactive Prebiotics Jelly Serum bottle",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/01-skin.webp",
+    alt: "Buudy Prebiotics Jelly Serum skin type compatibility and AM PM daily ritual guide",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/03-barrier-and-lightweight-care.webp",
+    alt: "Targeted barrier and lightweight care: microbiome support, calming redness, and deep hydration",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/02-verified-formula.webp",
+    alt: "Verified formula facts: 2% Prebiotics, 99% Natural Origin, ECOCERT COSMOS Natural certified",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/04-ingredient-spotlight.webp",
+    alt: "Inside the formula: Lactobacillus Ferment Lysate, dual Hyaluronic Acid, and Sodium PCA",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/05-considered-care-science-still-life.webp",
+    alt: "Considered care science: 30ml glass bottle and luxury plum carton in architectural studio still life",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/06-comfort-in-every-drop.webp",
+    alt: "Comfort in every drop: soothing hydration, calm redness relief, and balanced moisture barrier",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/07-key-ingredients-clear-jelly.webp",
+    alt: "Key ingredients: crystal-clear bioactive jelly droplet swatch with dual hyaluronic acid",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/05-considered-hydration-still-life.webp",
+    alt: "Thoughtfully formulated: Buudy Prebiotics Jelly Serum in warm luxury still life display",
+  },
+];
+
+export const bioactivePrebioticsJellySerumFaqs: FAQItem[] = [
+  {
+    question: "What are prebiotics in skincare, and how do they benefit my skin?",
+    answer: "Prebiotics are specialized bio-fermented nutrients that nourish and stimulate the growth of beneficial microorganisms living naturally on your skin (the skin microbiome). Just like your gut microbiome, a healthy cutaneous microbiome protects against opportunistic bacteria, environmental stressors, and inflammation. Buudy's 2% Lactobacillus Ferment Lysate helps maintain a resilient, diverse microbiome, calming surface redness, fortifying the lipid barrier, and preventing transepidermal water loss.",
+  },
+  {
+    question: "How does the Bioactive Prebiotics Jelly Serum work alongside LED light therapy?",
+    answer: "Unlike conventional serums loaded with heavy silicones and oils that reflect and scatter therapeutic light, our formula is a 100% water-based, crystal-clear jelly that matches the refractive index of skin moisture (n ~ 1.33). It allows 100% of 630nm Red, 415nm Blue, and 830nm Near-Infrared photons to pass through unhindered, while soothing skin and preventing mild warmth-induced moisture loss during your 10-minute session.",
+  },
+  {
+    question: "When should I apply this serum in my routine?",
+    answer: "Apply 3–4 drops morning and evening to freshly cleansed skin (ideally right after Buudy Blemish Purifying Face Wash) and before your moisturiser. If using with the Buudy LED Mask, apply a thin, even layer directly prior to your light therapy session as an optical hydrogel matrix.",
+  },
+  {
+    question: "What skin types is this serum suitable for?",
+    answer: "It is formulated for all skin types, and is particularly transformative for barrier-compromised, dehydrated, sensitive, stressed, or blemish-prone skin that experiences frequent tightness or redness.",
+  },
+  {
+    question: "What is the texture, absorption, and finish?",
+    answer: "It is a silky, refreshing fluid jelly texture derived from natural cellulose gum and algin. It glides smoothly, absorbs within seconds, and leaves a completely weightless, non-sticky, natural finish without clogging pores or leaving tacky residue.",
+  },
+  {
+    question: "What is the pH level and why does it matter?",
+    answer: "The serum is precisely buffered to pH 4.5–5.1. This matches the natural acidic pH of healthy human skin (the acid mantle), providing the ideal biological environment for beneficial microflora while discouraging harmful pathogens.",
+  },
+  {
+    question: "What key ingredients are inside the formula?",
+    answer: "The formula features 2% Lactobacillus Ferment Lysate (cosmeceutical-grade prebiotics), dual-action multi-molecular Hyaluronic Acid (Hydrolyzed HA + Sodium Hyaluronate), physiological humectants Sodium PCA and Glycerin, and botanical Patchouli oil, in a 99% natural origin base.",
+  },
+  {
+    question: "What certifications does this serum carry?",
+    answer: "Formulated under strict European ECOCERT COSMOS Natural standards, 99% of total ingredients are of natural origin and 10% are organic. It is 100% certified vegan, cruelty-free, nut-free, and housed in a recyclable heavy glass bottle with a durable PP #5 dropper.",
+  },
+  {
+    question: "What is the return and guarantee policy?",
+    answer: "All Buudy clinical skincare items are backed by our 30-day satisfaction guarantee and ship via tracked UK delivery.",
+  },
+];
+
+export const buudyPrebioticSerum: Product = {
+  id: "buudy-bioactive-prebiotics-serum",
+  sku: "BUUDY-SERUM-PRE-30",
+  slug: "buudy-bioactive-prebiotics-serum",
+  template: "serum",
+  name: "Buudy Bioactive Prebiotics Jelly Serum (30ml)",
+  heroTitle: "Buudy Bioactive Prebiotics Jelly Serum",
+  heroEmphasis: "Microbiome Barrier Jelly Matrix (30ml)",
+  shortDescription: "STEP 1: PREBIOTIC MICROBIOME BARRIER & BALANCING JELLY (30ml)",
+  description: "Lightweight, 100% water-based gel serum formulated to balance and nourish your skin, support the microbiome, and reinforce the vital moisture barrier. Infused with 2% Bioactive Prebiotics (Lactobacillus Ferment Lysate) to feed beneficial skin microflora, dual-action Hyaluronic Acid to hydrate and plump, and Sodium PCA to lock in all-day suppleness. Perfectly calibrated at skin-friendly pH 4.5–5.1 with zero oils, silicones, or light scattering—making it the ideal balancing companion for daily skincare and LED phototherapy. ECOCERT COSMOS Natural certified with 99% natural origin ingredients.",
+  seoTitle: "Buudy Bioactive Prebiotics Jelly Serum (30ml) | Buudy UK",
+  seoDescription: "ECOCERT COSMOS Natural 2% Prebiotics Jelly Serum. Lactobacillus Ferment Lysate, dual Hyaluronic Acid, and Sodium PCA to restore skin microbiome and barrier. 30ml.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 496,
+  customerCount: "15,000+",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "/images/products/buudy-prebiotics-serum/01-noni.webp",
+  gallery: buudyPrebioticSerumGallery,
+  gifts: [],
+  specs: [
+    { label: "Active Prebiotics", value: "2% Lactobacillus Ferment Lysate (Microbiome Support)" },
+    { label: "Hydration Complex", value: "Dual Multi-Molecular HA + Sodium PCA & Glycerin" },
+    { label: "pH Level", value: "pH 4.5–5.1 (Skin-Identical Acid Mantle)" },
+    { label: "Texture & Finish", value: "Weightless Light Jelly Fluid / Non-Greasy Natural" },
+    { label: "Regimen Step", value: "Step 1: AM/PM Prebiotic Barrier Care & Phototherapy Companion" },
+    { label: "Volume & Packaging", value: "30ml Heavy Glass Bottle with Precision PP #5 Dropper" },
+    { label: "Manufacturing", value: "ECOCERT COSMOS Natural (99% Natural Origin / 10% Organic)" },
+  ],
+  included: [{ quantity: "1x", label: "30ml Buudy Bioactive Prebiotics Jelly Serum" }],
+  highlights: [
+    "Aqua/Water",
+    "Alcohol➁",
+    "Glycerin➁",
+    "Sodium PCA",
+    "Cellulose Gum",
+    "Algin",
+    "Lactobacillus Ferment Lysate (2% Prebiotics)",
+    "Parfum/Fragrance",
+    "Sodium Phytate",
+    "Potassium Sorbate",
+    "Sodium Benzoate",
+    "Hydrolyzed Hyaluronic Acid",
+    "Sodium Hyaluronate",
+    "Pogostemon Cablin (Patchouli) Oil",
+  ],
+  keyBenefits: [
+    "2% Bioactive Prebiotics (Lactobacillus Ferment Lysate) nourish beneficial skin microflora, fortifying the natural lipid barrier against external stressors",
+    "Dual-action Hyaluronic Acid (Hydrolyzed HA + Sodium Hyaluronate) deeply plumps and hydrates across multiple epidermal layers",
+    "Sodium PCA and natural Glycerin act as physiological Natural Moisturizing Factors (NMF) to seal in long-lasting moisture with zero greasy weight",
+    "Lightweight, cooling fluid jelly texture absorbs instantly with a weightless, non-sticky finish",
+    "Skin-friendly pH 4.5–5.1 restores and preserves the acid mantle, soothing tightness, redness, and sensitivity",
+    "100% oil-free and silicone-free hydrogel matrix ensures zero light scattering and zero diode clouding during LED phototherapy sessions",
+    "Formulated under European ECOCERT COSMOS Natural standards with 99% ingredients of natural origin and 10% organic content",
+  ],
+  badges: ["Microbiome Step 1", "2% Bioactive Prebiotics", "ECOCERT COSMOS Natural"],
+  faqs: bioactivePrebioticsJellySerumFaqs,
+};
+
+export const buudyNoniSerum: Product = buudyPrebioticSerum;
+
 export const products = [
   buudyMask,
   buudyRedTorch,
@@ -1298,10 +1829,14 @@ export const products = [
   buudySkincareEbook,
   buudyGiftCard,
   buudyPackageProtection,
+  buudyPeptideSerum,
   buudyCollagenSerum,
   buudyHyaluronicSerum,
   buudyRetinolAlternativeSerum,
   buudyNiacinamideGel,
+  buudyFaceWash,
+  buudyPrebioticSerum,
+  buudyNoniSerum,
 ];
 
 export const productsById = Object.fromEntries(
@@ -1319,6 +1854,35 @@ export function getProductBySlug(slug: string) {
     slug === "buudy-light-activating-hyaluronic-serum"
   ) {
     return buudyHyaluronicSerum;
+  }
+  if (
+    slug === "peptide-serum" ||
+    slug === "buudy-peptide-serum" ||
+    slug === "buudy-collagen-boost-serum" ||
+    slug === "collagen-boost-serum" ||
+    slug === "buudy-peptide-anti-aging-serum"
+  ) {
+    return buudyPeptideSerum;
+  }
+  if (
+    slug === "blemish-purifying-face-wash" ||
+    slug === "buudy-blemish-purifying-face-wash" ||
+    slug === "acne-purifying-face-wash" ||
+    slug === "buudy-acne-purifying-face-wash" ||
+    slug === "buudy-face-wash"
+  ) {
+    return buudyFaceWash;
+  }
+  if (
+    slug === "bioactive-prebiotics-jelly-serum" ||
+    slug === "buudy-bioactive-prebiotics-jelly-serum" ||
+    slug === "buudy-bioactive-prebiotics-serum" ||
+    slug === "buudy-prebiotics-serum" ||
+    slug === "prebiotics-jelly-serum" ||
+    slug === "buudy-noni-serum" ||
+    slug === "noni-serum"
+  ) {
+    return buudyPrebioticSerum;
   }
   return products.find((product) => product.slug === slug);
 }

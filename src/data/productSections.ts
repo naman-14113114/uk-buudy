@@ -133,6 +133,105 @@ export const serumFeatures: Feature[] = [
   },
 ];
 
+export const peptideSerumFeatures: Feature[] = [
+  {
+    title: "Bio-Fermented Hexapeptide-11",
+    kicker: "Cellular Collagen Synthesis",
+    body: "Powered by bio-fermented Hexapeptide-11, this advanced peptide communicates directly with dermal fibroblasts during the critical post-light window, accelerating structural collagen type I and III synthesis and smoothing expression lines.",
+  },
+  {
+    title: "Dipalmitoyl Hydroxyproline",
+    kicker: "Deep Wrinkle Remodelling & Firmness",
+    body: "A plant-derived hydroxyproline amino acid vector that penetrates deep into dermal architecture. It reinforces collagen fibers, inhibits enzymatic degradation of elastin, and visibly lifts and tightens facial contours.",
+  },
+  {
+    title: "Dual-Action Multi-Molecular HA",
+    kicker: "Multi-Depth Hydration Reservoir",
+    body: "Combines low and high molecular weight hyaluronic acids with Sodium PCA to draw moisture deep into intercellular matrices, replenishing volume and delivering immediate bouncy plumpness.",
+  },
+  {
+    title: "Organic Blueberry & Ginkgo Biloba",
+    kicker: "Antioxidant Barrier Defence",
+    body: "Rich in anthocyanins and flavonoids from certified organic Blueberry fruit and Ginkgo Biloba extracts. Neutralizes environmental free radicals, boosts microcirculation, and protects newly formed collagen fibers.",
+  },
+  {
+    title: "Nourishing Jojoba & Strawberry Seed",
+    kicker: "Lightweight Barrier Lipid Restoration",
+    body: "Cold-pressed organic Jojoba and Strawberry seed oils restore vital skin lipids without heavy greasiness or pore congestion, locking in hydration and leaving a silky, velvet finish.",
+  },
+  {
+    title: "ECOCERT COSMOS Natural Certified",
+    kicker: "100% Natural Origin European Standard",
+    body: "Formulated under Europe's most stringent organic cosmetics standards. 100% cruelty-free, vegan, and free from synthetic parabens, artificial fragrances, silicones, and mineral oils.",
+  },
+];
+
+export const cleanserFeatures: Feature[] = [
+  {
+    title: "Sulfate-Free Micellar Cleansing",
+    kicker: "Zero-Strip Moisture Balance",
+    body: "Gentle plant-derived Coco-Glucoside and Cocamidopropyl Betaine surfactants create a delicate micro-foam that effortlessly dissolves excess sebum, environmental pollutants, and daily impurities without stripping the vital acid mantle.",
+  },
+  {
+    title: "Organic Mate Leaf Extract",
+    kicker: "Antioxidant & Blemish Soothing",
+    body: "Rich in bioactive polyphenols and caffeine, organic Ilex Paraguariensis (Mate) leaf extract actively calms micro-inflammation, defends against oxidative cellular stress, and clarifies congested pores for a noticeably calmer complexion.",
+  },
+  {
+    title: "Arctic Iceland Moss & Lichen",
+    kicker: "Natural Antimicrobial Defense",
+    body: "Sourced from pristine Nordic ecosystems, Cetraria Islandica and Usnea Barbata provide potent natural antibacterial lichen acids that help purge acne-triggering bacteria while establishing a protective, soothing moisture film.",
+  },
+  {
+    title: "Alpine Juniper Callus Stem Cells",
+    kicker: "Sebum & Pore Refining Matrix",
+    body: "Cultivated using sustainable plant biotechnology, Juniperus Communis callus extract delivers concentrated secondary metabolites that help regulate overactive sebaceous glands and visibly tighten enlarged, congested pores.",
+  },
+  {
+    title: "Natural Osmolytes (Glycerin & Sodium PCA)",
+    kicker: "Deep Intercellular Hydration",
+    body: "Infused with skin-identical physiological humectants that draw moisture deep into stratum corneum layers, ensuring skin emerges remarkably soft, supple, and hydrated after rinsing with zero tight, squeaky after-feel.",
+  },
+  {
+    title: "415nm Blue Light & LED Primer",
+    kicker: "Optimized Photon Penetration",
+    body: "Formulated specifically as the essential pre-light cleansing step. By clearing light-scattering surface lipids, dead cells, and cosmetic residues, it ensures 100% of 415nm blue and 630nm red therapeutic photons penetrate unimpeded into target dermal tissue.",
+  },
+];
+
+export const prebioticSerumFeatures: Feature[] = [
+  {
+    title: "2% Bioactive Prebiotics",
+    kicker: "Microbiome Barrier Fortification",
+    body: "Infused with a cosmeceutical-grade 2% concentration of Lactobacillus Ferment Lysate. Prebiotics nourish and balance beneficial skin microflora, reinforcing the natural cutaneous moisture barrier and calming reactivity against environmental aggressors.",
+  },
+  {
+    title: "Dual Multi-Molecular Hyaluronic Acid",
+    kicker: "Multi-Depth Weightless Plumping",
+    body: "Combines hydrolyzed low-molecular and high-molecular sodium hyaluronate. Deeply hydrates cellular matrices to plump fine lines, soothe tightness, and lock in all-day moisture without heaviness or sticky residue.",
+  },
+  {
+    title: "Physiological Osmolytes (Sodium PCA & Glycerin)",
+    kicker: "72-Hour Moisture Reservoir",
+    body: "Formulated with skin-identical natural moisturizing factors (NMF) that bind environmental moisture into stratum corneum lipid bilayers, leaving sensitive and dehydrated skin feeling supple, soft, and refreshed.",
+  },
+  {
+    title: "100% Optical Transparency",
+    kicker: "Zero-Scattering LED Phototherapy Synergy",
+    body: "100% water-based fluid jelly matrix matches the natural refractive index of skin moisture (n ~ 1.33). Free of light-scattering silicones and heavy oils, allowing 100% of 630nm Red, 415nm Blue, and 830nm Near-Infrared photons to reach dermal targets unhindered.",
+  },
+  {
+    title: "Skin-Calibrated pH 4.5–5.1",
+    kicker: "Acid Mantle & Barrier Defense",
+    body: "Buffered to the physiological pH of healthy skin to sustain optimal microflora diversity, soothe redness, prevent moisture flaking, and maintain the protective lipid mantle.",
+  },
+  {
+    title: "ECOCERT COSMOS Natural Certified",
+    kicker: "99% Natural Origin European Standard",
+    body: "Formulated under Europe's most stringent organic cosmetics standards. 99% natural origin, 10% organic ingredients, 100% vegan, cruelty-free, and packaged in recyclable heavy glass with a precision PP #5 dropper.",
+  },
+];
+
 export const realLifeImages = [
   {
     src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
@@ -363,6 +462,140 @@ export const serumTransformations: Transformation[] = [
       "4 sessions weekly with Buudy 7-Colour LED Mask + Collagen-Lock Hexapeptide Restorative Serum.",
     experience:
       "Emma experienced sustained improvements in dermal hydration and overall complexion radiance, with zero breakouts or mask irritation.",
+  },
+];
+
+export const cleanserTransformations: Transformation[] = [
+  {
+    id: "cleanser-result-01",
+    image: "/images/products/buudy-face-wash/09-neck-and-collarbone-beauty.webp",
+    concern: "Active Blemishes & Excess Oil",
+    title: "Clears breakouts without drying out my skin",
+    quote:
+      '"Most blemish cleansers leave my skin tight and flaky. This purified my breakouts within 3 weeks while keeping my face soft, calm, and hydrated."',
+    name: "Hannah M.",
+    fullName: "Hannah Morris",
+    age: 29,
+    skinType: "Oily, blemish-prone skin",
+    routine:
+      "Lather 1–2 pumps morning and evening on damp skin, followed by 10 minutes of Buudy Blue Light (415nm) phototherapy.",
+    experience:
+      "Hannah experienced a significant decrease in active acne lesions and pore congestion within 3 to 6 weeks of daily cleansing.",
+  },
+  {
+    id: "cleanser-result-02",
+    image: "/images/products/buudy-face-wash/10-damp-hand-beauty-editorial.webp",
+    concern: "Clogged Pores & T-Zone Shine",
+    title: "Pores look so much smaller and cleaner",
+    quote:
+      '"The fresh green tea scent is so uplifting, and my T-zone stays matte all afternoon without that stripped, uncomfortable feeling."',
+    name: "Chloe B.",
+    fullName: "Chloe Bennett",
+    age: 34,
+    skinType: "Combination skin with congested pores",
+    routine:
+      "Gentle 60-second circular massage on damp skin AM and PM, rinsed thoroughly with lukewarm water.",
+    experience:
+      "After 4 weeks, Chloe saw visibly clearer pores around her nose and chin and a balanced oil production throughout the day.",
+  },
+  {
+    id: "cleanser-result-03",
+    image: "/images/products/buudy-face-wash/05-cleanse-rinse-reset-still-life.webp",
+    concern: "Post-Acne Redness & Sensitivity",
+    title: "Soothing botanical relief",
+    quote:
+      '"The Mate Leaf and Iceland Moss calmed my angry red flare-ups almost immediately. It rinses completely clean with zero residue."',
+    name: "Gemma R.",
+    fullName: "Gemma Richardson",
+    age: 26,
+    skinType: "Sensitive, acne-prone skin",
+    routine:
+      "AM & PM cleanse, followed by Buudy Double Hydration Boost Gel and 10 minutes of Red/NIR light therapy.",
+    experience:
+      "Gemma noticed reduced surface redness, zero irritation flush, and balanced hydration across her cheeks and jawline.",
+  },
+  {
+    id: "cleanser-result-04",
+    image: "/images/products/buudy-face-wash/03-targeted-cleansing-benefits.webp",
+    concern: "Congested Skin & Blackheads",
+    title: "Best prep before my LED mask",
+    quote:
+      '"Using this right before my LED face mask made a world of difference. It removes all oils so the blue light penetrates deep into pores."',
+    name: "Sophie T.",
+    fullName: "Sophie Taylor",
+    age: 31,
+    skinType: "Blemish-prone skin with blackheads",
+    routine:
+      "Use before evening 10-minute LED mask sessions, rinse thoroughly and pat skin dry.",
+    experience:
+      "Sophie saw a visible reduction in blackheads and faster blemish recovery when pairing this face wash with blue light phototherapy.",
+  },
+];
+
+export const prebioticTransformations: Transformation[] = [
+  {
+    id: "prebiotic-result-01",
+    image: "/images/products/buudy-prebiotics-serum/09-neck-collarbone-beauty.webp",
+    concern: "Redness & Barrier Sensitivity",
+    title: "Calmed my redness and reactivity in days",
+    quote:
+      '"My skin used to flush and feel hot after LED sessions. Applying this prebiotic jelly first keeps my barrier so calm, hydrated, and radiant."',
+    name: "Rachel K.",
+    fullName: "Rachel Kendrick",
+    age: 38,
+    skinType: "Reactive, sensitive skin",
+    routine:
+      "Apply 3–4 drops of Bioactive Prebiotics Jelly Serum to damp skin, followed by 10 minutes of Buudy Red & NIR Light Therapy.",
+    experience:
+      "Rachel observed a marked reduction in surface flush and blotchiness within 2 weeks, with sustained barrier comfort and dewy suppleness.",
+  },
+  {
+    id: "prebiotic-result-02",
+    image: "/images/products/buudy-prebiotics-serum/10-serum-on-hand-editorial.webp",
+    concern: "Tightness & Dehydration Lines",
+    title: "My skin barrier has never felt so strong",
+    quote:
+      '"The cooling jelly texture absorbs instantly with zero stickiness. It feels like splashing healing mountain water on tight, thirsty skin."',
+    name: "Jessica L.",
+    fullName: "Jessica Lawson",
+    age: 42,
+    skinType: "Dehydrated, mature skin",
+    routine:
+      "Morning and evening application on clean face and neck, followed by moisturiser and SPF.",
+    experience:
+      "After 3 weeks of consistent use, Jessica experienced long-lasting hydration, softened expression lines, and a healthy plump finish.",
+  },
+  {
+    id: "prebiotic-result-03",
+    image: "/images/products/buudy-prebiotics-serum/06-comfort-in-every-drop.webp",
+    concern: "Post-Blemish Flaking & Uneven Texture",
+    title: "Pores are clear, redness completely gone",
+    quote:
+      '"I struggled with flaky patches from acne treatments. The prebiotics rebalanced my microbiome without clogging a single pore."',
+    name: "Maya S.",
+    fullName: "Maya Sharma",
+    age: 28,
+    skinType: "Combination, blemish-prone skin",
+    routine:
+      "Daily pre-light treatment with Buudy Prebiotics Jelly Serum alongside 415nm Blue Light therapy.",
+    experience:
+      "Maya noticed cleared congestion, healed dry patches, and a smooth, even texture across her T-zone and cheeks within 4 weeks.",
+  },
+  {
+    id: "prebiotic-result-04",
+    image: "/images/products/buudy-prebiotics-serum/03-barrier-and-lightweight-care.webp",
+    concern: "Dullness & Compromised Barrier",
+    title: "Plump, supple finish with zero heaviness",
+    quote:
+      '"Leaves a gorgeous weightless glow under makeup or sunscreen. It is the only serum that doesn\'t pill or leave an oily sheen under my mask."',
+    name: "Eleanor P.",
+    fullName: "Eleanor Price",
+    age: 47,
+    skinType: "Normal to dry skin",
+    routine:
+      "AM & PM 3-step ritual: Purifying cleanser, Prebiotics Jelly Serum, and Buudy LED Mask 4 times weekly.",
+    experience:
+      "Eleanor recorded significant improvements in skin elasticity, moisture retention, and overall complexion clarity over 6 weeks.",
   },
 ];
 

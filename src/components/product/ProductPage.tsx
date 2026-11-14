@@ -1,6 +1,15 @@
 import type { Product } from "@/data/products";
-import { serumFeatures, serumTransformations } from "@/data/productSections";
+import {
+  serumFeatures,
+  peptideSerumFeatures,
+  prebioticSerumFeatures,
+  cleanserFeatures,
+  serumTransformations,
+  prebioticTransformations,
+  cleanserTransformations,
+} from "@/data/productSections";
 import { SerumClinicalResults, SerumHowToUse } from "./SerumClinicalSections";
+import { CleanserClinicalResults, CleanserHowToUse } from "./CleanserClinicalSections";
 import { AppPromo, BlueLightSection, TouchTechSection } from "./AppPromo";
 import { ComparisonTable } from "./ComparisonTable";
 import { FAQSection } from "./FAQSection";
@@ -24,7 +33,7 @@ import { TrustBadges } from "./TrustBadges";
 export function ProductPage({
   product,
   variant,
-  galleryVariant = product.template === "mask" || product.template === "serum" ? "omnilux" : "default",
+  galleryVariant = product.template === "mask" || product.template === "serum" || product.template === "cleanser" ? "omnilux" : "default",
   comparisonPosition = product.template === "mask" ? "below-app" : "default",
   isHalloween = false,
   isEarlyBlackFriday = true,
@@ -48,6 +57,16 @@ export function ProductPage({
     return <MinimalProductPage product={product} />;
   }
 
+  const isPeptide =
+    product.id.includes("peptide") ||
+    product.slug.includes("peptide") ||
+    product.slug.includes("collagen");
+
+  const isPrebiotic =
+    product.id.includes("prebiotic") ||
+    product.slug.includes("prebiotic") ||
+    product.slug.includes("noni");
+
   return (
     <div className="relative">
       <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
@@ -56,7 +75,7 @@ export function ProductPage({
       {/* <FeatureGrid /> */}
       {product.template === "serum" && (
         <FeatureGrid
-          featuresList={serumFeatures}
+          featuresList={isPeptide ? peptideSerumFeatures : isPrebiotic ? prebioticSerumFeatures : serumFeatures}
           eyebrow="Formulation Science"
           title={
             <>
@@ -66,25 +85,57 @@ export function ProductPage({
           }
         />
       )}
-      {product.template === "serum" && <SerumClinicalResults />}
-      <DeferredBeforeAfterGrid
-        items={product.template === "serum" ? serumTransformations : undefined}
-        title={
-          product.template === "serum" ? (
+      {product.template === "cleanser" && (
+        <FeatureGrid
+          featuresList={cleanserFeatures}
+          eyebrow="Formulation Science"
+          title={
+            <>
+              What makes our cleanser{" "}
+              <em className="buudy-italic text-[var(--gold)]">unique</em>?
+            </>
+          }
+        />
+      )}
+      {product.template === "serum" && <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} />}
+      {product.template === "cleanser" && <CleanserClinicalResults />}
+      {product.template === "serum" && isPrebiotic && (
+        <DeferredBeforeAfterGrid
+          items={prebioticTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">restored skin barrier</em>.
+            </>
+          }
+          description="Verified customer transformations after incorporating Buudy Bioactive Prebiotics Jelly Serum into their daily barrier-repair and light therapy ritual."
+        />
+      )}
+      {product.template === "serum" && !isPeptide && !isPrebiotic && (
+        <DeferredBeforeAfterGrid
+          items={serumTransformations}
+          title={
             <>
               Real users, <em className="buudy-italic">visible dermal renewal</em>.
             </>
-          ) : undefined
-        }
-        description={
-          product.template === "serum"
-            ? "Verified customer transformations, photographed in their own homes after consistent daily use of Buudy Light-Activating Serum."
-            : undefined
-        }
-      />
+          }
+          description="Verified customer transformations, photographed in their own homes after consistent daily use of Buudy Light-Activating Serum."
+        />
+      )}
+      {product.template === "cleanser" && (
+        <DeferredBeforeAfterGrid
+          items={cleanserTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">visibly clearer skin</em>.
+            </>
+          }
+          description="Verified customer results after incorporating Buudy Blemish Purifying Face Wash into their daily morning and evening cleansing ritual."
+        />
+      )}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
-      {product.template === "serum" && <SerumHowToUse />}
+      {product.template === "serum" && <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} />}
+      {product.template === "cleanser" && <CleanserHowToUse />}
       {product.template === "mask" && <DeferredExpertSection />}
       {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
