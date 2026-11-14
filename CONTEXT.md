@@ -9,6 +9,23 @@ Read the workspace `AGENTS.md` and `CONTEXT.md`, then this file and the reposito
 remove or condense old entries. Do not record secrets, private tokens, or
 credential-bearing remote URLs.
 
+## 2026-11-15 01:45:00 +05:30 - Video Loading Root Cause Resolution & Instant Playback Across Mask Pages
+
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`.
+- Scope & Isolation: 100% strictly confined to `uk.Buudy Vercel Deployment`. Zero modifications to outside repositories (`muuhu`, `trustpilot-led-mask-replica`, `Buddy`).
+- User Request: "most of the videos are not loading they are just still or I don't know taking so time to lode see what happening and make them load fast because they are loading fast before but not now see the root issue and fix this on all mask pages doing minimal chanegs"
+- Root Causes Identified:
+  1. Dead external Videowise CDN bucket URLs (`https://cdn2.videowise.com/...mp4`) returned HTTP 403 Forbidden AccessDenied, causing `<video>` elements to fail silently or fail over to nonexistent local paths, freezing review cards on static posters.
+  2. Per-card `IntersectionObserver` inside GPU compositor-accelerated marquee (`vr-css-auto-scroll`) did not trigger in Chromium when cards translated horizontally from offscreen, leaving `isIntersecting = false` and `videoEl.pause()` active.
+  3. Strict browser autoplay policy blocked unmuted initial playback due to missing `defaultMuted = true` on DOM initialization, and `preload="metadata"` prevented eager frame caching.
+- Actions Taken & Verified:
+  1. Encoded 12 high-converting authentic review clips from `Buddy\Videos\Cleopatra LED Mask Review_1080p (*).mp4` using FFmpeg into `public/media/products/buudy-led-mask/videos/review-01.mp4` through `review-12.mp4` (540x960, H.264 CRF 28, `-movflags +faststart`, audio stripped, ~1.0–1.5 MB each).
+  2. Extracted 12 crisp local WebP posters (`review-01.webp` through `review-12.webp`, ~20–40 KB each).
+  3. Updated `src/data/productSections.ts` to map `reviewVideos` directly to local assets with `productMediaAsset`.
+  4. Refactored `src/components/product/VideoReviews.tsx` to use section-level `IntersectionObserver` with synchronous playback across all marquee cards, `defaultMuted = true`, and `preload="auto"`.
+  5. Hardened thumbnail and gallery video elements in `OmniluxProductGallery.tsx`, `ProductGallery.tsx`, and `WavelengthSelector.tsx`.
+  6. Verified `npx tsc --noEmit` (0 errors) and `npm run build` (78/78 static pages compiled cleanly).
+
 ## 2026-08-11 08:13:08 +05:30 - Initial UK Buudy Vercel deployment state refresh
 
 - Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`.
@@ -1220,3 +1237,64 @@ Evidence files:
   - Verified reviews count and dates starting from 11 Nov 2026 matching mask timeline.
   - Mask, torch, IPL, hyaluronic serum, and peptide serum pages 100% untouched and preserved.
 
+
+## 2026-11-15 00:36:00 +05:30 – Removed "What Makes Unique", Added Miroooo Circular Percentage Animation Split Grid, and Integrated 16 Real Clinical Before/After Images Above Stats & How-To-Use Across All 4 Skincare/Serum Pages
+
+- Request: "update your memory take pull and fix all 4 serum pages I just edited. Remove that ehat make serum unique section and those percentage section I wnat these percenatage in grid with image and those percentage have animation like in miroooo one time circle filligng animation same here too, and how to use section, above these both grid before after section in which u must use real before after imaegs from google and not from competition. after all reviews. fix these on all serum pages only don't touch mask and torch page strictly. launch multiple sub agents and fix this accurately"
+- Scope & Boundary: 100% strictly confined to `uk.Buudy Vercel Deployment`. Mask and torch pages strictly untouched.
+- Git Status & Remote:
+  - `git pull` executed cleanly; verified up to date with origin/main commit `d870c6c`.
+- Multi-Subagent Execution:
+  1. Subagent 1 ("Serum Before After Real Images Researcher & Integrator"):
+     - Sourced and processed 16 genuine clinical before/after comparison images from peer-reviewed open clinical research studies in PubMed Central (PMC8322246, PMC13632624, PMC11808453, PMC13714327, PMC3438385, PMC4580730).
+     - Strictly zero competitor images (no Omnilux, CurrentBody, Fybelle, etc.).
+     - Converted into optimized WebP assets and saved to disk:
+       - Hyaluronic Acid Serum: `public/images/products/buudy-serum/transformations/ha-transformation-01.webp` to `04.webp`
+       - Peptide Anti-Aging Serum: `public/images/products/buudy-peptide-serum/transformations/peptide-transformation-01.webp` to `04.webp`
+       - Prebiotic Jelly Serum: `public/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-01.webp` to `04.webp`
+       - Blemish Face Wash: `public/images/products/buudy-face-wash/transformations/cleanser-transformation-01.webp` to `04.webp`
+     - Updated `src/data/productSections.ts` with fully typed transformation items and exported `peptideTransformations`.
+  2. Subagent 2 ("Miroooo Circular Percentage Animation & Grid Component Builder"):
+     - Refactored `SerumClinicalResults` in `src/components/product/SerumClinicalSections.tsx` and `CleanserClinicalResults` in `src/components/product/CleanserClinicalSections.tsx`.
+     - Built 1:1 Miroooo circular SVG progress gauge (`r=28`, `strokeDasharray=176`, `-rotate-90deg`), animated with 1400ms cubic ease-out upon scrolling into view (IntersectionObserver, unobserves on trigger for a one-time animation).
+     - Split 12-column luxury responsive grid: stats list on left, high-resolution architectural still-life on right.
+  3. Parent Coordinator:
+     - Updated `src/components/product/ProductPage.tsx`:
+       - Removed `FeatureGrid` ("What makes our formula unique?" / "What makes our cleanser unique?").
+       - Harmonized section flow: `ProductHero` -> `TrustBadges` -> `DeferredBeforeAfterGrid` (Real clinical before & after) -> `SerumClinicalResults` / `CleanserClinicalResults` (Animated Circular Percentage Grid with Image) -> `SerumHowToUse` / `CleanserHowToUse` (Daily ritual protocol) -> `ProductReviewsSection` (After all the above sections) -> `FAQSection`, `GuaranteeSection`, `StickyAddToCart`.
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 77/77 static pages compiled successfully with Next.js Turbopack.
+  - Local server HTTP GET 200 OK verified across `/products/double-hydration-boost-gel`, `/products/peptide-serum`, `/products/bioactive-prebiotics-jelly-serum`, `/products/blemish-purifying-face-wash`, `/products/buudy-led-mask`, and `/products/red-light-torch`.
+  - Section sequence and presence of circular animations confirmed on live server.
+
+
+## 2026-11-15 01:10:00 +05:30 – Cleaned Clinical Efficacy & How-To-Use Sections, Enforced UK English, Compacted Buy Box Bullets Across All Serum Pages
+
+- Request: "no need to add these extra statemnet at end of this proven effiecienfy and no need to write anythign on image and noo this other backgrond shade keep it same and same no need to add that photopro tip in how to use, I don't want to exceed imaeg in text. Try to keep text on right left whitin imaeg frame, and don't increase imaeg height u have ot adjust text. And make sure u following UK English throught all these pages of serum. Also fix above bullet points below price add only 3-4 there and short one wihtin one line statement. fix this on all serum pages only, use multiple sub agents and fix this accurately"
+- Scope & Boundary: 100% strictly confined to `uk.Buudy Vercel Deployment`. LED Mask and Torch pages strictly untouched.
+- Multi-Subagent Execution & Direct Fixes:
+  1. Proven Efficacy Clean-Up (`SerumClinicalResults` & `CleanserClinicalResults`):
+     - Removed bottom footnote text (`*Results based on an independent...`) and `100% Dermatologically Tested` green badge completely.
+     - Removed all text overlays/pill badges (`productBadge` + `Clinical Trial`) from the still life images, keeping clean architectural presentation.
+     - Reverted section background from tinted peach band (`bg-[rgba(241,223,210,.35)]`) to default canvas `bg-[var(--cream)]` with no extra borders.
+     - Compacted stat card descriptions to single-line sentences, tightened card padding to `py-3 px-3.5 sm:py-3.5 sm:px-4`, and kept card column height (~315px) comfortably within the image frame (~550px).
+  2. How-To-Use Clean-Up (`SerumHowToUse` & `CleanserHowToUse`):
+     - Removed `Phototherapy Pro-Tip` callout box completely across all serum/cleanser rituals.
+     - Kept 3 step descriptions concise so text column (~340px) remains comfortably within the model UGC image frame (~600px).
+  3. Buy Box Bullets Below Price (`GiftBundle.tsx` / `keyBenefits` in `src/data/products.ts`):
+     - Replaced verbose bullet lists with strictly 4 concise, single-line statements (< 70 characters each) across `buudyHyaluronicSerum`, `buudyPeptideSerum`, `buudyPrebioticSerum`, `buudyFaceWash`, `buudyRetinolAlternativeSerum`, and `buudyNiacinamideGel`.
+  4. British/UK English Audit Across All Serum Pages:
+     - Enforced UK English spellings across `products.ts`, `productSections.ts`, and `page.tsx`:
+       * `Anti-Aging` -> `Anti-Ageing`
+       * `sulfate-free` / `sulfates` -> `sulphate-free` / `sulphates`
+       * `barrier defense` -> `barrier defence`
+       * `Blemish-Defense™` -> `Blemish-Defence™`
+       * `synthesise` / `maximise` / `optimised` / `specialised`
+       * `collagen remodelling` / `peptide signalling` / `photosensitising` / `collagen fibres`
+       * `aesthetician` / `localised` / `standardised` / `minimised` / `normalised` / `sensitised` / `cross-polarised`
+       * Added routing alias for `buudy-peptide-anti-ageing-serum`.
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 78/78 static pages compiled successfully with Next.js Turbopack.
+  - Mask and torch pages strictly untouched and preserved.

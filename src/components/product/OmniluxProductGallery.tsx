@@ -1065,6 +1065,12 @@ export function OmniluxProductGallery({
                       autoPlay
                       loop
                       preload="metadata"
+                      ref={(el) => {
+                        if (el) {
+                          el.defaultMuted = true;
+                          el.muted = true;
+                        }
+                      }}
                     />
                     {item.type === "video" && (
                       <div className="omni-video-thumb-overlay">

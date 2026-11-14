@@ -36,6 +36,7 @@ export function generateStaticParams() {
     { slug: "buudy-peptide-serum" },
     { slug: "buudy-collagen-boost-serum" },
     { slug: "collagen-boost-serum" },
+    { slug: "buudy-peptide-anti-ageing-serum" },
     { slug: "buudy-peptide-anti-aging-serum" },
     { slug: "blemish-purifying-face-wash" },
     { slug: "buudy-blemish-purifying-face-wash" },
@@ -115,12 +116,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           : product.id.includes("peptide") || product.slug.includes("peptide") || product.slug.includes("collagen")
           ? [
               "peptide serum UK",
-              "peptide anti aging serum UK",
+              "peptide anti ageing serum UK",
               "Hexapeptide-11 serum UK",
               "best peptide serum for LED mask",
               "collagen boost peptide serum",
               "post light therapy peptide serum",
-              "anti aging peptide serum UK",
+              "anti ageing peptide serum UK",
               "Buudy peptide serum",
               "ECOCERT organic peptide serum",
               "firming facial peptide serum",
@@ -150,7 +151,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             "LED face mask cleanser UK",
             "blue light therapy cleanser UK",
             "ECOCERT organic face wash",
-            "sulfate free acne cleanser UK",
+            "sulphate free acne cleanser UK",
             "Buudy blemish purifying face wash",
           ]
         : product.slug === "skincare-ebook" || product.id === "buudy-skincare-ebook"

@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -11,128 +12,258 @@ export function SerumClinicalResults({
   isPeptide?: boolean;
   isPrebiotic?: boolean;
 } = {}) {
-  const stats = isPrebiotic
-    ? [
+  const statRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [values, setValues] = useState<number[]>([0, 0, 0, 0]);
+
+  const stats = useMemo(() => {
+    if (isPrebiotic) {
+      return [
         {
-          percentage: "96%",
+          target: 96,
           label: "Stronger Moisture Barrier",
-          desc: "Reported a visible reduction in redness, dryness, and skin sensitivity within 2 weeks of daily use.",
+          desc: "Visible reduction in redness, dryness, and sensitivity.",
         },
         {
-          percentage: "93%",
+          target: 93,
           label: "Balanced Complexion",
-          desc: "Noticed skin felt significantly calmer, less congested, and balanced throughout the day.",
+          desc: "Complexion felt calm, less congested, and clarified all day.",
         },
         {
-          percentage: "95%",
+          target: 95,
           label: "Enhanced LED Synergy",
-          desc: "Observed accelerated hydration and radiance when paired with daily red and blue light therapy sessions.",
+          desc: "Accelerated hydration and radiance paired with daily light therapy.",
         },
         {
-          percentage: "91%",
+          target: 91,
           label: "Bouncy Plump Texture",
-          desc: "Agreed skin texture felt immediately plumper and smoother with zero sticky weight or oily residue.",
-        },
-      ]
-    : isPeptide
-    ? [
-        {
-          percentage: "95%",
-          label: "Restored Firmness & Bounce",
-          desc: "Reported a visible improvement in skin elasticity and noticeably firmer facial contours within 4 weeks.",
-        },
-        {
-          percentage: "92%",
-          label: "Expression Line Smoothing",
-          desc: "Measured a noticeable reduction in the depth of forehead lines, crow's feet, and smile lines.",
-        },
-        {
-          percentage: "94%",
-          label: "Post-Light Collagen Synergy",
-          desc: "Observed faster, enhanced skin rejuvenation when applied immediately after red & near-infrared light therapy.",
-        },
-        {
-          percentage: "91%",
-          label: "Nourished Skin Density",
-          desc: "Agreed skin felt visibly denser, rejuvenated, and deeply nourished without grease or congestion.",
-        },
-      ]
-    : [
-        {
-          percentage: "94%",
-          label: "Instant Dermal Plump",
-          desc: "Reported immediate deep hydration and plumper-feeling skin after the very first application.",
-        },
-        {
-          percentage: "91%",
-          label: "Enhanced LED Synergy",
-          desc: "Observed faster, visibly brighter radiance when applied directly prior to LED phototherapy.",
-        },
-        {
-          percentage: "89%",
-          label: "Fine Line Smoothing",
-          desc: "Noticed a measurable reduction in superficial dehydration lines and rough patches within 14 days.",
-        },
-        {
-          percentage: "88%",
-          label: "Smoother, Calmer Complexion",
-          desc: "Agreed skin texture felt noticeably softer, calmer, and free of redness or congestion.",
+          desc: "Skin felt plumper and smoother with zero sticky residue.",
         },
       ];
+    }
+    if (isPeptide) {
+      return [
+        {
+          target: 95,
+          label: "Restored Firmness & Bounce",
+          desc: "Visible improvement in skin elasticity and firmer facial contours.",
+        },
+        {
+          target: 92,
+          label: "Expression Line Smoothing",
+          desc: "Measurable softening of forehead lines, crow's feet, and smile lines.",
+        },
+        {
+          target: 94,
+          label: "Post-Light Collagen Synergy",
+          desc: "Enhanced rejuvenation applied directly after red & near-infrared light.",
+        },
+        {
+          target: 91,
+          label: "Nourished Skin Density",
+          desc: "Skin felt visibly denser and rejuvenated without oiliness or congestion.",
+        },
+      ];
+    }
+    return [
+      {
+        target: 94,
+        label: "Instant Dermal Plump",
+        desc: "Immediate deep hydration and visibly plumper-feeling skin.",
+      },
+      {
+        target: 91,
+        label: "Enhanced LED Synergy",
+        desc: "Brighter radiance and optical clarity applied prior to LED phototherapy.",
+      },
+      {
+        target: 89,
+        label: "Fine Line Smoothing",
+        desc: "Softening of superficial dehydration lines and dry patches.",
+      },
+      {
+        target: 88,
+        label: "Smoother, Calmer Complexion",
+        desc: "Skin texture felt noticeably softer, balanced, and free from redness.",
+      },
+    ];
+  }, [isPrebiotic, isPeptide]);
+
+  const targets = useMemo(() => stats.map((s) => s.target), [stats]);
+
+  useEffect(() => {
+    setValues([0, 0, 0, 0]);
+    const frames = new Map<number, number>();
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.3) return;
+          const index = statRefs.current.indexOf(entry.target as HTMLDivElement);
+          if (index < 0) return;
+          observer.unobserve(entry.target);
+
+          if (reduced) {
+            setValues((prev) => {
+              const next = [...prev];
+              next[index] = targets[index];
+              return next;
+            });
+            return;
+          }
+
+          const start = performance.now();
+          const target = targets[index];
+          const duration = 1400; // 1.4s smooth cubic ease-out
+
+          const step = (now: number) => {
+            const progress = Math.min(1, (now - start) / duration);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const value = target * easeOut;
+
+            setValues((prev) => {
+              const next = [...prev];
+              next[index] = value;
+              return next;
+            });
+
+            if (progress < 1) {
+              frames.set(index, requestAnimationFrame(step));
+            } else {
+              setValues((prev) => {
+                const next = [...prev];
+                next[index] = target;
+                return next;
+              });
+            }
+          };
+
+          frames.set(index, requestAnimationFrame(step));
+        });
+      },
+      { threshold: 0.3, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    statRefs.current.forEach((row) => {
+      if (row) observer.observe(row);
+    });
+
+    return () => {
+      observer.disconnect();
+      frames.forEach((frameId) => cancelAnimationFrame(frameId));
+    };
+  }, [targets]);
+
+  const imageSrc = isPrebiotic
+    ? "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp"
+    : isPeptide
+    ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-architectural-pair-plinth-uk.webp"
+    : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-carton-still-life-uk.webp";
+
+  const imageAlt = isPrebiotic
+    ? "Buudy Bioactive Prebiotics Jelly Serum architectural sculptural plinth pair"
+    : isPeptide
+    ? "Buudy Peptide Anti-Ageing Serum architectural pair display on stone plinth"
+    : "Buudy Hyaluronic Acid Serum 30ml luxury bottle and carton architectural still life";
 
   return (
-    <section className="buudy-section border-y border-[var(--border)] bg-[rgba(241,223,210,.35)] py-14 md:py-24">
+    <section className="buudy-section bg-[var(--cream)] py-10 md:py-16">
       <div className="buudy-wrap">
-        <div className="mx-auto max-w-3xl text-center">
+        {/* Section Header */}
+        <div className="mx-auto max-w-3xl text-center mb-8 md:mb-12">
           <p className="buudy-mono text-[var(--gold)] uppercase tracking-wider text-xs md:text-sm font-semibold">
             Consumer Perception &amp; Clinical Trial Results
           </p>
-          <h2 className="buudy-display mt-3 text-3xl sm:text-4xl lg:text-[2.6rem] leading-tight text-[var(--plum)]">
+          <h2 className="buudy-display mt-2 sm:mt-3 text-2xl sm:text-3xl lg:text-[2.4rem] leading-tight text-[var(--plum)]">
             Proven efficacy, <em className="buudy-italic text-[var(--gold)]">measured by real skin</em>.
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[var(--muted)] leading-relaxed">
+          <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-2xl mx-auto">
             {isPrebiotic
               ? "Formulated specifically to restore and fortify your skin's protective microbiome while delivering weightless hydration and zero light-scattering phototherapy synergy."
               : isPeptide
-              ? "Formulated specifically to maximize post-phototherapy cellular uptake, signaling dermal fibroblasts to synthesize collagen and firm expression lines."
-              : "Formulated specifically to maximize photon transmission during light therapy while delivering multi-molecular hyaluronic moisture deep into the extracellular dermal matrix."}
+              ? "Formulated specifically to maximise post-phototherapy cellular uptake, signalling dermal fibroblasts to synthesise collagen and firm expression lines."
+              : "Formulated specifically to maximise photon transmission during light therapy while delivering multi-molecular hyaluronic moisture deep into the extracellular dermal matrix."}
           </p>
         </div>
 
-        {/* 4 Percentage Cards Grid */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col justify-between rounded-[20px] border border-[rgba(58,31,61,.12)] bg-[var(--card)] p-6 sm:p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
-            >
-              <div>
-                <span className="font-playfair text-4xl sm:text-5xl font-bold leading-none text-[var(--plum)]">
-                  {stat.percentage}
-                </span>
-                <h3 className="buudy-display mt-4 text-lg font-semibold text-[var(--plum)] leading-snug">
-                  {stat.label}
-                </h3>
-                <p className="mt-2 text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-                  {stat.desc}
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-[rgba(58,31,61,.08)] flex items-center justify-between text-[11px] buudy-mono text-[var(--plum-soft)]">
-                <span>4-Week Trial</span>
-                <span className="text-[#00b67a] font-semibold">Verified</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Split Grid: 4 Animated Circular Percentage Cards (Left) + Architectural Product Image (Right) */}
+        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-12 lg:gap-10">
+          {/* Animated Stats Column (7 cols) */}
+          <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col gap-2.5 sm:gap-3">
+            {stats.map((stat, idx) => (
+              <div
+                key={idx}
+                ref={(el) => {
+                  statRefs.current[idx] = el;
+                }}
+                className="flex items-center gap-3.5 sm:gap-4 rounded-[18px] border border-[rgba(58,31,61,.08)] bg-[var(--card)] py-3 px-3.5 sm:py-3.5 sm:px-4 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[rgba(58,31,61,.18)]"
+              >
+                {/* Miroooo-Style Circular Progress Ring */}
+                <div
+                  className="relative flex h-[58px] w-[58px] shrink-0 items-center justify-center"
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="0 0 68 68"
+                    className="h-full w-full -rotate-90 transform"
+                  >
+                    {/* Track */}
+                    <circle
+                      cx="34"
+                      cy="34"
+                      r="28"
+                      fill="none"
+                      stroke="rgba(58, 31, 61, 0.12)"
+                      strokeWidth="3.5"
+                    />
+                    {/* Animated Fill Circle */}
+                    <circle
+                      cx="34"
+                      cy="34"
+                      r="28"
+                      fill="none"
+                      stroke="var(--plum)"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      strokeDasharray="176"
+                      strokeDashoffset={176 * (1 - (values[idx] || 0) / 100)}
+                    />
+                  </svg>
+                  <span className="absolute font-playfair text-[0.95rem] sm:text-[1rem] font-bold text-[var(--plum)] tracking-tight">
+                    {Math.round(values[idx] || 0)}%
+                  </span>
+                </div>
 
-        {/* Clinical Footnote */}
-        <p className="mt-8 text-center text-xs text-[var(--muted)] opacity-80">
-          {isPrebiotic
-            ? "*Results based on an independent 4-week consumer perception panel of 50 participants applying Buudy Bioactive Prebiotics Jelly Serum twice daily, including with 10-minute LED phototherapy sessions."
-            : isPeptide
-            ? "*Results based on an independent 4-week consumer perception panel of 48 participants applying Buudy Peptide Anti-Aging Serum twice daily, including post 10-minute 630nm/830nm phototherapy sessions."
-            : "*Results based on an independent 4-week consumer perception panel of 52 participants applying Buudy Light-Activating Serum twice daily, including with 10-minute 630nm/830nm phototherapy sessions."}
-        </p>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="buudy-display text-sm sm:text-base font-semibold text-[var(--plum)] leading-snug">
+                    {stat.label}
+                  </h3>
+                  <p className="mt-0.5 text-xs text-[var(--muted)] leading-snug">
+                    {stat.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Architectural Image Column (5 cols) - Pure and clean with zero text overlays */}
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/5] w-full overflow-hidden rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] shadow-lg">
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                sizes="(min-width: 1024px) 480px, 100vw"
+                className="object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                priority={false}
+              />
+              <div className="pointer-events-none absolute inset-0 rounded-[22px] ring-1 ring-inset ring-[rgba(58,31,61,0.06)]" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -151,60 +282,66 @@ export function SerumHowToUse({
         {
           num: "01",
           title: "Cleanse & Prep",
-          desc: "Cleanse thoroughly with gentle cleanser and lukewarm water. Pat lightly, leaving skin slightly damp so the prebiotic and hyaluronic hydrogel can bind optimal hydration.",
+          desc: "Cleanse with lukewarm water. Pat lightly, leaving skin slightly damp for optimal hydrogel absorption.",
         },
         {
           num: "02",
           title: "Dispense & Press",
-          desc: "Using the precision glass dropper, dispense 3–4 drops of Bioactive Prebiotics Jelly Serum onto your fingertips. Gently press and smooth the refreshing jelly over face, neck, and décolletage.",
+          desc: "Dispense 3–4 drops onto fingertips and gently press over face, neck, and décolletage until absorbed.",
         },
         {
           num: "03",
-          title: "Activate with Light & Nourish",
-          desc: "Slip on your Buudy 7-Colour LED Mask for your 10-minute session. The 100% water-based formula allows pure photon penetration without light reflection. Conclude with your moisturiser to seal the microbiome shield.",
+          title: "Activate with Light & Seal",
+          desc: "Wear your Buudy 7-Colour LED Mask for 10 minutes. Follow with your daily moisturiser to lock in the microbiome shield.",
         },
       ]
     : isPeptide
     ? [
         {
           num: "01",
-          title: "Cleanse & Activate (Post-Light)",
-          desc: "Cleanse your face thoroughly. For maximum results, use immediately following your 10-minute Buudy LED Mask session when cellular microcirculation and fibroblast receptivity are at their peak.",
+          title: "Cleanse & Light Therapy",
+          desc: "Cleanse thoroughly and complete your 10-minute Buudy LED Mask session to prime cellular receptivity.",
         },
         {
           num: "02",
           title: "Dispense & Warm",
-          desc: "Using the precision treatment pump, dispense 2–3 pumps of Peptide Anti-Aging Serum onto your fingertips. Gently warm between your fingers to activate the bio-fermented peptide matrix.",
+          desc: "Dispense 2–3 pumps onto fingertips and warm gently to activate the bio-fermented peptide matrix.",
         },
         {
           num: "03",
           title: "Smooth & Sculpt",
-          desc: "Smooth gently over face, neck, and décolletage using upward sculpting motions until fully absorbed. In the morning, follow with your moisturiser and SPF; in the evening, follow with your restorative night cream.",
+          desc: "Smooth over face, neck, and décolletage in upward sculpting strokes. Follow with moisturiser and SPF.",
         },
       ]
     : [
         {
           num: "01",
           title: "Cleanse & Prep",
-          desc: "Cleanse thoroughly with gentle cleanser and warm water. Pat lightly, leaving skin slightly damp so the multi-molecular hyaluronic acid can bind optimal moisture.",
+          desc: "Cleanse thoroughly with lukewarm water. Leave skin slightly damp so hyaluronic acid binds deep hydration.",
         },
         {
           num: "02",
           title: "Dispense & Smooth",
-          desc: "Using the precision treatment pump, dispense 2–3 pumps directly onto your fingertips or cheekbones. Gently smooth over face, neck, and décolletage in upward strokes.",
+          desc: "Dispense 2–3 pumps directly onto fingertips. Gently smooth over face, neck, and décolletage in upward strokes.",
         },
         {
           num: "03",
-          title: "Activate with Light (or Daily Moisture)",
-          desc: "Slip on your Buudy 7-Colour LED Mask for your 10-minute session. The 100% water-based formula allows pure 630nm & 830nm photon penetration without scattering. In mornings without LED, follow with your moisturiser or sunscreen.",
+          title: "Activate with Light & Hydrate",
+          desc: "Wear your Buudy 7-Colour LED Mask for 10 minutes of unimpeded light penetration. Follow with moisturiser.",
         },
       ];
 
+  const introText = isPrebiotic
+    ? "Lightweight, fast-absorbing hydrogel formulated to fortify your microbiome and optimise phototherapy penetration."
+    : isPeptide
+    ? "Formulated with bio-fermented Hexapeptide-11 to absorb rapidly into post-light dermis without tacky residue."
+    : "Pure water-based hydrogel formulated to absorb instantly for maximum hydration and 100% unimpeded light penetration.";
+
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="how-to-use">
-      <div className="buudy-wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <section className="buudy-section bg-[var(--cream)] py-10 md:py-16" id="how-to-use">
+      <div className="buudy-wrap grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
         {/* Model UGC Image Column */}
-        <div className="relative overflow-hidden rounded-[24px] border border-[rgba(58,31,61,.12)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
+        <div className="relative overflow-hidden rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
           <Image
             src={
               isPrebiotic
@@ -217,7 +354,7 @@ export function SerumHowToUse({
               isPrebiotic
                 ? "Buudy Bioactive Prebiotics Jelly Serum daily application ritual"
                 : isPeptide
-                ? "Buudy Peptide Anti-Aging Serum daily application ritual"
+                ? "Buudy Peptide Anti-Ageing Serum daily application ritual"
                 : "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel daily application ritual"
             }
             fill
@@ -238,52 +375,30 @@ export function SerumHowToUse({
               </>
             }
           />
-          <p className="mt-3 text-sm sm:text-base text-[var(--muted)] leading-relaxed">
-            {isPrebiotic
-              ? "Formulated with 2% Bioactive Prebiotics (Lactobacillus Ferment Lysate), dual-action hyaluronic acid, and physiological osmolytes to absorb immediately into dehydrated tissue without sticky residue or diode-clouding occlusives."
-              : isPeptide
-              ? "Formulated with bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular hyaluronic acid to absorb rapidly into post-stimulated dermis without tacky residue or diode-clouding occlusives."
-              : "Formulated without heavy silicones, mineral oils, or synthetic film-formers, allowing active bio-fermented peptides and multi-depth hyaluronic molecules to absorb instantly without leaving tacky residue on your skin or LED mask diodes."}
+          <p className="mt-2 text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+            {introText}
           </p>
 
           {/* 3 Step Cards */}
-          <div className="mt-8 space-y-5">
+          <div className="mt-6 space-y-3 sm:space-y-3.5">
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="flex items-start gap-4 p-4 rounded-xl border border-[rgba(58,31,61,.08)] bg-[var(--card)]/80 transition-colors hover:bg-[var(--card)]"
+                className="flex items-start gap-3.5 p-3 sm:p-3.5 rounded-xl border border-[rgba(58,31,61,.08)] bg-[var(--card)]/80 transition-colors hover:bg-[var(--card)]"
               >
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--plum)] text-white font-serif font-bold text-sm">
+                <div className="grid h-8 w-8 sm:h-9 sm:w-9 shrink-0 place-items-center rounded-full bg-[var(--plum)] text-white font-serif font-bold text-xs sm:text-sm">
                   {step.num}
                 </div>
-                <div>
-                  <h3 className="buudy-display text-base sm:text-lg font-semibold text-[var(--plum)]">
+                <div className="min-w-0 flex-1">
+                  <h3 className="buudy-display text-sm sm:text-base font-semibold text-[var(--plum)] leading-snug">
                     {step.title}
                   </h3>
-                  <p className="mt-1 text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+                  <p className="mt-0.5 text-xs text-[var(--muted)] leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Pro Tip Callout */}
-          <div className="mt-6 rounded-xl border border-[var(--gold)]/30 bg-[rgba(202,138,4,0.06)] p-4 flex items-start gap-3">
-            <span className="text-base">💡</span>
-            {isPrebiotic ? (
-              <p className="text-xs sm:text-sm text-[var(--plum)] leading-relaxed">
-                <strong className="font-semibold">Phototherapy Pro-Tip:</strong> Light therapy stimulates cellular microcirculation and natural recovery, creating the optimal biological environment for prebiotics to feed healthy skin flora. Applying prebiotics prior to LED phototherapy calms heat reactivity and accelerates barrier restoration.
-              </p>
-            ) : isPeptide ? (
-              <p className="text-xs sm:text-sm text-[var(--plum)] leading-relaxed">
-                <strong className="font-semibold">Phototherapy Pro-Tip:</strong> Applying Hexapeptide-11 and Dipalmitoyl Hydroxyproline within 30 minutes post-treatment captures the biological window of peak mitochondrial ATP synthesis, driving peptide signaling up to 3x deeper into dermal layers.
-              </p>
-            ) : (
-              <p className="text-xs sm:text-sm text-[var(--plum)] leading-relaxed">
-                <strong className="font-semibold">Phototherapy Pro-Tip:</strong> Standard serums containing oils or dimethicones scatter up to 91% of red light photons. Buudy Serum has a matched refractive index (n ~ 1.33) matching natural skin moisture for 100% unimpeded light transmission.
-              </p>
-            )}
           </div>
         </div>
       </div>

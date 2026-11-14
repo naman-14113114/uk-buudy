@@ -1,10 +1,7 @@
 import type { Product } from "@/data/products";
 import {
-  serumFeatures,
-  peptideSerumFeatures,
-  prebioticSerumFeatures,
-  cleanserFeatures,
   serumTransformations,
+  peptideTransformations,
   prebioticTransformations,
   cleanserTransformations,
 } from "@/data/productSections";
@@ -73,32 +70,7 @@ export function ProductPage({
       {product.template === "mask" && <DeferredVideoReviews />}
       <TrustBadges />
       {/* <FeatureGrid /> */}
-      {product.template === "serum" && (
-        <FeatureGrid
-          featuresList={isPeptide ? peptideSerumFeatures : isPrebiotic ? prebioticSerumFeatures : serumFeatures}
-          eyebrow="Formulation Science"
-          title={
-            <>
-              What makes our formula{" "}
-              <em className="buudy-italic text-[var(--gold)]">unique</em>?
-            </>
-          }
-        />
-      )}
-      {product.template === "cleanser" && (
-        <FeatureGrid
-          featuresList={cleanserFeatures}
-          eyebrow="Formulation Science"
-          title={
-            <>
-              What makes our cleanser{" "}
-              <em className="buudy-italic text-[var(--gold)]">unique</em>?
-            </>
-          }
-        />
-      )}
-      {product.template === "serum" && <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} />}
-      {product.template === "cleanser" && <CleanserClinicalResults />}
+      {/* 1. Verified Clinical Before & After Grid - Placed ABOVE both the Percentage Grid and How-To-Use */}
       {product.template === "serum" && isPrebiotic && (
         <DeferredBeforeAfterGrid
           items={prebioticTransformations}
@@ -110,6 +82,17 @@ export function ProductPage({
           description="Verified customer transformations after incorporating Buudy Bioactive Prebiotics Jelly Serum into their daily barrier-repair and light therapy ritual."
         />
       )}
+      {product.template === "serum" && isPeptide && (
+        <DeferredBeforeAfterGrid
+          items={peptideTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">firmer, lifted skin</em>.
+            </>
+          }
+          description="Verified customer transformations after incorporating Buudy Collagen-Lock Hexapeptide Serum into their daily firming and light therapy ritual."
+        />
+      )}
       {product.template === "serum" && !isPeptide && !isPrebiotic && (
         <DeferredBeforeAfterGrid
           items={serumTransformations}
@@ -118,7 +101,7 @@ export function ProductPage({
               Real users, <em className="buudy-italic">visible dermal renewal</em>.
             </>
           }
-          description="Verified customer transformations, photographed in their own homes after consistent daily use of Buudy Light-Activating Serum."
+          description="Verified customer transformations after incorporating Buudy Double Hydration Boost Gel into their daily hydration and light therapy ritual."
         />
       )}
       {product.template === "cleanser" && (
@@ -132,6 +115,12 @@ export function ProductPage({
           description="Verified customer results after incorporating Buudy Blemish Purifying Face Wash into their daily morning and evening cleansing ritual."
         />
       )}
+
+      {/* 2. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
+      {product.template === "serum" && <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} />}
+      {product.template === "cleanser" && <CleanserClinicalResults />}
+
+      {/* 3. Daily Application / Cleansing Ritual - How To Use Section */}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
       {product.template === "serum" && <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} />}
@@ -139,6 +128,8 @@ export function ProductPage({
       {product.template === "mask" && <DeferredExpertSection />}
       {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
+
+      {/* 4. Customer Reviews Section - After all the clinical, transformation, and ritual sections */}
       <ProductReviewsSection productHandle={product.template === "mask" ? "buudy-led-mask" : product.slug} />
       {product.template === "mask" && <AppPromo />}
       {product.template === "mask" && comparisonPosition === "below-app" && <ComparisonTable />}
