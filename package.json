@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "normalize:reviews": "node scripts/normalize-reviews.mjs",
+    "update:reviews": "node scripts/update-review-dates.mjs",
     "build": "next build",
     "sync:assets": "node scripts/sync-product-assets.mjs",
     "start": "next start",
