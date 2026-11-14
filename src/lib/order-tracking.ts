@@ -1584,8 +1584,8 @@ function buildVerifiedTrackingData(order: VerifiedOrderRecord): TrackingData {
     statusCode = 'PROCESSING';
     progressPercentage = 40;
     activeStepIndex = 0;
-    estimatedDelivery = '14–18 November 2026';
-    statusMessage = 'Order packaged and booked with carrier. International flight dispatch is scheduled shortly.';
+    estimatedDelivery = '18–22 November 2026';
+    statusMessage = 'Order packaged and booked with carrier. International flight dispatch is scheduled for delivery between 18–22 November.';
   } else {
     status = 'Processing';
     statusCode = 'PROCESSING';
