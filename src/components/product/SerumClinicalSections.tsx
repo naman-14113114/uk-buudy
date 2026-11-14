@@ -111,17 +111,6 @@ export function SerumHowToUse() {
             className="object-cover object-top"
             priority={false}
           />
-          {/* Subtle Corner Badge */}
-          <div className="absolute top-4 left-4 z-10 rounded-full bg-white/90 backdrop-blur-xs border border-[rgba(58,31,61,.1)] px-3.5 py-1.5 shadow-sm">
-            <span className="buudy-mono text-xs font-semibold text-[var(--plum)] tracking-wider uppercase">
-              Daily Protocol • AM &amp; PM
-            </span>
-          </div>
-          <div className="absolute bottom-4 right-4 z-10 rounded-full bg-[var(--plum)]/90 backdrop-blur-xs text-white px-3.5 py-1.5 shadow-sm">
-            <span className="buudy-mono text-xs font-medium tracking-wide">
-              100% Water-Based Hydrogel
-            </span>
-          </div>
         </div>
 
         {/* Steps Column */}

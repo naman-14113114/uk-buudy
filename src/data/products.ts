@@ -993,32 +993,14 @@ export const buudyCollagenSerum: Product = {
     {
       src: "/images/products/buudy-serum/serum-bottle-front.jpg",
       alt: "Buudy Collagen-Lock™ 30ml Precision Treatment Dropper Bottle",
-      badge: {
-        title: "PRECISION DROPPER\nTARGETED APPLICATION",
-        sub: "Graduated pipette delivers\noptimal active absorption",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/serum-texture-macro.jpg",
       alt: "Velvet Restorative Droplet with Multi-Molecular Hyaluronic Acid",
-      badge: {
-        title: "MULTI-DEPTH\nHYDRATION PLUMP",
-        sub: "Plumps freshly stimulated dermis\nwithout congesting sensitive pores",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/serum-bottle-box-back.jpg",
       alt: "Full ECOCERT Cosmos Organic Certified INCI Specifications",
-      badge: {
-        title: "TRANSPARENT INCI\nCLEAN FORMULATION",
-        sub: "1% Sodium PCA + Elderberry Extract\nsoothes and protects dermal barrier",
-        position: "top-left",
-        theme: "dark",
-      },
     },
   ],
   gifts: [],
@@ -1097,92 +1079,38 @@ export const buudyHyaluronicSerum: Product = {
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-double-hydration-boost-gel-hero-uk.webp",
       alt: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel 30ml and luxury plum box for LED light therapy UK",
-      badge: {
-        title: "DOUBLE HYDRATION\nMULTI-DEPTH MATRIX",
-        sub: "Multi-molecular HA + Provitamin B5\nlocks in 72h moisture reservoir",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-b5-serum-bottle-front-uk.webp",
       alt: "Buudy 30ml Hyaluronic Acid 2% + B5 serum bottle with precision pump dispenser",
-      badge: {
-        title: "PRECISION PUMP\nHYGIENIC DOSING",
-        sub: "Delivers exact clinical volume\nwithout formula oxidation",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-precision-dropper-dispensing-uk.webp",
       alt: "Buudy Hyaluronic Acid 2% + B5 precision pump dispenser releasing clear hydrating hydrogel droplet",
-      badge: {
-        title: "PURE HYDROGEL\nZERO-SCATTERING",
-        sub: "100% water-based formula\nmatches skin moisture (n ~ 1.33)",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-water-optical-clarity-caustics-uk.webp",
       alt: "Buudy Light-Activating Hyaluronic Serum in clear water with refractive light caustics demonstrating zero light scattering",
-      badge: {
-        title: "100% LIGHT-PERMEABLE\nLED COMPATIBLE",
-        sub: "Permits 100% of 630nm & 830nm\nphotons to reach deep dermis",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-gel-texture-droplet-macro-uk.webp",
       alt: "Clear multi-molecular hyaluronic acid hydrogel droplet swatch beside Buudy 30ml serum bottle",
-      badge: {
-        title: "SILKY NON-STICKY\nABSORBS IN SECONDS",
-        sub: "Zero silicone, zero oils\nleaves no film on LED diodes",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-double-hydration-boost-gel-water-splash-uk.webp",
       alt: "Buudy Double Hydration Boost Gel submerged in dynamic splashing water showing intensive dermal hydration",
-      badge: {
-        title: "INTENSIVE MOISTURE\nBOOST GEL",
-        sub: "Quenches dehydrated barriers\nand restores dermal bounce",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-pump-label-macro-uk.webp",
       alt: "Macro detail of Buudy Hyaluronic Acid 2% + B5 label and precision hygienic treatment pump",
-      badge: {
-        title: "CLINICAL PURITY\nECOCERT COSMOS",
-        sub: "Certified organic botanicals\nwith White Tea & Sage extracts",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-luxury-carton-box-uk.webp",
       alt: "Buudy Hyaluronic Acid 2% + B5 luxury deep plum folding carton packaging with vertical logo",
-      badge: {
-        title: "LUXURY PACKAGING\nPROTECTIVE CARTON",
-        sub: "100% recyclable outer carton\nprotects active photostability",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-plum-studio-shot-uk.webp",
       alt: "Buudy Hyaluronic Acid 2% + B5 serum bottle against signature plum background",
-      badge: {
-        title: "DESIGNED FOR UK SKIN\nALL SKIN TYPES",
-        sub: "Non-comedogenic & hypoallergenic\nsafe for reactive, sensitive skin",
-        position: "top-left",
-        theme: "dark",
-      },
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-cream-pedestal-display-uk.webp",
@@ -1287,7 +1215,6 @@ export const buudyRetinolAlternativeSerum: Product = {
   gallery: [
     { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01-3d-flat-selfnamed.jpg?width=1440", alt: "Buudy Phyto-Renew™ Botanical Retinol Alternative 30ml" },
     { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01c-3d-box-flat-badge-selfnamed.jpg?width=1440", alt: "Buudy Phyto-Renew™ Serum Bottle and Packaging" },
-    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01b-mood-usps-selfnamed.jpg?width=1440", alt: "Buudy Retinol Alternative Key Benefits and USPs" },
     { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-02-texture-selfnamed.jpg?width=1440", alt: "Golden Nectar Texture Swatch" },
     { src: "https://static.selfnamed.com/gallery-photos/3CUSiRBXYQG-Wa5JnD8H9u5wsYXfs5sJ.jpg", alt: "Buudy Phyto-Renew™ Serum Studio Shot" }
   ],
