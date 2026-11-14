@@ -34,8 +34,17 @@ function normalizeStaticReview(r: ProductReview) {
   };
 }
 
+const maskReviewList = maskReviews.map(normalizeStaticReview) as ProductReview[];
+
 const reviewCollections = {
-  "buudy-led-mask": maskReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-led-mask": maskReviewList,
+  "buudy-led-face-mask": maskReviewList,
+  "best-led-face-mask": maskReviewList,
+  "best-led-mask-in-uk": maskReviewList,
+  "buudy-7-colour-led-face-mask": maskReviewList,
+  "buudy-7-colour-led-mask": maskReviewList,
+  "buudy-led-mask-2": maskReviewList,
+  "buudy-led-mask-compact": maskReviewList,
   "buudy-red-torch": torchReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-ipl-device": iplReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-light-activating-hyaluronic-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],

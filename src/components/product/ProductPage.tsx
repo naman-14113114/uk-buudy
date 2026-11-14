@@ -53,7 +53,7 @@ export function ProductPage({
       <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
       {product.template === "mask" && <DeferredVideoReviews />}
       <TrustBadges />
-      {product.template === "mask" && <FeatureGrid />}
+      {/* <FeatureGrid /> */}
       {product.template === "serum" && (
         <FeatureGrid
           featuresList={serumFeatures}
@@ -88,7 +88,7 @@ export function ProductPage({
       {product.template === "mask" && <DeferredExpertSection />}
       {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
-      <ProductReviewsSection productHandle={product.slug} />
+      <ProductReviewsSection productHandle={product.template === "mask" ? "buudy-led-mask" : product.slug} />
       {product.template === "mask" && <AppPromo />}
       {product.template === "mask" && comparisonPosition === "below-app" && <ComparisonTable />}
       {product.template === "mask" && <BlueLightSection />}
