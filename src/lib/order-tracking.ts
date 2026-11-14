@@ -1553,7 +1553,7 @@ function buildVerifiedTrackingData(order: VerifiedOrderRecord): TrackingData {
   let statusCode: TrackingStage = 'PROCESSING';
   let progressPercentage = 30;
   let activeStepIndex = 0;
-  let estimatedDelivery = '14–18 November 2026';
+  let estimatedDelivery = '18–22 November 2026';
   let statusMessage = 'Your order is confirmed and being prepared for dispatch.';
 
   if (isSimms) {
