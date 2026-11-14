@@ -89,11 +89,11 @@ export function SerumHowToUse() {
     {
       num: "02",
       title: "Dispense & Smooth",
-      desc: "Using the precision glass pipette, release 3–4 drops directly onto your fingertips or cheekbones. Gently smooth over face, neck, and décolletage in upward strokes.",
+      desc: "Using the precision treatment pump, dispense 2–3 pumps directly onto your fingertips or cheekbones. Gently smooth over face, neck, and décolletage in upward strokes.",
     },
     {
       num: "03",
-      title: "Activate with Light (or SPF)",
+      title: "Activate with Light (or Daily Moisture)",
       desc: "Slip on your Buudy 7-Colour LED Mask for your 10-minute session. The 100% water-based formula allows pure 630nm & 830nm photon penetration without scattering. In mornings without LED, follow with your moisturiser or sunscreen.",
     },
   ];
@@ -104,8 +104,8 @@ export function SerumHowToUse() {
         {/* Model UGC Image Column */}
         <div className="relative overflow-hidden rounded-[24px] border border-[rgba(58,31,61,.12)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
           <Image
-            src="/images/products/buudy-serum/serum-how-to-use-model.jpg"
-            alt="Buudy Light-Activating Hyaluronic Serum daily application ritual"
+            src="/images/products/buudy-serum/buudy-hyaluronic-serum-two-hand-application-ritual-uk.webp"
+            alt="Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel daily application ritual"
             fill
             sizes="(min-width: 1024px) 500px, 100vw"
             className="object-cover object-top"
@@ -165,7 +165,7 @@ export function SerumHowToUse() {
           <div className="mt-6 rounded-xl border border-[var(--gold)]/30 bg-[rgba(202,138,4,0.06)] p-4 flex items-start gap-3">
             <span className="text-base">💡</span>
             <p className="text-xs sm:text-sm text-[var(--plum)] leading-relaxed">
-              <strong className="font-semibold">Phototherapy Pro-Tip:</strong> Standard serums containing oils or dimethicones scatter up to 91% of red light photons. Buudy Serum has a matched refractive index (n ≈ 1.33) matching natural skin moisture for 100% unimpeded light transmission.
+              <strong className="font-semibold">Phototherapy Pro-Tip:</strong> Standard serums containing oils or dimethicones scatter up to 91% of red light photons. Buudy Serum has a matched refractive index (n ~ 1.33) matching natural skin moisture for 100% unimpeded light transmission.
             </p>
           </div>
         </div>

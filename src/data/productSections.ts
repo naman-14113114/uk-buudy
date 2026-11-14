@@ -104,30 +104,30 @@ export const serumFeatures: Feature[] = [
   {
     title: "100% Optical Permeability",
     kicker: "Zero-Scattering Hydrogel Matrix",
-    body: "Unlike traditional serums loaded with silicones and oils that reflect up to 34% of therapeutic light, Buudy's 100% water-based matrix matches the refractive index of skin moisture (n ≈ 1.33), allowing Red (630nm) and NIR (830nm) photons to penetrate directly into dermal fibroblasts.",
+    body: "Unlike traditional serums loaded with silicones and oils that reflect up to 34% of therapeutic light, Buudy's 100% water-based matrix matches the refractive index of skin moisture (n ~ 1.33), allowing Red (630nm) and NIR (830nm) photons to penetrate directly into dermal fibroblasts.",
   },
   {
-    title: "2% Bio-Fermented Hexapeptide-11",
-    kicker: "Cellular Fibroblast Signaling",
-    body: "Signals freshly photostimulated fibroblasts to accelerate structural collagen type I & III synthesis during the critical 30-minute post-light window, visibly firming skin tone and relaxing persistent expression lines.",
-  },
-  {
-    title: "Multi-Molecular Hyaluronic Acid",
-    kicker: "Deep Dermal Plumping",
+    title: "Multi-Molecular Hyaluronic Acid (2%)",
+    kicker: "Deep Multi-Depth Dermal Plumping",
     body: "Combines low, medium, and high molecular weight hyaluronic acids. Low weights penetrate deep into extracellular matrices to bind water, while high weights protect the stratum corneum from warmth dehydration during 10-minute phototherapy sessions.",
   },
   {
-    title: "Alteromonas & Botanical Complex",
+    title: "Provitamin B5 & Sodium PCA",
+    kicker: "72-Hour Moisture Reservoir",
+    body: "Synergistic humectant complex draws in moisture from the air and locks it into intercellular lipid layers, relieving tight, dehydrated barriers and restoring supple elasticity without oiliness.",
+  },
+  {
+    title: "Organic White Tea & Sage",
     kicker: "Antioxidant Barrier Defence",
-    body: "Enriched with fermented Alteromonas extract, Organic White Tea, and Elderberry to defend against environmental oxidative stress, soothe micro-inflammation, and lock in lasting dermal hydration.",
+    body: "Enriched with certified organic White Tea and Sage botanical extracts to defend against environmental oxidative stress, soothe micro-inflammation, and keep skin calm and luminous.",
   },
   {
     title: "Device & Diode Safe",
     kicker: "Zero Diode Clouding",
-    body: "Completely oil-free, non-comedogenic, and non-sticky. Leaves zero greasy film on medical-grade silicone LED diodes and wipes clean in seconds, safeguarding your LED mask investment.",
+    body: "Completely oil-free, non-comedogenic, and non-sticky. Leaves zero greasy film on medical-grade silicone LED diodes and wipes clean in seconds with a damp cloth, safeguarding your LED mask investment.",
   },
   {
-    title: "COSMOS Certified Organic",
+    title: "ECOCERT COSMOS Certified",
     kicker: "100% Natural Origin Formulation",
     body: "Free from parabens, synthetic fragrances, silicones, and mineral oils. Formulated in Europe under strict ECOCERT COSMOS standards to calm sensitive skin barriers and prevent thermal redness flush.",
   },

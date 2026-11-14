@@ -1045,18 +1045,45 @@ export const buudyCollagenSerum: Product = {
   faqs: clinicalSerumFaqs,
 };
 
+export const doubleHydrationBoostGelFaqs: FAQItem[] = [
+  {
+    question: "Why should I use Double Hydration Boost Gel before or during LED light therapy?",
+    answer: "Standard facial serums and creams contain silicones, mineral oils, or lipids that have high refractive indices, reflecting up to 90% of therapeutic LED photons away from the skin. Buudy's Double Hydration Boost Gel is 100% water-based and matched to the natural refractive index of skin moisture (n ~ 1.33). This ensures 100% of 630nm red and 830nm near-infrared wavelengths penetrate deep into the dermis while preventing thermal moisture evaporation.",
+  },
+  {
+    question: "Can I use this gel serum daily without an LED mask?",
+    answer: "Absolutely! While engineered specifically as a zero-scattering phototherapy primer, it is an exceptional clinical-grade daily hydrating gel serum. Apply 2-3 pumps morning and night to clean, damp skin before your heavier creams or SPF for all-day moisture and skin plumpness.",
+  },
+  {
+    question: "Will this serum clog pores, cause breakouts, or leave a sticky residue?",
+    answer: "No. The formula is completely oil-free, silicone-free, fragrance-free, and non-comedogenic. It absorbs cleanly within 20-30 seconds, leaving a soft, non-tacky matte finish that never feels greasy or congests pores.",
+  },
+  {
+    question: "Is it safe for medical-grade silicone LED masks?",
+    answer: "Yes, 100%. Oils and silicones can degrade and cloud the medical-grade silicone diodes of LED devices over time. Buudy Double Hydration Boost Gel contains zero damaging occlusives, wiping cleanly off skin and mask surfaces with a damp cloth.",
+  },
+  {
+    question: "What makes the ECOCERT COSMOS certification important?",
+    answer: "Our formula is certified under European ECOCERT COSMOS standards, guaranteeing 100% natural origin ingredients, organic farming provenance for our botanical extracts (Aloe, White Tea, Sage), zero parabens, zero phthalates, and cruelty-free European formulation.",
+  },
+  {
+    question: "What is the return and guarantee policy?",
+    answer: "All Buudy clinical skincare items are backed by our 30-day satisfaction guarantee and ship via tracked UK delivery.",
+  },
+];
+
 export const buudyHyaluronicSerum: Product = {
   id: "buudy-light-activating-hyaluronic-serum",
-  sku: "BUUDY-SERUM-HA-50",
+  sku: "BUUDY-SERUM-HA-30",
   slug: "buudy-light-activating-hyaluronic-serum",
   template: "serum",
-  name: "Buudy Light-Activating Hyaluronic Serum (50ml)",
-  heroTitle: "Buudy Light-Activating Hyaluronic Serum",
-  heroEmphasis: "Pre-Light Hydration",
-  shortDescription: "STEP 1: PRE / DURING-LIGHT HYDROGEL PRIMER (50ml)",
-  description: "100% water-based, crystal-clear optical matrix engineered specifically for clinical LED masks. Zero oils, zero silicones, zero reflection. Matches the refractive index of skin moisture (n ≈ 1.33) so 100% of 630nm red and 830nm near-infrared wavelengths penetrate unhindered into dermal tissue.",
-  seoTitle: "Buudy Light-Activating Hyaluronic Serum | Buudy UK",
-  seoDescription: "Zero-reflection light-transmitting hyaluronic serum for LED light therapy masks. 100% water-based multi-molecular HA.",
+  name: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel (30ml)",
+  heroTitle: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel",
+  heroEmphasis: "Light-Activating Hydrogel Matrix",
+  shortDescription: "STEP 1: PRE / DURING-LIGHT HYDROGEL PRIMER & HYDRATION BOOST (30ml)",
+  description: "100% water-based, crystal-clear optical hydrogel matrix engineered specifically for clinical LED phototherapy and intensive daily moisture. Zero oils, zero silicones, zero light reflection. Matches the refractive index of skin moisture (n ~ 1.33) so 100% of 630nm red and 830nm near-infrared wavelengths penetrate unhindered into dermal tissue, while multi-molecular hyaluronic acid and Provitamin B5 deliver multi-depth plumping hydration for up to 72 hours.",
+  seoTitle: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel (30ml) | Buudy UK",
+  seoDescription: "Clinical-grade 100% water-based Hyaluronic Acid 2% + B5 Double Hydration Boost Gel. Zero light scattering, multi-depth dermal plumping, ECOCERT organic certified.",
   currency: market.currency,
   priceCents: 9900,
   compareAtCents: 19900,
@@ -1065,64 +1092,175 @@ export const buudyHyaluronicSerum: Product = {
   customerCount: "16,000+",
   promoCode: "",
   promoLabel: "",
-  cartImage: "/images/products/buudy-serum/serum-bottle-front.jpg",
+  cartImage: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-double-hydration-boost-gel-hero-uk.webp",
   gallery: [
     {
-      src: "/images/products/buudy-serum/serum-bottle-box-front.jpg",
-      alt: "Buudy Light-Activating Hyaluronic Serum & Luxury Outer Carton",
-    },
-    {
-      src: "/images/products/buudy-serum/serum-bottle-front.jpg",
-      alt: "Buudy Light-Activating Hyaluronic Serum 30ml Dropper Bottle",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-double-hydration-boost-gel-hero-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel 30ml and luxury plum box for LED light therapy UK",
       badge: {
-        title: "PRECISION DROPPER\nDAILY REGIMEN",
-        sub: "Graduated pipette delivers\nexact treatment volume",
+        title: "DOUBLE HYDRATION\nMULTI-DEPTH MATRIX",
+        sub: "Multi-molecular HA + Provitamin B5\nlocks in 72h moisture reservoir",
         position: "top-left",
         theme: "dark",
       },
     },
     {
-      src: "/images/products/buudy-serum/serum-texture-macro.jpg",
-      alt: "Crystal-Clear Zero-Scattering Multi-Molecular Hydrogel Droplet Texture",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-b5-serum-bottle-front-uk.webp",
+      alt: "Buudy 30ml Hyaluronic Acid 2% + B5 serum bottle with precision pump dispenser",
       badge: {
-        title: "MULTI-MOLECULAR\nHYDROGEL MATRIX",
-        sub: "Deep dermal plumping without\noils, silicones, or sticky residue",
+        title: "PRECISION PUMP\nHYGIENIC DOSING",
+        sub: "Delivers exact clinical volume\nwithout formula oxidation",
         position: "top-left",
         theme: "dark",
       },
     },
     {
-      src: "/images/products/buudy-serum/serum-bottle-box-back.jpg",
-      alt: "COSMOS Certified Organic Ingredients & Full INCI Specifications",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-precision-dropper-dispensing-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 precision pump dispenser releasing clear hydrating hydrogel droplet",
       badge: {
-        title: "TRANSPARENT INCI\nCLEAN FORMULATION",
-        sub: "100% vegan, cruelty-free &\nlaboratory tested phototherapy primer",
+        title: "PURE HYDROGEL\nZERO-SCATTERING",
+        sub: "100% water-based formula\nmatches skin moisture (n ~ 1.33)",
         position: "top-left",
         theme: "dark",
       },
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-water-optical-clarity-caustics-uk.webp",
+      alt: "Buudy Light-Activating Hyaluronic Serum in clear water with refractive light caustics demonstrating zero light scattering",
+      badge: {
+        title: "100% LIGHT-PERMEABLE\nLED COMPATIBLE",
+        sub: "Permits 100% of 630nm & 830nm\nphotons to reach deep dermis",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-gel-texture-droplet-macro-uk.webp",
+      alt: "Clear multi-molecular hyaluronic acid hydrogel droplet swatch beside Buudy 30ml serum bottle",
+      badge: {
+        title: "SILKY NON-STICKY\nABSORBS IN SECONDS",
+        sub: "Zero silicone, zero oils\nleaves no film on LED diodes",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-double-hydration-boost-gel-water-splash-uk.webp",
+      alt: "Buudy Double Hydration Boost Gel submerged in dynamic splashing water showing intensive dermal hydration",
+      badge: {
+        title: "INTENSIVE MOISTURE\nBOOST GEL",
+        sub: "Quenches dehydrated barriers\nand restores dermal bounce",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-pump-label-macro-uk.webp",
+      alt: "Macro detail of Buudy Hyaluronic Acid 2% + B5 label and precision hygienic treatment pump",
+      badge: {
+        title: "CLINICAL PURITY\nECOCERT COSMOS",
+        sub: "Certified organic botanicals\nwith White Tea & Sage extracts",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-luxury-carton-box-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 luxury deep plum folding carton packaging with vertical logo",
+      badge: {
+        title: "LUXURY PACKAGING\nPROTECTIVE CARTON",
+        sub: "100% recyclable outer carton\nprotects active photostability",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-plum-studio-shot-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 serum bottle against signature plum background",
+      badge: {
+        title: "DESIGNED FOR UK SKIN\nALL SKIN TYPES",
+        sub: "Non-comedogenic & hypoallergenic\nsafe for reactive, sensitive skin",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-cream-pedestal-display-uk.webp",
+      alt: "Buudy Hyaluronic Acid Serum and carton on sculptural cream plinth architectural display",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-packaging-overhead-flatlay-uk.webp",
+      alt: "Overhead flatlay of Buudy Hyaluronic Acid 2% + B5 serum bottle and outer box",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-campaign-editorial-pair-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 serum campaign editorial on plinth against deep plum backdrop",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-natural-botanical-pebbles-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 serum resting on glistening wet river stones emphasizing natural hydration",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-model-hand-plum-manicure-uk.webp",
+      alt: "Model hand holding Buudy Hyaluronic Acid 2% + B5 serum bottle with signature plum manicure",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-texture-application-on-hand-uk.webp",
+      alt: "Silky water-based hydrogel texture swatch of Buudy Hyaluronic Acid 2% + B5 on hand",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-two-hand-application-ritual-uk.webp",
+      alt: "Two-hand dispensing ritual using Buudy Hyaluronic Acid 2% + B5 pump bottle",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-neck-decolletage-glow-model-uk.webp",
+      alt: "Radiant, plump skin on neck and décolletage after using Buudy Hyaluronic Acid Serum with LED Mask",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp",
+      alt: "Model with glass skin holding Buudy Hyaluronic Acid 2% + B5 serum bottle against cheek",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-lifestyle-handheld-studio-uk.webp",
+      alt: "Hand holding Buudy Hyaluronic Acid 2% + B5 serum bottle in bright studio lighting",
     },
   ],
   gifts: [],
   specs: [
-    { label: "Optical Transparency", value: "100% Zero-Scattering Clear Hydrogel" },
-    { label: "Active Matrix", value: "Multi-Molecular Hyaluronic Acid & White Tea" },
-    { label: "Regimen Step", value: "Step 1: Prior to Mask Application" },
-    { label: "Volume", value: "50ml Generous Treatment Pump" },
-    { label: "Light Synergy", value: "Red (630nm), NIR (830nm) & Blue (415nm)" },
+    { label: "Active Matrix", value: "2% Multi-Molecular HA + Provitamin B5 & Sodium PCA" },
+    { label: "Optical Transparency", value: "100% Zero-Scattering Clear Water-Based Hydrogel" },
+    { label: "Regimen Step", value: "Step 1: Prior to Mask Application & Daily Hydration" },
+    { label: "Volume", value: "30ml Precision Treatment Pump (Airless Glass)" },
+    { label: "Light Synergy", value: "Red (630nm), NIR (830nm), Blue (415nm) & All Spectrum" },
+    { label: "Manufacturing", value: "ECOCERT COSMOS Certified Organic / 100% Natural Origin" },
   ],
-  included: [{ quantity: "1x", label: "50ml Light-Activating Hyaluronic Serum" }],
+  included: [{ quantity: "1x", label: "30ml Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel" }],
   highlights: [
-    "Aqua/Water", "Propanediol", "Cellulose Gum", "Camellia Sinensis (White Tea) Leaf Extract",
-    "Salvia Officinalis (Sage) Leaf Extract", "Hydrolyzed Hyaluronic Acid", "Sodium Hyaluronate"
+    "Aloe Barbadensis (Aloe) Leaf Juice➀",
+    "Aqua/Water",
+    "Glycerin➁",
+    "Propanediol",
+    "Sodium PCA",
+    "Sodium Hyaluronate (Hyaluronic Acid)",
+    "Hydrolyzed Hyaluronic Acid",
+    "Camellia Sinensis (White Tea) Leaf Extract➀",
+    "Salvia Officinalis (Sage) Leaf Extract➀",
+    "Cellulose Gum",
+    "Algin",
+    "Lactic Acid",
+    "Rhamnose",
+    "Glucose",
+    "Glucuronic Acid"
   ],
   keyBenefits: [
-    "100% water-based formulation prevents light scattering & refraction",
-    "Multi-molecular hyaluronic acid hydrates and cools skin during phototherapy",
-    "White tea and sage extracts protect skin barrier against warmth dehydration",
-    "Zero oils or silicones ensuring full clinical wavelength absorption"
+    "100% water-based formulation matches skin moisture refractive index (n ~ 1.33) to prevent light reflection",
+    "Multi-molecular hyaluronic acid penetrates deep into dermal layers to bind water and plump fine lines",
+    "Provitamin B5 (Panthenol) & Sodium PCA lock in a 72-hour moisture reservoir without oiliness",
+    "Organic White Tea & Sage botanical antioxidants calm micro-inflammation and prevent heat dehydration",
+    "Zero silicones or heavy occlusives ensures zero diode clouding or damage to medical-grade LED devices",
   ],
-  badges: ["Pre-Light Step 1", "Zero Light Reflection", "Pure Hydrogel"],
-  faqs: clinicalSerumFaqs,
+  badges: ["Pre-Light Step 1", "2% Multi-Molecular HA + B5", "100% Light-Permeable"],
+  faqs: doubleHydrationBoostGelFaqs,
 };
 
 export const buudyRetinolAlternativeSerum: Product = {
@@ -1247,6 +1385,14 @@ export function getProductBySlug(slug: string) {
   if (slug === "buudy-gift-card" || slug === "gift-card" || slug === "buudygiftcard") return buudyGiftCard;
   if (slug === "buudy-package-protection" || slug === "package-protection" || slug === "buudypackageprotection") return buudyPackageProtection;
   if (slug === "skincare-ebook" || slug === "buudy-skincare-ebook") return buudySkincareEbook;
+  if (
+    slug === "double-hydration-boost-gel" ||
+    slug === "buudy-double-hydration-boost-gel" ||
+    slug === "buudy-hyaluronic-serum" ||
+    slug === "buudy-light-activating-hyaluronic-serum"
+  ) {
+    return buudyHyaluronicSerum;
+  }
   return products.find((product) => product.slug === slug);
 }
 

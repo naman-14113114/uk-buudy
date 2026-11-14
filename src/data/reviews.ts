@@ -49,6 +49,9 @@ const reviewCollections = {
   "buudy-ipl-device": iplReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-light-activating-hyaluronic-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-collagen-boost-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "double-hydration-boost-gel": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-double-hydration-boost-gel": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-hyaluronic-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;

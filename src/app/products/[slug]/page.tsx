@@ -29,6 +29,9 @@ export function generateStaticParams() {
     { slug: "buudy-skincare-ebook" },
     { slug: "gift-card" },
     { slug: "package-protection" },
+    { slug: "double-hydration-boost-gel" },
+    { slug: "buudy-double-hydration-boost-gel" },
+    { slug: "buudy-hyaluronic-serum" },
   ];
   return [...baseParams, ...aliases];
 }
@@ -75,6 +78,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             "ice cooling IPL UK",
             "at home hair removal device",
             "painless hair removal UK",
+          ]
+        : product.template === "serum"
+        ? [
+            "hyaluronic acid serum UK",
+            "best hyaluronic acid serum for LED mask",
+            "LED face mask serum UK",
+            "double hydration boost gel UK",
+            "water based hyaluronic acid gel",
+            "Buudy hyaluronic acid 2% B5",
+            "phototherapy hyaluronic serum",
+            "light activating serum UK",
+            "ECOCERT organic hyaluronic serum",
+            "non sticky hydration serum UK",
           ]
         : product.slug === "skincare-ebook" || product.id === "buudy-skincare-ebook"
         ? [
