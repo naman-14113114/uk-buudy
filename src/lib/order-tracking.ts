@@ -1512,7 +1512,7 @@ function normalizeLookupQuery(input: string): string {
   return q;
 }
 
-function resolveVerifiedBuudyOrder(rawQuery: string): TrackingData | null {
+async function resolveVerifiedBuudyOrder(rawQuery: string): Promise<TrackingData | null> {
   if (process.env.CJ_ACCESS_TOKEN === 'test-only-token') {
     return null;
   }
@@ -1541,12 +1541,10 @@ function resolveVerifiedBuudyOrder(rawQuery: string): TrackingData | null {
 
   if (!matched) return null;
 
-  return buildVerifiedTrackingData(matched);
+  return await buildVerifiedTrackingData(matched);
 }
 
-function buildVerifiedTrackingData(order: VerifiedOrderRecord): TrackingData {
-  const isSimms = order.trackingNumber === 'QP272594967GB';
-  const isParrOrHutchings = order.trackingNumber === 'QP272594984GB' || order.trackingNumber === 'QP272594975GB';
+async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<TrackingData> {
   const hasTracking = Boolean(order.trackingNumber);
 
   let status: 'Processing' | 'In Transit' | 'Out for Delivery' | 'Delivered' = 'Processing';
@@ -1555,45 +1553,6 @@ function buildVerifiedTrackingData(order: VerifiedOrderRecord): TrackingData {
   let activeStepIndex = 0;
   let estimatedDelivery = '18–22 November 2026';
   let statusMessage = 'Your order is confirmed and being prepared for dispatch.';
-
-  if (isSimms) {
-    status = 'Out for Delivery';
-    statusCode = 'OUT_FOR_DELIVERY';
-    progressPercentage = 85;
-    activeStepIndex = 2;
-    estimatedDelivery = 'Today, 10 November 2026';
-    statusMessage = 'Your parcel is with your local Royal Mail postal carrier for delivery today.';
-  } else if (isParrOrHutchings) {
-    status = 'In Transit';
-    statusCode = 'IN_TRANSIT';
-    progressPercentage = 70;
-    activeStepIndex = 1;
-    estimatedDelivery = '11–12 November 2026';
-    statusMessage = 'Package processed at Royal Mail Jubilee Mail Centre and in transit to your local delivery office.';
-  } else if (hasTracking) {
-    status = 'In Transit';
-    statusCode = 'IN_TRANSIT';
-    progressPercentage = 55;
-    activeStepIndex = 1;
-    estimatedDelivery = '12–15 November 2026';
-    statusMessage = order.carrier === 'EVRI'
-      ? 'Your parcel has departed on an international cargo flight and is en route to London Heathrow. Doorstep delivery scans will update as soon as the flight clears UK customs and transfers to Evri.'
-      : 'Your parcel is in international air express transit to the United Kingdom. Scans will update upon arrival at the UK distribution centre.';
-  } else if (order.status === 3) {
-    status = 'Processing';
-    statusCode = 'PROCESSING';
-    progressPercentage = 40;
-    activeStepIndex = 0;
-    estimatedDelivery = '18–22 November 2026';
-    statusMessage = 'Order packaged and booked with carrier. International flight dispatch is scheduled for delivery between 18–22 November.';
-  } else {
-    status = 'Processing';
-    statusCode = 'PROCESSING';
-    progressPercentage = 25;
-    activeStepIndex = 0;
-    estimatedDelivery = '17–21 November 2026';
-    statusMessage = 'Your order is confirmed and currently undergoing clinical optical matrix calibration.';
-  }
 
   let carrierName = 'Royal Mail Tracked 48';
   let carrierTrackingUrl: string | undefined = undefined;
@@ -1617,6 +1576,110 @@ function buildVerifiedTrackingData(order: VerifiedOrderRecord): TrackingData {
     carrierName = 'Royal Mail Tracked DDP';
   }
 
+  const orderDateStr = order.crtTime.split(' ')[0];
+
+  const timeline: TimelineEvent[] = [
+    {
+      title: 'Order Confirmed & Payment Verified',
+      description: 'Your Buudy order and payment have been confirmed.',
+      date: orderDateStr,
+      completed: true,
+      stage: 'ORDER_PLACED',
+    },
+    {
+      title: 'Optical Calibration & Dual-Bundle Packing',
+      description: 'Cleopatra Labs medical diode matrix tested. LED Mask and complimentary 7W Torch packaged in protective travel case.',
+      date: orderDateStr,
+      completed: true,
+      stage: 'PROCESSING',
+    },
+  ];
+
+  // Attempt live carrier fetch if tracking number exists
+  let liveEvents: CarrierEvent[] = [];
+  if (hasTracking && order.trackingNumber) {
+    try {
+      const hyper = await fetchHyperSKUTracking(order.trackingNumber);
+      if (hyper) {
+        liveEvents = buildCarrierEvents(null, hyper);
+      }
+    } catch {
+      liveEvents = [];
+    }
+  }
+
+  if (liveEvents.length > 0) {
+    // Sort chronological: oldest to newest for the stepper timeline
+    const chronologicalEvents = liveEvents.slice().sort((a, b) => a.timestamp - b.timestamp);
+
+    for (const le of chronologicalEvents) {
+      timeline.push({
+        title: le.title,
+        description: le.description || 'Carrier checkpoint',
+        date: le.date,
+        completed: true,
+        stage: le.stage,
+      });
+    }
+
+    const latestEvent = liveEvents[0]; // liveEvents is sorted newest first by buildCarrierEvents
+    const isDelivered = latestEvent.stage === 'DELIVERED' || /delivered/i.test(latestEvent.title);
+    const isOutForDelivery = latestEvent.stage === 'OUT_FOR_DELIVERY' || /out for delivery|with delivery courier|postal carrier/i.test(latestEvent.title);
+
+    if (isDelivered) {
+      status = 'Delivered';
+      statusCode = 'DELIVERED';
+      progressPercentage = 100;
+      activeStepIndex = 3;
+      estimatedDelivery = 'Delivered';
+      statusMessage = 'Your package has been safely delivered.';
+    } else if (isOutForDelivery) {
+      status = 'Out for Delivery';
+      statusCode = 'OUT_FOR_DELIVERY';
+      progressPercentage = 85;
+      activeStepIndex = 2;
+      estimatedDelivery = 'Today, ' + latestEvent.date;
+      statusMessage = latestEvent.title;
+    } else {
+      status = 'In Transit';
+      statusCode = 'IN_TRANSIT';
+      const flightDeparted = /flight.*departed|departed.*hub|in transit to uk/i.test(latestEvent.title);
+      progressPercentage = flightDeparted ? 75 : 55;
+      activeStepIndex = 1;
+      estimatedDelivery = flightDeparted ? '16–19 November 2026' : '17–20 November 2026';
+      statusMessage = latestEvent.title;
+    }
+  } else if (hasTracking) {
+    status = 'In Transit';
+    statusCode = 'IN_TRANSIT';
+    progressPercentage = 50;
+    activeStepIndex = 1;
+    estimatedDelivery = '17–20 November 2026';
+    statusMessage = 'Your parcel is in transit with carrier under tracking ' + order.trackingNumber + '.';
+
+    timeline.push({
+      title: `Handed to Carrier — ${carrierName}`,
+      description: `Dispatched from logistics center under barcode ${order.trackingNumber}.`,
+      date: orderDateStr,
+      completed: true,
+      stage: 'IN_TRANSIT',
+    });
+  } else if (order.status === 3) {
+    status = 'Processing';
+    statusCode = 'PROCESSING';
+    progressPercentage = 40;
+    activeStepIndex = 0;
+    estimatedDelivery = '18–22 November 2026';
+    statusMessage = 'Order packaged and booked with carrier. International flight dispatch is scheduled for delivery between 18–22 November.';
+  } else {
+    status = 'Processing';
+    statusCode = 'PROCESSING';
+    progressPercentage = 25;
+    activeStepIndex = 0;
+    estimatedDelivery = '18–22 November 2026';
+    statusMessage = 'Your order is confirmed and being prepared for dispatch.';
+  }
+
   const items: TrackingItem[] = [
     {
       title: 'Buudy 7 Colour LED Face & Neck Mask',
@@ -1631,63 +1694,6 @@ function buildVerifiedTrackingData(order: VerifiedOrderRecord): TrackingData {
       image: 'https://oss.etailerhub.com/100/header/324c5e098d994a19bbc96461cb0d2b0b.jpg',
     },
   ];
-
-  const timeline: TimelineEvent[] = [
-    {
-      title: 'Order Confirmed & Payment Verified',
-      description: 'Your Buudy order and payment have been confirmed.',
-      date: order.crtTime.split(' ')[0],
-      completed: true,
-      stage: 'ORDER_PLACED',
-    },
-    {
-      title: 'Optical Calibration & Dual-Bundle Packing',
-      description: 'Cleopatra Labs medical diode matrix tested. LED Mask and complimentary 7W Torch packaged in protective travel case.',
-      date: order.crtTime.split(' ')[0],
-      completed: true,
-      stage: 'PROCESSING',
-    },
-  ];
-
-  if (hasTracking) {
-    timeline.push({
-      title: `Handed to Carrier — ${carrierName}`,
-      description: `Dispatched from logistics center under barcode ${order.trackingNumber}.`,
-      date: '08 Nov 2026',
-      completed: true,
-      stage: 'IN_TRANSIT',
-    });
-  }
-
-  if (order.carrier === 'EVRI' && hasTracking) {
-    timeline.push({
-      title: 'International Air Freight Departure',
-      description: 'Flight departed international hub. En route to London Heathrow for UK customs clearance and Evri final-mile injection.',
-      date: '09 Nov 2026',
-      completed: true,
-      stage: 'IN_TRANSIT',
-    });
-  }
-
-  if (isParrOrHutchings) {
-    timeline.push({
-      title: 'Arrived at Jubilee Mail Centre',
-      description: 'Package processed at Royal Mail sorting center. In transit to local Delivery Office.',
-      date: '09 Nov 2026',
-      completed: true,
-      stage: 'IN_TRANSIT',
-    });
-  }
-
-  if (isSimms) {
-    timeline.push({
-      title: 'Arrived at Wolverhampton Delivery Office',
-      description: 'Indoor sorting complete. Prepared for final delivery by local Royal Mail postal carrier.',
-      date: '10 Nov 2026',
-      completed: true,
-      stage: 'OUT_FOR_DELIVERY',
-    });
-  }
 
   const destination = order.city
     ? `${order.city}${order.postcode ? ` (${order.postcode})` : ''}`
@@ -1727,7 +1733,7 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
   const query = rawQuery.trim();
   if (!query || query.length > 100) return null;
   // 1. Check verified live Buudy orders ledger (covers active live customers)
-  const verifiedOrder = resolveVerifiedBuudyOrder(query);
+  const verifiedOrder = await resolveVerifiedBuudyOrder(query);
   if (verifiedOrder) {
     return verifiedOrder;
   }
