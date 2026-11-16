@@ -8,14 +8,40 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function SerumClinicalResults({
   isPeptide = false,
   isPrebiotic = false,
+  isAha = false,
 }: {
   isPeptide?: boolean;
   isPrebiotic?: boolean;
+  isAha?: boolean;
 } = {}) {
   const statRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [values, setValues] = useState<number[]>([0, 0, 0, 0]);
 
   const stats = useMemo(() => {
+    if (isAha) {
+      return [
+        {
+          target: 96,
+          label: "Overnight Cellular Renewal",
+          desc: "Dissolves dull surface cells for a visibly refined glass-smooth texture.",
+        },
+        {
+          target: 92,
+          label: "Refined Pore Clarity",
+          desc: "Unclogs congested pores and visibly minimizes pore appearance.",
+        },
+        {
+          target: 94,
+          label: "Luminous Skin Radiance",
+          desc: "Noticeable boost in natural skin radiance and clarity by morning.",
+        },
+        {
+          target: 89,
+          label: "Barrier Hydration Cushion",
+          desc: "Hyaluronic acid matrix prevents moisture loss during overnight exfoliation.",
+        },
+      ];
+    }
     if (isPrebiotic) {
       return [
         {
@@ -86,7 +112,7 @@ export function SerumClinicalResults({
         desc: "Skin texture felt noticeably softer, balanced, and free from redness.",
       },
     ];
-  }, [isPrebiotic, isPeptide]);
+  }, [isPrebiotic, isPeptide, isAha]);
 
   const targets = useMemo(() => stats.map((s) => s.target), [stats]);
 
@@ -156,17 +182,21 @@ export function SerumClinicalResults({
     };
   }, [targets]);
 
-  const imageSrc = isPrebiotic
+  const imageSrc = isAha
+    ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp"
+    : isPrebiotic
     ? "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp"
     : isPeptide
-    ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-architectural-pair-plinth-uk.webp"
-    : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-carton-still-life-uk.webp";
+    ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-box-three-quarter-display-uk.webp"
+    : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-neck-and-collarbone-beauty-glow-uk.webp";
 
-  const imageAlt = isPrebiotic
+  const imageAlt = isAha
+    ? "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling Concentrate treatment UK"
+    : isPrebiotic
     ? "Buudy Bioactive Prebiotics Jelly Serum architectural sculptural plinth pair"
     : isPeptide
-    ? "Buudy Peptide Anti-Ageing Serum architectural pair display on stone plinth"
-    : "Buudy Hyaluronic Acid Serum 30ml luxury bottle and carton architectural still life";
+    ? "Buudy Peptide Serum luxury deep plum folding carton and treatment pump bottle on stone plinth UK"
+    : "Radiant, deeply hydrated skin on model neck and collarbone after Buudy Hyaluronic Serum treatment UK";
 
   return (
     <section className="buudy-section bg-[var(--cream)] py-10 md:py-16">
@@ -180,7 +210,9 @@ export function SerumClinicalResults({
             Proven efficacy, <em className="buudy-italic text-[var(--gold)]">measured by real skin</em>.
           </h2>
           <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-2xl mx-auto">
-            {isPrebiotic
+            {isAha
+              ? "Formulated specifically to dissolve dull intercellular bonds and unclog congested pores overnight with 10% pure plant Lactic Acid and 1% soothing Hyaluronic Acid."
+              : isPrebiotic
               ? "Formulated specifically to restore and fortify your skin's protective microbiome while delivering weightless hydration and zero light-scattering phototherapy synergy."
               : isPeptide
               ? "Formulated specifically to maximise post-phototherapy cellular uptake, signalling dermal fibroblasts to synthesise collagen and firm expression lines."
@@ -273,11 +305,31 @@ export function SerumClinicalResults({
 export function SerumHowToUse({
   isPeptide = false,
   isPrebiotic = false,
+  isAha = false,
 }: {
   isPeptide?: boolean;
   isPrebiotic?: boolean;
+  isAha?: boolean;
 } = {}) {
-  const steps = isPrebiotic
+  const steps = isAha
+    ? [
+        {
+          num: "01",
+          title: "Cleanse & Dry",
+          desc: "Cleanse skin thoroughly with lukewarm water. Pat completely dry before applying your peeling concentrate.",
+        },
+        {
+          num: "02",
+          title: "Dispense & Smooth",
+          desc: "Dispense 3–4 drops onto fingertips and smooth gently over cleansed face and neck, avoiding eye contours.",
+        },
+        {
+          num: "03",
+          title: "Leave-On Overnight & Protect",
+          desc: "Leave on overnight for active cellular resurfacing. Rinse off in morning and always follow with SPF.",
+        },
+      ]
+    : isPrebiotic
     ? [
         {
           num: "01",
@@ -331,7 +383,9 @@ export function SerumHowToUse({
         },
       ];
 
-  const introText = isPrebiotic
+  const introText = isAha
+    ? "Gentle overnight resurfacing concentrate formulated with 10% plant Lactic Acid and 1% Hyaluronic Acid for smooth, refined radiance."
+    : isPrebiotic
     ? "Lightweight, fast-absorbing hydrogel formulated to fortify your microbiome and optimise phototherapy penetration."
     : isPeptide
     ? "Formulated with bio-fermented Hexapeptide-11 to absorb rapidly into post-light dermis without tacky residue."
@@ -344,18 +398,22 @@ export function SerumHowToUse({
         <div className="relative overflow-hidden rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
           <Image
             src={
-              isPrebiotic
+              isAha
+                ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp"
+                : isPrebiotic
                 ? "/images/products/buudy-prebiotics-serum/08-two-hand-dropper-ritual.webp"
                 : isPeptide
-                ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp"
-                : "/images/products/buudy-serum/buudy-hyaluronic-serum-two-hand-application-ritual-uk.webp"
+                ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-angle-plum-backdrop-uk.webp"
+                : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-three-quarter-plum-backdrop-uk.webp"
             }
             alt={
-              isPrebiotic
+              isAha
+                ? "Buudy AHA Peeling Concentrate bottle and luxury packaging carton on deep plum studio backdrop UK"
+                : isPrebiotic
                 ? "Buudy Bioactive Prebiotics Jelly Serum daily application ritual"
                 : isPeptide
-                ? "Buudy Peptide Anti-Ageing Serum daily application ritual"
-                : "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel daily application ritual"
+                ? "Buudy Peptide Serum bottle angled portrait on signature plum background for post-phototherapy ritual UK"
+                : "Buudy Hyaluronic Serum bottle three-quarter perspective on signature plum backdrop UK"
             }
             fill
             sizes="(min-width: 1024px) 500px, 100vw"

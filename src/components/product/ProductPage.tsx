@@ -65,11 +65,21 @@ export function ProductPage({
     product.slug.includes("prebiotic") ||
     product.slug.includes("noni");
 
+  const isAha =
+    product.id.includes("aha") ||
+    product.slug.includes("aha");
+
   return (
     <div className="relative">
       <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
       {product.template === "mask" && <DeferredVideoReviews />}
-      <TrustBadges />
+      {product.slug !== "double-hydration-boost-gel" &&
+        product.slug !== "buudy-double-hydration-boost-gel" &&
+        product.id !== "buudy-light-activating-hyaluronic-serum" &&
+        !isPeptide &&
+        !isAha && (
+          <TrustBadges />
+        )}
       <GiftBoxBundleSection productSlug={product.slug} />
       {/* <FeatureGrid /> */}
       {/* 1. Verified Clinical Before & After Grid - Placed ABOVE both the Percentage Grid and How-To-Use */}
@@ -119,13 +129,17 @@ export function ProductPage({
       )}
 
       {/* 2. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
-      {product.template === "serum" && <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} />}
+      {product.template === "serum" && (
+        <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} />
+      )}
       {product.template === "cleanser" && <CleanserClinicalResults />}
 
       {/* 3. Daily Application / Cleansing Ritual - How To Use Section */}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
-      {product.template === "serum" && <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} />}
+      {product.template === "serum" && (
+        <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} />
+      )}
       {product.template === "cleanser" && <CleanserHowToUse />}
       {product.template === "mask" && <DeferredExpertSection />}
       {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}

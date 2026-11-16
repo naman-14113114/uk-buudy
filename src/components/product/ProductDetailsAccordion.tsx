@@ -21,6 +21,18 @@ import {
   Sparkles,
   Plug,
   Sliders,
+  Eye,
+  Pipette,
+  Calendar,
+  SunMedium,
+  Droplets,
+  FlaskConical,
+  Leaf,
+  Scale,
+  Moon,
+  Layers,
+  Package,
+  Tag,
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import type { ReactNode } from "react";
@@ -53,20 +65,34 @@ type AccordionItem = {
 
 function getSpecIcon(label: string) {
   const normLabel = label.toLowerCase();
+  if (normLabel.includes("included") || normLabel.includes("items") || normLabel.includes("collection") || normLabel.includes("formulas")) return Layers;
+  if (normLabel.includes("packaging") || normLabel.includes("carton") || normLabel.includes("box") || normLabel.includes("presentation")) return Package;
+  if (normLabel.includes("peel") || normLabel.includes("acid") || normLabel.includes("aha")) return FlaskConical;
+  if (normLabel.includes("botanical") || normLabel.includes("antioxidant") || normLabel.includes("plant") || normLabel.includes("tea")) return Leaf;
+  if (normLabel.includes("ph") || normLabel.includes("balance")) return Scale;
+  if (normLabel.includes("overnight") || normLabel.includes("evening") || normLabel.includes("night")) return Moon;
+  if (normLabel.includes("active") || normLabel.includes("complex") || normLabel.includes("peptide")) return Sparkles;
+  if (normLabel.includes("hydration") || normLabel.includes("matrix") || normLabel.includes("ingredient") || normLabel.includes("moisture") || normLabel.includes("cushion")) return Droplets;
+  if (normLabel.includes("regimen") || normLabel.includes("step") || normLabel.includes("routine") || normLabel.includes("usage")) return Calendar;
+  if (normLabel.includes("savings") || normLabel.includes("saving") || normLabel.includes("value") || normLabel.includes("discount") || normLabel.includes("price")) return Tag;
+  if (normLabel.includes("volume") || normLabel.includes("size") || normLabel.includes("capacity") || normLabel.includes("bottle") || normLabel.includes("pump")) return Pipette;
+  if (normLabel.includes("skin") || normLabel.includes("compatib") || normLabel.includes("barrier") || normLabel.includes("type")) return Smile;
+  if (normLabel.includes("manufactur") || normLabel.includes("certif") || normLabel.includes("origin") || normLabel.includes("standard")) return ShieldCheck;
+  if (normLabel.includes("optical") || normLabel.includes("transparency")) return Eye;
+  if (normLabel.includes("synergy") || normLabel.includes("light") || normLabel.includes("wavelength") || normLabel.includes("irradiance")) return SunMedium;
   if (normLabel.includes("dimension")) return Ruler;
   if (normLabel.includes("led")) return Lightbulb;
   if (normLabel.includes("color")) return Palette;
   if (normLabel.includes("battery")) return Battery;
   if (normLabel.includes("use")) return Smile;
   if (normLabel.includes("power")) return Plug;
-  if (normLabel.includes("irradiance") || normLabel.includes("wavelength")) return Sun;
   if (normLabel.includes("voltage")) return Zap;
   if (normLabel.includes("intensity")) return Activity;
   if (normLabel.includes("cooling")) return Snowflake;
   if (normLabel.includes("flash")) return Sparkles;
   if (normLabel.includes("mode")) return Sliders;
   if (normLabel.includes("lamp")) return Lightbulb;
-  return Zap;
+  return Sparkles;
 }
 
 const keyBenefitIcons = [
@@ -281,10 +307,11 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         <ul className="grid gap-2 sm:grid-cols-2">
           {product.badges.map((badge) => (
             <li
-              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
+              className="flex items-center gap-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
               key={badge}
             >
-              {badge}
+              <ShieldCheck className="shrink-0 text-[var(--gold)]" size={16} strokeWidth={2} />
+              <span>{badge}</span>
             </li>
           ))}
         </ul>

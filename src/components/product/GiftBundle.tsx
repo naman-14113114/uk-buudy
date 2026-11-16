@@ -179,7 +179,21 @@ export function GiftBundle({
     0,
   );
   const hasGifts = product.gifts.length > 0;
-  const giftButtonLabel = isEarlyBlackFriday
+  const isSimplifiedProduct =
+    product.slug === "double-hydration-boost-gel" ||
+    product.slug === "buudy-double-hydration-boost-gel" ||
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "the-ultimate-renewal-collection-box" ||
+    product.id === "the-ultimate-renewal-collection-box" ||
+    product.slug.includes("aha") ||
+    product.id.includes("aha") ||
+    product.id.includes("peptide") ||
+    product.slug.includes("peptide") ||
+    product.slug.includes("collagen");
+
+  const giftButtonLabel = isSimplifiedProduct
+    ? "Add to cart"
+    : isEarlyBlackFriday
     ? hasGifts
       ? `CLAIM EARLY ACCESS + ${product.gifts.length} FREE GIFTS`
       : "CLAIM BLACK FRIDAY EARLY ACCESS"
