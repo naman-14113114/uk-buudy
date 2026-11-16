@@ -76,6 +76,8 @@ export function ProductPage({
       {product.slug !== "double-hydration-boost-gel" &&
         product.slug !== "buudy-double-hydration-boost-gel" &&
         product.id !== "buudy-light-activating-hyaluronic-serum" &&
+        product.slug !== "the-ultimate-renewal-collection-box" &&
+        product.id !== "the-ultimate-renewal-collection-box" &&
         !isPeptide &&
         !isAha && (
           <TrustBadges />
@@ -130,7 +132,7 @@ export function ProductPage({
 
       {/* 2. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
       {product.template === "serum" && (
-        <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} />
+        <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
       {product.template === "cleanser" && <CleanserClinicalResults />}
 
@@ -138,7 +140,7 @@ export function ProductPage({
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
       {product.template === "serum" && (
-        <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} />
+        <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
       {product.template === "cleanser" && <CleanserHowToUse />}
       {product.template === "mask" && <DeferredExpertSection />}

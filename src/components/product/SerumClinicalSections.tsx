@@ -9,13 +9,17 @@ export function SerumClinicalResults({
   isPeptide = false,
   isPrebiotic = false,
   isAha = false,
+  productSlug = "",
 }: {
   isPeptide?: boolean;
   isPrebiotic?: boolean;
   isAha?: boolean;
+  productSlug?: string;
 } = {}) {
   const statRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [values, setValues] = useState<number[]>([0, 0, 0, 0]);
+
+  const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
 
   const stats = useMemo(() => {
     if (isAha) {
@@ -182,7 +186,9 @@ export function SerumClinicalResults({
     };
   }, [targets]);
 
-  const imageSrc = isAha
+  const imageSrc = isRenewalBox
+    ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-plum-sleeve-detail-editorial-uk.webp"
+    : isAha
     ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp"
     : isPrebiotic
     ? "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp"
@@ -190,7 +196,9 @@ export function SerumClinicalResults({
     ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-box-three-quarter-display-uk.webp"
     : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-neck-and-collarbone-beauty-glow-uk.webp";
 
-  const imageAlt = isAha
+  const imageAlt = isRenewalBox
+    ? "The Ultimate Renewal Collection Box deep plum carton sleeve architectural detail and gold foil typography UK"
+    : isAha
     ? "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling Concentrate treatment UK"
     : isPrebiotic
     ? "Buudy Bioactive Prebiotics Jelly Serum architectural sculptural plinth pair"
@@ -210,7 +218,9 @@ export function SerumClinicalResults({
             Proven efficacy, <em className="buudy-italic text-[var(--gold)]">measured by real skin</em>.
           </h2>
           <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-2xl mx-auto">
-            {isAha
+            {isRenewalBox
+              ? "Formulated as a complete 3-step clinical ritual combining 10% AHA cellular resurfacing, multi-depth optical hyaluronic hydration, and bio-fermented peptide collagen-locking."
+              : isAha
               ? "Formulated specifically to dissolve dull intercellular bonds and unclog congested pores overnight with 10% pure plant Lactic Acid and 1% soothing Hyaluronic Acid."
               : isPrebiotic
               ? "Formulated specifically to restore and fortify your skin's protective microbiome while delivering weightless hydration and zero light-scattering phototherapy synergy."
@@ -306,12 +316,34 @@ export function SerumHowToUse({
   isPeptide = false,
   isPrebiotic = false,
   isAha = false,
+  productSlug = "",
 }: {
   isPeptide?: boolean;
   isPrebiotic?: boolean;
   isAha?: boolean;
+  productSlug?: string;
 } = {}) {
-  const steps = isAha
+  const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
+
+  const steps = isRenewalBox
+    ? [
+        {
+          num: "01",
+          title: "Weekly AHA Exfoliation",
+          desc: "Smooth 3–4 drops of AHA Peeling Concentrate 1–2 evenings per week over cleansed skin. Leave on overnight to dissolve dead cells.",
+        },
+        {
+          num: "02",
+          title: "Daily Hydrogel Priming",
+          desc: "Apply 2–3 pumps of Double Hydration Boost Gel daily AM/PM. Crystal-clear water hydrogel delivers 100% optical light permeability.",
+        },
+        {
+          num: "03",
+          title: "Post-Light Collagen Lock",
+          desc: "Apply 2–3 pumps of Peptide Serum immediately after LED light therapy to stimulate fibroblasts and lock in cellular firmness.",
+        },
+      ]
+    : isAha
     ? [
         {
           num: "01",
@@ -383,7 +415,9 @@ export function SerumHowToUse({
         },
       ];
 
-  const introText = isAha
+  const introText = isRenewalBox
+    ? "A synchronized 3-step ritual combining weekly resurfacing, daily optical hydrogel priming, and post-phototherapy collagen firming."
+    : isAha
     ? "Gentle overnight resurfacing concentrate formulated with 10% plant Lactic Acid and 1% Hyaluronic Acid for smooth, refined radiance."
     : isPrebiotic
     ? "Lightweight, fast-absorbing hydrogel formulated to fortify your microbiome and optimise phototherapy penetration."
@@ -398,7 +432,9 @@ export function SerumHowToUse({
         <div className="relative overflow-hidden rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
           <Image
             src={
-              isAha
+              isRenewalBox
+                ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp"
+                : isAha
                 ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp"
                 : isPrebiotic
                 ? "/images/products/buudy-prebiotics-serum/08-two-hand-dropper-ritual.webp"
@@ -407,7 +443,9 @@ export function SerumHowToUse({
                 : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-three-quarter-plum-backdrop-uk.webp"
             }
             alt={
-              isAha
+              isRenewalBox
+                ? "The Ultimate Renewal Collection Box gift packaging held in hand UK"
+                : isAha
                 ? "Buudy AHA Peeling Concentrate bottle and luxury packaging carton on deep plum studio backdrop UK"
                 : isPrebiotic
                 ? "Buudy Bioactive Prebiotics Jelly Serum daily application ritual"
