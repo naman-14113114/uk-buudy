@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import { market } from "@/lib/market";
-import { formatMoney } from "@/lib/money";
+import { formatMoney, percentOff } from "@/lib/money";
 import {
   appendAttributionToPath,
   pickAttributionFromSearch,
@@ -205,8 +205,13 @@ export function GiftBundle({
 
       <div className="mt-3 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
         <h1 className="font-playfair text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem] inline">
-          {product.heroTitle}{" "}
-          <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
+          {product.heroTitle || product.name}
+          {product.heroEmphasis ? (
+            <>
+              {" "}
+              <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
+            </>
+          ) : null}
         </h1>
 
         {/* Cleopatra Edition subtitle placed right beside heading aligned to text baseline */}
@@ -259,7 +264,15 @@ export function GiftBundle({
           hideDiscount={isHalloween || isEarlyBlackFriday}
         />
         {isHalloween && <HalloweenSaleBadge />}
-        {isEarlyBlackFriday && <EarlyBlackFridaySaleBadge />}
+        {isEarlyBlackFriday && (
+          <EarlyBlackFridaySaleBadge
+            discountText={
+              product.compareAtCents && (product.template === "serum" || product.template === "cleanser")
+                ? `${percentOff(product.priceCents, product.compareAtCents)}% OFF`
+                : undefined
+            }
+          />
+        )}
       </div>
 
 

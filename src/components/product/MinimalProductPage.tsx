@@ -161,16 +161,15 @@ export function MinimalProductPage({ product }: { product: Product }) {
 
               {/* Title with serif Playfair + italic gold emphasis */}
               <h1 className="font-playfair buudy-display text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--plum)] leading-[1.12] mt-2">
-                {product.heroTitle ? (
+                {product.heroTitle || product.name}
+                {product.heroEmphasis ? (
                   <>
-                    {product.heroTitle}{" "}
+                    {" "}
                     <em className="buudy-italic font-normal text-[var(--gold)]">
                       {product.heroEmphasis}
                     </em>
                   </>
-                ) : (
-                  product.name
-                )}
+                ) : null}
               </h1>
 
               {/* Star Rating & Customer Count Pill (Hidden on Digital Products) */}

@@ -134,12 +134,12 @@ export function EarlyBlackFridayTopBanner() {
  * Early Black Friday Sale Badge next to the price
  * Editorial luxury aesthetic matching reference: Serif "60% OFF" in gold | stacked "BLACK FRIDAY / EARLY ACCESS"
  */
-export function EarlyBlackFridaySaleBadge() {
+export function EarlyBlackFridaySaleBadge({ discountText }: { discountText?: string } = {}) {
   return (
     <div className="inline-flex items-center gap-2 sm:gap-2.5 py-0.5">
-      {/* 60% OFF in elegant serif gold */}
+      {/* 60% OFF or custom discount in elegant serif gold */}
       <span className="font-playfair text-[26px] sm:text-[30px] font-normal leading-none text-[var(--gold)] tracking-tight whitespace-nowrap">
-        60% OFF
+        {discountText || "60% OFF"}
       </span>
 
       {/* Thin vertical divider */}

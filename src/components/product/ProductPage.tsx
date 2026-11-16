@@ -26,6 +26,7 @@ import {
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
 import { TrustBadges } from "./TrustBadges";
+import { GiftBoxBundleSection } from "./GiftBoxBundleSection";
 
 export function ProductPage({
   product,
@@ -69,6 +70,7 @@ export function ProductPage({
       <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
       {product.template === "mask" && <DeferredVideoReviews />}
       <TrustBadges />
+      <GiftBoxBundleSection productSlug={product.slug} />
       {/* <FeatureGrid /> */}
       {/* 1. Verified Clinical Before & After Grid - Placed ABOVE both the Percentage Grid and How-To-Use */}
       {product.template === "serum" && isPrebiotic && (
@@ -90,7 +92,7 @@ export function ProductPage({
               Real users, <em className="buudy-italic">firmer, lifted skin</em>.
             </>
           }
-          description="Verified customer transformations after incorporating Buudy Collagen-Lock Hexapeptide Serum into their daily firming and light therapy ritual."
+          description={`Verified customer transformations after incorporating ${product.name} into their daily firming and light therapy ritual.`}
         />
       )}
       {product.template === "serum" && !isPeptide && !isPrebiotic && (
@@ -101,7 +103,7 @@ export function ProductPage({
               Real users, <em className="buudy-italic">visible dermal renewal</em>.
             </>
           }
-          description="Verified customer transformations after incorporating Buudy Double Hydration Boost Gel into their daily hydration and light therapy ritual."
+          description={`Verified customer transformations after incorporating ${product.name} into their daily hydration and skincare ritual.`}
         />
       )}
       {product.template === "cleanser" && (

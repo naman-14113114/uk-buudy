@@ -50,6 +50,23 @@ export function generateStaticParams() {
     { slug: "prebiotics-jelly-serum" },
     { slug: "buudy-noni-serum" },
     { slug: "noni-serum" },
+    { slug: "hydrating-serum" },
+    { slug: "buudy-deep-hydrating-serum" },
+    { slug: "deep-hydrating-serum" },
+    { slug: "peptide-ageless-am-pm-cream" },
+    { slug: "buudy-peptide-cream" },
+    { slug: "peptide-cream" },
+    { slug: "peptide-age-defying-eye-cream" },
+    { slug: "buudy-peptide-eye-cream" },
+    { slug: "peptide-eye-cream" },
+    { slug: "aha-peeling-concentrate" },
+    { slug: "buudy-aha-peel" },
+    { slug: "aha-peel" },
+    { slug: "ultimate-hydration-duo" },
+    { slug: "anti-age-peptide-gift-box" },
+    { slug: "peptide-collection-box" },
+    { slug: "ultimate-renewal-collection-box" },
+    { slug: "the-ultimate-renewal-collection" },
   ];
   return [...baseParams, ...aliases];
 }

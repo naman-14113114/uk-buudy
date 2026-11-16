@@ -1000,13 +1000,13 @@ export const buudyPeptideSerum: Product = {
   sku: "BUUDY-SERUM-PEP-30",
   slug: "buudy-peptide-serum",
   template: "serum",
-  name: "Buudy Peptide Anti-Ageing Serum (30ml)",
-  heroTitle: "Buudy Peptide Anti-Ageing Serum",
-  heroEmphasis: "Collagen-Lock™ Hexapeptide Complex",
+  name: "Buudy Peptide Serum (30ml)",
+  heroTitle: "Buudy Peptide Serum (30ml)",
+  heroEmphasis: "",
   shortDescription: "STEP 2: POST-LIGHT PEPTIDE BOOSTER & COLLAGEN LOCK (30ml)",
   description: "High-performance anti-ageing peptide serum powered by bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular hyaluronic acid. Formulated to stimulate cellular collagen synthesis, relax facial expression lines, and restore dermal firmness. Enriched with antioxidant-rich Blueberry, Ginkgo Biloba, and nourishing Jojoba. Engineered specifically for post-phototherapy synergy and intensive daily age-defence.",
-  seoTitle: "Buudy Peptide Anti-Ageing Serum (30ml) | Hexapeptide-11 Collagen Booster | Buudy UK",
-  seoDescription: "Clinical-grade Buudy Peptide Anti-Ageing Serum 30ml with Hexapeptide-11 and Dipalmitoyl Hydroxyproline. ECOCERT COSMOS certified, stimulates collagen, smooths wrinkles.",
+  seoTitle: "Buudy Peptide Serum (30ml) | Hexapeptide-11 Collagen Booster | Buudy UK",
+  seoDescription: "Clinical-grade Buudy Peptide Serum 30ml with Hexapeptide-11 and Dipalmitoyl Hydroxyproline. ECOCERT COSMOS certified, stimulates collagen, smooths wrinkles.",
   currency: market.currency,
   priceCents: 9900,
   compareAtCents: 19900,
@@ -1014,44 +1014,68 @@ export const buudyPeptideSerum: Product = {
   reviewCount: 486,
   customerCount: "14,000+",
   promoCode: "",
-  promoLabel: "",
+  promoLabel: "SAVE 50%",
   cartImage: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-and-box-hero-uk.webp",
   gallery: [
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-and-box-hero-uk.webp",
-      alt: "Buudy Peptide Anti-Ageing Serum 30ml bottle and luxury deep plum carton on studio plinth for LED light therapy UK",
+      alt: "Buudy Peptide Serum 30ml bottle and luxury deep plum carton on studio plinth for LED light therapy UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-verified-formula-facts-uk.webp",
+      alt: "Verified formula facts: ECOCERT COSMOS certified, vegan, cruelty-free, and diode-safe",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-key-ingredients-texture-uk.webp",
+      alt: "Key ingredients breakdown: Hexapeptide-11, Dipalmitoyl Hydroxyproline, and Multi-Molecular Hyaluronic Acid",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredient-spotlight-uk.webp",
+      alt: "Ingredient spotlight on bio-fermented peptides, Ginkgo Biloba, and Blueberry antioxidant botanicals",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plump-smooth-benefits-uk.webp",
+      alt: "Clinical anti-ageing benefits: visible line smoothing, restored skin bounce, and accelerated collagen support",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-types-and-ritual-uk.webp",
+      alt: "Skin types and daily application ritual guide for mature, dry, and combination skin barriers",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-targeted-daily-care-uk.webp",
+      alt: "Targeted daily care guide: facial tension relaxation and extracellular matrix reinforcement",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-front-uk.webp",
-      alt: "Buudy 30ml Peptide Anti-Ageing Serum bottle with precision treatment pump dispenser",
+      alt: "Buudy 30ml Peptide Serum bottle with precision treatment pump dispenser",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-luxury-carton-box-three-quarter-uk.webp",
-      alt: "Buudy Peptide Anti-Ageing Serum luxury deep plum folding carton packaging with vertical logo",
+      alt: "Buudy Peptide Serum luxury deep plum folding carton packaging with vertical logo",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-angle-plum-uk.webp",
-      alt: "Buudy Peptide Anti-Ageing Serum bottle angled portrait on signature plum background",
+      alt: "Buudy Peptide Serum bottle angled portrait on signature plum background",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-overhead-pair-flatlay-uk.webp",
-      alt: "Overhead flatlay composition of Buudy Peptide Anti-Ageing Serum bottle and outer folding box",
+      alt: "Overhead flatlay composition of Buudy Peptide Serum bottle and outer folding box",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-architectural-pair-plinth-uk.webp",
-      alt: "Buudy Peptide Anti-Ageing Serum bottle and carton displayed on sculptural architectural cream plinth",
+      alt: "Buudy Peptide Serum bottle and carton displayed on sculptural architectural cream plinth",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-pump-label-macro-uk.webp",
-      alt: "Macro detail of Buudy Peptide Anti-Ageing Serum label and precision hygienic treatment pump",
+      alt: "Macro detail of Buudy Peptide Serum label and precision hygienic treatment pump",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-glass-light-study-uk.webp",
-      alt: "Optical study of Buudy Peptide Anti-Ageing Serum glass bottle with crystal light refraction",
+      alt: "Optical study of Buudy Peptide Serum glass bottle with crystal light refraction",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-side-profile-uk.webp",
-      alt: "Side profile of Buudy Peptide Anti-Ageing Serum 30ml glass pump bottle",
+      alt: "Side profile of Buudy Peptide Serum 30ml glass pump bottle",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-campaign-editorial-pair-uk.webp",
@@ -1063,43 +1087,19 @@ export const buudyPeptideSerum: Product = {
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
-      alt: "Two-hand dispensing ritual using Buudy Peptide Anti-Ageing Serum precision pump bottle",
+      alt: "Two-hand dispensing ritual using Buudy Peptide Serum precision pump bottle",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
-      alt: "Model hand with signature plum manicure holding Buudy Peptide Anti-Ageing Serum bottle",
+      alt: "Model hand with signature plum manicure holding Buudy Peptide Serum bottle",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-on-hand-editorial-texture-uk.webp",
       alt: "Silky botanical peptide emulsion texture swatch of Buudy Peptide Serum on back of hand",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plump-smooth-benefits-uk.webp",
-      alt: "Clinical anti-ageing benefits: visible line smoothing, restored skin bounce, and accelerated collagen support",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-targeted-daily-care-uk.webp",
-      alt: "Targeted daily care guide: facial tension relaxation and extracellular matrix reinforcement",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-key-ingredients-texture-uk.webp",
-      alt: "Key ingredients breakdown: Hexapeptide-11, Dipalmitoyl Hydroxyproline, and Multi-Molecular Hyaluronic Acid",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredient-spotlight-uk.webp",
-      alt: "Ingredient spotlight on bio-fermented peptides, Ginkgo Biloba, and Blueberry antioxidant botanicals",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-types-and-ritual-uk.webp",
-      alt: "Skin types and daily application ritual guide for mature, dry, and combination skin barriers",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-verified-formula-facts-uk.webp",
-      alt: "Verified formula facts: ECOCERT COSMOS certified, vegan, cruelty-free, and diode-safe",
-    },
-    {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-campaign-hero-display-uk.webp",
-      alt: "Buudy Peptide Anti-Ageing Serum campaign hero display highlighting comprehensive firming and anti-wrinkle results",
+      alt: "Buudy Peptide Serum campaign hero display highlighting comprehensive firming and anti-wrinkle results",
     },
   ],
   gifts: [],
@@ -1190,13 +1190,13 @@ export const buudyHyaluronicSerum: Product = {
   sku: "BUUDY-SERUM-HA-30",
   slug: "buudy-light-activating-hyaluronic-serum",
   template: "serum",
-  name: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel (30ml)",
-  heroTitle: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel",
-  heroEmphasis: "Light-Activating Hydrogel Matrix",
+  name: "Buudy Hyaluronic Serum (30ml)",
+  heroTitle: "Buudy Hyaluronic Serum (30ml)",
+  heroEmphasis: "",
   shortDescription: "STEP 1: PRE / DURING-LIGHT HYDROGEL PRIMER & HYDRATION BOOST (30ml)",
   description: "100% water-based, crystal-clear optical hydrogel matrix engineered specifically for clinical LED phototherapy and intensive daily moisture. Zero oils, zero silicones, zero light reflection. Matches the refractive index of skin moisture (n ~ 1.33) so 100% of 630nm red and 830nm near-infrared wavelengths penetrate unhindered into dermal tissue, while multi-molecular hyaluronic acid and Provitamin B5 deliver multi-depth plumping hydration for up to 72 hours.",
-  seoTitle: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel (30ml) | Buudy UK",
-  seoDescription: "Clinical-grade 100% water-based Hyaluronic Acid 2% + B5 Double Hydration Boost Gel. Zero light scattering, multi-depth dermal plumping, ECOCERT organic certified.",
+  seoTitle: "Buudy Hyaluronic Serum (30ml) | Double Hydration Boost Gel | Buudy UK",
+  seoDescription: "Clinical-grade 100% water-based Hyaluronic Serum. Zero light scattering, multi-depth dermal plumping, ECOCERT organic certified.",
   currency: market.currency,
   priceCents: 9900,
   compareAtCents: 19900,
@@ -1204,20 +1204,44 @@ export const buudyHyaluronicSerum: Product = {
   reviewCount: 512,
   customerCount: "16,000+",
   promoCode: "",
-  promoLabel: "",
+  promoLabel: "SAVE 50%",
   cartImage: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-double-hydration-boost-gel-hero-uk.webp",
   gallery: [
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-double-hydration-boost-gel-hero-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel 30ml and luxury plum box for LED light therapy UK",
+      alt: "Buudy Hyaluronic Serum 30ml and luxury plum box for LED light therapy UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-formula-specifications-ph-uk.webp",
+      alt: "Buudy Hyaluronic Serum formula at a glance: 99% natural origin, 11% organic content, pH 5.0 to 5.25",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-inside-formula-botanicals-uk.webp",
+      alt: "Inside the Buudy Hyaluronic Serum formula: multi-molecular HA, sodium PCA, and aloe leaf juice with white tea and sage",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-daily-ritual-guide-uk.webp",
+      alt: "Buudy Hyaluronic Serum skin type compatibility and AM PM daily application ritual guide UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-benefits-uk.webp",
+      alt: "A lighter way to hydrate: Buudy Hyaluronic Serum lightweight hydrogel benefits and dewy finish",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-plump-finish-uk.webp",
+      alt: "Buudy Hyaluronic Serum moisture support and natural plumper looking finish UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-hydrogel-macro-uk.webp",
+      alt: "Buudy Hyaluronic Serum key ingredients macro droplet swatch showing sodium PCA and pure water hydrogel texture",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-b5-serum-bottle-front-uk.webp",
-      alt: "Buudy 30ml Hyaluronic Acid 2% + B5 serum bottle with precision pump dispenser",
+      alt: "Buudy 30ml Hyaluronic Serum bottle with precision pump dispenser",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-precision-dropper-dispensing-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 precision pump dispenser releasing clear hydrating hydrogel droplet",
+      alt: "Buudy Hyaluronic Serum precision pump dispenser releasing clear hydrating hydrogel droplet",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-water-optical-clarity-caustics-uk.webp",
@@ -1233,43 +1257,43 @@ export const buudyHyaluronicSerum: Product = {
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-pump-label-macro-uk.webp",
-      alt: "Macro detail of Buudy Hyaluronic Acid 2% + B5 label and precision hygienic treatment pump",
+      alt: "Macro detail of Buudy Hyaluronic Serum label and precision hygienic treatment pump",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-luxury-carton-box-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 luxury deep plum folding carton packaging with vertical logo",
+      alt: "Buudy Hyaluronic Serum luxury deep plum folding carton packaging with vertical logo",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-plum-studio-shot-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 serum bottle against signature plum background",
+      alt: "Buudy Hyaluronic Serum bottle against signature plum background",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-cream-pedestal-display-uk.webp",
-      alt: "Buudy Hyaluronic Acid Serum and carton on sculptural cream plinth architectural display",
+      alt: "Buudy Hyaluronic Serum and carton on sculptural cream plinth architectural display",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-packaging-overhead-flatlay-uk.webp",
-      alt: "Overhead flatlay of Buudy Hyaluronic Acid 2% + B5 serum bottle and outer box",
+      alt: "Overhead flatlay of Buudy Hyaluronic Serum bottle and outer box",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-campaign-editorial-pair-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 serum campaign editorial on plinth against deep plum backdrop",
+      alt: "Buudy Hyaluronic Serum campaign editorial on plinth against deep plum backdrop",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-natural-botanical-pebbles-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 serum resting on glistening wet river stones emphasizing natural hydration",
+      alt: "Buudy Hyaluronic Serum resting on glistening wet river stones emphasizing natural hydration",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-model-hand-plum-manicure-uk.webp",
-      alt: "Model hand holding Buudy Hyaluronic Acid 2% + B5 serum bottle with signature plum manicure",
+      alt: "Model hand holding Buudy Hyaluronic Serum bottle with signature plum manicure",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-texture-application-on-hand-uk.webp",
-      alt: "Silky water-based hydrogel texture swatch of Buudy Hyaluronic Acid 2% + B5 on hand",
+      alt: "Silky water-based hydrogel texture swatch of Buudy Hyaluronic Serum on hand",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-two-hand-application-ritual-uk.webp",
-      alt: "Two-hand dispensing ritual using Buudy Hyaluronic Acid 2% + B5 pump bottle",
+      alt: "Two-hand dispensing ritual using Buudy Hyaluronic Serum pump bottle",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-neck-decolletage-glow-model-uk.webp",
@@ -1277,39 +1301,15 @@ export const buudyHyaluronicSerum: Product = {
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp",
-      alt: "Model with glass skin holding Buudy Hyaluronic Acid 2% + B5 serum bottle against cheek",
+      alt: "Model with glass skin holding Buudy Hyaluronic Serum bottle against cheek",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-serum-lifestyle-handheld-studio-uk.webp",
-      alt: "Hand holding Buudy Hyaluronic Acid 2% + B5 serum bottle in bright studio lighting",
-    },
-    {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-daily-ritual-guide-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 Serum skin type compatibility and AM PM daily application ritual guide UK",
-    },
-    {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-formula-specifications-ph-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 formula at a glance: 99% natural origin, 11% organic content, pH 5.0 to 5.25",
-    },
-    {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-plump-finish-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel moisture support and natural plumper looking finish UK",
-    },
-    {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-inside-formula-botanicals-uk.webp",
-      alt: "Inside the Buudy Hyaluronic Acid Serum formula: multi-molecular HA, sodium PCA, and aloe leaf juice with white tea and sage",
+      alt: "Hand holding Buudy Hyaluronic Serum bottle in bright studio lighting",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-carton-still-life-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 30ml serum bottle and luxury plum packaging carton in studio still life UK",
-    },
-    {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-benefits-uk.webp",
-      alt: "A lighter way to hydrate: Buudy Double Hydration Boost Gel lightweight hydrogel benefits and dewy finish",
-    },
-    {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-hydrogel-macro-uk.webp",
-      alt: "Buudy Hyaluronic Acid 2% + B5 key ingredients macro droplet swatch showing sodium PCA and pure water hydrogel texture",
+      alt: "Buudy Hyaluronic Serum 30ml bottle and luxury plum packaging carton in studio still life UK",
     },
   ],
   gifts: [],
@@ -1354,27 +1354,27 @@ export const buudyRetinolAlternativeSerum: Product = {
   sku: "BUUDY-SERUM-RET-30",
   slug: "buudy-phyto-renew-retinol-alternative-serum",
   template: "serum",
-  name: "Buudy Phyto-Renew™ Botanical Retinol Alternative (30ml)",
-  heroTitle: "Buudy Phyto-Renew™ Botanical Retinol Alternative",
-  heroEmphasis: "Overnight Cellular Renewal",
+  name: "Buudy Retinol Alternative (30ml)",
+  heroTitle: "Buudy Retinol Alternative (30ml)",
+  heroEmphasis: "",
   shortDescription: "STEP 3: LED-SAFE NIGHT CELLULAR RENEWAL (30ml)",
   description: "2% Bidens Pilosa botanical retinoid complex delivering retinol-strength anti-ageing without peeling, irritation, or light sensitivity.",
-  seoTitle: "Buudy Phyto-Renew™ Botanical Retinol Alternative | Buudy UK",
+  seoTitle: "Buudy Retinol Alternative (30ml) | Buudy UK",
   seoDescription: "LED-safe natural retinol alternative. 2% Bidens Pilosa + Organic Sea Buckthorn. Zero photosensitivity, 100% clinical efficacy.",
   currency: market.currency,
-  priceCents: 4400,
-  compareAtCents: 8800,
+  priceCents: 9900,
+  compareAtCents: 19900,
   rating: 4.9,
   reviewCount: 286,
   customerCount: "12,000+",
   promoCode: "",
-  promoLabel: "",
+  promoLabel: "SAVE 50%",
   cartImage: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01-3d-flat-selfnamed.jpg?width=1440",
   gallery: [
-    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01-3d-flat-selfnamed.jpg?width=1440", alt: "Buudy Phyto-Renew™ Botanical Retinol Alternative 30ml" },
-    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01c-3d-box-flat-badge-selfnamed.jpg?width=1440", alt: "Buudy Phyto-Renew™ Serum Bottle and Packaging" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01-3d-flat-selfnamed.jpg?width=1440", alt: "Buudy Retinol Alternative 30ml" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-01c-3d-box-flat-badge-selfnamed.jpg?width=1440", alt: "Buudy Retinol Alternative Serum Bottle and Packaging" },
     { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/retinol-alternative-serum-30ml/retinol-alternative-serum-30ml-02-texture-selfnamed.jpg?width=1440", alt: "Golden Nectar Texture Swatch" },
-    { src: "https://static.selfnamed.com/gallery-photos/3CUSiRBXYQG-Wa5JnD8H9u5wsYXfs5sJ.jpg", alt: "Buudy Phyto-Renew™ Serum Studio Shot" }
+    { src: "https://static.selfnamed.com/gallery-photos/3CUSiRBXYQG-Wa5JnD8H9u5wsYXfs5sJ.jpg", alt: "Buudy Retinol Alternative Serum Studio Shot" }
   ],
   gifts: [],
   specs: [
@@ -1404,27 +1404,27 @@ export const buudyNiacinamideGel: Product = {
   sku: "BUUDY-SERUM-NIA-50",
   slug: "buudy-blemish-defense-niacinamide-gel",
   template: "serum",
-  name: "Buudy Blemish-Defence™ 5% Niacinamide Gel (50ml)",
-  heroTitle: "Buudy Blemish-Defence™ 5% Niacinamide Gel",
-  heroEmphasis: "Blue Light Clarifier",
-  shortDescription: "TARGETED: 415nm BLUE LIGHT BLEMISH COMPANION (50ml)",
+  name: "Buudy Niacinamide Gel (30ml)",
+  heroTitle: "Buudy Niacinamide Gel (30ml)",
+  heroEmphasis: "",
+  shortDescription: "TARGETED: 415nm BLUE LIGHT BLEMISH COMPANION (30ml)",
   description: "5% pure Niacinamide and Ginkgo Biloba gel formulated to pair synergistically with 415nm Blue Light therapy to clear breakouts and refine pores.",
-  seoTitle: "Buudy Blemish-Defence™ 5% Niacinamide Gel | Buudy UK",
+  seoTitle: "Buudy Niacinamide Gel (30ml) | Buudy UK",
   seoDescription: "5% Niacinamide blemish gel for 415nm blue light therapy. Regulates sebum, shrinks enlarged pores, fades marks.",
   currency: market.currency,
-  priceCents: 2900,
-  compareAtCents: 5800,
+  priceCents: 9900,
+  compareAtCents: 19900,
   rating: 4.8,
   reviewCount: 198,
   customerCount: "10,000+",
   promoCode: "",
-  promoLabel: "",
+  promoLabel: "SAVE 50%",
   cartImage: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01-3d-flat-selfnamed.jpg?width=1440",
   gallery: [
-    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01-3d-flat-selfnamed.jpg?width=1440", alt: "Buudy Blemish-Defence™ 5% Niacinamide Gel 50ml" },
-    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01c-3d-box-flat-badge-selfnamed.jpg?width=1440", alt: "Buudy Blemish-Defence™ Gel Packaging and Bottle" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01-3d-flat-selfnamed.jpg?width=1440", alt: "Buudy Niacinamide Gel 30ml" },
+    { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-01c-3d-box-flat-badge-selfnamed.jpg?width=1440", alt: "Buudy Niacinamide Gel Packaging and Bottle" },
     { src: "https://www.selfnamed.com/static/assets/product-card-v2/selfnamed-product-images-main-5-1x1/face-care/niacinamide-gel-moisturiser-50ml/niacinamide-gel-moisturiser-50ml-02-texture-selfnamed.jpg?width=1440", alt: "Clear Matte Gel Swatch" },
-    { src: "https://static.selfnamed.com/gallery-photos/C9k-L1c7X_j5wLgP5z8N-v-w9K1q4x7.jpg", alt: "Buudy Blemish-Defence™ Lifestyle Shot" }
+    { src: "https://static.selfnamed.com/gallery-photos/C9k-L1c7X_j5wLgP5z8N-v-w9K1q4x7.jpg", alt: "Buudy Niacinamide Gel Lifestyle Shot" }
   ],
   gifts: [],
   specs: [
@@ -1564,12 +1564,12 @@ export const buudyFaceWash: Product = {
   sku: "BUUDY-WASH-BL-140",
   slug: "buudy-blemish-purifying-face-wash",
   template: "cleanser",
-  name: "Buudy Blemish Purifying Face Wash (140ml)",
-  heroTitle: "Buudy Blemish Purifying Face Wash",
-  heroEmphasis: "Clarifying Botanical Cleanser (140ml)",
+  name: "Buudy Blemish Face Wash (140ml)",
+  heroTitle: "Buudy Blemish Face Wash (140ml)",
+  heroEmphasis: "",
   shortDescription: "STEP 1: PRE-LIGHT PURIFYING & SEBUM BALANCING CLEANSER (140ml)",
   description: "Gentle, pH-balanced facial cleanser without harsh surfactants that purifies blemish-prone and oily skin while preserving essential barrier moisture. Formulated with organic Mate Leaf, Arctic Iceland Moss, and Alpine Juniper Callus stem cells to dissolve excess sebum, eliminate daily impurities, and soothe redness. Perfectly preps pores for maximum photon penetration during 415nm Blue Light and 630nm Red Light therapy sessions. ECOCERT COSMOS Natural certified with 98% natural origin ingredients and a fresh green tea aroma.",
-  seoTitle: "Buudy Blemish Purifying Face Wash (140ml) | Buudy UK",
+  seoTitle: "Buudy Blemish Face Wash (140ml) | Buudy UK",
   seoDescription: "ECOCERT COSMOS Natural gentle face wash for blemish-prone skin. Mate Leaf, Iceland Moss, and Juniper Callus clear impurities and sebum without stripping. 140ml.",
   currency: market.currency,
   priceCents: 9900,
@@ -1578,7 +1578,7 @@ export const buudyFaceWash: Product = {
   reviewCount: 485,
   customerCount: "14,000+",
   promoCode: "",
-  promoLabel: "",
+  promoLabel: "SAVE 50%",
   cartImage: "/images/products/buudy-face-wash/02-bottle-front-cream.webp",
   gallery: buudyFaceWashGallery,
   gifts: [],
@@ -1626,67 +1626,7 @@ export const buudyFaceWash: Product = {
 export const buudyPrebioticSerumGallery: ProductImage[] = [
   {
     src: "/images/products/buudy-prebiotics-serum/01-noni.webp",
-    alt: "Buudy Bioactive Prebiotics Jelly Serum 30ml bottle and luxury plum box for skin microbiome barrier UK",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/02-noni.webp",
-    alt: "Buudy 30ml Bioactive Prebiotics Jelly Serum bottle with precision dropper",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/03-noni.webp",
-    alt: "Buudy Bioactive Prebiotics Jelly Serum bottle and folding packaging three-quarter angle",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/04-noni.webp",
-    alt: "Buudy Bioactive Prebiotics Jelly Serum bottle on signature plum backdrop",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/05-noni.webp",
-    alt: "Overhead flatlay of Buudy Bioactive Prebiotics Jelly Serum bottle and carton packaging",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp",
-    alt: "Buudy Bioactive Prebiotics Jelly Serum and box on architectural stone plinth display",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/07-dropper-and-serum-detail.webp",
-    alt: "Macro detail of Buudy glass dropper dispensing clear prebiotic jelly serum droplet",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/08-clear-glass-caustics.webp",
-    alt: "Buudy Bioactive Prebiotics Jelly Serum submerged in clear water with refractive light caustics",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/09-bottle-diagonal-editorial.webp",
-    alt: "Diagonal editorial still life of Buudy Bioactive Prebiotics Jelly Serum bottle",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/10-noni.webp",
-    alt: "Buudy Bioactive Prebiotics Jelly Serum campaign editorial pair on stone plinth",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/08-two-hand-dropper-ritual.webp",
-    alt: "Two-hand precision dropper dispensing ritual of Buudy Bioactive Prebiotics Jelly Serum",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/09-neck-collarbone-beauty.webp",
-    alt: "Model with radiant, calm, balanced skin on neck and décolletage after using Prebiotic Jelly Serum",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/10-serum-on-hand-editorial.webp",
-    alt: "Silky weightless fluid jelly texture swatch of Buudy Bioactive Prebiotics Serum on hand",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/11-plum-manicure.webp",
-    alt: "Model hand with signature plum manicure holding Buudy Bioactive Prebiotics Jelly Serum bottle",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/01-skin.webp",
-    alt: "Buudy Prebiotics Jelly Serum skin type compatibility and AM PM daily ritual guide",
-  },
-  {
-    src: "/images/products/buudy-prebiotics-serum/03-barrier-and-lightweight-care.webp",
-    alt: "Targeted barrier and lightweight care: microbiome support, calming redness, and deep hydration",
+    alt: "Buudy Prebiotics Serum 30ml bottle and luxury plum box for skin microbiome barrier UK",
   },
   {
     src: "/images/products/buudy-prebiotics-serum/02-verified-formula.webp",
@@ -1697,8 +1637,12 @@ export const buudyPrebioticSerumGallery: ProductImage[] = [
     alt: "Inside the formula: Lactobacillus Ferment Lysate, dual Hyaluronic Acid, and Sodium PCA",
   },
   {
-    src: "/images/products/buudy-prebiotics-serum/05-considered-care-science-still-life.webp",
-    alt: "Considered care science: 30ml glass bottle and luxury plum carton in architectural studio still life",
+    src: "/images/products/buudy-prebiotics-serum/01-skin.webp",
+    alt: "Buudy Prebiotics Jelly Serum skin type compatibility and AM PM daily ritual guide",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/03-barrier-and-lightweight-care.webp",
+    alt: "Targeted barrier and lightweight care: microbiome support, calming redness, and deep hydration",
   },
   {
     src: "/images/products/buudy-prebiotics-serum/06-comfort-in-every-drop.webp",
@@ -1709,8 +1653,64 @@ export const buudyPrebioticSerumGallery: ProductImage[] = [
     alt: "Key ingredients: crystal-clear bioactive jelly droplet swatch with dual hyaluronic acid",
   },
   {
+    src: "/images/products/buudy-prebiotics-serum/02-noni.webp",
+    alt: "Buudy 30ml Prebiotics Serum bottle with precision dropper",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/03-noni.webp",
+    alt: "Buudy Prebiotics Serum bottle and folding packaging three-quarter angle",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/04-noni.webp",
+    alt: "Buudy Prebiotics Serum bottle on signature plum backdrop",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/05-noni.webp",
+    alt: "Overhead flatlay of Buudy Prebiotics Serum bottle and carton packaging",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp",
+    alt: "Buudy Prebiotics Serum and box on architectural stone plinth display",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/07-dropper-and-serum-detail.webp",
+    alt: "Macro detail of Buudy glass dropper dispensing clear prebiotic jelly serum droplet",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/08-clear-glass-caustics.webp",
+    alt: "Buudy Prebiotics Serum submerged in clear water with refractive light caustics",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/09-bottle-diagonal-editorial.webp",
+    alt: "Diagonal editorial still life of Buudy Prebiotics Serum bottle",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/10-noni.webp",
+    alt: "Buudy Prebiotics Serum campaign editorial pair on stone plinth",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/08-two-hand-dropper-ritual.webp",
+    alt: "Two-hand precision dropper dispensing ritual of Buudy Prebiotics Serum",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/09-neck-collarbone-beauty.webp",
+    alt: "Model with radiant, calm, balanced skin on neck and décolletage after using Prebiotic Jelly Serum",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/10-serum-on-hand-editorial.webp",
+    alt: "Silky weightless fluid jelly texture swatch of Buudy Prebiotics Serum on hand",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/11-plum-manicure.webp",
+    alt: "Model hand with signature plum manicure holding Buudy Prebiotics Serum bottle",
+  },
+  {
+    src: "/images/products/buudy-prebiotics-serum/05-considered-care-science-still-life.webp",
+    alt: "Considered care science: 30ml glass bottle and luxury plum carton in architectural studio still life",
+  },
+  {
     src: "/images/products/buudy-prebiotics-serum/05-considered-hydration-still-life.webp",
-    alt: "Thoughtfully formulated: Buudy Prebiotics Jelly Serum in warm luxury still life display",
+    alt: "Thoughtfully formulated: Buudy Prebiotics Serum in warm luxury still life display",
   },
 ];
 
@@ -1758,12 +1758,12 @@ export const buudyPrebioticSerum: Product = {
   sku: "BUUDY-SERUM-PRE-30",
   slug: "buudy-bioactive-prebiotics-serum",
   template: "serum",
-  name: "Buudy Bioactive Prebiotics Jelly Serum (30ml)",
-  heroTitle: "Buudy Bioactive Prebiotics Jelly Serum",
-  heroEmphasis: "Microbiome Barrier Jelly Matrix (30ml)",
+  name: "Buudy Prebiotics Serum (30ml)",
+  heroTitle: "Buudy Prebiotics Serum (30ml)",
+  heroEmphasis: "",
   shortDescription: "STEP 1: PREBIOTIC MICROBIOME BARRIER & BALANCING JELLY (30ml)",
   description: "Lightweight, 100% water-based gel serum formulated to balance and nourish your skin, support the microbiome, and reinforce the vital moisture barrier. Infused with 2% Bioactive Prebiotics (Lactobacillus Ferment Lysate) to feed beneficial skin microflora, dual-action Hyaluronic Acid to hydrate and plump, and Sodium PCA to lock in all-day suppleness. Perfectly calibrated at skin-friendly pH 4.5–5.1 with zero oils, silicones, or light scattering—making it the ideal balancing companion for daily skincare and LED phototherapy. ECOCERT COSMOS Natural certified with 99% natural origin ingredients.",
-  seoTitle: "Buudy Bioactive Prebiotics Jelly Serum (30ml) | Buudy UK",
+  seoTitle: "Buudy Prebiotics Serum (30ml) | Buudy UK",
   seoDescription: "ECOCERT COSMOS Natural 2% Prebiotics Jelly Serum. Lactobacillus Ferment Lysate, dual Hyaluronic Acid, and Sodium PCA to restore skin microbiome and barrier. 30ml.",
   currency: market.currency,
   priceCents: 9900,
@@ -1772,7 +1772,7 @@ export const buudyPrebioticSerum: Product = {
   reviewCount: 496,
   customerCount: "15,000+",
   promoCode: "",
-  promoLabel: "",
+  promoLabel: "SAVE 50%",
   cartImage: "/images/products/buudy-prebiotics-serum/01-noni.webp",
   gallery: buudyPrebioticSerumGallery,
   gifts: [],
@@ -1814,6 +1814,824 @@ export const buudyPrebioticSerum: Product = {
 
 export const buudyNoniSerum: Product = buudyPrebioticSerum;
 
+export const hydratingSerumFaqs: FAQItem[] = [
+  {
+    question: "How does Buudy Deep Hydrating Serum differ from Double Hydration Boost Gel?",
+    answer: "While Double Hydration Boost Gel is an ultra-pure, 100% water-based optical hydrogel primer engineered specifically for use prior to and during LED phototherapy, Buudy Deep Hydrating Serum is an intensive daily nourishing serum. Formulated on an organic aloe juice base enriched with jojoba seed oil, soothing bisabolol, and antioxidant Nordic cloudberry and peony root extracts, it provides rich, lasting barrier replenishment and deep lipid comfort.",
+  },
+  {
+    question: "When should I apply Deep Hydrating Serum in my daily routine?",
+    answer: "Apply 2–3 pumps morning and evening to cleansed, slightly damp skin after toning and before heavier creams. If pairing with your Buudy LED Mask, use it after your light therapy session or as your primary morning and evening hydration step.",
+  },
+  {
+    question: "Is this serum suitable for sensitive and reactive skin?",
+    answer: "Yes. Formulated with 99% natural origin ingredients, certified organic aloe, and soothing bisabolol, this formula is gentle, non-comedogenic, and dermatologically tested to comfort reactive, dry, or dehydrated complexions.",
+  },
+];
+
+export const peptideCreamFaqs: FAQItem[] = [
+  {
+    question: "What makes Buudy Peptide Ageless AM/PM Cream effective for mature skin?",
+    answer: "Our dual-action day and night cream is powered by bio-fermented Hexapeptide-11 and Dipalmitoyl Hydroxyproline, which signal dermal fibroblasts to synthesise collagen and reinforce skin elasticity. 2% Sodium PCA and multi-depth hyaluronic acid provide continuous 24-hour hydration, while organic mango seed butter and blueberry seed oil restore the natural lipid barrier.",
+  },
+  {
+    question: "Can I use this cream immediately after my Buudy LED Face Mask session?",
+    answer: "Yes, this is the recommended routine. Phototherapy enhances cellular micro-circulation and permeability; applying Peptide Ageless AM/PM Cream immediately post-light locks in cellular energy and accelerates firming and wrinkle-smoothing results.",
+  },
+  {
+    question: "Will this cream feel heavy or cause congestion?",
+    answer: "No. The cream has a velvety, fast-absorbing texture that leaves a smooth, weightless finish with zero greasy residue, making it ideal under makeup in the morning and as a restorative seal at night.",
+  },
+];
+
+export const peptideEyeCreamFaqs: FAQItem[] = [
+  {
+    question: "Why do I need a specialised peptide eye cream?",
+    answer: "The periorbital skin is up to 10 times thinner than facial skin and exhibits fewer sebaceous glands, making it the first area to show crow's feet and volume loss. Buudy Peptide Age-Defying Eye Cream is calibrated specifically with Hexapeptide-11, gamma-linolenic borage seed oil, and Ginkgo Biloba extract to smooth micro-creases and alleviate under-eye puffiness without migrating into the eyes.",
+  },
+  {
+    question: "How should I apply the Peptide Age-Defying Eye Cream?",
+    answer: "Dispense a grain-of-rice amount onto your ring finger and gently tap along the orbital bone, moving from the inner corner outwards toward the temple and crow's feet. Use morning and evening.",
+  },
+];
+
+export const ahaPeelingConcentrateFaqs: FAQItem[] = [
+  {
+    question: "How does 10% Lactic Acid work compared to other exfoliating acids?",
+    answer: "Lactic Acid has a larger molecular size than glycolic acid, allowing it to gently dissolve dead keratinised cells on the skin surface without inducing erythema or barrier micro-tears. Furthermore, lactic acid is an intrinsic natural moisturising factor (NMF) that hydrates the skin as it exfoliates.",
+  },
+  {
+    question: "How often should I use the AHA Peeling Concentrate?",
+    answer: "Apply 1–2 evenings per week to clean, dry skin. Smooth a thin layer over the face and neck, avoiding the eye contour. Leave on overnight and follow with your moisturiser. Do not rinse off. Always wear broad-spectrum SPF the following morning.",
+  },
+  {
+    question: "Can I use the AHA Peeling Concentrate on the same night as LED light therapy?",
+    answer: "We recommend alternating evenings: use your Buudy LED Mask on non-peeling days, or complete your 10-minute LED session on clean skin first, and apply the AHA Concentrate afterwards before sleep.",
+  },
+];
+
+export const ultimateHydrationDuoFaqs: FAQItem[] = [
+  {
+    question: "What is included in The Ultimate Hydration Duo Gift Set?",
+    answer: "The set includes 1x full-size Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel (30ml), 1x full-size Buudy Deep Hydrating Serum (30ml), and a luxury deep plum presentation gift box carton with gold foil inscriptions.",
+  },
+  {
+    question: "How do the two products work together?",
+    answer: "Double Hydration Boost Gel is your 100% water-based Step 1 phototherapy primer used before and during light therapy to maximize photon penetration. Deep Hydrating Serum is your nourishing antioxidant treatment used daily to lock in long-lasting moisture, vitamins, and barrier protection.",
+  },
+];
+
+export const antiAgePeptideCollectionFaqs: FAQItem[] = [
+  {
+    question: "What products are included in the Anti-Age Peptide Collection?",
+    answer: "The collection features the complete 3-step peptide firming regimen: Buudy Collagen-Lock Hexapeptide Serum (30ml), Buudy Peptide Ageless AM/PM Cream (50ml), and Buudy Peptide Age-Defying Eye Cream (15ml), beautifully presented in our signature panoramic plum gift box.",
+  },
+  {
+    question: "What results can I expect from the peptide trio?",
+    answer: "In independent clinical and consumer perception trials, 95% of users reported firmer, more lifted-feeling skin within 28 days, with measurable attenuation of forehead lines, smile lines, and crow's feet.",
+  },
+];
+
+export const ultimateRenewalCollectionFaqs: FAQItem[] = [
+  {
+    question: "What is the regimen for The Ultimate Renewal Collection?",
+    answer: "The trilogy provides a 3-pillar protocol: 1–2 nights weekly, use the AHA 10% Lactic Acid Peeling Concentrate for overnight resurfacing; daily, use the Double Hydration Boost Gel for 72-hour moisture and LED priming; and daily post-light, apply the Collagen-Lock Hexapeptide Serum for firming and elasticity.",
+  },
+];
+
+export const buudyHydratingSerum: Product = {
+  id: "buudy-hydrating-serum",
+  sku: "BUUDY-SERUM-HYD-30",
+  slug: "buudy-hydrating-serum",
+  template: "serum",
+  name: "Buudy Hydrating Serum (30ml)",
+  heroTitle: "Buudy Hydrating Serum (30ml)",
+  heroEmphasis: "",
+  shortDescription: "INTENSIVE DAILY MOISTURE BOOST & ANTIOXIDANT BARRIER CARE (30ml)",
+  description: "Light-as-air facial serum feels like pure silk on your skin, delivering an immediate moisture surge that sustains a luminous, hydrated complexion all day long. Formulated on an organic aloe vera base with botanical jojoba oil, multi-depth hyaluronic acid, soothing bisabolol, and nutrient-dense Nordic cloudberry and peony extracts. Perfectly pairs with daily red light phototherapy to calm dehydration and restore essential vitamins and antioxidants.",
+  seoTitle: "Buudy Hydrating Serum (30ml) | Multi-Depth Moisture | Buudy UK",
+  seoDescription: "Clinical-grade Buudy Hydrating Serum with organic aloe, multi-depth hyaluronic acid, soothing bisabolol, and cloudberry extract for 24-hour hydration.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 384,
+  customerCount: "12,000+",
+  promoCode: "",
+  promoLabel: "SAVE 50%",
+  cartImage: "/images/products/buudy-hydrating-serum/hero.jpg",
+  gallery: [
+    {
+      src: "/images/products/buudy-hydrating-serum/hero.jpg",
+      alt: "Buudy Hydrating Serum 30ml luxury beige bottle and deep plum packaging carton UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-b5-serum-bottle-front-uk.webp",
+      alt: "Buudy 30ml serum bottle with precision hygienic pump dispenser",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-water-optical-clarity-caustics-uk.webp",
+      alt: "Buudy serum in water showing optical clarity and pure hydrating formulation",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-double-hydration-boost-gel-water-splash-uk.webp",
+      alt: "Buudy Hydrating Serum dynamic water splash demonstrating intensive skin moisture",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-gel-texture-droplet-macro-uk.webp",
+      alt: "Macro texture swatch of hydrating botanical fluid beside Buudy serum bottle",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-cream-pedestal-display-uk.webp",
+      alt: "Buudy Hydrating Serum displayed on architectural cream pedestal",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-neck-decolletage-glow-model-uk.webp",
+      alt: "Radiant, hydrated skin on neck and decolletage after using Buudy Hydrating Serum",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp",
+      alt: "Model with radiant dewy skin holding Buudy serum bottle against cheek",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Active Complex", value: "75.7% Organic Aloe + Cloudberry, Peony & Hyaluronic Acid" },
+    { label: "Skin Barrier Synergy", value: "Soothing Bisabolol & Botanical Jojoba Lipid Matrix" },
+    { label: "Finish & Texture", value: "Light-As-Air Silky Fluid with Weightless Dewy Finish" },
+    { label: "Volume", value: "30ml / 1.01 fl oz Precision Treatment Pump" },
+    { label: "Light Synergy", value: "Red (630nm) & Near-Infrared (830nm) Phototherapy Primer" },
+    { label: "Certification", value: "ECOCERT COSMOS Natural / 99% Natural Origin / Vegan" },
+  ],
+  included: [{ quantity: "1x", label: "30ml Buudy Hydrating Serum with Precision Pump" }],
+  highlights: [
+    "Aloe Barbadensis (Aloe) Leaf Juice*",
+    "Simmondsia Chinensis (Jojoba) Seed Oil*",
+    "Glycerin**",
+    "Pentylene Glycol",
+    "Rosa Damascena (Rose) Flower Water*",
+    "Polyglyceryl-6 Stearate",
+    "Cetearyl Alcohol",
+    "Isoamyl Laurate",
+    "Aqua/Water",
+    "Betaine",
+    "Bisabolol*",
+    "Paeonia Lactiflora (Peony) Root Extract",
+    "Rubus Chamaemorus (Cloudberry) Fruit Extract*",
+    "Sodium Hyaluronate (Hyaluronic Acid)",
+    "Hydrolyzed Hyaluronic Acid",
+    "Alteromonas Ferment Extract",
+  ],
+  keyBenefits: [
+    "75% organic aloe and multi-depth hyaluronic acid deliver intensive, all-day hydration",
+    "Nordic cloudberry and peony root extracts defend against environmental oxidants",
+    "Soothing bisabolol calms sensitivity, reactive redness, and post-treatment dryness",
+    "Silky, fast-absorbing fluid pairs seamlessly with LED phototherapy and daily makeup",
+  ],
+  badges: ["Deep Moisture Boost", "Cloudberry & Peony", "ECOCERT COSMOS Natural"],
+  faqs: hydratingSerumFaqs,
+};
+
+export const buudyPeptideCream: Product = {
+  id: "buudy-peptide-ageless-am-pm-cream",
+  sku: "BUUDY-CREAM-PEP-50",
+  slug: "buudy-peptide-ageless-am-pm-cream",
+  template: "serum",
+  name: "Buudy Peptide Cream (50ml)",
+  heroTitle: "Buudy Peptide Cream (50ml)",
+  heroEmphasis: "",
+  shortDescription: "CLINICAL-GRADE FIRMING & ELASTICITY DUAL DAY/NIGHT RESTORATIVE CREAM (50ml)",
+  description: "High-performance anti-ageing moisturiser powered by clinical-grade Hexapeptide-11 and Dipalmitoyl Hydroxyproline to visibly firm contours, boost cellular elasticity, and soften deep expression lines. Designed for comprehensive morning and evening protection, this velvety, weightless cream deeply hydrates via 2% Sodium PCA and multi-molecular hyaluronic acid while replenishing essential skin barrier lipids with organic jojoba, mango seed butter, and antioxidant-rich blueberry seed oil. Highly synergistic as post-LED restorative care.",
+  seoTitle: "Buudy Peptide Cream (50ml) | Clinical Firming Care | Buudy UK",
+  seoDescription: "Firming Buudy Peptide Cream with Hexapeptide-11, hydroxyproline, and multi-molecular hyaluronic acid for restored dermal density and bounce.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 412,
+  customerCount: "14,500+",
+  promoCode: "",
+  promoLabel: "SAVE 50%",
+  cartImage: "/images/products/buudy-peptide-ageless-am-pm-cream/hero.jpg",
+  gallery: [
+    {
+      src: "/images/products/buudy-peptide-ageless-am-pm-cream/hero.jpg",
+      alt: "Buudy Peptide Ageless AM/PM Cream 50ml luxury cream jar and deep plum packaging carton UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-architectural-pair-plinth-uk.webp",
+      alt: "Buudy Peptide anti-ageing skincare collection architectural stone plinth display",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
+      alt: "Two-hand application ritual using Buudy Peptide anti-ageing skincare",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-macro-label-uk.webp",
+      alt: "Macro detail of Buudy Peptide formulation and luxury branding",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-droplet-texture-macro-uk.webp",
+      alt: "Velvety firming cream texture swatch on glass display",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-neck-decolletage-glow-model-uk.webp",
+      alt: "Radiant, firm skin on neck and decolletage after using Buudy Peptide restorative care",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Bio-Active Peptide Complex", value: "Hexapeptide-11 + Dipalmitoyl Hydroxyproline Firming Complex" },
+    { label: "Hydration & Barrier", value: "2% Sodium PCA + Multi-Molecular HA & Mango Seed Butter" },
+    { label: "Antioxidant Defence", value: "Vitamin C (Ascorbyl Palmitate) + Vitamin E & Blueberry Seed Oil" },
+    { label: "Volume", value: "50ml / 1.69 fl oz Luxury Airless Treatment Jar" },
+    { label: "Usage & Regimen", value: "Step 2: AM & PM Daily Seal Post-Serum and Post-LED Mask" },
+    { label: "Certification", value: "ECOCERT COSMOS Natural / 99% Natural Origin / Vegan" },
+  ],
+  included: [{ quantity: "1x", label: "50ml Buudy Peptide Ageless AM/PM Cream in Luxury Jar" }],
+  highlights: [
+    "Aqua/Water",
+    "Simmondsia Chinensis (Jojoba) Seed Oil*",
+    "Glycerin",
+    "Sodium PCA (2%)",
+    "Dipalmitoyl Hydroxyproline",
+    "Mangifera Indica (Mango) Seed Butter*",
+    "Fragaria Ananassa (Strawberry) Seed Oil",
+    "Vaccinium Myrtillus (Blueberry) Seed Oil*",
+    "Hexapeptide-11",
+    "Sodium Hyaluronate (Hyaluronic Acid)",
+    "Hydrolyzed Hyaluronic Acid",
+    "Ginkgo Biloba Leaf Extract*",
+    "Ascorbyl Palmitate (Vitamin C)",
+    "Tocopherol (Vitamin E)",
+  ],
+  keyBenefits: [
+    "Hexapeptide-11 and hydroxyproline visibly firm contours and soften expression lines",
+    "2% Sodium PCA and hyaluronic acid restore 24-hour cellular moisture reservoirs",
+    "Organic mango butter and blueberry seed oil replenish essential barrier ceramides",
+    "Dual AM/PM formulation locks in post-LED phototherapy cellular rejuvenation",
+  ],
+  badges: ["Hexapeptide-11 + Hydroxyproline", "AM/PM Firming Seal", "ECOCERT COSMOS Natural"],
+  faqs: peptideCreamFaqs,
+};
+
+export const buudyPeptideEyeCream: Product = {
+  id: "buudy-peptide-age-defying-eye-cream",
+  sku: "BUUDY-EYE-PEP-15",
+  slug: "buudy-peptide-age-defying-eye-cream",
+  template: "serum",
+  name: "Buudy Peptide Eye Cream (15ml)",
+  heroTitle: "Buudy Peptide Eye Cream (15ml)",
+  heroEmphasis: "",
+  shortDescription: "CLINICAL-GRADE TARGETED CROW'S FEET, PUFFINESS & FIRMING EYE TREATMENT (15ml)",
+  description: "Targeted micro-contour eye cream specifically calibrated for the fragile periorbital tissue. Powered by a concentrated peptide complex featuring bio-fermented Hexapeptide-11, collagen-protecting Dipalmitoyl Hydroxyproline, and gamma-linolenic-rich borage seed oil. Instantly smooths micro-creping, attenuates the depth of crow's feet, and drenches the under-eye area in weightless hydration via 2% Sodium PCA and antioxidant Ginkgo Biloba leaf extract.",
+  seoTitle: "Buudy Peptide Eye Cream (15ml) | Anti-Ageing Eye Care | Buudy UK",
+  seoDescription: "Targeted Buudy Peptide Eye Cream with Hexapeptide-11, hydroxyproline, and borage seed oil for smoother, firmer under-eyes and crow's feet reduction.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 298,
+  customerCount: "8,500+",
+  promoCode: "",
+  promoLabel: "SAVE 50%",
+  cartImage: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-ivory-hero-uk.webp",
+  gallery: [
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-ivory-hero-uk.webp",
+      alt: "Buudy Peptide Eye Cream 15ml precision needle-nose tube and luxury deep plum packaging carton hero UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-clinical-formula-facts-uk.webp",
+      alt: "Clinical formula facts: 99% natural origin, 8% organic content, ECOCERT COSMOS Natural certified",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-who-it-is-for-guide-uk.webp",
+      alt: "Who it is for guide: targeted anti-ageing care for crow's feet, under-eye puffiness, and loss of firmness",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-hexapeptide-benefits-uk.webp",
+      alt: "Clinical peptide benefits: bio-fermented Hexapeptide-11 stimulating collagen synthesis around delicate eye contours",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-key-ingredients-borage-uk.webp",
+      alt: "Key ingredients breakdown: Hexapeptide-11, gamma-linolenic borage seed oil, and Ginkgo Biloba extract",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-benefits-velvet-texture-uk.webp",
+      alt: "Velvety, fast-absorbing eye cream texture swatch providing weightless hydration without migration",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-tube-front-view-uk.webp",
+      alt: "Front view of Buudy Peptide Eye Cream 15ml ophthalmic precision tube",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-luxury-carton-front-uk.webp",
+      alt: "Buudy Peptide Eye Cream deep plum outer carton with gold accents",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-three-quarter-pair-uk.webp",
+      alt: "Three-quarter perspective of Buudy Peptide Eye Cream tube and presentation carton",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-limestone-pedestal-uk.webp",
+      alt: "Buudy Peptide Eye Cream displayed on natural limestone architectural plinth",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-carton-side-angle-uk.webp",
+      alt: "Side angle of luxury Buudy Eye Cream packaging detailing volume and clinical credentials",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-overhead-flat-lay-uk.webp",
+      alt: "Overhead flat-lay composition of Buudy Peptide Eye Cream tube and carton",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-precision-applicator-macro-uk.webp",
+      alt: "Macro detail of precision ophthalmic applicator tip dispensing delicate cream droplet",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-plum-reflection-display-uk.webp",
+      alt: "Reflective plum mirror studio display of Buudy Peptide Eye Cream",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-arched-architectural-light-uk.webp",
+      alt: "Arched architectural light study featuring Buudy Peptide Eye Cream",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-campaign-hero-editorial-uk.webp",
+      alt: "Buudy Peptide Eye Cream editorial campaign display on luxury stone pedestal",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-formula-swatch-texture-uk.webp",
+      alt: "Silky micro-contour formula texture swatch on glass tile",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-formula-droplet-macro-uk.webp",
+      alt: "High-resolution macro droplet swatch of nourishing peptide eye cream",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-pump-dispensing-ritual-uk.webp",
+      alt: "Precision fingertip dispensing ritual for delicate periorbital application",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp",
+      alt: "Model with visibly smoothed under-eye contours, softened crow's feet, and luminous skin",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-texture-on-hand-swatch-uk.webp",
+      alt: "Silky peptide cream swatch on hand demonstrating fast absorption and zero greasy residue",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-plum-manicure-handheld-uk.webp",
+      alt: "Model hand holding Buudy Peptide Eye Cream tube in studio lighting",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Target Complex", value: "Hexapeptide-11 + Dipalmitoyl Hydroxyproline + Borage Seed Oil" },
+    { label: "Hydration Cushion", value: "2% Sodium PCA + Hyaluronic Acid & Mango Butter" },
+    { label: "Micro-Circulation", value: "Ginkgo Biloba Leaf Extract + Vitamin C & E" },
+    { label: "Volume", value: "15ml / 0.51 fl oz Precision Needle-Nose Ophthalmic Tube" },
+    { label: "Regimen Step", value: "AM & PM Targeted Eye Contouring Step" },
+    { label: "Certification", value: "ECOCERT COSMOS Natural / 99% Natural Origin / Vegan" },
+  ],
+  included: [{ quantity: "1x", label: "15ml Buudy Peptide Age-Defying Eye Cream in Precision Tube" }],
+  highlights: [
+    "Aqua/Water",
+    "Glycerin",
+    "Coconut Alkanes",
+    "Simmondsia Chinensis (Jojoba) Seed Oil*",
+    "Sodium PCA (2%)",
+    "Borago Officinalis (Borage) Seed Oil*",
+    "Dipalmitoyl Hydroxyproline",
+    "Ricinus Communis (Castor) Seed Oil",
+    "Hexapeptide-11",
+    "Ginkgo Biloba (Ginkgo) Leaf Extract*",
+    "Fragaria Ananassa (Strawberry) Seed Oil",
+    "Vaccinium Myrtillus (Blueberry) Seed Oil*",
+    "Ascorbyl Palmitate",
+    "Tocopherol",
+  ],
+  keyBenefits: [
+    "Concentrated Hexapeptide-11 softens crow's feet and reinforces eye contour firmness",
+    "Gamma-linolenic borage seed oil and 2% Sodium PCA banish periorbital dry creping",
+    "Ginkgo biloba extract enhances micro-circulation to diminish morning puffiness",
+    "Weightless, non-migrating texture creates a silky, crease-free base for concealer",
+  ],
+  badges: ["Hexapeptide-11 + Borage", "Periorbital Contour Care", "ECOCERT COSMOS Natural"],
+  faqs: peptideEyeCreamFaqs,
+};
+
+export const buudyAhaPeelingConcentrate: Product = {
+  id: "buudy-aha-peeling-concentrate",
+  sku: "BUUDY-PEEL-AHA-30",
+  slug: "buudy-aha-peeling-concentrate",
+  template: "serum",
+  name: "Buudy AHA Peeling Concentrate (30ml)",
+  heroTitle: "Buudy AHA Peeling Concentrate (30ml)",
+  heroEmphasis: "",
+  shortDescription: "OVERNIGHT CELLULAR RESURFACING, RADIANCE & PORE REFINING CONCENTRATE (30ml)",
+  description: "Potent yet exceptionally gentle overnight resurfacing peel formulated with 10% pure plant-derived Lactic Acid (AHA) and 1% high-molecular Hyaluronic Acid. Designed to dissolve intercellular adhesive bonds, sweep away dulling keratinised cells, unclog congested pores, and accelerate epidermal cell renewal without barrier irritation. Botanical white tea and sage extracts deliver calming antioxidant protection, revealing glass-smooth, luminous skin overnight.",
+  seoTitle: "Buudy AHA Peeling Concentrate (30ml) | Buudy UK",
+  seoDescription: "Gentle overnight Buudy AHA Peeling Concentrate with 1% hyaluronic acid, white tea, and sage for visible cellular renewal and pore refinement.",
+  currency: market.currency,
+  priceCents: 9900,
+  compareAtCents: 19900,
+  rating: 4.9,
+  reviewCount: 342,
+  customerCount: "9,000+",
+  promoCode: "",
+  promoLabel: "SAVE 50%",
+  cartImage: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-bottle-and-box-hero-uk.webp",
+  gallery: [
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-bottle-and-box-hero-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate 30ml bottle and luxury deep plum carton box for overnight skin resurfacing UK",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-formula-in-numbers-ph-uk.webp",
+      alt: "Formula in numbers: 10% plant-based AHA, 1% HA, pH 4.0 to 4.2 for zero-irritation exfoliation",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-two-core-actives-breakdown-uk.webp",
+      alt: "Two core actives breakdown: Lactic Acid cell-renewal mechanism paired with Hyaluronic Acid moisture lock",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-key-ingredients-botanicals-uk.webp",
+      alt: "Key botanical ingredients: organic white tea and sage extracts providing soothing antioxidant protection",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-skin-types-how-to-use-guide-uk.webp",
+      alt: "Who it is for and PM application ritual: ideal for dull skin, uneven texture, and congested pores",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-texture-ingredient-callouts-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate fluid texture swatch with key ingredient callouts: 10% Lactic Acid and 1% Hyaluronic Acid",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-bottle-front-uk.webp",
+      alt: "Front view of Buudy AHA Peeling Concentrate 30ml treatment bottle with precision dropper",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-bottle-three-quarter-uk.webp",
+      alt: "Three-quarter perspective of Buudy 30ml AHA Peeling Concentrate bottle highlighting pure botanical formula",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-luxury-carton-three-quarter-uk.webp",
+      alt: "Luxury deep plum Buudy AHA Peeling Concentrate folding carton with gold foil typography",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-dropper-label-macro-uk.webp",
+      alt: "Macro detail of Buudy AHA 10% Lactic Acid precision pipette dropper and clinical label",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-open-dropper-fluid-macro-uk.webp",
+      alt: "Close-up macro of active clear lactic acid exfoliating concentrate droplet suspended from glass dropper",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-two-hands-dropper-application-uk.webp",
+      alt: "Two-hand dispensing ritual applying 3 to 4 drops of Buudy AHA Peeling Concentrate onto cleansed fingertips",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-closed-bottle-swatch-hand-uk.webp",
+      alt: "Lightweight fluid texture swatch on back of hand alongside Buudy AHA bottle",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-ivory-plinth-duo-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate bottle and packaging carton on sculptural ivory architectural pedestal",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-diagonal-bottle-stone-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate resting diagonally on natural mineral stone",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-lab-still-life-carton-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate clinical laboratory still-life editorial display",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate signature deep plum studio campaign pair display",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-overhead-flat-lay-uk.webp",
+      alt: "Overhead flat-lay composition of Buudy AHA Peeling Concentrate bottle and luxury carton packaging",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp",
+      alt: "Radiant, smooth skin on model neck and decolletage following overnight AHA lactic acid cell renewal",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-plum-manicure-bottle-portrait-uk.webp",
+      alt: "Model hand with signature plum manicure holding Buudy AHA Peeling Concentrate bottle",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "AHA Peeling Acid", value: "10% Plant-Derived Lactic Acid (Alpha Hydroxy Acid)" },
+    { label: "Moisture Cushion", value: "1% High-Molecular Weight Hyaluronic Acid Matrix" },
+    { label: "Botanical Antioxidants", value: "Organic White Tea & Sage Leaf Extracts" },
+    { label: "Formula pH", value: "pH 4.0 – 4.2 (Optimal Exfoliation with Zero Irritation)" },
+    { label: "Usage", value: "1–2 Evenings Per Week (Leave-On Overnight; Follow with SPF)" },
+    { label: "Certification", value: "ECOCERT COSMOS Natural / 100% Natural Origin / Vegan" },
+  ],
+  included: [{ quantity: "1x", label: "30ml Buudy AHA 10% Lactic Acid Peeling Concentrate" }],
+  highlights: [
+    "Aqua/Water",
+    "Lactic Acid (10%)",
+    "Pentylene Glycol",
+    "Potassium Hydroxide",
+    "Butylene Glycol",
+    "Glycerin**",
+    "Sodium Hyaluronate (1% Hyaluronic Acid)",
+    "Camellia Sinensis (White Tea) Leaf Extract*",
+    "Salvia Officinalis (Sage) Leaf Extract*",
+  ],
+  keyBenefits: [
+    "10% plant-derived lactic acid dissolves dull dead cells for an overnight glass glow",
+    "1% hyaluronic acid prevents moisture loss and barrier tightness during exfoliation",
+    "Unclogs congested pores and visibly refines uneven skin texture and tone",
+    "Organic white tea and sage extracts calm redness and provide antioxidant defence",
+  ],
+  badges: ["10% Lactic Acid + 1% HA", "Overnight Resurfacing", "100% Natural Origin"],
+  faqs: ahaPeelingConcentrateFaqs,
+};
+
+export const theUltimateHydrationDuo: Product = {
+  id: "the-ultimate-hydration-duo",
+  sku: "BUUDY-BOX-DUO-HYD",
+  slug: "the-ultimate-hydration-duo",
+  template: "serum",
+  name: "The Ultimate Hydration Duo",
+  heroTitle: "The Ultimate Hydration Duo",
+  heroEmphasis: "",
+  shortDescription: "CLINICAL 2-STEP CELLULAR HYDRATION & PHOTOTHERAPY PRIMING DUO (2 x 30ml)",
+  description: "The definitive 2-step hydration protocol for thirsty, depleted skin. Combines our clinical Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel (Step 1 pre-light hydrogel primer) and the nourishing Buudy Deep Hydrating Serum (antioxidant cloudberry and peony daily moisture booster). Housed in our bespoke deep plum luxury collection gift carton with magnetic closure.",
+  seoTitle: "The Ultimate Hydration Duo (2 x 30ml) | Buudy UK",
+  seoDescription: "The Ultimate Hydration Duo combining Buudy Double Hydration Boost Gel and Deep Hydrating Serum in a luxury gift box. Save 50% online.",
+  currency: market.currency,
+  priceCents: 19900,
+  compareAtCents: 39900,
+  rating: 5.0,
+  reviewCount: 468,
+  customerCount: "16,000+",
+  promoCode: "",
+  promoLabel: "SAVE 50%",
+  cartImage: "/images/products/the-ultimate-hydration-duo/hero.jpg",
+  gallery: [
+    {
+      src: "/images/products/the-ultimate-hydration-duo/hero.jpg",
+      alt: "The Ultimate Hydration Duo Gift Set luxury plum gift box containing Hydrating Serum and Double Hydration Boost Gel UK",
+    },
+    {
+      src: "/images/products/buudy-hydrating-serum/hero.jpg",
+      alt: "Buudy Deep Hydrating Serum 30ml bottle and packaging box",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-double-hydration-boost-gel-hero-uk.webp",
+      alt: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel hero UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-water-optical-clarity-caustics-uk.webp",
+      alt: "Optical hydrogel caustics in clear water demonstrating zero light scattering",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-neck-decolletage-glow-model-uk.webp",
+      alt: "Radiant, plump skin on neck and decolletage after using Buudy Hydration Duo",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp",
+      alt: "Model with glass skin holding Buudy hydration product",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Included Items", value: "1x Double Hydration Boost Gel 30ml + 1x Deep Hydrating Serum 30ml" },
+    { label: "Packaging", value: "Luxury Panoramic Plum Rigid Gift Carton with Gold Foil Detailing" },
+    { label: "Active Synergy", value: "Multi-Molecular Hyaluronic Acid + Cloudberry, Peony & Provitamin B5" },
+    { label: "LED Mask Pairing", value: "100% Optical Light-Permeable for Enhanced 630nm/830nm Phototherapy" },
+    { label: "Savings", value: "50% Bundle Saving vs Individual Products (£40 Total Value)" },
+    { label: "Standards", value: "ECOCERT COSMOS Certified / Dermatologically Tested / Vegan" },
+  ],
+  included: [
+    { quantity: "1x", label: "30ml Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel" },
+    { quantity: "1x", label: "30ml Buudy Deep Hydrating Serum with Nordic Cloudberry & Peony" },
+    { quantity: "1x", label: "Luxury Buudy Deep Plum Rigid Gift Collection Sleeve Box" },
+  ],
+  highlights: [
+    "Aloe Barbadensis (Aloe) Leaf Juice*",
+    "Aqua/Water",
+    "Glycerin**",
+    "Sodium PCA",
+    "Sodium Hyaluronate (Multi-Molecular HA)",
+    "Hydrolyzed Hyaluronic Acid",
+    "Simmondsia Chinensis (Jojoba) Seed Oil*",
+    "Bisabolol*",
+    "Paeonia Lactiflora (Peony) Root Extract",
+    "Rubus Chamaemorus (Cloudberry) Fruit Extract*",
+    "Camellia Sinensis (White Tea) Leaf Extract*",
+    "Salvia Officinalis (Sage) Leaf Extract*",
+  ],
+  keyBenefits: [
+    "Complete 2-step hydration protocol delivering up to 72 hours of multi-depth moisture",
+    "Zero-scattering water hydrogel primes skin for 100% unimpeded LED phototherapy",
+    "Antioxidant cloudberry and peony extracts nourish and defend cellular moisture barrier",
+    "Bespoke luxury plum gift packaging - perfect gift set or intensive personal treatment",
+  ],
+  badges: ["Gift Set Duo", "Save 50%", "ECOCERT COSMOS Natural"],
+  faqs: ultimateHydrationDuoFaqs,
+};
+
+export const antiAgePeptideCollection: Product = {
+  id: "anti-age-peptide-collection",
+  sku: "BUUDY-BOX-TRIO-PEP",
+  slug: "anti-age-peptide-collection",
+  template: "serum",
+  name: "Anti-Age Peptide Collection",
+  heroTitle: "Anti-Age Peptide Collection",
+  heroEmphasis: "",
+  shortDescription: "CLINICAL 3-STEP FIRMING, ELASTICITY & CONTOURING TRIO (Serum 30ml + Cream 50ml + Eye Cream 15ml)",
+  description: "The ultimate peptide-powered clinical anti-ageing ritual designed to target the three primary signs of dermal ageing: loss of firmness, expression lines, and periorbital fatigue. Features the full-size Collagen-Lock Hexapeptide Serum (30ml), Peptide Ageless AM/PM Cream (50ml), and Peptide Age-Defying Eye Cream (15ml). Housed in an exquisite panoramic plum gift carton.",
+  seoTitle: "Anti-Age Peptide Collection | Full 3-Step Routine | Buudy UK",
+  seoDescription: "Anti-Age Peptide Collection Gift Set with Collagen-Lock Serum, Ageless AM/PM Cream, and Age-Defying Eye Cream. Clinical Hexapeptide-11 firming care.",
+  currency: market.currency,
+  priceCents: 19900,
+  compareAtCents: 39900,
+  rating: 5.0,
+  reviewCount: 524,
+  customerCount: "18,000+",
+  promoCode: "",
+  promoLabel: "SAVE 50%",
+  cartImage: "/images/products/anti-age-peptide-collection/hero.jpg",
+  gallery: [
+    {
+      src: "/images/products/anti-age-peptide-collection/hero.jpg",
+      alt: "Anti-Age Peptide Collection luxury plum gift box containing Serum, Cream, and Eye Cream UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-ageless-am-pm-cream/hero.jpg",
+      alt: "Buudy Peptide Ageless AM/PM Cream 50ml jar and box",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/hero.jpg",
+      alt: "Buudy Peptide Age-Defying Eye Cream 15ml precision tube and box",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-architectural-pair-plinth-uk.webp",
+      alt: "Buudy Collagen-Lock Hexapeptide Serum architectural pair display",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
+      alt: "Two-hand application ritual using Buudy Peptide anti-ageing skincare",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Included Items", value: "1x Peptide Serum 30ml + 1x AM/PM Cream 50ml + 1x Eye Cream 15ml" },
+    { label: "Packaging", value: "Panoramic Luxury Plum Gift Carton with Gold Foil Inscriptions" },
+    { label: "Active Synergy", value: "Hexapeptide-11 + Dipalmitoyl Hydroxyproline + Borage & Jojoba Matrix" },
+    { label: "Regimen", value: "Complete 3-Step AM/PM Anti-Ageing and Post-LED Phototherapy Protocol" },
+    { label: "Savings", value: "Over 51% Bundle Saving vs Individual Products (£65 Total Value)" },
+    { label: "Standards", value: "ECOCERT COSMOS Certified / Dermatologically Approved / Vegan" },
+  ],
+  included: [
+    { quantity: "1x", label: "30ml Buudy Collagen-Lock Hexapeptide Firming Serum" },
+    { quantity: "1x", label: "50ml Buudy Peptide Ageless AM/PM Cream in Luxury Jar" },
+    { quantity: "1x", label: "15ml Buudy Peptide Age-Defying Eye Cream in Precision Tube" },
+    { quantity: "1x", label: "Luxury Buudy Panoramic Deep Plum Collection Gift Carton" },
+  ],
+  highlights: [
+    "Hexapeptide-11 (Bio-Fermented Peptide)",
+    "Dipalmitoyl Hydroxyproline",
+    "Sodium PCA (2%)",
+    "Sodium Hyaluronate (Multi-Molecular HA)",
+    "Hydrolyzed Hyaluronic Acid",
+    "Simmondsia Chinensis (Jojoba) Seed Oil*",
+    "Borago Officinalis (Borage) Seed Oil*",
+    "Mangifera Indica (Mango) Seed Butter*",
+    "Vaccinium Myrtillus (Blueberry) Seed Oil*",
+    "Fragaria Ananassa (Strawberry) Seed Oil*",
+    "Ginkgo Biloba Leaf Extract*",
+    "Ascorbyl Palmitate (Vitamin C)",
+    "Tocopherol (Vitamin E)",
+  ],
+  keyBenefits: [
+    "Comprehensive 3-step Hexapeptide-11 routine for face, neck, and periorbital contours",
+    "Boosts cellular collagen synthesis and elasticity while softening fine lines",
+    "Targeted eye cream attenuates crow's feet, puffiness, and dehydration creping",
+    "Presented in bespoke luxury deep plum packaging with over 51% bundle savings",
+  ],
+  badges: ["Full 3-Step Routine", "Save 51%", "Hexapeptide-11 Matrix"],
+  faqs: antiAgePeptideCollectionFaqs,
+};
+
+export const theUltimateRenewalCollectionBox: Product = {
+  id: "the-ultimate-renewal-collection-box",
+  sku: "BUUDY-BOX-TRIO-REN",
+  slug: "the-ultimate-renewal-collection-box",
+  template: "serum",
+  name: "The Ultimate Renewal Collection Box",
+  heroTitle: "The Ultimate Renewal Collection Box",
+  heroEmphasis: "",
+  shortDescription: "CLINICAL CELLULAR RESURFACING, DEEP HYDRATION & COLLAGEN-LOCK TRILOGY (3 x 30ml)",
+  description: "A comprehensive clinical skincare trilogy designed for total epidermal renewal and dermal rejuvenation. Combines our AHA 10% Lactic Acid Peeling Concentrate (overnight cellular resurfacing), Hyaluronic Acid 2% + B5 Double Hydration Boost Gel (optical hydrogel plumping primer), and Collagen-Lock Hexapeptide Serum (post-phototherapy firming). Housed in a vertical luxury deep plum collection box.",
+  seoTitle: "The Ultimate Renewal Collection Box (3 x 30ml) | Buudy UK",
+  seoDescription: "The Ultimate Renewal Collection Box with 10% AHA Peeling Concentrate, Hyaluronic Acid Gel, and Peptide Serum in a luxury gift box.",
+  currency: market.currency,
+  priceCents: 19900,
+  compareAtCents: 39900,
+  rating: 5.0,
+  reviewCount: 489,
+  customerCount: "15,000+",
+  promoCode: "",
+  promoLabel: "SAVE 50%",
+  cartImage: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-inside-packaging-uk.webp",
+  gallery: [
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-inside-packaging-uk.webp",
+      alt: "The Ultimate Renewal Collection Box open packaging displaying all 3 full-size serums nested inside luxury plum gift box UK",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-weekly-skincare-rhythm-guide-uk.webp",
+      alt: "Weekly skincare rhythm guide: alternating weekly AHA exfoliation with daily LED priming and peptide collagen-locking",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-textures-comparison-uk.webp",
+      alt: "Three textures comparison: clear optical hydrogel, silky firming serum, and clarifying lactic acid peeling fluid",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-hydration-spotlight-ha-gel-uk.webp",
+      alt: "Step 01 Hydration Spotlight: Double Hydration Boost Gel 30ml with multi-depth Hyaluronic Acid and Provitamin B5",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-peptide-spotlight-serum-uk.webp",
+      alt: "Step 02 Firming Spotlight: Collagen-Lock Hexapeptide-11 Serum 30ml to boost elasticity and soften fine lines",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-overnight-exfoliation-aha-peel-uk.webp",
+      alt: "Step 03 Exfoliation Spotlight: AHA 10% Lactic Acid Peeling Concentrate 30ml for gentle overnight cellular resurfacing",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-collection-plum-studio-trio-uk.webp",
+      alt: "The Ultimate Renewal Trio: AHA Peeling Concentrate, Double Hydration Boost Gel, and Peptide Serum on plum studio backdrop",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-luxury-plum-sleeve-packaging-uk.webp",
+      alt: "Luxury vertical deep plum sleeve carton packaging with gold foil inscriptions and magnetic closure",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-satin-silk-editorial-still-life-uk.webp",
+      alt: "The Ultimate Renewal Collection Box displayed on draped ivory satin silk still-life setting",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp",
+      alt: "Model hands presenting The Ultimate Renewal Collection Gift Box set",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-step-skincare-in-use-uk.webp",
+      alt: "Complete 3-step renewal ritual in use: exfoliate, hydrate, and treat for radiant skin",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp",
+      alt: "Full-size 3 x 30ml luxury gifting presentation box set with over 50% bundle savings",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Included Items", value: "1x AHA Peel 30ml + 1x Double Hydration Gel 30ml + 1x Peptide Serum 30ml" },
+    { label: "Packaging", value: "Vertical Luxury Deep Plum Collection Gift Carton with Gold Foil Accents" },
+    { label: "Active Synergy", value: "10% Lactic Acid (AHA) + 2% Multi-Depth HA + Hexapeptide-11 Matrix" },
+    { label: "Regimen", value: "Weekly Resurfacing + Daily Light-Permeable Hydration & Firming" },
+    { label: "Savings", value: "Over 50% Bundle Saving vs Individual Items (£60 Total Value)" },
+    { label: "Standards", value: "ECOCERT COSMOS Certified / Dermatologically Tested / Vegan" },
+  ],
+  included: [
+    { quantity: "1x", label: "30ml Buudy AHA 10% Lactic Acid Peeling Concentrate" },
+    { quantity: "1x", label: "30ml Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel" },
+    { quantity: "1x", label: "30ml Buudy Collagen-Lock Hexapeptide Firming Serum" },
+    { quantity: "1x", label: "Luxury Buudy Vertical Deep Plum Collection Gift Carton" },
+  ],
+  highlights: [
+    "Lactic Acid (10% Plant-Derived AHA)",
+    "Sodium Hyaluronate (Multi-Molecular HA)",
+    "Hydrolyzed Hyaluronic Acid",
+    "Hexapeptide-11 (Bio-Fermented Peptide)",
+    "Sodium PCA",
+    "Provitamin B5",
+    "Camellia Sinensis (White Tea) Leaf Extract*",
+    "Salvia Officinalis (Sage) Leaf Extract*",
+    "Aloe Barbadensis (Aloe) Leaf Juice*",
+    "Aqua/Water",
+  ],
+  keyBenefits: [
+    "Complete trilogy targeting dullness, cellular dehydration, and loss of firmness",
+    "10% plant-based AHA gently sweeps away dead cells for radiant cellular turnover",
+    "Optical hydrogel primes skin for 100% unimpeded LED phototherapy light absorption",
+    "Over 50% bundle savings in a bespoke luxury presentation box",
+  ],
+  badges: ["Renewal Trilogy", "Save 50%", "AHA + HA + Peptide"],
+  faqs: ultimateRenewalCollectionFaqs,
+};
+
 export const products = [
   buudyMask,
   buudyRedTorch,
@@ -1829,6 +2647,13 @@ export const products = [
   buudyFaceWash,
   buudyPrebioticSerum,
   buudyNoniSerum,
+  buudyHydratingSerum,
+  buudyPeptideCream,
+  buudyPeptideEyeCream,
+  buudyAhaPeelingConcentrate,
+  theUltimateHydrationDuo,
+  antiAgePeptideCollection,
+  theUltimateRenewalCollectionBox,
 ];
 
 export const productsById = Object.fromEntries(
@@ -1877,7 +2702,59 @@ export function getProductBySlug(slug: string) {
   ) {
     return buudyPrebioticSerum;
   }
-  return products.find((product) => product.slug === slug);
+  if (
+    slug === "hydrating-serum" ||
+    slug === "buudy-hydrating-serum" ||
+    slug === "deep-hydrating-serum" ||
+    slug === "buudy-deep-hydrating-serum"
+  ) {
+    return buudyHydratingSerum;
+  }
+  if (
+    slug === "peptide-ageless-am-pm-cream" ||
+    slug === "buudy-peptide-ageless-am-pm-cream" ||
+    slug === "peptide-cream" ||
+    slug === "buudy-peptide-cream"
+  ) {
+    return buudyPeptideCream;
+  }
+  if (
+    slug === "peptide-age-defying-eye-cream" ||
+    slug === "buudy-peptide-age-defying-eye-cream" ||
+    slug === "peptide-eye-cream" ||
+    slug === "buudy-peptide-eye-cream"
+  ) {
+    return buudyPeptideEyeCream;
+  }
+  if (
+    slug === "aha-peeling-concentrate" ||
+    slug === "buudy-aha-peeling-concentrate" ||
+    slug === "aha-peel" ||
+    slug === "buudy-aha-peel"
+  ) {
+    return buudyAhaPeelingConcentrate;
+  }
+  if (
+    slug === "the-ultimate-hydration-duo" ||
+    slug === "ultimate-hydration-duo"
+  ) {
+    return theUltimateHydrationDuo;
+  }
+  if (
+    slug === "anti-age-peptide-collection" ||
+    slug === "anti-age-peptide-gift-box" ||
+    slug === "peptide-collection-box"
+  ) {
+    return antiAgePeptideCollection;
+  }
+  if (
+    slug === "the-ultimate-renewal-collection-box" ||
+    slug === "ultimate-renewal-collection-box" ||
+    slug === "the-ultimate-renewal-collection"
+  ) {
+    return theUltimateRenewalCollectionBox;
+  }
+  return products.find((product) => product.slug === slug || product.id === slug);
 }
 
 export function getProductById(id: string) {
