@@ -2748,6 +2748,24 @@ export function getProductBySlug(slug: string) {
     return antiAgePeptideCollection;
   }
   if (
+    slug === "buudy-retinol-alternative-repair-serum" ||
+    slug === "buudy-retinol-alternative" ||
+    slug === "retinol-alternative" ||
+    slug === "retinol-alternative-serum" ||
+    slug === "buudy-phyto-renew-retinol-alternative-serum"
+  ) {
+    return buudyRetinolAlternativeSerum;
+  }
+  if (
+    slug === "buudy-clarifying-niacinamide-gel" ||
+    slug === "buudy-niacinamide-gel" ||
+    slug === "niacinamide-gel" ||
+    slug === "buudy-blemish-defense-niacinamide-gel" ||
+    slug === "buudy-blemish-defence-niacinamide-gel"
+  ) {
+    return buudyNiacinamideGel;
+  }
+  if (
     slug === "the-ultimate-renewal-collection-box" ||
     slug === "ultimate-renewal-collection-box" ||
     slug === "the-ultimate-renewal-collection"

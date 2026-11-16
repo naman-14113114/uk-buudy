@@ -67,6 +67,14 @@ export function generateStaticParams() {
     { slug: "peptide-collection-box" },
     { slug: "ultimate-renewal-collection-box" },
     { slug: "the-ultimate-renewal-collection" },
+    { slug: "buudy-retinol-alternative-repair-serum" },
+    { slug: "buudy-retinol-alternative" },
+    { slug: "retinol-alternative" },
+    { slug: "retinol-alternative-serum" },
+    { slug: "buudy-clarifying-niacinamide-gel" },
+    { slug: "buudy-niacinamide-gel" },
+    { slug: "niacinamide-gel" },
+    { slug: "buudy-blemish-defence-niacinamide-gel" },
   ];
   return [...baseParams, ...aliases];
 }
