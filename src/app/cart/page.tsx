@@ -19,9 +19,10 @@ export const metadata: Metadata = {
 export default function CartPage() {
   return (
     <>
-    <link rel="preconnect" href="https://buudy.com" />
-    <CartPageContent
-      initialCustomer={{
+      <link rel="dns-prefetch" href="https://buudy.com" />
+      <link rel="preconnect" href="https://buudy.com" crossOrigin="anonymous" />
+      <CartPageContent
+        initialCustomer={{
         fullName: "",
         email: "",
         phone: "",
