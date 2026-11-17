@@ -37,6 +37,7 @@ export const VALID_PROMO_CODES: Record<
   BUUDY: { code: "BUUDY10", discountCents: 1000, type: "promo" },
   BUUDYBF20: { code: "BUUDYBF20", discountCents: 2000, type: "promo" },
   BUUDY10BLACKFRIDAY10: { code: "BUUDY10BLACKFRIDAY10", discountCents: 2000, type: "promo" },
+  VIP50: { code: "VIP50", discountCents: 5000, type: "promo" },
 };
 
 export const emptyCart: CartState = {
