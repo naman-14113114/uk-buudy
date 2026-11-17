@@ -58,6 +58,8 @@ export function StickyAddToCart({
     product.id.includes("aha") ||
     product.id.includes("peptide") ||
     product.slug.includes("peptide") ||
+    product.slug.includes("eye") ||
+    product.id.includes("eye") ||
     product.slug.includes("collagen");
 
   const giftLabel = isSimplifiedProduct

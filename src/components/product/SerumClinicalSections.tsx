@@ -19,6 +19,7 @@ export function SerumClinicalResults({
   const statRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [values, setValues] = useState<number[]>([0, 0, 0, 0]);
 
+  const isEyeCream = productSlug === "buudy-peptide-age-defying-eye-cream" || productSlug.includes("eye-cream") || productSlug.includes("eye");
   const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
 
   const stats = useMemo(() => {
@@ -186,7 +187,9 @@ export function SerumClinicalResults({
     };
   }, [targets]);
 
-  const imageSrc = isRenewalBox
+  const imageSrc = isEyeCream
+    ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp"
+    : isRenewalBox
     ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-plum-sleeve-detail-editorial-uk.webp"
     : isAha
     ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp"
@@ -196,7 +199,9 @@ export function SerumClinicalResults({
     ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-box-three-quarter-display-uk.webp"
     : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-neck-and-collarbone-beauty-glow-uk.webp";
 
-  const imageAlt = isRenewalBox
+  const imageAlt = isEyeCream
+    ? "Model eye area portrait showcasing visibly smoothed periorbital contours and diminished crow's feet after Buudy Peptide Eye Cream ritual UK"
+    : isRenewalBox
     ? "The Ultimate Renewal Collection Box deep plum carton sleeve architectural detail and gold foil typography UK"
     : isAha
     ? "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling Concentrate treatment UK"
@@ -323,9 +328,28 @@ export function SerumHowToUse({
   isAha?: boolean;
   productSlug?: string;
 } = {}) {
+  const isEyeCream = productSlug === "buudy-peptide-age-defying-eye-cream" || productSlug.includes("eye-cream") || productSlug.includes("eye");
   const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
 
-  const steps = isRenewalBox
+  const steps = isEyeCream
+    ? [
+        {
+          num: "01",
+          title: "Cleanse & Prime",
+          desc: "Cleanse periorbital area thoroughly and complete your Buudy LED Mask session to boost cellular micro-circulation.",
+        },
+        {
+          num: "02",
+          title: "Dispense Precision Droplet",
+          desc: "Gently press a rice-grain amount from the needle-nose applicator directly onto your ring fingertip.",
+        },
+        {
+          num: "03",
+          title: "Dot & Pat Eye Contours",
+          desc: "Lightly pat along the orbital bone, crow's feet, and under-eye area in outward tapping motions until fully absorbed.",
+        },
+      ]
+    : isRenewalBox
     ? [
         {
           num: "01",
@@ -415,7 +439,9 @@ export function SerumHowToUse({
         },
       ];
 
-  const introText = isRenewalBox
+  const introText = isEyeCream
+    ? "Precision ophthalmic periorbital formula enriched with bio-fermented Hexapeptide-11 and borage seed oil to target crow's feet and restore delicate contour bounce."
+    : isRenewalBox
     ? "A synchronized 3-step ritual combining weekly resurfacing, daily optical hydrogel priming, and post-phototherapy collagen firming."
     : isAha
     ? "Gentle overnight resurfacing concentrate formulated with 10% plant Lactic Acid and 1% Hyaluronic Acid for smooth, refined radiance."
@@ -432,7 +458,9 @@ export function SerumHowToUse({
         <div className="relative overflow-hidden rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
           <Image
             src={
-              isRenewalBox
+              isEyeCream
+                ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-plum-reflection-display-uk.webp"
+                : isRenewalBox
                 ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp"
                 : isAha
                 ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp"
@@ -443,7 +471,9 @@ export function SerumHowToUse({
                 : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-three-quarter-plum-backdrop-uk.webp"
             }
             alt={
-              isRenewalBox
+              isEyeCream
+                ? "Buudy Peptide Eye Cream precision tube displayed with subtle reflection on signature deep plum studio backdrop UK"
+                : isRenewalBox
                 ? "The Ultimate Renewal Collection Box gift packaging held in hand UK"
                 : isAha
                 ? "Buudy AHA Peeling Concentrate bottle and luxury packaging carton on deep plum studio backdrop UK"

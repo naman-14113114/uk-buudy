@@ -78,6 +78,8 @@ export function ProductPage({
         product.id !== "buudy-light-activating-hyaluronic-serum" &&
         product.slug !== "the-ultimate-renewal-collection-box" &&
         product.id !== "the-ultimate-renewal-collection-box" &&
+        product.slug !== "buudy-peptide-age-defying-eye-cream" &&
+        product.id !== "buudy-peptide-age-defying-eye-cream" &&
         !isPeptide &&
         !isAha && (
           <TrustBadges />

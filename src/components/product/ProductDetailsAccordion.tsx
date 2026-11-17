@@ -75,10 +75,8 @@ function getSpecIcon(label: string) {
   if (normLabel.includes("hydration") || normLabel.includes("matrix") || normLabel.includes("ingredient") || normLabel.includes("moisture") || normLabel.includes("cushion")) return Droplets;
   if (normLabel.includes("regimen") || normLabel.includes("step") || normLabel.includes("routine") || normLabel.includes("usage")) return Calendar;
   if (normLabel.includes("savings") || normLabel.includes("saving") || normLabel.includes("value") || normLabel.includes("discount") || normLabel.includes("price")) return Tag;
-  if (normLabel.includes("volume") || normLabel.includes("size") || normLabel.includes("capacity") || normLabel.includes("bottle") || normLabel.includes("pump")) return Pipette;
-  if (normLabel.includes("skin") || normLabel.includes("compatib") || normLabel.includes("barrier") || normLabel.includes("type")) return Smile;
-  if (normLabel.includes("manufactur") || normLabel.includes("certif") || normLabel.includes("origin") || normLabel.includes("standard")) return ShieldCheck;
-  if (normLabel.includes("optical") || normLabel.includes("transparency")) return Eye;
+  if (normLabel.includes("circulation") || normLabel.includes("eye") || normLabel.includes("optical") || normLabel.includes("transparency")) return Eye;
+  if (normLabel.includes("volume") || normLabel.includes("size") || normLabel.includes("capacity") || normLabel.includes("bottle") || normLabel.includes("pump") || normLabel.includes("tube")) return Pipette;
   if (normLabel.includes("synergy") || normLabel.includes("light") || normLabel.includes("wavelength") || normLabel.includes("irradiance")) return SunMedium;
   if (normLabel.includes("dimension")) return Ruler;
   if (normLabel.includes("led")) return Lightbulb;

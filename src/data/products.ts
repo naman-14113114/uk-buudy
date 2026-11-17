@@ -1990,120 +1990,76 @@ export const buudyPeptideEyeCream: Product = {
   sku: "BUUDY-EYE-PEP-15",
   slug: "buudy-peptide-age-defying-eye-cream",
   template: "serum",
-  name: "Buudy Peptide Eye Cream (15ml)",
-  heroTitle: "Buudy Peptide Eye Cream (15ml)",
+  name: "Buudy Peptide Eye Cream",
+  heroTitle: "Buudy Peptide Eye Cream",
   heroEmphasis: "",
   shortDescription: "CLINICAL-GRADE TARGETED CROW'S FEET, PUFFINESS & FIRMING EYE TREATMENT (15ml)",
   description: "Targeted micro-contour eye cream specifically calibrated for the fragile periorbital tissue. Powered by a concentrated peptide complex featuring bio-fermented Hexapeptide-11, collagen-protecting Dipalmitoyl Hydroxyproline, and gamma-linolenic-rich borage seed oil. Instantly smooths micro-creping, attenuates the depth of crow's feet, and drenches the under-eye area in weightless hydration via 2% Sodium PCA and antioxidant Ginkgo Biloba leaf extract.",
-  seoTitle: "Buudy Peptide Eye Cream (15ml) | Anti-Ageing Eye Care | Buudy UK",
+  seoTitle: "Buudy Peptide Eye Cream | Anti-Ageing Eye Care | Buudy UK",
   seoDescription: "Targeted Buudy Peptide Eye Cream with Hexapeptide-11, hydroxyproline, and borage seed oil for smoother, firmer under-eyes and crow's feet reduction.",
   currency: market.currency,
   priceCents: 9900,
-  compareAtCents: 19900,
+  compareAtCents: 11900,
   rating: 4.9,
   reviewCount: 298,
   customerCount: "8,500+",
   promoCode: "",
-  promoLabel: "SAVE 50%",
-  cartImage: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-ivory-hero-uk.webp",
+  promoLabel: "SAVE 17%",
+  cartImage: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-arched-architectural-light-uk.webp",
   gallery: [
     {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-ivory-hero-uk.webp",
-      alt: "Buudy Peptide Eye Cream 15ml precision needle-nose tube and luxury deep plum packaging carton hero UK",
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-arched-architectural-light-uk.webp",
+      alt: "Buudy Peptide Eye Cream 15ml precision tube and luxury carton under architectural arched lighting UK",
     },
     {
       src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-clinical-formula-facts-uk.webp",
-      alt: "Clinical formula facts: 99% natural origin, 8% organic content, ECOCERT COSMOS Natural certified",
+      alt: "Clinical formula facts: 99% natural origin, 8% organic content, ECOCERT COSMOS Natural certified eye cream UK",
     },
     {
       src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-who-it-is-for-guide-uk.webp",
-      alt: "Who it is for guide: targeted anti-ageing care for crow's feet, under-eye puffiness, and loss of firmness",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-hexapeptide-benefits-uk.webp",
-      alt: "Clinical peptide benefits: bio-fermented Hexapeptide-11 stimulating collagen synthesis around delicate eye contours",
+      alt: "Who it is for: targeted periorbital care for crow's feet, under-eye puffiness, and skin firmness loss UK",
     },
     {
       src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-key-ingredients-borage-uk.webp",
-      alt: "Key ingredients breakdown: Hexapeptide-11, gamma-linolenic borage seed oil, and Ginkgo Biloba extract",
+      alt: "Key active ingredients: Hexapeptide-11, gamma-linolenic borage seed oil, and Ginkgo Biloba extract UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-hexapeptide-benefits-uk.webp",
+      alt: "Clinical peptide benefits: bio-fermented Hexapeptide-11 stimulating collagen synthesis around eye contours UK",
     },
     {
       src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-benefits-velvet-texture-uk.webp",
-      alt: "Velvety, fast-absorbing eye cream texture swatch providing weightless hydration without migration",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-tube-front-view-uk.webp",
-      alt: "Front view of Buudy Peptide Eye Cream 15ml ophthalmic precision tube",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-luxury-carton-front-uk.webp",
-      alt: "Buudy Peptide Eye Cream deep plum outer carton with gold accents",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-three-quarter-pair-uk.webp",
-      alt: "Three-quarter perspective of Buudy Peptide Eye Cream tube and presentation carton",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-limestone-pedestal-uk.webp",
-      alt: "Buudy Peptide Eye Cream displayed on natural limestone architectural plinth",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-carton-side-angle-uk.webp",
-      alt: "Side angle of luxury Buudy Eye Cream packaging detailing volume and clinical credentials",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-overhead-flat-lay-uk.webp",
-      alt: "Overhead flat-lay composition of Buudy Peptide Eye Cream tube and carton",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-precision-applicator-macro-uk.webp",
-      alt: "Macro detail of precision ophthalmic applicator tip dispensing delicate cream droplet",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-plum-reflection-display-uk.webp",
-      alt: "Reflective plum mirror studio display of Buudy Peptide Eye Cream",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-arched-architectural-light-uk.webp",
-      alt: "Arched architectural light study featuring Buudy Peptide Eye Cream",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-campaign-hero-editorial-uk.webp",
-      alt: "Buudy Peptide Eye Cream editorial campaign display on luxury stone pedestal",
+      alt: "Velvety, fast-absorbing eye cream texture swatch delivering weightless hydration without migration UK",
     },
     {
       src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-formula-swatch-texture-uk.webp",
-      alt: "Silky micro-contour formula texture swatch on glass tile",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-formula-droplet-macro-uk.webp",
-      alt: "High-resolution macro droplet swatch of nourishing peptide eye cream",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-pump-dispensing-ritual-uk.webp",
-      alt: "Precision fingertip dispensing ritual for delicate periorbital application",
-    },
-    {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp",
-      alt: "Model with visibly smoothed under-eye contours, softened crow's feet, and luminous skin",
+      alt: "Silky micro-contour formula texture swatch on glass tile demonstrating non-creasing finish UK",
     },
     {
       src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-texture-on-hand-swatch-uk.webp",
-      alt: "Silky peptide cream swatch on hand demonstrating fast absorption and zero greasy residue",
+      alt: "Silky peptide cream swatch on hand demonstrating rapid dermal absorption with zero greasy residue UK",
     },
     {
       src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-plum-manicure-handheld-uk.webp",
-      alt: "Model hand holding Buudy Peptide Eye Cream tube in studio lighting",
+      alt: "Model hand with signature plum manicure holding Buudy Peptide Eye Cream precision tube in studio UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp",
+      alt: "Model eye area portrait showcasing smoothed under-eye contours and diminished crow's feet lines UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-pump-dispensing-ritual-uk.webp",
+      alt: "Precision fingertip dispensing ritual for delicate periorbital eye cream application UK",
     },
   ],
   gifts: [],
   specs: [
-    { label: "Target Complex", value: "Hexapeptide-11 + Dipalmitoyl Hydroxyproline + Borage Seed Oil" },
-    { label: "Hydration Cushion", value: "2% Sodium PCA + Hyaluronic Acid & Mango Butter" },
-    { label: "Micro-Circulation", value: "Ginkgo Biloba Leaf Extract + Vitamin C & E" },
-    { label: "Volume", value: "15ml / 0.51 fl oz Precision Needle-Nose Ophthalmic Tube" },
-    { label: "Regimen Step", value: "AM & PM Targeted Eye Contouring Step" },
-    { label: "Certification", value: "ECOCERT COSMOS Natural / 99% Natural Origin / Vegan" },
+    { label: "Active Peptides", value: "Hexapeptide-11 & Hydroxyproline" },
+    { label: "Hydration Matrix", value: "2% Sodium PCA & Hyaluronic Acid" },
+    { label: "Micro-Circulation", value: "Ginkgo Biloba & Vitamin C + E" },
+    { label: "Volume", value: "15ml / 0.51 fl oz Precision Tube" },
+    { label: "Regimen", value: "AM & PM Targeted Eye Contour" },
+    { label: "Standards", value: "ECOCERT COSMOS Natural & Vegan" },
   ],
   included: [{ quantity: "1x", label: "15ml Buudy Peptide Age-Defying Eye Cream in Precision Tube" }],
   highlights: [
@@ -2128,7 +2084,18 @@ export const buudyPeptideEyeCream: Product = {
     "Ginkgo biloba extract enhances micro-circulation to diminish morning puffiness",
     "Weightless, non-migrating texture creates a silky, crease-free base for concealer",
   ],
-  badges: ["Hexapeptide-11 + Borage", "Periorbital Contour Care", "ECOCERT COSMOS Natural"],
+  badges: [
+    "COSMOS NATURAL Certified by ECOCERT Greenlife",
+    "FDA Registered & Compliant Facility",
+    "ISO 22716:2007 GMP Certified",
+    "100% Vegan Certified",
+    "Cruelty-Free (Zero Animal Testing)",
+    "Dermatologically Tested & Approved",
+    "99% Natural Origin & 8% Organic Farming",
+    "Clean Beauty (Paraben, Sulphate & Silicone Free)",
+    "Gluten-Free & Nut-Free Formulation",
+    "CE & UKCA Compliant European Standards",
+  ],
   faqs: peptideEyeCreamFaqs,
 };
 
@@ -2353,7 +2320,7 @@ export const antiAgePeptideCollection: Product = {
       alt: "Buudy Peptide Ageless AM/PM Cream 50ml jar and box",
     },
     {
-      src: "/images/products/buudy-peptide-age-defying-eye-cream/hero.jpg",
+      src: "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-arched-architectural-light-uk.webp",
       alt: "Buudy Peptide Age-Defying Eye Cream 15ml precision tube and box",
     },
     {
