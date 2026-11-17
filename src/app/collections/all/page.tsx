@@ -20,6 +20,14 @@ export const metadata: Metadata = {
   },
 };
 
+const EXCLUDED_SCHEMA_IDS = new Set([
+  "buudy-package-protection",
+  "buudy-phyto-renew-retinol-alternative-serum",
+  "buudy-blemish-defense-niacinamide-gel",
+  "buudy-hydrating-serum",
+  "the-ultimate-hydration-duo",
+]);
+
 export default function CollectionsAllPage() {
   const itemListSchema = {
     "@context": "https://schema.org",
@@ -31,7 +39,7 @@ export default function CollectionsAllPage() {
     mainEntity: {
       "@type": "ItemList",
       itemListElement: products
-        .filter((p) => p.id !== "buudy-package-protection")
+        .filter((p) => !EXCLUDED_SCHEMA_IDS.has(p.id))
         .map((p, index) => ({
           "@type": "ListItem",
           position: index + 1,

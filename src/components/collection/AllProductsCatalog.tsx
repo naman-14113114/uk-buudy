@@ -3,13 +3,21 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, ShoppingBag, Star, Sparkles, ShieldCheck, Truck, Clock, RefreshCw } from "lucide-react";
+import { Check, ShoppingBag, Truck, ShieldCheck, RefreshCw, Clock } from "lucide-react";
 import { products, type Product } from "@/data/products";
-import { formatMoney, percentOff } from "@/lib/money";
+import { formatMoney } from "@/lib/money";
 import { useCart } from "@/components/cart/CartProvider";
 
 type CategoryFilter = "all" | "devices" | "skincare" | "bundles" | "digital";
 type SortOption = "featured" | "price-asc" | "price-desc" | "rating";
+
+const EXCLUDED_PRODUCT_IDS = new Set([
+  "buudy-package-protection",
+  "buudy-phyto-renew-retinol-alternative-serum",
+  "buudy-blemish-defense-niacinamide-gel",
+  "buudy-hydrating-serum",
+  "the-ultimate-hydration-duo",
+]);
 
 function getProductCategory(product: Product): "devices" | "skincare" | "bundles" | "digital" {
   if (
@@ -21,7 +29,6 @@ function getProductCategory(product: Product): "devices" | "skincare" | "bundles
   }
   if (
     product.id === "the-ultimate-renewal-collection-box" ||
-    product.id === "the-ultimate-hydration-duo" ||
     product.id === "anti-age-peptide-collection"
   ) {
     return "bundles";
@@ -32,23 +39,85 @@ function getProductCategory(product: Product): "devices" | "skincare" | "bundles
   return "skincare";
 }
 
-function getCategorySubtitle(product: Product): string {
-  const cat = getProductCategory(product);
-  if (cat === "devices") {
-    if (product.id === "buudy-led-mask") return "7-Colour Clinical Phototherapy";
-    if (product.id === "buudy-red-light-torch") return "Targeted Red & NIR Spot Therapy";
-    if (product.id === "buudy-ipl-device") return "Sapphire Ice Permanent IPL";
-    return "Light Therapy Technology";
+function getProductDisplayInfo(product: Product) {
+  let title = product.name.replace(/\s*\(\d+\s*ml\)/gi, "").trim();
+  let subtitle = "Clinical Formulation";
+  let benefit = product.shortDescription;
+
+  switch (product.id) {
+    case "buudy-led-mask":
+      title = "Buudy 7 Colour LED Face Mask";
+      subtitle = "7-Colour Clinical Phototherapy";
+      benefit = "CE-certified clinical phototherapy mask with 7 wavelengths for targeted anti-ageing, acne control, and skin rejuvenation.";
+      break;
+    case "buudy-red-light-torch":
+      title = "Buudy Targeted Red Light Therapy Torch";
+      subtitle = "Targeted Red & NIR Therapy";
+      benefit = "Medical-grade 660nm red and 850nm near-infrared targeted phototherapy for deep cellular repair and localized spot treatments.";
+      break;
+    case "buudy-ipl-device":
+      title = "Buudy Sapphire Ice IPL Hair Removal Handset";
+      subtitle = "Sapphire Cooling IPL Technology";
+      benefit = "Virtually painless permanent hair reduction featuring Sapphire Ice Cooling contact technology and 999,999 flashes.";
+      break;
+    case "buudy-peptide-ageless-am-pm-cream":
+      title = "Buudy Peptide Ageless AM/PM Cream";
+      subtitle = "Multi-Peptide Restorative Cream";
+      benefit = "High-performance hexapeptide moisturiser engineered to visibly firm facial contours, boost elasticity, and deeply hydrate day and night.";
+      break;
+    case "buudy-peptide-age-defying-eye-cream":
+      title = "Buudy Peptide Age-Defying Eye Cream";
+      subtitle = "Targeted Periorbital Treatment";
+      benefit = "Concentrated micro-contour peptide cream calibrated to soften crow's feet, attenuate under-eye puffiness, and brighten dark circles.";
+      break;
+    case "buudy-peptide-serum":
+      title = "Buudy Peptide Anti-Ageing Serum";
+      subtitle = "Collagen-Lock Hexapeptide Serum";
+      benefit = "Bio-fermented Hexapeptide-11 and Dipalmitoyl Hydroxyproline complex formulated to stimulate collagen synthesis and restore firmness.";
+      break;
+    case "buudy-light-activating-hyaluronic-serum":
+      title = "Buudy Light-Activating Hyaluronic Serum";
+      subtitle = "Pre-Light Optical Hydrogel Primer";
+      benefit = "100% water-based optical hydrogel matrix providing multi-depth cellular plumping and 72-hour deep moisture lock.";
+      break;
+    case "buudy-aha-peeling-concentrate":
+      title = "Buudy AHA Peeling Concentrate";
+      subtitle = "Overnight Resurfacing Peel";
+      benefit = "Potent yet gentle 10% botanical lactic acid peel that sweeps away dull cells, dissolves congested pores, and reveals luminous glass skin.";
+      break;
+    case "buudy-bioactive-prebiotics-serum":
+      title = "Buudy Bioactive Prebiotics Jelly Serum";
+      subtitle = "Microbiome Barrier Balancing Jelly";
+      benefit = "Lightweight prebiotic gel serum that balances skin microflora, reinforces the moisture barrier, and soothes reactive skin.";
+      break;
+    case "buudy-blemish-purifying-face-wash":
+      title = "Buudy Blemish-Purifying Face Wash";
+      subtitle = "Botanical Sebum-Balancing Cleanser";
+      benefit = "Gentle pH-balanced daily cleanser formulated with Nordic botanical stem cells to purify pores without stripping moisture.";
+      break;
+    case "the-ultimate-renewal-collection-box":
+      title = "The Ultimate Renewal Collection Box";
+      subtitle = "Luxury 4-Piece Clinical Ritual";
+      benefit = "Comprehensive clinical trilogy featuring AHA peel, hyaluronic gel, and peptide serum presented in a bespoke magnetic gift box.";
+      break;
+    case "anti-age-peptide-collection":
+      title = "Anti-Age Peptide Collection Box";
+      subtitle = "Tri-Active Peptide Treatment Set";
+      benefit = "The complete peptide-powered anti-ageing ritual combining full-size serum, AM/PM cream, and eye treatment in an exquisite gift carton.";
+      break;
+    case "buudy-skincare-ebook":
+      title = "The Science of Radiant Skin eBook";
+      subtitle = "Clinical Phototherapy Protocol";
+      benefit = "Definitive 40+ page clinical guide covering light therapy wavelengths, treatment schedules, and active ingredient layering.";
+      break;
+    case "buudy-gift-card":
+      title = "Buudy Official Digital E-Gift Card";
+      subtitle = "Digital Glow Voucher";
+      benefit = "The ultimate gift of radiant skin. Delivered instantly via electronic code to your email inbox, valid sitewide.";
+      break;
   }
-  if (cat === "bundles") {
-    return "Curated Treatment Set";
-  }
-  if (cat === "digital") {
-    return "Digital & Gifting";
-  }
-  if (product.template === "cleanser") return "Botanical Balancing Cleanser";
-  if (product.slug.includes("cream")) return "Multi-Peptide Dermal Care";
-  return "Clinical Bioactive Serum";
+
+  return { title, subtitle, benefit };
 }
 
 export function AllProductsCatalog() {
@@ -57,13 +126,13 @@ export function AllProductsCatalog() {
   const [sortBy, setSortBy] = useState<SortOption>("featured");
   const [addedProductId, setAddedProductId] = useState<string | null>(null);
 
-  // Filter out shipping protection & duplicates by id
+  // Filter out removed products & duplicates by id
   const catalogProducts = useMemo(() => {
     const seen = new Set<string>();
     const unique: Product[] = [];
 
     for (const p of products) {
-      if (p.id === "buudy-package-protection") continue;
+      if (EXCLUDED_PRODUCT_IDS.has(p.id)) continue;
       if (!seen.has(p.id)) {
         seen.add(p.id);
         unique.push(p);
@@ -120,9 +189,9 @@ export function AllProductsCatalog() {
   return (
     <div className="bg-[var(--cream)] min-h-screen text-[var(--plum)]">
       {/* Hero Banner */}
-      <section className="relative overflow-hidden pt-12 pb-14 md:pt-16 md:pb-20 border-b border-[rgba(46,16,47,0.08)] bg-gradient-to-b from-[#f8ede2] via-[var(--cream)] to-[var(--cream)]">
+      <section className="relative overflow-hidden pt-12 pb-12 md:pt-16 md:pb-16 border-b border-[rgba(46,16,47,0.08)] bg-gradient-to-b from-[#f8ede2] via-[var(--cream)] to-[var(--cream)]">
         <div className="buudy-wrap">
-          <nav className="flex items-center gap-2 text-xs text-[var(--muted)] mb-6 buudy-mono tracking-widest uppercase">
+          <nav className="flex items-center gap-2 text-xs text-[var(--muted)] mb-5 buudy-mono tracking-widest uppercase">
             <Link href="/" className="hover:text-[var(--plum)] transition-colors">Home</Link>
             <span>/</span>
             <span className="text-[var(--gold)]">All Products</span>
@@ -140,8 +209,8 @@ export function AllProductsCatalog() {
         </div>
       </section>
 
-      {/* Filter & Sort Controls */}
-      <section className="sticky top-0 z-20 bg-[var(--cream)]/95 backdrop-blur-md border-b border-[rgba(46,16,47,0.08)] py-3.5 transition-shadow">
+      {/* Filter & Sort Controls — NON-STICKY (scrolls naturally with page) */}
+      <section className="border-b border-[rgba(46,16,47,0.08)] py-5 bg-[var(--cream)]">
         <div className="buudy-wrap flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Category Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none -mx-4 px-4 md:mx-0 md:px-0">
@@ -157,10 +226,10 @@ export function AllProductsCatalog() {
                 <button
                   key={tab.id}
                   onClick={() => setSelectedCategory(tab.id as CategoryFilter)}
-                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium tracking-wide whitespace-nowrap transition-all duration-200 ${
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
                     active
                       ? "bg-[var(--plum)] text-[var(--cream)] shadow-sm"
-                      : "bg-white/80 text-[var(--plum)] border border-[rgba(46,16,47,0.1)] hover:border-[var(--gold)] hover:bg-white"
+                      : "bg-white/90 text-[var(--plum)] border border-[rgba(46,16,47,0.12)] hover:border-[var(--gold)] hover:bg-white"
                   }`}
                 >
                   <span>{tab.label}</span>
@@ -209,7 +278,7 @@ export function AllProductsCatalog() {
               <p className="text-lg text-[var(--plum)] font-semibold">No products found in this category.</p>
               <button
                 onClick={() => setSelectedCategory("all")}
-                className="mt-4 px-6 py-2.5 rounded-full bg-[var(--plum)] text-[var(--cream)] text-xs font-semibold uppercase tracking-wider hover:bg-[var(--plum-soft)] transition-colors"
+                className="mt-4 px-6 py-2.5 rounded-full bg-[var(--plum)] text-[var(--cream)] text-xs font-semibold uppercase tracking-wider hover:bg-[var(--plum-soft)] transition-colors cursor-pointer"
               >
                 View All Products
               </button>
@@ -217,128 +286,102 @@ export function AllProductsCatalog() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-7">
               {filteredAndSortedProducts.map((product, index) => {
-                const discount = percentOff(product.priceCents, product.compareAtCents);
-                const hasGifts = product.gifts && product.gifts.length > 0;
-                const isBestSeller = product.id === "buudy-led-mask" || product.id === "buudy-peptide-ageless-am-pm-cream";
                 const isAdded = addedProductId === product.id;
                 const imageSrc = product.cartImage || product.gallery?.[0]?.src || "/images/placeholder.webp";
-                const categorySubtitle = getCategorySubtitle(product);
+                const { title, subtitle, benefit } = getProductDisplayInfo(product);
 
                 return (
                   <div
                     key={product.id}
-                    className="group relative flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-[0_2px_12px_rgba(46,16,47,0.03)] hover:shadow-[0_16px_36px_rgba(46,16,47,0.09)] hover:border-[rgba(184,149,86,0.4)] transition-all duration-300"
+                    className="group flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-sm hover:shadow-xl hover:border-[rgba(184,149,86,0.4)] transition-all duration-300"
                   >
-                    {/* Image Area */}
+                    {/* End-to-end Image (Spans 100% width of card, zero padding, NOTHING on image) */}
                     <Link
                       href={`/products/${product.slug}`}
-                      className="relative aspect-square w-full bg-[#fbf7f1] overflow-hidden flex items-center justify-center p-6 border-b border-[rgba(46,16,47,0.05)] cursor-pointer"
+                      className="relative aspect-square w-full bg-[#fbf7f1] overflow-hidden block cursor-pointer"
                     >
                       <Image
                         src={imageSrc}
-                        alt={product.name}
+                        alt={title}
                         fill
                         sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw"
-                        className="object-contain p-4 transition-transform duration-500 ease-out group-hover:scale-106"
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                         priority={index < 4}
                       />
-
-                      {/* Floating Badges */}
-                      <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start pointer-events-none z-10">
-                        {isBestSeller && (
-                          <span className="bg-[var(--plum)] text-[var(--cream)] text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase shadow-sm flex items-center gap-1">
-                            <Sparkles size={10} className="text-[var(--gold)]" />
-                            Best Seller
-                          </span>
-                        )}
-                        {hasGifts && (
-                          <span className="bg-[#8b2332] text-white text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase shadow-sm">
-                            3 Free Gifts
-                          </span>
-                        )}
-                        {discount > 0 && (
-                          <span className="bg-[var(--gold)] text-white text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase shadow-sm">
-                            Save {discount}%
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Rating Capsule Top Right */}
-                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm border border-[rgba(46,16,47,0.08)] px-2 py-0.5 rounded-full text-[11px] font-semibold text-[var(--plum)] flex items-center gap-1 shadow-xs pointer-events-none z-10">
-                        <Star size={11} className="fill-[var(--gold)] text-[var(--gold)]" />
-                        <span>{product.rating.toFixed(1)}</span>
-                      </div>
                     </Link>
 
-                    {/* Card Body */}
-                    <div className="flex flex-col flex-1 p-5">
+                    {/* Card Content Body */}
+                    <div className="flex flex-col flex-1 p-5 sm:p-6">
                       {/* Subtitle / Category */}
                       <p className="buudy-mono text-[10px] text-[var(--gold)] font-medium tracking-[0.18em] uppercase mb-1.5">
-                        {categorySubtitle}
+                        {subtitle}
                       </p>
 
                       {/* Product Title */}
-                      <h2 className="buudy-display text-[17px] leading-snug font-semibold text-[var(--plum)] group-hover:text-[var(--gold)] transition-colors min-h-[2.75rem] line-clamp-2">
-                        <Link href={`/products/${product.slug}`}>{product.name}</Link>
+                      <h2 className="buudy-display text-[17px] leading-snug font-semibold text-[var(--plum)] group-hover:text-[var(--gold)] transition-colors min-h-[2.85rem] line-clamp-2">
+                        <Link href={`/products/${product.slug}`}>{title}</Link>
                       </h2>
 
-                      {/* Short Benefit / Active Highlight */}
-                      <p className="text-xs text-[var(--muted)] line-clamp-2 leading-relaxed mt-1.5 mb-4 min-h-[2.25rem]">
-                        {product.highlights?.[0] || product.shortDescription}
+                      {/* Properly Formatted Star Rating & Review Count */}
+                      <div className="flex items-center gap-1.5 mt-2 mb-2.5">
+                        <div className="flex items-center text-[var(--gold)]">
+                          {[...Array(5)].map((_, i) => (
+                            <svg
+                              key={i}
+                              className="w-3.5 h-3.5 fill-[var(--gold)] text-[var(--gold)]"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                        </div>
+                        <span className="text-xs font-bold text-[var(--plum)]">
+                          {product.rating.toFixed(1)}
+                        </span>
+                        <span className="text-xs text-[var(--muted)]">
+                          ({product.reviewCount} reviews)
+                        </span>
+                      </div>
+
+                      {/* Clean Product Benefit Description */}
+                      <p className="text-xs text-[var(--muted)] line-clamp-2 leading-relaxed mb-4 min-h-[2.35rem]">
+                        {benefit}
                       </p>
 
-                      {/* Price & Action Row */}
+                      {/* Price & Signature Buudy Add to Cart Button */}
                       <div className="mt-auto pt-3 border-t border-[rgba(46,16,47,0.06)] flex flex-col gap-3">
-                        <div className="flex items-baseline justify-between">
-                          <div className="flex items-baseline gap-2">
-                            <span className="buudy-display text-xl font-bold text-[var(--plum)]">
-                              {product.priceCents === 0 ? "FREE" : formatMoney(product.priceCents, product.currency)}
-                            </span>
-                            {product.compareAtCents && product.compareAtCents > product.priceCents ? (
-                              <span className="text-xs text-[var(--muted)] line-through">
-                                {formatMoney(product.compareAtCents, product.currency)}
-                              </span>
-                            ) : null}
-                          </div>
-
-                          <span className="text-[11px] text-[var(--muted)]">
-                            ({product.reviewCount} reviews)
+                        <div className="flex items-baseline gap-2">
+                          <span className="buudy-display text-2xl font-bold text-[var(--plum)]">
+                            {product.priceCents === 0 ? "FREE" : formatMoney(product.priceCents, product.currency)}
                           </span>
+                          {product.compareAtCents && product.compareAtCents > product.priceCents ? (
+                            <span className="text-sm text-[var(--muted)] line-through">
+                              {formatMoney(product.compareAtCents, product.currency)}
+                            </span>
+                          ) : null}
                         </div>
 
-                        {/* CTA Buttons */}
-                        <div className="grid grid-cols-2 gap-2">
-                          <Link
-                            href={`/products/${product.slug}`}
-                            className="inline-flex items-center justify-center gap-1 py-2.5 px-3 rounded-xl border border-[rgba(46,16,47,0.15)] text-[11px] font-semibold text-[var(--plum)] hover:border-[var(--plum)] hover:bg-[rgba(46,16,47,0.03)] transition-colors"
-                          >
-                            <span>Details</span>
-                            <ArrowRight size={12} />
-                          </Link>
-
-                          <button
-                            type="button"
-                            onClick={(e) => handleAddToCart(e, product)}
-                            disabled={isAdded}
-                            className={`inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-sm ${
-                              isAdded
-                                ? "bg-[var(--gold)] text-white"
-                                : "bg-[var(--plum)] text-[var(--cream)] hover:bg-[var(--plum-soft)]"
-                            }`}
-                          >
+                        {/* Signature Buudy Full-Width Wipe Button */}
+                        <button
+                          type="button"
+                          onClick={(e) => handleAddToCart(e, product)}
+                          disabled={isAdded}
+                          className="buudy-cart-wipe relative flex min-h-12 w-full items-center justify-center overflow-hidden rounded-full border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-xs font-bold uppercase tracking-wider text-[var(--cream)] shadow-md transition-all duration-300 hover:border-[var(--gold)] active:scale-95 cursor-pointer"
+                        >
+                          <span className="buudy-cart-wipe-content inline-flex items-center justify-center gap-2">
                             {isAdded ? (
                               <>
-                                <Check size={13} />
-                                <span>Added</span>
+                                <Check size={16} />
+                                <span>Added To Cart</span>
                               </>
                             ) : (
                               <>
-                                <ShoppingBag size={13} />
-                                <span>Add to Cart</span>
+                                <ShoppingBag size={15} />
+                                <span>Add To Cart</span>
                               </>
                             )}
-                          </button>
-                        </div>
+                          </span>
+                        </button>
                       </div>
                     </div>
                   </div>
