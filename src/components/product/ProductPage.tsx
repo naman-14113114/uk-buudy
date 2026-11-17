@@ -26,6 +26,7 @@ import {
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
 import { TrustBadges } from "./TrustBadges";
+import { SerumCertificationsRow } from "./SerumCertificationsRow";
 import { GiftBoxBundleSection } from "./GiftBoxBundleSection";
 
 export function ProductPage({
@@ -69,24 +70,16 @@ export function ProductPage({
     product.id.includes("aha") ||
     product.slug.includes("aha");
 
+  const isSerumOrGift =
+    product.template === "serum" ||
+    product.template === "cleanser";
+
   return (
     <div className="relative">
       <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
       {product.template === "mask" && <DeferredVideoReviews />}
-      {product.slug !== "double-hydration-boost-gel" &&
-        product.slug !== "buudy-double-hydration-boost-gel" &&
-        product.id !== "buudy-light-activating-hyaluronic-serum" &&
-        product.slug !== "the-ultimate-renewal-collection-box" &&
-        product.id !== "the-ultimate-renewal-collection-box" &&
-        product.slug !== "buudy-peptide-age-defying-eye-cream" &&
-        product.id !== "buudy-peptide-age-defying-eye-cream" &&
-        product.slug !== "buudy-peptide-ageless-am-pm-cream" &&
-        product.id !== "buudy-peptide-ageless-am-pm-cream" &&
-        product.template !== "serum" &&
-        !isPeptide &&
-        !isAha && (
-          <TrustBadges />
-        )}
+      {product.template === "mask" && <TrustBadges />}
+      {isSerumOrGift && <SerumCertificationsRow />}
       <GiftBoxBundleSection productSlug={product.slug} />
       {/* <FeatureGrid /> */}
       {/* 1. Verified Clinical Before & After Grid - Placed ABOVE both the Percentage Grid and How-To-Use */}
