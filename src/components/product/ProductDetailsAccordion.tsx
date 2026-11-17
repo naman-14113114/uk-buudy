@@ -63,13 +63,18 @@ const featureIcons = [
 
 function getCertificationIcon(badge: string) {
   const norm = badge.toLowerCase();
+  if (norm.includes("gluten")) return ShieldCheck;
+  if (norm.includes("nut")) return Shield;
+  if (norm.includes("vegan")) return Leaf;
+  if (norm.includes("natural")) return Award;
+  if (norm.includes("allergen")) return Sparkles;
+  if (norm.includes("cosmeceutical") || norm.includes("cosmetic")) return FlaskConical;
+  if (norm.includes("dermatolog")) return CheckCircle2;
   if (norm.includes("fda")) return ShieldCheck;
   if (norm.includes("gmp") || norm.includes("iso")) return Award;
   if (norm.includes("b corporation") || norm.includes("b-corp") || norm.includes("b corp")) return Globe;
-  if (norm.includes("ecocert") || norm.includes("cosmos") || norm.includes("organic") || norm.includes("natural")) return Leaf;
-  if (norm.includes("vegan")) return Leaf;
+  if (norm.includes("ecocert") || norm.includes("cosmos") || norm.includes("organic")) return Award;
   if (norm.includes("cruelty")) return Heart;
-  if (norm.includes("gluten") || norm.includes("nut")) return Shield;
   if (norm.includes("clean") || norm.includes("silicone") || norm.includes("paraben")) return Sparkles;
   if (norm.includes("cpnp") || norm.includes("registered") || norm.includes("safety")) return CheckCircle2;
   return ShieldCheck;
@@ -333,16 +338,18 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
       eyebrow: "Certifications",
       title: "Safety and product signals",
       content: (
-        <ul className="grid gap-2 sm:grid-cols-2">
+        <ul className={`grid gap-2.5 grid-cols-1 ${product.badges.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
           {product.badges.map((badge) => {
             const CertIcon = getCertificationIcon(badge);
             return (
               <li
-                className="flex items-center gap-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
                 key={badge}
+                className="flex items-center gap-2.5 rounded-xl border border-[rgba(58,31,61,0.08)] bg-[var(--card)] px-3.5 py-3 text-sm font-semibold leading-5 text-[var(--plum)] shadow-[0_1px_3px_rgba(58,31,61,0.02)] transition-all hover:border-[rgba(184,149,86,0.35)]"
               >
-                <CertIcon className="shrink-0 text-[var(--gold)]" size={16} strokeWidth={2} />
-                <span>{badge}</span>
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[rgba(184,149,86,0.12)] text-[var(--gold)]">
+                  <CertIcon size={16} strokeWidth={2} />
+                </span>
+                <span className="font-sans text-sm tracking-tight">{badge}</span>
               </li>
             );
           })}
