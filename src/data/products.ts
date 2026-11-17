@@ -67,6 +67,7 @@ export type Product = {
   differentiators?: string[];
   faqs: FAQItem[];
   wavelengths?: Wavelength[];
+  productSignals?: string[];
   badges: string[];
 };
 
@@ -1108,12 +1109,24 @@ export const buudyPeptideSerum: Product = {
     "Restores skin firmness, dermal density, and youthful facial bounce",
     "Designed for maximum absorption directly following LED light therapy",
   ],
-  badges: [
+  productSignals: [
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
     "Cosmeceutical Level",
+  ],
+  badges: [
+    "COSMOS ORGANIC Certified by ECOCERT Greenlife",
+    "FDA Registered & Compliant Facility",
+    "ISO 22716:2007 GMP Certified",
+    "100% Vegan Certified",
+    "Cruelty-Free (Zero Animal Testing)",
+    "Dermatologically Tested & Approved",
+    "100% Natural Origin & 20% Organic Farming",
+    "Clean Beauty (Paraben, Sulphate & Silicone Free)",
+    "Gluten-Free & Nut-Free Formulation",
+    "CE & UKCA Compliant European Standards",
   ],
   faqs: peptideSerumFaqs,
 };
@@ -1239,13 +1252,25 @@ export const buudyHyaluronicSerum: Product = {
     "100% water-based optical hydrogel engineered for LED phototherapy",
     "ECOCERT natural certified formula with zero sticky residue",
   ],
-  badges: [
+  productSignals: [
     "Allergen Label Free",
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
     "Cosmetic Grade",
+  ],
+  badges: [
+    "COSMOS NATURAL Certified by ECOCERT Greenlife",
+    "FDA Registered & Compliant Facility",
+    "ISO 22716:2007 GMP Certified",
+    "100% Vegan Certified",
+    "Cruelty-Free (Zero Animal Testing)",
+    "Dermatologically Tested & Approved",
+    "99% Natural Origin & 11% Organic Farming",
+    "Clean Beauty (Paraben, Sulphate & Silicone Free)",
+    "Gluten-Free & Allergen-Free Formulation",
+    "CE Compliant European Standards",
   ],
   faqs: doubleHydrationBoostGelFaqs,
 };
@@ -1296,12 +1321,13 @@ export const buudyRetinolAlternativeSerum: Product = {
     "Sea buckthorn and rosehip botanicals replenish depleted lipid barrier",
     "Fades hyperpigmentation and softens stubborn static wrinkles"
   ],
-  badges: [
+  productSignals: [
     "Gluten Free",
     "Nut Free",
     "Vegan",
     "Cosmeceutical Level",
   ],
+  badges: ["Night Repair Step 3", "2% Bidens Pilosa", "Zero Photosensitivity"],
   faqs: clinicalSerumFaqs,
 };
 
@@ -1351,12 +1377,13 @@ export const buudyNiacinamideGel: Product = {
     "Ginkgo Biloba antioxidants protect congested skin against oxidation",
     "Lightweight matte gel absorbs instantly without shine or residue"
   ],
-  badges: [
+  productSignals: [
     "Allergen Label Free",
     "Gluten Free",
     "Nut Free",
     "Vegan",
   ],
+  badges: ["Blue Light Companion", "5% Pure Niacinamide", "Pore & Sebum Control"],
   faqs: clinicalSerumFaqs,
 };
 
@@ -1530,12 +1557,13 @@ export const buudyFaceWash: Product = {
     "Visibly refines enlarged pores whilst preserving vital skin moisture",
     "Prepares skin for optimal 415nm blue and 630nm red light penetration",
   ],
-  badges: [
+  productSignals: [
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
   ],
+  badges: ["Cleanse Step 1", "Mate Leaf + Iceland Moss", "ECOCERT COSMOS Natural"],
   faqs: blemishPurifyingFaceWashFaqs,
 };
 
@@ -1724,13 +1752,14 @@ export const buudyPrebioticSerum: Product = {
     "Weightless cooling jelly texture with multi-molecular hyaluronic acid",
     "100% optical transparency with zero light scattering or diode residue",
   ],
-  badges: [
+  productSignals: [
     "Dermatologically Tested",
     "Gluten Free",
     "Nut Free",
     "Vegan",
     "Cosmeceutical Level",
   ],
+  badges: ["Microbiome Step 1", "2% Bioactive Prebiotics", "ECOCERT COSMOS Natural"],
   faqs: bioactivePrebioticsJellySerumFaqs,
 };
 
@@ -1910,12 +1939,13 @@ export const buudyHydratingSerum: Product = {
     "Soothing bisabolol calms sensitivity, reactive redness, and post-treatment dryness",
     "Silky, fast-absorbing fluid pairs seamlessly with LED phototherapy and daily makeup",
   ],
-  badges: [
+  productSignals: [
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
   ],
+  badges: ["Deep Moisture Boost", "Cloudberry & Peony", "ECOCERT COSMOS Natural"],
   faqs: hydratingSerumFaqs,
 };
 
@@ -2014,10 +2044,22 @@ export const buudyPeptideCream: Product = {
     "Organic Mango Butter & Blueberry Barrier Lipids",
     "Dual AM/PM Rejuvenation & Post-LED Seal",
   ],
-  badges: [
+  productSignals: [
     "Gluten Free",
     "Nut Free",
     "Vegan",
+  ],
+  badges: [
+    "FDA Registered Facility",
+    "Good Manufacturing Practice (GMP / ISO 22716)",
+    "Certified B Corporation",
+    "ECOCERT COSMOS Natural (99% Natural, 9% Organic)",
+    "100% Vegan Certified",
+    "Cruelty-Free International",
+    "Gluten-Free Formulation",
+    "Nut-Free Formulation",
+    "Clean Beauty: Paraben & Silicone-Free",
+    "CPNP & UK Cosmetic Safety Registered",
   ],
   faqs: peptideCreamFaqs,
 };
@@ -2121,10 +2163,22 @@ export const buudyPeptideEyeCream: Product = {
     "Ginkgo biloba extract enhances micro-circulation to diminish morning puffiness",
     "Weightless, non-migrating texture creates a silky, crease-free base for concealer",
   ],
-  badges: [
+  productSignals: [
     "Gluten Free",
     "Nut Free",
     "Vegan",
+  ],
+  badges: [
+    "FDA Registered Facility",
+    "Good Manufacturing Practice (GMP / ISO 22716)",
+    "Certified B Corporation",
+    "ECOCERT COSMOS Natural (99% Natural, 9% Organic)",
+    "100% Vegan Certified",
+    "Cruelty-Free International",
+    "Gluten-Free Formulation",
+    "Nut-Free Formulation",
+    "Clean Beauty: Paraben & Silicone-Free",
+    "CPNP & UK Cosmetic Safety Registered",
   ],
   faqs: peptideEyeCreamFaqs,
 };
@@ -2219,13 +2273,25 @@ export const buudyAhaPeelingConcentrate: Product = {
     "Unclogs congested pores and visibly refines uneven skin texture and tone",
     "Organic white tea and sage extracts calm redness and provide antioxidant defence",
   ],
-  badges: [
+  productSignals: [
     "Allergen Label Free",
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
     "Cosmeceutical Level",
+  ],
+  badges: [
+    "COSMOS NATURAL Certified by ECOCERT Greenlife",
+    "FDA Registered & Compliant Facility",
+    "ISO 22716:2007 GMP Certified",
+    "100% Vegan Certified",
+    "Cruelty-Free (Zero Animal Testing)",
+    "Dermatologically Tested & Approved",
+    "100% Natural Origin Formulation",
+    "Clean Beauty (Paraben, Sulphate & Silicone Free)",
+    "Gluten-Free & Allergen-Free Formulation",
+    "CE Compliant European Standards",
   ],
   faqs: ahaPeelingConcentrateFaqs,
 };
@@ -2311,13 +2377,14 @@ export const theUltimateHydrationDuo: Product = {
     "Antioxidant cloudberry and peony extracts nourish and defend cellular moisture barrier",
     "Bespoke luxury plum gift packaging - perfect gift set or intensive personal treatment",
   ],
-  badges: [
+  productSignals: [
     "Allergen Label Free",
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
   ],
+  badges: ["Gift Set Duo", "Save 50%", "ECOCERT COSMOS Natural"],
   faqs: ultimateHydrationDuoFaqs,
 };
 
@@ -2400,13 +2467,14 @@ export const antiAgePeptideCollection: Product = {
     "Targeted eye cream attenuates crow's feet, puffiness, and dehydration creping",
     "Presented in bespoke luxury deep plum packaging with over 51% bundle savings",
   ],
-  badges: [
+  productSignals: [
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
     "Cosmeceutical Level",
   ],
+  badges: ["Full 3-Step Routine", "Save 51%", "Hexapeptide-11 Matrix"],
   faqs: antiAgePeptideCollectionFaqs,
 };
 
@@ -2502,13 +2570,25 @@ export const theUltimateRenewalCollectionBox: Product = {
     "Optical hydrogel primes skin for 100% unimpeded LED phototherapy light absorption",
     "Over 20% bundle savings in a bespoke luxury presentation box",
   ],
-  badges: [
+  productSignals: [
     "Allergen Label Free",
     "Gluten Free",
     "Natural Certified",
     "Nut Free",
     "Vegan",
     "Cosmeceutical Level",
+  ],
+  badges: [
+    "COSMOS NATURAL Certified by ECOCERT Greenlife",
+    "FDA Registered & Compliant Facility",
+    "ISO 22716:2007 GMP Certified",
+    "100% Vegan Certified",
+    "Cruelty-Free (Zero Animal Testing)",
+    "Dermatologically Tested & Approved",
+    "100% Natural Origin Formulations",
+    "Clean Beauty (Paraben, Sulphate & Silicone Free)",
+    "Gluten-Free & Allergen-Free Formulation",
+    "CE Compliant European Standards",
   ],
   faqs: ultimateRenewalCollectionFaqs,
 };
