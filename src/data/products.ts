@@ -1969,7 +1969,7 @@ export const buudyPeptideCream: Product = {
   customerCount: "14,500+",
   promoCode: "",
   promoLabel: "SAVE 17%",
-  cartImage: "/images/products/buudy-peptide-ageless-am-pm-cream/buudy-peptide-ageless-am-pm-cream-morning-and-evening-ritual-uk.webp",
+  cartImage: "/images/products/buudy-peptide-ageless-am-pm-cream/buudy-peptide-ageless-am-pm-cream-hand-held-bottle-portrait-uk.webp",
   gallery: [
     {
       src: "/images/products/buudy-peptide-ageless-am-pm-cream/buudy-peptide-ageless-am-pm-cream-morning-and-evening-ritual-uk.webp",
