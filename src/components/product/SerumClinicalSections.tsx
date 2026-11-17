@@ -20,6 +20,7 @@ export function SerumClinicalResults({
   const [values, setValues] = useState<number[]>([0, 0, 0, 0]);
 
   const isEyeCream = productSlug === "buudy-peptide-age-defying-eye-cream" || productSlug.includes("eye-cream") || productSlug.includes("eye");
+  const isCream = productSlug === "buudy-peptide-ageless-am-pm-cream" || (productSlug.includes("cream") && !isEyeCream);
   const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
 
   const stats = useMemo(() => {
@@ -187,7 +188,9 @@ export function SerumClinicalResults({
     };
   }, [targets]);
 
-  const imageSrc = isEyeCream
+  const imageSrc = isCream
+    ? "/images/products/buudy-peptide-ageless-am-pm-cream/buudy-peptide-ageless-am-pm-cream-skin-application-and-bottle-uk.webp"
+    : isEyeCream
     ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp"
     : isRenewalBox
     ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-plum-sleeve-detail-editorial-uk.webp"
@@ -199,7 +202,9 @@ export function SerumClinicalResults({
     ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-box-three-quarter-display-uk.webp"
     : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-neck-and-collarbone-beauty-glow-uk.webp";
 
-  const imageAlt = isEyeCream
+  const imageAlt = isCream
+    ? "Model application ritual with Buudy Peptide Ageless AM/PM Cream bottle for lifted, glowing facial contours UK"
+    : isEyeCream
     ? "Model eye area portrait showcasing visibly smoothed periorbital contours and diminished crow's feet after Buudy Peptide Eye Cream ritual UK"
     : isRenewalBox
     ? "The Ultimate Renewal Collection Box deep plum carton sleeve architectural detail and gold foil typography UK"
@@ -223,7 +228,9 @@ export function SerumClinicalResults({
             Proven efficacy, <em className="buudy-italic text-[var(--gold)]">measured by real skin</em>.
           </h2>
           <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-2xl mx-auto">
-            {isRenewalBox
+            {isCream
+              ? "Formulated with clinical-grade Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular HA to lock in post-LED phototherapy rejuvenation and restore dermal elasticity."
+              : isRenewalBox
               ? "Formulated as a complete 3-step clinical ritual combining 10% AHA cellular resurfacing, multi-depth optical hyaluronic hydration, and bio-fermented peptide collagen-locking."
               : isAha
               ? "Formulated specifically to dissolve dull intercellular bonds and unclog congested pores overnight with 10% pure plant Lactic Acid and 1% soothing Hyaluronic Acid."
@@ -329,9 +336,28 @@ export function SerumHowToUse({
   productSlug?: string;
 } = {}) {
   const isEyeCream = productSlug === "buudy-peptide-age-defying-eye-cream" || productSlug.includes("eye-cream") || productSlug.includes("eye");
+  const isCream = productSlug === "buudy-peptide-ageless-am-pm-cream" || (productSlug.includes("cream") && !isEyeCream);
   const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
 
-  const steps = isEyeCream
+  const steps = isCream
+    ? [
+        {
+          num: "01",
+          title: "Cleanse & Prime",
+          desc: "Cleanse face thoroughly and complete your 10-minute Buudy LED Mask session to boost cellular microcirculation.",
+        },
+        {
+          num: "02",
+          title: "Dispense Velvety Cream",
+          desc: "Press 1–2 pumps of Peptide Ageless AM/PM Cream onto clean fingertips and gently warm between hands.",
+        },
+        {
+          num: "03",
+          title: "Smooth & Sculpt",
+          desc: "Smooth over face, neck, and décolletage in upward sculpting motions to seal in moisture and firm facial contours.",
+        },
+      ]
+    : isEyeCream
     ? [
         {
           num: "01",
@@ -439,7 +465,9 @@ export function SerumHowToUse({
         },
       ];
 
-  const introText = isEyeCream
+  const introText = isCream
+    ? "High-performance dual AM/PM restorative cream powered by Hexapeptide-11 and Dipalmitoyl Hydroxyproline to lock in light therapy results and restore dermal elasticity."
+    : isEyeCream
     ? "Precision ophthalmic periorbital formula enriched with bio-fermented Hexapeptide-11 and borage seed oil to target crow's feet and restore delicate contour bounce."
     : isRenewalBox
     ? "A synchronized 3-step ritual combining weekly resurfacing, daily optical hydrogel priming, and post-phototherapy collagen firming."
@@ -458,7 +486,9 @@ export function SerumHowToUse({
         <div className="relative overflow-hidden rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
           <Image
             src={
-              isEyeCream
+              isCream
+                ? "/images/products/buudy-peptide-ageless-am-pm-cream/buudy-peptide-ageless-cream-plum-bottle-portrait-uk.webp"
+                : isEyeCream
                 ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-plum-reflection-display-uk.webp"
                 : isRenewalBox
                 ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp"
@@ -471,7 +501,9 @@ export function SerumHowToUse({
                 : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-three-quarter-plum-backdrop-uk.webp"
             }
             alt={
-              isEyeCream
+              isCream
+                ? "Buudy Peptide Ageless AM/PM Cream bottle portrait on signature plum background for daily AM/PM ritual UK"
+                : isEyeCream
                 ? "Buudy Peptide Eye Cream precision tube displayed with subtle reflection on signature deep plum studio backdrop UK"
                 : isRenewalBox
                 ? "The Ultimate Renewal Collection Box gift packaging held in hand UK"

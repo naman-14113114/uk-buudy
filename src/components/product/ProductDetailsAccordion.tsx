@@ -33,6 +33,11 @@ import {
   Layers,
   Package,
   Tag,
+  Award,
+  Heart,
+  Shield,
+  CheckCircle2,
+  Globe,
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import type { ReactNode } from "react";
@@ -55,6 +60,32 @@ const featureIcons = [
   IconShieldCheck,
   IconDeviceMobile,
 ];
+
+function getCertificationIcon(badge: string) {
+  const norm = badge.toLowerCase();
+  if (norm.includes("fda")) return ShieldCheck;
+  if (norm.includes("gmp") || norm.includes("iso")) return Award;
+  if (norm.includes("b corporation") || norm.includes("b-corp") || norm.includes("b corp")) return Globe;
+  if (norm.includes("ecocert") || norm.includes("cosmos") || norm.includes("organic") || norm.includes("natural")) return Leaf;
+  if (norm.includes("vegan")) return Leaf;
+  if (norm.includes("cruelty")) return Heart;
+  if (norm.includes("gluten") || norm.includes("nut")) return Shield;
+  if (norm.includes("clean") || norm.includes("silicone") || norm.includes("paraben")) return Sparkles;
+  if (norm.includes("cpnp") || norm.includes("registered") || norm.includes("safety")) return CheckCircle2;
+  return ShieldCheck;
+}
+
+function getSkincareFeatureIcon(feature: { title: string; kicker: string }, index: number) {
+  const text = `${feature.title} ${feature.kicker}`.toLowerCase();
+  if (text.includes("hexapeptide") || text.includes("peptide") || text.includes("amino")) return Sparkles;
+  if (text.includes("hydroxyproline") || text.includes("collagen") || text.includes("firm")) return Layers;
+  if (text.includes("ha") || text.includes("hyaluronic") || text.includes("pca") || text.includes("hydration")) return Droplets;
+  if (text.includes("blueberry") || text.includes("ginkgo") || text.includes("antioxidant") || text.includes("botanical") || text.includes("mate")) return Leaf;
+  if (text.includes("jojoba") || text.includes("strawberry") || text.includes("lipid") || text.includes("barrier") || text.includes("moisture")) return ShieldCheck;
+  if (text.includes("ecocert") || text.includes("cosmos") || text.includes("vegan") || text.includes("standard") || text.includes("cleanse")) return Award;
+  const fallbacks = [Sparkles, Layers, Droplets, Leaf, ShieldCheck, Award];
+  return fallbacks[index % fallbacks.length];
+}
 
 type AccordionItem = {
   id: "unique" | "specs" | "benefits" | "included" | "certifications";
@@ -190,7 +221,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
       content: (
         <ul className="grid gap-3">
           {(product.template === "torch" ? torchFeatures : product.template === "ipl" ? iplFeatures : product.template === "cleanser" ? cleanserFeatures : product.template === "serum" ? (isPeptide ? peptideSerumFeatures : isPrebiotic ? prebioticSerumFeatures : serumFeatures) : features).map((feature, index) => {
-            const Icon = product.template === "torch" ? IconBulb : featureIcons[index % featureIcons.length];
+            const Icon = product.template === "torch" ? IconBulb : (product.template === "serum" || product.template === "cleanser") ? getSkincareFeatureIcon(feature, index) : featureIcons[index % featureIcons.length];
             return (
             <li
               key={index}
@@ -199,7 +230,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
-                    {Icon ? <Icon size={20} stroke={1.5} /> : null}
+                    {Icon ? <Icon size={20} strokeWidth={1.5} /> : null}
                   </span>
                   <div>
                     <p className="font-sans text-sm font-bold text-[var(--plum)]">
@@ -303,15 +334,18 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
       title: "Safety and product signals",
       content: (
         <ul className="grid gap-2 sm:grid-cols-2">
-          {product.badges.map((badge) => (
-            <li
-              className="flex items-center gap-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
-              key={badge}
-            >
-              <ShieldCheck className="shrink-0 text-[var(--gold)]" size={16} strokeWidth={2} />
-              <span>{badge}</span>
-            </li>
-          ))}
+          {product.badges.map((badge) => {
+            const CertIcon = getCertificationIcon(badge);
+            return (
+              <li
+                className="flex items-center gap-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
+                key={badge}
+              >
+                <CertIcon className="shrink-0 text-[var(--gold)]" size={16} strokeWidth={2} />
+                <span>{badge}</span>
+              </li>
+            );
+          })}
         </ul>
       ),
     },

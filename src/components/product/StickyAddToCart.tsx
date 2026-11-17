@@ -49,6 +49,8 @@ export function StickyAddToCart({
   }, []);
 
   const isSimplifiedProduct =
+    product.template === "serum" ||
+    product.template === "cleanser" ||
     product.slug === "double-hydration-boost-gel" ||
     product.slug === "buudy-double-hydration-boost-gel" ||
     product.id === "buudy-light-activating-hyaluronic-serum" ||

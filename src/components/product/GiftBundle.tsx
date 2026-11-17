@@ -20,6 +20,10 @@ import {
   Bandage,
   Umbrella,
   Droplets,
+  Leaf,
+  Layers,
+  Heart,
+  Shield,
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import { market } from "@/lib/market";
@@ -92,6 +96,53 @@ function FaceNeckIcon({ size = 22 }: { size?: number }) {
       <path d="M6.5 21h11" />
     </svg>
   );
+}
+
+function getBenefitIcon(text: string, index: number) {
+  const norm = text.toLowerCase();
+  if (
+    norm.includes("peptide") ||
+    norm.includes("firm") ||
+    norm.includes("contour") ||
+    norm.includes("elasticity") ||
+    norm.includes("hydroxyproline")
+  ) {
+    return Sparkles;
+  }
+  if (
+    norm.includes("hydration") ||
+    norm.includes("hyaluronic") ||
+    norm.includes("pca") ||
+    norm.includes("moisture") ||
+    norm.includes("water")
+  ) {
+    return Droplets;
+  }
+  if (
+    norm.includes("butter") ||
+    norm.includes("lipid") ||
+    norm.includes("barrier") ||
+    norm.includes("mango") ||
+    norm.includes("blueberry") ||
+    norm.includes("seed") ||
+    norm.includes("oil")
+  ) {
+    return Leaf;
+  }
+  if (
+    norm.includes("am/pm") ||
+    norm.includes("day") ||
+    norm.includes("night") ||
+    norm.includes("seal") ||
+    norm.includes("rejuvenation") ||
+    norm.includes("led") ||
+    norm.includes("regimen") ||
+    norm.includes("ritual")
+  ) {
+    return Sun;
+  }
+  const fallbackIcons = [Sparkles, Droplets, Leaf, Sun, ShieldCheck];
+  return fallbackIcons[index % fallbackIcons.length];
 }
 
 const keyBenefitIcons = [
@@ -180,6 +231,8 @@ export function GiftBundle({
   );
   const hasGifts = product.gifts.length > 0;
   const isSimplifiedProduct =
+    product.template === "serum" ||
+    product.template === "cleanser" ||
     product.slug === "double-hydration-boost-gel" ||
     product.slug === "buudy-double-hydration-boost-gel" ||
     product.id === "buudy-light-activating-hyaluronic-serum" ||
@@ -295,7 +348,7 @@ export function GiftBundle({
       {/* Premium Compact Bullet Points List */}
       <ul className="mt-4 mb-4 flex flex-col gap-1.5 pl-1.5">
         {(product.keyBenefits ?? product.highlights).map((benefit, index) => {
-          const Icon = keyBenefitIcons[index % keyBenefitIcons.length];
+          const Icon = getBenefitIcon(benefit, index);
           return (
             <li
               className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display"

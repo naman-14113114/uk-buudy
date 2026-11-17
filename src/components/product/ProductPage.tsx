@@ -80,6 +80,9 @@ export function ProductPage({
         product.id !== "the-ultimate-renewal-collection-box" &&
         product.slug !== "buudy-peptide-age-defying-eye-cream" &&
         product.id !== "buudy-peptide-age-defying-eye-cream" &&
+        product.slug !== "buudy-peptide-ageless-am-pm-cream" &&
+        product.id !== "buudy-peptide-ageless-am-pm-cream" &&
+        product.template !== "serum" &&
         !isPeptide &&
         !isAha && (
           <TrustBadges />
