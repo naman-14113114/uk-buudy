@@ -240,22 +240,10 @@ function MobileStickyCheckout() {
           btn?.click();
         }}
       >
-        {isRedirecting ? (
-          <>
-            <span style={{ visibility: "hidden" }} className="inline-flex items-center gap-2">
-              <Lock size={16} strokeWidth={1.8} />
-              <span>Checkout Securly</span>
-            </span>
-            <span style={{ position: "absolute", inset: 0 }} className="flex items-center justify-center">
-              <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
-            </span>
-          </>
-        ) : (
-          <span className="relative z-10 inline-flex items-center justify-center gap-2">
-            <Lock size={16} strokeWidth={1.8} />
-            <span>Checkout Securly</span>
-          </span>
-        )}
+        <span className="relative z-10 inline-flex items-center justify-center gap-2">
+          <Lock size={16} strokeWidth={1.8} />
+          <span>{isRedirecting ? "Opening Checkout…" : "Checkout Securely"}</span>
+        </span>
       </button>
     </div>
   );
