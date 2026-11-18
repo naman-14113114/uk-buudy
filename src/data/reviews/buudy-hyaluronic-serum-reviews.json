@@ -1,50 +1,242 @@
 [
   {
-    "id": "10000008256168_4887",
-    "sourceIndex": 4887,
+    "id": "buudy_ha_top_01",
+    "sourceIndex": 5001,
     "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Zoe Turner",
-    "rating": 4,
-    "title": "",
-    "body": "This is hands down the best hyaluronic acid I have tried. Sinks right in within about 20 seconds, leaves skin bouncy and hydrated. Huge improvement in hydration levels and my makeup sits so much better now without settling into creases. Does not break me out at all which is a miracle since almost everything clogs my pores.",
-    "date": "2026-11-11 00:00:00 +0000 UTC",
-    "displayDate": "2026-11-11",
-    "images": []
-  },
-  {
-    "id": "10000008256168_4652",
-    "sourceIndex": 4652,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Emily Robinson",
-    "rating": 4,
-    "title": "",
-    "body": "Been using this for about 4 weeks now alongside my led mask. Glide is so smooth and you only need about 2 pumps for full face and neck. Stubborn fine lines on my forehead and around my mouth are genuinely softening. Packaging is gorgeous frosted glass though I have to be careful not to drop it on my bathroom tiles!",
-    "date": "2026-11-11 00:00:00 +0000 UTC",
-    "displayDate": "2026-11-11",
-    "images": []
-  },
-  {
-    "id": "10000008256168_4647",
-    "sourceIndex": 4647,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Lily White",
+    "customerName": "Deepanshu T.",
     "rating": 5,
-    "title": "",
-    "body": "Skin drank this up immediately. Glide is so smooth and you only need about 2 pumps for full face and neck. Noticeable difference in skin bounce and elasticity after about 3 weeks of daily use.",
-    "date": "2026-11-11 00:00:00 +0000 UTC",
+    "title": "Simple And Effective Literally",
+    "body": "Simple and Effective, literally just two words for this serum and it perfectly does what a hydration serum should.",
+    "date": "2026-11-18 19:40:00 +0000 UTC",
+    "displayDate": "2026-11-18",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_02",
+    "sourceIndex": 5002,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Pallavi K.",
+    "rating": 5,
+    "title": "My Skin",
+    "body": "My skin looks more plump and healthy. Really liking what the serum is doing for my skin so far.",
+    "date": "2026-11-18 14:15:00 +0000 UTC",
+    "displayDate": "2026-11-18",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_03",
+    "sourceIndex": 5003,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Rohan V.",
+    "rating": 5,
+    "title": "Absorbs Quickly And Doesn't Leave Residue",
+    "body": "Absorbs quickly and doesn’t leave any residue, honestly that's pretty impressive.",
+    "date": "2026-11-17 20:10:00 +0000 UTC",
+    "displayDate": "2026-11-17",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_04",
+    "sourceIndex": 5004,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Shivangi R.",
+    "rating": 5,
+    "title": "It Helped With Dryness",
+    "body": "It helped with dryness around my cheeks and now my skin feels more balanced and clear.",
+    "date": "2026-11-17 11:30:00 +0000 UTC",
+    "displayDate": "2026-11-17",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_05",
+    "sourceIndex": 5005,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Divyanshi T.",
+    "rating": 5,
+    "title": "My Skin Remains Hydrated",
+    "body": "My skin remains hydrated and fresh throughout the day, not just for a few hours.",
+    "date": "2026-11-16 18:25:00 +0000 UTC",
+    "displayDate": "2026-11-16",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_06",
+    "sourceIndex": 5006,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Yashika J.",
+    "rating": 5,
+    "title": "Nice Product",
+    "body": "Nice product. It makes my skin feel very hydrated and refreshed instantly, and also hydration lasts for a long time.",
+    "date": "2026-11-16 09:50:00 +0000 UTC",
+    "displayDate": "2026-11-16",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_07",
+    "sourceIndex": 5007,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Varsha P.",
+    "rating": 5,
+    "title": "I Noticed My Skin Feels Hydrated",
+    "body": "I noticed my skin feels hydrated for longer and not just right after applying.",
+    "date": "2026-11-15 16:15:00 +0000 UTC",
+    "displayDate": "2026-11-15",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_08",
+    "sourceIndex": 5008,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Manav O.",
+    "rating": 5,
+    "title": "Nice Serum It Works",
+    "body": "Nice serum, it works better with regular use, I've been using it since it was launched, since I have a few more products from Buudy as well.",
+    "date": "2026-11-15 10:05:00 +0000 UTC",
+    "displayDate": "2026-11-15",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_09",
+    "sourceIndex": 5009,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Priyal S.",
+    "rating": 5,
+    "title": "This Serum Has Worked",
+    "body": "This serum has worked well for my combination skin as compared to the other serums I have tried recently.",
+    "date": "2026-11-14 17:45:00 +0000 UTC",
+    "displayDate": "2026-11-14",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_10",
+    "sourceIndex": 5010,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Anvi C.",
+    "rating": 5,
+    "title": "Fresh Finish",
+    "body": "Quite happy with this. Gives a fresh finish without making my face look oily.",
+    "date": "2026-11-14 12:20:00 +0000 UTC",
+    "displayDate": "2026-11-14",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_11",
+    "sourceIndex": 5011,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Ojas K.",
+    "rating": 5,
+    "title": "Lighter Than Expected",
+    "body": "My skin feels hydrated, but the finish is lighter than I expected. Happy with that.",
+    "date": "2026-11-13 15:35:00 +0000 UTC",
+    "displayDate": "2026-11-13",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_12",
+    "sourceIndex": 5012,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Mitali B.",
+    "rating": 5,
+    "title": "Soft Rather Than Slippery",
+    "body": "I like how my skin feels after this. Soft and moisturized, rather than slippery.",
+    "date": "2026-11-13 08:40:00 +0000 UTC",
+    "displayDate": "2026-11-13",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_13",
+    "sourceIndex": 5013,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Zoya K.",
+    "rating": 5,
+    "title": "My Skin Feels Very Fresh",
+    "body": "My skin feels very fresh and smooth after I apply this serum.",
+    "date": "2026-11-12 18:10:00 +0000 UTC",
+    "displayDate": "2026-11-12",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_14",
+    "sourceIndex": 5014,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Tanmay D.",
+    "rating": 5,
+    "title": "The Serum Gives Instant Hydration",
+    "body": "The serum gives instant hydration and my skin feels refreshed after applying.",
+    "date": "2026-11-12 11:15:00 +0000 UTC",
+    "displayDate": "2026-11-12",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_15",
+    "sourceIndex": 5015,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Aritro S.",
+    "rating": 5,
+    "title": "Softer Skin Feel",
+    "body": "My skin feels softer after applying it. Nice that it doesn't feel like a thick layer.",
+    "date": "2026-11-11 16:50:00 +0000 UTC",
     "displayDate": "2026-11-11",
     "images": []
   },
   {
-    "id": "10000008256168_4925",
-    "sourceIndex": 4925,
+    "id": "buudy_ha_top_16",
+    "sourceIndex": 5016,
     "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Claire Holmes",
+    "customerName": "Saira M.",
     "rating": 5,
-    "title": "",
-    "body": "Was sceptical at first about spending £99 but it is worth every penny. The texture is like a lightweight water-gel, zero tackiness or stickiness once it sinks in. Hyperpigmentation and post acne marks are fading faster than with the mask alone.",
-    "date": "2026-11-10 00:00:00 +0000 UTC",
+    "title": "Comfortable Hydration",
+    "body": "Nice hydrating serum. My cheeks feel more comfortable without my forehead getting greasy.",
+    "date": "2026-11-11 09:20:00 +0000 UTC",
+    "displayDate": "2026-11-11",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_17",
+    "sourceIndex": 5017,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Kavini S.",
+    "rating": 5,
+    "title": "Fresh Without Excess Shine",
+    "body": "I like the finish. My skin looks a little fresher, but it doesn't have that overly shiny look.",
+    "date": "2026-11-10 14:40:00 +0000 UTC",
     "displayDate": "2026-11-10",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_18",
+    "sourceIndex": 5018,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Aashna S.",
+    "rating": 5,
+    "title": "Works Under Sunscreen",
+    "body": "Works well under my sunscreen. I let it settle first, and the layers feel comfortable together.",
+    "date": "2026-11-09 19:15:00 +0000 UTC",
+    "displayDate": "2026-11-09",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_19",
+    "sourceIndex": 5019,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Katia S.",
+    "rating": 5,
+    "title": "Great feeling and result",
+    "body": "Great feeling and result, thank you for your product.",
+    "date": "2026-11-08 13:30:00 +0000 UTC",
+    "displayDate": "2026-11-08",
+    "images": []
+  },
+  {
+    "id": "buudy_ha_top_20",
+    "sourceIndex": 5020,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Naman S.",
+    "rating": 5,
+    "title": "Good Consistency",
+    "body": "Good consistency. Easy to spread, and I don't need a lot for my face.",
+    "date": "2026-11-07 10:00:00 +0000 UTC",
+    "displayDate": "2026-11-07",
     "images": []
   },
   {
@@ -55,8 +247,8 @@
     "rating": 5,
     "title": "",
     "body": "Skin drank this up immediately. Does not feel tacky at all unlike The Ordinary or Paula's Choice which always felt sticky on me. Gives an immediate glass skin plump that lasts all day.",
-    "date": "2026-11-09 00:00:00 +0000 UTC",
-    "displayDate": "2026-11-09",
+    "date": "2026-11-05 00:00:00 +0000 UTC",
+    "displayDate": "2026-11-05",
     "images": []
   },
   {
@@ -67,44 +259,8 @@
     "rating": 5,
     "title": "",
     "body": "Honestly did not expect this to make such a difference. It doesnt leave any greasy film on the mask silicone which is great. My marionette lines look softer and overall texture is much smoother. Packaging is gorgeous frosted glass though I have to be careful not to drop it on my bathroom tiles!",
-    "date": "2026-11-08 00:00:00 +0000 UTC",
-    "displayDate": "2026-11-08",
-    "images": []
-  },
-  {
-    "id": "10000008256168_4773",
-    "sourceIndex": 4773,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Emily Roberts",
-    "rating": 5,
-    "title": "",
-    "body": "This is hands down the best hyaluronic acid I have tried. Texture is lovely and silky, no heavy occlusive feeling at all. My marionette lines look softer and overall texture is much smoother.",
-    "date": "2026-11-07 00:00:00 +0000 UTC",
-    "displayDate": "2026-11-07",
-    "images": []
-  },
-  {
-    "id": "10000008256168_4962",
-    "sourceIndex": 4962,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Ruby Phillips",
-    "rating": 5,
-    "title": "",
-    "body": "Repurchasing for the second time already!! Texture is lovely and silky, no heavy occlusive feeling at all. Stubborn fine lines on my forehead and around my mouth are genuinely softening. Does not break me out at all which is a miracle since almost everything clogs my pores.",
-    "date": "2026-11-06 00:00:00 +0000 UTC",
-    "displayDate": "2026-11-06",
-    "images": []
-  },
-  {
-    "id": "10000008256168_4782",
-    "sourceIndex": 4782,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Victoria Green",
-    "rating": 5,
-    "title": "",
-    "body": "Game changer for anyone doing at home light therapy. Very refreshing on tired morning skin too even on non-mask days. Hyperpigmentation and post acne marks are fading faster than with the mask alone. A little goes a long way, 2 pumps is plenty for face, neck and décolleté.",
-    "date": "2026-11-06 00:00:00 +0000 UTC",
-    "displayDate": "2026-11-06",
+    "date": "2026-11-04 00:00:00 +0000 UTC",
+    "displayDate": "2026-11-04",
     "images": []
   },
   {
@@ -117,6 +273,18 @@
     "body": "Game changer for anyone doing at home light therapy. The texture is like a lightweight water-gel, zero tackiness or stickiness once it sinks in. My marionette lines look softer and overall texture is much smoother. Price is a bit steep at £99 but honestly one bottle lasts ages so cost per use is fine.",
     "date": "2026-11-04 00:00:00 +0000 UTC",
     "displayDate": "2026-11-04",
+    "images": []
+  },
+  {
+    "id": "10000008256168_4773",
+    "sourceIndex": 4773,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Emily Roberts",
+    "rating": 5,
+    "title": "",
+    "body": "This is hands down the best hyaluronic acid I have tried. Texture is lovely and silky, no heavy occlusive feeling at all. My marionette lines look softer and overall texture is much smoother.",
+    "date": "2026-11-03 00:00:00 +0000 UTC",
+    "displayDate": "2026-11-03",
     "images": []
   },
   {
@@ -144,30 +312,6 @@
     "images": []
   },
   {
-    "id": "10000008256168_custom_2star",
-    "sourceIndex": 5502,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Sophie Davies",
-    "rating": 2,
-    "title": "Frustrating stock issue",
-    "body": "I bought this serum 4 months ago and now I'm addicted to it as it is so nice and giving good result, but it went out of stock I have to wait for 2 weeks to get it again, totally frustating.",
-    "date": "2026-10-25 11:45:00 +0000 UTC",
-    "displayDate": "2026-10-25",
-    "images": []
-  },
-  {
-    "id": "10000008256168_custom_1star",
-    "sourceIndex": 5501,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Amara Patel",
-    "rating": 1,
-    "title": "Did nothing for my tanning",
-    "body": "I bought it thinking it helps me in reducing my tanning, but it did nothing for my tanning.",
-    "date": "2026-10-18 14:22:00 +0000 UTC",
-    "displayDate": "2026-10-18",
-    "images": []
-  },
-  {
     "id": "10000008256168_4612",
     "sourceIndex": 4612,
     "productHandle": "buudy-light-activating-hyaluronic-serum",
@@ -180,6 +324,42 @@
     "images": []
   },
   {
+    "id": "10000008256168_4647",
+    "sourceIndex": 4647,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Lily White",
+    "rating": 5,
+    "title": "",
+    "body": "Skin drank this up immediately. Glide is so smooth and you only need about 2 pumps for full face and neck. Noticeable difference in skin bounce and elasticity after about 3 weeks of daily use.",
+    "date": "2026-11-02 00:00:00 +0000 UTC",
+    "displayDate": "2026-11-02",
+    "images": []
+  },
+  {
+    "id": "10000008256168_4962",
+    "sourceIndex": 4962,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Ruby Phillips",
+    "rating": 5,
+    "title": "",
+    "body": "Repurchasing for the second time already!! Texture is lovely and silky, no heavy occlusive feeling at all. Stubborn fine lines on my forehead and around my mouth are genuinely softening. Does not break me out at all which is a miracle since almost everything clogs my pores.",
+    "date": "2026-11-02 00:00:00 +0000 UTC",
+    "displayDate": "2026-11-02",
+    "images": []
+  },
+  {
+    "id": "10000008256168_4782",
+    "sourceIndex": 4782,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Victoria Green",
+    "rating": 5,
+    "title": "",
+    "body": "Game changer for anyone doing at home light therapy. Very refreshing on tired morning skin too even on non-mask days. Hyperpigmentation and post acne marks are fading faster than with the mask alone. A little goes a long way, 2 pumps is plenty for face, neck and décolleté.",
+    "date": "2026-11-02 00:00:00 +0000 UTC",
+    "displayDate": "2026-11-02",
+    "images": []
+  },
+  {
     "id": "10000008256168_4494",
     "sourceIndex": 4494,
     "productHandle": "buudy-light-activating-hyaluronic-serum",
@@ -189,6 +369,18 @@
     "body": "Been using this for about 4 weeks now alongside my led mask. Does not feel tacky at all unlike The Ordinary or Paula's Choice which always felt sticky on me. Noticeable difference in skin bounce and elasticity after about 3 weeks of daily use. Came beautifully packaged in the cream box, felt very luxurious unboxing it.",
     "date": "2026-11-02 00:00:00 +0000 UTC",
     "displayDate": "2026-11-02",
+    "images": []
+  },
+  {
+    "id": "10000008256168_4925",
+    "sourceIndex": 4925,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Claire Holmes",
+    "rating": 5,
+    "title": "",
+    "body": "Was sceptical at first about spending £99 but it is worth every penny. The texture is like a lightweight water-gel, zero tackiness or stickiness once it sinks in. Hyperpigmentation and post acne marks are fading faster than with the mask alone.",
+    "date": "2026-11-01 00:00:00 +0000 UTC",
+    "displayDate": "2026-11-01",
     "images": []
   },
   {
@@ -420,6 +612,30 @@
     "images": []
   },
   {
+    "id": "10000008256168_4887",
+    "sourceIndex": 4887,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Zoe Turner",
+    "rating": 4,
+    "title": "",
+    "body": "This is hands down the best hyaluronic acid I have tried. Sinks right in within about 20 seconds, leaves skin bouncy and hydrated. Huge improvement in hydration levels and my makeup sits so much better now without settling into creases. Does not break me out at all which is a miracle since almost everything clogs my pores.",
+    "date": "2026-10-15 00:00:00 +0000 UTC",
+    "displayDate": "2026-10-15",
+    "images": []
+  },
+  {
+    "id": "10000008256168_4652",
+    "sourceIndex": 4652,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Emily Robinson",
+    "rating": 4,
+    "title": "",
+    "body": "Been using this for about 4 weeks now alongside my led mask. Glide is so smooth and you only need about 2 pumps for full face and neck. Stubborn fine lines on my forehead and around my mouth are genuinely softening. Packaging is gorgeous frosted glass though I have to be careful not to drop it on my bathroom tiles!",
+    "date": "2026-10-15 00:00:00 +0000 UTC",
+    "displayDate": "2026-10-15",
+    "images": []
+  },
+  {
     "id": "10000008256168_4542",
     "sourceIndex": 4542,
     "productHandle": "buudy-light-activating-hyaluronic-serum",
@@ -547,18 +763,6 @@
     "rating": 5,
     "title": "",
     "body": "Skin drank this up immediately. Glide is so smooth and you only need about 2 pumps for full face and neck. Hyperpigmentation and post acne marks are fading faster than with the mask alone.",
-    "date": "2026-10-07 00:00:00 +0000 UTC",
-    "displayDate": "2026-10-07",
-    "images": []
-  },
-  {
-    "id": "10000008256168_4900",
-    "sourceIndex": 4900,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Ruby Watson",
-    "rating": 3,
-    "title": "",
-    "body": "A staple in my evening skincare routine now. Very refreshing on tired morning skin too even on non-mask days. Really good hydration but Royal Mail delivery was delayed by 3 days to Edinburgh and box had a slight dent. Serum itself works well under light therapy.",
     "date": "2026-10-07 00:00:00 +0000 UTC",
     "displayDate": "2026-10-07",
     "images": []
@@ -693,6 +897,18 @@
     "body": "Just finished my first bottle and ordering the two pack today. Completely clear and unscented which my sensitive rosacea skin is very grateful for. Using this under my 7-colour mask has noticeably amplified the glow. Skin looks like glass the next morning. Would love a jumbo 100ml size if Buudy ever makes one please!!",
     "date": "2026-09-30 00:00:00 +0000 UTC",
     "displayDate": "2026-09-30",
+    "images": []
+  },
+  {
+    "id": "10000008256168_custom_2star",
+    "sourceIndex": 5502,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Sophie Davies",
+    "rating": 2,
+    "title": "Frustrating stock issue",
+    "body": "I bought this serum 4 months ago and now I'm addicted to it as it is so nice and giving good result, but it went out of stock I have to wait for 2 weeks to get it again, totally frustating.",
+    "date": "2026-09-29 11:45:00 +0000 UTC",
+    "displayDate": "2026-09-29",
     "images": []
   },
   {
@@ -909,6 +1125,18 @@
     "body": "My aesthetician recommended switching to a pure water-based hydrogel. Does not feel tacky at all unlike The Ordinary or Paula's Choice which always felt sticky on me. Definitely feel the light gets through deeper, fibroblasts must be loving it haha. Came beautifully packaged in the cream box, felt very luxurious unboxing it.",
     "date": "2026-09-16 00:00:00 +0000 UTC",
     "displayDate": "2026-09-16",
+    "images": []
+  },
+  {
+    "id": "10000008256168_custom_1star",
+    "sourceIndex": 5501,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Amara Patel",
+    "rating": 1,
+    "title": "Did nothing for my tanning",
+    "body": "I bought it thinking it helps me in reducing my tanning, but it did nothing for my tanning.",
+    "date": "2026-09-15 14:22:00 +0000 UTC",
+    "displayDate": "2026-09-15",
     "images": []
   },
   {
@@ -1416,6 +1644,18 @@
     "images": []
   },
   {
+    "id": "10000008256168_4900",
+    "sourceIndex": 4900,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Ruby Watson",
+    "rating": 3,
+    "title": "",
+    "body": "A staple in my evening skincare routine now. Very refreshing on tired morning skin too even on non-mask days. Really good hydration but Royal Mail delivery was delayed by 3 days to Edinburgh and box had a slight dent. Serum itself works well under light therapy.",
+    "date": "2026-08-22 00:00:00 +0000 UTC",
+    "displayDate": "2026-08-22",
+    "images": []
+  },
+  {
     "id": "10000008256168_4964",
     "sourceIndex": 4964,
     "productHandle": "buudy-light-activating-hyaluronic-serum",
@@ -1569,6 +1809,18 @@
     "body": "So impressed with how fast this absorbs. Completely clear and unscented which my sensitive rosacea skin is very grateful for. Using this under my 7-colour mask has noticeably amplified the glow. Skin looks like glass the next morning. A little goes a long way, 2 pumps is plenty for face, neck and décolleté.",
     "date": "2026-08-06 00:00:00 +0000 UTC",
     "displayDate": "2026-08-06",
+    "images": []
+  },
+  {
+    "id": "10000008256168_4714",
+    "sourceIndex": 4714,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Gemma Jackson",
+    "rating": 3,
+    "title": "",
+    "body": "I rarely leave reviews but felt I had to for this one. Texture is lovely and silky, no heavy occlusive feeling at all. Really good hydration but Royal Mail delivery was delayed by 3 days to Edinburgh and box had a slight dent. Serum itself works well under light therapy.",
+    "date": "2026-08-05 00:00:00 +0000 UTC",
+    "displayDate": "2026-08-05",
     "images": []
   },
   {
@@ -1773,6 +2025,18 @@
     "body": "Just finished my first bottle and ordering the two pack today. Texture is lovely and silky, no heavy occlusive feeling at all. Huge improvement in hydration levels and my makeup sits so much better now without settling into creases.",
     "date": "2026-07-19 00:00:00 +0000 UTC",
     "displayDate": "2026-07-19",
+    "images": []
+  },
+  {
+    "id": "10000008256168_4646",
+    "sourceIndex": 4646,
+    "productHandle": "buudy-light-activating-hyaluronic-serum",
+    "customerName": "Gemma Roberts",
+    "rating": 3,
+    "title": "",
+    "body": "Honestly did not expect this to make such a difference. The texture is like a lightweight water-gel, zero tackiness or stickiness once it sinks in. Really good hydration but Royal Mail delivery was delayed by 3 days to Edinburgh and box had a slight dent. Serum itself works well under light therapy.",
+    "date": "2026-07-18 00:00:00 +0000 UTC",
+    "displayDate": "2026-07-18",
     "images": []
   },
   {
@@ -4104,18 +4368,6 @@
     "images": []
   },
   {
-    "id": "10000008256168_4714",
-    "sourceIndex": 4714,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Gemma Jackson",
-    "rating": 3,
-    "title": "",
-    "body": "I rarely leave reviews but felt I had to for this one. Texture is lovely and silky, no heavy occlusive feeling at all. Really good hydration but Royal Mail delivery was delayed by 3 days to Edinburgh and box had a slight dent. Serum itself works well under light therapy.",
-    "date": "2026-02-04 00:00:00 +0000 UTC",
-    "displayDate": "2026-02-04",
-    "images": []
-  },
-  {
     "id": "10000008256168_4775",
     "sourceIndex": 4775,
     "productHandle": "buudy-light-activating-hyaluronic-serum",
@@ -5875,18 +6127,6 @@
     "rating": 5,
     "title": "",
     "body": "Just finished my first bottle and ordering the two pack today. No pilling whatsoever when I layer my night cream over it afterwards. Gives an immediate glass skin plump that lasts all day.",
-    "date": "2025-10-17 00:00:00 +0000 UTC",
-    "displayDate": "2025-10-17",
-    "images": []
-  },
-  {
-    "id": "10000008256168_4646",
-    "sourceIndex": 4646,
-    "productHandle": "buudy-light-activating-hyaluronic-serum",
-    "customerName": "Gemma Roberts",
-    "rating": 3,
-    "title": "",
-    "body": "Honestly did not expect this to make such a difference. The texture is like a lightweight water-gel, zero tackiness or stickiness once it sinks in. Really good hydration but Royal Mail delivery was delayed by 3 days to Edinburgh and box had a slight dent. Serum itself works well under light therapy.",
     "date": "2025-10-17 00:00:00 +0000 UTC",
     "displayDate": "2025-10-17",
     "images": []

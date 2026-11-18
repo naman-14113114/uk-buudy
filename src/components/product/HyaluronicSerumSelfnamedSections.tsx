@@ -530,80 +530,71 @@ export function PackagingSection() {
   );
 }
 
-// 7. How To Use (4-Step Protocol)
+// 7. How To Use (Horizontal 4-Step Protocol matching Molekulaire style)
 function HowToUseSection() {
   const steps = [
     {
-      num: "01",
-      title: "Cleanse Skin",
-      desc: "Apply to thoroughly cleansed skin, after washing or immediately before your Buudy LED Mask session.",
+      num: 1,
+      title: "Cleanse Your Face",
+      desc: "Start with a clean face, morning or night.",
     },
     {
-      num: "02",
-      title: "Dispense & Smooth",
-      desc: "Smooth a small amount (1–2 pumps) evenly across face and neck with gentle upward motions.",
+      num: 2,
+      title: "Apply the Serum",
+      desc: "Dispense 1-2 drops and gently press into the face, neck and décolletage.",
     },
     {
-      num: "03",
-      title: "Absorb & Layer",
-      desc: "Allow 30–60 seconds for complete dermal absorption. Layer a moisturiser or oil on top if more nourishment is desired.",
+      num: 3,
+      title: "Massage & Absorb",
+      desc: "Use light upward strokes to massage in until the serum is fully absorbed into the skin.",
     },
     {
-      num: "04",
-      title: "Keep It Daily",
-      desc: "Use morning (AM) and evening (PM) every day to maintain a plump, deeply hydrated moisture barrier.",
+      num: 4,
+      title: "Follow with Moisturiser",
+      desc: "Layer a moisturiser on top to lock in the actives. Always follow with SPF in the morning.",
     },
   ];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20" id="how-to-use">
       <div className="buudy-wrap">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Column: Model Ritual Image */}
-          <div className="lg:col-span-6">
-            <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
-              <Image
-                src="/images/products/buudy-serum/selfnamed/how-to-use.jpg"
-                alt="Model applying Buudy Hyaluronic Serum Double Hydration Boost Gel in daily morning routine"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
+        {/* Centered Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+          <h2 className="buudy-display text-3xl sm:text-4xl lg:text-[2.6rem] text-[var(--plum)]">
+            How to Use
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-[var(--muted)]">
+            Follow these simple steps to get the best results
+          </p>
+        </div>
 
-          {/* Right Column: 4 Steps */}
-          <div className="lg:col-span-6 flex flex-col gap-6">
-            <div>
-              <p className="buudy-mono text-[var(--gold)] uppercase tracking-[0.2em] text-xs font-semibold">
-                Daily Application Protocol
-              </p>
-              <h2 className="buudy-display mt-2 text-3xl sm:text-4xl leading-tight text-[var(--plum)]">
-                How to <em className="buudy-italic text-[var(--gold)]">use</em>.
-              </h2>
-              <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
-                Follow this simple 4-step ritual morning and evening for optimal dermal plumping and light therapy synergy.
-              </p>
-            </div>
+        {/* Horizontal Stepper Timeline */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Connecting line on desktop */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute top-7 left-[12.5%] right-[12.5%] h-[1.5px] bg-[#d5cfc5] z-0"
+          />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {steps.map((s) => (
-                <div
-                  key={s.num}
-                  className="p-5 rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] shadow-xs"
-                >
-                  <span className="buudy-mono text-sm font-bold text-[var(--gold)]">
-                    Step {s.num}
-                  </span>
-                  <h3 className="buudy-display text-base sm:text-lg font-semibold text-[var(--plum)] mt-1 mb-1.5">
-                    {s.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed">
-                    {s.desc}
-                  </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 relative z-10">
+            {steps.map((step) => (
+              <div key={step.num} className="flex flex-col items-center text-center">
+                {/* Number Badge */}
+                <div className="w-14 h-14 rounded-full bg-white border border-[#d5cfc5] shadow-xs text-[var(--plum)] font-serif font-bold text-lg flex items-center justify-center mb-4 md:mb-6 shrink-0 transition-transform hover:scale-105">
+                  {step.num}
                 </div>
-              ))}
-            </div>
+
+                {/* Title */}
+                <h3 className="buudy-display font-semibold text-base sm:text-lg text-[var(--plum)] mb-2">
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-[240px]">
+                  {step.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
