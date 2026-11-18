@@ -30,6 +30,7 @@ import { SerumCertificationsRow } from "./SerumCertificationsRow";
 import { GiftBoxBundleSection } from "./GiftBoxBundleSection";
 import {
   HyaluronicSerumSelfnamedSections,
+  PackagingSection,
   RelatedProductsSection,
 } from "./HyaluronicSerumSelfnamedSections";
 
@@ -146,6 +147,7 @@ export function ProductPage({
       {product.template === "serum" && (
         <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
+      {isHyaluronic && <PackagingSection />}
       {product.template === "cleanser" && <CleanserClinicalResults />}
 
       {/* 4. Daily Application / Cleansing Ritual - How To Use Section */}

@@ -463,7 +463,7 @@ function KeyIngredientsSection() {
 }
 
 // 6. Packaging & Circular Sustainability
-function PackagingSection() {
+export function PackagingSection() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
@@ -761,7 +761,6 @@ export function HyaluronicSerumSelfnamedSections() {
       <CuratedForSection />
       <ProductFormulaSection />
       <KeyIngredientsSection />
-      <PackagingSection />
       <HowToUseSection />
     </>
   );
