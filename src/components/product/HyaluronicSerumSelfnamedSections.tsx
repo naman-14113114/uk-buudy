@@ -45,7 +45,7 @@ function ProductInDetailsCarousel() {
   ];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-12 md:py-18 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-12 md:py-18">
       <div className="buudy-wrap">
         {/* Header with Navigation Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
@@ -106,7 +106,7 @@ function ProductInDetailsCarousel() {
 // 2. Product Features & Star Attributes
 function ProductFeaturesSection() {
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Feature Banner Image */}
@@ -226,7 +226,7 @@ function CuratedForSection() {
   ];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
         <div className="max-w-2xl text-center mx-auto mb-12">
           <p className="buudy-mono text-[var(--gold)] uppercase tracking-[0.2em] text-xs font-semibold">
@@ -277,7 +277,7 @@ function CuratedForSection() {
 // 4. Product Formula & Physical Calibration
 function ProductFormulaSection() {
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Texture Image */}
@@ -416,7 +416,7 @@ function KeyIngredientsSection() {
   ];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
         <div className="max-w-2xl text-center mx-auto mb-12">
           <p className="buudy-mono text-[var(--gold)] uppercase tracking-[0.2em] text-xs font-semibold">
@@ -465,7 +465,7 @@ function KeyIngredientsSection() {
 // 6. Packaging & Circular Sustainability
 function PackagingSection() {
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Sustainable Packaging Imagery */}
@@ -490,9 +490,6 @@ function PackagingSection() {
               <h2 className="buudy-display mt-2 text-3xl sm:text-4xl leading-tight text-[var(--plum)]">
                 Mindful <em className="buudy-italic text-[var(--gold)]">packaging</em>.
               </h2>
-              <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
-                We believe exceptional luxury skincare must care for the planet. Our bottles and components are selected for infinite circular recyclability.
-              </p>
             </div>
 
             <div className="space-y-4">
@@ -559,7 +556,7 @@ function HowToUseSection() {
   ];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Model Ritual Image */}
@@ -643,7 +640,7 @@ export function RelatedProductsSection({ currentProductId }: { currentProductId?
   };
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-16 md:py-24 border-t border-[rgba(46,16,47,0.08)]">
+    <section className="buudy-section bg-[var(--cream)] py-16 md:py-24">
       <div className="buudy-wrap">
         <div className="max-w-2xl text-center mx-auto mb-12">
           <p className="buudy-mono text-[var(--gold)] uppercase tracking-[0.2em] text-xs font-semibold">
