@@ -2,8 +2,71 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { aboutHero, aboutSections } from "@/data/about";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { openTawkChat } from "@/lib/tawk";
+
+function renderBulletItem(boldPart: string, rest: string) {
+  const label = boldPart.trim().toLowerCase();
+  const text = rest.trim();
+
+  if (label.includes("email")) {
+    return (
+      <a
+        className="group inline-flex items-baseline underline-offset-2 transition-colors"
+        href={`mailto:${text}`}
+      >
+        <strong className="text-[var(--plum)] font-semibold group-hover:text-[var(--gold)] transition-colors">
+          {boldPart}:
+        </strong>
+        <span className="ml-1 underline group-hover:text-[var(--gold)] transition-colors">
+          {text}
+        </span>
+      </a>
+    );
+  }
+
+  if (label.includes("contact")) {
+    return (
+      <Link
+        className="group inline-flex items-baseline underline-offset-2 transition-colors"
+        href="/pages/contact-us#contact-form"
+      >
+        <strong className="text-[var(--plum)] font-semibold group-hover:text-[var(--gold)] transition-colors">
+          {boldPart}:
+        </strong>
+        <span className="ml-1 underline group-hover:text-[var(--gold)] transition-colors">
+          {text}
+        </span>
+      </Link>
+    );
+  }
+
+  if (label.includes("chat")) {
+    return (
+      <button
+        type="button"
+        onClick={openTawkChat}
+        className="group inline-flex items-baseline underline-offset-2 transition-colors cursor-pointer text-left bg-transparent p-0 border-0 font-inherit text-inherit"
+      >
+        <strong className="text-[var(--plum)] font-semibold group-hover:text-[var(--gold)] transition-colors">
+          {boldPart}:
+        </strong>
+        <span className="ml-1 underline group-hover:text-[var(--gold)] transition-colors">
+          {text}
+        </span>
+      </button>
+    );
+  }
+
+  return (
+    <>
+      <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
+      <span className="ml-1">{text}</span>
+    </>
+  );
+}
 
 const storyVideo = {
   src: "/media/about/buudy-uk-our-story-clinical-skincare-led-light-therapy.mp4",
@@ -187,26 +250,15 @@ export function AboutPage() {
                           <ul key={pIdx} className="space-y-3 mt-4">
                             {paragraph.split("\n").map((bullet, bIdx) => {
                               const cleanBullet = bullet.replace(/^- /, "").trim();
-                              const [boldPart, rest] = cleanBullet.split(":");
+                              const [boldPart, ...restParts] = cleanBullet.split(":");
+                              const rest = restParts.join(":");
                               
                               return (
                                 <li key={bIdx} className="flex items-start gap-2.5">
                                   <span className="text-[var(--gold)] mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                                   <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
                                     {rest ? (
-                                      <>
-                                        <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
-                                        {boldPart === "Email" ? (
-                                          <a
-                                            className="ml-1 underline underline-offset-2 hover:text-[var(--gold)] transition-colors"
-                                            href="mailto:support@buudy.co.uk"
-                                          >
-                                            {rest.trim()}
-                                          </a>
-                                        ) : (
-                                          rest
-                                        )}
-                                      </>
+                                      renderBulletItem(boldPart, rest)
                                     ) : (
                                       cleanBullet
                                     )}
@@ -260,26 +312,15 @@ export function AboutPage() {
                         <ul key={pIdx} className="space-y-4 mt-8 pt-6 border-t border-[rgba(58,31,61,0.06)]">
                           {paragraph.split("\n").map((bullet, bIdx) => {
                             const cleanBullet = bullet.replace(/^- /, "").trim();
-                            const [boldPart, rest] = cleanBullet.split(":");
+                            const [boldPart, ...restParts] = cleanBullet.split(":");
+                            const rest = restParts.join(":");
                             
                             return (
-                              <li key={bIdx} className="flex items-center gap-3">
-                                <span className="text-[var(--gold)] h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                              <li key={bIdx} className="flex items-start sm:items-center gap-3">
+                                <span className="text-[var(--gold)] mt-2 sm:mt-0 h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                                 <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
                                   {rest ? (
-                                    <>
-                                      <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
-                                      {boldPart === "Email" ? (
-                                        <a
-                                          className="ml-1 underline underline-offset-2 hover:text-[var(--gold)] transition-colors"
-                                          href="mailto:support@buudy.co.uk"
-                                        >
-                                          {rest.trim()}
-                                        </a>
-                                      ) : (
-                                        rest
-                                      )}
-                                    </>
+                                    renderBulletItem(boldPart, rest)
                                   ) : (
                                     cleanBullet
                                   )}
