@@ -40,14 +40,6 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
       ? activeCodes.join(" + ")
       : activeCodes[0] || "";
 
-  const hasMaskProduct = lines.some(
-    (line) =>
-      line.type === "product" &&
-      (line.productId === "buudy-led-mask" ||
-        line.id === "buudy-led-mask" ||
-        line.slug === "buudy-led-mask" ||
-        line.title.toLowerCase().includes("mask")),
-  );
   const productSavingsCents = totals.savingsCents;
 
   const giftLines = getDisplayLines(lines).filter(
@@ -101,9 +93,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                   <div className="flex justify-between gap-4">
                     <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
                       <Tag aria-hidden="true" size={14} className="shrink-0" />
-                      <span>
-                        Black Friday Offer{hasMaskProduct ? " (449 - 179 = 270)" : ""}
-                      </span>
+                      Black Friday Offer
                     </span>
                     <span className="font-semibold text-[var(--muted)] shrink-0">
                       -{formatMoney(productSavingsCents)}
