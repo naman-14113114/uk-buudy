@@ -151,6 +151,7 @@ export function ProductPage({
       {product.template === "cleanser" && <CleanserClinicalResults />}
 
       {/* 4. Daily Application / Cleansing Ritual - How To Use Section */}
+      {product.template === "mask" && <DeferredBeforeAfterGrid />}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
       {product.template === "serum" && !isHyaluronic && (
