@@ -37,7 +37,7 @@ import {
 export function ProductPage({
   product,
   variant,
-  galleryVariant = product.template === "mask" || product.template === "serum" || product.template === "cleanser" ? "omnilux" : "default",
+  galleryVariant = "omnilux",
   comparisonPosition = product.template === "mask" ? "below-app" : "default",
   isHalloween = false,
   isEarlyBlackFriday = true,

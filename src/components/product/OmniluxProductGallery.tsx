@@ -188,7 +188,6 @@ export function OmniluxProductGallery({
 
   // Current global media index. By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [hoverSide, setHoverSide] = useState<"left" | "right">("right");
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -216,7 +215,7 @@ export function OmniluxProductGallery({
     else if (tab === "video") setCurrentIndex(videoStartIndex);
   };
 
-  // Continuous linear navigation across all items (Gallery -> Before & After -> Video)
+  // Continuous linear navigation across all items
   const goNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % allMediaItems.length);
   }, [allMediaItems.length]);
@@ -224,18 +223,6 @@ export function OmniluxProductGallery({
   const goPrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + allMediaItems.length) % allMediaItems.length);
   }, [allMediaItems.length]);
-
-  // Handle mouse move on main stage to toggle < or > cursor depending on side from center (only for non-mask templates)
-  const handleStageMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMask) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    if (mouseX < rect.width / 2) {
-      setHoverSide("left");
-    } else {
-      setHoverSide("right");
-    }
-  }, [isMask]);
 
   // Lightbox opening (for both images and video)
   const openLightbox = useCallback(() => {
@@ -253,24 +240,14 @@ export function OmniluxProductGallery({
     }
   }, []);
 
-  // Handle click on main stage: on mask pages, clicking the stage opens the magnification lightbox (unless video); on non-mask pages, cycles prev/next
+  // Handle click on main stage: clicking the stage opens the magnification lightbox (unless video); video toggles play/pause
   const handleStageClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMask) {
-      if (allMediaItems[currentIndex]?.type === "video") {
-        toggleVideoPlay();
-      } else {
-        openLightbox();
-      }
-      return;
-    }
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    if (mouseX < rect.width / 2) {
-      goPrev();
+    if (allMediaItems[currentIndex]?.type === "video") {
+      toggleVideoPlay();
     } else {
-      goNext();
+      openLightbox();
     }
-  }, [isMask, allMediaItems, currentIndex, toggleVideoPlay, openLightbox, goNext, goPrev]);
+  }, [allMediaItems, currentIndex, toggleVideoPlay, openLightbox]);
 
   // Dynamic Thumbnail Centering Scroll (1:1 from Miroooo): centers active thumbnail vertically on desktop & horizontally on mobile
   useEffect(() => {
@@ -1182,24 +1159,17 @@ export function OmniluxProductGallery({
         <div className="omni-gallery-main-col">
           {/* TOP MAIN DISPLAY STAGE ROW */}
           <div className="omni-stage-row">
-            {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS OR ZOOM */}
+            {/* MAIN DISPLAY STAGE WITH ZOOM CURSOR */}
             <div
               className={`omni-main-stage ${
-                isMask
-                  ? currentItem.type === "video"
-                    ? ""
-                    : "omni-main-stage--zoom"
-                  : hoverSide === "left"
-                  ? "omni-main-stage--cursor-left"
-                  : "omni-main-stage--cursor-right"
+                currentItem.type === "video" ? "" : "omni-main-stage--zoom"
               }`}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
-              onMouseMove={handleStageMouseMove}
               onClick={handleStageClick}
             >
-              {/* STAGE NAVIGATION ARROWS (MASK ONLY) */}
-              {isMask && (
+              {/* STAGE NAVIGATION ARROWS (ALL PRODUCTS WITH MULTIPLE MEDIA ITEMS) */}
+              {allMediaItems.length > 1 && (
                 <>
                   <button
                     type="button"
