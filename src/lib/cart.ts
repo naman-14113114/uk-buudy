@@ -219,11 +219,13 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
   );
 
   const formatted = lines.map((line) => {
-    if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "product") {
+    if (line.type === "product") {
+      const prod = findProductForLine(line);
       return {
         ...line,
-        title: "Buudy LED Mask",
-        image: getProductById("buudy-led-mask")?.cartImage ?? line.image,
+        title: line.productId === "buudy-led-mask" ? "Buudy LED Mask" : line.title,
+        subtitle: prod?.shortDescription ?? line.subtitle,
+        image: line.productId === "buudy-led-mask" ? (getProductById("buudy-led-mask")?.cartImage ?? line.image) : line.image,
       };
     }
     if (

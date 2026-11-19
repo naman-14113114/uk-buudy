@@ -40,6 +40,16 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
       ? activeCodes.join(" + ")
       : activeCodes[0] || "";
 
+  const hasMaskProduct = lines.some(
+    (line) =>
+      line.type === "product" &&
+      (line.productId === "buudy-led-mask" ||
+        line.id === "buudy-led-mask" ||
+        line.slug === "buudy-led-mask" ||
+        line.title.toLowerCase().includes("mask")),
+  );
+  const productSavingsCents = totals.savingsCents;
+
   const giftLines = getDisplayLines(lines).filter(
     (line) =>
       line.type === "gift" &&
@@ -50,7 +60,8 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
     (total, line) => total + (line.compareAtCents ?? 0) * line.quantity,
     0,
   );
-  const totalSavingsCents = giftOfferDiscountCents + totals.promoDiscountCents;
+  const totalSavingsCents =
+    productSavingsCents + giftOfferDiscountCents + totals.promoDiscountCents;
 
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
@@ -86,6 +97,19 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
           >
             <div className="overflow-hidden">
               <div className="space-y-3 pb-3 pt-2 text-sm">
+                {productSavingsCents > 0 ? (
+                  <div className="flex justify-between gap-4">
+                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                      <Tag aria-hidden="true" size={14} className="shrink-0" />
+                      <span>
+                        Black Friday Offer{hasMaskProduct ? " (449 - 179 = 270)" : ""}
+                      </span>
+                    </span>
+                    <span className="font-semibold text-[var(--muted)] shrink-0">
+                      -{formatMoney(productSavingsCents)}
+                    </span>
+                  </div>
+                ) : null}
                 {giftLines.map((line) => (
                   <div className="flex justify-between gap-4" key={line.id}>
                     <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
@@ -108,6 +132,15 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                     </span>
                   </div>
                 ) : null}
+                <div className="flex justify-between gap-4">
+                  <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                    <Tag aria-hidden="true" size={14} className="shrink-0" />
+                    Free tracked Shipping
+                  </span>
+                  <span className="font-semibold text-[var(--muted)] shrink-0">
+                    Free
+                  </span>
+                </div>
               </div>
             </div>
           </div>
