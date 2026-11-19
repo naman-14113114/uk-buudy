@@ -3,10 +3,16 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { aboutHero, aboutSections } from "@/data/about";
-import { expertVideo } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-function AboutDrVideo({ isRight }: { isRight: boolean }) {
+const storyVideo = {
+  src: "/media/about/buudy-uk-our-story-clinical-skincare-led-light-therapy.mp4",
+  poster: "/images/about/buudy-uk-our-story-clinical-skincare-led-light-therapy-poster.webp",
+  alt: "Buudy UK clinical skincare specialist sharing the founding story and LED light therapy mission",
+  title: "Buudy UK — Our Story & Clinical LED Light Therapy Journey",
+};
+
+function AboutStoryVideo({ isRight }: { isRight: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -33,14 +39,16 @@ function AboutDrVideo({ isRight }: { isRight: boolean }) {
         <video
           className="w-full aspect-[2/3] object-cover object-center block cursor-pointer"
           playsInline
-          poster={expertVideo.poster}
+          poster={storyVideo.poster}
           preload="none"
           ref={videoRef}
+          title={storyVideo.title}
+          aria-label={storyVideo.alt}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           onClick={togglePlay}
         >
-          <source src={expertVideo.src} />
+          <source src={storyVideo.src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -128,9 +136,9 @@ export function AboutPage() {
               className="buudy-section py-6 md:py-10 transition-all duration-300"
             >
               <div className="buudy-wrap grid gap-12 lg:grid-cols-2 lg:items-center">
-                {/* Media Column: Same Dr Video as Product Page for our-story, static image for others */}
+                {/* Media Column: Clinical Skincare Story Video for our-story, static image for others */}
                 {section.id === "our-story" ? (
-                  <AboutDrVideo isRight={isRight} />
+                  <AboutStoryVideo isRight={isRight} />
                 ) : (
                   <div 
                     className={`relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${

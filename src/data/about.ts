@@ -23,9 +23,15 @@ export const aboutSections = [
     eyebrow: "How we started",
     title: "Our Story",
     copy: "The idea for Buudy was born out of genuine frustration with the traditional skincare cycle. We were tired of spending a fortune on topical creams that over-promised and expensive dermatologist visits that were hard to maintain.\n\nWe knew the science behind clinical LED light therapy worked, but the at-home devices available were either too weak, overpriced, or tethered you to a wall with bulky cords. So, we changed the standard. We created the Buudy LED Mask: a sleek, 100% wireless device packed with 7 visible wavelengths plus 830nm near-infrared. Today, we're proud to have helped over 16,000 customers regain their confidence from the comfort of home.",
+    video: {
+      src: "/media/about/buudy-uk-our-story-clinical-skincare-led-light-therapy.mp4",
+      poster: "/images/about/buudy-uk-our-story-clinical-skincare-led-light-therapy-poster.webp",
+      alt: "Buudy UK clinical skincare specialist sharing the founding story and LED light therapy mission",
+      title: "Buudy UK — Our Story & Clinical LED Light Therapy Journey",
+    },
     image: {
-      src: "/images/products/buudy-led-mask/dermatologist-video-poster.png",
-      alt: "Dr. Gabriella Vasili reviewing the wireless Buudy LED Mask"
+      src: "/images/about/buudy-uk-our-story-clinical-skincare-led-light-therapy-poster.webp",
+      alt: "Buudy UK clinical skincare specialist sharing the founding story and LED light therapy mission"
     },
     align: "right" as const,
   },
