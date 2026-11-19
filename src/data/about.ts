@@ -13,8 +13,8 @@ export const aboutSections = [
     title: "Our Team",
     copy: "Behind Buudy is a close-knit team of skincare enthusiasts, tech innovators, and customer advocates. We aren't just selling a product; we use the Buudy Mask ourselves. From our product design team ensuring the optimal output of every LED bulb, to our dedicated customer support squad who are always ready to guide you on your light therapy journey, everyone at Buudy is united by one common goal: delivering an exceptional experience and real, visible results to you.",
     image: {
-      src: "/images/about/about-team-v3.webp",
-      alt: "The Buudy team designing high-performance skincare solutions"
+      src: "/images/about/buudy-uk-team-clinical-skincare-innovators-about-us.webp",
+      alt: "The Buudy UK team of skincare innovators and clinical specialists at the London exhibition booth with the Buudy LED Mask"
     },
     align: "left" as const,
   },

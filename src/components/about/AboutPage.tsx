@@ -139,6 +139,18 @@ export function AboutPage() {
                 {/* Media Column: Clinical Skincare Story Video for our-story, static image for others */}
                 {section.id === "our-story" ? (
                   <AboutStoryVideo isRight={isRight} />
+                ) : section.id === "our-team" ? (
+                  <div 
+                    className={`relative aspect-square w-full max-w-[500px] lg:max-w-none mx-auto overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${
+                      isRight ? "lg:order-2" : ""
+                    }`}
+                  >
+                    <img
+                      alt={section.image.alt}
+                      src={section.image.src}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
                 ) : (
                   <div 
                     className={`relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${
