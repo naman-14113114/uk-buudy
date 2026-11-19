@@ -225,8 +225,9 @@ export function OmniluxProductGallery({
     setCurrentIndex((prev) => (prev - 1 + allMediaItems.length) % allMediaItems.length);
   }, [allMediaItems.length]);
 
-  // Handle mouse move on main stage to toggle < or > cursor depending on side from center
+  // Handle mouse move on main stage to toggle < or > cursor depending on side from center (only for non-mask templates)
   const handleStageMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMask) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     if (mouseX < rect.width / 2) {
@@ -234,10 +235,34 @@ export function OmniluxProductGallery({
     } else {
       setHoverSide("right");
     }
+  }, [isMask]);
+
+  // Lightbox opening (for both images and video)
+  const openLightbox = useCallback(() => {
+    setIsLightboxOpen(true);
   }, []);
 
-  // Handle click on main stage: left side goes backward (<), right side goes forward (>)
+  const toggleVideoPlay = useCallback(() => {
+    const video = videoPlayerRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsVideoPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsVideoPlaying(false);
+    }
+  }, []);
+
+  // Handle click on main stage: on mask pages, clicking the stage opens the magnification lightbox (unless video); on non-mask pages, cycles prev/next
   const handleStageClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMask) {
+      if (allMediaItems[currentIndex]?.type === "video") {
+        toggleVideoPlay();
+      } else {
+        openLightbox();
+      }
+      return;
+    }
     const rect = e.currentTarget.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     if (mouseX < rect.width / 2) {
@@ -245,7 +270,7 @@ export function OmniluxProductGallery({
     } else {
       goNext();
     }
-  }, [goNext, goPrev]);
+  }, [isMask, allMediaItems, currentIndex, toggleVideoPlay, openLightbox, goNext, goPrev]);
 
   // Dynamic Thumbnail Centering Scroll (1:1 from Miroooo): centers active thumbnail vertically on desktop & horizontally on mobile
   useEffect(() => {
@@ -281,28 +306,12 @@ export function OmniluxProductGallery({
     }
   }, [currentIndex, allMediaItems]);
 
-  const toggleVideoPlay = useCallback(() => {
-    const video = videoPlayerRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play().then(() => setIsVideoPlaying(true)).catch(() => {});
-    } else {
-      video.pause();
-      setIsVideoPlaying(false);
-    }
-  }, []);
-
   const toggleVideoMute = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     const video = videoPlayerRef.current;
     if (!video) return;
     video.muted = !video.muted;
     setIsVideoMuted(video.muted);
-  }, []);
-
-  // Lightbox opening (for both images and video)
-  const openLightbox = useCallback(() => {
-    setIsLightboxOpen(true);
   }, []);
 
   // Lightbox keyboard & scroll lock
@@ -497,6 +506,66 @@ export function OmniluxProductGallery({
         }
         .omni-main-stage--cursor-right {
           cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='13' fill='%23ffffff' stroke='%23e5e7eb' stroke-width='1' fill-opacity='0.94'/%3E%3Cpath d='M12 8.5L17.5 14L12 19.5' stroke='%231f2937' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") 14 14, e-resize !important;
+        }
+        .omni-main-stage--zoom {
+          cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in !important;
+        }
+        .omni-main-stage--zoom .omni-main-img-wrap,
+        .omni-main-stage--zoom .omni-main-img {
+          cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in !important;
+        }
+
+        /* BUUDY LUXURY STAGE NAVIGATION ARROWS */
+        .omni-stage-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 12;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.94);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(46, 16, 47, 0.12);
+          color: #2E102F;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer !important;
+          transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.22s ease, color 0.2s ease;
+          box-shadow: 0 4px 14px rgba(46, 16, 47, 0.1);
+          padding: 0;
+          user-select: none;
+        }
+        .omni-stage-arrow--prev {
+          left: clamp(10px, 1.4vw, 16px);
+        }
+        .omni-stage-arrow--next {
+          right: clamp(10px, 1.4vw, 16px);
+        }
+        .omni-stage-arrow:hover {
+          background-color: #FFFFFF;
+          border-color: var(--gold, #B89556);
+          color: #2E102F;
+          transform: translateY(-50%) scale(1.08);
+          box-shadow: 0 6px 20px rgba(46, 16, 47, 0.18), 0 0 0 1px rgba(184, 149, 86, 0.25);
+        }
+        .omni-stage-arrow:active {
+          transform: translateY(-50%) scale(0.96);
+        }
+        .omni-stage-arrow svg {
+          width: 22px;
+          height: 22px;
+          color: currentColor;
+          flex-shrink: 0;
+          transition: transform 0.2s ease;
+        }
+        .omni-stage-arrow--prev:hover svg {
+          transform: translateX(-1px);
+        }
+        .omni-stage-arrow--next:hover svg {
+          transform: translateX(1px);
         }
         .omni-main-img-wrap {
           position: absolute;
@@ -1006,8 +1075,18 @@ export function OmniluxProductGallery({
             gap: 6px;
           }
           .omni-stage-arrow {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
+          }
+          .omni-stage-arrow svg {
+            width: 18px;
+            height: 18px;
+          }
+          .omni-stage-arrow--prev {
+            left: 8px;
+          }
+          .omni-stage-arrow--next {
+            right: 8px;
           }
           .omni-tabs-row {
             gap: 16px;
@@ -1103,10 +1182,14 @@ export function OmniluxProductGallery({
         <div className="omni-gallery-main-col">
           {/* TOP MAIN DISPLAY STAGE ROW */}
           <div className="omni-stage-row">
-            {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS */}
+            {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS OR ZOOM */}
             <div
               className={`omni-main-stage ${
-                hoverSide === "left"
+                isMask
+                  ? currentItem.type === "video"
+                    ? ""
+                    : "omni-main-stage--zoom"
+                  : hoverSide === "left"
                   ? "omni-main-stage--cursor-left"
                   : "omni-main-stage--cursor-right"
               }`}
@@ -1115,6 +1198,33 @@ export function OmniluxProductGallery({
               onMouseMove={handleStageMouseMove}
               onClick={handleStageClick}
             >
+              {/* STAGE NAVIGATION ARROWS (MASK ONLY) */}
+              {isMask && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Previous image"
+                    className="omni-stage-arrow omni-stage-arrow--prev"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      goPrev();
+                    }}
+                  >
+                    <ChevronLeft size={22} strokeWidth={2.2} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next image"
+                    className="omni-stage-arrow omni-stage-arrow--next"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      goNext();
+                    }}
+                  >
+                    <ChevronRight size={22} strokeWidth={2.2} />
+                  </button>
+                </>
+              )}
               {/* 1. GALLERY IMAGE / VIDEO DISPLAY */}
               {currentItem.type === "gallery" && (
                 <div className="omni-main-img-wrap">
