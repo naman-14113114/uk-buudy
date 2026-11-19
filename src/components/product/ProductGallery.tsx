@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
+import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 import { X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
 
@@ -495,14 +497,17 @@ export function ProductGallery({
                     className="buudyLED-23435t23-main_img"
                   />
                 ) : (
-                  <img
+                  <Image
                     src={image.src}
                     id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
                     className="buudyLED-23435t23-main_img"
                     alt={image.alt}
+                    width={1200}
+                    height={1200}
+                    sizes="(min-width: 1024px) 520px, calc(100vw - 32px)"
                     decoding="async"
-                    fetchPriority={index === 0 ? "high" : "low"}
-                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchPriority={isActive ? "high" : "low"}
+                    loading={isActive ? "eager" : "lazy"}
                   />
                 )}
 
@@ -580,25 +585,20 @@ export function ProductGallery({
               type="button"
             >
               {image.src.endsWith(".mp4") || image.src.endsWith(".webm") ? (
-                <video
+                <LazyAutoplayVideo
                   src={image.src}
+                  ariaLabel={image.alt}
                   className="buudyLED-23435t23-thumb_img"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  ref={(el) => {
-                    if (el) {
-                      el.defaultMuted = true;
-                      el.muted = true;
-                    }
-                  }}
+                  rootMargin="120px 0px"
                 />
               ) : (
-                <img
+                <Image
                   src={image.src}
                   className="buudyLED-23435t23-thumb_img"
                   alt={image.alt}
+                  width={192}
+                  height={192}
+                  sizes="(min-width: 1024px) 160px, 90px"
                   decoding="async"
                   fetchPriority="low"
                   loading="lazy"
@@ -798,14 +798,14 @@ function GalleryVideo({
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={isActive ? src : undefined}
       id={id}
       className={className}
-      autoPlay
+      autoPlay={isActive}
       muted
       loop
       playsInline
-      preload="auto"
+      preload={isActive ? "auto" : "none"}
     />
   );
 }

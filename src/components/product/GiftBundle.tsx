@@ -365,15 +365,9 @@ export function GiftBundle({
     product.id.includes("eye") ||
     product.slug.includes("collagen");
 
-  const giftButtonLabel = isSimplifiedProduct
-    ? "Add to cart"
-    : isEarlyBlackFriday
-    ? hasGifts
-      ? `CLAIM EARLY ACCESS + ${product.gifts.length} FREE GIFTS`
-      : "CLAIM BLACK FRIDAY EARLY ACCESS"
-    : hasGifts
+  const giftButtonLabel = product.template === "mask" && hasGifts
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
-    : "ADD TO CART + FREE SHIPPING";
+    : "Add to cart";
 
   const benefitList = product.keyBenefits ?? product.highlights;
   const benefitIcons =

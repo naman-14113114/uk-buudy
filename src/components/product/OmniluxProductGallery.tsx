@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
+import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 import {
   ChevronLeft,
   ChevronRight,
@@ -275,7 +277,6 @@ export function OmniluxProductGallery({
     if (currentItem?.type === "video") {
       videoPlayerRef.current?.play().then(() => setIsVideoPlaying(true)).catch(() => {});
     } else {
-      setIsVideoPlaying(false);
       videoPlayerRef.current?.pause();
     }
   }, [currentIndex, allMediaItems]);
@@ -1057,20 +1058,11 @@ export function OmniluxProductGallery({
               >
                 {item.type === "video" || item.src.endsWith(".mp4") || item.src.endsWith(".webm") ? (
                   <>
-                    <video
+                    <LazyAutoplayVideo
                       src={item.src}
+                      ariaLabel={item.alt}
                       className="omni-thumb-img"
-                      muted
-                      playsInline
-                      autoPlay
-                      loop
-                      preload="metadata"
-                      ref={(el) => {
-                        if (el) {
-                          el.defaultMuted = true;
-                          el.muted = true;
-                        }
-                      }}
+                      rootMargin="120px 0px"
                     />
                     {item.type === "video" && (
                       <div className="omni-video-thumb-overlay">
@@ -1079,11 +1071,15 @@ export function OmniluxProductGallery({
                     )}
                   </>
                 ) : (
-                  <img
+                  <Image
                     src={item.src}
                     alt={item.alt}
                     className="omni-thumb-img"
+                    width={128}
+                    height={128}
+                    sizes="90px"
                     decoding="async"
+                    fetchPriority="low"
                     loading="lazy"
                   />
                 )}
@@ -1129,13 +1125,16 @@ export function OmniluxProductGallery({
                       className="omni-main-img"
                     />
                   ) : (
-                    <img
+                    <Image
                       src={currentItem.src}
                       alt={currentItem.alt}
                       className="omni-main-img"
+                      width={1200}
+                      height={1200}
+                      sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, calc(100vw - 32px)"
                       decoding="async"
-                      fetchPriority={currentIndex === 0 ? "high" : "low"}
-                      loading={currentIndex === 0 ? "eager" : "lazy"}
+                      fetchPriority="high"
+                      loading="eager"
                     />
                   )}
                   {currentItem.badge && (
@@ -1149,11 +1148,15 @@ export function OmniluxProductGallery({
               {/* 2. BEFORE & AFTER DISPLAY (With 3 Bottom Treatment Pills) */}
               {currentItem.type === "before-after" && (
                 <div className="omni-main-img-wrap">
-                  <img
+                  <Image
                     src={currentItem.src}
                     alt={currentItem.alt}
                     className="omni-main-img omni-main-img--contain"
+                    width={1200}
+                    height={1200}
+                    sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, calc(100vw - 32px)"
                     decoding="async"
+                    fetchPriority="high"
                     loading="eager"
                   />
                   {currentItem.pills && (
@@ -1485,14 +1488,14 @@ function GalleryVideo({
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={isActive ? src : undefined}
       id={id}
       className={className}
-      autoPlay
+      autoPlay={isActive}
       muted
       loop
       playsInline
-      preload="auto"
+      preload={isActive ? "auto" : "none"}
     />
   );
 }
