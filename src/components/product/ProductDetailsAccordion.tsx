@@ -217,6 +217,12 @@ export function ProductSignalsRow({ signals }: { signals: string[] }) {
         <ul aria-hidden="true" className={styles.signalsGroup}>
           {items}
         </ul>
+        <ul aria-hidden="true" className={styles.signalsGroup}>
+          {items}
+        </ul>
+        <ul aria-hidden="true" className={styles.signalsGroup}>
+          {items}
+        </ul>
       </div>
     </section>
   );

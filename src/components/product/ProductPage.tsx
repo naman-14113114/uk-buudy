@@ -94,7 +94,7 @@ export function ProductPage({
     <>
       {product.template === "mask" && <DeferredVideoReviews />}
       {product.template === "mask" && <TrustBadges />}
-      {isSerumOrGift && <SerumCertificationsRow />}
+      {isSerumOrGift && !hyaluronicEditorial && !isHyaluronic && <SerumCertificationsRow />}
       {hyaluronicEditorial && product.productSignals && product.productSignals.length > 0 && (
         <ProductSignalsRow signals={product.productSignals} />
       )}

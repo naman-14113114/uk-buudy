@@ -59,17 +59,16 @@
   width: max-content;
   align-items: center;
   height: 100%;
-  animation: signalsScroll 32s linear infinite;
+  animation: signalsScroll 28s linear infinite;
+  will-change: transform;
 }
 
 .signalsGroup {
   display: flex;
   flex: none;
-  min-width: 100vw;
   align-items: center;
-  justify-content: space-around;
-  gap: clamp(1.75rem, 3.5vw, 3.5rem);
-  padding: 0 clamp(1rem, 2vw, 2rem);
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  padding: 0 calc(clamp(2rem, 3.5vw, 3.5rem) / 2);
   height: 100%;
   margin: 0;
 }
@@ -79,8 +78,11 @@
 }
 
 @keyframes signalsScroll {
-  to {
-    transform: translateX(-50%);
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-25%, 0, 0);
   }
 }
 

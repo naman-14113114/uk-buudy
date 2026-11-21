@@ -1814,3 +1814,29 @@ Final main HEAD758581011662a7af57014d780c066d55aa460340, upstream origin/main 0/
   - Chrome DevTools evaluation: Marquee icon topSpace = 15.5px, bottomSpace = 15.5px (0.0px deviation); text centered to subpixel accuracy.
   - Verified visual rendering on both Desktop (1265px) and Mobile (390px) viewports with high-resolution screenshots.
 
+
+## 2026-11-21 23:35:00 +05:30 IST - Hero certifications equal spacing, standalone certifications removal, and seamless 4-group continuous marquee
+
+- Owner requests:
+  1. Ensure equal spacing between the certification icons below the Add to Cart button.
+  2. Remove the standalone certifications section from below the accordion now that they are present in the hero.
+  3. Fix the Product Signals marquee so that it is continuously looping with zero blank spaces.
+- Code changes:
+  - `src/components/product/GiftBundle.tsx`:
+    * Container converted to `grid grid-cols-3 items-center justify-items-center w-full px-2 sm:px-4 py-2`.
+    * Calibrated exact visible bounds: FDA `width: 62px, height: 39px`, B Corp `width: 43px, height: 62px`, GMP `width: 60px, height: 60px`.
+    * Verified center-to-center distances are identical (176.14px each, 0.00px deviation) and edge-to-edge gaps are identical (123.6px vs 124.6px).
+  - `src/components/product/ProductPage.tsx`:
+    * Re-applied `{isSerumOrGift && !hyaluronicEditorial && !isHyaluronic && <SerumCertificationsRow />}` to suppress duplicate certifications below the accordion on the Hyaluronic route.
+  - `src/components/product/ProductDetailsAccordion.tsx`:
+    * Rendered 4 identical groups (`<ul>`) in `ProductSignalsRow` to guarantee a 4,310px buffer across wide and 4K displays.
+  - `src/components/product/HyaluronicSerumEditorial.module.css`:
+    * Removed `min-width: 100vw` and `justify-content: space-around` which previously caused uneven spacing and blank spaces at the end of cycles.
+    * Added uniform `gap: clamp(2rem, 3.5vw, 3.5rem)` and matching half-padding `padding: 0 calc(clamp(2rem, 3.5vw, 3.5rem) / 2)` so that seam spacing equals internal item spacing (`gapDiff: 0.00px`).
+    * Configured animation to slide by 1 group width: `0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-25%, 0, 0); }` with `will-change: transform`.
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 113/113 static pages compiled successfully in Turbopack.
+  - Desktop and mobile visual inspections confirmed equal icon spacing, absence of standalone cert section, and continuous seamless marquee looping.
+
+

@@ -857,12 +857,14 @@ export function GiftBundle({
 
       {/* Certifications row directly below Add to Cart in ONE LINE with text color var(--plum) */}
       {isHyaluronic && (
-        <div className="mt-5 flex items-center justify-between sm:justify-around gap-4 sm:gap-8 px-2 sm:px-4 py-2">
+        <div className="mt-5 grid grid-cols-3 items-center justify-items-center w-full px-2 sm:px-4 py-2">
           <div
             title="FDA Registered"
             aria-label="FDA Registered"
-            className="h-9 sm:h-10 w-28 sm:w-32 shrink-0"
+            className="shrink-0"
             style={{
+              width: "62px",
+              height: "39px",
               maskImage: "url(/images/certifications/fda-registered.svg)",
               WebkitMaskImage: "url(/images/certifications/fda-registered.svg)",
               maskRepeat: "no-repeat",
@@ -877,8 +879,10 @@ export function GiftBundle({
           <div
             title="Certified B Corporation"
             aria-label="Certified B Corporation"
-            className="h-14 sm:h-16 w-12 sm:w-14 shrink-0"
+            className="shrink-0"
             style={{
+              width: "43px",
+              height: "62px",
               maskImage: "url(/images/certifications/b-corp.svg)",
               WebkitMaskImage: "url(/images/certifications/b-corp.svg)",
               maskRepeat: "no-repeat",
@@ -893,8 +897,10 @@ export function GiftBundle({
           <div
             title="Good Manufacturing Practice"
             aria-label="Good Manufacturing Practice"
-            className="h-14 sm:h-16 w-14 sm:w-16 shrink-0"
+            className="shrink-0"
             style={{
+              width: "60px",
+              height: "60px",
               maskImage: "url(/images/certifications/gmp-certified.svg)",
               WebkitMaskImage: "url(/images/certifications/gmp-certified.svg)",
               maskRepeat: "no-repeat",
