@@ -11,7 +11,15 @@
   min-width: 0;
   padding-block: 0;
   border: 0;
+}
+
+.editorial > section:not([class~="bg-white"]) {
   background: inherit;
+}
+
+.editorial > section[class~="bg-white"] {
+  background-color: #ffffff !important;
+  padding-block: clamp(3rem, 5vw, 4.5rem);
 }
 
 .editorial > section h2 {
@@ -28,14 +36,8 @@
   color: var(--plum-soft);
 }
 
-.editorial :is(div[class~="bg-white"], div[class~="bg-[var(--card)]"], [data-story-card]) {
-  background-color: var(--cream);
-}
-
-.editorial div[class~="p-5"][class~="bg-white"] {
-  padding: 0;
-  border: 0;
-  box-shadow: none;
+.editorial [data-story-card] {
+  background-color: #ffffff !important;
 }
 
 .editorial > :global(#product-signals) {
@@ -69,7 +71,7 @@
 }
 
 .editorial > :global(#product-signals):is(:hover, :focus-visible) .signalsTrack {
-  animation-play-state: paused;
+  animation-play-state: running !important;
 }
 
 @keyframes signalsScroll {

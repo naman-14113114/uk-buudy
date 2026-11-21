@@ -78,19 +78,46 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
     return [];
   }
 
+  const isHyaluronic =
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    Boolean(product.slug && product.slug.includes("hyaluronic"));
+
+  let unitPriceCents = product.priceCents;
+  let compareAtCents =
+    product.compareAtCents && product.compareAtCents > product.priceCents
+      ? product.compareAtCents
+      : undefined;
+  let subtitle = product.shortDescription;
+
+  if (isHyaluronic) {
+    if (normalizedQuantity === 3) {
+      unitPriceCents = 8300;
+      compareAtCents = 11900;
+      subtitle = "3 Bottles (90ml) · Full 90-Day Protocol";
+    } else if (normalizedQuantity === 6) {
+      unitPriceCents = 6650;
+      compareAtCents = 11900;
+      subtitle = "6 Bottles (180ml) · 6-Month Protocol";
+    } else if (normalizedQuantity === 1) {
+      unitPriceCents = 9900;
+      compareAtCents = 11900;
+      subtitle = "1 Bottle (30ml) · Daily Hydration";
+    } else {
+      unitPriceCents = 9900;
+      compareAtCents = 11900;
+    }
+  }
+
   const productLine: CartLine = {
     id: product.id,
     productId: product.id,
     slug: product.slug,
     type: "product",
     title: product.name,
-    subtitle: product.shortDescription,
+    subtitle,
     image: product.cartImage,
-    unitPriceCents: product.priceCents,
-    compareAtCents:
-      product.compareAtCents && product.compareAtCents > product.priceCents
-        ? product.compareAtCents
-        : undefined,
+    unitPriceCents,
+    compareAtCents,
     quantity: normalizedQuantity,
   };
 
@@ -162,7 +189,14 @@ export function ensureProductInCart(
   requestedQuantity = 1,
 ): CartState {
   if (!Number.isSafeInteger(requestedQuantity) || requestedQuantity < 1) return state;
+  const isHyaluronic =
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    Boolean(product.slug && product.slug.includes("hyaluronic"));
   const existing = state.lines.find(line => line.type === "product" && line.productId === product.id);
+  if (isHyaluronic) {
+    if (existing && existing.quantity === requestedQuantity) return state;
+    return { ...state, lines: upsertProductCartLines(state.lines, product, requestedQuantity) };
+  }
   if (existing && existing.quantity >= requestedQuantity) return state;
   return { ...state, lines: upsertProductCartLines(state.lines, product, requestedQuantity) };
 }
@@ -224,10 +258,13 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
   const formatted = lines.map((line) => {
     if (line.type === "product") {
       const prod = findProductForLine(line);
+      const isHyaluronic =
+        line.productId === "buudy-light-activating-hyaluronic-serum" ||
+        Boolean(line.slug && line.slug.includes("hyaluronic"));
       return {
         ...line,
         title: line.productId === "buudy-led-mask" ? "Buudy LED Mask" : line.title,
-        subtitle: prod?.shortDescription ?? line.subtitle,
+        subtitle: isHyaluronic && line.subtitle ? line.subtitle : (prod?.shortDescription ?? line.subtitle),
         image: line.productId === "buudy-led-mask" ? (getProductById("buudy-led-mask")?.cartImage ?? line.image) : line.image,
       };
     }

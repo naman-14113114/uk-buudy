@@ -46,7 +46,7 @@ function ProductInDetailsCarousel() {
   ];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-12 md:py-18">
+    <section className="buudy-section bg-white py-12 md:py-18">
       <div className="buudy-wrap">
         {/* Header with Navigation Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
@@ -82,12 +82,12 @@ function ProductInDetailsCarousel() {
         {/* Carousel Reel */}
         <div
           ref={scrollRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0"
+          className="flex gap-4 sm:gap-6 overflow-x-auto pt-2 pb-6 md:pb-8 scrollbar-none snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0"
         >
           {detailCards.map((card) => (
             <div
               key={card.num}
-              className="flex-none w-[260px] sm:w-[290px] md:w-[320px] aspect-[320/488] relative rounded-[20px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-sm hover:shadow-md hover:border-[rgba(184,149,86,0.35)] transition-all snap-start"
+              className="flex-none w-[260px] sm:w-[290px] md:w-[320px] aspect-[320/488] relative rounded-[20px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300 snap-start"
             >
               <Image
                 src={card.src}
@@ -248,11 +248,11 @@ function CuratedForSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-4 pb-6">
           {roles.map((role) => (
             <div
               key={role.title}
-              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-xs hover:shadow-lg hover:border-[rgba(184,149,86,0.35)] transition-all"
+              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--cream)]">
                 <Image
@@ -263,7 +263,7 @@ function CuratedForSection() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-5 flex flex-col flex-1">
+              <div className="p-5 pb-7 flex flex-col flex-1">
                 <span className="buudy-mono text-xs text-[var(--gold)] font-bold uppercase tracking-wider mb-1.5">
                   {role.subtitle}
                 </span>
@@ -438,11 +438,11 @@ function KeyIngredientsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 py-4 pb-6">
           {ingredients.map((ing) => (
             <div
               key={ing.name}
-              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] p-5 text-center shadow-xs hover:shadow-md hover:border-[rgba(184,149,86,0.35)] transition-all"
+              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] p-5 pb-7 text-center shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300"
             >
               <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-[var(--cream)] border border-[rgba(46,16,47,0.08)] mb-4">
                 <Image
@@ -708,7 +708,7 @@ export function RelatedProductsSection({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-4 pb-6">
           {relatedList.map((product: Product) => {
             const isAdded = addedId === product.id;
             const imageSrc = product.cartImage || product.gallery?.[0]?.src || "/images/placeholder.webp";
@@ -716,7 +716,7 @@ export function RelatedProductsSection({
             return (
               <div
                 key={product.id}
-                className="group flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-sm hover:shadow-xl hover:border-[rgba(184,149,86,0.4)] transition-all duration-300"
+                className="group flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[rgba(184,149,86,0.4)] transition-all duration-300"
               >
                 {/* End-to-end Image */}
                 <Link
@@ -733,7 +733,7 @@ export function RelatedProductsSection({
                 </Link>
 
                 {/* Body */}
-                <div className="p-5 flex flex-col flex-1">
+                <div className="p-5 pb-6 flex flex-col flex-1">
                   <span className="buudy-mono text-xs text-[var(--gold)] font-bold uppercase tracking-wider mb-1">
                     {product.template === "mask" ? "LED Phototherapy" : "Clinical Formulation"}
                   </span>

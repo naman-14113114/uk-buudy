@@ -284,6 +284,45 @@ const hyaluronicEditorialBenefits = [
   { text: "COSMOS Natural certified by ECOCERT", icon: BadgeCheck },
 ];
 
+const HYALURONIC_TIERS = [
+  {
+    tier: 1 as const,
+    label: "BUY 1",
+    subtitle: "1 Bottle (30ml) · Daily Hydration",
+    price: 99,
+    compareAt: 119,
+    priceCents: 9900,
+    compareAtCents: 11900,
+    badge: null,
+    details: "£99.00 each",
+    savingsText: null,
+  },
+  {
+    tier: 3 as const,
+    label: "BUY 3",
+    subtitle: "3 Bottles (90ml) · Full 90-Day Protocol",
+    price: 249,
+    compareAt: 357,
+    priceCents: 24900,
+    compareAtCents: 35700,
+    badge: "MOST POPULAR",
+    details: "£83.00 each",
+    savingsText: "Save £108",
+  },
+  {
+    tier: 6 as const,
+    label: "BUY 6",
+    subtitle: "6 Bottles (180ml) · 6-Month Protocol",
+    price: 399,
+    compareAt: 714,
+    priceCents: 39900,
+    compareAtCents: 71400,
+    badge: "BEST VALUE",
+    details: "£66.50 each",
+    savingsText: "Save £315",
+  },
+];
+
 export function GiftBundle({
   product,
   isHalloween = false,
@@ -361,6 +400,16 @@ export function GiftBundle({
     0,
   );
   const hasGifts = product.gifts.length > 0;
+  const isHyaluronic =
+    hyaluronicEditorial ||
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "buudy-light-activating-hyaluronic-serum" ||
+    Boolean(product.slug && product.slug.includes("hyaluronic"));
+
+  const [selectedTier, setSelectedTier] = useState<1 | 3 | 6>(1);
+  const currentTierData =
+    HYALURONIC_TIERS.find((t) => t.tier === selectedTier) ?? HYALURONIC_TIERS[0];
+
   const isSimplifiedProduct =
     product.template === "serum" ||
     product.template === "cleanser" ||
@@ -379,6 +428,8 @@ export function GiftBundle({
 
   const giftButtonLabel = product.template === "mask" && hasGifts
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
+    : isHyaluronic
+    ? `ADD TO CART — £${currentTierData.price}`
     : "Add to cart";
 
   const benefitList = hyaluronicEditorial
@@ -463,16 +514,18 @@ export function GiftBundle({
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <Price
-          compareAtCents={product.compareAtCents}
+          compareAtCents={isHyaluronic ? currentTierData.compareAtCents : product.compareAtCents}
           currency={product.currency}
-          priceCents={product.priceCents}
+          priceCents={isHyaluronic ? currentTierData.priceCents : product.priceCents}
           hideDiscount={isHalloween || isEarlyBlackFriday}
         />
         {isHalloween && <HalloweenSaleBadge />}
         {isEarlyBlackFriday && (
           <EarlyBlackFridaySaleBadge
             discountText={
-              product.compareAtCents && (product.template === "serum" || product.template === "cleanser")
+              isHyaluronic
+                ? `${percentOff(currentTierData.priceCents, currentTierData.compareAtCents)}% OFF`
+                : product.compareAtCents && (product.template === "serum" || product.template === "cleanser")
                 ? `${percentOff(product.priceCents, product.compareAtCents)}% OFF`
                 : undefined
             }
@@ -546,13 +599,135 @@ export function GiftBundle({
         </div>
       </div>
 
+      {/* 3-Tier Bundle Offer for Hyaluronic Serum */}
+      {isHyaluronic && (
+        <div className="mt-5 mb-2">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-px flex-1 bg-[rgba(58,31,61,.15)]" />
+            <span className="font-bold uppercase text-[12px] sm:text-[13px] tracking-[0.12em] text-[var(--plum)]/80">
+              CHOOSE YOUR PROTOCOL
+            </span>
+            <span className="h-px flex-1 bg-[rgba(58,31,61,.15)]" />
+          </div>
+
+          <div
+            className="flex flex-col gap-3"
+            role="radiogroup"
+            aria-label="Choose your hyaluronic serum bundle"
+            onKeyDown={(event) => {
+              const tiers = [1, 3, 6] as const;
+              const direction = ["ArrowRight", "ArrowDown"].includes(event.key)
+                ? 1
+                : ["ArrowLeft", "ArrowUp"].includes(event.key)
+                ? -1
+                : 0;
+              if (!direction) return;
+              event.preventDefault();
+              const nextIndex =
+                (tiers.indexOf(selectedTier) + direction + tiers.length) %
+                tiers.length;
+              setSelectedTier(tiers[nextIndex]);
+              event.currentTarget
+                .querySelectorAll<HTMLButtonElement>('[role="radio"]')
+                [nextIndex]?.focus();
+            }}
+          >
+            {HYALURONIC_TIERS.map((tierItem) => {
+              const isSelected = selectedTier === tierItem.tier;
+              return (
+                <div
+                  key={tierItem.tier}
+                  className={`relative flex flex-col rounded-2xl transition-all duration-200 cursor-pointer ${
+                    isSelected
+                      ? "border-2 border-[var(--plum)] bg-[var(--card)] shadow-[0_4px_18px_rgba(58,31,61,0.12)]"
+                      : "border border-[rgba(58,31,61,0.2)] bg-[var(--card)] hover:border-[rgba(58,31,61,0.4)]"
+                  }`}
+                  onClick={() => setSelectedTier(tierItem.tier)}
+                >
+                  {tierItem.badge && (
+                    <div className="absolute -top-2.5 right-3.5 z-10 pointer-events-none">
+                      <span className="inline-flex items-center rounded-full bg-[#22c55e] px-2.5 py-0.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-white shadow-sm">
+                        {tierItem.badge}
+                      </span>
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={isSelected}
+                    tabIndex={isSelected ? 0 : -1}
+                    aria-label={`Select ${tierItem.label} - £${tierItem.price}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedTier(tierItem.tier);
+                    }}
+                    className={`flex items-center justify-between gap-2.5 sm:gap-3.5 p-3.5 sm:p-4 w-full text-left bg-transparent border-0 cursor-pointer font-inherit box-border ${
+                      tierItem.badge ? "pt-4 sm:pt-4" : ""
+                    }`}
+                  >
+                    {/* Left: Radio + Label + Subtitle */}
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                      <div
+                        className={`h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                          isSelected
+                            ? "border-[var(--plum)] bg-white"
+                            : "border-[rgba(58,31,61,0.35)] bg-white"
+                        }`}
+                      >
+                        {isSelected && (
+                          <div className="h-2.5 w-2.5 rounded-full bg-[var(--plum)]" />
+                        )}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-[14px] sm:text-[15px] uppercase tracking-wide text-[var(--plum)] leading-none">
+                            {tierItem.label}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-[13px] text-[var(--plum)]/75 mt-1 leading-snug m-0">
+                          {tierItem.subtitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Right: Prices + Details */}
+                    <div className="text-right flex flex-col items-end justify-center shrink-0 pl-1">
+                      <div className="flex items-baseline gap-1.5 justify-end">
+                        <span className="font-bold text-base sm:text-lg text-[var(--plum)] leading-none">
+                          £{tierItem.price}
+                        </span>
+                        <span className="text-xs sm:text-[13px] text-[var(--muted)]/80 line-through leading-none">
+                          £{tierItem.compareAt}
+                        </span>
+                      </div>
+                      <div className="mt-1 leading-tight text-[11.5px] sm:text-xs">
+                        {tierItem.savingsText ? (
+                          <span className="text-[var(--plum)]/80">
+                            {tierItem.details} · <span className="font-semibold text-[#16a34a]">{tierItem.savingsText}</span>
+                          </span>
+                        ) : (
+                          <span className="text-[var(--muted)]">
+                            {tierItem.details}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <Button
         className={`proxy-bundle-btn relative overflow-hidden mt-5 w-full rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--plum)] active:scale-[0.98] sm:text-[22px] ${isAdding ? "disabled:!opacity-100" : ""}`}
         disabled={isAdding}
         id="hero-cta"
         onClick={() => {
           setIsAdding(true);
-          addProduct(product);
+          addProduct(product, isHyaluronic ? selectedTier : 1);
           router.push(
             appendAttributionToPath(
               "/cart",
@@ -576,6 +751,60 @@ export function GiftBundle({
           </span>
         )}
       </Button>
+
+      {/* Certifications row directly below Add to Cart in ONE LINE with text color var(--plum) */}
+      {isHyaluronic && (
+        <div className="mt-4 flex items-center justify-between gap-4 px-2 sm:px-4 py-1">
+          <div
+            title="FDA Registered"
+            aria-label="FDA Registered"
+            className="flex-1 h-8 sm:h-9"
+            style={{
+              maskImage: "url(/images/certifications/fda-registered.svg)",
+              WebkitMaskImage: "url(/images/certifications/fda-registered.svg)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              backgroundColor: "var(--plum)",
+            }}
+          />
+          <div
+            title="Certified B Corporation"
+            aria-label="Certified B Corporation"
+            className="flex-1 h-8 sm:h-9"
+            style={{
+              maskImage: "url(/images/certifications/b-corp.svg)",
+              WebkitMaskImage: "url(/images/certifications/b-corp.svg)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              backgroundColor: "var(--plum)",
+            }}
+          />
+          <div
+            title="Good Manufacturing Practice"
+            aria-label="Good Manufacturing Practice"
+            className="flex-1 h-8 sm:h-9"
+            style={{
+              maskImage: "url(/images/certifications/gmp-certified.svg)",
+              WebkitMaskImage: "url(/images/certifications/gmp-certified.svg)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              backgroundColor: "var(--plum)",
+            }}
+          />
+        </div>
+      )}
 
       {/* Benefits Grid Row (Mask Only) */}
       {product.id === "buudy-led-mask" && (

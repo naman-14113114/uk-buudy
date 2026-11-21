@@ -1764,3 +1764,25 @@ Final main HEAD758581011662a7af57014d780c066d55aa460340, upstream origin/main 0/
   - `npx tsc --noEmit`: 0 errors.
   - `npm run build`: 113/113 static pages compiled successfully in Next.js Turbopack.
   - Desktop (1265px) and mobile (390px) responsive DOM inspection confirmed exact 52px marquee height, clean vertical centering, and 4:3 carousel modal rendering with zero cropping.
+
+
+## 2026-11-21 17:45:00 +05:30 IST - Hyaluronic Serum 3-tier bundle offers, in-hero FDA certifications, white details section, and card hover fixes
+
+- Owner requests:
+  1. Move FDA Registered, Certified B Corp, and Good Manufacturing Practice below Add to Cart button in one line, adjust accordingly, and change their color to the text color. Fix marquee so it does not stop on hover.
+  2. Change background color of 2nd image section ("Product in details.") to white.
+  3. Fix all cards on this page on hover so they do not cut from bottom, and change card background to white in Before/After section while keeping section background same.
+  4. Implement 3 Bundle offers as on Miro heads: Buy 1 at £99, Buy 3 at £249 (compare multiple of 119 = £357), Buy 6 at £399 (compare multiple of 119 = £714).
+  5. Check locally and push clean code to GitHub.
+- Scope: Confined strictly to `uk.Buudy Vercel Deployment` and `/products/buudy-light-activating-hyaluronic-serum`.
+- Code changes:
+  - `src/components/product/GiftBundle.tsx`: implemented `HYALURONIC_TIERS` with 3 interactive protocol options, dynamic price and discount badges, dynamic "ADD TO CART — £[price]" button, `addProduct(product, selectedTier)` dispatch, and in-hero horizontal single-line certifications using CSS mask with `var(--plum)`.
+  - `src/lib/cart.ts`: updated `buildProductCartLines` and `getDisplayLines` to support tiered unit prices (£83 each for qty 3, £66.50 each for qty 6, £99 each for qty 1) and compare-at (£119 each).
+  - `src/components/product/ProductPage.tsx`: suppressed standalone `SerumCertificationsRow` for hyaluronic editorial route.
+  - `src/components/product/HyaluronicSerumEditorial.module.css`: enabled `animation-play-state: running !important;` on marquee hover; added white section background override with padding; removed destructive padding/shadow-stripping rules; set `.editorial [data-story-card]` background to `#ffffff`.
+  - `src/components/product/HyaluronicSerumSelfnamedSections.tsx`: set `ProductInDetailsCarousel` section class to `bg-white`; added `py-4 pb-6` container padding and `pb-7` card padding across `CuratedForSection`, `KeyIngredientsSection`, `ProductInDetailsCarousel`, and `RelatedProductsSection` with smooth `-translate-y-1` hover lifts.
+  - `src/components/product/BeforeAfterGrid.tsx`: expanded track padding to `pb-8` to ensure story card hover shadows have zero clipping.
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 113/113 static pages compiled successfully in Next.js Turbopack.
+  - Interactive testing via Chrome DevTools confirmed dynamic tier selection, £249 cart synchronization, in-hero plum certifications, and clean card hover physics.
