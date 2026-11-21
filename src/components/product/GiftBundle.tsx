@@ -428,8 +428,6 @@ export function GiftBundle({
 
   const giftButtonLabel = product.template === "mask" && hasGifts
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
-    : isHyaluronic
-    ? `ADD TO CART — £${currentTierData.price}`
     : "Add to cart";
 
   const benefitList = hyaluronicEditorial

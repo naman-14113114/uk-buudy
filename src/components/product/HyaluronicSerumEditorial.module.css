@@ -36,7 +36,8 @@
   color: var(--plum-soft);
 }
 
-.editorial [data-story-card] {
+.editorial [data-story-card],
+.editorial [data-percentage-card] {
   background-color: #ffffff !important;
 }
 
