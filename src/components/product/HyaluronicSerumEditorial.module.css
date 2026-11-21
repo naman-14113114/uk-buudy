@@ -41,7 +41,7 @@
 }
 
 .editorial > :global(#product-signals) {
-  margin-block-start: calc(clamp(1.5rem, 2.5vw, 2.25rem) - var(--section-gap));
+  margin-block: 0;
   overflow: hidden;
   background: var(--plum);
   color: var(--cream);
@@ -52,6 +52,8 @@
   height: 50px;
   max-height: 50px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
 .signalsTrack {
