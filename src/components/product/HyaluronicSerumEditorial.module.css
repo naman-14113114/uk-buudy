@@ -1,0 +1,91 @@
+.editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  --section-gap: clamp(3.5rem, 6vw, 5.5rem);
+  row-gap: var(--section-gap);
+  padding-block: clamp(1rem, 2.5vw, 2rem) clamp(3.5rem, 6vw, 5.5rem);
+  background: var(--cream);
+}
+
+.editorial > section {
+  min-width: 0;
+  padding-block: 0;
+  border: 0;
+  background: inherit;
+}
+
+.editorial > section h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.editorial > section :global(#hyaluronic-how-to-use) {
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+}
+
+.editorial > section p:global(.buudy-mono) {
+  color: var(--plum-soft);
+}
+
+.editorial :is(div[class~="bg-white"], div[class~="bg-[var(--card)]"], [data-story-card]) {
+  background-color: var(--cream);
+}
+
+.editorial div[class~="p-5"][class~="bg-white"] {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.editorial > :global(#product-signals) {
+  margin-block-start: calc(0.75rem - var(--section-gap));
+  overflow: hidden;
+  background: var(--plum);
+  color: var(--cream);
+}
+
+.signalsTrack {
+  display: flex;
+  width: max-content;
+  animation: signalsScroll 32s linear infinite;
+}
+
+.signalsGroup {
+  display: flex;
+  flex: none;
+  min-width: 100vw;
+  align-items: center;
+  justify-content: space-around;
+  gap: clamp(1.5rem, 3vw, 3.25rem);
+  padding: 0.75rem clamp(1rem, 2vw, 2rem);
+}
+
+.editorial > :global(#product-signals):is(:hover, :focus-visible) .signalsTrack {
+  animation-play-state: paused;
+}
+
+@keyframes signalsScroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signalsTrack {
+    width: 100%;
+    animation: none;
+  }
+
+  .signalsGroup {
+    width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .signalsGroup[aria-hidden="true"] {
+    display: none;
+  }
+}

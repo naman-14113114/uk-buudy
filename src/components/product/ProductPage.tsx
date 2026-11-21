@@ -28,6 +28,8 @@ import {
 import { TrustBadges } from "./TrustBadges";
 import { SerumCertificationsRow } from "./SerumCertificationsRow";
 import { GiftBoxBundleSection } from "./GiftBoxBundleSection";
+import styles from "./HyaluronicSerumEditorial.module.css";
+import { ProductSignalsRow } from "./ProductDetailsAccordion";
 import {
   HyaluronicSerumSelfnamedSections,
   PackagingSection,
@@ -41,6 +43,7 @@ export function ProductPage({
   comparisonPosition = product.template === "mask" ? "below-app" : "default",
   isHalloween = false,
   isEarlyBlackFriday = true,
+  hyaluronicEditorial = false,
 }: {
   product: Product;
   variant?: string;
@@ -48,6 +51,7 @@ export function ProductPage({
   comparisonPosition?: "default" | "below-app";
   isHalloween?: boolean;
   isEarlyBlackFriday?: boolean;
+  hyaluronicEditorial?: boolean;
 }) {
   if (product.template === "torch") {
     return <TorchProductPage product={product} isHalloween={isHalloween} />;
@@ -86,12 +90,14 @@ export function ProductPage({
     product.slug.includes("hyaluronic") ||
     product.slug.includes("double-hydration");
 
-  return (
-    <div className="relative">
-      <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
+  const overview = (
+    <>
       {product.template === "mask" && <DeferredVideoReviews />}
       {product.template === "mask" && <TrustBadges />}
       {isSerumOrGift && <SerumCertificationsRow />}
+      {hyaluronicEditorial && product.productSignals && product.productSignals.length > 0 && (
+        <ProductSignalsRow signals={product.productSignals} />
+      )}
       <GiftBoxBundleSection productSlug={product.slug} />
       {/* <FeatureGrid /> */}
       {/* 1. Verified Clinical Before & After Grid - Placed ABOVE both the Percentage Grid and How-To-Use */}
@@ -141,13 +147,13 @@ export function ProductPage({
       )}
 
       {/* 2. Selfnamed Rich Clinical Sections for Hyaluronic Serum */}
-      {isHyaluronic && <HyaluronicSerumSelfnamedSections />}
+      {isHyaluronic && <HyaluronicSerumSelfnamedSections routineFirstGrid={hyaluronicEditorial} />}
 
       {/* 3. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
       {product.template === "serum" && (
         <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
-      {isHyaluronic && <PackagingSection />}
+      {isHyaluronic && !hyaluronicEditorial && <PackagingSection />}
       {product.template === "cleanser" && <CleanserClinicalResults />}
 
       {/* 4. Daily Application / Cleansing Ritual - How To Use Section */}
@@ -163,8 +169,31 @@ export function ProductPage({
       {/* <TouchTechSection /> */}
 
       {/* 5. Related Products Section */}
-      {isSerumOrGift && <RelatedProductsSection currentProductId={product.id} />}
+      {isSerumOrGift && (
+        <RelatedProductsSection
+          currentProductId={product.id}
+          heading={hyaluronicEditorial ? "Recommended products" : undefined}
+        />
+      )}
+    </>
+  );
 
+  return (
+    <div className="relative">
+      <ProductHero
+        product={product}
+        galleryVariant={galleryVariant}
+        isHalloween={isHalloween}
+        isEarlyBlackFriday={isEarlyBlackFriday}
+        hyaluronicEditorial={hyaluronicEditorial}
+      />
+      {hyaluronicEditorial ? (
+        <div className={styles.editorial} data-hyaluronic-editorial>
+          {overview}
+        </div>
+      ) : (
+        overview
+      )}
       {/* 6. Customer Reviews Section - After all the clinical, transformation, and ritual sections */}
       <ProductReviewsSection productHandle={product.template === "mask" ? "buudy-led-mask" : product.slug} />
       {product.template === "mask" && <AppPromo />}

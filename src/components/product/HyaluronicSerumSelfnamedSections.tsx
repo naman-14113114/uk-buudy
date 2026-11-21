@@ -20,6 +20,7 @@ import {
 import { products, type Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "@/components/cart/CartProvider";
+import { HyaluronicRoutineSteps } from "./HyaluronicRoutineSteps";
 
 // 1. Product In Details (10-Card Carousel)
 function ProductInDetailsCarousel() {
@@ -531,7 +532,7 @@ export function PackagingSection() {
 }
 
 // 7. How To Use (Horizontal 4-Step Protocol matching Molekulaire style)
-function HowToUseSection() {
+function HyaluronicHowToUseSection({ editorial = false }: { editorial?: boolean }) {
   const steps = [
     {
       num: 1,
@@ -554,6 +555,70 @@ function HowToUseSection() {
       desc: "Layer a moisturiser on top to lock in the actives. Always follow with SPF in the morning.",
     },
   ];
+
+  if (editorial) {
+    return (
+      <section
+        aria-labelledby="hyaluronic-how-to-use"
+        className="buudy-section scroll-mt-24"
+        id="how-to-use"
+      >
+        <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3]">
+            <Image
+              src="/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp"
+              alt="Buudy Hyaluronic Serum held beside the face"
+              fill
+              sizes="(min-width: 1260px) 560px, (min-width: 768px) 46vw, calc(100vw - 32px)"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h2 id="hyaluronic-how-to-use" className="buudy-display text-[var(--plum)]">
+              How to Use
+            </h2>
+            <p className="mt-3 text-sm text-[var(--muted)] sm:text-base">
+              Follow these simple steps to get the best results
+            </p>
+            <HyaluronicRoutineSteps>
+              {steps.map(({ num, title, desc }) => (
+                <li className="flex items-baseline gap-3 sm:gap-4" key={num}>
+                  <span aria-hidden="true" className="buudy-mono shrink-0 text-[var(--plum-soft)]">
+                    {String(num).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="buudy-display text-xl leading-tight text-[var(--plum)]">
+                      {title}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
+                      {desc}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </HyaluronicRoutineSteps>
+          </div>
+        </div>
+        <div className="buudy-wrap mt-8 md:mt-10" id="mask-routine">
+          <h3 className="buudy-display text-2xl leading-tight text-[var(--plum)] sm:text-3xl">
+            Pair it with the Buudy LED Mask
+          </h3>
+          <p className="buudy-copy mt-2 max-w-xl text-sm sm:text-base">
+            Use your Buudy LED Mask as directed. After your session, smooth on the clear
+            gel before moisturiser. Hyaluronic acid and sodium PCA help keep skin hydrated
+            and looking plump.
+          </p>
+          <Link
+            href="/products/buudy-led-mask"
+            className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-[var(--plum)] underline underline-offset-4 hover:text-[var(--plum-soft)]"
+          >
+            Explore the Buudy LED Mask
+            <ChevronRight aria-hidden="true" size={17} />
+          </Link>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-20" id="how-to-use">
@@ -603,7 +668,13 @@ function HowToUseSection() {
 }
 
 // 8. Related Products Section (Complete Your Ritual)
-export function RelatedProductsSection({ currentProductId }: { currentProductId?: string }) {
+export function RelatedProductsSection({
+  currentProductId,
+  heading,
+}: {
+  currentProductId?: string;
+  heading?: string;
+}) {
   const { addProduct, openCart } = useCart();
   const [addedId, setAddedId] = useState<string | null>(null);
 
@@ -638,7 +709,9 @@ export function RelatedProductsSection({ currentProductId }: { currentProductId?
             Complete Your Ritual
           </p>
           <h2 className="buudy-display mt-2 text-3xl sm:text-4xl leading-tight text-[var(--plum)]">
-            Pairs well with <em className="buudy-italic text-[var(--gold)]">clinical synergy</em>.
+            {heading ?? (
+              <>Pairs well with <em className="buudy-italic text-[var(--gold)]">clinical synergy</em>.</>
+            )}
           </h2>
           <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
             Enhance your cellular results. Layer with our phototherapy hardware and peptide collagen firming formulations.
@@ -744,15 +817,16 @@ export function RelatedProductsSection({ currentProductId }: { currentProductId?
 }
 
 // Master Wrapper for all Selfnamed Sections on Hyaluronic Serum Page
-export function HyaluronicSerumSelfnamedSections() {
+export function HyaluronicSerumSelfnamedSections({ routineFirstGrid = false }: { routineFirstGrid?: boolean }) {
   return (
     <>
       <ProductInDetailsCarousel />
+      {routineFirstGrid && <HyaluronicHowToUseSection editorial />}
       <ProductFeaturesSection />
       <CuratedForSection />
       <ProductFormulaSection />
       <KeyIngredientsSection />
-      <HowToUseSection />
+      {!routineFirstGrid && <HyaluronicHowToUseSection />}
     </>
   );
 }

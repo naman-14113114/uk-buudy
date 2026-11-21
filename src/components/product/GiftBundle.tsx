@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
 import {
+  BadgeCheck,
   BatteryCharging,
   Clock,
   ShieldCheck,
@@ -19,7 +20,9 @@ import {
   CircleDot,
   Bandage,
   Umbrella,
+  Droplet,
   Droplets,
+  Feather,
   Leaf,
   Layers,
   Heart,
@@ -274,14 +277,23 @@ const keyBenefitIcons = [
   Waves,
 ];
 
+const hyaluronicEditorialBenefits = [
+  { text: "Helps skin look plump and feel hydrated", icon: Droplet },
+  { text: "Light gel with a fresh, natural finish", icon: Feather },
+  { text: "Layers easily into your AM and PM routine", icon: Sun },
+  { text: "COSMOS Natural certified by ECOCERT", icon: BadgeCheck },
+];
+
 export function GiftBundle({
   product,
   isHalloween = false,
   isEarlyBlackFriday = true,
+  hyaluronicEditorial = false,
 }: {
   product: Product;
   isHalloween?: boolean;
   isEarlyBlackFriday?: boolean;
+  hyaluronicEditorial?: boolean;
 }) {
   const { addProduct } = useCart();
   const router = useRouter();
@@ -369,9 +381,12 @@ export function GiftBundle({
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
     : "Add to cart";
 
-  const benefitList = product.keyBenefits ?? product.highlights;
-  const benefitIcons =
-    product.template === "mask"
+  const benefitList = hyaluronicEditorial
+    ? hyaluronicEditorialBenefits.map(({ text }) => text)
+    : product.keyBenefits ?? product.highlights;
+  const benefitIcons = hyaluronicEditorial
+    ? hyaluronicEditorialBenefits.map(({ icon }) => icon)
+    : product.template === "mask"
       ? benefitList.map((_, i) => keyBenefitIcons[i % keyBenefitIcons.length])
       : getDistinctBenefitIcons(benefitList);
   return (
@@ -691,7 +706,7 @@ export function GiftBundle({
           </p>
         </section> */}
 
-      <ProductDetailsAccordion product={product} />
+      <ProductDetailsAccordion product={product} showProductSignals={!hyaluronicEditorial} />
     </div>
   );
 }

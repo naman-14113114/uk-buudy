@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./HyaluronicSerumEditorial.module.css";
 import {
   ChevronDown,
   Ruler,
@@ -193,7 +194,38 @@ function AccordionPanel({
   );
 }
 
-export function ProductDetailsAccordion({ product }: { product: Product }) {
+export function ProductSignalsRow({ signals }: { signals: string[] }) {
+  const items = signals.map((signal) => {
+    const Icon = getCertificationIcon(signal);
+    return (
+      <li key={signal} className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-medium">
+        <Icon aria-hidden="true" className="shrink-0 text-[var(--gold)]" size={17} strokeWidth={1.6} />
+        {signal}
+      </li>
+    );
+  });
+
+  return (
+    <section aria-label="Product signals" id="product-signals" tabIndex={0}>
+      <div className={styles.signalsTrack}>
+        <ul className={styles.signalsGroup}>
+          {items}
+        </ul>
+        <ul aria-hidden="true" className={styles.signalsGroup}>
+          {items}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+export function ProductDetailsAccordion({
+  product,
+  showProductSignals = true,
+}: {
+  product: Product;
+  showProductSignals?: boolean;
+}) {
   const [openItems, setOpenItems] = useState<Set<AccordionItem["id"]>>(new Set());
 
   function toggleItem(id: AccordionItem["id"]) {
@@ -306,7 +338,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         </ul>
       ),
     }, */
-    ...(product.productSignals && product.productSignals.length > 0
+    ...(showProductSignals && product.productSignals && product.productSignals.length > 0
       ? [
           {
             id: "signals" as const,
@@ -367,7 +399,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
     {
       id: "certifications",
       eyebrow: "Certifications",
-      title: "Safety and product signals",
+      title: showProductSignals ? "Safety and product signals" : "Safety and certifications",
       content: (
         <ul className="grid gap-2.5 grid-cols-1 sm:grid-cols-2">
           {product.badges.map((badge) => {
