@@ -83,6 +83,10 @@ export function ProductPage({
     product.template === "serum" ||
     product.template === "cleanser";
 
+  const isEditorial =
+    hyaluronicEditorial ||
+    isSerumOrGift;
+
   const isHyaluronic =
     product.id === "buudy-light-activating-hyaluronic-serum" ||
     product.slug === "buudy-light-activating-hyaluronic-serum" ||
@@ -94,8 +98,8 @@ export function ProductPage({
     <>
       {product.template === "mask" && <DeferredVideoReviews />}
       {product.template === "mask" && <TrustBadges />}
-      {isSerumOrGift && !hyaluronicEditorial && !isHyaluronic && <SerumCertificationsRow />}
-      {hyaluronicEditorial && product.productSignals && product.productSignals.length > 0 && (
+      {isSerumOrGift && !isEditorial && <SerumCertificationsRow />}
+      {isEditorial && product.productSignals && product.productSignals.length > 0 && (
         <ProductSignalsRow signals={product.productSignals} />
       )}
       <GiftBoxBundleSection productSlug={product.slug} />
@@ -172,7 +176,7 @@ export function ProductPage({
       {isSerumOrGift && (
         <RelatedProductsSection
           currentProductId={product.id}
-          heading={hyaluronicEditorial ? "Recommended products" : undefined}
+          heading={isEditorial ? "Recommended products" : undefined}
         />
       )}
     </>
@@ -185,9 +189,9 @@ export function ProductPage({
         galleryVariant={galleryVariant}
         isHalloween={isHalloween}
         isEarlyBlackFriday={isEarlyBlackFriday}
-        hyaluronicEditorial={hyaluronicEditorial}
+        hyaluronicEditorial={isEditorial}
       />
-      {hyaluronicEditorial ? (
+      {isEditorial ? (
         <div className={styles.editorial} data-hyaluronic-editorial>
           {overview}
         </div>

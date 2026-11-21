@@ -284,44 +284,343 @@ const hyaluronicEditorialBenefits = [
   { text: "COSMOS Natural certified by ECOCERT", icon: BadgeCheck },
 ];
 
-const HYALURONIC_TIERS = [
-  {
-    tier: 1 as const,
-    label: "BUY 1",
-    subtitle: "1 Bottle (30ml) · Daily Hydration",
-    price: 99,
-    compareAt: 119,
-    priceCents: 9900,
-    compareAtCents: 11900,
-    badge: null,
-    details: "£99.00 each",
-    savingsText: null,
-  },
-  {
-    tier: 3 as const,
-    label: "BUY 3",
-    subtitle: "3 Bottles (90ml) · Full 90-Day Protocol",
-    price: 249,
-    compareAt: 357,
-    priceCents: 24900,
-    compareAtCents: 35700,
-    badge: "MOST POPULAR",
-    details: "£83.00 each",
-    savingsText: "Save £108",
-  },
-  {
-    tier: 6 as const,
-    label: "BUY 6",
-    subtitle: "6 Bottles (180ml) · 6-Month Protocol",
-    price: 399,
-    compareAt: 714,
-    priceCents: 39900,
-    compareAtCents: 71400,
-    badge: "BEST VALUE",
-    details: "£66.50 each",
-    savingsText: "Save £315",
-  },
-];
+export interface ProtocolTier {
+  tier: number;
+  label: string;
+  subtitle: string;
+  price: number;
+  compareAt: number;
+  priceCents: number;
+  compareAtCents: number;
+  badge: "MOST POPULAR" | "BEST VALUE" | null;
+  details: string;
+  savingsText: string | null;
+}
+
+export function getProductProtocolTiers(product: Product): ProtocolTier[] | null {
+  const isSimplified =
+    product.template === "serum" ||
+    product.template === "cleanser" ||
+    product.slug === "double-hydration-boost-gel" ||
+    product.slug === "buudy-double-hydration-boost-gel" ||
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "the-ultimate-renewal-collection-box" ||
+    product.id === "the-ultimate-renewal-collection-box" ||
+    product.slug.includes("aha") ||
+    product.id.includes("aha") ||
+    product.id.includes("peptide") ||
+    product.slug.includes("peptide") ||
+    product.slug.includes("eye") ||
+    product.id.includes("eye") ||
+    product.slug.includes("collagen") ||
+    product.slug.includes("duo") ||
+    product.slug.includes("box") ||
+    product.slug.includes("collection");
+
+  if (!isSimplified) {
+    return null;
+  }
+
+  const slug = product.slug || "";
+  const id = product.id || "";
+  const isBox = slug.includes("collection") || slug.includes("box") || slug.includes("duo");
+
+  if (isBox) {
+    if (slug.includes("duo")) {
+      return [
+        {
+          tier: 1,
+          label: "BUY 1",
+          subtitle: "1 Duo Gift Box (2 x 30ml) · 2-Step Cellular Hydration",
+          price: 199,
+          compareAt: 399,
+          priceCents: 19900,
+          compareAtCents: 39900,
+          badge: null,
+          details: "£199.00 each",
+          savingsText: null,
+        },
+        {
+          tier: 2,
+          label: "BUY 2",
+          subtitle: "2 Duo Gift Boxes (4 x 30ml) · Extended 120-Day Protocol",
+          price: 349,
+          compareAt: 798,
+          priceCents: 34900,
+          compareAtCents: 79800,
+          badge: "MOST POPULAR",
+          details: "£174.50 each",
+          savingsText: "Save £449",
+        },
+        {
+          tier: 3,
+          label: "BUY 3",
+          subtitle: "3 Duo Gift Boxes (6 x 30ml) · Year-Round Hydration & Gifting",
+          price: 449,
+          compareAt: 1197,
+          priceCents: 44900,
+          compareAtCents: 119700,
+          badge: "BEST VALUE",
+          details: "£149.67 each",
+          savingsText: "Save £748",
+        },
+      ];
+    }
+    if (slug.includes("peptide")) {
+      return [
+        {
+          tier: 1,
+          label: "BUY 1",
+          subtitle: "1 Collection Box (3-Step Trio) · Full Anti-Age Protocol",
+          price: 199,
+          compareAt: 399,
+          priceCents: 19900,
+          compareAtCents: 39900,
+          badge: null,
+          details: "£199.00 each",
+          savingsText: null,
+        },
+        {
+          tier: 2,
+          label: "BUY 2",
+          subtitle: "2 Collection Boxes · Extended 180-Day Firming Protocol",
+          price: 349,
+          compareAt: 798,
+          priceCents: 34900,
+          compareAtCents: 79800,
+          badge: "MOST POPULAR",
+          details: "£174.50 each",
+          savingsText: "Save £449",
+        },
+        {
+          tier: 3,
+          label: "BUY 3",
+          subtitle: "3 Collection Boxes · Ultimate Luxury Gifting & Year-Round Care",
+          price: 449,
+          compareAt: 1197,
+          priceCents: 44900,
+          compareAtCents: 119700,
+          badge: "BEST VALUE",
+          details: "£149.67 each",
+          savingsText: "Save £748",
+        },
+      ];
+    }
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Collection Box (3 x 30ml) · Complete Renewal Trilogy",
+        price: 199,
+        compareAt: 249,
+        priceCents: 19900,
+        compareAtCents: 24900,
+        badge: null,
+        details: "£199.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 2,
+        label: "BUY 2",
+        subtitle: "2 Collection Boxes (6 x 30ml) · Continuous Renewal Protocol",
+        price: 349,
+        compareAt: 498,
+        priceCents: 34900,
+        compareAtCents: 49800,
+        badge: "MOST POPULAR",
+        details: "£174.50 each",
+        savingsText: "Save £149",
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Collection Boxes (9 x 30ml) · Luxury Gifting & Year-Round Care",
+        price: 449,
+        compareAt: 747,
+        priceCents: 44900,
+        compareAtCents: 74700,
+        badge: "BEST VALUE",
+        details: "£149.67 each",
+        savingsText: "Save £298",
+      },
+    ];
+  }
+
+  const isEyeCream = slug.includes("eye-cream") || slug.includes("eye");
+  const isCream = (slug.includes("cream") || id.includes("cream")) && !isEyeCream;
+  const isFaceWash = slug.includes("face-wash") || slug.includes("wash") || product.template === "cleanser";
+
+  if (isEyeCream) {
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Tube (15ml) · Daily Eye Contour Care",
+        price: 99,
+        compareAt: 119,
+        priceCents: 9900,
+        compareAtCents: 11900,
+        badge: null,
+        details: "£99.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Tubes (45ml) · Full 90-Day Protocol",
+        price: 249,
+        compareAt: 357,
+        priceCents: 24900,
+        compareAtCents: 35700,
+        badge: "MOST POPULAR",
+        details: "£83.00 each",
+        savingsText: "Save £108",
+      },
+      {
+        tier: 6,
+        label: "BUY 6",
+        subtitle: "6 Tubes (90ml) · 6-Month Protocol",
+        price: 399,
+        compareAt: 714,
+        priceCents: 39900,
+        compareAtCents: 71400,
+        badge: "BEST VALUE",
+        details: "£66.50 each",
+        savingsText: "Save £315",
+      },
+    ];
+  }
+
+  if (isCream) {
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Jar (50ml) · Daily Restorative Care",
+        price: 99,
+        compareAt: 119,
+        priceCents: 9900,
+        compareAtCents: 11900,
+        badge: null,
+        details: "£99.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Jars (150ml) · Full 90-Day Protocol",
+        price: 249,
+        compareAt: 357,
+        priceCents: 24900,
+        compareAtCents: 35700,
+        badge: "MOST POPULAR",
+        details: "£83.00 each",
+        savingsText: "Save £108",
+      },
+      {
+        tier: 6,
+        label: "BUY 6",
+        subtitle: "6 Jars (300ml) · 6-Month Protocol",
+        price: 399,
+        compareAt: 714,
+        priceCents: 39900,
+        compareAtCents: 71400,
+        badge: "BEST VALUE",
+        details: "£66.50 each",
+        savingsText: "Save £315",
+      },
+    ];
+  }
+
+  if (isFaceWash) {
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Bottle (140ml) · Daily Purifying & Balancing",
+        price: 99,
+        compareAt: 119,
+        priceCents: 9900,
+        compareAtCents: 11900,
+        badge: null,
+        details: "£99.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Bottles (420ml) · Full 90-Day Protocol",
+        price: 249,
+        compareAt: 357,
+        priceCents: 24900,
+        compareAtCents: 35700,
+        badge: "MOST POPULAR",
+        details: "£83.00 each",
+        savingsText: "Save £108",
+      },
+      {
+        tier: 6,
+        label: "BUY 6",
+        subtitle: "6 Bottles (840ml) · 6-Month Protocol",
+        price: 399,
+        compareAt: 714,
+        priceCents: 39900,
+        compareAtCents: 71400,
+        badge: "BEST VALUE",
+        details: "£66.50 each",
+        savingsText: "Save £315",
+      },
+    ];
+  }
+
+  // All 30ml Serums
+  let tier1Action = "Daily Hydration";
+  if (slug.includes("peptide")) tier1Action = "Post-Light Collagen Lock";
+  else if (slug.includes("prebiotic")) tier1Action = "Microbiome & Barrier Balance";
+  else if (slug.includes("aha")) tier1Action = "Overnight Cellular Resurfacing";
+  else if (slug.includes("retinol")) tier1Action = "LED-Safe Night Cellular Renewal";
+  else if (slug.includes("niacinamide")) tier1Action = "Blemish Defence & Pore Control";
+  else if (slug.includes("hydrating")) tier1Action = "Intensive Moisture & Barrier Care";
+
+  return [
+    {
+      tier: 1,
+      label: "BUY 1",
+      subtitle: `1 Bottle (30ml) · ${tier1Action}`,
+      price: 99,
+      compareAt: 119,
+      priceCents: 9900,
+      compareAtCents: 11900,
+      badge: null,
+      details: "£99.00 each",
+      savingsText: null,
+    },
+    {
+      tier: 3,
+      label: "BUY 3",
+      subtitle: "3 Bottles (90ml) · Full 90-Day Protocol",
+      price: 249,
+      compareAt: 357,
+      priceCents: 24900,
+      compareAtCents: 35700,
+      badge: "MOST POPULAR",
+      details: "£83.00 each",
+      savingsText: "Save £108",
+    },
+    {
+      tier: 6,
+      label: "BUY 6",
+      subtitle: "6 Bottles (180ml) · 6-Month Protocol",
+      price: 399,
+      compareAt: 714,
+      priceCents: 39900,
+      compareAtCents: 71400,
+      badge: "BEST VALUE",
+      details: "£66.50 each",
+      savingsText: "Save £315",
+    },
+  ];
+}
 
 export function GiftBundle({
   product,
@@ -401,14 +700,16 @@ export function GiftBundle({
   );
   const hasGifts = product.gifts.length > 0;
   const isHyaluronic =
-    hyaluronicEditorial ||
     product.id === "buudy-light-activating-hyaluronic-serum" ||
     product.slug === "buudy-light-activating-hyaluronic-serum" ||
     Boolean(product.slug && product.slug.includes("hyaluronic"));
 
-  const [selectedTier, setSelectedTier] = useState<1 | 3 | 6>(1);
+  const protocolTiers = getProductProtocolTiers(product);
+  const showProtocolTiers = Boolean(protocolTiers && protocolTiers.length > 0);
+
+  const [selectedTier, setSelectedTier] = useState<number>(protocolTiers?.[0]?.tier ?? 1);
   const currentTierData =
-    HYALURONIC_TIERS.find((t) => t.tier === selectedTier) ?? HYALURONIC_TIERS[0];
+    protocolTiers?.find((t) => t.tier === selectedTier) ?? protocolTiers?.[0];
 
   const isSimplifiedProduct =
     product.template === "serum" ||
@@ -430,10 +731,10 @@ export function GiftBundle({
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
     : "Add to cart";
 
-  const benefitList = hyaluronicEditorial
+  const benefitList = isHyaluronic && hyaluronicEditorial
     ? hyaluronicEditorialBenefits.map(({ text }) => text)
     : product.keyBenefits ?? product.highlights;
-  const benefitIcons = hyaluronicEditorial
+  const benefitIcons = isHyaluronic && hyaluronicEditorial
     ? hyaluronicEditorialBenefits.map(({ icon }) => icon)
     : product.template === "mask"
       ? benefitList.map((_, i) => keyBenefitIcons[i % keyBenefitIcons.length])
@@ -512,16 +813,16 @@ export function GiftBundle({
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <Price
-          compareAtCents={isHyaluronic ? currentTierData.compareAtCents : product.compareAtCents}
+          compareAtCents={currentTierData ? currentTierData.compareAtCents : product.compareAtCents}
           currency={product.currency}
-          priceCents={isHyaluronic ? currentTierData.priceCents : product.priceCents}
+          priceCents={currentTierData ? currentTierData.priceCents : product.priceCents}
           hideDiscount={isHalloween || isEarlyBlackFriday}
         />
         {isHalloween && <HalloweenSaleBadge />}
         {isEarlyBlackFriday && (
           <EarlyBlackFridaySaleBadge
             discountText={
-              isHyaluronic
+              currentTierData
                 ? `${percentOff(currentTierData.priceCents, currentTierData.compareAtCents)}% OFF`
                 : product.compareAtCents && (product.template === "serum" || product.template === "cleanser")
                 ? `${percentOff(product.priceCents, product.compareAtCents)}% OFF`
@@ -597,8 +898,8 @@ export function GiftBundle({
         </div>
       </div>
 
-      {/* 3-Tier Bundle Offer for Hyaluronic Serum */}
-      {isHyaluronic && (
+      {/* 3-Tier Bundle Offer for Serums, Creams, and Collection Boxes */}
+      {showProtocolTiers && protocolTiers && (
         <div className="mt-5 mb-2">
           <div className="flex items-center gap-3 mb-4">
             <span className="h-px flex-1 bg-[rgba(58,31,61,.15)]" />
@@ -611,9 +912,9 @@ export function GiftBundle({
           <div
             className="flex flex-col gap-3"
             role="radiogroup"
-            aria-label="Choose your hyaluronic serum bundle"
+            aria-label="Choose your protocol bundle"
             onKeyDown={(event) => {
-              const tiers = [1, 3, 6] as const;
+              const tiers = protocolTiers.map((t) => t.tier);
               const direction = ["ArrowRight", "ArrowDown"].includes(event.key)
                 ? 1
                 : ["ArrowLeft", "ArrowUp"].includes(event.key)
@@ -630,7 +931,7 @@ export function GiftBundle({
                 [nextIndex]?.focus();
             }}
           >
-            {HYALURONIC_TIERS.map((tierItem) => {
+            {protocolTiers.map((tierItem) => {
               const isSelected = selectedTier === tierItem.tier;
               return (
                 <div
@@ -642,7 +943,7 @@ export function GiftBundle({
                   }`}
                   onClick={() => setSelectedTier(tierItem.tier)}
                 >
-                  {tierItem.tier === 3 && (
+                  {tierItem.badge === "MOST POPULAR" && (
                     <div
                       className="tier-popular-badge-wrap badge-popular"
                       style={{
@@ -713,7 +1014,7 @@ export function GiftBundle({
                     </div>
                   )}
 
-                  {tierItem.tier === 6 && (
+                  {tierItem.badge === "BEST VALUE" && (
                     <div
                       className="tier-best-value-wrap badge-value"
                       style={{
@@ -787,9 +1088,9 @@ export function GiftBundle({
                     <div
                       className="text-right flex flex-col items-end justify-center shrink-0 pl-1"
                       style={
-                        tierItem.tier === 3
+                        tierItem.badge === "MOST POPULAR"
                           ? { marginTop: "14px" }
-                          : tierItem.tier === 6
+                          : tierItem.badge === "BEST VALUE"
                           ? { marginTop: "12px" }
                           : undefined
                       }
@@ -828,7 +1129,7 @@ export function GiftBundle({
         id="hero-cta"
         onClick={() => {
           setIsAdding(true);
-          addProduct(product, isHyaluronic ? selectedTier : 1);
+          addProduct(product, currentTierData ? currentTierData.tier : 1);
           router.push(
             appendAttributionToPath(
               "/cart",
@@ -854,7 +1155,7 @@ export function GiftBundle({
       </Button>
 
       {/* Certifications row directly below Add to Cart in ONE LINE with text color var(--plum) */}
-      {isHyaluronic && (
+      {showProtocolTiers && (
         <div className="mt-5 grid grid-cols-3 items-center justify-items-center w-full px-2 sm:px-4 py-2">
           <div
             title="FDA Registered"

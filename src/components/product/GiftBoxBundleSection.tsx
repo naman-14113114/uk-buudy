@@ -88,7 +88,8 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
           {renewalProducts.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300"
+              data-story-card
+              className="flex flex-col rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300"
             >
               {/* Product Spotlight Image */}
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-[var(--cream)] mb-5">
@@ -146,7 +147,7 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
 
         {/* Dual Visual Feature: Skincare Rhythm (Left) + Three Textures (Right) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-center">
-          <div className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] p-6 shadow-sm">
+          <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
                 src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-weekly-skincare-rhythm-guide-uk.webp"
@@ -164,7 +165,7 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
             </p>
           </div>
 
-          <div className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] p-6 shadow-sm">
+          <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
                 src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-textures-comparison-uk.webp"
