@@ -401,7 +401,7 @@ export const transformations: Transformation[] = [
 export const serumTransformations: Transformation[] = [
   {
     id: "serum-result-01",
-    image: "/images/products/buudy-serum/transformations/ha-transformation-01.webp",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-01-acne.webp",
     concern: "Dermal Hydration & Fine Line Smoothing",
     title: "Remarkable hydration and line smoothing",
     quote:
@@ -417,7 +417,7 @@ export const serumTransformations: Transformation[] = [
   },
   {
     id: "serum-result-02",
-    image: "/images/products/buudy-serum/transformations/ha-transformation-02.webp",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-02-profile.webp",
     concern: "Cheek Turgor & Plumpness",
     title: "Visibly plumper cheeks and restored bounce",
     quote:

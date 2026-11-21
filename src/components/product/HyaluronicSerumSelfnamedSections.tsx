@@ -133,8 +133,15 @@ function ProductFeaturesSection() {
                 Targeted features, <em className="buudy-italic text-[var(--gold)]">engineered for results</em>.
               </h2>
               <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
-                Formulated with dual-molecular weight hyaluronic acid and physiological Sodium PCA to form a protective moisture-locking cushion that plumps dehydrated dermal tissue.
+                Use your Buudy LED Mask as directed. After your session, smooth on the clear gel before moisturiser. Hyaluronic acid and sodium PCA help keep skin hydrated and looking plump.
               </p>
+              <Link
+                href="/products/buudy-led-mask"
+                className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--plum)] underline underline-offset-4 hover:text-[var(--gold)] transition-colors"
+              >
+                Explore the Buudy LED Mask
+                <ChevronRight aria-hidden="true" size={17} />
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -598,23 +605,6 @@ function HyaluronicHowToUseSection({ editorial = false }: { editorial?: boolean 
               ))}
             </HyaluronicRoutineSteps>
           </div>
-        </div>
-        <div className="buudy-wrap mt-8 md:mt-10" id="mask-routine">
-          <h3 className="buudy-display text-2xl leading-tight text-[var(--plum)] sm:text-3xl">
-            Pair it with the Buudy LED Mask
-          </h3>
-          <p className="buudy-copy mt-2 max-w-xl text-sm sm:text-base">
-            Use your Buudy LED Mask as directed. After your session, smooth on the clear
-            gel before moisturiser. Hyaluronic acid and sodium PCA help keep skin hydrated
-            and looking plump.
-          </p>
-          <Link
-            href="/products/buudy-led-mask"
-            className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-[var(--plum)] underline underline-offset-4 hover:text-[var(--plum-soft)]"
-          >
-            Explore the Buudy LED Mask
-            <ChevronRight aria-hidden="true" size={17} />
-          </Link>
         </div>
       </section>
     );

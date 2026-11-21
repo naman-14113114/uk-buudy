@@ -198,9 +198,9 @@ export function ProductSignalsRow({ signals }: { signals: string[] }) {
   const items = signals.map((signal) => {
     const Icon = getCertificationIcon(signal);
     return (
-      <li key={signal} className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-medium">
-        <Icon aria-hidden="true" className="shrink-0 text-[var(--gold)]" size={17} strokeWidth={1.6} />
-        {signal}
+      <li key={signal} className="inline-flex shrink-0 items-center gap-2.5 whitespace-nowrap text-[15px] sm:text-base font-semibold tracking-wide leading-none">
+        <Icon aria-hidden="true" className="shrink-0 text-[var(--gold)]" size={19} strokeWidth={1.7} />
+        <span>{signal}</span>
       </li>
     );
   });
