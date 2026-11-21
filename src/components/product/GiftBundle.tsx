@@ -644,11 +644,105 @@ export function GiftBundle({
                   }`}
                   onClick={() => setSelectedTier(tierItem.tier)}
                 >
-                  {tierItem.badge && (
-                    <div className="absolute -top-2.5 right-3.5 z-10 pointer-events-none">
-                      <span className="inline-flex items-center rounded-full bg-[#22c55e] px-2.5 py-0.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-white shadow-sm">
-                        {tierItem.badge}
-                      </span>
+                  {tierItem.tier === 3 && (
+                    <div
+                      className="tier-popular-badge-wrap badge-popular"
+                      style={{
+                        position: "absolute",
+                        top: "-16px",
+                        right: "0px",
+                        zIndex: 20,
+                        pointerEvents: "none",
+                      }}
+                    >
+                      <div
+                        className="tier-popular-seal"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          filter: "drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4))",
+                        }}
+                      >
+                        <svg
+                          width="84"
+                          height="53"
+                          viewBox="0 0 90 56"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M 85.0 28.0 Q 80.2 31.2 83.0 35.1 Q 76.8 37.3 77.4 41.5 Q 70.2 42.5 68.5 46.6 Q 61.2 46.3 57.4 49.9 Q 50.6 48.2 45.0 51.0 Q 39.4 48.2 32.6 49.9 Q 28.8 46.3 21.5 46.6 Q 19.8 42.5 12.6 41.5 Q 13.2 37.3 7.0 35.1 Q 9.8 31.2 5.0 28.0 Q 9.8 24.8 7.0 20.9 Q 13.2 18.7 12.6 14.5 Q 19.8 13.5 21.5 9.4 Q 28.8 9.7 32.6 6.1 Q 39.4 7.8 45.0 5.0 Q 50.6 7.8 57.4 6.1 Q 61.2 9.7 68.5 9.4 Q 70.2 13.5 77.4 14.5 Q 76.8 18.7 83.0 20.9 Q 80.2 24.8 85.0 28.0 Z"
+                            fill="#22c55e"
+                          />
+                          <ellipse
+                            cx="45"
+                            cy="28"
+                            rx="34"
+                            ry="18.5"
+                            stroke="rgba(255, 255, 255, 0.45)"
+                            strokeWidth="0.9"
+                            strokeDasharray="2 1.5"
+                            fill="none"
+                          />
+                          <text
+                            x="45"
+                            y="23"
+                            textAnchor="middle"
+                            fill="#ffffff"
+                            fontFamily="'Playfair Display', Georgia, serif"
+                            fontSize="12.5"
+                            fontStyle="italic"
+                            fontWeight="600"
+                            letterSpacing="0.3"
+                          >
+                            Most
+                          </text>
+                          <text
+                            x="45"
+                            y="37.5"
+                            textAnchor="middle"
+                            fill="#ffffff"
+                            fontFamily="'Inter', -apple-system, sans-serif"
+                            fontSize="11"
+                            fontWeight="800"
+                            letterSpacing="0.5"
+                          >
+                            Popular
+                          </text>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+
+                  {tierItem.tier === 6 && (
+                    <div
+                      className="tier-best-value-wrap badge-value"
+                      style={{
+                        position: "absolute",
+                        top: "-11px",
+                        right: "10px",
+                        zIndex: 20,
+                        pointerEvents: "none",
+                      }}
+                    >
+                      <div
+                        className="tier-best-value-ribbon"
+                        style={{
+                          borderRadius: "4px",
+                          background: "#22c55e",
+                          padding: "4px 10px",
+                          fontSize: "11.5px",
+                          fontWeight: 800,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.04em",
+                          color: "#ffffff",
+                          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        BEST VALUE
+                      </div>
                     </div>
                   )}
 
@@ -692,7 +786,16 @@ export function GiftBundle({
                     </div>
 
                     {/* Right: Prices + Details */}
-                    <div className="text-right flex flex-col items-end justify-center shrink-0 pl-1">
+                    <div
+                      className="text-right flex flex-col items-end justify-center shrink-0 pl-1"
+                      style={
+                        tierItem.tier === 3
+                          ? { marginTop: "14px" }
+                          : tierItem.tier === 6
+                          ? { marginTop: "12px" }
+                          : undefined
+                      }
+                    >
                       <div className="flex items-baseline gap-1.5 justify-end">
                         <span className="font-bold text-base sm:text-lg text-[var(--plum)] leading-none">
                           £{tierItem.price}
@@ -754,11 +857,11 @@ export function GiftBundle({
 
       {/* Certifications row directly below Add to Cart in ONE LINE with text color var(--plum) */}
       {isHyaluronic && (
-        <div className="mt-4 flex items-center justify-between gap-4 px-2 sm:px-4 py-1">
+        <div className="mt-5 flex items-center justify-between sm:justify-around gap-4 sm:gap-8 px-2 sm:px-4 py-2">
           <div
             title="FDA Registered"
             aria-label="FDA Registered"
-            className="flex-1 h-8 sm:h-9"
+            className="h-9 sm:h-10 w-28 sm:w-32 shrink-0"
             style={{
               maskImage: "url(/images/certifications/fda-registered.svg)",
               WebkitMaskImage: "url(/images/certifications/fda-registered.svg)",
@@ -774,7 +877,7 @@ export function GiftBundle({
           <div
             title="Certified B Corporation"
             aria-label="Certified B Corporation"
-            className="flex-1 h-8 sm:h-9"
+            className="h-14 sm:h-16 w-12 sm:w-14 shrink-0"
             style={{
               maskImage: "url(/images/certifications/b-corp.svg)",
               WebkitMaskImage: "url(/images/certifications/b-corp.svg)",
@@ -790,7 +893,7 @@ export function GiftBundle({
           <div
             title="Good Manufacturing Practice"
             aria-label="Good Manufacturing Practice"
-            className="flex-1 h-8 sm:h-9"
+            className="h-14 sm:h-16 w-14 sm:w-16 shrink-0"
             style={{
               maskImage: "url(/images/certifications/gmp-certified.svg)",
               WebkitMaskImage: "url(/images/certifications/gmp-certified.svg)",

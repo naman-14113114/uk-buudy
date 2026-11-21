@@ -1786,3 +1786,31 @@ Final main HEAD758581011662a7af57014d780c066d55aa460340, upstream origin/main 0/
   - `npx tsc --noEmit`: 0 errors.
   - `npm run build`: 113/113 static pages compiled successfully in Next.js Turbopack.
   - Interactive testing via Chrome DevTools confirmed dynamic tier selection, £249 cart synchronization, in-hero plum certifications, and clean card hover physics.
+
+
+## 2026-11-21 18:10:00 +05:30 IST - Miro heads bundle badges (Most Popular seal & Best Value ribbon), enlarged B Corp & GMP certifications, and marquee dead-centering
+
+- Owner requests:
+  1. Extract and replicate the exact Most Popular badge and Best Value badge from Miro heads (`E:\1st YEAR DTU\New folder\miroooo`) on the Hyaluronic Serum bundle cards.
+  2. Increase size of Certified B Corporation and Good Manufacturing Practice (GMP) certifications so they are clearly visible and balanced with FDA Registered.
+  3. Keep all items (icons and text) vertically centered inside the purple Product Signals marquee.
+  4. Scope: Confined strictly to `uk.Buudy Vercel Deployment` and `/products/buudy-light-activating-hyaluronic-serum`.
+- Code changes:
+  - `src/components/product/GiftBundle.tsx`:
+    * Buy 3 (Most Popular): Replaced pill badge with Miro heads exact 90x56 SVG scalloped rosette seal (`fill="#22c55e"`, drop shadow `0 3px 8px rgba(0, 0, 0, 0.4)`, dashed inner ellipse, italic *Most*, bold **Popular**) positioned at `top: -16px, right: 0px`. Added `marginTop: '14px'` to right price column to prevent collision.
+    * Buy 6 (Best Value): Replaced pill badge with Miro heads exact green ribbon (`#22c55e`, rounded 4px, uppercase bold "BEST VALUE", drop shadow `0 2px 6px rgba(0, 0, 0, 0.3)`) positioned at `top: -11px, right: 10px`. Added `marginTop: '12px'` to right price column.
+    * In-Hero Certifications Row: Enlarged B Corp to `h-14 sm:h-16 w-12 sm:w-14` (56px-64px height) and GMP to `h-14 sm:h-16 w-14 sm:w-16` (56px-64px height/width) with `var(--plum)` CSS mask, making the circular text and inner logos crisp, clear, and perfectly balanced with FDA Registered (`h-9 sm:h-10 w-28 sm:w-32`).
+  - `src/components/product/SerumCertificationsRow.tsx`:
+    * Re-enabled standalone certifications section in `ProductPage.tsx` above the marquee as shown in user's reference screenshot.
+    * Upgraded individual badge scaling: FDA `h-11 sm:h-13 md:h-15 w-auto max-w-[140px]`, B-Corp `h-16 sm:h-20 md:h-24 w-auto`, GMP `h-16 sm:h-18 md:h-22 w-auto`, `opacity-100` so B Corp and GMP are bold and legible.
+  - `src/components/product/HyaluronicSerumEditorial.module.css`:
+    * Fixed `#product-signals` to strict 50px height with `min-height: 50px; height: 50px; max-height: 50px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;`.
+    * Enforced `height: 100%; display: flex; align-items: center; margin: 0;` on `.signalsTrack` and `.signalsGroup`.
+  - `src/components/product/ProductDetailsAccordion.tsx`:
+    * Set `li` in `ProductSignalsRow` to `inline-flex items-center justify-center gap-2.5 h-full`, with text `span` styled with `inline-block transform -translate-y-[0.5px] leading-none` to guarantee mathematical and optical dead-centering.
+- Verification & Testing:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 113/113 static pages compiled successfully in Turbopack.
+  - Chrome DevTools evaluation: Marquee icon topSpace = 15.5px, bottomSpace = 15.5px (0.0px deviation); text centered to subpixel accuracy.
+  - Verified visual rendering on both Desktop (1265px) and Mobile (390px) viewports with high-resolution screenshots.
+
