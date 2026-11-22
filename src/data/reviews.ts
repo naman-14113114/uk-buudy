@@ -2,6 +2,7 @@ import maskReviews from "./reviews/buudy-led-mask-reviews.json";
 import torchReviews from "./reviews/buudy-red-torch-reviews.json";
 import iplReviews from "./reviews/buudy-ipl-hair-removal-device-reviews.json";
 import serumReviews from "./reviews/buudy-hyaluronic-serum-reviews.json";
+import peptideReviews from "./reviews/buudy-peptide-serum-reviews.json";
 import faceWashReviews from "./reviews/buudy-face-wash-reviews.json";
 import prebioticReviews from "./reviews/buudy-prebiotics-serum-reviews.json";
 import { market } from "@/lib/market";
@@ -55,9 +56,10 @@ const reviewCollections = {
   "double-hydration-boost-gel": serumReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-double-hydration-boost-gel": serumReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-hyaluronic-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
-  "buudy-peptide-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
-  "peptide-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
-  "buudy-peptide-anti-aging-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-peptide-serum": peptideReviews.map(normalizeStaticReview) as ProductReview[],
+  "peptide-serum": peptideReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-peptide-anti-aging-serum": peptideReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-peptide-anti-ageing-serum": peptideReviews.map(normalizeStaticReview) as ProductReview[],
   "collagen-boost-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-blemish-purifying-face-wash": faceWashReviews.map(normalizeStaticReview) as ProductReview[],
   "blemish-purifying-face-wash": faceWashReviews.map(normalizeStaticReview) as ProductReview[],

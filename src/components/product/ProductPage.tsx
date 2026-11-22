@@ -35,6 +35,7 @@ import {
   PackagingSection,
   RelatedProductsSection,
 } from "./HyaluronicSerumSelfnamedSections";
+import { PeptideSerumSelfnamedSections } from "./PeptideSerumSelfnamedSections";
 
 export function ProductPage({
   product,
@@ -150,8 +151,9 @@ export function ProductPage({
         />
       )}
 
-      {/* 2. Selfnamed Rich Clinical Sections for Hyaluronic Serum */}
+      {/* 2. Selfnamed Rich Clinical Sections for Hyaluronic & Peptide Serums */}
       {isHyaluronic && <HyaluronicSerumSelfnamedSections routineFirstGrid={hyaluronicEditorial} />}
+      {isPeptide && <PeptideSerumSelfnamedSections routineFirstGrid={isEditorial} />}
 
       {/* 3. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
       {product.template === "serum" && (
@@ -164,7 +166,7 @@ export function ProductPage({
       {product.template === "mask" && <DeferredBeforeAfterGrid />}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
-      {product.template === "serum" && !isHyaluronic && (
+      {product.template === "serum" && !isHyaluronic && !isPeptide && (
         <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
       {product.template === "cleanser" && <CleanserHowToUse />}

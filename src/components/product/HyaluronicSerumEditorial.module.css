@@ -28,7 +28,8 @@
   text-wrap: balance;
 }
 
-.editorial > section :global(#hyaluronic-how-to-use) {
+.editorial > section :global(#hyaluronic-how-to-use),
+.editorial > section :global(#peptide-how-to-use) {
   font-size: clamp(2.75rem, 6vw, 4.5rem);
 }
 
