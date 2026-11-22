@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,9 +11,50 @@ import {
   Sparkles,
   Wind,
 } from "lucide-react";
-import { HyaluronicRoutineSteps } from "./HyaluronicRoutineSteps";
 
-// 1. Product In Details (9-Card Carousel for Peptide Serum from Selfnamed)
+function PeptideRoutineSteps({ children }: { children: ReactNode }) {
+  const list = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    const element = list.current;
+    if (!element || !window.IntersectionObserver || !element.animate) {
+      return;
+    }
+
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        observer.disconnect();
+        if (!motion.matches) {
+          element.animate(
+            [{ opacity: 0.78, transform: "translateY(5px)" }, { opacity: 1, transform: "none" }],
+            { duration: 240, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+          );
+        }
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <ol className="mt-5 space-y-4 md:mt-6" ref={list}>
+      {children}
+    </ol>
+  );
+}
+
+// 1. Product In Details (9-Card Carousel for Buudy Peptide Concentrate from Selfnamed)
 function ProductInDetailsCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -24,10 +65,10 @@ function ProductInDetailsCarousel() {
   };
 
   const detailCards = [
-    { num: "01", src: "/images/products/buudy-peptide-serum/selfnamed/detail-01.jpg", alt: "Hexapeptide-11 & bio-fermented peptide collagen boost" },
+    { num: "01", src: "/images/products/buudy-peptide-serum/selfnamed/detail-01.jpg", alt: "Hexapeptide-11 bio-fermented peptide collagen booster" },
     { num: "02", src: "/images/products/buudy-peptide-serum/selfnamed/detail-02.jpg", alt: "Multi-depth fine line and wrinkle smoothing" },
     { num: "03", src: "/images/products/buudy-peptide-serum/selfnamed/detail-03.jpg", alt: "Dipalmitoyl Hydroxyproline cellular matrix reinforcement" },
-    { num: "04", src: "/images/products/buudy-peptide-serum/selfnamed/detail-04.jpg", alt: "Multi-molecular hyaluronic acid and Sodium PCA moisture lock" },
+    { num: "04", src: "/images/products/buudy-peptide-serum/selfnamed/detail-04.jpg", alt: "Bio-fermented peptide actives and Sodium PCA moisture retention" },
     { num: "05", src: "/images/products/buudy-peptide-serum/selfnamed/detail-05.jpg", alt: "Phytosterols skin barrier lipid replenishment" },
     { num: "06", src: "/images/products/buudy-peptide-serum/selfnamed/detail-06.jpg", alt: "Blueberry and Ginkgo Biloba antioxidant defense" },
     { num: "07", src: "/images/products/buudy-peptide-serum/selfnamed/detail-07.jpg", alt: "Silky creamy emulsion with dewy non-greasy finish" },
@@ -94,7 +135,7 @@ function ProductInDetailsCarousel() {
   );
 }
 
-// 2. Product Features & Star Attributes (from Selfnamed Peptide Serum)
+// 2. Product Features & Star Attributes (Original UK English copy for Buudy Peptide Concentrate)
 function ProductFeaturesSection() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
@@ -105,7 +146,7 @@ function ProductFeaturesSection() {
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
                 src="/images/products/buudy-peptide-serum/04-bottle-angle-plum.webp"
-                alt="Buudy Peptide Anti-Aging Serum clinical features bottle and carton display"
+                alt="Buudy Peptide Concentrate 30ml clinical features bottle and carton display"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -123,7 +164,7 @@ function ProductFeaturesSection() {
                 Targeted features, <em className="buudy-italic text-[var(--gold)]">engineered for results</em>.
               </h2>
               <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
-                Use your Buudy LED Mask as directed. After your session, smooth on the peptide serum before moisturiser. Bio-fermented Hexapeptide-11 and multi-molecular hyaluronic acid help stimulate collagen synthesis and keep skin firm, lifted, and smooth.
+                Following your Buudy LED phototherapy session, apply 1 to 2 pumps of Buudy Peptide Concentrate across the face and neck before your daily moisturiser. Bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and cellular phytosterols work in synergy to stimulate fibroblast collagen synthesis, visibly firm facial contours, and smooth expression lines.
               </p>
               <Link
                 href="/products/buudy-led-mask"
@@ -144,7 +185,7 @@ function ProductFeaturesSection() {
                   </span>
                 </div>
                 <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed">
-                  Anti-age, dehydrated skin, fine lines, loss of elasticity, and expression wrinkles.
+                  Anti-ageing, fine lines, loss of dermal firmness, compromised elasticity, and expression wrinkles.
                 </p>
               </div>
 
@@ -157,7 +198,7 @@ function ProductFeaturesSection() {
                   </span>
                 </div>
                 <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed">
-                  Normal, dry, mature, and combination skin needing collagen matrix reinforcement.
+                  Normal, dry, mature, and combination skin needing structural collagen reinforcement.
                 </p>
               </div>
 
@@ -170,7 +211,7 @@ function ProductFeaturesSection() {
                   </span>
                 </div>
                 <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed">
-                  Smooths, reduces fine lines, supports skin firmness, and enhances dermal elasticity.
+                  Visibly lifts facial contours, reduces fine lines, supports collagen synthesis, and reinforces skin suppleness.
                 </p>
               </div>
 
@@ -183,7 +224,7 @@ function ProductFeaturesSection() {
                   </span>
                 </div>
                 <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed">
-                  Delicate floral fantasy aroma with notes of amber on sweet, powdery background.
+                  Subtle, natural botanical aroma with notes of delicate amber and warm florals on a soft, powdery base.
                 </p>
               </div>
             </div>
@@ -194,31 +235,31 @@ function ProductFeaturesSection() {
   );
 }
 
-// 3. Curated For (Exact Roles from Selfnamed Peptide Serum Page)
+// 3. Curated For (Clinical Specialists — Tailored UK English Copy)
 function CuratedForSection() {
   const roles = [
     {
       title: "Estheticians",
-      subtitle: "Daily Anti-Aging Support",
-      desc: "Retail as a daily anti-aging serum clients use at home to support the look of firmness and plumpness between treatments.",
+      subtitle: "Daily Anti-Ageing Support",
+      desc: "Retail as a daily targeted anti-ageing concentrate clients use at home to maintain visible firmness and bounce between clinic treatments.",
       img: "/images/products/buudy-peptide-serum/selfnamed/curated-estheticians.jpg",
     },
     {
       title: "Cosmetologists",
       subtitle: "Visible Smoothing & Firming",
-      desc: "Recommend to clients wanting visible smoothing from a peptide-and-hyaluronic-acid serum, sold as take-home care.",
+      desc: "Recommend to clients seeking targeted collagen reinforcement and visible line smoothing from a clinical-grade peptide concentrate.",
       img: "/images/products/buudy-peptide-serum/selfnamed/curated-cosmetologists.jpg",
     },
     {
       title: "Makeup Artists",
       subtitle: "Skin Prep & Smooth Canvas",
-      desc: "A plumping, smoothing serum that preps mature skin before makeup, applied in the client's own routine with zero pilling.",
+      desc: "A smoothing, firming concentrate that preps mature skin before cosmetics application, creating a seamless canvas with zero pilling.",
       img: "/images/products/buudy-peptide-serum/selfnamed/curated-makeup-artists.jpg",
     },
     {
       title: "Bridal MUAs",
       subtitle: "Pre-Wedding Firming Ritual",
-      desc: "A pre-wedding smoothing serum for brides building firmer, plumper-looking skin and radiant bounce at home.",
+      desc: "A pre-wedding firming and smoothing ritual for brides building plumper-looking, radiant skin and supple bounce at home.",
       img: "/images/products/buudy-peptide-serum/selfnamed/curated-bridal-muas.jpg",
     },
   ];
@@ -273,7 +314,7 @@ function CuratedForSection() {
   );
 }
 
-// 4. Product Formula & Physical Calibration (from Selfnamed Peptide Serum Page)
+// 4. Product Formula & Physical Calibration (Buudy Peptide Concentrate)
 function ProductFormulaSection() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
@@ -284,7 +325,7 @@ function ProductFormulaSection() {
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
                 src="/images/products/buudy-peptide-serum/03-serum-on-hand-editorial.webp"
-                alt="Buudy Peptide Anti-Aging Serum silky formulation texture on hand"
+                alt="Buudy Peptide Concentrate silky formulation texture on hand"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -302,7 +343,7 @@ function ProductFormulaSection() {
                 Product <em className="buudy-italic text-[var(--gold)]">formula</em>.
               </h2>
               <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
-                Bio-compatible emulsion matrix designed with micro-peptides, multi-depth humectants, and botanical seed oils to maximize daily absorption, cellular collagen synthesis, and red light wavelength synergy.
+                Bio-compatible micro-peptide emulsion calibrated with cold-pressed botanical seed oils and physiological humectants to optimise cellular absorption, collagen synthesis, and post-LED wavelength synergy.
               </p>
             </div>
 
@@ -381,7 +422,7 @@ function ProductFormulaSection() {
   );
 }
 
-// 5. Key Ingredients Deep Dive (with Exact Card Sizing as Hyaluronic + Left/Right Arrow Navigation + Touch/Trackpad Scrolling)
+// 5. Key Ingredients Deep Dive (Dedicated Bio-Active Peptide Matrix)
 function KeyIngredientsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -397,6 +438,12 @@ function KeyIngredientsSection() {
       role: "2% Bio-Fermented Actives",
       desc: "A powerhouse peptide that stimulates collagen synthesis, improves skin elasticity, and visibly softens fine lines and wrinkles.",
       img: "/images/products/buudy-peptide-serum/selfnamed/ingredient-peptides.jpg",
+    },
+    {
+      name: "Dipalmitoyl Hydroxyproline",
+      role: "Collagen Matrix Remodelling",
+      desc: "A plant-derived amino acid vector that reinforces the skin's structural scaffolding, visibly lifting contours and protecting elastin from degradation.",
+      img: "/images/products/buudy-peptide-serum/selfnamed/ingredient-phytosterols.jpg",
     },
     {
       name: "Phytosterols",
@@ -417,12 +464,6 @@ function KeyIngredientsSection() {
       img: "/images/products/buudy-peptide-serum/selfnamed/ingredient-sodium-pca.jpg",
     },
     {
-      name: "Hyaluronic Acid",
-      role: "Multi-Molecular Complex",
-      desc: "Multi-depth hydration that plumps dehydration lines on the surface while delivering deep moisture to cellular layers.",
-      img: "/images/products/buudy-peptide-serum/selfnamed/ingredient-hyaluronic-acid.jpg",
-    },
-    {
       name: "Superfruit Seed Oils",
       role: "Strawberry & Blueberry Oils",
       desc: "Cold-pressed superfruit oils rich in Omega-3, Omega-6, and vitamins to nourish, soften, and protect against environmental stress.",
@@ -430,7 +471,7 @@ function KeyIngredientsSection() {
     },
     {
       name: "Ginkgo Leaf Extract",
-      role: "1% Polyphenol Defense",
+      role: "1% Polyphenol Defence",
       desc: "Potent botanical antioxidant that defends collagen networks against free radicals and supports radiant microcirculation.",
       img: "/images/products/buudy-peptide-serum/selfnamed/ingredient-ginkgo-leaf-extract.jpg",
     },
@@ -510,28 +551,28 @@ function KeyIngredientsSection() {
   );
 }
 
-// 6. How To Use Section (from Selfnamed Peptide Serum Page)
+// 6. How To Use Section (Buudy Peptide Concentrate Daily Ritual)
 function PeptideHowToUseSection({ editorial = false }: { editorial?: boolean }) {
   const steps = [
     {
       num: 1,
       title: "Cleanse Your Skin",
-      desc: "Start with a clean face and neck, morning and evening.",
+      desc: "Start with a clean, dry face and neck following your morning or evening cleanse.",
     },
     {
       num: 2,
-      title: "Apply the Peptide Serum",
-      desc: "Dispense 1–2 drops and gently press into face, neck, and décolletage.",
+      title: "Apply Buudy Peptide Concentrate",
+      desc: "Dispense 1–2 pumps onto fingertips and gently press across the face, neck, and décolletage.",
     },
     {
       num: 3,
       title: "Massage & Absorb",
-      desc: "Gently massage in upward circular motions until fully absorbed. Suitable for AM and/or PM use.",
+      desc: "Massage using gentle upward strokes until the concentrate fully sinks in. Suitable for AM and/or PM use.",
     },
     {
       num: 4,
-      title: "Follow with Moisturiser & SPF",
-      desc: "Layer your ageless moisturiser on top to lock in peptides. Always apply SPF in the morning.",
+      title: "Lock In Actives",
+      desc: "Follow with your Buudy Ageless Moisturiser to seal in the peptides. Always apply broad-spectrum SPF in the morning.",
     },
   ];
 
@@ -559,7 +600,7 @@ function PeptideHowToUseSection({ editorial = false }: { editorial?: boolean }) 
             <p className="mt-3 text-sm text-[var(--muted)] sm:text-base">
               Follow these simple steps to get the best results
             </p>
-            <HyaluronicRoutineSteps>
+            <PeptideRoutineSteps>
               {steps.map(({ num, title, desc }) => (
                 <li className="flex items-baseline gap-3 sm:gap-4" key={num}>
                   <span aria-hidden="true" className="buudy-mono shrink-0 text-[var(--plum-soft)]">
@@ -575,7 +616,7 @@ function PeptideHowToUseSection({ editorial = false }: { editorial?: boolean }) 
                   </div>
                 </li>
               ))}
-            </HyaluronicRoutineSteps>
+            </PeptideRoutineSteps>
           </div>
         </div>
       </section>

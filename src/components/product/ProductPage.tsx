@@ -194,7 +194,7 @@ export function ProductPage({
         hyaluronicEditorial={isEditorial}
       />
       {isEditorial ? (
-        <div className={styles.editorial} data-hyaluronic-editorial>
+        <div className={styles.editorial} data-editorial-theme>
           {overview}
         </div>
       ) : (

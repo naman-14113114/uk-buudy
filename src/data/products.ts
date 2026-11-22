@@ -980,7 +980,7 @@ export const peptideSerumFaqs: FAQItem[] = [
   },
   {
     question: "Will this serum clog pores, cause breakouts, or feel greasy?",
-    answer: "No. The formula features a lightweight, silky botanical emulsion matrix that absorbs cleanly within 30 seconds. Powered by organic Jojoba and Strawberry seed oils alongside multi-molecular Hyaluronic Acid and Sodium PCA, it delivers intensive nourishment without heaviness, silicones, or comedogenic oils.",
+    answer: "No. The formula features a lightweight, silky botanical emulsion matrix that absorbs cleanly within 30 seconds. Powered by organic Jojoba and Strawberry seed oils alongside cellular phytosterols and Sodium PCA, it delivers intensive nourishment without heaviness, silicones, or comedogenic oils.",
   },
   {
     question: "Is it safe for medical-grade silicone LED masks?",
@@ -1005,7 +1005,7 @@ export const buudyPeptideSerum: Product = {
   heroTitle: "Buudy Peptide Serum",
   heroEmphasis: "",
   shortDescription: "STEP 2: POST-LIGHT PEPTIDE BOOSTER & COLLAGEN LOCK (30ml)",
-  description: "High-performance anti-ageing peptide serum powered by bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular hyaluronic acid. Formulated to stimulate cellular collagen synthesis, relax facial expression lines, and restore dermal firmness. Enriched with antioxidant-rich Blueberry, Ginkgo Biloba, and nourishing Jojoba. Engineered specifically for post-phototherapy synergy and intensive daily age-defence.",
+  description: "High-performance anti-ageing peptide concentrate powered by bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and cellular phytosterols. Formulated to stimulate fibroblast collagen synthesis, relax dynamic expression lines, and restore dermal firmness. Enriched with antioxidant-rich Blueberry, Ginkgo Biloba, and nourishing Jojoba. Engineered specifically for post-phototherapy synergy and intensive daily age-defence.",
   seoTitle: "Buudy Peptide Serum | Hexapeptide-11 Collagen Booster | Buudy UK",
   seoDescription: "Clinical-grade Buudy Peptide Serum with Hexapeptide-11 and Dipalmitoyl Hydroxyproline. ECOCERT COSMOS certified, stimulates collagen, smooths wrinkles.",
   currency: market.currency,
@@ -1028,7 +1028,7 @@ export const buudyPeptideSerum: Product = {
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-key-ingredients-texture-macro-uk.webp",
-      alt: "Key ingredients macro texture: Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular hyaluronic acid UK",
+      alt: "Key ingredients macro texture: Hexapeptide-11, Dipalmitoyl Hydroxyproline, and botanical phytosterols UK",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredient-spotlight-botanicals-uk.webp",
@@ -1062,7 +1062,7 @@ export const buudyPeptideSerum: Product = {
   gifts: [],
   specs: [
     { label: "Active Complex", value: "Hexapeptide-11 & Hydroxyproline" },
-    { label: "Hydration Matrix", value: "Multi-Depth Hyaluronic Acid + Sodium PCA" },
+    { label: "Barrier Support", value: "Natural Phytosterols & Sodium PCA" },
     { label: "Regimen Step", value: "Post-LED Phototherapy & Daily AM/PM" },
     { label: "Volume", value: "30ml Precision Treatment Pump" },
     { label: "Skin Compatibility", value: "All Skin Types & Sensitive Barriers" },
@@ -1090,9 +1090,7 @@ export const buudyPeptideSerum: Product = {
     "Vaccinium Myrtillus (Blueberry) Fruit Extract➀",
     "Ricinus Communis (Castor) Seed Oil➀",
     "Ascorbyl Palmitate",
-    "Hydrolyzed Hyaluronic Acid",
     "Potassium Hydroxide",
-    "Sodium Hyaluronate",
     "Sodium Phytate",
     "Tocopherol",
     "Leuconostoc/Radish Root Ferment Filtrate",

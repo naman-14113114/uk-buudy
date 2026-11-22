@@ -145,9 +145,9 @@ export const peptideSerumFeatures: Feature[] = [
     body: "A plant-derived hydroxyproline amino acid vector that penetrates deep into dermal architecture. It reinforces collagen fibres, inhibits enzymatic degradation of elastin, and visibly lifts and tightens facial contours.",
   },
   {
-    title: "Dual-Action Multi-Molecular HA",
-    kicker: "Multi-Depth Hydration Reservoir",
-    body: "Combines low and high molecular weight hyaluronic acids with Sodium PCA to draw moisture deep into intercellular matrices, replenishing volume and delivering immediate bouncy plumpness.",
+    title: "Plant-Derived Phytosterols & Sodium PCA",
+    kicker: "Cellular Lipid & Moisture Lock",
+    body: "Bio-compatible plant sterols and skin-identical Sodium PCA work in harmony to reinforce the dermal lipid barrier, lock in hydration, and maintain all-day suppleness without heaviness.",
   },
   {
     title: "Organic Blueberry & Ginkgo Biloba",
