@@ -1058,6 +1058,10 @@ export const buudyPeptideSerum: Product = {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-texture-on-hand-editorial-uk.webp",
       alt: "Silky botanical peptide emulsion texture swatch of Buudy Peptide Serum on hand UK",
     },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
+      alt: "Model hands performing two-hand precision dispensing pump ritual with Buudy Peptide Serum UK",
+    },
   ],
   gifts: [],
   specs: [

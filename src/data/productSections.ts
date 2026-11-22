@@ -468,7 +468,7 @@ export const serumTransformations: Transformation[] = [
 export const peptideTransformations: Transformation[] = [
   {
     id: "peptide-result-01",
-    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01-v2.webp",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01-v3.webp",
     concern: "Dynamic Expression Line Smoothing",
     title: "Expression lines visibly relaxed and smoothed",
     quote:
@@ -484,7 +484,7 @@ export const peptideTransformations: Transformation[] = [
   },
   {
     id: "peptide-result-02",
-    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02-v2.webp",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02-v3.webp",
     concern: "Skin Firmness & Wrinkle Smoothing",
     title: "Firmer dermal cushion and tightened temple area",
     quote:

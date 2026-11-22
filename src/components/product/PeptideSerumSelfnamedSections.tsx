@@ -242,25 +242,25 @@ function CuratedForSection() {
       title: "Estheticians",
       subtitle: "Daily Anti-Ageing Support",
       desc: "Retail as a daily targeted anti-ageing concentrate clients use at home to maintain visible firmness and bounce between clinic treatments.",
-      img: "/images/products/buudy-peptide-serum/selfnamed/curated-estheticians.jpg",
+      img: "/images/products/buudy-peptide-serum/buudy-peptide-serum-neck-collarbone-beauty-glow-uk.webp",
     },
     {
       title: "Cosmetologists",
       subtitle: "Visible Smoothing & Firming",
       desc: "Recommend to clients seeking targeted collagen reinforcement and visible line smoothing from a clinical-grade peptide concentrate.",
-      img: "/images/products/buudy-peptide-serum/selfnamed/curated-cosmetologists.jpg",
+      img: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
     },
     {
       title: "Makeup Artists",
       subtitle: "Skin Prep & Smooth Canvas",
       desc: "A smoothing, firming concentrate that preps mature skin before cosmetics application, creating a seamless canvas with zero pilling.",
-      img: "/images/products/buudy-peptide-serum/selfnamed/curated-makeup-artists.jpg",
+      img: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
     },
     {
       title: "Bridal MUAs",
       subtitle: "Pre-Wedding Firming Ritual",
       desc: "A pre-wedding firming and smoothing ritual for brides building plumper-looking, radiant skin and supple bounce at home.",
-      img: "/images/products/buudy-peptide-serum/selfnamed/curated-bridal-muas.jpg",
+      img: "/images/products/buudy-peptide-serum/buudy-peptide-serum-texture-on-hand-editorial-uk.webp",
     },
   ];
 
