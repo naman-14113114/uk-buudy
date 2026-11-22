@@ -224,8 +224,8 @@ function ProductFeaturesSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/selfnamed/features-mood.jpg"
-                alt="The Ultimate Renewal Collection Box features banner"
+                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp"
+                alt="The Ultimate Renewal Collection Box held in hand portrait UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -339,7 +339,7 @@ function CuratedForSection() {
       title: "Luxury Gifting",
       subtitle: "Gift-Ready Presentation",
       desc: "An exquisitely packaged collection box for birthdays, seasonal celebrations, and high-impact self-care renewal routines.",
-      img: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-inside-packaging-uk.webp",
+      img: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp",
     },
   ];
 
@@ -403,8 +403,8 @@ function ProductFormulaSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-textures-comparison-uk.webp"
-                alt="The Ultimate Renewal Collection Box three texture comparison"
+                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-plum-sleeve-detail-editorial-uk.webp"
+                alt="The Ultimate Renewal Collection Box formula and packaging detail UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -643,8 +643,8 @@ function RenewalPackagingSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/selfnamed/packaging-box.jpg"
-                alt="The Ultimate Renewal Collection Box packaging"
+                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp"
+                alt="The Ultimate Renewal Collection Box luxury gifting presentation box set UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"

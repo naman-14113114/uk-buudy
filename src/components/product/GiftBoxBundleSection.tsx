@@ -150,8 +150,8 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
           <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-weekly-skincare-rhythm-guide-uk.webp"
-                alt="Weekly skincare rhythm guide: alternating weekly AHA exfoliation with daily LED priming and peptide collagen-locking"
+                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-step-skincare-in-use-uk.webp"
+                alt="Complete 3-step skincare ritual in use with The Ultimate Renewal Collection Box UK"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center"
@@ -168,8 +168,8 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
           <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-textures-comparison-uk.webp"
-                alt="Three textures comparison: clear optical hydrogel, silky firming serum, and clarifying lactic acid peeling fluid"
+                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp"
+                alt="Full-size 3 x 30ml luxury gifting presentation box set with bespoke deep plum sleeve carton UK"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center"
