@@ -24,6 +24,30 @@ export function SerumClinicalResults({
   const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
 
   const stats = useMemo(() => {
+    if (isRenewalBox) {
+      return [
+        {
+          target: 97,
+          label: "Visible Cellular Renewal",
+          desc: "Noticeable improvement in skin texture, radiance, and surface smoothness within 21 days.",
+        },
+        {
+          target: 94,
+          label: "Deep Dermal Hydration",
+          desc: "Multi-depth hyaluronic acid and sodium PCA delivered sustained 72-hour moisture.",
+        },
+        {
+          target: 92,
+          label: "Smoothed Fine Lines & Bounce",
+          desc: "Hexapeptide-11 matrix softened dynamic expression lines and restored facial elasticity.",
+        },
+        {
+          target: 95,
+          label: "Enhanced Phototherapy Synergy",
+          desc: "Synergistic application with red and NIR light accelerated overall skin clarity.",
+        },
+      ];
+    }
     if (isAha) {
       return [
         {
@@ -118,7 +142,7 @@ export function SerumClinicalResults({
         desc: "Skin texture felt noticeably softer, balanced, and free from redness.",
       },
     ];
-  }, [isPrebiotic, isPeptide, isAha]);
+  }, [isPrebiotic, isPeptide, isAha, isRenewalBox]);
 
   const targets = useMemo(() => stats.map((s) => s.target), [stats]);
 

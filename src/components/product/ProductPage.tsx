@@ -4,6 +4,7 @@ import {
   peptideTransformations,
   prebioticTransformations,
   cleanserTransformations,
+  renewalCollectionTransformations,
 } from "@/data/productSections";
 import { SerumClinicalResults, SerumHowToUse } from "./SerumClinicalSections";
 import { CleanserClinicalResults, CleanserHowToUse } from "./CleanserClinicalSections";
@@ -36,6 +37,8 @@ import {
   RelatedProductsSection,
 } from "./HyaluronicSerumSelfnamedSections";
 import { PeptideSerumSelfnamedSections } from "./PeptideSerumSelfnamedSections";
+import { AhaPeelingSelfnamedSections } from "./AhaPeelingSelfnamedSections";
+import { RenewalBoxSelfnamedSections } from "./RenewalBoxSelfnamedSections";
 
 export function ProductPage({
   product,
@@ -80,6 +83,10 @@ export function ProductPage({
     product.id.includes("aha") ||
     product.slug.includes("aha");
 
+  const isRenewalBox =
+    product.id === "the-ultimate-renewal-collection-box" ||
+    product.slug === "the-ultimate-renewal-collection-box";
+
   const isSerumOrGift =
     product.template === "serum" ||
     product.template === "cleanser";
@@ -106,6 +113,17 @@ export function ProductPage({
       <GiftBoxBundleSection productSlug={product.slug} />
       {/* <FeatureGrid /> */}
       {/* 1. Verified Clinical Before & After Grid - Placed ABOVE both the Percentage Grid and How-To-Use */}
+      {product.template === "serum" && isRenewalBox && (
+        <DeferredBeforeAfterGrid
+          items={renewalCollectionTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">total skin renewal</em>.
+            </>
+          }
+          description="Verified customer transformations after incorporating The Ultimate Renewal Collection Box into their weekly resurfacing, daily hydration, and firming ritual."
+        />
+      )}
       {product.template === "serum" && isPrebiotic && (
         <DeferredBeforeAfterGrid
           items={prebioticTransformations}
@@ -128,7 +146,7 @@ export function ProductPage({
           description={`Verified customer transformations after incorporating ${product.name} into their daily firming and light therapy ritual.`}
         />
       )}
-      {product.template === "serum" && !isPeptide && !isPrebiotic && (
+      {product.template === "serum" && !isPeptide && !isPrebiotic && !isAha && !isRenewalBox && (
         <DeferredBeforeAfterGrid
           items={serumTransformations}
           title={
@@ -151,9 +169,11 @@ export function ProductPage({
         />
       )}
 
-      {/* 2. Selfnamed Rich Clinical Sections for Hyaluronic & Peptide Serums */}
+      {/* 2. Selfnamed Rich Clinical Sections for Hyaluronic, Peptide, AHA Serums & Renewal Box */}
       {isHyaluronic && <HyaluronicSerumSelfnamedSections routineFirstGrid={hyaluronicEditorial} />}
       {isPeptide && <PeptideSerumSelfnamedSections routineFirstGrid={isEditorial} />}
+      {isAha && <AhaPeelingSelfnamedSections routineFirstGrid={isEditorial} />}
+      {isRenewalBox && <RenewalBoxSelfnamedSections routineFirstGrid={isEditorial} />}
 
       {/* 3. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
       {product.template === "serum" && (
@@ -166,7 +186,7 @@ export function ProductPage({
       {product.template === "mask" && <DeferredBeforeAfterGrid />}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
-      {product.template === "serum" && !isHyaluronic && !isPeptide && (
+      {product.template === "serum" && !isHyaluronic && !isPeptide && !isAha && !isRenewalBox && (
         <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
       {product.template === "cleanser" && <CleanserHowToUse />}

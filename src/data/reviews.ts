@@ -5,6 +5,8 @@ import serumReviews from "./reviews/buudy-hyaluronic-serum-reviews.json";
 import peptideReviews from "./reviews/buudy-peptide-serum-reviews.json";
 import faceWashReviews from "./reviews/buudy-face-wash-reviews.json";
 import prebioticReviews from "./reviews/buudy-prebiotics-serum-reviews.json";
+import ahaReviews from "./reviews/buudy-aha-peeling-concentrate-reviews.json";
+import renewalReviews from "./reviews/buudy-renewal-collection-box-reviews.json";
 import { market } from "@/lib/market";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/config";
@@ -72,6 +74,12 @@ const reviewCollections = {
   "prebiotics-jelly-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-noni-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
   "noni-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-aha-peeling-concentrate": ahaReviews.map(normalizeStaticReview) as ProductReview[],
+  "aha-peeling-concentrate": ahaReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-aha-peel": ahaReviews.map(normalizeStaticReview) as ProductReview[],
+  "aha-peel": ahaReviews.map(normalizeStaticReview) as ProductReview[],
+  "the-ultimate-renewal-collection-box": renewalReviews.map(normalizeStaticReview) as ProductReview[],
+  "ultimate-renewal-collection-box": renewalReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;
