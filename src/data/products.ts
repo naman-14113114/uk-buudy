@@ -1023,8 +1023,16 @@ export const buudyPeptideSerum: Product = {
       alt: "Buudy Peptide Serum 30ml bottle and luxury folding carton displayed on plum campaign plinths UK",
     },
     {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-neck-collarbone-beauty-glow-uk.webp",
+      alt: "Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care UK",
+    },
+    {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-verified-formula-facts-ecocert-uk.webp",
       alt: "Verified formula facts: ECOCERT COSMOS Natural certified, 1% Hexapeptide-11, vegan and cruelty-free UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
+      alt: "Model hand with signature plum manicure holding Buudy Peptide Serum bottle UK",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-key-ingredients-texture-macro-uk.webp",
@@ -1045,14 +1053,6 @@ export const buudyPeptideSerum: Product = {
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-targeted-daily-care-anti-ageing-uk.webp",
       alt: "Targeted daily care guide: facial tension relaxation and dermal collagen matrix reinforcement UK",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
-      alt: "Model hand with signature plum manicure holding Buudy Peptide Serum bottle UK",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-neck-collarbone-beauty-glow-uk.webp",
-      alt: "Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care UK",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-texture-on-hand-editorial-uk.webp",
