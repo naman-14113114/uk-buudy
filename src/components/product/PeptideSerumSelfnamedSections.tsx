@@ -10,8 +10,6 @@ import {
   ShieldCheck,
   Sparkles,
   Wind,
-  Leaf,
-  Recycle,
 } from "lucide-react";
 import { HyaluronicRoutineSteps } from "./HyaluronicRoutineSteps";
 
@@ -106,8 +104,8 @@ function ProductFeaturesSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-peptide-serum/selfnamed/features.jpg"
-                alt="Buudy Peptide Anti-Aging Serum clinical features banner"
+                src="/images/products/buudy-peptide-serum/04-bottle-angle-plum.webp"
+                alt="Buudy Peptide Anti-Aging Serum clinical features bottle and carton display"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -285,8 +283,8 @@ function ProductFormulaSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-peptide-serum/selfnamed/formula.jpg"
-                alt="Buudy Peptide Anti-Aging Serum formula texture and viscosity"
+                src="/images/products/buudy-peptide-serum/03-serum-on-hand-editorial.webp"
+                alt="Buudy Peptide Anti-Aging Serum silky formulation texture on hand"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -383,8 +381,16 @@ function ProductFormulaSection() {
   );
 }
 
-// 5. Key Ingredients Deep Dive (from Selfnamed Peptide Serum Page)
+// 5. Key Ingredients Deep Dive (with Exact Card Sizing as Hyaluronic + Left/Right Arrow Navigation + Touch/Trackpad Scrolling)
 function KeyIngredientsSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const scrollAmount = direction === "left" ? -280 : 280;
+    scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
   const ingredients = [
     {
       name: "Hexapeptide-11",
@@ -433,26 +439,52 @@ function KeyIngredientsSection() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
       <div className="buudy-wrap">
-        <div className="max-w-2xl text-center mx-auto mb-12">
-          <p className="buudy-mono text-[var(--gold)] uppercase tracking-[0.2em] text-xs font-semibold">
-            Pure Active Chemistry
-          </p>
-          <h2 className="buudy-display mt-2 text-3xl sm:text-4xl leading-tight text-[var(--plum)]">
-            Key <em className="buudy-italic text-[var(--gold)]">bioactive ingredients</em>.
-          </h2>
-          <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
-            Formulated according to strict European ECOCERT COSMOS Natural standards. Zero synthetic dyes, parabens, phthalates, or microplastics.
-          </p>
+        {/* Header with Navigation Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <p className="buudy-mono text-[var(--gold)] uppercase tracking-[0.2em] text-xs font-semibold">
+              Pure Active Chemistry
+            </p>
+            <h2 className="buudy-display mt-2 text-3xl sm:text-4xl leading-tight text-[var(--plum)]">
+              Key <em className="buudy-italic text-[var(--gold)]">bioactive ingredients</em>.
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-[var(--muted)] max-w-2xl leading-relaxed">
+              Formulated according to strict European ECOCERT COSMOS Natural standards. Zero synthetic dyes, parabens, phthalates, or microplastics.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 self-end md:self-auto shrink-0">
+            <button
+              type="button"
+              onClick={() => scroll("left")}
+              aria-label="Previous ingredient"
+              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll("right")}
+              aria-label="Next ingredient"
+              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-5 py-4 pb-6">
+        {/* Horizontal Scrollable Reel with Touch, Trackpad & Arrow Navigation */}
+        <div
+          ref={scrollRef}
+          className="flex gap-5 sm:gap-6 overflow-x-auto pt-2 pb-6 md:pb-8 scrollbar-none snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0 touch-pan-x"
+        >
           {ingredients.map((ing) => (
             <div
               key={ing.name}
               data-story-card
-              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] p-5 pb-7 text-center shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300"
+              className="flex-none w-[220px] sm:w-[240px] flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] p-5 pb-7 text-center shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300 snap-start"
             >
-              <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-[var(--cream)] border border-[rgba(46,16,47,0.08)] mb-4">
+              <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-[var(--cream)] border border-[rgba(46,16,47,0.08)] mb-4 shrink-0">
                 <Image
                   src={ing.img}
                   alt={ing.name}
@@ -467,7 +499,7 @@ function KeyIngredientsSection() {
               <span className="buudy-mono text-[11px] text-[var(--gold)] font-bold uppercase tracking-wider mt-1 mb-2">
                 {ing.role}
               </span>
-              <p className="text-xs leading-relaxed text-[var(--muted)]">
+              <p className="text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
                 {ing.desc}
               </p>
             </div>
@@ -478,75 +510,7 @@ function KeyIngredientsSection() {
   );
 }
 
-// 6. Packaging & Circular Sustainability (from Selfnamed Peptide Serum Page)
-export function PeptidePackagingSection() {
-  return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20">
-      <div className="buudy-wrap">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Column: Sustainable Packaging Imagery */}
-          <div className="lg:col-span-6">
-            <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
-              <Image
-                src="/images/products/buudy-peptide-serum/selfnamed/packaging-bottle-box.jpg"
-                alt="Buudy Peptide Anti-Aging Serum sustainable glass packaging and recyclable specifications"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Right Column: Sustainable Specifications */}
-          <div className="lg:col-span-6 flex flex-col gap-6">
-            <div>
-              <p className="buudy-mono text-[var(--gold)] uppercase tracking-[0.2em] text-xs font-semibold">
-                Sustainable Luxury
-              </p>
-              <h2 className="buudy-display mt-2 text-3xl sm:text-4xl leading-tight text-[var(--plum)]">
-                Mindful <em className="buudy-italic text-[var(--gold)]">packaging</em>.
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              <div data-story-card className="p-5 rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] shadow-xs">
-                <h3 className="buudy-display text-base sm:text-lg font-semibold text-[var(--plum)] flex items-center gap-2">
-                  <Recycle size={18} className="text-[var(--gold)]" />
-                  Glass Treatment Bottle
-                </h3>
-                <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed mt-2">
-                  Heavy, sturdy cosmetic glass — durable, protective of delicate peptide bio-actives, and infinitely recyclable without loss of quality.
-                </p>
-              </div>
-
-              <div data-story-card className="p-5 rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] shadow-xs">
-                <h3 className="buudy-display text-base sm:text-lg font-semibold text-[var(--plum)] flex items-center gap-2">
-                  <ShieldCheck size={18} className="text-[var(--gold)]" />
-                  PP #5 Precision Dispensing Pump
-                </h3>
-                <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed mt-2">
-                  Precision dispensing mechanism crafted from Polypropylene (PP #5) — durable, lightweight, hygienic, and fully recyclable.
-                </p>
-              </div>
-
-              <div data-story-card className="p-5 rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] shadow-xs">
-                <h3 className="buudy-display text-base sm:text-lg font-semibold text-[var(--plum)] flex items-center gap-2">
-                  <Leaf size={18} className="text-[var(--gold)]" />
-                  Circular Recycling Guidelines
-                </h3>
-                <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed mt-2">
-                  The bottle and pump are different materials, so separate them before recycling. Rinse the glass bottle and recycle with glass; recycle the PP #5 pump according to local recycling requirements.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// 7. How To Use Section (from Selfnamed Peptide Serum Page)
+// 6. How To Use Section (from Selfnamed Peptide Serum Page)
 function PeptideHowToUseSection({ editorial = false }: { editorial?: boolean }) {
   const steps = [
     {
@@ -581,8 +545,8 @@ function PeptideHowToUseSection({ editorial = false }: { editorial?: boolean }) 
         <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3]">
             <Image
-              src="/images/products/buudy-peptide-serum/selfnamed/how-to-use.jpg"
-              alt="Model applying Buudy Peptide Anti-Aging Serum gently to face"
+              src="/images/products/buudy-peptide-serum/02-neck-collarbone-beauty.webp"
+              alt="Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care"
               fill
               sizes="(min-width: 1260px) 560px, (min-width: 768px) 46vw, calc(100vw - 32px)"
               className="object-cover"
@@ -675,7 +639,6 @@ export function PeptideSerumSelfnamedSections({ routineFirstGrid = false }: { ro
       <CuratedForSection />
       <ProductFormulaSection />
       <KeyIngredientsSection />
-      <PeptidePackagingSection />
       {!routineFirstGrid && <PeptideHowToUseSection />}
     </>
   );
