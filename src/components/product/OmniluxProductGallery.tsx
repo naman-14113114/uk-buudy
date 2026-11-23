@@ -1348,7 +1348,7 @@ export function OmniluxProductGallery({
               )}
               {/* 1. GALLERY IMAGE / VIDEO DISPLAY */}
               {currentItem.type === "gallery" && (
-                <div className="omni-main-img-wrap" key={isMask ? currentItem.src : undefined}>
+                <div className="omni-main-img-wrap" key={currentItem.src}>
                   {currentItem.src.endsWith(".mp4") || currentItem.src.endsWith(".webm") ? (
                     <GalleryVideo
                       src={currentItem.src}
@@ -1378,7 +1378,7 @@ export function OmniluxProductGallery({
 
               {/* 2. BEFORE & AFTER DISPLAY (With 3 Bottom Treatment Pills) */}
               {currentItem.type === "before-after" && (
-                <div className="omni-main-img-wrap" key={isMask ? currentItem.src : undefined}>
+                <div className="omni-main-img-wrap" key={currentItem.src}>
                   <Image
                     src={currentItem.src}
                     alt={currentItem.alt}
@@ -1576,7 +1576,7 @@ export function OmniluxProductGallery({
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
                 </button>
 
-                <div className="buudyLED-23435t23-lightbox_stage" key={isMask ? currentItem.src : undefined}>
+                <div className="buudyLED-23435t23-lightbox_stage" key={currentItem.src}>
                   {currentItem.type === "video" || currentItem.src.endsWith(".mp4") || currentItem.src.endsWith(".webm") ? (
                     <video
                       className="buudyLED-23435t23-lightbox_img"

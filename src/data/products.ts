@@ -1027,7 +1027,7 @@ export const buudyPeptideSerum: Product = {
       alt: "Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-verified-formula-facts-ecocert-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-natural-origin-formula-composition-uk.webp",
       alt: "Natural-origin formula composition infographic: 99% from natural origin, 20% organic, 5.15–5.25 formula pH range UK",
     },
     {
