@@ -1001,11 +1001,11 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "postcode": "CW3 0JB",
     "address": "Green Court, Hall Lane, HANKELOW  CREWE  CHESHIRE",
     "city": "HANKELOW  CREWE  CHESHIRE",
-    "status": 1,
-    "statusStr": "waitPayment",
-    "carrier": "Royal Mail Tracked",
-    "trackingNumber": "YT2632100715210035",
-    "initialTracking": null,
+    "status": 4,
+    "statusStr": "pendingReceipt",
+    "carrier": "Royal Mail Tracked 48",
+    "trackingNumber": "QP424242767GB",
+    "initialTracking": "YT2632100715210035",
     "crtTime": "2026-11-16 18:19:09"
   },
   {
@@ -1929,7 +1929,7 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
     }
 
     const latestEvent = liveEvents[0]; // liveEvents is sorted newest first by buildCarrierEvents
-    const isDelivered = latestEvent.stage === 'DELIVERED' || /delivered/i.test(latestEvent.title);
+    const isDelivered = latestEvent.stage === 'DELIVERED' || (/delivered/i.test(latestEvent.title) && !/local carrier|courier partner|facility/i.test(latestEvent.title));
     const isOutForDelivery = latestEvent.stage === 'OUT_FOR_DELIVERY' || /out for delivery|with delivery courier|postal carrier/i.test(latestEvent.title);
 
     if (isDelivered) {
