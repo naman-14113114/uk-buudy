@@ -1028,7 +1028,7 @@ export const buudyPeptideSerum: Product = {
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-verified-formula-facts-ecocert-uk.webp",
-      alt: "Verified formula facts: ECOCERT COSMOS Natural certified, 1% Hexapeptide-11, vegan and cruelty-free UK",
+      alt: "Natural-origin formula composition infographic: 99% from natural origin, 20% organic, 5.15–5.25 formula pH range UK",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
