@@ -1018,11 +1018,11 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "postcode": "WR11 3JR",
     "address": "5 Lambourne Close, Evesham",
     "city": "Evesham",
-    "status": 2,
-    "statusStr": "purchase",
+    "status": 4,
+    "statusStr": "pendingReceipt",
     "carrier": "EVRI",
     "trackingNumber": "H00RVA0573472525",
-    "initialTracking": null,
+    "initialTracking": "YT2632100701576415",
     "crtTime": "2026-11-15 22:42:01"
   },
   {
