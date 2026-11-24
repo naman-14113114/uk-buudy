@@ -1035,24 +1035,24 @@ export const buudyPeptideSerum: Product = {
       alt: "Model hand with signature plum manicure holding Buudy Peptide Serum bottle UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-key-ingredients-texture-macro-uk.webp",
-      alt: "Key ingredients macro texture: Hexapeptide-11, Dipalmitoyl Hydroxyproline, and botanical phytosterols UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-inside-formula-infographic-uk.webp",
+      alt: "Inside the formula infographic: Hexapeptide-11 peptide-powered care, Hyaluronic acid hydration support, and soothing Aloe juice base UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredient-spotlight-botanicals-uk.webp",
-      alt: "Ingredient spotlight on bio-fermented peptides, Ginkgo Biloba, and Blueberry antioxidant botanicals UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredients-with-purpose-infographic-uk.webp",
+      alt: "Ingredients with purpose infographic: Hexapeptide-11 for smoother appearance, Ginkgo extract antioxidant support, and Hyaluronic acid for plumper look UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plump-smooth-collagen-benefits-uk.webp",
-      alt: "Clinical anti-ageing benefits: visible wrinkle smoothing, skin elasticity, and accelerated collagen synthesis UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-smooth-plump-glow-infographic-uk.webp",
+      alt: "Smooth, Plump, Glow infographic: plumper-looking skin, smoother appearance, and improved skin elasticity UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-types-daily-ritual-guide-uk.webp",
-      alt: "Skin types and daily application ritual guide for mature, dry, and combination skin barriers UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-ritual-guide-infographic-uk.webp",
+      alt: "Made for your skin ritual infographic: targets dehydration and visible fine lines, suitable for normal and dry skin AM/PM UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-targeted-daily-care-anti-ageing-uk.webp",
-      alt: "Targeted daily care guide: facial tension relaxation and dermal collagen matrix reinforcement UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-daily-care-callout-infographic-uk.webp",
+      alt: "Daily care callout infographic: peptides and hyaluronic acid for comforting hydration and a smoother-looking complexion UK",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-texture-on-hand-editorial-uk.webp",
