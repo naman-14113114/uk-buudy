@@ -88,13 +88,11 @@ function ProductInDetailsCarousel() {
   };
 
   const detailCards = [
-    { num: "01", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-01.jpg", alt: "The Ultimate Renewal Collection Box 3-step trilogy set contents" },
-    { num: "02", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-02.jpg", alt: "10% Plant Lactic Acid overnight cellular resurfacing" },
-    { num: "03", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-03.jpg", alt: "Multi-Molecular Hyaluronic Acid optical hydrogel & LED priming" },
-    { num: "04", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-04.jpg", alt: "Bio-Fermented Hexapeptide-11 firming and collagen synthesis" },
-    { num: "05", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-05.jpg", alt: "Organic Botanicals: White Tea, Sage and Aloe Barbadensis" },
-    { num: "06", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-06.jpg", alt: "Strict ECOCERT COSMOS Natural and Vegan certification" },
-    { num: "07", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-07.jpg", alt: "Synergistic clinic-grade skincare protocol for radiance and bounce" },
+    { num: "01", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-03.jpg", alt: "Multi-Molecular Hyaluronic Acid optical hydrogel & LED priming" },
+    { num: "02", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-04.jpg", alt: "Bio-Fermented Hexapeptide-11 firming and collagen synthesis" },
+    { num: "03", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-05.jpg", alt: "Organic Botanicals: White Tea, Sage and Aloe Barbadensis" },
+    { num: "04", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-06.jpg", alt: "Strict ECOCERT COSMOS Natural and Vegan certification" },
+    { num: "05", src: "/images/products/the-ultimate-renewal-collection-box/selfnamed/detail-07.jpg", alt: "Synergistic clinic-grade skincare protocol for radiance and bounce" },
   ];
 
   return (
@@ -758,7 +756,6 @@ export function RenewalBoxSelfnamedSections({ routineFirstGrid = false }: { rout
       <CuratedForSection />
       <ProductFormulaSection />
       <KeyIngredientsSection />
-      <RenewalPackagingSection />
       {!routineFirstGrid && <RenewalHowToUseSection />}
     </>
   );

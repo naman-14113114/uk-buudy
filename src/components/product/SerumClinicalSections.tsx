@@ -217,7 +217,7 @@ export function SerumClinicalResults({
     : isEyeCream
     ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp"
     : isRenewalBox
-    ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-plum-sleeve-detail-editorial-uk.webp"
+    ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-gifting-presentation-uk.webp"
     : isAha
     ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp"
     : isPrebiotic
@@ -231,7 +231,7 @@ export function SerumClinicalResults({
     : isEyeCream
     ? "Model eye area portrait showcasing visibly smoothed periorbital contours and diminished crow's feet after Buudy Peptide Eye Cream ritual UK"
     : isRenewalBox
-    ? "The Ultimate Renewal Collection Box deep plum carton sleeve architectural detail and gold foil typography UK"
+    ? "The Ultimate Renewal Collection Box full-size 3-step luxury gifting presentation UK"
     : isAha
     ? "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling Concentrate treatment UK"
     : isPrebiotic
