@@ -60,6 +60,26 @@ function RenewalRoutineSteps({ children }: { children: ReactNode }) {
 // 1. Product In Details (7-Card Carousel from Selfnamed)
 function ProductInDetailsCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScroll, setCanScroll] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const checkScrollable = () => {
+      setCanScroll(el.scrollWidth > el.clientWidth + 2);
+    };
+
+    checkScrollable();
+    const ro = new ResizeObserver(() => checkScrollable());
+    ro.observe(el);
+    window.addEventListener("resize", checkScrollable);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", checkScrollable);
+    };
+  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -91,24 +111,26 @@ function ProductInDetailsCarousel() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 self-end md:self-auto">
-            <button
-              type="button"
-              onClick={() => scroll("left")}
-              aria-label="Previous card"
-              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll("right")}
-              aria-label="Next card"
-              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+          {canScroll && (
+            <div className="flex items-center gap-2 self-end md:self-auto">
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                aria-label="Previous card"
+                className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                aria-label="Next card"
+                className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Carousel Reel */}
@@ -521,6 +543,26 @@ function ProductFormulaSection() {
 // 6. Key Ingredients Deep Dive
 function KeyIngredientsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScroll, setCanScroll] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const checkScrollable = () => {
+      setCanScroll(el.scrollWidth > el.clientWidth + 2);
+    };
+
+    checkScrollable();
+    const ro = new ResizeObserver(() => checkScrollable());
+    ro.observe(el);
+    window.addEventListener("resize", checkScrollable);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", checkScrollable);
+    };
+  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -577,24 +619,26 @@ function KeyIngredientsSection() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-end md:self-auto shrink-0">
-            <button
-              type="button"
-              onClick={() => scroll("left")}
-              aria-label="Previous ingredient"
-              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll("right")}
-              aria-label="Next card"
-              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+          {canScroll && (
+            <div className="flex items-center gap-2 self-end md:self-auto shrink-0">
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                aria-label="Previous ingredient"
+                className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                aria-label="Next card"
+                className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          )}
         </div>
 
         <div
