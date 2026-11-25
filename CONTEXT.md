@@ -1440,10 +1440,10 @@ Evidence files:
   - How-To-Use daily ritual section image updated to `04-bottle-three-quarter-plum.webp` (`buudy-hyaluronic-acid-serum-bottle-three-quarter-plum-backdrop-uk.webp`).
 - 5. Gallery Images: Replaced previous gallery images with the exact 9 images in the exact order requested from `Hyaluronic_compressed_images`:
   1. `06-cream-plinth-pair.webp` -> `buudy-hyaluronic-acid-serum-cream-plinth-pair-display-uk.webp`
-  2. `07-key-ingredients-gel-macro.webp` -> `buudy-hyaluronic-acid-serum-key-ingredients-hydrogel-macro-uk.webp`
-  3. `01-skin-and-daily-ritual.webp` -> `buudy-hyaluronic-acid-serum-skin-type-daily-ritual-guide-uk.webp`
-  4. `06-lightweight-hydration-benefits.webp` -> `buudy-hyaluronic-acid-serum-lightweight-hydration-benefits-uk.webp`
-  5. `03-hydration-held-in.webp` -> `buudy-hyaluronic-acid-serum-moisture-barrier-hydration-held-in-uk.webp`
+  2. `Crystal-clear serum swatch on white-2.webp` -> `buudy-hyaluronic-acid-serum-key-ingredients-pure-white-uk.webp`
+  3. `Clear serum bottle on pure white-1.webp` -> `buudy-hyaluronic-acid-serum-skin-type-ritual-pure-white-uk.webp`
+  4. `Water-Clear Serum Swatch on White-3.webp` -> `buudy-hyaluronic-acid-serum-lightweight-hydration-pure-white-uk.webp`
+  5. `Crystal-clear serum bottle on white-4.webp` -> `buudy-hyaluronic-acid-serum-moisture-barrier-pure-white-uk.webp`
   6. `09-diagonal-bottle-editorial.webp` -> `buudy-hyaluronic-acid-serum-diagonal-bottle-editorial-uk.webp`
   7. `11-plum-manicure-hand-hero.webp` -> `buudy-hyaluronic-acid-serum-plum-manicure-hand-hero-uk.webp`
   8. `10-gel-on-hand-editorial.webp` -> `buudy-hyaluronic-acid-serum-gel-texture-on-hand-editorial-uk.webp`

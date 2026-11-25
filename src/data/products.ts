@@ -1189,20 +1189,20 @@ export const buudyHyaluronicSerum: Product = {
       alt: "Buudy Hyaluronic Serum bottle and luxury folding carton displayed on cream architectural plinths UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-hydrogel-macro-uk.webp",
-      alt: "Buudy Hyaluronic Serum key ingredients macro hydrogel droplet swatch with multi-molecular hyaluronic acid UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-pure-white-uk.webp",
+      alt: "Key ingredients infographic: multi-molecular Hyaluronic Acid surface hydration, Sodium PCA moisture attractor, and soothing Aloe leaf juice UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-daily-ritual-guide-uk.webp",
-      alt: "Buudy Hyaluronic Serum skin type compatibility and AM PM daily application ritual guide UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-ritual-pure-white-uk.webp",
+      alt: "Who is it for infographic: ideal for normal and mature skin tackling dehydration and tightness, AM and PM ritual guide UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-benefits-uk.webp",
-      alt: "A lighter way to hydrate: Buudy Hyaluronic Serum lightweight hydrogel benefits and dewy finish UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-pure-white-uk.webp",
+      alt: "A lighter way to hydrate infographic: moisture-locking care for refreshed-feeling skin with a soft, plump-looking finish UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-hydration-held-in-uk.webp",
-      alt: "Hydration held in: Buudy Hyaluronic Serum moisture barrier support and natural plumper looking finish UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-pure-white-uk.webp",
+      alt: "Hydration held in infographic: moisture support helps reduce moisture loss and supports natural plumpness and elasticity UK",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-diagonal-bottle-editorial-uk.webp",
@@ -2205,11 +2205,11 @@ export const buudyAhaPeelingConcentrate: Product = {
   customerCount: "9,000+",
   promoCode: "",
   promoLabel: "SAVE 17%",
-  cartImage: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-ivory-plinth-duo-uk.webp",
+  cartImage: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp",
   gallery: [
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-ivory-plinth-duo-uk.webp",
-      alt: "Buudy AHA Peeling Concentrate bottle and luxury carton displayed on ivory architectural plinths UK",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate bottle and luxury carton displayed on deep plum campaign plinths UK",
     },
     {
       src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-key-ingredients-botanicals-uk.webp",
@@ -2240,8 +2240,8 @@ export const buudyAhaPeelingConcentrate: Product = {
       alt: "Buudy AHA Peeling Concentrate resting diagonally on natural mineral stone studio still life UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp",
-      alt: "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling treatment UK",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-two-hands-open-dropper-ritual-uk.webp",
+      alt: "Two hands holding open precision pipette dropper with Buudy AHA Peeling Concentrate UK",
     },
     {
       src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-closed-bottle-swatch-hand-uk.webp",

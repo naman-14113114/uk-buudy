@@ -146,8 +146,8 @@ function ProductFeaturesSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-aha-peeling-concentrate/selfnamed/features.jpg"
-                alt="Buudy AHA Peeling Concentrate 30ml clinical features and bottle display"
+                src="/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-bottle-three-quarter-plum-uk.webp"
+                alt="Buudy AHA Peeling Concentrate 30ml clinical three-quarter bottle display against plum backdrop UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -325,8 +325,8 @@ function ProductFormulaSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-aha-peeling-concentrate/selfnamed/formula.jpg"
-                alt="Buudy AHA Peeling Concentrate lightweight fluid texture formula"
+                src="/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-closed-bottle-swatch-hand-uk.webp"
+                alt="Buudy AHA Peeling Concentrate bottle and lightweight resurfacing fluid swatch applied on hand UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -569,8 +569,8 @@ function AhaHowToUseSection({ editorial = false }: { editorial?: boolean }) {
         <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3]">
             <Image
-              src="/images/products/buudy-aha-peeling-concentrate/selfnamed/how-to-use.jpg"
-              alt="Model facial application demonstrating gentle evening AHA Peeling Concentrate ritual"
+              src="/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp"
+              alt="Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling treatment UK"
               fill
               sizes="(min-width: 1260px) 560px, (min-width: 768px) 46vw, calc(100vw - 32px)"
               className="object-cover"
