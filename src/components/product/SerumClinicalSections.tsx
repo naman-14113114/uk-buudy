@@ -219,7 +219,7 @@ export function SerumClinicalResults({
     : isRenewalBox
     ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-gifting-presentation-uk.webp"
     : isAha
-    ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp"
+    ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-model-collarbone-4k.webp"
     : isPrebiotic
     ? "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp"
     : isPeptide

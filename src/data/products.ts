@@ -2205,47 +2205,51 @@ export const buudyAhaPeelingConcentrate: Product = {
   customerCount: "9,000+",
   promoCode: "",
   promoLabel: "SAVE 17%",
-  cartImage: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp",
+  cartImage: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-bottle-and-flush-lid-carton-4k.webp",
   gallery: [
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-bottle-and-flush-lid-carton-4k.webp",
       alt: "Buudy AHA Peeling Concentrate bottle and luxury carton displayed on deep plum campaign plinths UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-key-ingredients-botanicals-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-key-ingredients-and-bottle-4k.webp",
       alt: "Buudy AHA Peeling Concentrate key botanical ingredients: 10% Lactic Acid, 1% Hyaluronic Acid, white tea and sage extracts UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-who-its-for-how-to-use-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-who-its-for-and-how-to-use-4k.webp",
       alt: "Who it is for and evening application ritual: ideal for dull skin, uneven texture, and congested pores UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-formula-in-numbers-ph-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-formula-in-numbers-4k.webp",
       alt: "Formula in numbers: 10% plant lactic acid, 1% HA, pH 4.0 to 4.2 for gentle overnight cell renewal UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-texture-ingredient-callouts-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-inside-the-formula-4k.webp",
       alt: "Buudy AHA Peeling Concentrate fluid texture swatch with key ingredient callouts for smooth skin UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-open-pipette-benefits-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-skin-benefits-with-pipette-4k.webp",
       alt: "Precision glass pipette dropper dispensing active lactic acid peel with overnight glow benefits UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-two-core-actives-breakdown-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-two-core-actives-4k.webp",
       alt: "Two core actives: 10% Lactic Acid cellular renewal paired with 1% Hyaluronic Acid moisture lock UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-diagonal-bottle-stone-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-diagonal-bottle-on-stone-4k.webp",
       alt: "Buudy AHA Peeling Concentrate resting diagonally on natural mineral stone studio still life UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-two-hands-open-dropper-ritual-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-two-hands-open-dropper-4k.webp",
       alt: "Two hands holding open precision pipette dropper with Buudy AHA Peeling Concentrate UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-closed-bottle-swatch-hand-uk.webp",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-closed-bottle-and-serum-on-hand-4k.webp",
       alt: "Buudy AHA Peeling Concentrate bottle and lightweight resurfacing fluid swatch applied on hand UK",
+    },
+    {
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-model-collarbone-4k.webp",
+      alt: "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling treatment UK",
     },
   ],
   gifts: [],
