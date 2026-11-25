@@ -610,8 +610,8 @@ function AhaHowToUseSection({ editorial = false }: { editorial?: boolean }) {
         className="buudy-section scroll-mt-24"
         id="how-to-use"
       >
-        <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3]">
+        <div className="buudy-wrap grid items-center md:items-stretch gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
+          <div className="relative aspect-square md:aspect-auto md:h-full md:order-last overflow-hidden rounded-2xl">
             <Image
               src="/images/products/buudy-aha-peeling-concentrate/buudy-aha-carton-three-quarter-4k.webp"
               alt="Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling treatment UK"
