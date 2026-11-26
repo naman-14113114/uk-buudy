@@ -167,7 +167,7 @@ function ProductFeaturesSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-peptide-serum/04-bottle-angle-plum.webp"
+                src="/images/products/buudy-peptide-serum/buudy-peptide-overhead-flatlay-4k.webp"
                 alt="Buudy Peptide Concentrate 30ml clinical features bottle and carton display"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -346,7 +346,7 @@ function ProductFormulaSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-peptide-serum/03-serum-on-hand-editorial.webp"
+                src="/images/products/buudy-peptide-serum/buudy-peptide-two-hand-pump-ritual-4k.webp"
                 alt="Buudy Peptide Concentrate silky formulation texture on hand"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -627,10 +627,10 @@ function PeptideHowToUseSection({ editorial = false }: { editorial?: boolean }) 
         className="buudy-section scroll-mt-24"
         id="how-to-use"
       >
-        <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3]">
+        <div className="buudy-wrap grid items-center md:items-stretch gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
+          <div className="relative aspect-square md:aspect-auto md:h-full md:order-last overflow-hidden rounded-2xl">
             <Image
-              src="/images/products/buudy-peptide-serum/02-neck-collarbone-beauty.webp"
+              src="/images/products/buudy-peptide-serum/buudy-peptide-neck-collarbone-4k.webp"
               alt="Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care"
               fill
               sizes="(min-width: 1260px) 560px, (min-width: 768px) 46vw, calc(100vw - 32px)"

@@ -1016,50 +1016,50 @@ export const buudyPeptideSerum: Product = {
   customerCount: "14,000+",
   promoCode: "",
   promoLabel: "SAVE 17%",
-  cartImage: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-campaign-pair-display-uk.webp",
+  cartImage: "/images/products/buudy-peptide-serum/buudy-peptide-architectural-plinth-4k.webp",
   gallery: [
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-campaign-pair-display-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-architectural-plinth-4k.webp",
       alt: "Buudy Peptide Serum 30ml bottle and luxury folding carton displayed on plum campaign plinths UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-neck-collarbone-beauty-glow-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-neck-collarbone-4k.webp",
       alt: "Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-natural-origin-formula-composition-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-natural-origin-formula-composition-4k.webp",
       alt: "Natural-origin formula composition infographic: 99% from natural origin, 20% organic, 5.15–5.25 formula pH range UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-plum-manicure-4k.webp",
       alt: "Model hand with signature plum manicure holding Buudy Peptide Serum bottle UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-inside-formula-infographic-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-infographic-pure-white-3-4k.webp",
       alt: "Inside the formula infographic: Hexapeptide-11 peptide-powered care, Hyaluronic acid hydration support, and soothing Aloe juice base UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredients-with-purpose-infographic-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-ingredients-infographic-4k.webp",
       alt: "Ingredients with purpose infographic: Hexapeptide-11 for smoother appearance, Ginkgo extract antioxidant support, and Hyaluronic acid for plumper look UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-smooth-plump-glow-infographic-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-product-infographic-pure-white-4-4k.webp",
       alt: "Smooth, Plump, Glow infographic: plumper-looking skin, smoother appearance, and improved skin elasticity UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-ritual-guide-infographic-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-product-infographic-pure-white-5-4k.webp",
       alt: "Made for your skin ritual infographic: targets dehydration and visible fine lines, suitable for normal and dry skin AM/PM UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-daily-care-callout-infographic-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-daily-care-infographic-4k.webp",
       alt: "Daily care callout infographic: peptides and hyaluronic acid for comforting hydration and a smoother-looking complexion UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-texture-on-hand-editorial-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-on-hand-4k.webp",
       alt: "Silky botanical peptide emulsion texture swatch of Buudy Peptide Serum on hand UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-two-hand-pump-ritual-4k.webp",
       alt: "Model hands performing two-hand precision dispensing pump ritual with Buudy Peptide Serum UK",
     },
   ],
@@ -2429,11 +2429,11 @@ export const antiAgePeptideCollection: Product = {
       alt: "Buudy Peptide Age-Defying Eye Cream 15ml precision tube and box",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-architectural-pair-plinth-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-architectural-plinth-4k.webp",
       alt: "Buudy Collagen-Lock Hexapeptide Serum architectural pair display",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-two-hand-pump-ritual-4k.webp",
       alt: "Two-hand application ritual using Buudy Peptide anti-ageing skincare",
     },
   ],

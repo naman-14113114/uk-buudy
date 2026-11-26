@@ -223,7 +223,7 @@ export function SerumClinicalResults({
     : isPrebiotic
     ? "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp"
     : isPeptide
-    ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-box-three-quarter-display-uk.webp"
+    ? "/images/products/buudy-peptide-serum/buudy-peptide-box-three-quarter-4k.webp"
     : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-neck-and-collarbone-beauty-glow-uk.webp";
 
   const imageAlt = isCream
