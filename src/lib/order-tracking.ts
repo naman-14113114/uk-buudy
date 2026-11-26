@@ -4,6 +4,8 @@ import { getCache } from "@vercel/functions";
 import { AsyncLocalStorage } from "node:async_hooks";
 import { createHash } from "node:crypto";
 
+import { resolveLiveHyperSkuTracking, isExplicitUkDeliveryText, computeDynamicEstimatedDelivery } from "./hypersku-live";
+
 export type TrackingStage = "ORDER_PLACED" | "PROCESSING" | "IN_TRANSIT" | "OUT_FOR_DELIVERY" | "DELIVERED";
 
 export type TimelineEvent = {
@@ -816,11 +818,7 @@ export function sanitizeTrackingText(text: string): string {
 // Classify the carrier's original wording BEFORE applying display sanitization.
 // A hub/depot arrival, customs scan or handoff is not a delivery-van scan.
 export function isExplicitCustomerDelivery(text: string): boolean {
-  const t = text.trim().toLowerCase();
-  if (/\b(undelivered|not delivered|not yet delivered|unsuccessful|failed|attempted|attempt|unable|pending|scheduled|expected|estimated|tomorrow|soon|will be|to be|out for delivery|returned|return to sender)\b/.test(t)) return false;
-  if (/\b(delivered|handed|passed)\b.*\b(carrier|courier|partner|company|sender|depot|hub|facility|warehouse|airport|airline|sorting|distribution|delivery office|delivery unit|post office|service centre|service center|service point|collection point|pickup point|pick up point|parcelshop|locker|agent)\b/.test(t)) return false;
-  return /^(?:delivered|delivery completed|delivery successful)\b/.test(t) ||
-    /\b(?:successfully delivered|(?:item|package|parcel|shipment)(?: has been| was| is)? delivered|signed for by|delivered to (?:the )?(?:recipient|customer|addressee|neighbour|neighbor|safe place|front door|porch|letterbox|mailbox|reception))\b/.test(t);
+  return isExplicitUkDeliveryText(text);
 }
 
 export function classifyTrackingEvent(text: string): TrackingStage {
@@ -1857,7 +1855,7 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
   let statusCode: TrackingStage = 'PROCESSING';
   let progressPercentage = 30;
   let activeStepIndex = 0;
-  let estimatedDelivery = '18–22 November 2026';
+  let estimatedDelivery = computeDynamicEstimatedDelivery(order.crtTime, false);
   let statusMessage = 'Your order is confirmed and being prepared for dispatch.';
 
   let carrierName = 'Royal Mail Tracked 48';
@@ -1952,7 +1950,7 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
       const flightDeparted = /flight.*departed|departed.*hub|in transit to uk/i.test(latestEvent.title);
       progressPercentage = flightDeparted ? 75 : 55;
       activeStepIndex = 1;
-      estimatedDelivery = flightDeparted ? '16–19 November 2026' : '17–20 November 2026';
+      estimatedDelivery = computeDynamicEstimatedDelivery(order.crtTime, false);
       statusMessage = latestEvent.title;
     }
   } else if (hasTracking) {
@@ -1960,7 +1958,7 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
     statusCode = 'IN_TRANSIT';
     progressPercentage = 50;
     activeStepIndex = 1;
-    estimatedDelivery = '17–20 November 2026';
+    estimatedDelivery = computeDynamicEstimatedDelivery(order.crtTime, false);
     statusMessage = 'Your parcel is in transit with carrier under tracking ' + order.trackingNumber + '.';
 
     timeline.push({
@@ -1975,14 +1973,14 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
     statusCode = 'PROCESSING';
     progressPercentage = 40;
     activeStepIndex = 0;
-    estimatedDelivery = '18–22 November 2026';
-    statusMessage = 'Order packaged and booked with carrier. International flight dispatch is scheduled for delivery between 18–22 November.';
+    estimatedDelivery = computeDynamicEstimatedDelivery(order.crtTime, false);
+    statusMessage = 'Order packaged and booked with carrier. Dispatch scan updates shortly.';
   } else {
     status = 'Processing';
     statusCode = 'PROCESSING';
     progressPercentage = 25;
     activeStepIndex = 0;
-    estimatedDelivery = '18–22 November 2026';
+    estimatedDelivery = computeDynamicEstimatedDelivery(order.crtTime, false);
     statusMessage = 'Your order is confirmed and being prepared for dispatch.';
   }
 
@@ -2038,7 +2036,12 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
 async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
   const query = rawQuery.trim();
   if (!query || query.length > 100) return null;
-  // 1. Check verified live Buudy orders ledger (covers active live customers)
+  // 1. Live HyperSKU + real-time carrier tracking (covers all past, current & future Buudy orders)
+  const liveHyperOrder = await resolveLiveHyperSkuTracking(query);
+  if (liveHyperOrder) {
+    return liveHyperOrder;
+  }
+  // 2. Fallback verified live Buudy orders ledger if live HyperSKU API is unreachable
   const verifiedOrder = await resolveVerifiedBuudyOrder(query);
   if (verifiedOrder) {
     return verifiedOrder;
