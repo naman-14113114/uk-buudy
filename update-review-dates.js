@@ -4,34 +4,48 @@ const path = require('path');
 
 // 1. Parse arguments
 const args = process.argv.slice(2);
-if (args.length === 0) {
-  console.error('Error: Please provide the number of days to shift as the first argument.');
-  console.error('Usage: node update-review-dates.js <days> [product-handle]');
-  process.exit(1);
+const targetArg = args.find((a) => a.startsWith('--target='));
+const daysArg = args.find((a) => a.startsWith('--days='));
+
+let targetDate = targetArg ? targetArg.split('=')[1] : null;
+let daysToShift = null;
+let targetProductHandle = null;
+
+if (!targetDate && args.length > 0 && !args[0].startsWith('--')) {
+  // Check if first arg is a number or date
+  if (/^\d{4}-\d{2}-\d{2}$/.test(args[0])) {
+    targetDate = args[0];
+    targetProductHandle = args[1] || null;
+  } else {
+    daysToShift = parseInt(args[0], 10);
+    if (!isNaN(daysToShift)) {
+      targetProductHandle = args[1] || null;
+    }
+  }
+} else if (daysArg) {
+  daysToShift = parseInt(daysArg.split('=')[1], 10);
 }
 
-const daysToShift = parseInt(args[0], 10);
-if (isNaN(daysToShift)) {
-  console.error('Error: The first argument must be a valid number.');
-  process.exit(1);
+if (!targetDate && daysToShift === null) {
+  // Default to 2026-11-22 target date if neither provided
+  targetDate = '2026-11-22';
 }
 
-const targetProductHandle = args[1] || null;
-
-// Helper to format date as "YYYY-MM-DD 00:00:00 +0000 UTC"
-function formatFullDate(dateObj) {
-  const yyyy = dateObj.getUTCFullYear();
-  const mm = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
-  const dd = String(dateObj.getUTCDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd} 00:00:00 +0000 UTC`;
+function addDaysToYmd(ymd, days) {
+  const [y, m, d] = ymd.split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d + days, 12, 0, 0));
+  const newY = dt.getUTCFullYear();
+  const newM = String(dt.getUTCMonth() + 1).padStart(2, '0');
+  const newD = String(dt.getUTCDate()).padStart(2, '0');
+  return `${newY}-${newM}-${newD}`;
 }
 
-// Helper to format date as "YYYY-MM-DD"
-function formatDisplayDate(dateObj) {
-  const yyyy = dateObj.getUTCFullYear();
-  const mm = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
-  const dd = String(dateObj.getUTCDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
+function daysBetweenYmd(fromYmd, toYmd) {
+  const [y1, m1, d1] = fromYmd.split('-').map(Number);
+  const [y2, m2, d2] = toYmd.split('-').map(Number);
+  const t1 = Date.UTC(y1, m1 - 1, d1);
+  const t2 = Date.UTC(y2, m2 - 1, d2);
+  return Math.round((t2 - t1) / (24 * 3600 * 1000));
 }
 
 // Main logic
@@ -39,28 +53,52 @@ function updateDatesInFile(filePath) {
   try {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const reviews = JSON.parse(fileContent);
-    let updatedCount = 0;
+    if (!Array.isArray(reviews) || reviews.length === 0) return;
+
+    let maxDateBefore = '';
+    let minDateBefore = '9999-99-99';
 
     reviews.forEach(review => {
-      if (review.date) {
-        const dateObj = new Date(review.date);
-        
-        // Add/subtract days
-        dateObj.setUTCDate(dateObj.getUTCDate() + daysToShift);
-        
-        // Format back
-        review.date = formatFullDate(dateObj);
-        review.displayDate = formatDisplayDate(dateObj);
-        
+      const curDate = review.displayDate || (review.date ? review.date.slice(0, 10) : '');
+      if (curDate && curDate > maxDateBefore) maxDateBefore = curDate;
+      if (curDate && curDate < minDateBefore) minDateBefore = curDate;
+    });
+
+    let shift = daysToShift;
+    if (targetDate) {
+      if (!maxDateBefore) return;
+      shift = daysBetweenYmd(maxDateBefore, targetDate);
+    }
+
+    let updatedCount = 0;
+    let minDateAfter = '9999-99-99';
+    let maxDateAfter = '';
+
+    reviews.forEach(review => {
+      const curYmd = review.displayDate || (review.date ? review.date.slice(0, 10) : '');
+      if (curYmd) {
+        const newYmd = addDaysToYmd(curYmd, shift);
+        review.displayDate = newYmd;
+
+        // Preserve time portion if present in "YYYY-MM-DD HH:mm:ss +0000 UTC"
+        const timeMatch = review.date && review.date.match(/\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}:\d{2}\s+\+0000\s+UTC)/);
+        if (timeMatch) {
+          review.date = `${newYmd}${timeMatch[1]}`;
+        } else {
+          review.date = `${newYmd} 00:00:00 +0000 UTC`;
+        }
+
+        if (newYmd < minDateAfter) minDateAfter = newYmd;
+        if (newYmd > maxDateAfter) maxDateAfter = newYmd;
         updatedCount++;
       }
     });
 
     if (updatedCount > 0) {
       fs.writeFileSync(filePath, JSON.stringify(reviews, null, 2) + '\n', 'utf-8');
-      console.log(`Updated ${updatedCount} reviews in ${filePath}`);
-    } else {
-      console.log(`No reviews found to update in ${filePath}`);
+      console.log(`Updated ${updatedCount} reviews in ${path.basename(filePath)} (shift: ${shift >= 0 ? '+' : ''}${shift} days):`);
+      console.log(`  Before: min=${minDateBefore}, max=${maxDateBefore}`);
+      console.log(`  After:  min=${minDateAfter}, max=${maxDateAfter}`);
     }
   } catch (error) {
     console.error(`Failed to process ${filePath}:`, error.message);
@@ -98,12 +136,12 @@ let totalUpdatedFiles = 0;
 reviewDirs.forEach(reviewsDir => {
   const files = fs.readdirSync(reviewsDir);
   files.forEach(file => {
-    if (!file.endsWith('.json')) return;
+    if (!file.endsWith('.json') || file === 'customer_org_review.json') return;
     
     // If a target product handle is provided, only process matching file
     if (targetProductHandle) {
       const expectedFileName = `${targetProductHandle}-reviews.json`;
-      if (file !== expectedFileName) {
+      if (file !== expectedFileName && file !== targetProductHandle) {
         return;
       }
     }

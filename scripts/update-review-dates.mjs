@@ -3,14 +3,27 @@ import path from "node:path";
 
 const args = process.argv.slice(2);
 const daysArg = args.find((a) => a.startsWith("--days="));
-const DAYS_TO_ADD = daysArg ? parseInt(daysArg.split("=")[1], 10) : 3;
+const targetArg = args.find((a) => a.startsWith("--target="));
+const productArg = args.find((a) => a.startsWith("--product="));
 
-if (Number.isNaN(DAYS_TO_ADD)) {
+const TARGET_DATE = targetArg
+  ? targetArg.split("=")[1]
+  : !daysArg
+  ? "2026-11-22"
+  : null;
+const DAYS_TO_ADD = daysArg ? parseInt(daysArg.split("=")[1], 10) : null;
+const TARGET_PRODUCT = productArg ? productArg.split("=")[1] : null;
+
+if (DAYS_TO_ADD !== null && Number.isNaN(DAYS_TO_ADD)) {
   console.error("Invalid days argument:", daysArg);
   process.exit(1);
 }
 
-console.log(`Advancing all product review dates by ${DAYS_TO_ADD} days...`);
+if (TARGET_DATE) {
+  console.log(`Synchronizing review dates so latest date is ${TARGET_DATE}...`);
+} else {
+  console.log(`Advancing product review dates by ${DAYS_TO_ADD} days...`);
+}
 
 function addDaysToYmd(ymd, days) {
   const [y, m, d] = ymd.split("-").map(Number);
@@ -19,6 +32,14 @@ function addDaysToYmd(ymd, days) {
   const newM = String(dt.getUTCMonth() + 1).padStart(2, "0");
   const newD = String(dt.getUTCDate()).padStart(2, "0");
   return `${newY}-${newM}-${newD}`;
+}
+
+function daysBetweenYmd(fromYmd, toYmd) {
+  const [y1, m1, d1] = fromYmd.split("-").map(Number);
+  const [y2, m2, d2] = toYmd.split("-").map(Number);
+  const t1 = Date.UTC(y1, m1 - 1, d1);
+  const t2 = Date.UTC(y2, m2 - 1, d2);
+  return Math.round((t2 - t1) / (24 * 3600 * 1000));
 }
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -39,33 +60,57 @@ function addDaysToIso(isoStr, days) {
 }
 
 const standardReviewFiles = [
-  "src/data/reviews/buudy-hyaluronic-serum-reviews.json",
-  "src/data/reviews/buudy-ipl-hair-removal-device-reviews.json",
   "src/data/reviews/buudy-led-mask-reviews.json",
   "src/data/reviews/buudy-red-torch-reviews.json",
+  "src/data/reviews/buudy-hyaluronic-serum-reviews.json",
+  "src/data/reviews/buudy-peptide-serum-reviews.json",
+  "src/data/reviews/buudy-aha-peeling-concentrate-reviews.json",
+  "src/data/reviews/buudy-renewal-collection-box-reviews.json",
+  "src/data/reviews/buudy-face-wash-reviews.json",
+  "src/data/reviews/buudy-prebiotics-serum-reviews.json",
+  "src/data/reviews/buudy-ipl-hair-removal-device-reviews.json",
 ];
 
 let totalStandardUpdated = 0;
+let maskShiftApplied = 6;
 
 for (const relPath of standardReviewFiles) {
+  if (TARGET_PRODUCT && !relPath.includes(TARGET_PRODUCT)) {
+    continue;
+  }
+
   const absPath = path.join(process.cwd(), relPath);
   const raw = await readFile(absPath, "utf8");
   const reviews = JSON.parse(raw);
 
-  let minDateBefore = "9999";
+  let minDateBefore = "9999-99-99";
   let maxDateBefore = "";
-  let minDateAfter = "9999";
+
+  for (const review of reviews) {
+    const curDate = review.displayDate || (review.date ? review.date.slice(0, 10) : "");
+    if (curDate && curDate < minDateBefore) minDateBefore = curDate;
+    if (curDate && curDate > maxDateBefore) maxDateBefore = curDate;
+  }
+
+  let shiftDays = DAYS_TO_ADD;
+  if (TARGET_DATE) {
+    shiftDays = daysBetweenYmd(maxDateBefore, TARGET_DATE);
+  }
+
+  if (relPath.includes("buudy-led-mask")) {
+    maskShiftApplied = shiftDays;
+  }
+
+  let minDateAfter = "9999-99-99";
   let maxDateAfter = "";
 
   for (const review of reviews) {
-    if (review.displayDate < minDateBefore) minDateBefore = review.displayDate;
-    if (review.displayDate > maxDateBefore) maxDateBefore = review.displayDate;
-
-    const newYmd = addDaysToYmd(review.displayDate, DAYS_TO_ADD);
+    const curYmd = review.displayDate || (review.date ? review.date.slice(0, 10) : "");
+    const newYmd = addDaysToYmd(curYmd, shiftDays);
     review.displayDate = newYmd;
 
-    // Preserve time portion in "YYYY-MM-DD HH:mm:ss +0000 UTC"
-    const timeMatch = review.date.match(/\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}:\d{2}\s+\+0000\s+UTC)/);
+    // Preserve time portion if present in "YYYY-MM-DD HH:mm:ss +0000 UTC"
+    const timeMatch = review.date && review.date.match(/\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}:\d{2}\s+\+0000\s+UTC)/);
     if (timeMatch) {
       review.date = `${newYmd}${timeMatch[1]}`;
     } else {
@@ -78,7 +123,7 @@ for (const relPath of standardReviewFiles) {
 
   await writeFile(absPath, JSON.stringify(reviews, null, 2) + "\n", "utf8");
   totalStandardUpdated += reviews.length;
-  console.log(`Updated ${reviews.length} reviews in ${path.basename(relPath)}:`);
+  console.log(`Updated ${reviews.length} reviews in ${path.basename(relPath)} (shift: ${shiftDays >= 0 ? "+" : ""}${shiftDays} days):`);
   console.log(`  Before: min=${minDateBefore}, max=${maxDateBefore}`);
   console.log(`  After:  min=${minDateAfter}, max=${maxDateAfter}`);
 }
@@ -88,19 +133,21 @@ const orgPath = path.join(process.cwd(), "src/data/reviews/customer_org_review.j
 const orgRaw = await readFile(orgPath, "utf8");
 const orgReviews = JSON.parse(orgRaw);
 
+const orgShift = DAYS_TO_ADD !== null ? DAYS_TO_ADD : maskShiftApplied;
+
 for (const review of orgReviews) {
   if (review.dateIST) {
-    review.dateIST = addDaysToIstDate(review.dateIST, DAYS_TO_ADD);
+    review.dateIST = addDaysToIstDate(review.dateIST, orgShift);
   }
   if (review.submittedAtIST) {
     const timePart = review.submittedAtIST.split(",")[1];
     review.submittedAtIST = `${review.dateIST},${timePart}`;
   }
   if (review.createdAtISO) {
-    review.createdAtISO = addDaysToIso(review.createdAtISO, DAYS_TO_ADD);
+    review.createdAtISO = addDaysToIso(review.createdAtISO, orgShift);
   }
 }
 
 await writeFile(orgPath, JSON.stringify(orgReviews, null, 2) + "\n", "utf8");
-console.log(`Updated ${orgReviews.length} organic customer reviews in customer_org_review.json.`);
+console.log(`Updated ${orgReviews.length} organic customer reviews in customer_org_review.json (shift: ${orgShift >= 0 ? "+" : ""}${orgShift} days).`);
 console.log(`Total reviews updated: ${totalStandardUpdated + orgReviews.length}.`);
