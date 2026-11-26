@@ -72,9 +72,11 @@ interface ParsedScanEvent {
 
 const ORDERS_CACHE_TTL_MS = 60_000;
 const TOKEN_CACHE_TTL_MS = 20 * 60_000;
+const AUTH_COOLDOWN_MS = 180_000;
 const MIROOOO_PRODUCT_ID = "709534";
 
 let cachedToken: { token: string; expiresAt: number } | null = null;
+let failedTokenUntil = 0;
 let cachedOrders: { rows: HyperSkuOrderRow[]; expiresAt: number } | null = null;
 let inFlightOrdersFetch: Promise<HyperSkuOrderRow[] | null> | null = null;
 
@@ -215,6 +217,9 @@ function computeEstimatedDelivery(orderDate: Date | null, deliveredDate: Date | 
 }
 
 async function getHyperSkuToken(forceRefresh = false): Promise<string | null> {
+  const directApiKey = cleanEnvSecret(process.env.HYPERSKU_API_KEY).replace(/^Bearer\s+/i, "").trim();
+  if (directApiKey) return directApiKey;
+
   const username = cleanEnvSecret(process.env.HYPERSKU_USERNAME);
   const password = cleanEnvSecret(process.env.HYPERSKU_PASSWORD);
   if (!username || !password) return null;
@@ -222,21 +227,35 @@ async function getHyperSkuToken(forceRefresh = false): Promise<string | null> {
   if (!forceRefresh && cachedToken && Date.now() < cachedToken.expiresAt) {
     return cachedToken.token;
   }
+  if (Date.now() < failedTokenUntil) {
+    return null;
+  }
 
-  const res = await fetch("https://app.hypersku.com/api/auth/jwt/token/customer", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
-    cache: "no-store",
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!res.ok) return null;
-  const json = (await res.json()) as { data?: { token?: string } };
-  const rawToken = String(json?.data?.token || "").replace(/^Bearer\s+/i, "").trim();
-  if (!rawToken) return null;
+  try {
+    const res = await fetch("https://app.hypersku.com/api/auth/jwt/token/customer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) {
+      failedTokenUntil = Date.now() + AUTH_COOLDOWN_MS;
+      return null;
+    }
+    const json = (await res.json()) as { data?: { token?: string } };
+    const rawToken = String(json?.data?.token || "").replace(/^Bearer\s+/i, "").trim();
+    if (!rawToken) {
+      failedTokenUntil = Date.now() + AUTH_COOLDOWN_MS;
+      return null;
+    }
 
-  cachedToken = { token: rawToken, expiresAt: Date.now() + TOKEN_CACHE_TTL_MS };
-  return rawToken;
+    cachedToken = { token: rawToken, expiresAt: Date.now() + TOKEN_CACHE_TTL_MS };
+    return rawToken;
+  } catch {
+    failedTokenUntil = Date.now() + AUTH_COOLDOWN_MS;
+    return null;
+  }
 }
 
 function isActiveBuudyHyperSkuOrder(row: HyperSkuOrderRow): boolean {
@@ -554,7 +573,10 @@ async function relayViaBuudyCom(rawQuery: string): Promise<TrackingData | null> 
   try {
     const res = await fetch("https://buudy.com/api/order-tracking", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-buudy-relay": "1",
+      },
       body: JSON.stringify({ query: rawQuery }),
       cache: "no-store",
       signal: AbortSignal.timeout(9000),
@@ -639,10 +661,13 @@ async function relayViaBuudyCom(rawQuery: string): Promise<TrackingData | null> 
   }
 }
 
-export async function resolveLiveHyperSkuTracking(rawQuery: string): Promise<TrackingData | null> {
+export async function resolveLiveHyperSkuTracking(
+  rawQuery: string,
+  options?: { skipRelay?: boolean }
+): Promise<TrackingData | null> {
   const rows = await fetchAllActiveBuudyOrders();
   if (!rows) {
-    return relayViaBuudyCom(rawQuery);
+    return options?.skipRelay ? null : relayViaBuudyCom(rawQuery);
   }
   if (rows.length === 0) return null;
 

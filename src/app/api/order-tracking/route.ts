@@ -38,7 +38,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const trackingData = await lookupOrderTracking(cleanQuery);
+    const skipRelay = request.headers.get("x-buudy-relay") === "1";
+    const trackingData = await lookupOrderTracking(cleanQuery, { skipRelay });
 
     if (!trackingData) {
       return json(
@@ -96,7 +97,8 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const trackingData = await lookupOrderTracking(cleanQuery);
+    const skipRelay = request.headers.get("x-buudy-relay") === "1";
+    const trackingData = await lookupOrderTracking(cleanQuery, { skipRelay });
 
     if (!trackingData) {
       return json(
