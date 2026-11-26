@@ -224,7 +224,7 @@ export function SerumClinicalResults({
     ? "/images/products/buudy-prebiotics-serum/06-sculptural-plinth-pair.webp"
     : isPeptide
     ? "/images/products/buudy-peptide-serum/buudy-peptide-box-three-quarter-4k.webp"
-    : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-neck-and-collarbone-beauty-glow-uk.webp";
+    : "/images/products/buudy-serum/buudy-hyaluronic-carton-4k.webp";
 
   const imageAlt = isCream
     ? "Model application ritual with Buudy Peptide Ageless AM/PM Cream bottle for lifted, glowing facial contours UK"

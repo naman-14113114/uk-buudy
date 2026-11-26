@@ -1182,43 +1182,51 @@ export const buudyHyaluronicSerum: Product = {
   customerCount: "16,000+",
   promoCode: "",
   promoLabel: "SAVE 17%",
-  cartImage: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-cream-plinth-pair-display-uk.webp",
+  cartImage: "/images/products/buudy-serum/buudy-hyaluronic-campaign-pair-4k.webp",
   gallery: [
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-cream-plinth-pair-display-uk.webp",
-      alt: "Buudy Hyaluronic Serum bottle and luxury folding carton displayed on cream architectural plinths UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-campaign-pair-4k.webp",
+      alt: "Buudy Hyaluronic Serum 30ml bottle and luxury folding carton displayed on plum campaign plinths UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-pure-white-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-neck-and-collarbone-4k.webp",
+      alt: "Model neck and collarbone beauty portrait demonstrating deeply hydrated, radiant skin after hyaluronic acid care UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-formula-at-a-glance-4k.webp",
+      alt: "Formula at a glance infographic: clean water-based hydration formula, active hydrators, and dermatological standards UK",
+    },
+    {
+      src: "/images/products/buudy-serum/buudy-hyaluronic-key-ingredients-4k.webp",
       alt: "Key ingredients infographic: multi-molecular Hyaluronic Acid surface hydration, Sodium PCA moisture attractor, and soothing Aloe leaf juice UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-ritual-pure-white-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-who-is-it-for-4k.webp",
       alt: "Who is it for infographic: ideal for normal and mature skin tackling dehydration and tightness, AM and PM ritual guide UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-pure-white-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-a-lighter-way-to-hydrate-4k.webp",
       alt: "A lighter way to hydrate infographic: moisture-locking care for refreshed-feeling skin with a soft, plump-looking finish UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-pure-white-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-hydration-held-in-4k.webp",
       alt: "Hydration held in infographic: moisture support helps reduce moisture loss and supports natural plumpness and elasticity UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-diagonal-bottle-editorial-uk.webp",
-      alt: "Buudy Hyaluronic Serum 30ml glass bottle diagonal luxury editorial studio still life UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-bottle-and-gel-flat-lay-4k.webp",
+      alt: "Buudy Hyaluronic Serum 30ml glass bottle and crystal-clear hydrogel droplet flat-lay still life UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-plum-manicure-hand-hero-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-manicure-hand-hero-4k.webp",
       alt: "Model hand with signature plum manicure holding Buudy Hyaluronic Serum bottle UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-gel-texture-on-hand-editorial-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-gel-on-hand-4k.webp",
       alt: "Silky clear water-based hydrogel texture swatch of Buudy Hyaluronic Serum applied on hand UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-neck-and-collarbone-beauty-glow-uk.webp",
-      alt: "Radiant, plump skin on model neck and collarbone after using Buudy Hyaluronic Serum with LED Mask UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-two-hand-pump-4k.webp",
+      alt: "Model hands performing two-hand precision dispensing pump ritual with Buudy Hyaluronic Serum UK",
     },
   ],
   gifts: [],
@@ -1879,31 +1887,31 @@ export const buudyHydratingSerum: Product = {
       alt: "Buudy Hydrating Serum 30ml luxury beige bottle and deep plum packaging carton UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-b5-serum-bottle-front-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-campaign-pair-4k.webp",
       alt: "Buudy 30ml serum bottle with precision hygienic pump dispenser",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-water-optical-clarity-caustics-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-bottle-and-gel-flat-lay-4k.webp",
       alt: "Buudy serum in water showing optical clarity and pure hydrating formulation",
     },
     {
-      src: "/images/products/buudy-serum/buudy-double-hydration-boost-gel-water-splash-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-formula-at-a-glance-4k.webp",
       alt: "Buudy Hydrating Serum dynamic water splash demonstrating intensive skin moisture",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-gel-texture-droplet-macro-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-gel-on-hand-4k.webp",
       alt: "Macro texture swatch of hydrating botanical fluid beside Buudy serum bottle",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-cream-pedestal-display-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-slate-blue-bottle-4k.webp",
       alt: "Buudy Hydrating Serum displayed on architectural cream pedestal",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-neck-decolletage-glow-model-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-neck-and-collarbone-4k.webp",
       alt: "Radiant, hydrated skin on neck and decolletage after using Buudy Hydrating Serum",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-two-hand-pump-4k.webp",
       alt: "Model with radiant dewy skin holding Buudy serum bottle against cheek",
     },
   ],
@@ -2333,19 +2341,19 @@ export const theUltimateHydrationDuo: Product = {
       alt: "Buudy Deep Hydrating Serum 30ml bottle and packaging box",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-double-hydration-boost-gel-hero-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-campaign-pair-4k.webp",
       alt: "Buudy Hyaluronic Acid 2% + B5 Double Hydration Boost Gel hero UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-water-optical-clarity-caustics-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-bottle-and-gel-flat-lay-4k.webp",
       alt: "Optical hydrogel caustics in clear water demonstrating zero light scattering",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-neck-decolletage-glow-model-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-neck-and-collarbone-4k.webp",
       alt: "Radiant, plump skin on neck and decolletage after using Buudy Hydration Duo",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-two-hand-pump-4k.webp",
       alt: "Model with glass skin holding Buudy hydration product",
     },
   ],

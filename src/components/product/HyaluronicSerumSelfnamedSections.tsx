@@ -136,7 +136,7 @@ function ProductFeaturesSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-serum/07-pump-and-label-macro.webp"
+                src="/images/products/buudy-serum/buudy-hyaluronic-slate-blue-bottle-4k.webp"
                 alt="Buudy Hyaluronic Serum Double Hydration Boost Gel clinical features banner"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -314,7 +314,7 @@ function ProductFormulaSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-serum/09-diagonal-bottle-editorial.webp"
+                src="/images/products/buudy-serum/buudy-hyaluronic-bottle-and-gel-flat-lay-4k.webp"
                 alt="Buudy Hyaluronic Serum Double Hydration Boost Gel formula texture and viscosity"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -502,7 +502,7 @@ export function PackagingSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/buudy-serum/10-plum-campaign-pair.webp"
+                src="/images/products/buudy-serum/buudy-hyaluronic-campaign-pair-4k.webp"
                 alt="Buudy Hyaluronic Serum sustainable glass packaging and recyclable specifications"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -592,10 +592,10 @@ function HyaluronicHowToUseSection({ editorial = false }: { editorial?: boolean 
         className="buudy-section scroll-mt-24"
         id="how-to-use"
       >
-        <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3]">
+        <div className="buudy-wrap grid items-center md:items-stretch gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
+          <div className="relative aspect-square md:aspect-auto md:h-full md:order-last overflow-hidden rounded-2xl">
             <Image
-              src="/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp"
+              src="/images/products/buudy-serum/buudy-hyaluronic-neck-and-collarbone-4k.webp"
               alt="Buudy Hyaluronic Serum held beside the face"
               fill
               sizes="(min-width: 1260px) 560px, (min-width: 768px) 46vw, calc(100vw - 32px)"

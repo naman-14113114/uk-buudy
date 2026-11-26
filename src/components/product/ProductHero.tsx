@@ -16,19 +16,7 @@ export function ProductHero({
   isEarlyBlackFriday?: boolean;
   hyaluronicEditorial?: boolean;
 }) {
-  const isHyaluronic =
-    product.id === "buudy-light-activating-hyaluronic-serum" ||
-    Boolean(product.slug && product.slug.includes("hyaluronic"));
-
-  const gallery = isHyaluronic && hyaluronicEditorial
-    ? [
-        {
-          src: "/images/products/buudy-serum/10-plum-campaign-pair.webp",
-          alt: "Buudy Hyaluronic Serum bottle and carton against a plum studio backdrop",
-        },
-        ...product.gallery.slice(1),
-      ]
-    : product.gallery;
+  const gallery = product.gallery;
 
   return (
     <section
