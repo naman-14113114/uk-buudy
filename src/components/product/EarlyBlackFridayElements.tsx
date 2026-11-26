@@ -3,41 +3,29 @@
 import { useEffect, useState } from "react";
 import { Sparkles, Tag, Check, ShieldCheck, RotateCcw, Truck, Flame } from "lucide-react";
 
+const BLACK_FRIDAY_END_UK_MS = Date.UTC(2026, 10, 28, 0, 0, 0); // Friday 27 Nov 2026 23:59:59 GMT (UK)
+
+function getUKBlackFridayTimeLeft(): string {
+  const remaining = Math.max(0, Math.floor((BLACK_FRIDAY_END_UK_MS - Date.now()) / 1000));
+  const d = Math.floor(remaining / 86400);
+  const h = Math.floor((remaining % 86400) / 3600);
+  const m = Math.floor((remaining % 3600) / 60);
+  const s = remaining % 60;
+  const hms = `${String(h).padStart(2, "0")}h : ${String(m).padStart(2, "0")}m : ${String(s).padStart(2, "0")}s`;
+  return d > 0 ? `${String(d).padStart(2, "0")}d : ${hms}` : hms;
+}
+
 function useUKMidnightCountdown() {
-  const [timeLeft, setTimeLeft] = useState<string>("14h : 27m : 53s");
+  const [timeLeft, setTimeLeft] = useState<string>(() => getUKBlackFridayTimeLeft());
 
   useEffect(() => {
-    function calculate() {
-      try {
-        const formatter = new Intl.DateTimeFormat("en-GB", {
-          timeZone: "Europe/London",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        });
-        const parts = formatter.formatToParts(new Date());
-        const hour = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10);
-        const minute = parseInt(parts.find((p) => p.type === "minute")?.value ?? "0", 10);
-        const second = parseInt(parts.find((p) => p.type === "second")?.value ?? "0", 10);
-        const elapsed = (hour % 24) * 3600 + minute * 60 + second;
-        const remaining = Math.max(0, 86400 - elapsed);
-
-        const h = Math.floor(remaining / 3600);
-        const m = Math.floor((remaining % 3600) / 60);
-        const s = remaining % 60;
-
-        setTimeLeft(
-          `${String(h).padStart(2, "0")}h : ${String(m).padStart(2, "0")}m : ${String(s).padStart(2, "0")}s`
-        );
-      } catch {
-        // Fallback
-      }
-    }
-
-    calculate();
-    const interval = window.setInterval(calculate, 1000);
-    return () => window.clearInterval(interval);
+    const sync = () => setTimeLeft(getUKBlackFridayTimeLeft());
+    const initial = window.setTimeout(sync, 0);
+    const interval = window.setInterval(sync, 1000);
+    return () => {
+      window.clearTimeout(initial);
+      window.clearInterval(interval);
+    };
   }, []);
 
   return timeLeft;
@@ -68,7 +56,7 @@ export function EarlyBlackFridayTopBanner() {
       <span className="text-[rgba(247,241,232,0.4)]">|</span>
       <div className="flex items-center gap-1 text-[#e5c17d] font-mono font-semibold text-[11px]">
         <span className="text-[10px] uppercase tracking-wider text-[#f7f1e8]/70 font-sans">Ends In:</span>
-        <span>{timer}</span>
+        <span suppressHydrationWarning>{timer}</span>
       </div>
       <span className="text-[rgba(247,241,232,0.3)]">·</span>
       <div className="flex items-center gap-1 text-[#f7f1e8]/90 text-[11px]">
@@ -107,7 +95,7 @@ export function EarlyBlackFridayTopBanner() {
             <span className="text-[10px] uppercase tracking-wider text-[#f7f1e8]/70 font-sans">
               Ends In:
             </span>
-            <span>{timer}</span>
+            <span suppressHydrationWarning>{timer}</span>
           </div>
           <span className="text-[rgba(247,241,232,0.3)]">·</span>
           <div className="flex items-center gap-1 text-[#f7f1e8]/90">
