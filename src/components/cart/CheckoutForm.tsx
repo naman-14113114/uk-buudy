@@ -219,8 +219,22 @@ export function CheckoutForm({
         onClick={handleCheckout}
         type="button"
       >
-        <Lock size={17} />
-        {isRedirecting ? "Opening checkout…" : "Checkout securely"}
+        {isRedirecting ? (
+          <>
+            <span style={{ visibility: "hidden" }} className="flex items-center gap-2">
+              <Lock size={17} />
+              Checkout securely
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center">
+              <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
+            </span>
+          </>
+        ) : (
+          <>
+            <Lock size={17} />
+            Checkout securely
+          </>
+        )}
       </Button>
       {error ? (
         <p className="mt-3 text-center text-xs font-semibold text-[var(--plum)]">
