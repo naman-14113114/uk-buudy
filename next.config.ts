@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  outputFileTracingIncludes: {
+    "/api/lifecycle/order-email": ["./public/Buudy-Cleopatra-LED-Mask-User-Manual.pdf"],
+    "/api/cron/lifecycle-emails": ["./public/Buudy-Cleopatra-LED-Mask-User-Manual.pdf"],
+  },
   poweredByHeader: false,
   images: {
     remotePatterns: [

@@ -44,7 +44,7 @@ export const googleMerchantProducts: MerchantProduct[] = [
     id: "buudy-led-face-mask-uk",
     title: "Buudy 7 Colour LED Face Mask with 830 nm Near-Infrared",
     description:
-      "Buudy 7 Colour LED Face Mask is a flexible, wearable device for adult at-home skincare routines. It uses seven visible light colours alongside a dedicated 830 nm near-infrared mode. The close-fitting mask supports a hands-free routine and comes with a USB-C charging cable, eye supports, a user manual and a comprehensive treatment guide.",
+      "Buudy 7 Colour LED Face Mask is a flexible, wearable device for adult at-home skincare routines. It uses seven visible light colours alongside a dedicated 830 nm near-infrared mode. The close-fitting mask supports a hands-free routine and comes with a USB-C charging cable and eye supports, plus a digital user manual, video guide and comprehensive treatment guide emailed with your order.",
     link: absoluteUrl("/products/buudy-led-mask"),
     imageLink: productImage(
       "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",

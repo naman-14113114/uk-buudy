@@ -406,8 +406,8 @@ export const buudyMask: Product = {
     { quantity: "1x", label: "7-colour + NIR LED Light Face Mask" },
     { quantity: "1x", label: "Charger with USB-C cable" },
     { quantity: "2x", label: "Eye Support" },
-    { quantity: "1x", label: "User Manual" },
-    { quantity: "1x", label: "Comprehensive Treatment Guide" },
+    { quantity: "Digital", label: "User Manual (PDF) & Step-by-Step Video Guide", tag: "Emailed with order" },
+    { quantity: "Digital", label: "Comprehensive Treatment Guide & Skincare E-Book", tag: "Emailed with order" },
     { quantity: "1x", label: "Buudy LED Torch", tag: "Free gift" },
   ],
   highlights: [
