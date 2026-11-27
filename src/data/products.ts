@@ -2512,42 +2512,42 @@ export const theUltimateRenewalCollectionBox: Product = {
   customerCount: "15,000+",
   promoCode: "",
   promoLabel: "SAVE 20%",
-  cartImage: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-inside-packaging-uk.webp",
+  cartImage: "/images/products/the-ultimate-renewal-collection-box/01-inside-the-gift-box(1).webp",
   gallery: [
     {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-inside-packaging-uk.webp",
+      src: "/images/products/the-ultimate-renewal-collection-box/01-inside-the-gift-box(1).webp",
       alt: "The Ultimate Renewal Collection Box open packaging displaying all 3 full-size serums nested inside luxury plum gift box UK",
     },
     {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-textures-comparison-uk.webp",
-      alt: "Three textures comparison: clear optical hydrogel, silky firming serum, and clarifying lactic acid peeling fluid UK",
-    },
-    {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp",
-      alt: "Model hands holding The Ultimate Renewal Collection Box luxury gift packaging UK",
-    },
-    {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-hydration-spotlight-ha-gel-uk.webp",
-      alt: "Step 01 Hydration Spotlight: Double Hydration Boost Gel 30ml with multi-depth Hyaluronic Acid and Provitamin B5 UK",
-    },
-    {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-peptide-spotlight-serum-uk.webp",
-      alt: "Step 02 Firming Spotlight: Collagen-Lock Hexapeptide-11 Serum 30ml to boost elasticity and soften fine lines UK",
-    },
-    {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-overnight-exfoliation-aha-peel-uk.webp",
-      alt: "Step 03 Exfoliation Spotlight: AHA 10% Lactic Acid Peeling Concentrate 30ml for gentle overnight cellular resurfacing UK",
-    },
-    {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-weekly-skincare-rhythm-guide-uk.webp",
-      alt: "Weekly skincare rhythm guide: alternating weekly AHA exfoliation with daily LED priming and peptide collagen-locking UK",
-    },
-    {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-step-skincare-in-use-uk.webp",
+      src: "/images/products/the-ultimate-renewal-collection-box/09-skincare-in-use(1).webp",
       alt: "Complete 3-step renewal ritual in use: exfoliate, hydrate, and treat for radiant skin UK",
     },
     {
-      src: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp",
+      src: "/images/products/the-ultimate-renewal-collection-box/13-three-textures-white.jpg",
+      alt: "Three textures comparison: clear optical hydrogel, silky firming serum, and clarifying lactic acid peeling fluid UK",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/02-hydration-spotlight(1).webp",
+      alt: "Step 01 Hydration Spotlight: Double Hydration Boost Gel 30ml with multi-depth Hyaluronic Acid and Provitamin B5 UK",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/03-peptide-spotlight(1).webp",
+      alt: "Step 02 Firming Spotlight: Collagen-Lock Hexapeptide-11 Serum 30ml to boost elasticity and soften fine lines UK",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/04-overnight-exfoliation(1).webp",
+      alt: "Step 03 Exfoliation Spotlight: AHA 10% Lactic Acid Peeling Concentrate 30ml for gentle overnight cellular resurfacing UK",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/06-weekly-skincare-rhythm(1).webp",
+      alt: "Weekly skincare rhythm guide: alternating weekly AHA exfoliation with daily LED priming and peptide collagen-locking UK",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/08-gift-box-in-hand(1).webp",
+      alt: "Model hands holding The Ultimate Renewal Collection Box luxury gift packaging UK",
+    },
+    {
+      src: "/images/products/the-ultimate-renewal-collection-box/10-full-size-gifting(1).webp",
       alt: "Full-size 3 x 30ml luxury gifting presentation box set with bespoke deep plum sleeve carton UK",
     },
   ],

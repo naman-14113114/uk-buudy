@@ -27,7 +27,7 @@ const renewalProducts: ProductCardProps[] = [
       "Gentle plant-derived lactic acid dissolves dead surface keratinocytes, unclogs congested pores, and promotes active epidermal cellular renewal without redness or barrier tightness.",
     actives: ["10% Plant Lactic Acid", "1% Hyaluronic Acid", "Organic White Tea & Sage"],
     imageSrc:
-      "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-overnight-exfoliation-aha-peel-uk.webp",
+      "/images/products/the-ultimate-renewal-collection-box/07-aha-and-sage.webp",
     imageAlt: "Buudy AHA Peeling Concentrate 30ml spotlight",
     href: "/products/buudy-aha-peeling-concentrate",
   },
@@ -40,7 +40,7 @@ const renewalProducts: ProductCardProps[] = [
       "100% water-based, crystal-clear optical hydrogel matrix engineered for zero light scattering during phototherapy while delivering 72-hour multi-depth cellular moisture.",
     actives: ["2% Multi-Depth HA", "Provitamin B5", "Sodium PCA (NMF)"],
     imageSrc:
-      "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-hydration-spotlight-ha-gel-uk.webp",
+      "/images/products/the-ultimate-renewal-collection-box/01-aloe-and-hyaluronic-gel.webp",
     imageAlt: "Buudy Hyaluronic Serum 30ml spotlight",
     href: "/products/buudy-light-activating-hyaluronic-serum",
   },
@@ -53,7 +53,7 @@ const renewalProducts: ProductCardProps[] = [
       "Bio-fermented Hexapeptide-11 signals dermal fibroblasts to synthesize fresh collagen, softening expression lines, crow's feet, and restoring supple facial bounce.",
     actives: ["Hexapeptide-11 Matrix", "Bio-Fermented Peptides", "Multi-Molecular HA"],
     imageSrc:
-      "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-peptide-spotlight-serum-uk.webp",
+      "/images/products/the-ultimate-renewal-collection-box/05-peptide-strawberry-seed-oil.webp",
     imageAlt: "Buudy Peptide Serum 30ml spotlight",
     href: "/products/buudy-peptide-serum",
   },
@@ -141,7 +141,7 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
           <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-step-skincare-in-use-uk.webp"
+                src="/images/products/the-ultimate-renewal-collection-box/10-buudy-renewal-ingredient-trio.webp"
                 alt="Complete 3-step skincare ritual in use with The Ultimate Renewal Collection Box UK"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
@@ -159,7 +159,7 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
           <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp"
+                src="/images/products/the-ultimate-renewal-collection-box/10-full-size-gifting(1).webp"
                 alt="Full-size 3 x 30ml luxury gifting presentation box set with bespoke deep plum sleeve carton UK"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"

@@ -191,7 +191,7 @@ function RenewalHowToUseSection({ editorial = true }: { editorial?: boolean }) {
         <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3] bg-white border border-[rgba(46,16,47,0.08)] shadow-sm">
             <Image
-              src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-step-skincare-in-use-uk.webp"
+              src="/images/products/the-ultimate-renewal-collection-box/10-buudy-renewal-ingredient-trio.webp"
               alt="Complete 3-step renewal ritual in use: exfoliate, hydrate, and firm with Buudy Ultimate Renewal Collection Box"
               fill
               sizes="(min-width: 1260px) 560px, (min-width: 768px) 46vw, calc(100vw - 32px)"
@@ -244,7 +244,7 @@ function ProductFeaturesSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp"
+                src="/images/products/the-ultimate-renewal-collection-box/08-gift-box-in-hand(1).webp"
                 alt="The Ultimate Renewal Collection Box held in hand portrait UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -359,7 +359,7 @@ function CuratedForSection() {
       title: "Luxury Gifting",
       subtitle: "Gift-Ready Presentation",
       desc: "An exquisitely packaged collection box for birthdays, seasonal celebrations, and high-impact self-care renewal routines.",
-      img: "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp",
+      img: "/images/products/the-ultimate-renewal-collection-box/10-full-size-gifting(1).webp",
     },
   ];
 
@@ -423,7 +423,7 @@ function ProductFormulaSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-plum-sleeve-detail-editorial-uk.webp"
+                src="/images/products/the-ultimate-renewal-collection-box/07-plum-sleeve-detail(1).webp"
                 alt="The Ultimate Renewal Collection Box formula and packaging detail UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -685,7 +685,7 @@ function RenewalPackagingSection() {
           <div className="lg:col-span-6">
             <div className="relative aspect-square w-full rounded-[24px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-md">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp"
+                src="/images/products/the-ultimate-renewal-collection-box/10-full-size-gifting(1).webp"
                 alt="The Ultimate Renewal Collection Box luxury gifting presentation box set UK"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

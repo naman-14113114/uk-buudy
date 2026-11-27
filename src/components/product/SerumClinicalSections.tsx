@@ -217,7 +217,7 @@ export function SerumClinicalResults({
     : isEyeCream
     ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp"
     : isRenewalBox
-    ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-gifting-presentation-uk.webp"
+    ? "/images/products/the-ultimate-renewal-collection-box/03-hydration-gel-pump-ritual.webp"
     : isAha
     ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-model-collarbone-4k.webp"
     : isPrebiotic
