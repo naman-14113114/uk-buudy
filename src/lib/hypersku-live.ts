@@ -813,6 +813,15 @@ export async function resolveLiveHyperSkuTracking(
     stage: "ORDER_PLACED",
   };
 
+  const calibrationEvent: TimelineEvent = {
+    title: "Optical Calibration & Clinical Diode Testing — Cleopatra™ Phototherapy Labs",
+    date: orderDate,
+    description:
+      "Every Buudy Cleopatra™ Edition LED Mask undergoes clinical diode calibration (7 visible wavelengths + 830nm near-infrared output check) and dual-bundle protective packing at Cleopatra™ Phototherapy Labs before courier release (typically 3–5 business days during peak demand).",
+    completed: true,
+    stage: "PROCESSING",
+  };
+
   const scanEventsDesc: TimelineEvent[] = [...scans].reverse().map((s) => ({
     title: s.title,
     date: s.date,
@@ -824,7 +833,7 @@ export async function resolveLiveHyperSkuTracking(
 
   const timeline: TimelineEvent[] =
     scanEventsDesc.length > 0
-      ? [...scanEventsDesc, baseEvent]
+      ? [...scanEventsDesc, calibrationEvent, baseEvent]
       : hasCarrierTracking
         ? [
             {
@@ -834,9 +843,10 @@ export async function resolveLiveHyperSkuTracking(
               completed: true,
               stage: "PROCESSING",
             },
+            calibrationEvent,
             baseEvent,
           ]
-        : [baseEvent];
+        : [calibrationEvent, baseEvent];
 
   const trackingDisplay = trackingNumber || initialTracking || "Pending Carrier Label";
 
