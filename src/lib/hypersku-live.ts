@@ -220,7 +220,7 @@ async function getHyperSkuToken(forceRefresh = false): Promise<string | null> {
   const directApiKey = cleanEnvSecret(process.env.HYPERSKU_API_KEY).replace(/^Bearer\s+/i, "").trim();
   if (directApiKey) return directApiKey;
 
-  const username = cleanEnvSecret(process.env.HYPERSKU_USERNAME);
+  const username = cleanEnvSecret(process.env.HYPERSKU_USERNAME) || "sahiljian2@gmail.com";
   const password = cleanEnvSecret(process.env.HYPERSKU_PASSWORD);
   if (!username || !password) return null;
 
@@ -231,31 +231,38 @@ async function getHyperSkuToken(forceRefresh = false): Promise<string | null> {
     return null;
   }
 
-  try {
-    const res = await fetch("https://app.hypersku.com/api/auth/jwt/token/customer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) {
-      failedTokenUntil = Date.now() + AUTH_COOLDOWN_MS;
-      return null;
-    }
-    const json = (await res.json()) as { data?: { token?: string } };
-    const rawToken = String(json?.data?.token || "").replace(/^Bearer\s+/i, "").trim();
-    if (!rawToken) {
-      failedTokenUntil = Date.now() + AUTH_COOLDOWN_MS;
-      return null;
-    }
+  for (const [authUrl, extract] of [
+    [
+      "https://api.hypersku.com/api/auth/admin/token",
+      (j: { token?: string }) => cleanEnvSecret(j?.token).replace(/^Bearer\s+/i, "").trim(),
+    ],
+    [
+      "https://app.hypersku.com/api/auth/jwt/token/customer",
+      (j: { data?: { token?: string } }) => cleanEnvSecret(j?.data?.token).replace(/^Bearer\s+/i, "").trim(),
+    ],
+  ] as const) {
+    try {
+      const res = await fetch(authUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!res.ok) continue;
+      const json = (await res.json()) as { token?: string; data?: { token?: string } };
+      const rawToken = extract(json);
+      if (!rawToken) continue;
 
-    cachedToken = { token: rawToken, expiresAt: Date.now() + TOKEN_CACHE_TTL_MS };
-    return rawToken;
-  } catch {
-    failedTokenUntil = Date.now() + AUTH_COOLDOWN_MS;
-    return null;
+      cachedToken = { token: rawToken, expiresAt: Date.now() + TOKEN_CACHE_TTL_MS };
+      return rawToken;
+    } catch {
+      // Try next HyperSKU auth endpoint cleanly
+    }
   }
+
+  failedTokenUntil = Date.now() + AUTH_COOLDOWN_MS;
+  return null;
 }
 
 function isActiveBuudyHyperSkuOrder(row: HyperSkuOrderRow): boolean {
@@ -288,32 +295,47 @@ async function fetchAllActiveBuudyOrders(): Promise<HyperSkuOrderRow[] | null> {
       if (!token) return null;
 
       const fetchPages = async (authToken: string): Promise<{ ok: boolean; rows: HyperSkuOrderRow[] }> => {
-        const collected: HyperSkuOrderRow[] = [];
-        for (let page = 1; page <= 20; page++) {
-          const res = await fetch(`https://app.hypersku.com/api/customer/orders/query/list/page?t=${Date.now()}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authToken,
-              token: authToken,
-            },
-            body: JSON.stringify({ page, limit: 100, storeId: 0, searchType: 2 }),
-            cache: "no-store",
-            signal: AbortSignal.timeout(9000),
-          });
-          if (!res.ok) return { ok: false, rows: [] };
-          const json = (await res.json()) as {
-            status?: number;
-            data?: { total?: number; rows?: HyperSkuOrderRow[] };
-          };
-          if (json?.status === 40101 || !json?.data || !Array.isArray(json.data.rows)) {
-            return { ok: false, rows: [] };
+        for (const baseUrl of ["https://app.hypersku.com", "https://api.hypersku.com"]) {
+          const collected: HyperSkuOrderRow[] = [];
+          let hostOk = true;
+          for (let page = 1; page <= 20; page++) {
+            try {
+              const res = await fetch(`${baseUrl}/api/customer/orders/query/list/page?t=${Date.now()}`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: authToken,
+                  token: authToken,
+                },
+                body: JSON.stringify({ page, limit: 100, storeId: 0, searchType: 2 }),
+                cache: "no-store",
+                signal: AbortSignal.timeout(9000),
+              });
+              if (!res.ok) {
+                hostOk = false;
+                break;
+              }
+              const json = (await res.json()) as {
+                status?: number;
+                data?: { total?: number; rows?: HyperSkuOrderRow[] };
+              };
+              if (json?.status === 40101 || !json?.data || !Array.isArray(json.data.rows)) {
+                hostOk = false;
+                break;
+              }
+              collected.push(...json.data.rows);
+              const total = Number(json.data.total || 0);
+              if (collected.length >= total || json.data.rows.length === 0) break;
+            } catch {
+              hostOk = false;
+              break;
+            }
           }
-          collected.push(...json.data.rows);
-          const total = Number(json.data.total || 0);
-          if (collected.length >= total || json.data.rows.length === 0) break;
+          if (hostOk) {
+            return { ok: true, rows: collected };
+          }
         }
-        return { ok: true, rows: collected };
+        return { ok: false, rows: [] };
       };
 
       let result = await fetchPages(token);
