@@ -227,20 +227,52 @@ async function handleCron(request: NextRequest) {
     );
   }
 
+  // Fast pre-filter before any network tracking call:
+  // 1) Skip orders that already received a :delivered notification
+  // 2) Skip already-delivered verified ledger orders from before Nov 25
+  // 3) Cap window to last 30 days & at most 60 recent active orders so cron always completes < 15s
+  const verifiedStatusById = new Map<string, { status: number; statusStr: string; crtTime: string; hasTracking: boolean }>();
+  for (const v of VERIFIED_BUUDY_ORDERS) {
+    const vid = (v.paymentId || v.orderId || "").trim();
+    if (!vid) continue;
+    verifiedStatusById.set(vid, {
+      status: v.status,
+      statusStr: v.statusStr,
+      crtTime: v.crtTime,
+      hasTracking: Boolean(v.trackingNumber),
+    });
+  }
+
   const nowMs = Date.now();
+  const maxAgeMs = 30 * 86_400_000;
+  const evalList = candidates
+    .filter((order) => {
+      if (sentEvents.has(`${order.orderId}:delivered`)) return false;
+      if (order.paidAtMs > 0 && nowMs - order.paidAtMs > maxAgeMs) return false;
+      const v = verifiedStatusById.get(order.orderId);
+      if (v && /delivered/i.test(v.statusStr) && v.crtTime < "2026-11-24") {
+        return false;
+      }
+      return true;
+    })
+    .slice(0, 60);
+
   const queued: Array<{
     order: CandidateOrder;
     milestone: LifecycleMilestone;
     tracking: TrackingData;
   }> = [];
 
-  const concurrency = 4;
-  for (let i = 0; i < candidates.length; i += concurrency) {
-    const slice = candidates.slice(i, i + concurrency);
+  const deadlineMs = nowMs + 35_000;
+  const concurrency = 10;
+  for (let i = 0; i < evalList.length; i += concurrency) {
+    if (Date.now() > deadlineMs) break;
+    const slice = evalList.slice(i, i + concurrency);
     const settled = await Promise.allSettled(
       slice.map(async (order) => {
+        const knownVerified = verifiedStatusById.has(order.orderId);
         const tracking = await lookupOrderTracking(order.orderId, {
-          skipRelay: false,
+          skipRelay: knownVerified,
         });
         const milestone = determineMilestone(order, tracking, sentEvents, nowMs);
         return { order, tracking, milestone };
@@ -308,7 +340,7 @@ async function handleCron(request: NextRequest) {
     sourceCounts: {
       remoteWhopOrders: remoteCandidates.length,
       fallbackVerifiedOrders: localCandidates.length,
-      evaluatedOrders: candidates.length,
+      evaluatedOrders: evalList.length,
     },
     alreadySentEventsIndexed: sentEvents.size,
     dueCount: queued.length,
