@@ -569,7 +569,7 @@ function mapGoodsToItems(goods?: HyperSkuGoodsItem[] | null): TrackingData["item
   return items;
 }
 
-async function relayViaBuudyCom(rawQuery: string): Promise<TrackingData | null> {
+export async function relayViaBuudyCom(rawQuery: string): Promise<TrackingData | null> {
   try {
     const res = await fetch("https://buudy.com/api/order-tracking", {
       method: "POST",

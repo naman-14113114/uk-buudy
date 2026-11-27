@@ -4,7 +4,7 @@ import { getCache } from "@vercel/functions";
 import { AsyncLocalStorage } from "node:async_hooks";
 import { createHash } from "node:crypto";
 
-import { resolveLiveHyperSkuTracking, isExplicitUkDeliveryText, computeDynamicEstimatedDelivery } from "./hypersku-live";
+import { resolveLiveHyperSkuTracking, isExplicitUkDeliveryText, computeDynamicEstimatedDelivery, relayViaBuudyCom } from "./hypersku-live";
 
 export type TrackingStage = "ORDER_PLACED" | "PROCESSING" | "IN_TRANSIT" | "OUT_FOR_DELIVERY" | "DELIVERED";
 
@@ -3740,6 +3740,14 @@ async function lookupTracking(
   const verifiedOrder = await resolveVerifiedBuudyOrder(query);
   if (verifiedOrder) {
     return verifiedOrder;
+  }
+
+  // 2b. Relay to buudy.com (checks Whop live payments for newest paid orders not yet synced to HyperSKU)
+  if (!options?.skipRelay) {
+    const relayed = await relayViaBuudyCom(query);
+    if (relayed) {
+      return relayed;
+    }
   }
 
   const key = query.toLowerCase();
