@@ -5,7 +5,6 @@ import {
   Ruler,
   Wrench,
   ShieldCheck,
-  RotateCcw,
   Sparkles,
   Star,
   CheckCircle2,
@@ -268,23 +267,7 @@ export default function BuudyShowerHeadPage() {
               {name}
             </h1>
 
-            {/* Clinically Proven Badges */}
-            <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
-              <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-[var(--plum)]">
-                <ShieldCheck size={14} className="shrink-0 text-[var(--gold)]" />
-                Clinically Proven
-              </span>
-              <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-[var(--plum)]">
-                <RotateCcw size={13} className="shrink-0 text-[var(--gold)]" />
-                Easy Returns
-              </span>
-              <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-[var(--plum)]">
-                <Sparkles size={14} className="shrink-0 text-[var(--gold)]" />
-                Dermatologist Approved
-              </span>
-            </div>
-
-            {/* Price & Early Black Friday Discount - Direct Below Name & Badges */}
+            {/* Price & Early Black Friday Discount - Direct Below Name */}
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <Price priceCents={priceCents} compareAtCents={compareAtCents} hideDiscount />
               <EarlyBlackFridaySaleBadge

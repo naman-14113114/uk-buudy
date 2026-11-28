@@ -462,7 +462,7 @@ function ReviewCard({
         </span>
       </div>
 
-      {review.title ? (
+      {review.title && review.title.trim().toLowerCase() !== review.body.trim().toLowerCase() ? (
         <h3 className="buudy-display mt-4 text-[1.3rem] sm:text-xl leading-snug text-[var(--plum)]">
           {review.title}
         </h3>
@@ -637,7 +637,7 @@ function ReviewModal({
               {review.displayDate || review.date}
             </span>
           </div>
-          {review.title ? (
+          {review.title && review.title.trim().toLowerCase() !== review.body.trim().toLowerCase() ? (
             <h3 className="buudy-display mt-6 text-3xl leading-tight text-[var(--plum)]">
               {review.title}
             </h3>
