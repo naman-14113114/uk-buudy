@@ -9,6 +9,17 @@ Read the workspace `AGENTS.md` and `CONTEXT.md`, then this file and the reposito
 remove or condense old entries. Do not record secrets, private tokens, or
 credential-bearing remote URLs.
 
+## 2026-11-28 19:10:00 +05:30 - Remove Section End Divider Lines, Installation Cards Background to White, & Revert 20-Stage Section to Latest GPT Version
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
+- Tasks Completed:
+  1. Section Divider Lines Removed: Stripped all `border-y border-[var(--border)]/60` lines from the ends of all sections (`#results-in-numbers`, `#features`, `#filtration`, `#clinical-verdict`, `#installation`) across the page.
+  2. Installation Cards Background Set to White: Updated `#installation` step cards to `bg-white` (replacing `bg-[var(--card)]`).
+  3. Reverted 20 Stages Filtration Section: Restored `ShowerHeadFiltration.tsx` strictly to the latest Kiierr-aligned tabbed component from GPT (`Follow a drop of water through all 20 stages` with pill layer buttons, white active panel, and 'Removes:' tags, with section divider borders removed).
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 114/114 static pages generated cleanly with Next.js Turbopack.
+  - Verified static HTML: 0 `border-y` divider lines across page sections, installation cards have `bg-white`, and Kiierr-aligned 20-stage pill tabs are present.
+
 ## 2026-11-28 17:55:00 +05:30 - Buudy Filtered Showerhead Page Refinements & Mask Parity
 - Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
 - Tasks Completed:

@@ -353,7 +353,7 @@ export default function BuudyShowerHeadPage() {
       {/* Result Percentages / In Numbers Section */}
       <section
         id="results-in-numbers"
-        className="border-y border-[var(--border)]/60 bg-white py-14 md:py-24"
+        className="bg-white py-14 md:py-24"
         aria-labelledby="shower-results-title"
       >
         <div className="buudy-wrap">
@@ -503,7 +503,7 @@ export default function BuudyShowerHeadPage() {
       {/* 4-Column Feature Grid (Matching User Image 4) */}
       <section
         id="features"
-        className="border-y border-[var(--border)]/60 bg-white py-14 md:py-24"
+        className="bg-white py-14 md:py-24"
         aria-labelledby="shower-features-title"
       >
         <div className="buudy-wrap">
@@ -592,7 +592,7 @@ export default function BuudyShowerHeadPage() {
       {/* Dermatologist Verdict & Clinical Transformation (Matching Kiierr + User Image 5) */}
       <section
         id="clinical-verdict"
-        className="border-y border-[var(--border)]/60 bg-white py-14 md:py-24"
+        className="bg-white py-14 md:py-24"
         aria-labelledby="dermatologist-verdict-title"
       >
         <div className="buudy-wrap">
@@ -670,7 +670,7 @@ export default function BuudyShowerHeadPage() {
       {/* Installation Steps Section (Matching Kiierr + User Image 6) */}
       <section
         id="installation"
-        className="border-y border-[var(--border)]/60 bg-[var(--cream)] scroll-mt-28 py-14 md:py-24"
+        className="bg-[var(--cream)] scroll-mt-28 py-14 md:py-24"
         aria-labelledby="shower-install-title"
       >
         <div className="buudy-wrap">
@@ -695,7 +695,7 @@ export default function BuudyShowerHeadPage() {
             {installationSteps.map(({ image, alt, title, description }, index) => (
               <li
                 key={image}
-                className="flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm"
+                className="flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-sm"
               >
                 <div className="relative aspect-3/2 w-full overflow-hidden">
                   <Image
