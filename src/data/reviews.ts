@@ -7,6 +7,7 @@ import faceWashReviews from "./reviews/buudy-face-wash-reviews.json";
 import prebioticReviews from "./reviews/buudy-prebiotics-serum-reviews.json";
 import ahaReviews from "./reviews/buudy-aha-peeling-concentrate-reviews.json";
 import renewalReviews from "./reviews/buudy-renewal-collection-box-reviews.json";
+import showerHeadReviews from "./reviews/buudy-shower-head-reviews.json";
 import { market } from "@/lib/market";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/config";
@@ -80,6 +81,7 @@ const reviewCollections = {
   "aha-peel": ahaReviews.map(normalizeStaticReview) as ProductReview[],
   "the-ultimate-renewal-collection-box": renewalReviews.map(normalizeStaticReview) as ProductReview[],
   "ultimate-renewal-collection-box": renewalReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-shower-head": showerHeadReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;
