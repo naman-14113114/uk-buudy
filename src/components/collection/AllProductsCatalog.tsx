@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Check, ShoppingBag, Truck, ShieldCheck, RefreshCw, Clock } from "lucide-react";
+import { buudyShowerHead } from "@/data/buudyShowerHead";
 import { products, type Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "@/components/cart/CartProvider";
@@ -120,6 +121,42 @@ function getProductDisplayInfo(product: Product) {
   return { title, subtitle, benefit };
 }
 
+function ShowerHeadCatalogCard() {
+  const { description, hero, href, name, status } = buudyShowerHead;
+
+  return (
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-[rgba(46,16,47,0.08)] bg-white shadow-sm transition-all duration-300 hover:border-[rgba(184,149,86,0.4)] hover:shadow-xl">
+      <Link href={href} className="relative block aspect-square w-full overflow-hidden bg-white">
+        <Image
+          src={hero.src}
+          alt={hero.alt}
+          fill
+          sizes="(min-width: 1280px) 285px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, calc(100vw - 32px)"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        />
+      </Link>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <p className="buudy-mono mb-1.5 text-[10px] font-medium tracking-[0.18em] text-[var(--plum-soft)]">
+          {status}
+        </p>
+        <h2 className="buudy-display mb-2 text-[17px] font-semibold leading-snug">
+          <Link href={href}>{name}</Link>
+        </h2>
+        <p className="mb-4 text-xs leading-relaxed text-[var(--muted)]">{description}</p>
+        <div className="mt-auto border-t border-[rgba(46,16,47,0.06)] pt-3">
+          <Link
+            href={href}
+            aria-label={`View ${name}`}
+            className="flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--plum)] px-6 py-3 text-xs font-bold uppercase tracking-wider text-[var(--cream)] transition-colors hover:bg-[var(--plum-soft)]"
+          >
+            View product
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function AllProductsCatalog() {
   const { addProduct, openCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all");
@@ -142,7 +179,7 @@ export function AllProductsCatalog() {
   }, []);
 
   const counts = useMemo(() => {
-    const res = { all: catalogProducts.length, devices: 0, skincare: 0, bundles: 0, digital: 0 };
+    const res = { all: catalogProducts.length + 1, devices: 0, skincare: 0, bundles: 0, digital: 0 };
     for (const p of catalogProducts) {
       const cat = getProductCategory(p);
       res[cat] = (res[cat] || 0) + 1;
@@ -174,6 +211,9 @@ export function AllProductsCatalog() {
 
     return list;
   }, [catalogProducts, selectedCategory, sortBy]);
+
+  const showShowerHead = selectedCategory === "all";
+  const resultCount = filteredAndSortedProducts.length + Number(showShowerHead);
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
@@ -248,7 +288,7 @@ export function AllProductsCatalog() {
           {/* Sort Selector & Product Count */}
           <div className="flex items-center justify-between md:justify-end gap-3 text-xs">
             <span className="text-[var(--muted)] buudy-mono tracking-wider uppercase text-[11px] hidden sm:inline">
-              Showing {filteredAndSortedProducts.length} items
+              Showing {resultCount} items
             </span>
             <div className="flex items-center gap-2 ml-auto">
               <label htmlFor="sort-select" className="text-[var(--muted)] buudy-mono uppercase text-[10px] tracking-wider">
@@ -273,7 +313,7 @@ export function AllProductsCatalog() {
       {/* Product Grid */}
       <section className="py-10 md:py-16">
         <div className="buudy-wrap">
-          {filteredAndSortedProducts.length === 0 ? (
+          {resultCount === 0 ? (
             <div className="text-center py-20 bg-white rounded-3xl border border-[rgba(46,16,47,0.08)] p-8">
               <p className="text-lg text-[var(--plum)] font-semibold">No products found in this category.</p>
               <button
@@ -387,6 +427,7 @@ export function AllProductsCatalog() {
                   </div>
                 );
               })}
+              {showShowerHead && <ShowerHeadCatalogCard />}
             </div>
           )}
         </div>

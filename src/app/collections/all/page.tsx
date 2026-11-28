@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AllProductsCatalog } from "@/components/collection/AllProductsCatalog";
+import { buudyShowerHead } from "@/data/buudyShowerHead";
 import { products } from "@/data/products";
 
 export const metadata: Metadata = {
@@ -38,8 +39,10 @@ export default function CollectionsAllPage() {
       "Complete collection of Buudy UK light therapy devices, clinical peptide creams, and active serums.",
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: products
-        .filter((p) => !EXCLUDED_SCHEMA_IDS.has(p.id))
+      itemListElement: [
+        ...products.filter((p) => !EXCLUDED_SCHEMA_IDS.has(p.id)),
+        buudyShowerHead,
+      ]
         .map((p, index) => ({
           "@type": "ListItem",
           position: index + 1,
