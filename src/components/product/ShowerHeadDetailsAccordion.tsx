@@ -29,7 +29,7 @@ const items: AccordionItem[] = [
     content: (
       <ul className="grid gap-2">
         {[
-          { quantity: "1", label: "Buudy Shower Head (polished chrome, 152 mm face)" },
+          { quantity: "1", label: "Buudy Filtered Showerhead (polished chrome, 152 mm face)" },
           { quantity: "1", label: "20-Stage Filter Cartridge (pre-installed inside head)" },
           { quantity: "2", label: "Extra Replacement Filter Cartridges (3 filters total)" },
           { quantity: "1", label: "Roll of Teflon Thread-Seal Tape" },
@@ -86,7 +86,7 @@ const items: AccordionItem[] = [
   {
     id: "features",
     eyebrow: "Features",
-    title: "What makes our shower head unique?",
+    title: "What makes our filtered showerhead unique?",
     content: (
       <ul className="grid gap-3">
         {[

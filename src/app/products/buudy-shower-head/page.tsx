@@ -32,7 +32,7 @@ const { compareAtCents, description, gallery, hero, href, name, priceCents } =
   buudyShowerHead;
 
 export const metadata: Metadata = {
-  title: `${name} | 20-Stage Filtered Shower Head for Healthier Hair & Skin`,
+  title: `${name} | 20-Stage Filtered Showerhead for Healthier Hair & Skin`,
   description,
   alternates: { canonical: href },
   openGraph: {
@@ -196,7 +196,7 @@ const faqs = [
   {
     question: "How often do I replace the filter?",
     answer:
-      "Every 90 days (roughly 10,000 gallons or 3 months of daily use). The Black Friday bundle includes the shower head with its pre-installed filter plus 2 extra cartridges, providing 9 full months of filtered water before needing refills. Cartridge swaps take under 30 seconds.",
+      "Every 90 days (roughly 10,000 gallons or 3 months of daily use). The Black Friday bundle includes the filtered showerhead with its pre-installed filter plus 2 extra cartridges, providing 9 full months of filtered water before needing refills. Cartridge swaps take under 30 seconds.",
   },
   {
     question: "Will it fit my shower?",
@@ -214,14 +214,14 @@ const faqs = [
       "It is significantly better for it. Chlorine and dissolved copper in municipal tap water are the primary culprits behind colour fade, brassy blonde tones, and brittle texture. Removing them protects hair dye and preserves salon colour between visits.",
   },
   {
-    question: "Can I replace the filter without replacing the head?",
+    question: "Can I replace the filter without replacing the showerhead?",
     answer:
       "Yes. The 20-stage cartridge sits inside the polished chrome housing. Simply twist open the housing by hand, insert a fresh cartridge, and screw it back together.",
   },
   {
     question: "What is included in the Black Friday bundle?",
     answer:
-      "One polished-chrome Buudy Shower Head with a pre-installed 20-stage filter cartridge, two additional replacement filter cartridges (three filters total), a roll of Teflon sealing tape, a custom rubber O-ring seal, and a step-by-step installation guide.",
+      "One polished-chrome Buudy Filtered Showerhead with a pre-installed 20-stage filter cartridge, two additional replacement filter cartridges (three filters total), a roll of Teflon sealing tape, a custom rubber O-ring seal, and a step-by-step installation guide.",
   },
 ];
 
@@ -262,7 +262,7 @@ export default function BuudyShowerHeadPage() {
                 href="#reviews"
                 className="font-medium text-[var(--plum)] hover:underline focus-visible:outline-2 focus-visible:outline-[var(--plum)]"
               >
-                1,214 verified reviews
+                2,643 verified reviews
               </a>
               <span className="text-[var(--muted)] hidden sm:inline">·</span>
               <span className="rounded-full bg-[var(--plum-soft)]/10 px-2.5 py-0.5 text-xs font-semibold text-[var(--plum)]">
@@ -295,7 +295,7 @@ export default function BuudyShowerHeadPage() {
             <div className="mt-5 flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-3.5 sm:p-4 shadow-sm">
               <Image
                 src={showerHeadAsset("13-black-friday-bundle.webp")}
-                alt="Buudy Shower Head and two spare filter cartridges"
+                alt="Buudy Filtered Showerhead and two spare filter cartridges"
                 width={112}
                 height={112}
                 className="h-20 w-20 shrink-0 rounded-xl object-cover sm:h-24 sm:w-24 border border-[var(--border)]"
@@ -367,7 +367,7 @@ export default function BuudyShowerHeadPage() {
               Proven results <em className="buudy-italic">in numbers.</em>
             </h2>
             <p className="buudy-copy mt-4 text-base sm:text-lg">
-              Clearer skin. Healthier hair. Users swapped their shower head and changed nothing
+              Clearer skin. Healthier hair. Users swapped their showerhead and changed nothing
               else about their routine. Here is what they noticed after 4 weeks:
             </p>
           </div>
@@ -378,7 +378,7 @@ export default function BuudyShowerHeadPage() {
             <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--cream)] shadow-md">
               <Image
                 src={showerHeadAsset("04-spray-face.webp")}
-                alt="Buudy Shower Head circular spray face with precision micro-nozzles"
+                alt="Buudy Filtered Showerhead circular spray face with precision micro-nozzles"
                 fill
                 sizes={sectionImageSizes}
                 className="object-cover"
@@ -582,7 +582,7 @@ export default function BuudyShowerHeadPage() {
           </div>
           <Image
             src={showerHeadAsset("09-shower-routine.webp")}
-            alt="A person rinsing their hair beneath the running filtered shower head"
+            alt="A person rinsing their hair beneath the running filtered showerhead"
             width={1536}
             height={1024}
             sizes="(min-width: 1280px) 780px, (min-width: 768px) 65vw, calc(100vw - 32px)"
@@ -701,7 +701,7 @@ export default function BuudyShowerHeadPage() {
           </div>
           <Image
             src={showerHeadAsset("08-fitting.webp")}
-            alt="Hand supporting the chrome shower head at the fixed arm connection"
+            alt="Hand supporting the chrome filtered showerhead at the fixed arm connection"
             width={1536}
             height={1024}
             sizes={sectionImageSizes}
@@ -790,7 +790,7 @@ export default function BuudyShowerHeadPage() {
               <span className="font-bold text-[var(--plum)]">4.8 / 5.0</span>
               <span className="text-[var(--muted)]">·</span>
               <span className="text-sm font-semibold text-[var(--muted)]">
-                94% rate it 5 stars (1,214+ reviews)
+                94% rate it 5 stars (2,600+ reviews)
               </span>
             </div>
           </div>
