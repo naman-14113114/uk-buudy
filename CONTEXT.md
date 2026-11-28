@@ -9,6 +9,20 @@ Read the workspace `AGENTS.md` and `CONTEXT.md`, then this file and the reposito
 remove or condense old entries. Do not record secrets, private tokens, or
 credential-bearing remote URLs.
 
+## 2026-11-28 19:35:00 +05:30 - Kiierr-Aligned 20-Stage Dark Capsule Filtration Section
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
+- Tasks Completed:
+  1. Replaced 20-Stage Filtration Component with Kiierr Vertical Capsule Section:
+     - Built `ShowerHeadFiltration.tsx` to match `kiierr.com/products/radiance-flow` exactly, following the Buudy dark palette (`#141215` / `#18111b`) and typography (`font-playfair` / `Inter`).
+     - Left Column: Vertical capsule pill (`rounded-[92px]`, dark metallic gradient, inner border `rgba(255,255,255,0.12)`) containing stacked disc layers textured with actual stage filter media (`mesh.webp`, `kdf.webp`, `vitaminc.webp`, `alkaline.webp`, `carbon.webp`). Beside the capsule: vertical trigger list with connector lines `—` (`1–5 Mesh pre-filter`, `6–10 KDF-55`, `11–13 Vitamin C core`, `14–17 Alkaline ion core`, `18–20 Carbon polish`, `↓ What reaches you`).
+     - Dynamic Layer Lighting: Tapping either a line or any disc in the capsule illuminates that stage's discs with rich glowing color (e.g. coral/amber/gold glow at 100% opacity), while inactive layers remain dimmed at 25% opacity. Selecting "What reaches you" illuminates all discs in champagne radiance.
+     - Right Column: Features the Playfair header ("Follow a drop of water through all 20 stages." and "Tap a layer of the cartridge to see what it does.") and the dark rounded detail card (`bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10`) featuring a large watermark numeral in the top-right corner (`1`, `2`, `3`, `4`, `5`, `✓`), stage title, description, and bottom `Removes` badge with pill tags.
+     - Preserved zero divider lines on section bounds (`border-y` absent).
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 114/114 static pages compiled cleanly with Next.js Turbopack.
+  - Verified static HTML: generated markup contains the vertical capsule, connector lines, detail card with watermark, and all 20 stage breakdown elements.
+
 ## 2026-11-28 19:20:00 +05:30 - Remove Synthetic Review Titles & Remove 3 Clinically Proven Badges Under Product Name
 - Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
 - Tasks Completed:
