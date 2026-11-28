@@ -9,6 +9,21 @@ Read the workspace `AGENTS.md` and `CONTEXT.md`, then this file and the reposito
 remove or condense old entries. Do not record secrets, private tokens, or
 credential-bearing remote URLs.
 
+## 2026-11-28 19:40:00 +05:30 - Remove Delivery Note Below CTA & Integrate Mask Sticky Add to Cart
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
+- Tasks Completed:
+  1. Removed Free Tracked Delivery Note Below Add to Cart CTA:
+     - Removed the `div` containing "🚚 Free UK Tracked Delivery \n Dispatched within 24h · 30-Day Money-Back Guarantee" from beneath the Buy Box Add to Cart button in `src/app/products/buudy-shower-head/page.tsx`.
+     - Preserved the countdown delivery timer above the Add to Cart button ("Free delivery: Order within MM:SS to get as fast as...") intact.
+  2. Integrated Mask Sticky Add to Cart:
+     - Imported `StickyAddToCart` from `@/components/product/StickyAddToCart` and `showerHeadCartProduct` from `@/data/buudyShowerHead`.
+     - Placed `<StickyAddToCart product={showerHeadCartProduct} />` on the showerhead product page right above `</article>`.
+     - Observed `id="product-hero"` so when user scrolls past hero section, the floating pill bar slides in from bottom with product thumbnail, title, price (£149), and "Add to cart" CTA button with lottie loading state.
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 114/114 static pages generated cleanly with Next.js Turbopack.
+  - Verified static HTML: "Free UK Tracked Delivery" is absent below CTA, countdown timer is present above CTA, and Sticky Add to Cart is rendered.
+
 ## 2026-11-28 19:35:00 +05:30 - Kiierr-Aligned 20-Stage Dark Capsule Filtration Section
 - Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
 - Tasks Completed:

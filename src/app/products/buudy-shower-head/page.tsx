@@ -8,7 +8,6 @@ import {
   Sparkles,
   Star,
   CheckCircle2,
-  Truck,
   Layers,
   Heart,
   Zap,
@@ -20,11 +19,13 @@ import { ProductReviewsSection } from "@/components/product/ProductReviewsSectio
 import { ShowerHeadAddToCart } from "@/components/product/ShowerHeadAddToCart";
 import { ShowerHeadDetailsAccordion } from "@/components/product/ShowerHeadDetailsAccordion";
 import { ShowerHeadFiltration } from "@/components/product/ShowerHeadFiltration";
+import { StickyAddToCart } from "@/components/product/StickyAddToCart";
 import { Price } from "@/components/ui/Price";
 import {
   buudyShowerHead,
   showerHeadAsset,
   showerHeadBundleDescription,
+  showerHeadCartProduct,
 } from "@/data/buudyShowerHead";
 import { percentOff } from "@/lib/money";
 
@@ -317,14 +318,6 @@ export default function BuudyShowerHeadPage() {
             {/* Delivery Countdown Timer + Add to Cart CTA */}
             <div className="mt-4">
               <ShowerHeadAddToCart />
-            </div>
-
-            {/* Delivery & Dispatch Note */}
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm text-[var(--muted)]">
-              <span className="flex items-center gap-1.5 font-medium text-[var(--plum)]">
-                <Truck size={16} className="text-[var(--gold)]" /> Free UK Tracked Delivery
-              </span>
-              <span>Dispatched within 24h · 30-Day Money-Back Guarantee</span>
             </div>
 
             {/* Product Details Accordion - Matching Mask Page Points & Icons */}
@@ -768,6 +761,9 @@ export default function BuudyShowerHeadPage() {
 
       {/* FAQ SECTION - PLACED DIRECTLY BELOW REVIEWS */}
       <FAQSection faqs={faqs} />
+
+      {/* Sticky Floating Add to Cart - Matching Mask Parity */}
+      <StickyAddToCart product={showerHeadCartProduct} />
     </article>
   );
 }
