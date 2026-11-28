@@ -5,6 +5,7 @@ import {
   Ruler,
   Wrench,
   ShieldCheck,
+  RotateCcw,
   Sparkles,
   Star,
   CheckCircle2,
@@ -156,13 +157,7 @@ const installationSteps = [
   },
 ];
 
-const measurements = [
-  { label: "Spray face diameter", value: "152 mm" },
-  { label: "Overall depth", value: "131 mm" },
-  { label: "Threaded connection", value: "G 1/2 universal" },
-  { label: "Included cartridges", value: "3 filters (pre-installed + 2 spares)" },
-  { label: "Finish", value: "Mirror-polished chrome" },
-];
+
 
 const customerQuotes = [
   {
@@ -264,10 +259,6 @@ export default function BuudyShowerHeadPage() {
               >
                 2,643 verified reviews
               </a>
-              <span className="text-[var(--muted)] hidden sm:inline">·</span>
-              <span className="rounded-full bg-[var(--plum-soft)]/10 px-2.5 py-0.5 text-xs font-semibold text-[var(--plum)]">
-                🔥 18 sold in last 24h
-              </span>
             </div>
 
             <h1
@@ -277,14 +268,24 @@ export default function BuudyShowerHeadPage() {
               {name}
             </h1>
 
-            <p className="buudy-copy mt-3 max-w-lg text-base sm:text-lg leading-relaxed">
-              Healthier hair and skin starts with cleaner water. 20-stage filtration with a
-              replaceable cartridge eliminates chlorine, rust, and heavy minerals that dry out your
-              scalp and irritate your skin.
-            </p>
+            {/* Clinically Proven Badges */}
+            <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
+              <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-[var(--plum)]">
+                <ShieldCheck size={14} className="shrink-0 text-[var(--gold)]" />
+                Clinically Proven
+              </span>
+              <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-[var(--plum)]">
+                <RotateCcw size={13} className="shrink-0 text-[var(--gold)]" />
+                Easy Returns
+              </span>
+              <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-[var(--plum)]">
+                <Sparkles size={14} className="shrink-0 text-[var(--gold)]" />
+                Dermatologist Approved
+              </span>
+            </div>
 
-            {/* Price & Early Black Friday Discount */}
-            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+            {/* Price & Early Black Friday Discount - Direct Below Name & Badges */}
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <Price priceCents={priceCents} compareAtCents={compareAtCents} hideDiscount />
               <EarlyBlackFridaySaleBadge
                 discountText={`${percentOff(priceCents, compareAtCents)}% OFF`}
@@ -292,7 +293,7 @@ export default function BuudyShowerHeadPage() {
             </div>
 
             {/* Black Friday Bundle Presentation Card */}
-            <div className="mt-5 flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-3.5 sm:p-4 shadow-sm">
+            <div className="mt-4 flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-3.5 sm:p-4 shadow-sm">
               <Image
                 src={showerHeadAsset("13-black-friday-bundle.webp")}
                 alt="Buudy Filtered Showerhead and two spare filter cartridges"
@@ -310,28 +311,28 @@ export default function BuudyShowerHeadPage() {
               </div>
             </div>
 
-            {/* Feature Bullets */}
-            <ul className="mt-5 space-y-3.5 border-y border-[var(--border)] py-4 text-sm sm:text-base">
-              <li className="flex items-center gap-3">
-                <Droplets size={19} className="shrink-0 text-[var(--plum-soft)]" aria-hidden="true" />
-                <span>20-stage filtration with a replaceable cartridge</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Ruler size={19} className="shrink-0 text-[var(--plum-soft)]" aria-hidden="true" />
-                <span>152 mm spray face with pressure-boosting micro-nozzles</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Wrench size={19} className="shrink-0 text-[var(--plum-soft)]" aria-hidden="true" />
-                <span>Universal G 1/2 connection fits standard fixed shower arms</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Sparkles size={19} className="shrink-0 text-[var(--plum-soft)]" aria-hidden="true" />
-                <span>Includes Teflon tape, rubber O-ring seal, and pre-installed filter</span>
-              </li>
+            {/* Benefit-Driven Feature Bullets (1 concise line each) */}
+            <ul className="mt-4 mb-4 flex flex-col gap-2 pl-0.5">
+              {[
+                { text: "20-stage filtration eliminates 99% of free chlorine & heavy metals", icon: Droplets },
+                { text: "Protects skin lipid barrier to relieve post-shower dryness & itch", icon: ShieldCheck },
+                { text: "Laser-cut micro-nozzles boost spray pressure while conditioning water", icon: Sparkles },
+                { text: "Neutralizes chloramines & balances pH to prevent hair frizz & breakage", icon: CheckCircle2 },
+              ].map(({ text, icon: Icon }) => (
+                <li
+                  key={text}
+                  className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display"
+                >
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
+                    <Icon size={18} strokeWidth={1.5} />
+                  </span>
+                  <span>{text}</span>
+                </li>
+              ))}
             </ul>
 
-            {/* CTA Button */}
-            <div className="mt-5">
+            {/* Delivery Countdown Timer + Add to Cart CTA */}
+            <div className="mt-4">
               <ShowerHeadAddToCart />
             </div>
 
@@ -447,9 +448,9 @@ export default function BuudyShowerHeadPage() {
         className="buudy-wrap py-14 md:py-24"
         aria-labelledby="why-filter-title"
       >
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center xl:gap-14">
-          {/* Left Column: Pool Water Image (Matching Kiierr) */}
-          <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--border)] shadow-lg">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-stretch xl:gap-14">
+          {/* Left Column: Pool Water Image - Matches Height of Content on Right */}
+          <div className="relative min-h-[360px] w-full overflow-hidden rounded-[2rem] border border-[var(--border)] shadow-lg lg:h-full lg:min-h-0">
             <Image
               src={showerHeadAsset("pool-water-rinse.webp")}
               alt="Woman in swimming pool illustrating municipal water chlorine levels"
@@ -477,15 +478,12 @@ export default function BuudyShowerHeadPage() {
               all of it go straight in.
             </p>
 
-            {/* 3 Problem Points */}
-            <div className="mt-8 space-y-4">
+            {/* 3 Problem Points (Simple, unboxed list) */}
+            <div className="mt-8 space-y-5">
               {waterProblems.map(({ icon: Icon, title, description }) => (
-                <div
-                  key={title}
-                  className="flex gap-4 rounded-2xl border border-[var(--border)] bg-white p-4 sm:p-5 shadow-sm"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--cream)] text-[var(--plum)] border border-[var(--border)]">
-                    <Icon size={22} />
+                <div key={title} className="flex gap-4 items-start">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--card)] text-[var(--gold)] border border-[var(--border)] shadow-2xs">
+                    <Icon size={20} />
                   </div>
                   <div>
                     <h3 className="font-playfair text-lg font-bold text-[var(--plum)] sm:text-xl leading-snug">
@@ -669,51 +667,10 @@ export default function BuudyShowerHeadPage() {
         </div>
       </section>
 
-      {/* Shower Fit & Measurements Section */}
-      <section
-        id="fit"
-        className="scroll-mt-28 bg-[var(--cream)] py-14 md:py-24"
-        aria-labelledby="shower-fit-title"
-      >
-        <div className="buudy-wrap grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-11 lg:gap-16">
-          <div>
-            <p className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
-              Universal Compatibility
-            </p>
-            <h2
-              id="shower-fit-title"
-              className="buudy-display mt-2 text-[2.15rem] leading-[1.08] md:text-5xl"
-            >
-              Check your <em className="buudy-italic">shower fit.</em>
-            </h2>
-            <p className="buudy-copy mt-4 max-w-md text-base leading-relaxed">
-              Designed to screw directly onto any standard fixed shower arm with a universal G 1/2
-              thread. No special tools, adaptors, or plumbing modifications required.
-            </p>
-            <dl className="mt-6 divide-y divide-[var(--border)]/65 border-y border-[var(--border)]/65">
-              {measurements.map(({ label, value }) => (
-                <div key={label} className="flex items-baseline justify-between gap-4 py-3 text-sm">
-                  <dt className="text-[var(--muted)]">{label}</dt>
-                  <dd className="shrink-0 font-semibold text-[var(--plum)]">{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-          <Image
-            src={showerHeadAsset("08-fitting.webp")}
-            alt="Hand supporting the chrome filtered showerhead at the fixed arm connection"
-            width={1536}
-            height={1024}
-            sizes={sectionImageSizes}
-            className="w-full rounded-[2rem] border border-[var(--border)] shadow-md"
-          />
-        </div>
-      </section>
-
       {/* Installation Steps Section (Matching Kiierr + User Image 6) */}
       <section
         id="installation"
-        className="border-y border-[var(--border)]/60 bg-white scroll-mt-28 py-14 md:py-24"
+        className="border-y border-[var(--border)]/60 bg-[var(--cream)] scroll-mt-28 py-14 md:py-24"
         aria-labelledby="shower-install-title"
       >
         <div className="buudy-wrap">
@@ -738,9 +695,9 @@ export default function BuudyShowerHeadPage() {
             {installationSteps.map(({ image, alt, title, description }, index) => (
               <li
                 key={image}
-                className="flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--cream)] p-5 shadow-sm"
+                className="flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm"
               >
-                <div className="relative aspect-3/2 w-full overflow-hidden rounded-xl border border-[var(--border)]">
+                <div className="relative aspect-3/2 w-full overflow-hidden">
                   <Image
                     src={showerHeadAsset(image)}
                     alt={alt}
@@ -749,18 +706,19 @@ export default function BuudyShowerHeadPage() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="buudy-display mt-4 flex items-center gap-2 text-xl leading-tight sm:text-2xl text-[var(--plum)]">
-                  <span
-                    className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--plum)] text-xs font-bold text-white"
-                    aria-hidden="true"
-                  >
-                    {index + 1}
-                  </span>
-                  {title}
-                </h3>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
-                  {description}
-                </p>
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] font-sans text-xs font-bold text-[var(--cream)]">
+                      {index + 1}
+                    </span>
+                    <h3 className="buudy-display text-lg font-bold text-[var(--plum)]">
+                      {title}
+                    </h3>
+                  </div>
+                  <p className="buudy-copy mt-2 text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
+                    {description}
+                  </p>
+                </div>
               </li>
             ))}
           </ol>

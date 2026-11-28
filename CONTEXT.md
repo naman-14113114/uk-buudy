@@ -9,6 +9,30 @@ Read the workspace `AGENTS.md` and `CONTEXT.md`, then this file and the reposito
 remove or condense old entries. Do not record secrets, private tokens, or
 credential-bearing remote URLs.
 
+## 2026-11-28 17:55:00 +05:30 - Buudy Filtered Showerhead Page Refinements & Mask Parity
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
+- Tasks Completed:
+  1. Hero Right Side Alignment:
+     - Replaced bullet points with 4 concise one-line benefit bullets (removed specs/what's included bullets).
+     - Added countdown delivery timer ("Free delivery: Order within MM:SS to get as fast as...") with shipping info tooltip directly above Add to Cart button (exact match to mask page).
+     - Removed paragraph description under product heading; direct price and discount badge below name and clinically proven badges.
+     - Removed "🔥 18 sold in last 24h" tag to keep right hero clean and identical to mask styling.
+  2. 20 Stages Component Restored:
+     - Restored `ShowerHeadFiltration.tsx` to commit `48200c5` (the interactive dark plum 2-column component with vertical stage progression, active stage card, and 20-stage core cutaway callout).
+  3. Sections 3 & 4 Cleaned & Aligned:
+     - Removed Section 3 (`#fit` / "Check your shower fit" table and `08-fitting.webp`) completely.
+     - Fixed Section 4 (`#installation` / "Installs in 2 minutes"): set background to `bg-[var(--cream)]` (not white); formatted cards with images flush edge-to-edge at top with `bg-[var(--card)]` and padded content below.
+  4. Pool Water Section Cleaned:
+     - In `#why-filter` ("Most people spend 10 minutes a day rinsing in pool water"): left image stretches to match right column height (`lg:items-stretch`, `lg:h-full`); removed bulky white card containers around the 3 problem points for clean, simple icon + text layout.
+  5. Accordions Aligned to Mask:
+     - Ordered: Features ("What makes our filtered showerhead unique?"), Specifications ("The numbers, in detail"), In the Box ("Everything you need").
+     - Removed "Step-by-Step Quick Installation Guide" from In the Box.
+     - Removed bulky box container wrappers from Specifications, rendering clean rows with icons matching `ProductDetailsAccordion.tsx`.
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 114/114 static pages generated successfully in Next.js Turbopack.
+  - Verified static HTML: "18 sold" is absent, countdown timer is present, guide is removed, `#fit` is removed, 20 stages selector is present, pool water and installation sections render cleanly.
+
 ## 2026-11-28 17:40:00 +05:30 - Product Rebrand to "Buudy Filtered Showerhead" & Multi-Store Review Ingestion
 - Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
 - Tasks Completed:

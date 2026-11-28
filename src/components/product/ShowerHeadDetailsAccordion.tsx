@@ -8,10 +8,7 @@ import {
   Wrench,
   ShieldCheck,
   Sparkles,
-  Layers,
   Package,
-  Scale,
-  CheckCircle2,
 } from "lucide-react";
 
 interface AccordionItem {
@@ -22,67 +19,6 @@ interface AccordionItem {
 }
 
 const items: AccordionItem[] = [
-  {
-    id: "bundle",
-    eyebrow: "In the Box",
-    title: "Everything you need",
-    content: (
-      <ul className="grid gap-2">
-        {[
-          { quantity: "1", label: "Buudy Filtered Showerhead (polished chrome, 152 mm face)" },
-          { quantity: "1", label: "20-Stage Filter Cartridge (pre-installed inside head)" },
-          { quantity: "2", label: "Extra Replacement Filter Cartridges (3 filters total)" },
-          { quantity: "1", label: "Roll of Teflon Thread-Seal Tape" },
-          { quantity: "1", label: "Rubber O-Ring Flow Seal" },
-          { quantity: "1", label: "Step-by-Step Quick Installation Guide" },
-        ].map((item) => (
-          <li
-            key={item.label}
-            className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[rgba(247,241,232,.55)] px-4 py-3"
-          >
-            <span className="flex items-center gap-3">
-              <span className="buudy-mono text-[var(--gold)] font-bold">{item.quantity}</span>
-              <span className="text-xs sm:text-sm font-semibold text-[var(--plum)]">
-                {item.label}
-              </span>
-            </span>
-          </li>
-        ))}
-      </ul>
-    ),
-  },
-  {
-    id: "specs",
-    eyebrow: "Specifications",
-    title: "The numbers, in detail",
-    content: (
-      <dl className="grid gap-2.5">
-        {[
-          { label: "Spray face diameter", value: "152 mm", icon: Ruler },
-          { label: "Overall depth", value: "131 mm", icon: Ruler },
-          { label: "Thread connection", value: "G 1/2 universal (fixed arm)", icon: Wrench },
-          { label: "Filter cartridge lifespan", value: "90 days / ~10,000 gallons", icon: Droplets },
-          { label: "Included cartridges", value: "3 filters (pre-installed + 2 spares)", icon: Package },
-          { label: "Hardware finish", value: "Mirror-polished chrome", icon: Sparkles },
-        ].map(({ label, value, icon: Icon }) => (
-          <div
-            key={label}
-            className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[rgba(247,241,232,.35)] px-4 py-2.5"
-          >
-            <dt className="flex items-center gap-2">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
-                <Icon size={15} strokeWidth={2} />
-              </span>
-              <span className="text-xs sm:text-sm font-medium text-[var(--muted)]">{label}</span>
-            </dt>
-            <dd className="text-xs sm:text-sm font-semibold text-[var(--plum)] text-right">
-              {value}
-            </dd>
-          </div>
-        ))}
-      </dl>
-    ),
-  },
   {
     id: "features",
     eyebrow: "Features",
@@ -119,27 +55,27 @@ const items: AccordionItem[] = [
           return (
             <li
               key={feature.title}
-              className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 shadow-xs"
+              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-4"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 flex-none place-items-center rounded-xl bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                  <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
                     <Icon size={18} strokeWidth={1.8} />
                   </span>
                   <div>
-                    <p className="font-sans text-xs sm:text-sm font-bold text-[var(--plum)]">
+                    <p className="font-sans text-sm font-bold text-[var(--plum)]">
                       {feature.title}
                     </p>
-                    <p className="font-sans text-[11px] sm:text-xs italic font-semibold text-[var(--gold)]">
+                    <p className="font-sans mt-0.5 text-xs italic font-semibold text-[var(--gold)]">
                       {feature.kicker}
                     </p>
                   </div>
                 </div>
-                <span className="buudy-display text-xs text-[var(--gold)] font-medium self-start mt-0.5">
+                <span className="buudy-display text-sm text-[var(--gold)] font-medium self-start mt-1">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
               </div>
-              <p className="mt-1 text-xs leading-relaxed text-[var(--muted)] pl-12">
+              <p className="font-sans mt-1 text-xs leading-5 text-[var(--muted)] pl-13">
                 {feature.body}
               </p>
             </li>
@@ -149,28 +85,60 @@ const items: AccordionItem[] = [
     ),
   },
   {
-    id: "installation",
-    eyebrow: "Installation",
-    title: "4 simple setup steps",
+    id: "specs",
+    eyebrow: "Specifications",
+    title: "The numbers, in detail",
     content: (
-      <ul className="grid gap-2.5">
+      <dl className="grid gap-3">
         {[
-          { step: "1", title: "Remove existing head", desc: "Twist off your old shower head by hand and clean the exposed arm threads." },
-          { step: "2", title: "Apply Teflon tape", desc: "Wrap the included thread-seal tape 2–3 turns clockwise around the threads." },
-          { step: "3", title: "Fit seal and screw on", desc: "Seat the rubber O-ring into the inlet, align, and turn clockwise until snug." },
-          { step: "4", title: "Run for 60 seconds", desc: "Turn on the shower for 60 seconds to prime the filter media, then shower normally." },
-        ].map((step) => (
-          <li
-            key={step.step}
-            className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[rgba(247,241,232,.4)] p-3"
+          { label: "Spray face diameter", value: "152 mm", icon: Ruler },
+          { label: "Overall depth", value: "131 mm", icon: Ruler },
+          { label: "Thread connection", value: "G 1/2 universal (fixed arm)", icon: Wrench },
+          { label: "Filter cartridge lifespan", value: "90 days / ~10,000 gallons", icon: Droplets },
+          { label: "Included cartridges", value: "3 filters (pre-installed + 2 spares)", icon: Package },
+          { label: "Hardware finish", value: "Mirror-polished chrome", icon: Sparkles },
+        ].map(({ label, value, icon: Icon }) => (
+          <div
+            key={label}
+            className="grid grid-cols-[1fr_auto] gap-4 items-center"
           >
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-xs font-bold text-white">
-              {step.step}
+            <dt className="flex items-center gap-2">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
+                <Icon size={15} strokeWidth={2} />
+              </span>
+              <span className="font-sans text-sm font-medium text-[var(--muted)]">{label}</span>
+            </dt>
+            <dd className="font-sans text-right text-sm font-semibold leading-5 text-[var(--plum)]">
+              {value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    ),
+  },
+  {
+    id: "bundle",
+    eyebrow: "In the box",
+    title: "Everything you need",
+    content: (
+      <ul className="grid gap-2">
+        {[
+          { quantity: "1", label: "Buudy Filtered Showerhead (polished chrome, 152 mm face)" },
+          { quantity: "1", label: "20-Stage Filter Cartridge (pre-installed inside head)" },
+          { quantity: "2", label: "Extra Replacement Filter Cartridges (3 filters total)" },
+          { quantity: "1", label: "Roll of Teflon Thread-Seal Tape" },
+          { quantity: "1", label: "Rubber O-Ring Flow Seal" },
+        ].map((item) => (
+          <li
+            key={item.label}
+            className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[rgba(247,241,232,.55)] px-4 py-3"
+          >
+            <span className="flex items-center gap-3">
+              <span className="buudy-mono font-bold text-[var(--gold)]">{item.quantity}</span>
+              <span className="text-xs sm:text-sm font-semibold text-[var(--plum)]">
+                {item.label}
+              </span>
             </span>
-            <div>
-              <p className="text-xs sm:text-sm font-bold text-[var(--plum)]">{step.title}</p>
-              <p className="text-xs text-[var(--muted)] mt-0.5">{step.desc}</p>
-            </div>
           </li>
         ))}
       </ul>
@@ -194,13 +162,16 @@ export function ShowerHeadDetailsAccordion() {
   }
 
   return (
-    <div className="mt-6 divide-y divide-[var(--border)] border-b border-[var(--border)]">
+    <section
+      aria-label="Product details"
+      className="mt-8 rounded-[18px] border border-[var(--border)] bg-[rgba(247,241,232,.64)] px-5"
+    >
       {items.map((item) => {
         const isOpen = openItems.has(item.id);
         const contentId = `shower-detail-${item.id}`;
 
         return (
-          <div key={item.id} className="last:border-b-0">
+          <div key={item.id} className="border-b border-[var(--border)] last:border-b-0">
             <div
               aria-controls={contentId}
               aria-expanded={isOpen}
@@ -243,6 +214,6 @@ export function ShowerHeadDetailsAccordion() {
           </div>
         );
       })}
-    </div>
+    </section>
   );
 }
