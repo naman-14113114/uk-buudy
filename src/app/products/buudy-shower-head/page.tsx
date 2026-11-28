@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  ChevronDown,
   Droplets,
   Ruler,
   Wrench,
@@ -10,8 +9,6 @@ import {
   Star,
   CheckCircle2,
   Truck,
-  RotateCcw,
-  Award,
   Layers,
   Heart,
   Zap,
@@ -21,6 +18,7 @@ import { FAQSection } from "@/components/product/FAQSection";
 import { OmniluxProductGallery } from "@/components/product/OmniluxProductGallery";
 import { ProductReviewsSection } from "@/components/product/ProductReviewsSection";
 import { ShowerHeadAddToCart } from "@/components/product/ShowerHeadAddToCart";
+import { ShowerHeadDetailsAccordion } from "@/components/product/ShowerHeadDetailsAccordion";
 import { ShowerHeadFiltration } from "@/components/product/ShowerHeadFiltration";
 import { Price } from "@/components/ui/Price";
 import {
@@ -51,39 +49,6 @@ export const metadata: Metadata = {
     images: [hero.src],
   },
 };
-
-const sideDetails = [
-  {
-    eyebrow: "Bundle",
-    title: "What’s in the box",
-    description:
-      "One polished-chrome shower head with its pre-installed filter, plus two extra replacement filters (three cartridges in total), Teflon sealing tape, rubber O-ring, and quick-start card.",
-  },
-  {
-    eyebrow: "Specifications",
-    title: "Fit and dimensions",
-    description:
-      "152 mm wide circular spray face, 131 mm overall depth, and universal G 1/2 thread for a compatible fixed shower arm.",
-    href: "#fit",
-    link: "Check your fit",
-  },
-  {
-    eyebrow: "Filter",
-    title: "20-stage filtration",
-    description:
-      "Water passes through the 20-stage replaceable cartridge inside the chrome housing before reaching the micro-nozzle spray face.",
-    href: "#filtration",
-    link: "Explore the 20 stages",
-  },
-  {
-    eyebrow: "Installation",
-    title: "Fitting your shower head",
-    description:
-      "Installs in 2 minutes with no plumber or tools. Wrap the Teflon tape, insert the O-ring, and screw on hand-tight.",
-    href: "#installation",
-    link: "See installation steps",
-  },
-];
 
 const perceptionResults = [
   {
@@ -375,61 +340,11 @@ export default function BuudyShowerHeadPage() {
               <span className="flex items-center gap-1.5 font-medium text-[var(--plum)]">
                 <Truck size={16} className="text-[var(--gold)]" /> Free UK Tracked Delivery
               </span>
-              <span>Dispatched within 24h</span>
+              <span>Dispatched within 24h · 30-Day Money-Back Guarantee</span>
             </div>
 
-            {/* Trust Badges Row */}
-            <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl border border-[var(--border)] bg-white/60 p-3 text-center text-xs sm:text-sm">
-              <div className="flex flex-col items-center gap-1">
-                <RotateCcw size={18} className="text-[var(--plum-soft)]" />
-                <span className="font-semibold text-[var(--plum)]">30-Day Trial</span>
-                <span className="text-[11px] text-[var(--muted)]">Money-back guarantee</span>
-              </div>
-              <div className="flex flex-col items-center gap-1 border-x border-[var(--border)]">
-                <ShieldCheck size={18} className="text-[var(--plum-soft)]" />
-                <span className="font-semibold text-[var(--plum)]">2-Year Warranty</span>
-                <span className="text-[11px] text-[var(--muted)]">Solid chrome build</span>
-              </div>
-              <div className="flex flex-col items-center gap-1">
-                <Award size={18} className="text-[var(--plum-soft)]" />
-                <span className="font-semibold text-[var(--plum)]">NSF-177 Blend</span>
-                <span className="text-[11px] text-[var(--muted)]">Lab-tested media</span>
-              </div>
-            </div>
-
-            {/* Product Details Accordion */}
-            <div className="mt-6 divide-y divide-[var(--border)] border-b border-[var(--border)]">
-              {sideDetails.map(({ eyebrow, title, description: detail, href: target, link }) => (
-                <details key={title} name="buudy-shower-product-details" className="group">
-                  <summary className="flex w-full cursor-pointer list-none items-center justify-between gap-5 rounded-sm py-4 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--plum)] [&::-webkit-details-marker]:hidden">
-                    <span>
-                      <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
-                        {eyebrow}
-                      </span>
-                      <span className="font-playfair mt-1 block text-xl text-[var(--plum)]">
-                        {title}
-                      </span>
-                    </span>
-                    <ChevronDown
-                      size={19}
-                      aria-hidden="true"
-                      className="shrink-0 text-[var(--plum)] transition-transform duration-200 group-open:rotate-180"
-                    />
-                  </summary>
-                  <p className="buudy-copy pb-4 pr-5 text-sm leading-relaxed">
-                    {detail}
-                    {target && (
-                      <a
-                        href={target}
-                        className="mt-2 block w-fit font-semibold text-[var(--plum)] underline underline-offset-4 hover:text-[var(--plum-soft)]"
-                      >
-                        {link}
-                      </a>
-                    )}
-                  </p>
-                </details>
-              ))}
-            </div>
+            {/* Product Details Accordion - Matching Mask Page Points & Icons */}
+            <ShowerHeadDetailsAccordion />
           </div>
         </div>
       </section>
@@ -457,76 +372,54 @@ export default function BuudyShowerHeadPage() {
             </p>
           </div>
 
-          {/* 4 Percentage Cards + Product Visual */}
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-stretch lg:gap-8">
-            {/* Visual Panel with Perception Callout */}
-            <div className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-[#261c2b] text-[var(--cream)] p-6 sm:p-8 min-h-[380px] shadow-xl">
+          {/* 4 Percentage Cards + Product Visual (Kiierr Style Clean Image & Number Cards) */}
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-8">
+            {/* Clean Product Visual (No overlays or text boxes over image) */}
+            <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--cream)] shadow-md">
               <Image
                 src={showerHeadAsset("04-spray-face.webp")}
                 alt="Buudy Shower Head circular spray face with precision micro-nozzles"
                 fill
                 sizes={sectionImageSizes}
-                className="object-cover opacity-60 mix-blend-luminosity"
+                className="object-cover"
               />
-              <div className="relative z-10">
-                <span className="inline-block rounded-full bg-[var(--gold)] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[var(--plum)]">
-                  4-Week Study
-                </span>
-                <h3 className="buudy-display mt-4 text-2xl sm:text-3xl text-white">
-                  All hair & skin types.
-                </h3>
-                <p className="mt-2 max-w-xs text-xs sm:text-sm text-[var(--cream)]/80 leading-relaxed">
-                  Conducted across households in varying hard water regions throughout the UK.
-                </p>
-              </div>
-
-              <div className="relative z-10 mt-8 rounded-xl border border-white/20 bg-black/40 p-4 backdrop-blur-md">
-                <p className="text-xs font-semibold text-[var(--gold)]">
-                  *Results from independent consumer perception testing
-                </p>
-                <p className="mt-1 text-xs text-[var(--cream)]/75">
-                  100% of participants noticed an immediate improvement in water clarity and odor.
-                </p>
-              </div>
             </div>
 
             {/* 4 Percentage Result Boxes */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {perceptionResults.map(({ percentage, title, description }, idx) => (
-                <div
-                  key={title}
-                  className={`flex flex-col justify-between rounded-2xl p-5 sm:p-6 transition-transform hover:-translate-y-1 duration-200 border ${
-                    idx === 0
-                      ? "border-[var(--plum)] bg-[var(--plum)] text-[var(--cream)] shadow-md"
-                      : "border-[var(--border)] bg-[var(--cream)] text-[var(--plum)]"
-                  }`}
-                >
-                  <div className="flex items-baseline justify-between">
-                    <span className="buudy-display text-4xl sm:text-5xl font-bold tracking-tight">
-                      {percentage}
-                    </span>
-                    <span
-                      className={`text-xs font-semibold uppercase tracking-wider ${
-                        idx === 0 ? "text-[var(--gold)]" : "text-[var(--plum-soft)]"
-                      }`}
-                    >
-                      Study verified
-                    </span>
+            <div className="flex flex-col justify-between gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {perceptionResults.map(({ percentage, title, description }, idx) => (
+                  <div
+                    key={title}
+                    className={`flex flex-col justify-between rounded-2xl p-5 sm:p-6 transition-transform hover:-translate-y-1 duration-200 border ${
+                      idx === 0
+                        ? "border-[var(--plum)] bg-[var(--plum)] text-[var(--cream)] shadow-md"
+                        : "border-[var(--border)] bg-[var(--cream)] text-[var(--plum)]"
+                    }`}
+                  >
+                    <div>
+                      <span className="buudy-display text-4xl sm:text-5xl font-bold tracking-tight">
+                        {percentage}
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="font-playfair text-lg font-bold sm:text-xl leading-snug">
+                        {title}
+                      </h4>
+                      <p
+                        className={`mt-2 text-xs sm:text-sm leading-relaxed ${
+                          idx === 0 ? "text-[var(--cream)]/85" : "text-[var(--muted)]"
+                        }`}
+                      >
+                        {description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="mt-4">
-                    <h4 className="font-playfair text-lg font-bold sm:text-xl leading-snug">
-                      {title}
-                    </h4>
-                    <p
-                      className={`mt-2 text-xs sm:text-sm leading-relaxed ${
-                        idx === 0 ? "text-[var(--cream)]/85" : "text-[var(--muted)]"
-                      }`}
-                    >
-                      {description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <p className="text-xs text-[var(--muted)] italic pt-1">
+                *After 4 Weeks · Results from a consumer perception study conducted across all hair and skin types.
+              </p>
             </div>
           </div>
 
@@ -548,99 +441,63 @@ export default function BuudyShowerHeadPage() {
         </div>
       </section>
 
-      {/* Why Filter Section: "Most people spend 10 minutes a day rinsing in pool water" */}
+      {/* Why Filter Section: Kiierr 2-Column Layout with pool-water-rinse.webp */}
       <section
         id="why-filter"
         className="buudy-wrap py-14 md:py-24"
         aria-labelledby="why-filter-title"
       >
-        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
-            The Hidden Cause of Dry Skin & Brittle Hair
-          </p>
-          <h2
-            id="why-filter-title"
-            className="buudy-display mt-2 text-[2.15rem] leading-[1.08] md:text-5xl"
-          >
-            Most people spend 10 minutes a day{" "}
-            <em className="buudy-italic">rinsing in pool water.</em>
-          </h2>
-          <p className="buudy-copy mt-4 text-base sm:text-lg leading-relaxed">
-            Municipal water carries roughly the same chlorine as a swimming pool, plus rust, copper,
-            and dissolved hard minerals. Hot water opens your skin pores and hair cuticles — letting
-            all of it go straight in.
-          </p>
-        </div>
-
-        {/* 3 Problem Cards */}
-        <div className="grid gap-6 md:grid-cols-3">
-          {waterProblems.map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="flex flex-col justify-between rounded-[1.75rem] border border-[var(--border)] bg-white p-6 sm:p-7 shadow-sm transition-all hover:shadow-md"
-            >
-              <div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--cream)] text-[var(--plum)] border border-[var(--border)]">
-                  <Icon size={24} />
-                </div>
-                <h3 className="buudy-display mt-5 text-xl font-bold text-[var(--plum)] sm:text-2xl leading-snug">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Purify & Enjoy Dual Highlight Banner */}
-        <div className="mt-8 grid gap-4 overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[#261c2b] text-[var(--cream)] p-6 sm:p-9 md:grid-cols-2">
-          <div className="border-b border-white/15 pb-6 md:border-b-0 md:border-r md:pb-0 md:pr-8">
-            <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
-              Purify Your Water
-            </span>
-            <h4 className="buudy-display mt-2 text-2xl text-white">Eliminate Harmful Chemicals</h4>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--cream)]/80">
-              Captures chlorine, heavy metals, pipe rust, and sediment before water ever touches
-              your body.
-            </p>
-            <ul className="mt-4 space-y-2 text-xs sm:text-sm text-[var(--cream)]/90">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[var(--gold)]" /> Removes Free Chlorine &
-                Chloramines
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[var(--gold)]" /> Filters Heavy Metals (Lead,
-                Mercury, Copper)
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[var(--gold)]" /> Screens Pipe Rust & Silt
-              </li>
-            </ul>
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center xl:gap-14">
+          {/* Left Column: Pool Water Image (Matching Kiierr) */}
+          <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--border)] shadow-lg">
+            <Image
+              src={showerHeadAsset("pool-water-rinse.webp")}
+              alt="Woman in swimming pool illustrating municipal water chlorine levels"
+              fill
+              sizes={sectionImageSizes}
+              className="object-cover"
+            />
           </div>
 
-          <div className="pt-2 md:pl-8 md:pt-0">
-            <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
-              Enjoy Healthy Showers
-            </span>
-            <h4 className="buudy-display mt-2 text-2xl text-white">Nourish Skin & Scalp Health</h4>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--cream)]/80">
-              Restores natural pH balance and conditions hard minerals for smoother skin and
-              bouncier hair.
+          {/* Right Column: Narrative & 3 Problem Points */}
+          <div>
+            <p className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
+              The Hidden Cause of Dry Skin & Brittle Hair
             </p>
-            <ul className="mt-4 space-y-2 text-xs sm:text-sm text-[var(--cream)]/90">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[var(--gold)]" /> Relieves Itchy Scalp &
-                Dry Flakes
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[var(--gold)]" /> Reduces Facial & Back Acne
-                Irritation
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[var(--gold)]" /> Preserves Hair Colour &
-                Prevents Brassiness
-              </li>
-            </ul>
+            <h2
+              id="why-filter-title"
+              className="buudy-display mt-2 text-[2.15rem] leading-[1.1] md:text-[2.75rem]"
+            >
+              Most people spend 10 minutes a day{" "}
+              <em className="buudy-italic">rinsing in pool water.</em>
+            </h2>
+            <p className="buudy-copy mt-4 text-base sm:text-lg leading-relaxed">
+              Municipal water carries roughly the same chlorine as a swimming pool, plus rust, copper,
+              and dissolved hard minerals. Hot water opens your skin pores and hair cuticles — letting
+              all of it go straight in.
+            </p>
+
+            {/* 3 Problem Points */}
+            <div className="mt-8 space-y-4">
+              {waterProblems.map(({ icon: Icon, title, description }) => (
+                <div
+                  key={title}
+                  className="flex gap-4 rounded-2xl border border-[var(--border)] bg-white p-4 sm:p-5 shadow-sm"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--cream)] text-[var(--plum)] border border-[var(--border)]">
+                    <Icon size={22} />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair text-lg font-bold text-[var(--plum)] sm:text-xl leading-snug">
+                      {title}
+                    </h3>
+                    <p className="mt-1 text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

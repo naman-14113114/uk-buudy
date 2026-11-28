@@ -9,6 +9,19 @@ Read the workspace `AGENTS.md` and `CONTEXT.md`, then this file and the reposito
 remove or condense old entries. Do not record secrets, private tokens, or
 credential-bearing remote URLs.
 
+## 2026-11-28 17:15:00 +05:30 - Shower Head Page Redesign & Kiierr Parity
+- Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment` (`/products/buudy-shower-head`).
+- Tasks Completed:
+  1. Section 1 (Numbers): Clean spray face image with zero text overlays; removed 'STUDY VERIFIED' tags from the 4 percentage cards.
+  2. Section 2 (Pool Water): Kiierr 2-column layout with `pool-water-rinse.webp` on left and 3 problem cards on right. Removed bottom banner.
+  3. Section 3 (Filtration): Kiierr-aligned clean 5-tab pill switcher with stage details and 'Removes:' tags in `ShowerHeadFiltration.tsx`.
+  4. Section 4 (Hero & Accordions): Removed the 3 boxes under Add to Cart; consistent 30-Day Money-Back Guarantee; created `ShowerHeadDetailsAccordion.tsx` matching mask style with points/icons and zero `#links`.
+  5. Reviews: 25 authentic reviews placed directly above FAQ with 0 occurrences of 'Buudy' or 'Kiierr'.
+- Verification:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 114/114 static pages compiled cleanly.
+  - Compiled HTML verified for all 8 requirements.
+
 ## 2026-11-16 20:20:00 +05:30 - Peptide Serum Title, Pricing (17% OFF / £119), Spec Icons & Bullets, Selfnamed Certifications, Add to Cart Button, TrustBadges Removal, Editorial Section Images & Gallery Optimization
 
 - Repository: `E:\1st YEAR DTU\New folder\uk.Buudy Vercel Deployment`.
