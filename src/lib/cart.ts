@@ -1,4 +1,5 @@
 import { getProductById, getProductBySlug, type Product } from "@/data/products";
+import { SHOWER_HEAD_ID } from "@/data/buudyShowerHead";
 
 export type CartLineType = "product" | "gift";
 
@@ -374,7 +375,11 @@ export function calculateCartTotals(
   const totalPromoDiscountCents = uniqueAppliedCodes.reduce((acc, code) => {
     return acc + getPromoDiscountCents(code);
   }, 0);
-  const promoDiscountCents = Math.min(totalPromoDiscountCents, subtotalCents);
+  const promoEligibleSubtotalCents = productLines.reduce(
+    (total, line) => line.productId === SHOWER_HEAD_ID ? total : total + line.unitPriceCents * line.quantity,
+    0,
+  );
+  const promoDiscountCents = Math.min(totalPromoDiscountCents, promoEligibleSubtotalCents);
 
   return {
     itemCount: productLines.reduce((total, line) => total + line.quantity, 0),

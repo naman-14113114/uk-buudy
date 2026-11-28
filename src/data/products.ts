@@ -15,6 +15,8 @@ import {
   type Wavelength,
 } from "./productSections";
 
+import { SHOWER_HEAD_ID, showerHeadCartProduct } from "./buudyShowerHead";
+
 export { standardMaskFaqs, buudyLedMaskFaqs };
 
 export type ProductGift = {
@@ -2751,6 +2753,7 @@ export function getProductBySlug(slug: string) {
 }
 
 export function getProductById(id: string) {
-  return productsById[id];
+  // Cart-only offer. Storefront discovery is controlled by the UK collections page.
+  return id === SHOWER_HEAD_ID ? showerHeadCartProduct : productsById[id];
 }
 

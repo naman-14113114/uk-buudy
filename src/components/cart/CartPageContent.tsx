@@ -18,7 +18,8 @@ import { CartLineItem } from "./CartLineItem";
 import { CartSummary } from "./CartSummary";
 import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
 import { FreeGiftsPanel } from "./FreeGiftsPanel";
-import { getDisplayLines, type CartLine } from "@/lib/cart";
+import { getDisplayLines } from "@/lib/cart";
+import { SHOWER_HEAD_ID } from "@/data/buudyShowerHead";
 
 function useCheckoutCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -65,6 +66,8 @@ export function CartPageContent({
     [lines],
   );
   const hasItems = totals.itemCount > 0;
+  const containsShowerHead = lines.some((line) => line.type === "product" && line.productId === SHOWER_HEAD_ID);
+  const containsOtherProducts = lines.some((line) => line.type === "product" && line.productId !== SHOWER_HEAD_ID);
 
   if (!isHydrated) {
     return <CartRestoringState />;
@@ -103,11 +106,21 @@ export function CartPageContent({
 
           <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
             <CartSummary>
-              <CheckoutForm
-                initialCustomer={initialCustomer}
-                timer={timer}
-                deliveryIconData={deliveryIconData}
-              />
+              {containsShowerHead ? (
+                <p className="flex items-start gap-2 rounded-xl border border-[var(--border)] bg-[var(--cream)] p-3 text-sm leading-6 text-[var(--plum)]">
+                  <Lock size={17} aria-hidden="true" className="mt-1 shrink-0" />
+                  <span>
+                    Checkout for the Shower Head bundle is coming soon.
+                    {containsOtherProducts && " To check out your other items, remove the bundle from your cart."}
+                  </span>
+                </p>
+              ) : (
+                <CheckoutForm
+                  initialCustomer={initialCustomer}
+                  timer={timer}
+                  deliveryIconData={deliveryIconData}
+                />
+              )}
             </CartSummary>
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
               <button
@@ -180,7 +193,7 @@ export function CartPageContent({
         </div>
       </div>
     </section>
-    <MobileStickyCheckout />
+    {!containsShowerHead && <MobileStickyCheckout />}
     </>
   );
 }

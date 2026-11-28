@@ -5,6 +5,7 @@ import { ArrowRight, ChevronDown, Tag } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
 import { getDisplayLines } from "@/lib/cart";
+import { SHOWER_HEAD_ID } from "@/data/buudyShowerHead";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { PromoCodeBox } from "./PromoCodeBox";
@@ -41,6 +42,8 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
       : activeCodes[0] || "";
 
   const productSavingsCents = totals.savingsCents;
+  const showerHeadOnly = lines.some((line) => line.productId === SHOWER_HEAD_ID) &&
+    !lines.some((line) => line.type === "product" && line.productId !== SHOWER_HEAD_ID);
 
   const giftLines = getDisplayLines(lines).filter(
     (line) =>
@@ -122,22 +125,24 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                     </span>
                   </div>
                 ) : null}
-                <div className="flex justify-between gap-4">
-                  <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                    <Tag aria-hidden="true" size={14} className="shrink-0" />
-                    Free tracked Shipping
-                  </span>
-                  <span className="font-semibold text-[var(--muted)] shrink-0">
-                    Free
-                  </span>
-                </div>
+                {!showerHeadOnly && (
+                  <div className="flex justify-between gap-4">
+                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                      <Tag aria-hidden="true" size={14} className="shrink-0" />
+                      Free tracked Shipping
+                    </span>
+                    <span className="font-semibold text-[var(--muted)] shrink-0">
+                      Free
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </>
       ) : null}
 
-      {action === "summary" ? (
+      {action === "summary" && !showerHeadOnly ? (
         <div className={totalSavingsCents > 0 ? "mt-4" : ""}>
           <PromoCodeBox key={totals.itemCount > 0 ? "active" : "empty"} />
         </div>
