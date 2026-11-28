@@ -157,7 +157,7 @@ function ShowerHeadCatalogCard() {
   );
 }
 
-export function AllProductsCatalog() {
+export function AllProductsCatalog({ includeShowerHead = false }: { includeShowerHead?: boolean }) {
   const { addProduct, openCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all");
   const [sortBy, setSortBy] = useState<SortOption>("featured");
@@ -179,13 +179,13 @@ export function AllProductsCatalog() {
   }, []);
 
   const counts = useMemo(() => {
-    const res = { all: catalogProducts.length + 1, devices: 0, skincare: 0, bundles: 0, digital: 0 };
+    const res = { all: catalogProducts.length + Number(includeShowerHead), devices: 0, skincare: 0, bundles: 0, digital: 0 };
     for (const p of catalogProducts) {
       const cat = getProductCategory(p);
       res[cat] = (res[cat] || 0) + 1;
     }
     return res;
-  }, [catalogProducts]);
+  }, [catalogProducts, includeShowerHead]);
 
   const filteredAndSortedProducts = useMemo(() => {
     let list = catalogProducts.filter((product) => {
@@ -212,7 +212,7 @@ export function AllProductsCatalog() {
     return list;
   }, [catalogProducts, selectedCategory, sortBy]);
 
-  const showShowerHead = selectedCategory === "all";
+  const showShowerHead = includeShowerHead && selectedCategory === "all";
   const resultCount = filteredAndSortedProducts.length + Number(showShowerHead);
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {

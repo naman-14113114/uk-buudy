@@ -58,7 +58,7 @@ export default function CollectionsAllPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      <AllProductsCatalog />
+      <AllProductsCatalog includeShowerHead />
     </>
   );
 }
